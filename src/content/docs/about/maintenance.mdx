@@ -1,7 +1,7 @@
 ---
 title: Maintenance and upgrades
 description: How to validate changes, review Nimbus upgrades, and prepare for publication.
-lastUpdated: 2026-10-02
+lastUpdated: 2026-10-03
 ---
 
 Maintain the site through small, reviewed changes. Keep Nimbus pinned to an exact
@@ -21,7 +21,7 @@ git diff --check
 git status --short
 ```
 
-`validate` runs deployment guard tests, Astro checks, content lint, and the production build.
+`validate` runs deployment guard and verification tests, Astro checks, content lint, and the production build.
 Review the changed source and output for unintended content or sensitive material.
 
 If lint reports a new page as missing, check its source path and sidebar entry.
@@ -143,6 +143,18 @@ the origin first. It then runs `npm run validate` before Wrangler can upload fil
 Either failure stops this workflow. Local development and ordinary validation
 retain the localhost default.
 
+The approved production origin is `https://latentlit.com`. For an authorized
+release from an authenticated Cloudflare CLI session, run:
+
+```bash
+SITE_URL=https://latentlit.com npm run deploy
+```
+
+The Worker is named `latent-light`. Its custom domain is configured in
+`wrangler.jsonc`. The `workers.dev` address and version preview URLs are disabled
+so public references use the intended domain. Do not replace an existing domain
+binding or deploy to a different account without confirmation.
+
 Direct Wrangler commands bypass these checks. Use the same origin check and
 full validation in any future automated deployment. Passing checks does not
 authorize publication.
@@ -155,7 +167,69 @@ The current configuration builds a static site. `wrangler.jsonc` serves `dist/`
 with a 404 fallback. Before changing to request rendering, review the Astro
 adapter and Cloudflare configuration together. Do not reuse the static assumptions.
 
-Obtain explicit user authorization for each commit, push, and deployment.
+Obtain explicit user authorization for commits and pushes. When automatic deployment is active,
+authorization to push or merge into `main` also authorizes production publication.
+Permission to edit or validate files does not authorize a push or merge.
+Request separate authorization for manual deployment or changes to hosting settings.
+
+### Automatic deployment
+
+GitHub validates changes. Cloudflare Workers Builds publishes the site.
+Use one production deployment system. Do not add a competing GitHub deployment workflow.
+
+The repository contains the validation workflow. The Cloudflare connection still needs browser setup.
+Do not describe automatic deployment as active until the connection and first build pass.
+
+Connect the existing `latent-light` Worker to `by-liu/latent-light` through
+**Workers & Pages → latent-light → Settings → Builds → Connect**.
+Authorize the Cloudflare GitHub App for this repository only.
+Do not grant access to all repositories. Cloudflare documents its
+[GitHub integration](https://developers.cloudflare.com/workers/ci-cd/builds/git-integration/github-integration/).
+
+Use these production settings:
+
+| Setting | Value |
+| --- | --- |
+| Repository | `by-liu/latent-light` |
+| Production branch | `main` |
+| Root directory | Repository root |
+| Build command | `npm ci` |
+| Deploy command | `npm run deploy` |
+| Build variable | `SITE_URL=https://latentlit.com` |
+| Build variable | `SKIP_DEPENDENCY_INSTALL=1` |
+| Node version | `.node-version`, currently `24.21.0` |
+| Preview builds | Disabled |
+
+`npm ci` installs the committed dependency versions. `npm run deploy` performs validation and builds before upload.
+The `postdeploy` step then checks the public deployment. Avoid a second build command that repeats validation.
+Cloudflare supports these [build settings](https://developers.cloudflare.com/workers/ci-cd/builds/configuration/)
+and [version and installation controls](https://developers.cloudflare.com/workers/ci-cd/builds/build-image/).
+
+The workflow `.github/workflows/validate.yml` checks pull requests targeting `main` and pushes to `main`.
+It uses the same Node version and lockfile. It has no deployment credentials.
+Its action references use full commit identifiers. Do not use `pull_request_target` to execute untrusted changes.
+See [GitHub workflow security guidance](https://docs.github.com/en/actions/reference/security/secure-use).
+
+Require the **Validate site** check before merging pull requests into `main`.
+Use a branch and pull request for substantial changes. Inspect content and assets before authorizing publication.
+Passing automated checks does not establish factual accuracy or publication rights.
+Administrators can bypass branch protection unless enforcement also applies to administrators. Do not use a bypass for unreviewed work.
+
+A failed validation stops upload. A failed public check occurs after upload and can leave the new version active.
+Inspect Cloudflare build logs and the live site. Use the authorized recovery procedure when necessary.
+The public check retries briefly for propagation. It checks page content against the build, agent exports, canonical URLs, and editor unavailability.
+
+After a successful release, check the public reading experience. For a manual repeat of the smoke check, retain the matching build:
+
+```bash
+SITE_URL=https://latentlit.com npm run verify:deployment
+```
+
+Keep preview builds disabled until their origins, permissions, and publication boundaries receive a separate review.
+Keep credentials in Cloudflare, not source files or pull request jobs.
+To pause automatic publication, disconnect the repository under the Worker's Builds settings.
+Disconnecting Builds is a hosting change that requires authorization.
+Do not change the production domain or remove the Worker to pause publication.
 
 ### Review before a public GitHub repository
 

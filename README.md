@@ -2,6 +2,8 @@
 
 *Seeing deeper. Thinking wider.*
 
+## [Visit Latent Light → latentlit.com](https://latentlit.com)
+
 A personal notebook exploring AI, products, and human potential. Built for my
 own learning and shared with anyone who finds it useful.
 
@@ -21,7 +23,8 @@ the About sources, not parallel copies in repository documents.
 
 ## Local development
 
-Use Node.js 22.12 or newer and npm. From this directory:
+Use the Node.js version in `.node-version` and npm. Select that version with
+your version manager before running commands. From this directory:
 
 ```bash
 npm ci
@@ -50,12 +53,12 @@ server controls are `npx --no-install astro dev status` and
 - `docs/branding/`: asset references and generation records.
 
 This site uses Astro and a pinned Nimbus dependency. Content is authored once
-and exported as HTML, Markdown, and MDX. The local site is ready to explore.
-The website is not deployed yet. See
+and exported as HTML, Markdown, and MDX. The public site is available at
+<https://latentlit.com>. See
 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for retained upstream notices.
 
 The [publication readiness review](docs/publication-readiness.md) records local
-checks, the unresolved dependency advisory, and decisions needed before release.
+checks, the unresolved dependency advisory, and the first public deployment.
 
 ## License
 

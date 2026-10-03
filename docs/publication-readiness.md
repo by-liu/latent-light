@@ -4,15 +4,16 @@ Reviewed: October 2, 2026
 Repository cleanup: October 3, 2026
 License and publication decisions: October 3, 2026
 Scope: the local Latent Light repository and its static build.
-Status: local technical preparation complete. Initial source publication is
-authorized. Website deployment is not authorized and has not occurred.
+Status: initial source publication and the first static website deployment are
+complete. The user approved the documented security assessment and explicitly
+authorized deployment on October 3, 2026.
 
 This is a review record, not a second development guide. The authoritative
 release and recovery procedures are in
 [Maintenance and upgrades](../src/content/docs/about/maintenance.mdx).
-Cloudflare Workers Static Assets remains the proposed hosting choice.
+Cloudflare Workers Static Assets hosts the published site.
 The separate planning draft was archived after its release checks became part
-of the shared maintenance guide. No hosting service is connected yet.
+of the shared maintenance guide. Automatic deployment remains unconfigured.
 
 ## Public suitability
 
@@ -119,10 +120,8 @@ Existing build warnings remain: Vite warns about MDX `use astro:head-inject`
 directives. Pagefind skips the generated philosophy redirect because it lacks
 an outer HTML element. The actual content pages are indexed.
 
-The build intentionally uses localhost for this local review. It is not a
-deployable public build. A release must rebuild with the actual approved
-`SITE_URL`. Public origin references, Cloudflare redirects, and remote error
-responses remain checks for the first authorized deployment.
+The initial local review used localhost. The first public deployment rebuilt
+with the approved `SITE_URL`. Its public checks are recorded below.
 
 ## Approved source publication
 
@@ -134,6 +133,71 @@ making the initial commit, and pushing the reviewed source.
 Target repository: `https://github.com/by-liu/latent-light`.
 This authorization does not include website deployment or automatic publication.
 
-For later deployment, also choose the Cloudflare account and actual site origin,
-approve the security assessment above, and authorize publication separately.
-Automatic deployment remains disabled and unconfigured.
+This source publication authorization did not include website deployment.
+The user subsequently approved the security assessment and separately authorized
+the first website deployment below. Automatic deployment remains unconfigured.
+
+## First public deployment
+
+Deployed and checked: October 3, 2026.
+
+- Production origin: `https://latentlit.com`.
+- Cloudflare Worker: `latent-light`, serving static assets on the custom domain.
+- Worker version: `d07c9e67-4dcc-4b8b-b52b-a1daf76d026d`.
+- Source baseline: `e65b53142e0646ca839d724484b0fbd8a6397636`, plus the
+  uncommitted domain configuration in `wrangler.jsonc` and release instructions
+  in `src/content/docs/about/maintenance.mdx`. No new commit or push occurred.
+- Tools: Node 25.2.1, Astro 7.3.1, Nimbus 0.15.2, Wrangler 4.146.0.
+- Command: `SITE_URL=https://latentlit.com mise exec -- npm run deploy`, with the
+  verified Cloudflare account selected in the process environment.
+- Validation: 41 guard tests passed, 104 Astro files checked without errors or
+  warnings, seven files lint clean, and the static build passed.
+- Upload: 107 assets. No paid service or automatic deployment was enabled.
+- Public checks: all six content pages, canonical and social image URLs,
+  sitemap, robots file, root and section agent indexes, and Markdown and MDX
+  exports passed. Branding and tested social images matched local build hashes.
+- Browser checks: all six pages rendered at 1440 and 390 pixel widths without
+  horizontal overflow, broken images, JavaScript errors, or asset errors.
+  Search, theme switching and persistence, sidebar controls, keyboard restoration,
+  focus persistence, reduced motion, and mobile navigation passed.
+- Routes: `/about/philosophy` returns HTTP 301 to the intended About anchor.
+  Its trailing slash variant uses Astro's HTML redirect and reaches the same
+  anchor in the browser. Unknown routes and the source editor endpoint return 404.
+- HTTPS: the public checks used normal certificate validation. Plain HTTP also
+  currently serves the public site; an enforced HTTPS redirect was not configured.
+- Initial requests briefly returned HTTP 500 immediately after deployment.
+  Subsequent HTTP and browser checks passed without a code change.
+
+The documented dependency advisory remains unresolved and accepted for this
+static deployment. Reassess it before changing the production architecture.
+Existing Vite directive warnings and the Pagefind redirect notice remain.
+There is no earlier Worker version to restore for this first deployment.
+
+## Automatic deployment preparation
+
+Prepared: October 3, 2026. The user authorized preparing the proposed workflow
+and its documentation, then explicitly authorized committing and pushing the
+reviewed changes. At the preparation checkpoint, GitHub workflow execution and
+branch protection remained pending source publication. Cloudflare activation
+remains a separate browser setup step.
+
+The repository contains a GitHub validation workflow with read access only,
+no deployment credentials, and action references pinned to official commit identifiers.
+Node 24.21.0 is pinned in `.node-version`. A clean lockfile installation and full
+validation passed under that version in an isolated temporary directory.
+All 48 deployment tests passed. Astro checked 106 files without errors or warnings.
+Content lint and the production build passed. The updated guides rendered at
+1440 and 390 pixel widths. Markdown and MDX retained the setup instructions.
+Deployment tests now include public verification and credential isolation checks.
+The existing dependency advisory remains visible in installation output.
+
+The new `postdeploy` command checks the live pages and agent exports against the
+matching build. A failed public check does not reverse an upload. The updated
+Maintenance guide describes failure handling, recovery, and exact build settings.
+The README now links prominently to the public website.
+
+Cloudflare activation still needs a browser step. The current Wrangler OAuth
+session can deploy Workers but receives HTTP 403 from the Builds configuration API.
+Do not claim that production builds are connected until dashboard setup and an
+automatic build succeed. Restrict the GitHub App to this repository. Keep
+preview builds disabled. No deployment credentials belong in GitHub pull request jobs.

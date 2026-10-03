@@ -77,6 +77,7 @@ test('deployment lifecycle requires the origin check and complete validation', (
   assert.equal(scripts.predeploy, 'npm run check:deploy-origin && npm run validate');
   assert.equal(scripts.deploy, 'wrangler deploy');
   assert.equal(scripts.validate, 'npm run test:deployment && npm run typecheck && npm run lint:docs && npm run build');
+  assert.equal(scripts.postdeploy, 'npm run verify:deployment');
 });
 
 test('predeploy stops before validation when SITE_URL is missing', () => {

@@ -10,14 +10,16 @@
     "preview": "astro preview",
     "typecheck": "astro check",
     "validate": "npm run test:deployment && npm run typecheck && npm run lint:docs && npm run build",
-    "test:deployment": "node --test scripts/check-deployment-origin.test.mjs",
+    "test:deployment": "node --test scripts/check-deployment-origin.test.mjs scripts/verify-deployment.test.mjs",
     "check:deploy-origin": "node scripts/check-deployment-origin.mjs",
+    "verify:deployment": "node scripts/verify-deployment.mjs",
     "lint:docs": "nimbus-docs lint",
     "lint:docs:fix": "nimbus-docs lint --fix",
     "prepreview:cf": "astro build",
     "preview:cf": "wrangler dev",
     "predeploy": "npm run check:deploy-origin && npm run validate",
-    "deploy": "wrangler deploy"
+    "deploy": "wrangler deploy",
+    "postdeploy": "npm run verify:deployment"
   },
   "dependencies": {
     "@cloudflare/nimbus-docs": "0.15.2",

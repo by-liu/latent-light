@@ -1,7 +1,7 @@
 ---
 title: Development guide
 description: Where source files live and how to develop pages, components, and exports.
-lastUpdated: 2026-10-02
+lastUpdated: 2026-10-03
 ---
 
 Develop the site from its source files. Preserve the calm reading experience.
@@ -27,6 +27,10 @@ Read the repository files `AGENTS.md` and `README.md` first. Use
 | `src/pages/` | HTML routes, text exports, agent indexes, and social images |
 | `astro.config.ts` | Sidebar, integrations, rendering, and canonical origin |
 | `nimbus.json` | Nimbus provenance and reviewed upgrade baseline |
+| `.node-version` | Shared Node version for local development and automated builds |
+| `.github/workflows/validate.yml` | GitHub validation without deployment credentials |
+| `wrangler.jsonc` | Production Worker, domain, and static asset configuration |
+| `scripts/verify-deployment.mjs` | Public checks after deployment |
 | `public/` | Assets included in the published build |
 | `docs/branding/` | Asset references and generation records |
 

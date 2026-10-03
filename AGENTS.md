@@ -22,6 +22,8 @@ installed implementation. Correct the guidance if it no longer matches them.
 
 - Do not commit, push, create a GitHub repository, or deploy without explicit user authorization.
 - Treat commit, push, and deployment as separate actions that require authorization.
+- When Cloudflare Builds connects to this repository, an authorized push or merge to `main` also authorizes production deployment.
+- Do not infer permission to push or merge from permission to edit or validate files.
 - Use local port 4327. Do not interrupt other projects or their servers.
 - Never add secrets, private conversations, employer confidential material, or assets without suitable usage rights.
 - Review files under `public/` as publication material. Hidden pages and Git history are not private storage.
