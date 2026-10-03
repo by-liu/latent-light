@@ -1,0 +1,72 @@
+/* Keep Nimbus's native typography, neutral palette, and documentation layout.
+   Project additions should not replace its navigation or reading structure. */
+
+/* Homepage-only AI-generated editorial line art, no animation.
+   The isolated stacking context keeps the decoration behind readable content. */
+#main-content[data-latent-home] {
+  position: relative;
+  isolation: isolate;
+}
+#main-content[data-latent-home]::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+  top: 0;
+  right: 0;
+  width: min(100%, 34rem);
+  height: 23rem;
+  background: url('/brand/galaxy-line-art.png') right top / contain no-repeat;
+  mix-blend-mode: multiply;
+  opacity: .52;
+  mask-image: linear-gradient(to bottom, #000 32%, rgb(0 0 0 / .45) 58%, transparent 83%);
+}
+html[data-mode='dark'] #main-content[data-latent-home]::before {
+  filter: invert(1) hue-rotate(180deg);
+  mix-blend-mode: screen;
+  opacity: .62;
+}
+@media (max-width: 767px) {
+  #main-content[data-latent-home]::before { width: 88%; height: 17rem; opacity: .38; }
+  html[data-mode='dark'] #main-content[data-latent-home]::before { opacity: .52; }
+}
+@media print {
+  #main-content[data-latent-home]::before { display: none; }
+}
+.docs-content .author-introduction {
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr);
+  align-items: start;
+  gap: 1rem;
+  margin-top: 2rem;
+  font-size: .875rem;
+  line-height: 1.65;
+  color: var(--nb-muted-foreground);
+}
+.docs-content .author-introduction > p {
+  margin: 0;
+  font-size: inherit;
+  line-height: inherit;
+}
+.docs-content .author-introduction img {
+  display: block;
+  width: 56px;
+  height: 56px;
+  margin: 0;
+  object-fit: cover;
+  border-radius: 50%;
+}
+.docs-content details {
+  margin-block: 1.5rem;
+  padding-block: 1rem;
+  border-block: 1px solid var(--nb-border);
+}
+.docs-content summary { cursor: pointer; font-weight: 600; }
+.docs-content summary:focus-visible {
+  outline: 2px solid var(--nb-primary);
+  outline-offset: 4px;
+}
+.docs-content details[open] summary { margin-bottom: 1rem; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; }
+}

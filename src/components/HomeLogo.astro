@@ -1,0 +1,20 @@
+<!-- Decorative identity: the adjacent heading supplies the accessible name. -->
+<div class="home-logo" aria-hidden="true">
+  <img class="logo-light" src="/brand/logo-light.png" alt="" width="120" height="120" />
+  <img class="logo-dark" src="/brand/logo-dark.png" alt="" width="120" height="120" />
+</div>
+
+<style is:global>
+  .home-logo {
+    width: 120px;
+    height: 120px;
+    margin-top: 1rem;
+    margin-bottom: -0.25rem;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .home-logo img { width: 120px; height: 120px; }
+  .home-logo .logo-dark { display: none; }
+  html[data-mode='dark'] .home-logo .logo-light { display: none; }
+  html[data-mode='dark'] .home-logo .logo-dark { display: block; }
+</style>

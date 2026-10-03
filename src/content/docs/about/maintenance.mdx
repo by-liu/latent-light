@@ -1,0 +1,232 @@
+---
+title: Maintenance and upgrades
+description: How to validate changes, review Nimbus upgrades, and prepare for publication.
+lastUpdated: 2026-10-02
+---
+
+Maintain the site through small, reviewed changes. Keep Nimbus pinned to an exact
+version. Review upstream improvements before merging them. A passing build is
+necessary. It does not replace checks of the reading experience and agent exports.
+
+Local setup commands are in the repository file `README.md`. Use the
+[Development guide](/about/development-guide/) for development practices.
+
+## Validate a change
+
+Run these commands after a completed site change:
+
+```bash
+npm run validate
+git diff --check
+git status --short
+```
+
+`validate` runs deployment guard tests, Astro checks, content lint, and the production build.
+Review the changed source and output for unintended content or sensitive material.
+
+If lint reports a new page as missing, check its source path and sidebar entry.
+If both are correct, run `npm run build` to refresh route metadata.
+Then repeat validation. Do not suppress the broken link rule.
+
+- Check desktop and mobile layout, links, and horizontal overflow.
+- After interface changes, check keyboard use, reduced motion, sidebar controls,
+  focus view, and the mobile drawer.
+- Check page Markdown exports after content or component changes.
+- After route changes, also check `/llms.txt`, `/llms-full.txt`, and page MDX exports.
+- Check search after changes to navigation, indexing, or dependencies.
+- Report existing warnings and unresolved failures.
+- Preserve unrelated changes.
+
+A production preview provides the built search index.
+
+For an additional structural and migration audit, run:
+
+```bash
+npx --no-install @cloudflare/nimbus-docs check --json
+```
+
+Review `status`, `readiness`, findings, and skipped checks. A successful exit code
+does not establish full coverage. Resolve errors and required work.
+
+A partial check identifies a gap. It does not authorize you to ignore that gap.
+Do not repeatedly apply corrections when the remaining work needs user input or manual review.
+
+Nimbus documents its [check behavior](https://nimbus-docs.com/cli/#nimbus-docs-check).
+For request rendering, the production build remains a separate required check.
+
+## Review Nimbus upgrades
+
+Package updates and updates to copied components are separate. `migrate` reviews
+package API changes. `outdated` and `diff` identify changes to starter files and
+registry components. Customized files may need manual merging. See the
+[official upgrade workflow](https://nimbus-docs.com/cli/#keeping-up-to-date).
+
+Use the installed CLI through `npx --no-install`. This prevents commands from
+silently downloading a different package version. Preserve `package-lock.json`.
+Preserve the exact Nimbus version in `package.json`.
+
+1. **Establish a recovery point.** Inspect the working tree. Preserve unfinished
+   work. Use a reviewed backup or, if the user authorizes a commit, a Git checkpoint.
+2. **Review the release.** Inspect release notes, compatibility requirements, and
+   the requested target version. Do not upgrade solely because a newer version exists.
+3. **Update the dependency.** Install the chosen exact version only after the
+   user authorizes the upgrade. Review changes to the package file and lockfile.
+4. **Preview migrations.** Run the command below. Review every proposed edit,
+   required review, and blocker before applying changes.
+
+```bash
+npx --no-install @cloudflare/nimbus-docs migrate --dry-run --diff
+```
+
+5. **Complete the reviews.** Apply recognized safe migrations with `migrate --yes`
+   only within the authorized upgrade. Merge customized code manually. Repeat the
+   migration plan until you complete the required work. Then check the reviewed baseline.
+6. **Review copied files.** Run `outdated`. Then run `diff` for each relevant file.
+   Use `diff FILE --apply` only for a reviewed clean update. Do not overwrite
+   the logo, reading controls, source editor, or other custom work.
+7. **Validate and check.** Follow the validation checklist. Run the Nimbus structural
+   check. Update these guides when development practices change.
+
+```bash
+npx --no-install @cloudflare/nimbus-docs outdated
+npx --no-install @cloudflare/nimbus-docs diff
+```
+
+`nimbus.json` records provenance and `lastReviewedNimbusVersion`, the previously
+reviewed Nimbus version. Keep this record in version control. It does not pin
+the installed package version. Do not change it manually to bypass pending work.
+
+If the baseline is missing, supply the known previously reviewed version with
+`migrate --from VERSION`. Incomplete migration work can produce a nonzero exit
+code. Record completion only after the actual review.
+
+Before using `add COMPONENT_SLUG --overwrite`, review all affected files and
+dependencies for the registry replacement. Do not remove license notices.
+
+## Preserve a usable local site
+
+Use port 4327. Keep development bound to loopback, which restricts the server to
+the local computer. Do not interrupt servers for other projects.
+
+Development and build caches are separate to avoid stale JavaScript dependencies.
+Preserve this separation. If controls stop responding, check failed script
+requests before changing interaction code. Restart only this project's server when needed.
+
+Stop the development server before starting preview on the same port.
+Keep the source editor in development mode only. Never include it in preview or production.
+
+## Prepare for publication
+
+Publication requires separate user authorization. Request the intended
+production origin from the user. Set `SITE_URL` before building for that origin.
+Never invent a public domain. Never use the local default as a production URL.
+
+### Deployment checks
+
+Set `SITE_URL` explicitly in the build environment. Use the actual public HTTPS
+origin without a trailing slash. The root `.env.example` contains a placeholder,
+not a deployment address. Local environment files remain excluded from version control.
+
+To check the origin without building or uploading, run:
+
+```bash
+npm run check:deploy-origin
+```
+
+The check rejects missing values, noncanonical URLs, IP addresses, local hostnames,
+and reserved or example domains. A canonical origin contains only the scheme,
+hostname, and optional port. It contains no credentials, path, query, or fragment.
+The check does not establish domain ownership or availability.
+
+For an authorized deployment, use `npm run deploy`. Its `predeploy` step checks
+the origin first. It then runs `npm run validate` before Wrangler can upload files.
+Either failure stops this workflow. Local development and ordinary validation
+retain the localhost default.
+
+Direct Wrangler commands bypass these checks. Use the same origin check and
+full validation in any future automated deployment. Passing checks does not
+authorize publication.
+
+Review the repository, history, pages, and assets for privacy and usage rights.
+Keep third party notices. Settle the licensing of original material before
+public release. Check canonical URLs, social images, agent links, and search.
+
+The current configuration builds a static site. `wrangler.jsonc` serves `dist/`
+with a 404 fallback. Before changing to request rendering, review the Astro
+adapter and Cloudflare configuration together. Do not reuse the static assumptions.
+
+Obtain explicit user authorization for each commit, push, and deployment.
+
+### Review before a public GitHub repository
+
+Review every intended file, including untracked files. `git diff` alone does not
+show new files before the first commit.
+
+1. Check pages, repository documents, assets, and any existing Git history for
+   private material and credentials.
+2. Check exclusions for environment files, dependency directories, build output,
+   and local tool state. Keep only the reviewed root `.env.example`.
+3. Check media provenance and retain required license notices. Decide the reuse
+   terms for original code, writing, and identity artwork separately.
+4. Run `npm audit`. Investigate each advisory and record its relevance to the
+   installed version and deployment design. Do not apply automatic major downgrades.
+5. Complete the validation checklist. Record unresolved findings and pending
+   decisions in `docs/publication-readiness.md`.
+6. Confirm the GitHub owner, repository name, and public visibility with the user.
+7. After commit authorization, stage only reviewed paths. Review the staged
+   file list and diff before committing.
+8. After repository creation authorization, create an empty remote repository.
+   Check its address and visibility before configuring the local remote.
+9. Push only after separate push authorization. Do not enable automatic deployment
+   as part of repository creation.
+
+Publishing the repository and publishing the site are separate actions.
+The repository can be prepared before selecting a production `SITE_URL`.
+`private: true` in `package.json` prevents npm package publication.
+It does not control GitHub visibility.
+
+### Check the first deployment
+
+Before upload, check the built canonical URLs, social image URLs, sitemap, and
+agent links against the approved production origin. Local URLs must not remain
+in those public references. Check that production excludes the source editor.
+
+After an authorized deployment, check these items at the public address:
+
+- Desktop and mobile layout, images, navigation, and theme switching
+- Search results and reading controls
+- `/about/philosophy` and its intended redirect
+- An unknown route and its 404 response
+- `/llms.txt`, `/llms-full.txt`, and page Markdown and MDX exports
+- Canonical URLs, sitemap entries, and social image URLs
+- Absence of editor controls and the source editor API
+
+Local checks do not establish that Cloudflare routes and public URLs work.
+Record those results after testing the deployed site.
+
+### Record a release and recover
+
+After a successful deployment, record the source commit, Worker version,
+production origin, build commands, tool versions, and validation results.
+Keep credentials outside release records. Identify the last working version
+before each later deployment. The first deployment has no previous version to restore.
+
+For an authorized rollback:
+
+1. Confirm the affected Worker and its Cloudflare account.
+2. Identify the specific previously working version and its source commit.
+3. Check that its embedded URLs match the intended public origin.
+4. Review any changes to bindings or external data since that version.
+5. Request authorization to restore that specific version.
+6. Open the Worker's Deployments view in Cloudflare. Select that version's
+   menu and choose Rollback.
+7. Repeat the public deployment checks. Record the restored version and outcome.
+
+Cloudflare rollback restores a deployed Worker version. It does not restore
+external data or change the source repository. See
+[Cloudflare rollback documentation](https://developers.cloudflare.com/workers/versions-and-deployments/rollbacks/).
+
+If no suitable version exists, prepare the reviewed source in a separate
+working directory. Rebuild with the approved production origin and repeat validation.
+Deploy that recovery build only after authorization. Do not erase local changes
+or reset the current working tree to recover a public deployment.

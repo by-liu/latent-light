@@ -1,0 +1,13 @@
+---
+interface Props { size?: 'figure' | 'diagram' | 'wide'; label: string; }
+const { size = 'diagram', label } = Astro.props;
+---
+<section class:list={['focus-canvas', `focus-canvas-${size}`]} aria-label={label}><slot /></section>
+<style>
+  .focus-canvas { min-width:0; }
+  @media(min-width:768px) {
+    :global(html[data-ll-focus]) .focus-canvas { width:min(var(--canvas-width),calc(100vw - 4rem)); max-width:none; margin-left:50%; transform:translateX(-50%); }
+    .focus-canvas-figure {--canvas-width:64rem;}.focus-canvas-diagram {--canvas-width:72rem;}.focus-canvas-wide {--canvas-width:76rem;}
+  }
+  @media print { .focus-canvas {width:auto!important;margin-left:0!important;transform:none!important;} }
+</style>

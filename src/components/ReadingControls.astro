@@ -1,0 +1,50 @@
+---
+interface Props { control: 'left' | 'right' | 'focus'; restore?: boolean; }
+const {control, restore=false}=Astro.props;
+const label=control==='focus'?'Enter focus view':`${restore?'Show':'Hide'} ${control==='left'?'navigation sidebar':'page outline'}`;
+---
+<button type="button" class:list={['reading-control', {'reading-restore':restore}]} data-reading={control} aria-label={label} title={label} aria-controls={control==='left'?'desktop-sidebar':undefined} aria-expanded={control!=='focus'?!restore:undefined} aria-pressed={control==='focus'?false:undefined}>
+ {control==='focus'? <span>Focus</span> : <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d={control==='left'?'m12 5-5 5 5 5':'m8 5 5 5-5 5'} /></svg>}
+</button>
+<script>
+ import { mount } from '@cloudflare/nimbus-docs/client';
+ const update=()=>{
+  const html=document.documentElement, focus=html.hasAttribute('data-ll-focus');
+  document.querySelectorAll<HTMLButtonElement>('[data-reading]').forEach(b=>{
+   const key=b.dataset.reading!;
+   if(key==='focus'){b.textContent=focus?'Exit focus':'Focus';b.setAttribute('aria-pressed',String(focus));b.title=focus?'Exit focus view':'Enter focus view';b.setAttribute('aria-label',b.title);}
+   else {const hidden=focus||html.hasAttribute('data-ll-'+key);b.setAttribute('aria-expanded',String(!hidden));b.title=`${hidden?'Show':'Hide'} ${key==='left'?'navigation sidebar':'page outline'}`;b.setAttribute('aria-label',b.title);}
+  });
+ };
+ mount('[data-reading]',root=>{
+  const controller=new AbortController();
+  root.addEventListener('click',()=>{
+   const key=(root as HTMLElement).dataset.reading!;
+   document.documentElement.toggleAttribute('data-ll-'+key);
+   try{localStorage.setItem('latent-light:reading',JSON.stringify(Object.fromEntries(['left','right','focus'].map(k=>[k,document.documentElement.hasAttribute('data-ll-'+k)]))));}catch{}
+   update();
+   if(key!=='focus'){
+    const collapsed=document.documentElement.hasAttribute('data-ll-'+key);
+    document.querySelector<HTMLButtonElement>(`[data-reading="${key}"]${collapsed?'.reading-restore':':not(.reading-restore)'}`)?.focus();
+   }
+  },{signal:controller.signal});
+  update();return()=>controller.abort();
+ });
+</script>
+<style is:global>
+ .reading-control{display:none;}
+ @media(min-width:768px){
+  .reading-control{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;min-width:28px;min-height:28px;padding:4px 7px;border-radius:5px;color:var(--nb-muted-foreground);font-size:12px;cursor:pointer;background:var(--nb-background);}
+  .reading-control:hover{background:var(--nb-accent);color:var(--nb-foreground);}
+  .reading-control:focus-visible{outline:2px solid var(--nb-primary);outline-offset:2px;}
+  .reading-restore{display:none;position:fixed;top:76px;z-index:25;border:1px solid var(--nb-border);}
+  .reading-restore svg{transform:rotate(180deg);}
+  .reading-restore[data-reading=left]{left:8px;}.reading-restore[data-reading=right]{right:8px;}
+  html[data-ll-left] #desktop-sidebar,html[data-ll-focus] #desktop-sidebar{display:none!important;}
+  html[data-ll-right] [data-nb-toc-scroll-host],html[data-ll-focus] [data-nb-toc-scroll-host]{display:none!important;}
+  html[data-ll-left]:not([data-ll-focus]) .reading-restore[data-reading=left]{display:inline-flex;}
+  html[data-ll-focus] [data-nb-mobile-toc]{display:none;}
+ }
+ @media(min-width:1280px){html[data-ll-right]:not([data-ll-focus]) .reading-restore[data-reading=right]{display:inline-flex;}}
+ @media print{.reading-control{display:none!important;}}
+</style>

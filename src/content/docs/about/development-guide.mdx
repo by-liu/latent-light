@@ -1,0 +1,192 @@
+---
+title: Development guide
+description: Where source files live and how to develop pages, components, and exports.
+lastUpdated: 2026-10-02
+---
+
+Develop the site from its source files. Preserve the calm reading experience.
+Keep the content equally usable for people and agents. This guide defines
+development practices. It does not authorize deployment or changes to external services.
+
+Read the repository files `AGENTS.md` and `README.md` first. Use
+[Content standards](/about/content-standards/) for writing. Use
+[Maintenance and upgrades](/about/maintenance/) for checks and updates.
+
+## Source map
+
+| Location | Purpose |
+| --- | --- |
+| `src/content/docs/` | Pages, including the authoritative About guides |
+| `src/content/partials/` | Reusable Markdown or MDX content |
+| `src/content.config.ts` | Content collections and schemas |
+| `src/components.ts` | Components available globally in MDX |
+| `src/components/` | Shared interface and local components |
+| `src/components/ui/` | Components copied from the Nimbus registry |
+| `src/layouts/` | Page shell, navigation, and reading layout |
+| `src/styles/` | Shared styles and Latent Light additions |
+| `src/pages/` | HTML routes, text exports, agent indexes, and social images |
+| `astro.config.ts` | Sidebar, integrations, rendering, and canonical origin |
+| `nimbus.json` | Nimbus provenance and reviewed upgrade baseline |
+| `public/` | Assets included in the published build |
+| `docs/branding/` | Asset references and generation records |
+
+Do not edit files in these directories:
+
+- `dist/` contains build output.
+- `.astro/` contains generated Astro files.
+- `node_modules/` contains installed dependency files.
+- `.wrangler/` contains local Cloudflare state.
+
+Build and development tools manage these files.
+
+## Add or update a page
+
+Create a Markdown or MDX source in `src/content/docs/`. Set `title`,
+`description`, and `lastUpdated` in frontmatter, the metadata block at the top
+of the file. The content schema requires `title`. The layout uses `title` as
+the page heading.
+
+Add each new page to the explicit sidebar in `astro.config.ts`. Link related
+explanations. Preserve established URLs. Use a redirect when replacing a route.
+
+Use `<Render file="partial-name" />` for reusable content from
+`src/content/partials/`. Do not import MDX files directly into other pages.
+Register shared MDX components in `src/components.ts`. Alternatively, import
+a component explicitly in the page that uses it.
+
+## Work with Nimbus components
+
+Use PascalCase component names. Use the Nimbus installer for existing registry
+components. Do not recreate those components manually. Review dependencies and
+changed files before retaining the result.
+
+```bash
+npx --no-install @cloudflare/nimbus-docs list
+npx --no-install @cloudflare/nimbus-docs add COMPONENT_SLUG
+npx --no-install @cloudflare/nimbus-docs add FEATURE_SLUG --print
+```
+
+Replace each uppercase placeholder with a reviewed registry slug. A slug is the
+registry identifier for a component or feature. `add` can copy files and install
+dependencies. Feature recipes describe changes for the developer to adapt.
+
+Review the exact replacement before using `--overwrite` on customized files.
+See the [Nimbus CLI documentation](https://nimbus-docs.com/cli/#nimbus-docs-add-slug).
+
+Use Nimbus's `Icon` component with Phosphor icons. The import path is
+`@cloudflare/nimbus-docs/components/Icon.astro`. Icon names use the `ph:` prefix.
+
+## Preserve reading and editing behavior
+
+Keep the left navigation, central article, and right outline on desktop.
+Preserve independent sidebar collapse, focus view, and reading preferences
+across navigation. Mobile uses a drawer and section selector. Keep the browser
+title as Latent Light. Keep the Astro developer toolbar disabled.
+
+Put project styling in `src/styles/latent-light.css` where practical. Avoid
+rewriting Nimbus components solely for a small feature specific to this site.
+Initialize client handlers after page navigation. Remove obsolete listeners.
+
+For wide visuals, import `src/components/FocusCanvas.astro` in the page.
+Use its `label` and `size` props. Available sizes are `figure`, `diagram`,
+and `wide`. Only the visual should expand in focus view, not the reading column.
+Keep a meaningful text equivalent in the exported content.
+
+The local source editor exists only in development mode. Preserve these protections:
+
+- Loopback binding restricts the server to the local computer.
+- Same origin checks restrict requests to the editor's origin.
+- Path checks restrict the files that the editor can access.
+- Revision conflict protection prevents edits from silently replacing newer changes.
+
+Keep the editor absent from production builds and preview. Edit only trusted
+MDX because MDX can execute code during rendering.
+
+Development and validation use separate Vite caches. Preserve this separation.
+A build must not invalidate dependencies in a running local server.
+
+## Keep agent exports complete
+
+Preserve these parts of the export system:
+
+- `<AgentDirective />` in `BaseLayout.astro`
+- The alternate Markdown link in the page head
+- `/llms.txt` and `/llms-full.txt`
+- The Markdown and MDX page routes
+
+Do not edit generated exports separately from the page source.
+
+Check custom components in HTML and Markdown. Preserve essential examples,
+citations, captions, assumptions, and media explanations. Extend Markdown
+processing through the Nimbus plugin configuration. Review compatibility before
+replacing the processor.
+
+If replacing Sätteri, set `admonitions: false`. Preserve the existing callout
+behavior. See the [Nimbus endpoint documentation](https://nimbus-docs.com/ai/publish-markdown/).
+
+## Retain source and asset records
+
+A canonical link is enough for an ordinary citation. Keep a concise record in
+`docs/research/<topic>/` for a closely studied paper or a source that supplies
+a visual. Use `docs/branding/` for identity assets. These records support the
+[Content standards](/about/content-standards/). They do not duplicate the editorial guidance.
+
+Record these details for each source:
+
+- Title and author or organization
+- Canonical URL
+- Exact version or publication date
+- Retrieval date
+
+For changing information, distinguish the source date from the date you checked
+the claim.
+
+For a reproduced or adapted visual, also record these details:
+
+- Figure number or location in the source
+- Usage terms
+- Extraction or adaptation method
+- Resulting asset path
+
+Retain prompts and reference provenance for AI generated assets. Keep a useful
+caption and source link on the page, not only in the repository record.
+
+If a local paper copy helps study, preserve the original version unchanged.
+Record its filename and checksum to distinguish it from later versions.
+Do not commit downloaded papers or excerpts unless their usage terms permit the intended distribution.
+Do not deploy those files unless their usage terms permit the intended distribution.
+Local study archives can remain outside the public repository.
+
+Use `src/assets/` for page visuals that Astro processes. Use `public/` for assets
+that need stable paths. Prefer SVG or HTML for original technical diagrams when
+practical. Include accessible descriptions. Preserve the meaning of visuals at
+narrow widths and in text exports. Keep large media outside the source repository.
+
+Repository records are also intended for public sharing. Do not place private
+research notes, confidential sources, or restricted files in these records.
+If usage rights are unclear, link to the source instead of copying its material
+into the site.
+
+## Visual identity and provenance
+
+The identity uses the refined K spectral aperture. It combines a subtly elliptical
+blue form, converging light, and a spectral edge. Keep the separate, text free
+`public/brand/logo-dark.png` and `public/brand/logo-light.png` assets.
+Each image is 1254 by 1254 pixels. The header switches between the complete
+images with the theme. These raster references are neither vector masters nor
+a cleared trademark.
+
+`public/favicon.ico` contains 16, 32, 48, 64, and 256 pixel versions of an AI
+generated symbol adaptation. Its source is `public/brand/favicon-master.png`.
+The homepage uses `public/brand/galaxy-line-art.png` as original AI generated
+decorative artwork. This artwork is not an astronomical diagram.
+
+Keep the artwork static. Adapt it to the theme. Hide it when printing.
+Do not add a large logo to the homepage body.
+
+The small author introduction uses `public/brand/avatar-bingyuan-cartoon.png`.
+This AI generated cartoon uses the author's public portrait as a loose reference.
+Its source link and generation prompt remain in `docs/branding/avatar-cartoon.md`.
+Keep license records in `THIRD_PARTY_NOTICES.md` and `public/licenses/`.
+
+Before completing a change, follow the [validation checklist](/about/maintenance/#validate-a-change).

@@ -1,0 +1,62 @@
+---
+interface Props { sourcePath: string; }
+const { sourcePath } = Astro.props;
+---
+<div data-local-editor data-source-path={sourcePath}>
+  <button class="editor-launch" type="button" data-editor-open>Edit source</button>
+  <dialog aria-label="Edit local page source">
+    <header><strong>Edit source</strong><button type="button" data-editor-close>Close</button></header>
+    <p>Local Markdown / MDX · Save writes to this repository.</p>
+    <textarea aria-label="Page source" spellcheck="false" disabled></textarea>
+    <footer><span role="status">Not loaded</span><button type="button" data-editor-reload>Reload</button><button type="button" data-editor-save disabled>Save</button></footer>
+  </dialog>
+</div>
+<script is:inline>
+(() => {
+  function setup() {
+    const root = document.querySelector('[data-local-editor]');
+    if (!root || root.dataset.ready) return;
+    root.dataset.ready = 'true';
+    const dialog=root.querySelector('dialog'), area=root.querySelector('textarea'), status=root.querySelector('[role=status]');
+    const save=root.querySelector('[data-editor-save]'), reload=root.querySelector('[data-editor-reload]');
+    let original='', revision='', busy=false;
+    const dirty=()=>!area.disabled && area.value!==original;
+    const load=async()=>{
+      if(dirty() && !confirm('Discard unsaved changes and reload?')) return;
+      area.disabled=true; save.disabled=true; status.textContent='Loading…';
+      try {
+        const r=await fetch('/__latent/source-editor?path='+encodeURIComponent(root.dataset.sourcePath));
+        const data=await r.json();if(!r.ok)throw Error(data.error);
+        area.value=original=data.source; revision=data.revision; area.disabled=false;area.focus();area.setSelectionRange(0,0);area.scrollTop=0;status.textContent='Source loaded';
+      }catch(e){status.textContent=e.message;}
+    };
+    root.querySelector('[data-editor-open]').onclick=()=>{dialog.showModal();load();};
+    const close=()=>{if(!busy && (!dirty() || confirm('Discard unsaved changes?')))dialog.close();};
+    root.querySelector('[data-editor-close]').onclick=close;
+    dialog.oncancel=e=>{e.preventDefault();close();};
+    area.oninput=()=>{save.disabled=!dirty();status.textContent=dirty()?'Unsaved changes':'Source loaded';};
+    reload.onclick=load;
+    save.onclick=async()=>{
+      busy=true; save.disabled=true;reload.disabled=true;area.disabled=true;
+      try {
+        const r=await fetch('/__latent/source-editor',{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({path:root.dataset.sourcePath,source:area.value,revision})});
+        const data=await r.json();if(!r.ok)throw Error(data.error);
+        original=area.value;status.textContent='Saved';location.reload();
+      }catch(e){status.textContent=e.message;area.disabled=false;save.disabled=false;}
+      finally{busy=false;reload.disabled=false;}
+    };
+    const guard=e=>{if(dirty()){e.preventDefault();e.returnValue='';}};
+    window.addEventListener('beforeunload',guard);
+    document.addEventListener('astro:before-swap',()=>window.removeEventListener('beforeunload',guard),{once:true});
+  }
+  setup();
+  if(!window.__llEditorBound){document.addEventListener('astro:page-load',setup);window.__llEditorBound=true;}
+})();
+</script>
+<style>
+ .editor-launch {padding:4px 8px;border-radius:4px;color:var(--nb-muted-foreground);background:transparent;font-size:13px;cursor:pointer;}
+ .editor-launch:hover {background:var(--nb-accent);color:var(--nb-foreground);}
+ dialog {width:min(900px,calc(100vw - 24px));max-height:90dvh;margin:auto;padding:20px;border:1px solid var(--nb-border);border-radius:10px;background:var(--nb-background);color:var(--nb-foreground);}
+ dialog::backdrop{background:#0008;}header,footer{display:flex;gap:12px;align-items:center;justify-content:space-between;}p{font-size:13px;margin:12px 0;color:var(--nb-muted-foreground);}textarea{display:block;width:100%;height:55dvh;font-family:monospace;font-size:14px;line-height:1.6;border:1px solid var(--nb-border);padding:12px;resize:vertical;}footer{margin-top:12px;font-size:13px;}button{cursor:pointer;}button:disabled{opacity:.5;}button:focus-visible,textarea:focus-visible{outline:2px solid var(--nb-primary);outline-offset:3px;}[role=status]{flex:1;}
+ @media print{[data-local-editor]{display:none;}}
+</style>

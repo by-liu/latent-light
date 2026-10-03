@@ -1,0 +1,158 @@
+---
+title: Content standards
+description: How to create clear, grounded content and choose useful media.
+lastUpdated: 2026-10-02
+---
+
+Create content that helps a reader understand something or act on it. Keep the
+presentation simple without removing necessary depth. These standards apply to
+writing, research, and visuals throughout Latent Light.
+
+For the broader philosophy, see [About Latent Light](/about/#how-i-approach-learning).
+For implementation, use the [Development guide](/about/development-guide/).
+
+## Start with a clear purpose
+
+Begin with a question, topic, field, paper, or idea worth exploring. Clarify
+what you hope to understand, while allowing the direction to evolve as you learn.
+
+Let the structure fit the work. A focused explanation, a comparison of papers,
+a technical deep dive, and a broad landscape study serve different purposes.
+For larger investigations, provide an overview and organize the detail into
+manageable sections.
+
+Check for related content before adding a page. Extend or connect existing
+material when that helps, rather than forcing every investigation into the
+same format.
+
+## Write for people
+
+- Introduce the topic and purpose early. When there is a central answer or
+  finding, state it before the supporting detail.
+- Use clear titles and headings. Keep the page title in frontmatter rather
+  than repeat it in the body.
+- Use connected paragraphs for explanations, lists for distinct items, and
+  tables for comparisons. Give each paragraph a purpose.
+- Prefer natural language. Avoid promotional claims, unnecessary jargon,
+  decorative punctuation, and hyphens or dashes in prose. Preserve punctuation
+  required by code, formulas, URLs, or official names.
+- Keep writing personal where it expresses the author's experience or views.
+  Do not present aspirations or interpretations as established findings.
+
+## Ground claims in evidence
+
+### When to cite
+
+Cite consequential claims a reader may reasonably want to verify. These include
+architecture and algorithm behavior, published formulas, benchmarks, historical
+attribution, distinctive explanations borrowed from an author, and current
+facts about companies, products, or markets. Cite software and model behavior
+that depends on a version.
+
+Personal reflections, clearly identified experience, and elementary calculations
+shown fully on the page usually need no citation. For original derivations and
+synthesis, cite the underlying definitions, assumptions, or evidence.
+
+Place citations beside the claims they support. One citation can cover a compact
+group of related statements; avoid repeating it after every sentence. Use
+descriptive links and enough metadata to identify the source and relevant version.
+
+### Choose appropriate sources
+
+Use original papers, official documentation, standards, and reference
+implementations to establish technical facts. Good books, courses, surveys,
+and blogs can provide explanation and context. Personal accounts and community
+discussions can offer experience, but should not establish broad conclusions.
+Match the source to the claim rather than treating every topic as a paper review.
+
+Inspect the actual source and confirm that it supports the nearby claim.
+Search snippets and generated summaries are leads, not evidence. Prefer the
+canonical source and record its date or version when relevant. If sources
+disagree, explain the difference rather than conceal it.
+
+### Separate evidence from interpretation
+
+Make the status of an explanation clear through natural wording:
+
+- **Published finding:** “The authors report…”
+- **Interpretation:** “One useful mental model is…”
+- **Derivation:** “Under these assumptions, we obtain…”
+- **Synthesis:** “Taken together, these sources suggest…”
+- **Experience:** “In my experience…” using only facts suitable for public sharing.
+
+These are examples, not labels required in every paragraph. Preserve dates,
+units, comparison baselines, conditions, and uncertainty. Draft status does not
+justify unsupported claims. If a claim cannot be checked, qualify it, identify
+the gap, or remove it.
+
+## Choose media for the explanation
+
+Use a visual when it clarifies a relationship better than prose. Choose a
+published figure when its exact notation, layout, or historical significance
+matters. Create our own diagram when isolating a mechanism, adding tensor shapes
+or execution order, or combining sources makes the explanation clearer.
+
+Use both only when they contribute different things. For example, a canonical
+architecture figure may establish the full design while a focused diagram
+explains one data flow. Remove visuals that merely repeat the same information.
+
+Give diagrams, charts, formulas, and tables accurate provenance. For visual
+captions, use the description that fits:
+
+- **Reproduced from:** materially the same visual as the source.
+- **Adapted from:** modified from one identifiable source.
+- **Latent Light derivation:** calculated here from stated assumptions.
+- **Latent Light synthesis:** created here from multiple cited sources.
+
+Cite sources beside the visual and explain any meaningful changes. Identify
+decorative artwork as such, especially when AI generated. Verify usage rights
+before reproducing or adapting material; attribution alone is not permission.
+See the [Development guide](/about/development-guide/#retain-source-and-asset-records)
+for source records and asset handling.
+
+Media must have meaningful text equivalents:
+
+- **Interactive explanations:** support keyboard use and reduced motion.
+  Provide a static or textual explanation of the mechanism.
+- **Video:** provide captions, a transcript, and attribution.
+- **Podcasts:** provide transcripts, source links, and disclosure of AI generated audio.
+
+Large media files should live outside the source repository. No essential
+lesson should require playing a video or running an animation. HTML and
+Markdown exports must preserve the same essential meaning.
+
+## Revise without losing context
+
+Correct the existing explanation and remove superseded wording. Preserve
+useful links and unrelated edits. Update `lastUpdated` after a material revision.
+Keep meaningful uncertainty and open questions visible.
+
+For changing information, state when it was verified and the relevant model or
+software version. `lastUpdated` records a page revision, not proof that every
+claim on the page was checked again.
+
+Before publishing, ask what can be removed without weakening understanding,
+and what must remain to prevent misunderstanding.
+
+### Review the content
+
+- Do the inspected sources support the claims beside them?
+- Are assumptions, units, baselines, versions, and verification dates clear where needed?
+- Can readers distinguish evidence, interpretation, and personal experience?
+- Do visuals add value and retain attribution, usage rights, and accessible explanations?
+- Do HTML and Markdown preserve the essential meaning without relying on media playback?
+- Is everything suitable for public sharing, including linked assets?
+
+Automated checks cannot establish factual accuracy. Review the content as well
+as completing the [site validation checks](/about/maintenance/#validate-a-change).
+
+## Keep public sharing deliberate
+
+Only include material suitable for public sharing. Never include private
+conversations, employer confidential material, credentials, or restricted assets.
+Files under `public/` also enter the deployment. Hidden pages and Git history
+are not private storage.
+
+Respect copyright and usage rights even when a source is publicly accessible.
+Retain license notices. The author's views are personal, not those of an employer.
+Publication requires a separate decision, not merely a completed content edit.
