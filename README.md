@@ -13,7 +13,9 @@
 <p align="center"><em>Seeing deeper. Thinking wider.</em></p>
 
 <p align="center">
-  <strong><a href="https://latentlit.com">Read the notebook at latentlit.com</a></strong>
+  <strong><a href="https://latentlit.com">https://latentlit.com</a></strong>
+  <br>
+  <sub>Read the public notebook</sub>
 </p>
 
 A personal notebook exploring AI, products, and human potential. Built for my
