@@ -16,7 +16,7 @@ const nimbusConfig = defineNimbusConfig({
   // CHANGE_ME: a one-line description of your docs — used for meta + OG.
   description: "Seeing deeper. Thinking wider. A notebook exploring AI, products, and how we think, learn, and build.",
   locale: "en",
-  github: null,
+  github: "https://github.com/by-liu/latent-light",
   sidebar: {
     items: [
       { label: "Welcome", link: "/" },

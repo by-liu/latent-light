@@ -1,8 +1,20 @@
-# Latent Light
+<p align="center">
+  <a href="https://latentlit.com">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="public/brand/logo-dark.png">
+      <source media="(prefers-color-scheme: light)" srcset="public/brand/logo-light.png">
+      <img src="public/brand/logo-light.png" alt="Latent Light spectral aperture logo" width="128" height="128">
+    </picture>
+  </a>
+</p>
 
-*Seeing deeper. Thinking wider.*
+<h1 align="center">Latent Light</h1>
 
-## [Visit Latent Light → latentlit.com](https://latentlit.com)
+<p align="center"><em>Seeing deeper. Thinking wider.</em></p>
+
+<p align="center">
+  <strong><a href="https://latentlit.com">Read the notebook at latentlit.com</a></strong>
+</p>
 
 A personal notebook exploring AI, products, and human potential. Built for my
 own learning and shared with anyone who finds it useful.
