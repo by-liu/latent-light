@@ -1,0 +1,23 @@
+Third party figures on the Transformer Foundations page
+
+1. original-transformer.png
+   Figure 1 of Attention Is All You Need, Vaswani et al., NeurIPS 2017.
+   Exact paper version: https://arxiv.org/html/1706.03762v7
+   The paper grants reproduction of its tables and figures for journalistic
+   or scholarly works with proper attribution. Consult the source for the
+   exact permission statement.
+   This figure is reproduced for the site's educational scholarly explanation.
+   This is not a general open license or a grant to repurpose it as branding.
+
+2. gqa-comparison.png
+   Figure 2 of GQA: Training Generalized Multi-Query Transformer Models from
+   Multi-Head Checkpoints, Joshua Ainslie, James Lee-Thorp, Michiel de Jong,
+   Yury Zemlyanskiy, Federico Lebron, and Sumit Sanghai, EMNLP 2023.
+   https://aclanthology.org/2023.emnlp-main.298/
+   Licensed under Creative Commons Attribution 4.0 International:
+   https://creativecommons.org/licenses/by/4.0/
+   Figure pixels are unchanged. The site adds a surrounding display border.
+
+These figures are not covered by Latent Light's MIT license.
+Source versions, extraction records, and checksums are in
+docs/research/architectures/transformer-foundations.md.

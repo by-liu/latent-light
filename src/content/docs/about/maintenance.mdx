@@ -21,7 +21,8 @@ git diff --check
 git status --short
 ```
 
-`validate` runs deployment guard and verification tests, Astro checks, content lint, and the production build.
+`validate` runs deployment guard and verification tests, content renderer tests,
+Astro checks, content lint, and the production build.
 Review the changed source and output for unintended content or sensitive material.
 
 If lint reports a new page as missing, check its source path and sidebar entry.
@@ -177,12 +178,18 @@ Request separate authorization for manual deployment or changes to hosting setti
 GitHub validates changes. Cloudflare Workers Builds publishes the site.
 Use one production deployment system. Do not add a competing GitHub deployment workflow.
 
-The repository contains the validation workflow. The Cloudflare connection still needs browser setup.
-Do not describe automatic deployment as active until the connection and first build pass.
+Automatic production deployment is active. It was verified on October 3, 2026,
+with [commit `15841ae`](https://github.com/by-liu/latent-light/commit/15841ae7178258aaedb05135fe0d030f363bb7c9).
+Both **Validate site** and **Workers Builds: latent-light** passed.
+The live pages and agent exports matched the build. Desktop and mobile checks also passed.
 
-Connect the existing `latent-light` Worker to `by-liu/latent-light` through
-**Workers & Pages → latent-light → Settings → Builds → Connect**.
-Authorize the Cloudflare GitHub App for this repository only.
+The existing `latent-light` Worker is connected to `by-liu/latent-light`.
+An authorized push to `main` triggers validation in GitHub and deployment in Cloudflare.
+These systems run independently. The GitHub workflow does not need a deployment job.
+Cloudflare repeats validation before upload through `npm run deploy`.
+
+Manage the connection through **Workers & Pages → latent-light → Settings → Builds**.
+Keep the Cloudflare GitHub App's repository access limited to the intended projects.
 Do not grant access to all repositories. Cloudflare documents its
 [GitHub integration](https://developers.cloudflare.com/workers/ci-cd/builds/git-integration/github-integration/).
 
@@ -210,7 +217,9 @@ It uses the same Node version and lockfile. It has no deployment credentials.
 Its action references use full commit identifiers. Do not use `pull_request_target` to execute untrusted changes.
 See [GitHub workflow security guidance](https://docs.github.com/en/actions/reference/security/secure-use).
 
-Require the **Validate site** check before merging pull requests into `main`.
+GitHub branch protection is not enabled as of October 3, 2026.
+Requiring the **Validate site** check before merging pull requests into `main` is a recommended safeguard,
+not a currently enforced rule. Enabling branch protection requires separate authorization.
 Use a branch and pull request for substantial changes. Inspect content and assets before authorizing publication.
 Passing automated checks does not establish factual accuracy or publication rights.
 Administrators can bypass branch protection unless enforcement also applies to administrators. Do not use a bypass for unreviewed work.
@@ -218,6 +227,18 @@ Administrators can bypass branch protection unless enforcement also applies to a
 A failed validation stops upload. A failed public check occurs after upload and can leave the new version active.
 Inspect Cloudflare build logs and the live site. Use the authorized recovery procedure when necessary.
 The public check retries briefly for propagation. It checks page content against the build, agent exports, canonical URLs, and editor unavailability.
+
+Check both results through the status icon beside the pushed commit in GitHub.
+The **Validate site** check confirms validation, not publication.
+The **Workers Builds: latent-light** check reports the Cloudflare build.
+Select its **Details** link for build information. Cloudflare also provides
+**View build history** at the bottom of the Worker's Deployments tab.
+See the [build status documentation](https://developers.cloudflare.com/workers/ci-cd/builds/#view-build-and-preview-url).
+
+If Cloudflare reports that the project is disconnected from its Git account,
+use **Manage** beside the Git repository to review the GitHub App's repository access.
+Preserve access for other existing projects. Restore the connection before testing another authorized push.
+A previous green **Validate site** check does not establish that Cloudflare received that push.
 
 After a successful release, check the public reading experience. For a manual repeat of the smoke check, retain the matching build:
 

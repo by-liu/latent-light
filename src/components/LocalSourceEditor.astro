@@ -1,62 +1,213 @@
 ---
-interface Props { sourcePath: string; }
-const { sourcePath } = Astro.props;
+import Icon from '@cloudflare/nimbus-docs/components/Icon.astro';
+interface Props { sourcePath: string; pageTitle: string; }
+const {sourcePath, pageTitle} = Astro.props;
 ---
-<div data-local-editor data-source-path={sourcePath}>
-  <button class="editor-launch" type="button" data-editor-open>Edit source</button>
-  <dialog aria-label="Edit local page source">
-    <header><strong>Edit source</strong><button type="button" data-editor-close>Close</button></header>
-    <p>Local Markdown / MDX · Save writes to this repository.</p>
-    <textarea aria-label="Page source" spellcheck="false" disabled></textarea>
-    <footer><span role="status">Not loaded</span><button type="button" data-editor-reload>Reload</button><button type="button" data-editor-save disabled>Save</button></footer>
-  </dialog>
-</div>
-<script is:inline>
-(() => {
-  function setup() {
-    const root = document.querySelector('[data-local-editor]');
-    if (!root || root.dataset.ready) return;
-    root.dataset.ready = 'true';
-    const dialog=root.querySelector('dialog'), area=root.querySelector('textarea'), status=root.querySelector('[role=status]');
-    const save=root.querySelector('[data-editor-save]'), reload=root.querySelector('[data-editor-reload]');
-    let original='', revision='', busy=false;
-    const dirty=()=>!area.disabled && area.value!==original;
-    const load=async()=>{
-      if(dirty() && !confirm('Discard unsaved changes and reload?')) return;
-      area.disabled=true; save.disabled=true; status.textContent='Loading…';
-      try {
-        const r=await fetch('/__latent/source-editor?path='+encodeURIComponent(root.dataset.sourcePath));
-        const data=await r.json();if(!r.ok)throw Error(data.error);
-        area.value=original=data.source; revision=data.revision; area.disabled=false;area.focus();area.setSelectionRange(0,0);area.scrollTop=0;status.textContent='Source loaded';
-      }catch(e){status.textContent=e.message;}
-    };
-    root.querySelector('[data-editor-open]').onclick=()=>{dialog.showModal();load();};
-    const close=()=>{if(!busy && (!dirty() || confirm('Discard unsaved changes?')))dialog.close();};
-    root.querySelector('[data-editor-close]').onclick=close;
-    dialog.oncancel=e=>{e.preventDefault();close();};
-    area.oninput=()=>{save.disabled=!dirty();status.textContent=dirty()?'Unsaved changes':'Source loaded';};
-    reload.onclick=load;
-    save.onclick=async()=>{
-      busy=true; save.disabled=true;reload.disabled=true;area.disabled=true;
-      try {
-        const r=await fetch('/__latent/source-editor',{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({path:root.dataset.sourcePath,source:area.value,revision})});
-        const data=await r.json();if(!r.ok)throw Error(data.error);
-        original=area.value;status.textContent='Saved';location.reload();
-      }catch(e){status.textContent=e.message;area.disabled=false;save.disabled=false;}
-      finally{busy=false;reload.disabled=false;}
-    };
-    const guard=e=>{if(dirty()){e.preventDefault();e.returnValue='';}};
-    window.addEventListener('beforeunload',guard);
-    document.addEventListener('astro:before-swap',()=>window.removeEventListener('beforeunload',guard),{once:true});
+
+<latent-source-editor data-local-editor data-source-path={sourcePath}>
+  <button type="button" class="editor-launch" data-editor-open aria-controls="local-source-editor-panel" aria-expanded="false" title={`Edit src/content/docs/${sourcePath}`}>
+    <Icon name="ph:pencil-simple" class="editor-icon" /><span>Edit source</span>
+  </button>
+  <section id="local-source-editor-panel" class="editor-panel" data-editor-panel role="region" aria-labelledby="local-source-editor-title" hidden>
+    <div class="editor-shell">
+      <header>
+        <div><p>Editing page source</p><h2 id="local-source-editor-title">{pageTitle}</h2><code>src/content/docs/{sourcePath}</code></div>
+        <button type="button" class="editor-close" data-editor-close aria-label="Close editor"><Icon name="ph:x" class="editor-icon" /></button>
+      </header>
+      <div class="editor-notice"><strong>Markdown / MDX</strong><span>Save writes to the local project and refreshes this page.</span></div>
+      <div class="editor-workspace"><textarea data-editor-text aria-label="Page source" spellcheck="false" disabled></textarea></div>
+      <footer>
+        <span role="status" data-editor-status>Open the editor to load this file.</span>
+        <div><button type="button" class="secondary" data-editor-reload disabled>Reload source</button><button type="button" data-editor-save disabled>Save page</button></div>
+      </footer>
+    </div>
+  </section>
+</latent-source-editor>
+
+<script>
+  import {findHeadingOffset} from '../lib/source-editor';
+
+  class LatentSourceEditor extends HTMLElement {
+    private cleanup?: () => void;
+
+    connectedCallback() {
+      if (this.cleanup) return;
+      const sourcePath = this.dataset.sourcePath;
+      const open = this.querySelector<HTMLButtonElement>('[data-editor-open]');
+      const close = this.querySelector<HTMLButtonElement>('[data-editor-close]');
+      const reload = this.querySelector<HTMLButtonElement>('[data-editor-reload]');
+      const save = this.querySelector<HTMLButtonElement>('[data-editor-save]');
+      const area = this.querySelector<HTMLTextAreaElement>('textarea');
+      const status = this.querySelector<HTMLElement>('[data-editor-status]');
+      const panel = this.querySelector<HTMLElement>('[data-editor-panel]');
+      if (!sourcePath || !open || !close || !reload || !save || !area || !status || !panel) return;
+
+      const listeners = new AbortController();
+      let request: AbortController | undefined;
+      let revision = '', original = '', heading = '';
+      let loaded = false, busy = false, saving = false;
+      let generation = 0;
+      let refreshTimer: ReturnType<typeof setTimeout> | undefined;
+      const obscured = new Map<HTMLElement, boolean>();
+      const transitionMeta = document.querySelector<HTMLMetaElement>('meta[name="astro-view-transitions-enabled"]');
+      const dirty = () => loaded && area.value !== original;
+      const setStatus = (message: string, state = '') => { status.textContent = message; status.dataset.state = state; };
+      const updateButtons = () => {save.disabled = busy || area.disabled || !dirty();reload.disabled = busy;};
+
+      const currentHeading = () => {
+        const line = Math.min(innerHeight * .35, 320);
+        let result = '';
+        for (const element of document.querySelectorAll<HTMLElement>('.docs-content h2, .docs-content h3, .docs-content h4, .docs-content h5, .docs-content h6')) {
+          if (element.getBoundingClientRect().top > line) break;
+          if (!element.getClientRects().length) continue;
+          const text = element.cloneNode(true) as HTMLElement;
+          text.querySelectorAll('a[href^="#"], [data-footnote-ref]').forEach(a => a.remove());
+          result = text.textContent?.trim() ?? '';
+        }
+        return result;
+      };
+
+      const positionCursor = () => {
+        const offset = findHeadingOffset(original, heading);
+        const cursor = Math.max(0, offset);
+        area.focus({preventScroll: true});
+        area.setSelectionRange(cursor, cursor);
+        requestAnimationFrame(() => {
+          if (!this.isConnected || panel.hidden) return;
+          if (offset < 0) {area.scrollTop = 0;return;}
+          // Measure wrapped source lines with the same width and font as the editor.
+          const styles = getComputedStyle(area);
+          const mirror = document.createElement('div');
+          Object.assign(mirror.style, {position:'fixed',left:'-10000px',top:'0',visibility:'hidden',boxSizing:'border-box',width:`${area.clientWidth}px`,padding:styles.padding,font:styles.font,letterSpacing:styles.letterSpacing,lineHeight:styles.lineHeight,tabSize:styles.tabSize,whiteSpace:'pre-wrap',overflowWrap:styles.overflowWrap,wordBreak:styles.wordBreak});
+          mirror.append(document.createTextNode(original.slice(0, offset)));
+          const marker = document.createElement('span');marker.textContent = '\u200b';mirror.append(marker);
+          document.body.append(mirror);
+          area.scrollTop = Math.max(0, marker.offsetTop - area.clientHeight * .2);
+          mirror.remove();
+        });
+        return offset >= 0;
+      };
+
+      const layout = () => {
+        const sidebar = document.querySelector<HTMLElement>('[data-nb-desktop-sidebar]');
+        const edge = sidebar?.getClientRects().length ? sidebar.getBoundingClientRect().right : 0;
+        panel.style.setProperty('--editor-left', `${edge}px`);
+      };
+      const resize = new ResizeObserver(layout);
+      const sidebar = document.querySelector<HTMLElement>('[data-nb-desktop-sidebar]');
+      if (sidebar) resize.observe(sidebar);
+      const reading = new MutationObserver(layout);
+      reading.observe(document.documentElement, {attributes:true,attributeFilter:['data-ll-left','data-ll-focus']});
+      window.addEventListener('resize', layout, {signal:listeners.signal});
+
+      const restoreReading = () => {
+        obscured.forEach((inert, element) => {element.inert = inert;});obscured.clear();
+        if (transitionMeta) transitionMeta.name = 'astro-view-transitions-enabled';
+        document.documentElement.removeAttribute('data-ll-editor-open');
+      };
+      const load = async () => {
+        request?.abort();request = new AbortController();
+        const ticket = ++generation;
+        busy = true;area.disabled = true;updateButtons();setStatus('Loading source…');
+        try {
+          const response = await fetch(`/__latent/source-editor?path=${encodeURIComponent(sourcePath)}`, {headers:{Accept:'application/json'},cache:'no-store',signal:request.signal});
+          const data = await response.json();
+          if (!response.ok) throw new Error(data.error || 'Unable to load this source.');
+          if (ticket !== generation || !this.isConnected || panel.hidden) return;
+          original = data.source;revision = data.revision;area.value = original;loaded = true;area.disabled = false;
+          const matched = positionCursor();
+          setStatus(matched ? `${data.format} source loaded · focused on “${heading}”` : `${data.format} source loaded`);
+        } catch (error) {
+          if (ticket === generation && !panel.hidden) setStatus(error instanceof Error ? error.message : 'Unable to load this source.', 'error');
+        } finally {if (ticket === generation) {busy = false;updateButtons();}}
+      };
+      const requestClose = () => {
+        if (saving) {setStatus('Saving. Wait for the request to finish before closing.');return;}
+        if (dirty() && !confirm('Close the editor and discard your unsaved changes?')) return;
+        generation++;request?.abort();busy = false;panel.hidden = true;
+        restoreReading();open.setAttribute('aria-expanded','false');open.focus({preventScroll:true});
+      };
+      const openEditor = () => {
+        if (!panel.hidden) return;
+        heading = currentHeading();loaded = false;layout();panel.hidden = false;
+        document.documentElement.setAttribute('data-ll-editor-open','');
+        // Use full navigation while editing so beforeunload also protects sidebar links.
+        // Client-side swaps otherwise remove a dirty editor without firing that event.
+        if (transitionMeta) transitionMeta.name = 'latent-editor-paused-transitions';
+        document.querySelectorAll<HTMLElement>('#main-content, [data-nb-toc-scroll-host]').forEach(element => {obscured.set(element, element.inert);element.inert = true;});
+        open.setAttribute('aria-expanded','true');close.focus({preventScroll:true});void load();
+      };
+      const saveSource = async () => {
+        if (!dirty() || busy || area.disabled) return;
+        busy = true;saving = true;area.disabled = true;updateButtons();setStatus('Saving to the working tree…');
+        const source = area.value;
+        try {
+          const response = await fetch('/__latent/source-editor', {method:'PUT',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify({path:sourcePath,source,revision})});
+          const data = await response.json();
+          if (!response.ok) throw new Error(data.error || 'Unable to save this source.');
+          original = source;revision = data.revision;
+          setStatus('Saved. The page will refresh with your changes.','success');
+          if (this.isConnected) refreshTimer = setTimeout(() => location.reload(), 550);
+        } catch (error) {
+          setStatus(error instanceof Error ? error.message : 'Unable to save this source.','error');
+          area.disabled = false;area.focus({preventScroll:true});
+        } finally {busy = false;saving = false;updateButtons();}
+      };
+
+      open.addEventListener('click', openEditor, {signal:listeners.signal});
+      close.addEventListener('click', requestClose, {signal:listeners.signal});
+      area.addEventListener('input', () => {updateButtons();setStatus(dirty() ? 'Unsaved changes' : 'Source is up to date', dirty() ? 'warning' : '');}, {signal:listeners.signal});
+      reload.addEventListener('click', () => {if (!dirty() || confirm('Discard your unsaved changes and reload the file?')) void load();}, {signal:listeners.signal});
+      save.addEventListener('click', () => void saveSource(), {signal:listeners.signal});
+      panel.addEventListener('keydown', event => {
+        if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 's') {event.preventDefault();void saveSource();}
+        if (event.key === 'Escape') {event.preventDefault();requestClose();}
+      }, {signal:listeners.signal});
+      window.addEventListener('beforeunload', event => {if (!panel.hidden && dirty()) event.preventDefault();}, {signal:listeners.signal});
+      this.cleanup = () => {generation++;request?.abort();listeners.abort();resize.disconnect();reading.disconnect();if(refreshTimer)clearTimeout(refreshTimer);restoreReading();};
+      if (new URLSearchParams(location.search).has('latent-edit')) openEditor();
+    }
+
+    disconnectedCallback() {this.cleanup?.();this.cleanup = undefined;}
   }
-  setup();
-  if(!window.__llEditorBound){document.addEventListener('astro:page-load',setup);window.__llEditorBound=true;}
-})();
+  if (!customElements.get('latent-source-editor')) customElements.define('latent-source-editor', LatentSourceEditor);
 </script>
+
 <style>
- .editor-launch {padding:4px 8px;border-radius:4px;color:var(--nb-muted-foreground);background:transparent;font-size:13px;cursor:pointer;}
- .editor-launch:hover {background:var(--nb-accent);color:var(--nb-foreground);}
- dialog {width:min(900px,calc(100vw - 24px));max-height:90dvh;margin:auto;padding:20px;border:1px solid var(--nb-border);border-radius:10px;background:var(--nb-background);color:var(--nb-foreground);}
- dialog::backdrop{background:#0008;}header,footer{display:flex;gap:12px;align-items:center;justify-content:space-between;}p{font-size:13px;margin:12px 0;color:var(--nb-muted-foreground);}textarea{display:block;width:100%;height:55dvh;font-family:monospace;font-size:14px;line-height:1.6;border:1px solid var(--nb-border);padding:12px;resize:vertical;}footer{margin-top:12px;font-size:13px;}button{cursor:pointer;}button:disabled{opacity:.5;}button:focus-visible,textarea:focus-visible{outline:2px solid var(--nb-primary);outline-offset:3px;}[role=status]{flex:1;}
- @media print{[data-local-editor]{display:none;}}
+  .editor-launch{position:fixed;right:1rem;bottom:1rem;z-index:30;display:flex;align-items:center;gap:.45rem;min-height:2.75rem;padding:.65rem .9rem;border:1px solid var(--nb-border);border-radius:999px;background:var(--nb-background);color:var(--nb-foreground);box-shadow:0 .3rem 1rem #0002;font:inherit;font-size:.8rem;cursor:pointer;}
+  .editor-launch:hover{background:var(--nb-accent);}
+  :global(html[data-ll-editor-open]) .editor-launch{visibility:hidden;}
+  :global(.editor-icon){width:1rem;height:1rem;}
+  .editor-panel{position:fixed;z-index:30;inset:3.5rem 0 0 var(--editor-left,0px);border-left:1px solid var(--nb-border);color:var(--nb-foreground);background:var(--nb-background);}
+  .editor-panel[hidden]{display:none;}
+  .editor-shell{height:100%;display:grid;grid-template-rows:auto auto minmax(0,1fr) auto;}
+  header,footer{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:.9rem 1.15rem;}
+  header{border-bottom:1px solid var(--nb-border);}
+  header>div{min-width:0;}
+  header p{margin:0 0 .15rem;color:var(--nb-muted-foreground);font-size:.7rem;}
+  h2{margin:0;font-size:1.1rem;font-weight:600;line-height:1.4;}
+  code{display:block;margin-top:.2rem;font-size:.75rem;color:var(--nb-muted-foreground);overflow-wrap:anywhere;}
+  .editor-close{display:grid;place-items:center;flex-shrink:0;width:2.75rem;height:2.75rem;border:1px solid var(--nb-border);border-radius:.4rem;cursor:pointer;background:var(--nb-background);}
+  .editor-notice{display:flex;align-items:center;gap:.7rem;padding:.6rem 1.15rem;border-bottom:1px solid var(--nb-border);color:var(--nb-muted-foreground);background:var(--nb-accent);font-size:.8rem;}
+  .editor-notice strong{color:var(--nb-foreground);white-space:nowrap;font-weight:600;}
+  .editor-workspace{min-height:0;padding:.8rem;background:var(--nb-accent);}
+  textarea{display:block;width:100%;height:100%;resize:none;box-sizing:border-box;padding:1.1rem 1.3rem;border:1px solid #c5ced8;border-radius:.5rem;background:#fffefa;color:#1d2939;caret-color:#126782;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:.9rem;line-height:1.65;tab-size:2;}
+  textarea::selection{background:#c8ecf7;color:#102a37;}
+  textarea:disabled{opacity:.65;cursor:wait;}
+  footer{border-top:1px solid var(--nb-border);}
+  [role=status]{font-size:.8rem;color:var(--nb-muted-foreground);overflow-wrap:anywhere;}
+  [data-state=warning]{color:var(--nb-foreground);}
+  [data-state=error]{color:var(--nb-destructive,#dc2626);}
+  footer>div{display:flex;flex-shrink:0;gap:.55rem;}
+  footer button{min-height:2.75rem;padding:.6rem .8rem;border:1px solid var(--nb-border);border-radius:.4rem;background:var(--nb-primary);color:var(--nb-primary-foreground);font:inherit;font-size:.8rem;cursor:pointer;}
+  footer button.secondary{color:var(--nb-foreground);background:var(--nb-background);}
+  button:disabled{opacity:.5;cursor:not-allowed;}
+  button:focus-visible{outline:2px solid var(--nb-primary);outline-offset:3px;}
+  textarea:focus-visible{outline:2px solid #126782;outline-offset:2px;}
+  @media(min-width:768px){
+    :global(html[data-ll-editor-open] .reading-restore[data-reading=left]){z-index:35;}
+    :global(html[data-ll-editor-open][data-ll-left]:not([data-ll-focus])) .editor-shell>header{padding-left:3.5rem;}
+  }
+  @media(max-width:40rem){.editor-launch{right:.75rem;bottom:.75rem;}header,footer{padding:.7rem;}footer{align-items:stretch;flex-direction:column;gap:.6rem;}footer>div,footer button{flex:1;}.editor-notice{align-items:flex-start;flex-direction:column;gap:.25rem;padding:.6rem .7rem;}.editor-workspace{padding:.5rem;}textarea{padding:.8rem;font-size:.8rem;}}
+  @media print{latent-source-editor{display:none;}}
 </style>

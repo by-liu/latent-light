@@ -4,16 +4,16 @@ Reviewed: October 2, 2026
 Repository cleanup: October 3, 2026
 License and publication decisions: October 3, 2026
 Scope: the local Latent Light repository and its static build.
-Status: initial source publication and the first static website deployment are
-complete. The user approved the documented security assessment and explicitly
-authorized deployment on October 3, 2026.
+Status: source publication and automatic production deployment are complete.
+The user approved the documented security assessment and explicitly authorized
+the release pushes. Automatic deployment was verified on October 3, 2026.
 
 This is a review record, not a second development guide. The authoritative
 release and recovery procedures are in
 [Maintenance and upgrades](../src/content/docs/about/maintenance.mdx).
 Cloudflare Workers Static Assets hosts the published site.
 The separate planning draft was archived after its release checks became part
-of the shared maintenance guide. Automatic deployment remains unconfigured.
+of the shared maintenance guide. Automatic deployment is active and verified.
 
 ## Public suitability
 
@@ -62,7 +62,7 @@ The earlier unused avatar, landscape image, and obsolete avatar record were
 moved to a local archive outside the repository on October 3. They remain
 recoverable but will not enter GitHub or the website deployment. Current asset
 provenance and exact cartoon avatar prompts remain in `docs/branding/`.
-Root `docs/` remains part of the proposed public repository, not a website
+Root `docs/` remains part of the public repository, not a website
 content collection. It holds provenance and this release review, not duplicate
 development guidance.
 
@@ -131,11 +131,10 @@ user authorized applying the agreed license, creating the public repository,
 making the initial commit, and pushing the reviewed source.
 
 Target repository: `https://github.com/by-liu/latent-light`.
-This authorization does not include website deployment or automatic publication.
-
-This source publication authorization did not include website deployment.
-The user subsequently approved the security assessment and separately authorized
-the first website deployment below. Automatic deployment remains unconfigured.
+This initial authorization did not include website deployment or automatic publication.
+The user subsequently approved the security assessment, separately authorized
+the first website deployment, and authorized the pushes used to verify automatic deployment.
+The release records below distinguish those actions.
 
 ## First public deployment
 
@@ -179,7 +178,7 @@ Prepared: October 3, 2026. The user authorized preparing the proposed workflow
 and its documentation, then explicitly authorized committing and pushing the
 reviewed changes. At the preparation checkpoint, GitHub workflow execution and
 branch protection remained pending source publication. Cloudflare activation
-remains a separate browser setup step.
+required a separate browser setup step, completed before the verified release below.
 
 The repository contains a GitHub validation workflow with read access only,
 no deployment credentials, and action references pinned to official commit identifiers.
@@ -196,8 +195,43 @@ matching build. A failed public check does not reverse an upload. The updated
 Maintenance guide describes failure handling, recovery, and exact build settings.
 The README now links prominently to the public website.
 
-Cloudflare activation still needs a browser step. The current Wrangler OAuth
-session can deploy Workers but receives HTTP 403 from the Builds configuration API.
-Do not claim that production builds are connected until dashboard setup and an
-automatic build succeed. Restrict the GitHub App to this repository. Keep
-preview builds disabled. No deployment credentials belong in GitHub pull request jobs.
+The Wrangler OAuth session can deploy Workers but receives HTTP 403 from the
+Builds configuration API. Verification therefore used GitHub check results,
+the Worker deployments API, and public site checks. No deployment credentials
+belong in GitHub pull request jobs.
+
+## Automatic deployment verification
+
+Verified: October 3, 2026, in America/Vancouver.
+Deployment time: October 4, 2026, at 00:49:24 UTC, or October 3 at 17:49:24 PDT.
+
+- Production origin: `https://latentlit.com`.
+- Source commit: [`15841ae7178258aaedb05135fe0d030f363bb7c9`](https://github.com/by-liu/latent-light/commit/15841ae7178258aaedb05135fe0d030f363bb7c9).
+- Cloudflare Worker: `latent-light`.
+- Active Worker version: `cae82026-2ba5-45bc-80ef-c66caebe9c15`, serving 100 percent of traffic.
+- Previous working version: `d07c9e67-4dcc-4b8b-b52b-a1daf76d026d`, recorded in the first deployment above.
+- Trigger: an explicitly authorized push of the README URL improvement to `main`.
+  Cloudflare deployed through Workers Builds. No manual deployment command ran.
+- Build commands: `npm ci`, then `npm run deploy`, including validation before
+  upload and the public verification step afterward.
+- Local verification tools: Node 24.21.0, Astro 7.3.1, Nimbus 0.15.2, Wrangler 4.146.0.
+- GitHub results: **Validate site** and **Workers Builds: latent-light** both passed.
+  The [GitHub validation run](https://github.com/by-liu/latent-light/actions/runs/37166073547)
+  completed successfully.
+- Local validation: all 48 deployment tests passed, 106 Astro files checked without
+  errors or warnings, seven files lint clean, and the production build passed.
+- Public verification: tested HTML pages, agent indexes, and Maintenance Markdown
+  and MDX exports matched the local build. Tested HTML canonical URLs were correct.
+  The source editor endpoint and an unknown route returned HTTP 404.
+- Browser verification: the public homepage rendered at 1440 and 390 pixel widths
+  in both light and dark themes. The new GitHub link was visible, used the correct
+  repository URL, and accepted keyboard focus. No public editor controls,
+  document overflow, or JavaScript errors were found.
+
+Before the successful push, Cloudflare showed a disconnected Git account warning.
+The user updated the GitHub App configuration and confirmed that the warning disappeared.
+The next authorized push produced the successful Cloudflare build and new active version.
+
+Branch protection remains unconfigured; the GitHub branch protection API returned HTTP 404.
+Requiring validation before pull request merges is a recommendation, not an enforced rule.
+The existing dependency advisory and build warnings remain unchanged.

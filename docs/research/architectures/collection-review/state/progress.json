@@ -1,0 +1,25 @@
+{
+  "schema_version": 2,
+  "topic_id": "architecture-collection-review",
+  "status": "complete",
+  "coverage": {
+    "pages": "All ten existing non-Foundations pages reviewed and refined.",
+    "evidence": "Fifteen primary sources and twenty two verified claims, with scope and locators.",
+    "visuals": "Seven original diagrams, manually inspected and tested at 1440, 390 and 320 pixels in both themes.",
+    "equations": "Twelve centered, sequentially numbered equations and explicit assumptions.",
+    "exports": "Markdown, source MDX and full agent export retain essential meaning.",
+    "regression": "Existing Foundations figures, equations, source assets and exports preserved and verified."
+  },
+  "open_questions": [
+    "Future work: select one Qwen3-VL checkpoint and trace its processor and complete forward shapes.",
+    "Future work: execute separately scoped quality and serving comparisons."
+  ],
+  "recommended_next_direction": null,
+  "last_seen": "2026-10-05T07:17:52.669Z",
+  "quality_gate": {
+    "evidence_verified": true,
+    "contradictions_reviewed": true,
+    "report_reviewed": true,
+    "visuals_reviewed": true
+  }
+}

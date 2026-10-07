@@ -1,0 +1,328 @@
+---
+interface Props {
+  kind: 'heads' | 'assembly' | 'position' | 'training' | 'evolution';
+  id?: string;
+}
+const { kind, id = `foundation-${Astro.props.kind}` } = Astro.props;
+const titles = {
+  heads: 'Different heads, different attention weights',
+  assembly: 'A residual path around every sublayer',
+  position: 'Position as a bundle of waves',
+  training: 'Two ways to predict the next token',
+  evolution: 'Design choices evolve along several axes',
+};
+const stacks = [
+  {name: 'Encoder', units: ['Self-attention', 'FFN'], output: 'Memory Z'},
+  {name: 'Decoder', units: ['Masked self-attention', 'Cross-attention · K, V from Z', 'FFN'], output: 'Generator'},
+];
+const choices = [
+  {axis: 'Topology', original: 'Encoder + decoder', later: 'Decoder-only models'},
+  {axis: 'Normalization', original: 'Post-LN', later: 'Pre-norm; LayerNorm or RMSNorm'},
+  {axis: 'Position', original: 'Added sine / cosine vectors', later: 'Learned embeddings or RoPE'},
+  {axis: 'FFN', original: 'ReLU', later: 'GELU or gated activations'},
+  {axis: 'Attention', original: 'MHA; decoder cross-attention', later: 'MHA, GQA, MQA and other variants'},
+];
+const waves = [1, .1, .01].map((frequency, index) => ({frequency, index}));
+const plotLayouts = [
+  {name: 'wide', width: 640, left: 45, right: 622},
+  {name: 'narrow', width: 380, left: 42, right: 362},
+];
+const curve = (frequency: number, cosine: boolean, left: number, right: number) =>
+  Array.from({length: 505}, (_, i) => {
+    const p = i * 63 / 504;
+    const value = cosine ? Math.cos(p * frequency) : Math.sin(p * frequency);
+    return `${i === 0 ? 'M' : 'L'}${(left + p / 63 * (right - left)).toFixed(3)},${(76 - value * 47).toFixed(3)}`;
+  }).join(' ');
+---
+
+<figure id={id} class={`foundation-figure kind-${kind}`} aria-labelledby={`${id}-heading`}>
+  <figcaption id={`${id}-heading`} class="visual-title">{titles[kind]}</figcaption>
+
+  {kind === 'heads' && <>
+    <div class="input-pair">
+      <section class="input-card query-input">
+        <strong>Query states</strong><span class="shape">B × Tq × D</span>
+        <span>Query projection → Q</span>
+      </section>
+      <section class="input-card kv-input">
+        <strong>Key / value states</strong><span class="shape">B × Tk × D</span>
+        <span>Key / value projections → K, V</span>
+      </section>
+    </div>
+    <p class="compact-note">Self-attention uses the same states for both inputs. Cross-attention can use different lengths, Tq and Tk.</p>
+    <div class="flow-down" aria-hidden="true">↓</div>
+    <strong class="section-label">H heads run in parallel</strong>
+    <div class="head-fork" aria-label="Two example heads and the final head; three cards illustrate any head count H">
+      {['1', '2', 'H'].map((label, i) => <section class={`head-card head-${i}`}>
+        <strong>Head {label}</strong>
+        <span>{`Q${['₁', '₂', 'ₕ'][i]} · K${['₁', '₂', 'ₕ'][i]} · V${['₁', '₂', 'ₕ'][i]}`}</span>
+        <span class="head-result">{`A${['₁', '₂', 'ₕ'][i]} V${['₁', '₂', 'ₕ'][i]}`}</span>
+      </section>)}
+    </div>
+    <p class="compact-note">Aᵢ contains Tq × Tk weights per batch item. Each head returns B × Tq × dᵥ.</p>
+    <svg class="head-join" viewBox="0 0 300 30" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M50 0V10M150 0V10M250 0V10M50 10H250M150 10V27M146 23L150 27L154 23" />
+    </svg>
+    <div class="output-card">
+      <strong>Concatenate, then mix with Wᴼ</strong>
+      <span class="shape">B × Tq × (H · dᵥ) → B × Tq × D</span>
+    </div>
+    <p class="visual-note">Concatenate, not average. In the original equal-width setup, dₖ = dᵥ = D/H. The cards are illustrative, not a checkpoint.</p>
+  </>}
+
+  {kind === 'assembly' && <>
+    <div class="residual-contract">
+      <strong class="section-label">One Pre-LN sublayer block</strong>
+      {['wide', 'narrow'].map(layout => <svg class={`residual-diagram layout-${layout}`} viewBox={layout === 'wide' ? '0 0 640 175' : '0 0 380 336'} role="img" aria-labelledby={`${id}-${layout}-title ${id}-${layout}-desc`}>
+        <title id={`${id}-${layout}-title`}>The unchanged input bypasses LayerNorm, the sublayer, and dropout</title>
+        <desc id={`${id}-${layout}-desc`}>Input x follows two branches. One applies LayerNorm, a sublayer, then dropout. The other carries x unchanged. Addition merges them, preserving the model width. This is Harvard's Pre-LN implementation, not the paper's Post-LN order.</desc>
+        <defs><marker id={`${id}-${layout}-arrow`} viewBox="0 0 10 10" refX="10" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10Z" fill="var(--diagram-line)" /></marker></defs>
+        {layout === 'wide' ? <>
+          <text class="input-label" x="18" y="109">x</text>
+          <path class="edge" d="M34 103H67" marker-end={`url(#${id}-${layout}-arrow)`} />
+          <path class="edge residual-bypass" d="M47 103V31H526V82" marker-end={`url(#${id}-${layout}-arrow)`} />
+          <text class="detail" x="280" y="22" text-anchor="middle">unchanged residual x</text>
+          <circle class="junction" cx="47" cy="103" r="3" />
+          {[
+            {x: 67, w: 114, label: 'LayerNorm'},
+            {x: 211, w: 128, label: 'Sublayer'},
+            {x: 369, w: 113, label: 'Dropout'},
+          ].map(box => <g class="operation" transform={`translate(${box.x},73)`}><rect width={box.w} height="60" rx="9" /><text x={box.w / 2} y="36" text-anchor="middle">{box.label}</text></g>)}
+          {['M181 103H211', 'M339 103H369', 'M482 103H505', 'M547 103H606'].map(d => <path class="edge" d={d} marker-end={`url(#${id}-${layout}-arrow)`} />)}
+          <circle class="add" cx="526" cy="103" r="21" /><text class="add-label" x="526" y="110" text-anchor="middle">+</text>
+          <text class="input-label" x="612" y="110">y</text>
+          <text class="detail" x="280" y="162" text-anchor="middle">Both branches have width D at the addition.</text>
+        </> : <>
+          <text class="input-label" x="132" y="23" text-anchor="middle">x</text>
+          <path class="edge" d="M132 31V57" marker-end={`url(#${id}-${layout}-arrow)`} />
+          <path class="edge residual-bypass" d="M132 39H323V286H153" marker-end={`url(#${id}-${layout}-arrow)`} />
+          <circle class="junction" cx="132" cy="39" r="3" />
+          <text class="detail" x="267" y="152" text-anchor="middle">residual</text><text class="input-label" x="267" y="179" text-anchor="middle">x</text>
+          {['LayerNorm', 'Sublayer', 'Dropout'].map((label, i) => <g class="operation" transform={`translate(48,${57 + i * 68})`}><rect width="168" height="46" rx="9" /><text x="84" y="29" text-anchor="middle">{label}</text></g>)}
+          {['M132 103V125', 'M132 171V193', 'M132 239V265', 'M132 307V332'].map(d => <path class="edge" d={d} marker-end={`url(#${id}-${layout}-arrow)`} />)}
+          <circle class="add" cx="132" cy="286" r="21" /><text class="add-label" x="132" y="293" text-anchor="middle">+</text>
+          <text class="detail" x="175" y="329">y · width D</text>
+        </>}
+      </svg>)}
+    </div>
+    <div class="stack-pair">
+      {stacks.map((stack, index) => <section class={`stack stack-${index}`} aria-labelledby={`${id}-stack-${index}`}>
+        <strong id={`${id}-stack-${index}`} class="section-label">{stack.name}</strong>
+        <div class="repeat-layer">
+          <span class="repeat-label">One layer · repeat N times</span>
+          <ol class="sublayers">{stack.units.map(unit => <li>{unit}</li>)}</ol>
+          <span class="compact-note">Each item uses the block above.</span>
+        </div>
+        <div class="flow-down" aria-hidden="true">↓</div>
+        <div class="stack-output">Final LayerNorm → {stack.output}</div>
+      </section>)}
+    </div>
+    <p class="visual-note">Repeat with independent parameters. The final norm sits outside the repeat.</p>
+  </>}
+
+  {kind === 'position' && <>
+    <p class="compact-note plot-intro">Exact toy encoding: D = 8. Three of its four sine / cosine pairs are shown.</p>
+    <div class="wave-legend"><span class="sine-key">Sine · solid</span><span class="cosine-key">Cosine · dashed</span></div>
+    {waves.map(wave => <section class="wave-panel" aria-labelledby={`${id}-pair-${wave.index}`}>
+      <strong id={`${id}-pair-${wave.index}`} class="wave-heading">Channels {2 * wave.index}, {2 * wave.index + 1} · ω = {wave.frequency}</strong>
+      {plotLayouts.map(layout => <svg class={`wave-plot layout-${layout.name}`} viewBox={`0 0 ${layout.width} 169`} role="img" aria-labelledby={`${id}-${wave.index}-${layout.name}-title ${id}-${wave.index}-${layout.name}-desc`}>
+        <title id={`${id}-${wave.index}-${layout.name}-title`}>Sine and cosine at angular frequency {wave.frequency}</title>
+        <desc id={`${id}-${wave.index}-${layout.name}-desc`}>Position ranges from zero to sixty-three. Encoding values range from minus one to plus one. The solid sine starts at zero; the dashed cosine starts at one. Lower frequencies change more slowly. Lines evaluate the analytical functions between integer positions for readability.</desc>
+        {[-1, 0, 1].map(value => <>
+          <line class:list={['grid-line', {'zero-line': value === 0}]} x1={layout.left} x2={layout.right} y1={76 - value * 47} y2={76 - value * 47} />
+          <text class="tick" x={layout.left - 9} y={82 - value * 47} text-anchor="end">{value === 1 ? '+1' : value === -1 ? '−1' : '0'}</text>
+        </>)}
+        {[0, 16, 32, 48, 63].map(position => <>
+          <line class="grid-line" x1={layout.left + position / 63 * (layout.right - layout.left)} x2={layout.left + position / 63 * (layout.right - layout.left)} y1="29" y2="123" />
+          <text class="tick" x={layout.left + position / 63 * (layout.right - layout.left)} y="148" text-anchor="middle">{position}</text>
+        </>)}
+        <path class="wave sine" data-frequency={wave.frequency} data-function="sin" d={curve(wave.frequency, false, layout.left, layout.right)} />
+        <path class="wave cosine" data-frequency={wave.frequency} data-function="cos" d={curve(wave.frequency, true, layout.left, layout.right)} />
+      </svg>)}
+    </section>)}
+    <p class="plot-axis-label">Position p →</p>
+    <p class="visual-note">Vertical axis: encoding value. Frequencies follow the paper's rule, ωᵢ = 10000^(−2i/D); this is a calculation, not a trained-model measurement.</p>
+  </>}
+
+  {kind === 'training' && <>
+    <section class="execution-panel training-panel" aria-labelledby={`${id}-train-heading`}>
+      <strong id={`${id}-train-heading`} class="section-label">Training · shifted, known targets</strong>
+      <table class="shift-table" aria-label="Known decoder inputs and their next-token labels at four positions">
+        <thead><tr><th scope="col">Position</th>{[1, 2, 3, 4].map(i => <th scope="col">{i}</th>)}</tr></thead>
+        <tbody>
+          <tr><th scope="row">Input</th>{['BOS', 'y₁', 'y₂', 'y₃'].map(token => <td>{token}</td>)}</tr>
+          <tr><th scope="row">Label</th>{['y₁', 'y₂', 'y₃', 'EOS'].map(token => <td>{token}</td>)}</tr>
+        </tbody>
+      </table>
+      {['wide', 'narrow'].map(layout => <svg class={`training-flow layout-${layout}`} viewBox={layout === 'wide' ? '0 0 640 170' : '0 0 380 230'} role="img" aria-labelledby={`${id}-training-${layout}-title ${id}-training-${layout}-desc`}>
+        <title id={`${id}-training-${layout}-title`}>Scores and known labels meet at the loss, not at generation</title>
+        <desc id={`${id}-training-${layout}-desc`}>One causal decoder and generator pass takes the input row and produces scores at all four positions. Known next-token labels independently enter the loss. Backpropagation and the optimizer update follow. The mask prevents each position from reading future inputs.</desc>
+        <defs><marker id={`${id}-training-${layout}-arrow`} viewBox="0 0 10 10" refX="10" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10Z" fill="var(--diagram-line)" /></marker></defs>
+        {(layout === 'wide' ? [
+          {x: 12, y: 77, w: 184, title: 'Causal pass', detail: 'decoder + generator'},
+          {x: 228, y: 77, w: 165, title: 'Scores', detail: 'all positions'},
+          {x: 425, y: 77, w: 203, title: 'Loss', detail: 'compare with labels'},
+        ] : [
+          {x: 12, y: 20, w: 165, title: 'Causal pass', detail: 'decoder + head'},
+          {x: 205, y: 20, w: 163, title: 'Scores', detail: 'all positions'},
+          {x: 205, y: 143, w: 163, title: 'Loss', detail: 'compare labels'},
+        ]).map(box => <g class="operation" transform={`translate(${box.x},${box.y})`}><rect width={box.w} height="64" rx="9" /><text x={box.w / 2} y="26" text-anchor="middle">{box.title}</text><text class="detail" x={box.w / 2} y="49" text-anchor="middle">{box.detail}</text></g>)}
+        {layout === 'wide' ? <>
+          <path class="edge" d="M196 109H228" marker-end={`url(#${id}-training-${layout}-arrow)`} />
+          <path class="edge" d="M393 109H425" marker-end={`url(#${id}-training-${layout}-arrow)`} />
+          <text class="detail" x="526" y="29" text-anchor="middle">Known label row</text>
+          <path class="edge label-edge" d="M526 39V77" marker-end={`url(#${id}-training-${layout}-arrow)`} />
+        </> : <>
+          <path class="edge" d="M177 52H205" marker-end={`url(#${id}-training-${layout}-arrow)`} />
+          <path class="edge" d="M286 84V143" marker-end={`url(#${id}-training-${layout}-arrow)`} />
+          <text class="detail" x="86" y="168" text-anchor="middle">Known</text><text class="detail" x="86" y="191" text-anchor="middle">label row</text>
+          <path class="edge label-edge" d="M140 175H205" marker-end={`url(#${id}-training-${layout}-arrow)`} />
+        </>}
+      </svg>)}
+      <p class="compact-note">Loss → backward → optimizer update. Predictions are trained in parallel, but each position sees only its allowed prefix.</p>
+    </section>
+    <section class="execution-panel inference-panel" aria-labelledby={`${id}-infer-heading`}>
+      <strong id={`${id}-infer-heading`} class="section-label">Generation · feed the chosen token back</strong>
+      {['wide', 'narrow'].map(layout => <svg class={`generation-flow layout-${layout}`} viewBox={layout === 'wide' ? '0 0 640 182' : '0 0 380 330'} role="img" aria-labelledby={`${id}-generation-${layout}-title ${id}-generation-${layout}-desc`}>
+        <title id={`${id}-generation-${layout}-title`}>An autoregressive feedback loop</title>
+        <desc id={`${id}-generation-${layout}-desc`}>A prefix containing BOS and the previously chosen token enters the decoder and generator. Choose the next token from its distribution, append that token, then repeat with the updated prefix. Stop at EOS or the length limit. Encoder memory is fixed and not drawn here.</desc>
+        <defs><marker id={`${id}-generation-${layout}-arrow`} viewBox="0 0 10 10" refX="10" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10Z" fill="var(--diagram-line)" /></marker></defs>
+        {(layout === 'wide' ? [
+          {x: 12, y: 23, w: 168, title: 'Current prefix', detail: 'BOS, ŷ₁'},
+          {x: 210, y: 23, w: 200, title: 'Decoder + head', detail: 'next-token distribution'},
+          {x: 440, y: 23, w: 188, title: 'Choose ŷ₂', detail: 'sample or argmax'},
+        ] : [
+          {x: 18, y: 14, w: 236, title: 'Current prefix', detail: 'BOS, ŷ₁'},
+          {x: 18, y: 122, w: 236, title: 'Decoder + head', detail: 'next-token distribution'},
+          {x: 18, y: 230, w: 236, title: 'Choose ŷ₂', detail: 'sample or argmax'},
+        ]).map(box => <g class="operation" transform={`translate(${box.x},${box.y})`}><rect width={box.w} height="66" rx="9" /><text x={box.w / 2} y="27" text-anchor="middle">{box.title}</text><text class="detail" x={box.w / 2} y="51" text-anchor="middle">{box.detail}</text></g>)}
+        {layout === 'wide' ? <>
+          {['M180 56H210', 'M410 56H440'].map(d => <path class="edge" d={d} marker-end={`url(#${id}-generation-${layout}-arrow)`} />)}
+          <path class="edge feedback-edge" data-feedback-loop d="M534 89V143H96V89" marker-end={`url(#${id}-generation-${layout}-arrow)`} />
+          <text class="detail" x="310" y="133" text-anchor="middle">append the chosen token; repeat</text>
+        </> : <>
+          {['M136 80V122', 'M136 188V230'].map(d => <path class="edge" d={d} marker-end={`url(#${id}-generation-${layout}-arrow)`} />)}
+          <path class="edge feedback-edge" data-feedback-loop d="M254 263H355V47H254" marker-end={`url(#${id}-generation-${layout}-arrow)`} />
+          <text class="detail" x="303" y="150" text-anchor="middle">append</text><text class="detail" x="303" y="174" text-anchor="middle">token</text>
+        </>}
+      </svg>)}
+      <p class="compact-note">Stop at EOS or the length limit. KV caching saves repeated work; it does not remove the next-token dependency.</p>
+    </section>
+  </>}
+
+  {kind === 'evolution' && <>
+    <div class="design-grid" role="table" aria-label="Original Transformer choices and examples of later alternatives">
+      <div class="design-row design-header" role="row"><span role="columnheader">Axis</span><strong role="columnheader">2017 design</strong><strong role="columnheader">Later choices</strong></div>
+      {choices.map(choice => <div class="design-row" role="row">
+        <strong class="design-axis" role="rowheader">{choice.axis}</strong>
+        <span class="original-choice" role="cell"><span class="mobile-column-label" aria-hidden="true">2017</span>{choice.original}</span>
+        <span class="later-choice" role="cell"><span class="mobile-column-label" aria-hidden="true">Alternatives</span>{choice.later}</span>
+      </div>)}
+    </div>
+    <div class="execution-note"><strong>Execution is another axis.</strong> Exact tiled attention kernels can change how attention is computed without changing the attention operation. Caching, precision and parallelism add separate serving choices.</div>
+    <p class="visual-note">These choices can coexist. This is a comparison, not a ranking or a recipe that every model follows.</p>
+  </>}
+</figure>
+
+<style>
+  .foundation-figure {
+    --diagram-line: var(--nb-muted-foreground);
+    --diagram-blue: var(--nb-info);
+    --diagram-violet: light-dark(#7450ab, #bba0e8);
+    --diagram-green: light-dark(#34785b, #83c9ab);
+    container-type: inline-size;
+    container-name: foundation;
+    margin: 1.5rem 0; padding: 1rem; min-width: 0;
+    border: 1px solid var(--nb-border); border-radius: 1rem;
+    background: var(--nb-muted); color: var(--nb-foreground);
+  }
+  .visual-title {font-size: 1rem; font-weight: 650; line-height: 1.5; margin-bottom: 1rem;}
+  .section-label {display: block; font-size: .87rem; font-weight: 650; line-height: 1.5; margin-bottom: .65rem;}
+  .compact-note, .visual-note {font-size: .78rem; line-height: 1.65; color: var(--nb-muted-foreground); margin: .7rem 0 0;}
+  .visual-note {margin-top: 1rem;}
+  .input-pair, .stack-pair {display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .8rem;}
+  .input-card, .output-card, .head-card, .stack, .execution-panel, .execution-note {border: 1px solid var(--nb-border); border-radius: .65rem; background: var(--nb-background); padding: .8rem; min-width: 0;}
+  .input-card {display: flex; flex-direction: column; gap: .35rem; font-size: .82rem; line-height: 1.5; border-top: 2px solid var(--diagram-blue);}
+  .kv-input {border-top-color: var(--diagram-green);}
+  .shape {display: block; font: .8rem/1.6 ui-monospace, SFMono-Regular, monospace; overflow-wrap: anywhere;}
+  .flow-down {text-align: center; color: var(--diagram-line); font-size: 1.25rem; line-height: 1.4; margin: .25rem 0;}
+  .head-fork {display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .65rem;}
+  .head-card {display: flex; flex-direction: column; align-items: center; gap: .5rem; font-size: .84rem; line-height: 1.5; border-top: 2px solid var(--diagram-violet);}
+  .head-result {font: 1.1rem/1.5 ui-serif, Georgia, serif; color: var(--diagram-violet);}
+  .head-join {display: block; width: 100%; max-width: none; height: 30px;}
+  .head-join path {fill: none; stroke: var(--diagram-line); stroke-width: 1.5; vector-effect: non-scaling-stroke;}
+  .output-card {text-align: center; font-size: .86rem; line-height: 1.6; border-color: var(--diagram-violet);}
+  .output-card .shape {margin-top: .3rem;}
+  .residual-contract {margin-bottom: 1rem;}
+  svg {display: block; width: 100%; height: auto; max-width: 40rem; margin-inline: auto;}
+  .layout-narrow {display: none; max-width: 23.75rem; margin-inline: auto;}
+  text {fill: var(--nb-foreground); font: 21px Inter, ui-sans-serif, system-ui, sans-serif;}
+  .detail {font-size: 18px; fill: var(--nb-muted-foreground);}
+  .layout-narrow .detail, .layout-narrow .tick {font-size: 20px;}
+  .input-label {font-size: 24px; font-family: ui-serif, Georgia, serif;}
+  .operation rect {fill: var(--nb-background); stroke: var(--diagram-blue); stroke-width: 1.5;}
+  .edge {fill: none; stroke: var(--diagram-line); stroke-width: 2;}
+  .residual-bypass {stroke: var(--diagram-violet);}
+  .junction {fill: var(--diagram-violet);}
+  .add {fill: var(--nb-background); stroke: var(--diagram-violet); stroke-width: 2;}
+  .add-label {font-size: 28px; fill: var(--diagram-violet);}
+  .stack {font-size: .83rem; line-height: 1.5;}
+  .repeat-layer {padding: .7rem; border: 1px dashed var(--diagram-blue); border-radius: .5rem;}
+  .stack-1 .repeat-layer {border-color: var(--diagram-violet);}
+  .repeat-label {display: block; font-size: .76rem; color: var(--nb-muted-foreground); margin-bottom: .6rem;}
+  .sublayers {list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 1rem;}
+  .sublayers li {position: relative; padding: .5rem; border: 1px solid var(--nb-border); border-radius: .35rem; background: var(--nb-muted); text-align: center;}
+  .sublayers li:not(:last-child)::after {content: '↓'; position: absolute; bottom: -1rem; left: calc(50% - .3rem); color: var(--diagram-line);}
+  .repeat-layer > .compact-note {display: block; font-size: .72rem;}
+  .stack-output {text-align: center; font-size: .78rem; font-weight: 600;}
+  .plot-intro {margin-top: -.5rem;}
+  .wave-legend {display: flex; flex-wrap: wrap; gap: 1.2rem; margin: .7rem 0; font-size: .78rem;}
+  .wave-legend span {display: inline-flex; align-items: center; gap: .5rem;}
+  .wave-legend span::before {content: ''; width: 1.5rem; border-top: 2px solid var(--diagram-blue);}
+  .wave-legend .cosine-key::before {border-color: var(--diagram-violet); border-top-style: dashed;}
+  .wave-panel + .wave-panel {margin-top: .2rem;}
+  .wave-heading {display: block; font-size: .8rem; line-height: 1.5;}
+  .grid-line {stroke: var(--nb-border); stroke-width: 1;}
+  .zero-line {stroke: var(--diagram-line); stroke-width: 1.2;}
+  .wave {fill: none; stroke-width: 2; vector-effect: non-scaling-stroke;}
+  .sine {stroke: var(--diagram-blue);}
+  .cosine {stroke: var(--diagram-violet); stroke-dasharray: 5 4;}
+  .tick {font-size: 18px; fill: var(--nb-muted-foreground);}
+  .plot-axis-label {text-align: center; margin: -.3rem 0 0; font-size: .78rem; color: var(--nb-muted-foreground);}
+  .execution-panel + .execution-panel {margin-top: 1rem;}
+  .shift-table {width: 100%; border-collapse: collapse; font-size: .78rem; line-height: 1.5; margin: 0; text-align: center;}
+  .shift-table th, .shift-table td {padding: .35rem .2rem; border: 1px solid var(--nb-border);}
+  .shift-table thead th {font-weight: 500; color: var(--nb-muted-foreground); background: var(--nb-muted);}
+  .shift-table tbody th {text-align: left; padding-left: .5rem;}
+  .shift-table tbody tr:first-child td {color: var(--diagram-blue);}
+  .shift-table tbody tr:last-child td {color: var(--diagram-violet);}
+  .feedback-edge {stroke: var(--diagram-green);}
+  .label-edge {stroke: var(--diagram-violet);}
+  .design-grid {font-size: .81rem; line-height: 1.6; border: 1px solid var(--nb-border); border-radius: .65rem; overflow: hidden;}
+  .design-row {display: grid; grid-template-columns: 1fr 1.5fr 1.8fr; gap: .7rem; padding: .65rem .75rem; background: var(--nb-background);}
+  .design-row + .design-row {border-top: 1px solid var(--nb-border);}
+  .design-header {background: var(--nb-muted);}
+  .design-axis {font-weight: 600;}
+  .later-choice {color: var(--diagram-violet);}
+  .mobile-column-label {display: none; font-size: .7rem; color: var(--nb-muted-foreground);}
+  .execution-note {font-size: .8rem; line-height: 1.65; margin-top: .8rem;}
+  @container foundation (max-width: 590px) {
+    .layout-wide {display: none;}
+    .layout-narrow {display: block;}
+  }
+  @container foundation (max-width: 470px) {
+    .input-pair, .stack-pair {grid-template-columns: 1fr;}
+    .head-fork {gap: .4rem;}
+    .head-card {padding: .65rem .25rem; font-size: .78rem;}
+    .design-row {grid-template-columns: 1fr 1fr; gap: .35rem .8rem;}
+    .design-axis {grid-column: 1 / -1;}
+    .design-header {grid-template-columns: 1fr 1fr; font-size: .78rem;}
+    .design-header > :first-child {position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap;}
+    .mobile-column-label {display: block;}
+  }
+  @media print {
+    .layout-wide {display: block;}
+    .layout-narrow {display: none;}
+    .wave-panel, .execution-panel, .stack {break-inside: avoid;}
+  }
+</style>

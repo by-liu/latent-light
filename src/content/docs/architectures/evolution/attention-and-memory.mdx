@@ -1,0 +1,93 @@
+---
+title: Attention and Memory
+description: Distinguish faster execution, smaller KV caches, and alternative memory operators.
+lastUpdated: 2026-10-05
+---
+
+import FocusCanvas from '../../../../components/FocusCanvas.astro';
+import ArchitectureDiagram from '../../../../components/architectures/ArchitectureDiagram.astro';
+
+Attention has several costs: comparing positions, moving tensors, and retaining
+history for generation. “Efficient attention” is therefore not one mechanism.
+First ask whether a design changes **execution**, **stored heads**, or **the
+memory operator**.[^flash][^gqa][^linear]
+
+## Three different levers
+
+<FocusCanvas size="diagram" label="Attention efficiency mechanisms">
+  <ArchitectureDiagram kind="memory" id="figure-1">
+    **Figure 1.** Three efficiency levers, not three interchangeable replacements. Original schematic based on the cited mechanisms.[^flash][^gqa][^linear]
+  </ArchitectureDiagram>
+</FocusCanvas>
+
+In the diagram, FlashAttention schedules tiles without changing dense
+softmax attention; GQA shares KV heads while retaining history by position;
+causal linear attention accumulates a different kind of history state.
+The techniques act on different contracts, so compare them at the level of
+the operation they change.
+
+## Execute exact attention with less memory traffic
+
+FlashAttention loads tiles into fast on chip SRAM, updates softmax statistics
+and outputs incrementally, and avoids writing the full attention matrix to
+high bandwidth memory (HBM). Its backward pass recomputes intermediates
+instead of storing that matrix.[^flash]
+
+This preserves dense attention mathematically, subject to floating point
+rounding. It does not remove the quadratic pairwise arithmetic. Performance
+depends on hardware, shapes, and kernel implementation, not just the label
+“exact attention.”[^flash]
+
+## Share heads to reduce cached storage
+
+GQA assigns a group of query heads to one shared key head and value head.
+MQA uses one KV head for all queries; MHA uses one per query head. GQA is an
+intermediate choice, not a guarantee that quality stays unchanged.[^gqa]
+
+For equal key and value widths, a local tensor count gives:
+
+<MathExpression display number="1" tex="M_{\mathrm{KV}} = 2 L B T H_{\mathrm{KV}} d_h s" />
+
+Here `L` is layers, `B` batch size, `T` retained positions, `H_KV` KV heads,
+`d_h` elements per head, and `s` bytes per element. Equation (1) counts keys
+and values only; it excludes allocation overhead and other runtime buffers.
+Quartering the KV head count quarters this storage, not necessarily request
+latency. See [Foundations](/architectures/foundations/#attention-and-masking)
+for the head sharing diagram and tensor shapes.
+
+## Replace a growing list with a recurrent state
+
+The causal linear Transformer uses a positive feature map `φ` to replace
+softmax matching with a normalized kernel. For column vectors `q`, `k`, and
+`v`, its recurrence can be written as:[^linear]
+
+<MathExpression display number="2" tex="
+\begin{aligned}
+S_t &= S_{t-1}+\phi(k_t)v_t^\top \\
+z_t &= z_{t-1}+\phi(k_t) \\
+y_t^\top &= \frac{\phi(q_t)^\top S_t}{\phi(q_t)^\top z_t}
+\end{aligned}
+" />
+
+Start with zero states. `S` stores accumulated feature and value associations;
+`z` normalizes the readout. The denominator must be nonzero. With fixed feature
+width `d_φ` and value width `d_v`, the state has `d_φ d_v + d_φ` elements,
+independent of history length. That is a local shape count, not a statement
+that a complete model has no other memory costs.
+
+The finite feature formulation is a different operator, not an exact
+reordering of ordinary softmax attention. Its usefulness depends on what
+the state preserves.[^linear]
+
+## What to test
+
+Proposed comparisons should measure distant fact retrieval, repeated
+distractors, quality, memory, and latency under the same serving conditions.
+Distinguish prompt processing from incremental decoding. None of the equations
+alone establishes which design is best for your application.
+
+Selected mechanisms checked October 5, 2026. No serving benchmarks were run.
+
+[^flash]: Tri Dao et al., [FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness](https://arxiv.org/html/2205.14135v2), 2022, sections 2 and 3. Dense exact attention is distinct from the paper's block sparse extension.
+[^gqa]: Joshua Ainslie et al., [GQA: Training Generalized Multi-Query Transformer Models from Multi-Head Checkpoints](https://arxiv.org/html/2305.13245v3), 2023, section 2 and the study conditions in section 3.
+[^linear]: Angelos Katharopoulos et al., [Transformers are RNNs: Fast Autoregressive Transformers with Linear Attention](https://arxiv.org/html/2006.16236v3), 2020, sections 3.2 to 3.4, especially equations 9 to 12 and 16 to 20. Equation (2) uses equivalent local notation.

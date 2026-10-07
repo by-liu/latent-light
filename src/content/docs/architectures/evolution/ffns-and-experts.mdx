@@ -1,0 +1,84 @@
+---
+title: FFNs and Experts
+description: Separate nonlinear feature transformations, multiplicative gates, and sparse expert routing.
+lastUpdated: 2026-10-05
+---
+
+import FocusCanvas from '../../../../components/FocusCanvas.astro';
+import ArchitectureDiagram from '../../../../components/architectures/ArchitectureDiagram.astro';
+
+Attention exchanges information across positions; an FFN transforms each
+position's features. A richer activation, a feature gate, and an expert router
+change different parts of that transformation.[^transformer][^glu][^switch]
+
+## A feature gate is not an expert router
+
+In SwiGLU, two projections of the same token are multiplied. One branch uses
+SiLU, which is Swish with parameter 1. Omitting biases:[^glu]
+
+<MathExpression display number="1" tex="\operatorname{SiLU}(a)=a\,\sigma(a),\qquad \sigma(a)=\frac{1}{1+e^{-a}}" />
+
+<MathExpression display number="2" tex="\operatorname{SwiGLU}(x)=\bigl(\operatorname{SiLU}(xW_g)\odot xW_u\bigr)W_d" />
+
+`x` is a row vector of width `D`; `W_g` and `W_u` map to hidden width `F`;
+`W_d` maps back to `D`. The symbol `⊙` means elementwise multiplication.
+
+<FocusCanvas size="diagram" label="SwiGLU feature computation">
+  <ArchitectureDiagram kind="gate" id="figure-1">
+    **Figure 1.** Two computed branches, one gated feature transformation. Original schematic of the bias omitted SwiGLU FFN.[^glu]
+  </ArchitectureDiagram>
+</FocusCanvas>
+
+Both branches are computed for every token. SiLU can be negative and is
+unbounded above, so this gate is neither a probability distribution nor a
+mask restricted to `[0, 1]`. The multiplication makes one learned feature
+branch modulate the other; it does not skip an expert.[^glu]
+
+## Compare widths at a comparable budget
+
+A two projection dense FFN has about `2DF_dense` weights. A gated FFN has
+about `3DF_gate`. Ignoring biases, matching those counts gives a local
+calculation:
+
+<MathExpression display number="3" tex="F_{\mathrm{gate}}\approx\frac{2}{3}F_{\mathrm{dense}}" />
+
+The GLU variants paper uses this width adjustment in its T5 experiments.
+Its results support gated variants in that tested setting, not universal
+superiority at arbitrary widths or training budgets.[^glu]
+
+## Route a token to selected experts
+
+Switch Transformer replaces a dense FFN with several FFN experts and a
+router. Its top 1 rule selects one expert and weights its output by the
+router probability:[^switch]
+
+<MathExpression display number="4" tex="j=\arg\max_i p_i(x),\qquad y=p_j(x)E_j(x)" />
+
+<FocusCanvas size="diagram" label="Switch expert routing">
+  <ArchitectureDiagram kind="routing" id="figure-2">
+    **Figure 2.** One selected expert, not three evaluated FFNs. Original Switch routing example with illustrative probabilities.[^switch]
+  </ArchitectureDiagram>
+</FocusCanvas>
+
+The example routes `x` to expert 1 and returns `0.7 E₁(x)`.
+Experts 2 and 3 are not dispatched for that token. This assumes capacity is
+available: the paper's bounded expert capacity can cause overflow. Load
+balancing and distributed communication also matter.[^switch]
+
+## Capacity, compute, and serving are different budgets
+
+More total expert weights does not mean every weight is used for every token.
+It also does not make those weights free to store or distribute. A proposed
+comparison should report total parameters, active computation, training
+budget, routing balance, memory, and communication separately.
+
+Feature gates and expert routing can coexist; neither replaces attention's
+role in communication. Return to [Foundations](/architectures/foundations/#components-and-full-model)
+for the residual block around these sublayers.
+
+Selected mechanisms checked October 5, 2026. No FFN or routing experiments
+were performed here.
+
+[^transformer]: Ashish Vaswani et al., [Attention Is All You Need](https://arxiv.org/html/1706.03762v7), 2017, section 3.3: positionwise feed forward networks.
+[^glu]: Noam Shazeer, [GLU Variants Improve Transformer](https://arxiv.org/html/2002.05202v1), 2020, sections 1 to 3, equations 5 and 6, and the matched width experiment. Equation (3) is a local parameter count under the stated assumptions.
+[^switch]: William Fedus, Barret Zoph, and Noam Shazeer, [Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity](https://arxiv.org/html/2101.03961v3), 2022 revision, sections 2.1 to 2.3. Top 1 routing, output weighting, capacity, and load balancing refer to this design, not all MoE variants.

@@ -1,0 +1,84 @@
+---
+title: Position and Long Context
+description: Understand how rotary position affects matching, and why accepting a long sequence is not the same as using it well.
+lastUpdated: 2026-10-05
+---
+
+import FocusCanvas from '../../../../components/FocusCanvas.astro';
+import ArchitectureDiagram from '../../../../components/architectures/ArchitectureDiagram.astro';
+
+An attention layer needs information about order as well as content.
+But three questions are different: how position is represented, how much
+context a system can accept, and how well it uses evidence inside that context.
+Keeping them separate avoids treating a large context limit as a quality guarantee.
+
+## From added position to rotated features
+
+The original Transformer adds sinusoidal position vectors to token embeddings.
+GPT-2's released implementation instead adds learned absolute position
+embeddings.[^transformer][^gpt-code] RoPE applies position dependent rotations
+to query and key feature pairs, so their dot product also carries relative
+position information.[^rope]
+
+For one two dimensional feature pair, define:
+
+<MathExpression display number="1" tex="
+R(a)=\begin{bmatrix}\cos a & -\sin a\\\sin a & \cos a\end{bmatrix}
+" />
+
+At positions `m` and `n`, the rotated vectors are `R(mθ)q` and `R(nθ)k`.
+The orthogonality of rotation gives:[^rope]
+
+<MathExpression display number="2" tex="
+\bigl(R(m\theta)q\bigr)^\top R(n\theta)k
+=q^\top R\bigl((n-m)\theta\bigr)k
+" />
+
+The position term depends on the difference `n − m`, but the content vectors
+still determine the score. Real heads use many pairs with different
+frequencies, not a single angle for the whole vector.[^rope]
+
+<FocusCanvas size="diagram" label="Rotary position intuition">
+  <ArchitectureDiagram kind="rope" id="figure-1">
+    **Figure 1.** Position changes the angle used in matching. Original toy illustration of RoPE, not a measured attention pattern.[^rope]
+  </ArchitectureDiagram>
+</FocusCanvas>
+
+In this example, both unrotated vectors are `(1, 0)`. With `θ = π/4`, position
+1 rotates the query by 45° and position 2 rotates the key by 90°. Their
+separation is 45°. Different content vectors would add their own geometry.
+
+## Capacity is not useful reach
+
+| Question | What to inspect |
+| --- | --- |
+| Representation | Where does position enter, and which relationships does it encode? |
+| Capacity | What do the checkpoint, processor, cache, and memory budget permit? |
+| Usefulness | Does the answer still depend on the right evidence as distance and distractors increase? |
+
+RoPE does not by itself establish reliable extrapolation to unseen lengths.
+A position formula is not an evaluation of evidence use. A useful proposed
+test varies evidence location, dependency distance, and distractors separately,
+while keeping the answer and necessary facts controlled. Report quality
+alongside memory and latency, not just the accepted token count.
+
+## Images and video add more coordinates
+
+For visual inputs, sequence order alone need not express spatial or temporal
+relationships. Qwen3-VL's official summary describes Interleaved MRoPE,
+which allocates rotary frequencies across time, width, and height. It also
+uses textual timestamps for video, a distinct channel for time information.[^qwen-summary]
+
+These mechanisms expose coordinates; they do not guarantee that an answer
+is correctly grounded in a frame or region. Read the
+[Qwen3-VL study](/architectures/models/qwen3-vl/) for its architecture and
+[Multimodal integration](/architectures/evolution/multimodal-integration/)
+for the processing choices that determine which evidence reaches the model.
+
+Selected mechanisms checked October 5, 2026. Long context tests above are
+proposals, not results from this site.
+
+[^transformer]: Ashish Vaswani et al., [Attention Is All You Need](https://arxiv.org/html/1706.03762v7), 2017, section 3.5. The [Foundations position section](/architectures/foundations/#components-and-full-model) explains the sinusoidal construction.
+[^gpt-code]: OpenAI, [`src/model.py`](https://github.com/openai/gpt-2/blob/9b63575ef42771a015060c964af2c3da4cf7c8ab/src/model.py), commit `9b63575`, function `model`: token embeddings plus learned position embeddings, with positions offset by cached history length.
+[^rope]: Jianlin Su et al., [RoFormer: Enhanced Transformer with Rotary Position Embedding](https://arxiv.org/html/2104.09864v5), 2023 revision of the 2021 preprint, sections 3.1 and 3.2. Equations (1) and (2) use equivalent local notation with column vectors.
+[^qwen-summary]: Qwen Team, [Qwen3-VL official repository](https://github.com/QwenLM/Qwen3-VL#model-architecture-updates), architecture summary inspected October 5, 2026. This is not a pinned processor or checkpoint study.

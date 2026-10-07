@@ -9,7 +9,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "typecheck": "astro check",
-    "validate": "npm run test:deployment && npm run typecheck && npm run lint:docs && npm run build",
+    "validate": "npm run test:deployment && npm run test:content && npm run typecheck && npm run lint:docs && npm run build",
+    "test:content": "node --test scripts/reference-heading.test.mjs scripts/source-editor.test.mjs scripts/math-typesetting.test.mjs",
     "test:deployment": "node --test scripts/check-deployment-origin.test.mjs scripts/verify-deployment.test.mjs",
     "check:deploy-origin": "node scripts/check-deployment-origin.mjs",
     "verify:deployment": "node scripts/verify-deployment.mjs",
@@ -22,6 +23,7 @@
     "postdeploy": "npm run verify:deployment"
   },
   "dependencies": {
+    "@astrojs/markdown-satteri": "0.4.2",
     "@cloudflare/nimbus-docs": "0.15.2",
     "@fontsource-variable/inter": "^5.2.8",
     "@fontsource-variable/jetbrains-mono": "^5.2.8",
@@ -30,6 +32,8 @@
     "astro-og-canvas": "^0.13.0",
     "canvaskit-wasm": "^0.41.1",
     "clsx": "^2.1.1",
+    "hast-util-from-html": "2.0.3",
+    "katex": "0.19.0",
     "tailwind-merge": "^3.5.0"
   },
   "devDependencies": {

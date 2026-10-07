@@ -1,7 +1,7 @@
 ---
 title: Content standards
 description: How to create clear, grounded content and choose useful media.
-lastUpdated: 2026-10-02
+lastUpdated: 2026-10-04
 ---
 
 Create content that helps a reader understand something or act on it. Keep the
@@ -54,8 +54,48 @@ shown fully on the page usually need no citation. For original derivations and
 synthesis, cite the underlying definitions, assumptions, or evidence.
 
 Place citations beside the claims they support. One citation can cover a compact
-group of related statements; avoid repeating it after every sentence. Use
-descriptive links and enough metadata to identify the source and relevant version.
+group of related statements; avoid repeating it after every sentence. Cover the
+consequential claims throughout the page, not only those in the introduction.
+
+### Citation format
+
+Use native Markdown footnotes for references. The rendered page must show a
+numbered superscript at the point of citation and a reference list at the end.
+Readers must be able to follow a citation to its source entry and return to the
+passage. Keep ordinary links for navigation and further reading; a list of
+links at the end does not replace citations beside claims.
+
+```md
+FlashAttention is an exact, IO aware attention algorithm.[^flashattention]
+
+[^flashattention]: Tri Dao et al.,
+    [FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness](https://arxiv.org/abs/2205.14135),
+    NeurIPS 2022.
+```
+
+- Use a short semantic identifier, such as `flashattention` or `vaswani2017`.
+  Reuse it when the same source supports another claim. Let the renderer assign
+  numbers; do not type numbers or superscript HTML manually.
+- Put definitions at the end of the document. The renderer creates the reference
+  section with a visible References heading, so do not add a duplicate heading.
+- Start each entry with the author or organization, followed by the linked title
+  and year. Include the relevant venue, version, or commit. Omit routine source
+  type labels such as Paper, Code, or Documentation. Add a source type only when
+  it helps distinguish otherwise ambiguous material, and place it after the title.
+- Link directly to the inspected source with descriptive text. Add a section,
+  equation, figure number, or code locator when that helps readers verify the claim.
+- Place the marker immediately after the supported claim or compact paragraph.
+  Cite sources in figure captions and beside borrowed formulas, tables, and
+  adapted code. A caption must also state whether the material is reproduced,
+  adapted, calculated, or synthesized here.
+- Cite the inputs to an original derivation or synthesis without presenting the
+  result as a source's published finding. Do not invent references for personal
+  experience, proposed checklists, or elementary calculations shown in full.
+- Keep definitions and citation markers in Markdown exports. Check numbered
+  superscripts, source links, and return links in the rendered page.
+
+These conventions apply to every factual page, including foundations, model
+studies, paper discussions, and landscape research.
 
 ### Choose appropriate sources
 
@@ -85,6 +125,62 @@ units, comparison baselines, conditions, and uncertainty. Draft status does not
 justify unsupported claims. If a claim cannot be checked, qualify it, identify
 the gap, or remove it.
 
+## Write equations as mathematics
+
+Use LaTeX math notation, not blockquotes, screenshots, or code styling, for
+mathematical expressions. Use `$...$` for inline math and `$$` on separate lines
+for a display equation in Markdown. Reserve backticks for code and literal identifiers.
+
+```latex
+The key width is $d_k$.
+
+$$
+\operatorname{Attention}(Q,K,V)
+=\operatorname{softmax}\left(\frac{QK^\top}{\sqrt{d_k}}+M\right)V
+\tag{1}
+$$
+```
+
+For MDX pages, use the shared `MathExpression` component. Nimbus's MDX source
+scanner does not recognize math delimiters, so it can misread LaTeX braces as
+JavaScript. A static `tex` attribute keeps the expression intact. Add `display`
+and a static `number="1"` attribute for a standalone equation; omit both for
+inline math. The component adds the TeX tag automatically. The export becomes standard
+LaTeX with the appropriate dollar delimiters.
+Use `\lt` and `\gt` for comparison symbols in component attributes, rather than
+literal angle brackets, so the export scanner cannot mistake them for markup.
+
+```mdx
+The key width is <MathExpression tex="d_k" />.
+
+<MathExpression display number="1" tex="
+\operatorname{Attention}(Q,K,V)
+=\operatorname{softmax}\left(\frac{QK^\top}{\sqrt{d_k}}+M\right)V
+" />
+```
+
+Define symbols, shapes, units, and essential assumptions beside the equation.
+Keep source citations outside the math delimiters and beside the statement they
+support. Use `aligned` inside display math for related equations on multiple
+lines. Keep expressions readable at narrow widths; a long equation can scroll
+within its own region, but must not widen the whole page.
+
+Center every display equation and place its number in parentheses on the right.
+Number display equations in reading order, starting at (1) on each page. Give a
+related multiline group one number; leave inline expressions unnumbered.
+Use `\tag{1}` in Markdown or `number="1"` in MDX, not both. The renderer creates
+an `equation-1` anchor. Refer to it as `[Equation (1)](#equation-1)` when needed.
+Equation numbers are separate from figure numbers. Renumber labels and update
+text references when reordering equations; check that numbers are unique and
+sequential. On narrow screens, long equations and their numbers can scroll
+together without overlapping.
+
+Keep LaTeX in Markdown exports and source expressions in MDX exports. Escape a
+literal dollar sign as `\$` outside code, especially when writing prices.
+Verify typesetting, accessible
+MathML, and exported notation after a change. See the
+[math rendering setup](/about/development-guide/#render-mathematics).
+
 ## Choose media for the explanation
 
 Use a visual when it clarifies a relationship better than prose. Choose a
@@ -96,13 +192,35 @@ Use both only when they contribute different things. For example, a canonical
 architecture figure may establish the full design while a focused diagram
 explains one data flow. Remove visuals that merely repeat the same information.
 
-Give diagrams, charts, formulas, and tables accurate provenance. For visual
-captions, use the description that fits:
+### Figure numbering and captions
+
+Every instructional figure must be numbered in reading order within its page, starting with
+**Figure 1**. Include diagrams, plots, and reproduced images in the same sequence.
+Restart numbering on each page. Do not number logos, avatars, or purely decorative artwork.
+Begin each caption with **Figure N.**, followed by a short description and the
+necessary attribution. Avoid repeating details already clear in the figure.
+Keep the number in authored text, not only CSS or an image,
+so it remains visible in accessible reading and Markdown exports.
+
+Give figures a stable `figure-N` anchor for links such as
+`[Figure 2](#figure-2)`. Reference them by number when discussing them in the text.
+The page's figure numbers and the source's numbers are separate: for example,
+“Figure 2. Original
+Transformer architecture. Reproduced from the paper's Figure 1.” Renumber captions
+and update links when figures are added, removed, or reordered.
+
+### Visual provenance
+
+Give diagrams, charts, formulas, and tables accurate provenance.
+For provenance, use a concise description that fits:
 
 - **Reproduced from:** materially the same visual as the source.
 - **Adapted from:** modified from one identifiable source.
 - **Latent Light derivation:** calculated here from stated assumptions.
 - **Latent Light synthesis:** created here from multiple cited sources.
+
+These labels are examples, not required boilerplate. Natural wording such as
+“illustration informed by…” is sufficient when it identifies the source and method.
 
 Cite sources beside the visual and explain any meaningful changes. Identify
 decorative artwork as such, especially when AI generated. Verify usage rights
@@ -136,10 +254,16 @@ and what must remain to prevent misunderstanding.
 
 ### Review the content
 
-- Do the inspected sources support the claims beside them?
+- Do the inspected sources support the claims beside them throughout the page?
+- Are references numbered superscripts with complete source entries, working
+  citation and return links, and definitions retained in Markdown exports?
 - Are assumptions, units, baselines, versions, and verification dates clear where needed?
 - Can readers distinguish evidence, interpretation, and personal experience?
 - Do visuals add value and retain attribution, usage rights, and accessible explanations?
+- Are figure captions numbered in reading order, with unique anchors, correct text
+  references, and numbers preserved in Markdown exports?
+- Are equations typeset as mathematics, with defined symbols, nearby citations,
+  readable layouts, and LaTeX preserved in the text exports?
 - Do HTML and Markdown preserve the essential meaning without relying on media playback?
 - Is everything suitable for public sharing, including linked assets?
 
@@ -147,6 +271,10 @@ Automated checks cannot establish factual accuracy. Review the content as well
 as completing the [site validation checks](/about/maintenance/#validate-a-change).
 
 ## Keep public sharing deliberate
+
+Write public pages so they make sense without knowledge of the author's private
+workspaces. Do not mention internal project names or migration history in page
+text. Keep such history in repository source records when needed for provenance.
 
 Only include material suitable for public sharing. Never include private
 conversations, employer confidential material, credentials, or restricted assets.

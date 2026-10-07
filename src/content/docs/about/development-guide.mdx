@@ -1,7 +1,7 @@
 ---
 title: Development guide
 description: Where source files live and how to develop pages, components, and exports.
-lastUpdated: 2026-10-03
+lastUpdated: 2026-10-04
 ---
 
 Develop the site from its source files. Preserve the calm reading experience.
@@ -96,7 +96,21 @@ Use its `label` and `size` props. Available sizes are `figure`, `diagram`,
 and `wide`. Only the visual should expand in focus view, not the reading column.
 Keep a meaningful text equivalent in the exported content.
 
-The local source editor exists only in development mode. Preserve these protections:
+Follow the [figure numbering and caption standards](/about/content-standards/#figure-numbering-and-captions).
+`SourceFigure` and `FoundationDiagram` accept an `id` for figure anchors.
+Keep caption labels in the page source so the text export retains them.
+
+The local source editor exists only in development mode. The Edit source button
+opens a full height pane below the header while keeping desktop navigation
+available. The pane follows sidebar collapse and focus view. It opens at the
+section currently being read, with a cursor positioned at the matching source
+heading. Generated References opens at the footnote definitions.
+
+The header identifies the page and source path. Save page writes to the local
+working tree and refreshes the page; it does not commit, push, or deploy.
+Use Ctrl+S or Cmd+S to save and Escape to close. Reload source and closing the
+pane require confirmation before discarding edits. Navigation and refresh warn
+about unsaved changes. Preserve these protections:
 
 - Loopback binding restricts the server to the local computer.
 - Same origin checks restrict requests to the editor's origin.
@@ -124,6 +138,46 @@ Check custom components in HTML and Markdown. Preserve essential examples,
 citations, captions, assumptions, and media explanations. Extend Markdown
 processing through the Nimbus plugin configuration. Review compatibility before
 replacing the processor.
+
+Use native Markdown footnotes as specified in the
+[citation standards](/about/content-standards/#citation-format). The local plugin
+`plugins/reference-heading.mjs` makes the generated References heading visible
+without replacing Nimbus's processor. It preserves citation anchors and return
+links. Renderer regression tests run through `npm run test:content` and are part
+of `npm run validate`.
+
+## Render mathematics
+
+Author math using the [equation standards](/about/content-standards/#write-equations-as-mathematics).
+`astro.config.ts` selects Astro's native Sätteri processor with `math: true`.
+Nimbus still supplies its admonitions and normal Astro rendering passes.
+The existing table and reference plugins remain in the same pipeline.
+
+`plugins/math-typesetting.mjs` typesets native Markdown math nodes with KaTeX
+at build time. MDX pages use the globally registered `MathExpression` component
+because Nimbus's source scanner does not recognize math delimiters. Pass LaTeX
+in a static `tex` attribute and add `display` and `number="1"` for a standalone
+equation. The component adds `\tag{1}`; do not also put a tag in its `tex` value.
+Numeric tags produce an `equation-1` anchor and an accessible equation label.
+Both paths produce visual HTML and accessible MathML with a TeX annotation.
+Invalid LaTeX fails the build. Trusted HTML commands are disabled, and macros
+do not carry between expressions. Code examples and quotations remain literal.
+
+`BaseLayout.astro` imports KaTeX CSS. Its fonts are bundled locally; no CDN or
+client side renderer is used. Equation styles in `src/styles/prose.css` keep
+display formulas centered, with right aligned numbers and symmetric space to
+prevent overlap. Wide formulas and their numbers stay in a keyboard accessible
+scrolling region. Keep those styles
+scoped to article content. Do not apply code or quotation styles to equations.
+
+KaTeX and the Sätteri processor are explicit dependencies. The rendering tests
+in `scripts/math-typesetting.test.mjs` run through `npm run test:content`.
+Check actual pages in both themes and at narrow widths. Confirm that Markdown
+exports retain the standard dollar delimiters, notation, equation tags, and citations.
+The `mathAsMarkdown` component transform in `astro.config.ts` supplies this
+conversion. MDX exports retain the original component and LaTeX attributes.
+Neither export should contain rendered spans or stripped equations. KaTeX documents its
+[rendering options](https://katex.org/docs/options).
 
 If replacing Sätteri, set `admonitions: false`. Preserve the existing callout
 behavior. See the [Nimbus endpoint documentation](https://nimbus-docs.com/ai/publish-markdown/).

@@ -1,0 +1,143 @@
+---
+interface Props { id?: string; }
+const { id = 'encoder-decoder-flow' } = Astro.props;
+interface Node {
+  key: string;
+  title: string[];
+  titleY: number;
+  role: 'input' | 'embed' | 'block' | 'memory' | 'output';
+  details?: string[];
+  detailY?: number;
+  shape?: string;
+  shapeY?: number;
+  shapeSize?: number;
+}
+const source: Node[] = [
+  { key: 'source-ids', title: ['Source IDs'], titleY: 46, role: 'input', shape: 'B × S' },
+  { key: 'source-embed', title: ['Embed +', 'position'], titleY: 32, role: 'embed', shape: 'B × S × D', shapeY: 94 },
+  { key: 'encoder', title: ['Encoder × N'], titleY: 28, role: 'block', details: ['self attention', '+ FFN'], shape: 'B × S × D', shapeY: 98 },
+  { key: 'memory', title: ['Memory Z'], titleY: 46, role: 'memory', shape: 'B × S × D' },
+];
+const target: Node[] = [
+  { key: 'target-ids', title: ['Target IDs'], titleY: 28, role: 'input', details: ['shifted prefix'], detailY: 58, shape: 'B × T', shapeY: 94 },
+  { key: 'target-embed', title: ['Embed +', 'position'], titleY: 32, role: 'embed', shape: 'B × T × D', shapeY: 94 },
+  { key: 'decoder', title: ['Decoder × N'], titleY: 28, role: 'block', details: ['masked self', '+ cross + FFN'], shape: 'B × T × D', shapeY: 98 },
+  { key: 'generator', title: ['Generator'], titleY: 28, role: 'output', details: ['linear +', 'log-softmax'], detailY: 54 },
+  { key: 'scores', title: ['Scores'], titleY: 46, role: 'output', shape: 'B × T × V', shapeSize: 16 },
+];
+const columns = [16, 178, 346, 532, 718];
+const widths = [128, 134, 152, 152, 106];
+const layouts = [
+  {
+    name: 'wide', viewBox: '0 0 840 404',
+    edges: ['M144 120H178', 'M312 120H346', 'M498 120H532', 'M144 326H178', 'M312 326H346', 'M498 326H532', 'M684 326H718'],
+    memoryEdge: 'M608 176V224H422V270',
+  },
+  {
+    name: 'narrow', viewBox: '0 0 460 752',
+    edges: ['M102 176V204', 'M102 316V344', 'M102 456V484', 'M358 176V204', 'M358 316V344', 'M358 456V484', 'M358 596V624'],
+    memoryEdge: 'M188 540H230V400H272',
+  },
+].map(layout => ({
+  ...layout,
+  prefix: id + '-' + layout.name,
+  nodes: [
+    ...source.map((node, i) => ({ ...node, x: layout.name === 'wide' ? columns[i] : 16, y: layout.name === 'wide' ? 64 : 64 + i * 140, width: layout.name === 'wide' ? widths[i] : 172 })),
+    ...target.map((node, i) => ({ ...node, x: layout.name === 'wide' ? columns[i] : 272, y: layout.name === 'wide' ? 270 : 64 + i * 140, width: layout.name === 'wide' ? widths[i] : 172 })),
+  ],
+}));
+---
+
+<figure id={id} class="encoder-decoder-flow" aria-labelledby={id + '-heading'}>
+  <figcaption id={id + '-heading'} class="visual-title">Encoder and decoder data flow</figcaption>
+  {layouts.map(layout => (
+    <svg class={'flow-diagram layout-' + layout.name} viewBox={layout.viewBox} role="img" aria-labelledby={layout.prefix + '-title ' + layout.prefix + '-desc'}>
+      <title id={layout.prefix + '-title'}>Two token paths connected by encoder memory</title>
+      <desc id={layout.prefix + '-desc'}>
+        Source IDs of shape B by S pass through embeddings and position encoding, then N encoder layers, to produce memory Z of shape B by S by D.
+        Shifted target IDs of shape B by T pass through their own embeddings and position encoding, then N decoder layers, producing hidden states of shape B by T by D.
+        The separate dashed connection starts at memory Z and enters the decoder, where every cross attention layer reads that memory.
+        The generator applies a linear vocabulary projection and log-softmax, producing scores of shape B by T by V.
+        The source length S and target length T can differ. The diagram follows the Harvard implementation.
+      </desc>
+      <defs>
+        <marker id={layout.prefix + '-arrow'} viewBox="0 0 10 10" refX="10" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+          <path d="M0 0L10 5L0 10Z" fill="var(--flow-line)" />
+        </marker>
+        <marker id={layout.prefix + '-memory-arrow'} viewBox="0 0 10 10" refX="10" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+          <path d="M0 0L10 5L0 10Z" fill="var(--flow-memory)" />
+        </marker>
+      </defs>
+      <text class="lane-label" x="16" y="34">SOURCE PATH</text>
+      <text class="lane-label" x={layout.name === 'wide' ? 16 : 272} y={layout.name === 'wide' ? 246 : 34}>TARGET PATH</text>
+      {layout.edges.map(edge => <path class="data-flow" d={edge} marker-end={'url(#' + layout.prefix + '-arrow)'} />)}
+      <path class="memory-flow" data-edge="memory-to-decoder" d={layout.memoryEdge} marker-end={'url(#' + layout.prefix + '-memory-arrow)'} />
+      {layout.name === 'wide' ? (
+        <text class="memory-label" x="624" y="206">
+          <tspan x="624">cross attention</tspan>
+          <tspan x="624" dy="23">reads Z</tspan>
+        </text>
+      ) : (
+        <g class="memory-badge">
+          <rect x="216" y="456" width="28" height="28" rx="6" />
+          <text x="230" y="476" text-anchor="middle">Z</text>
+        </g>
+      )}
+      {layout.nodes.map(node => (
+        <g class={'flow-node node-' + node.role} data-node={node.key} transform={'translate(' + node.x + ',' + node.y + ')'}>
+          <rect width={node.width} height="112" rx="12" />
+          {node.title.map((line, i) => <text class="node-title" x={node.width / 2} y={node.titleY + i * 24} text-anchor="middle">{line}</text>)}
+          {node.details?.map((line, i) => <text class="node-detail" x={node.width / 2} y={(node.detailY ?? 50) + i * 22} text-anchor="middle">{line}</text>)}
+          {node.shape && <text class="node-shape" x={node.width / 2} y={node.shapeY ?? 86} text-anchor="middle" font-size={node.shapeSize ?? 18}>{node.shape}</text>}
+        </g>
+      ))}
+    </svg>
+  ))}
+  <p class="visual-note">Memory Z connects the two paths. Every decoder cross attention layer reads it; S and T need not match.</p>
+</figure>
+
+<style>
+  .encoder-decoder-flow {
+    --flow-line: var(--nb-muted-foreground);
+    --flow-input: var(--nb-info);
+    --flow-embed: light-dark(#34785b, #83c9ab);
+    --flow-memory: light-dark(#7353a0, #b8a2e3);
+    --flow-output: light-dark(#89621d, #e2ba70);
+    container-type: inline-size;
+    container-name: encoder-flow;
+    margin: 1.5rem 0;
+    padding: 1rem;
+    min-width: 0;
+    border: 1px solid var(--nb-border);
+    border-radius: 1rem;
+    background: var(--nb-muted);
+    color: var(--nb-foreground);
+  }
+  .visual-title { font-size: 1rem; font-weight: 650; line-height: 1.5; margin-bottom: .75rem; }
+  .flow-diagram { display: block; width: 100%; height: auto; }
+  .layout-narrow { display: none; max-width: 28.75rem; margin-inline: auto; }
+  .flow-node rect { fill: var(--nb-background); stroke-width: 1.75; }
+  .node-input rect { stroke: var(--flow-input); }
+  .node-embed rect { stroke: var(--flow-embed); }
+  .node-block rect, .node-memory rect { stroke: var(--flow-memory); }
+  .node-memory rect { fill: color-mix(in srgb, var(--flow-memory), var(--nb-background) 94%); }
+  .node-output rect { stroke: var(--flow-output); }
+  text { fill: var(--nb-foreground); font-family: Inter, ui-sans-serif, system-ui, sans-serif; }
+  .node-title { font-size: 20px; font-weight: 650; }
+  .node-detail { font-size: 17px; fill: var(--nb-muted-foreground); }
+  .node-shape { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; fill: var(--nb-muted-foreground); }
+  .lane-label { font-size: 15px; font-weight: 600; letter-spacing: .08em; fill: var(--nb-muted-foreground); }
+  .data-flow, .memory-flow { fill: none; stroke: var(--flow-line); stroke-width: 2; }
+  .memory-flow { stroke: var(--flow-memory); stroke-dasharray: 6 5; }
+  .memory-label, .memory-badge text { font-size: 17px; font-weight: 600; fill: var(--flow-memory); }
+  .memory-badge rect { fill: var(--nb-muted); }
+  .visual-note { font-size: .8rem; line-height: 1.6; color: var(--nb-muted-foreground); margin: .75rem 0 0; }
+  @container encoder-flow (max-width: 580px) {
+    .layout-wide { display: none; }
+    .layout-narrow { display: block; }
+  }
+  @media print {
+    .layout-wide { display: block; }
+    .layout-narrow { display: none; }
+  }
+</style>

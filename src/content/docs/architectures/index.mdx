@@ -1,0 +1,45 @@
+---
+title: LLM & VLM Architectures
+description: Understand the mechanisms, evolving designs, and concrete models behind language and vision language AI.
+lastUpdated: 2026-10-05
+---
+
+How does a model turn context into a useful answer? This section builds the
+mental model behind large language models (LLMs) and vision language models
+(VLMs), then follows the design choices that change how they process information.
+
+## Choose a reading path
+
+| Path | What it gives you | Start here |
+| --- | --- | --- |
+| Foundations | The intuition, mathematics, and data flow of a Transformer | [Transformer foundations](/architectures/foundations/) |
+| Architectural Evolution | The problems behind alternative designs and their tradeoffs | [The design map](/architectures/evolution/) |
+| Model Studies | Concrete examples of how the pieces fit together | [Reading model architectures](/architectures/models/) |
+
+Start with Foundations if the mechanisms are unfamiliar. Otherwise, follow a
+question: [what should a model remember](/architectures/evolution/attention-and-memory/),
+[how should it use position](/architectures/evolution/position-and-long-context/),
+[where should it spend computation](/architectures/evolution/ffns-and-experts/),
+or [how should it read visual evidence](/architectures/evolution/multimodal-integration/)?
+
+## Depth without an endless catalog
+
+Foundations is a complete visual walkthrough of the core Transformer.
+The evolution pages are focused mechanism explanations. Model studies connect
+those ideas in [GPT-2](/architectures/models/gpt-2/) and
+[Qwen3-VL](/architectures/models/qwen3-vl/), with each study stating what its
+sources establish and what remains unverified.
+
+Training and inference appear where they explain an architectural choice.
+Standalone computer vision, robot policies, agent orchestration, and a full
+post training curriculum are outside this section's current scope.
+
+## Built to evolve
+
+This is a learning map, not a ranking or a claim to cover every new release.
+New work belongs here when it changes our understanding of a mechanism,
+reveals a useful combination, or challenges an existing conclusion.
+
+Sources sit beside the claims they support. Selected evidence dates describe
+what was checked, not an exhaustive frontier search. For questions worth
+investigating next, see [Emerging directions](/architectures/evolution/emerging-directions/).

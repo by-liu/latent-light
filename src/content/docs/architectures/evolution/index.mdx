@@ -1,0 +1,51 @@
+---
+title: Architectural Evolution
+description: Follow the design problems behind changes in language and vision language models.
+lastUpdated: 2026-10-05
+---
+
+Architectures evolve because useful capabilities meet practical limits.
+Rather than follow release names, ask what changes in the computation,
+what problem that change addresses, and what it costs.
+
+## The design map
+
+| Design question | What to trace | Reading page |
+| --- | --- | --- |
+| What should a token read and retain? | Attention execution, shared KV heads, recurrent state | [Attention and memory](/architectures/evolution/attention-and-memory/) |
+| How does position affect matching? | Absolute position, rotary features, useful context | [Position and long context](/architectures/evolution/position-and-long-context/) |
+| Where should computation go? | Feature gates, FFN width, sparse expert routing | [FFNs and experts](/architectures/evolution/ffns-and-experts/) |
+| How does visual evidence reach language computation? | Queries, projections, merging, feature injection | [Multimodal integration](/architectures/evolution/multimodal-integration/) |
+| What deserves another experiment? | Hypotheses, controlled comparisons, missing evidence | [Emerging directions](/architectures/evolution/emerging-directions/) |
+
+This is an editorial reading map, not an exhaustive taxonomy or a ladder from
+obsolete to superior designs. Several choices can coexist in one model.
+
+## Read a change in five steps
+
+1. Name the problem and the baseline.
+2. Locate the operation or stored representation that changes.
+3. Identify what stays the same.
+4. Compare quality, computation, memory, and implementation cost.
+5. Check the experiment's conditions before generalizing its result.
+
+For example, FlashAttention changes how attention is executed; GQA changes
+how heads share keys and values; causal linear attention changes the memory
+operator.[^flash][^gqa][^linear] Calling all three “efficient attention” hides the distinction.
+The [attention page](/architectures/evolution/attention-and-memory/) explains
+each mechanism and its source evidence.
+
+## Connect mechanisms to models
+
+Use [GPT-2](/architectures/models/gpt-2/) to trace a language decoder and
+[Qwen3-VL](/architectures/models/qwen3-vl/) to examine a visual interface
+that also reaches inside the decoder. Neither is presented as the endpoint
+of architectural progress.
+
+The collection grows through deliberate research and review. A page's
+`lastUpdated` date records an edit; its evidence note records the sources
+checked. Neither implies automatic monitoring of every new publication.
+
+[^flash]: Tri Dao et al., [FlashAttention](https://arxiv.org/html/2205.14135v2), 2022, section 3: exact attention with tiling and recomputation.
+[^gqa]: Joshua Ainslie et al., [GQA](https://arxiv.org/html/2305.13245v3), 2023, section 2: KV head sharing within query groups.
+[^linear]: Angelos Katharopoulos et al., [Transformers are RNNs](https://arxiv.org/html/2006.16236v3), 2020, section 3: kernel attention and causal recurrent accumulation. Selected sources checked October 5, 2026.

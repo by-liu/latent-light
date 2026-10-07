@@ -1,0 +1,44 @@
+---
+title: Reading Model Architectures
+description: Connect model reports, source code, input processing, training, and evaluation without confusing their evidence boundaries.
+lastUpdated: 2026-10-05
+---
+
+A model study turns mechanisms into a concrete system. Follow the input,
+trace the transformations, and ask which evidence supports each detail.
+A model name alone does not identify a checkpoint, an implementation, or an
+evaluation setting.
+
+## Start with two contrasting studies
+
+| Study | What to understand | Evidence boundary |
+| --- | --- | --- |
+| [GPT-2](/architectures/models/gpt-2/) | A causal decoder, two residual branches, learned position, cached history | The 2019 report and a pinned released source file; no checkpoint execution |
+| [Qwen3-VL](/architectures/models/qwen3-vl/) | Visual merging, DeepStack, multimodal position, staged training | Report, official summary, and a targeted pinned code check; no checkpoint tensor trace |
+
+These are focused architectural readings, not benchmark reproductions or
+complete training recipes. Use [Foundations](/architectures/foundations/)
+for shared mechanisms and [Architectural Evolution](/architectures/evolution/)
+for alternatives.
+
+## Keep the evidence layers separate
+
+| Layer | What it can establish | What it cannot establish by itself |
+| --- | --- | --- |
+| Report | The authors' design, motivation, and experiments | Every released checkpoint's execution details |
+| Configuration | Declared widths, head counts, layers, and limits for one checkpoint | Whether those limits are useful on your task |
+| Processor | Resizing, cropping, tokenization, and position metadata | What the decoder preserves or uses |
+| Forward pass | Where tensors move, branch, combine, and return | The effect of the training data or objective |
+| Training disclosure | Which modules and objectives change across stages | A reproducible recipe if crucial details are absent |
+| Evaluation | Results under specified tasks, budgets, and conditions | A universal ranking or guaranteed application quality |
+
+This is a study framework, not a claim that every source provides every layer.
+An unverified dimension or unavailable training detail should remain an
+explicit unknown.
+
+## Read for a transferable lesson
+
+The useful outcome is not memorizing a block diagram. It is being able to
+explain the model's distinctive combination, trace the evidence through it,
+and identify a comparison that would test whether the choice helps.
+New studies should deepen that understanding rather than repeat the curriculum.

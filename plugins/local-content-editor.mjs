@@ -149,7 +149,7 @@ async function handleEditorRequest(request, response) {
 
 	const temporaryPath = path.join(
 		path.dirname(resolved.absolutePath),
-		`.eclipse-edit-${path.basename(resolved.absolutePath)}-${randomUUID()}.tmp`,
+		`.latent-edit-${path.basename(resolved.absolutePath)}-${randomUUID()}.tmp`,
 	);
 
 	try {
@@ -182,7 +182,7 @@ async function handleEditorRequest(request, response) {
 
 export function localContentEditor() {
 	return {
-		name: 'eclipse-local-content-editor',
+		name: 'latent-light-local-content-editor',
 		apply: 'serve',
 		configureServer(server) {
 			// Never expose filesystem access when the dev server is network-bound.

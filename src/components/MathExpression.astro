@@ -1,0 +1,15 @@
+---
+import {renderMath, prepareMdxMath, equationNumber} from '../../plugins/math-typesetting.mjs';
+interface Props { tex: string; display?: boolean; number?: string; }
+const {tex, display = false, number} = Astro.props;
+const expression = prepareMdxMath(tex, display, number);
+const label = display ? equationNumber(expression) : undefined;
+const html = renderMath(expression, display, Astro.url.pathname);
+---
+{display ? (
+  <div class="ll-equation" id={label ? `equation-${label}` : undefined}
+    data-equation-number={label} tabindex="0" role="region"
+    aria-label={label ? `Equation (${label})` : 'Mathematical expression'} set:html={html} />
+) : (
+  <span class="ll-math-inline" set:html={html} />
+)}

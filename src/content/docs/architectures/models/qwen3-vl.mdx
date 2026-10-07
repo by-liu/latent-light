@@ -1,0 +1,86 @@
+---
+title: Qwen3-VL
+description: Understand visual merging, DeepStack depth connections, multimodal position, and disclosed training stages.
+lastUpdated: 2026-10-05
+---
+
+import FocusCanvas from '../../../../components/FocusCanvas.astro';
+import ArchitectureDiagram from '../../../../components/architectures/ArchitectureDiagram.astro';
+
+Qwen3-VL is an instructive example of visual evidence entering a language
+decoder at more than one depth. Its design combines a visual input path,
+additional feature connections, multimodal position, and staged training.[^summary]
+
+This is a **report level study**, with a targeted source check of DeepStack
+in Transformers v4.57.1. Sources were checked October 5, 2026; no released
+checkpoint or processor was executed, and no full runtime trace was performed.[^report][^summary][^code]
+
+## One input path, additional depth connections
+
+The reported main path encodes an image or video frames and uses an MLP
+merger to compress each `2 × 2` group of visual features into a token at the
+language model's width. DeepStack separately takes features from three
+encoder levels, projects them with dedicated mergers, and adds them at
+corresponding visual positions in the first three LLM layers.[^report]
+
+<FocusCanvas size="diagram" label="Qwen3-VL visual paths">
+  <ArchitectureDiagram kind="deepstack" id="figure-1">
+    **Figure 1.** Visual input plus early depth connections. Original schematic based on the report, with output additions checked in pinned code.[^report][^code]
+  </ArchitectureDiagram>
+</FocusCanvas>
+
+The main visual embeddings join text embeddings in the language stream.
+The side features are not concatenated as three extra input sequences.
+In the inspected implementation, each addition occurs after a corresponding
+early decoder layer and affects only the visual positions selected by a mask.
+The updated stream continues to the next layer. The additions do not create
+new context positions.[^code]
+
+For a divisible visual feature grid of height `h` and width `w`, a local count
+for the main spatial merger is:
+
+<MathExpression display number="1" tex="N_{\mathrm{merged}}=\frac{h w}{4}" />
+
+Equation (1) counts a single feature grid, not raw image pixels, video frames,
+special tokens, or a processor's final sequence. It must not be reused as a
+checkpoint token count without inspecting preprocessing.
+
+## Position and timestamps are different signals
+
+The official summary describes Interleaved MRoPE, which spreads time, width,
+and height components across rotary frequency bands. Textual timestamps
+provide another way to represent video time.[^summary] The report describes
+timestamps prefixed to video temporal patches.[^report]
+
+Coordinates and timestamps expose structure; they do not by themselves
+demonstrate correct temporal grounding. See
+[Position and long context](/architectures/evolution/position-and-long-context/)
+for the distinction between representation, accepted length, and useful reach.
+
+## Train the interface, then the system
+
+The report describes initial merger alignment with the vision and language
+backbones frozen, followed by full parameter multimodal training and longer
+context stages. It also describes supervised fine tuning, distillation, and
+reinforcement learning after pretraining. These are disclosed stages, not a
+fully reproducible training recipe.[^report]
+
+The lesson is to read architecture and training together: a feature connection
+specifies where information can enter, while training determines how the
+system learns to use it.
+
+## What supports the design, and what remains unknown?
+
+The report's DeepStack ablation uses an internal `15B-A2B` language model,
+200 billion pretraining tokens, and validation evaluation without post training.
+That is evidence under the authors' conditions, not a measured gain for every
+released model or independent replication.[^report]
+
+A deeper study should select one checkpoint, pin processor and code versions,
+trace visual token counts and injection sites, and inspect its ablations.
+Do not transfer dimensions between dense and expert variants. This page
+does not infer undisclosed training details or make a current leaderboard claim.
+
+[^report]: Qwen Team, [Qwen3-VL Technical Report](https://arxiv.org/html/2511.21631v1), 2025, sections 2 to 4 and section 5.12.2, Table 9. Figure 1 here abstracts the architecture rather than reproducing the source's figure.
+[^summary]: Qwen Team, [Qwen3-VL official repository](https://github.com/QwenLM/Qwen3-VL#model-architecture-updates), architecture summary inspected October 5, 2026. The repository summary is not an immutable checkpoint or runtime specification.
+[^code]: Hugging Face, [`modeling_qwen3_vl.py`](https://github.com/huggingface/transformers/blob/8cb5963cc22174954e7dca2c0a3320b7dc2f4edc/src/transformers/models/qwen3_vl/modeling_qwen3_vl.py), Transformers v4.57.1, commit `8cb5963`. Targeted inspection of `Qwen3VLTextModel.forward` and `_deepstack_process`: additions follow the selected decoder layers and index visual positions. This does not verify a particular checkpoint's processor, feature level indices, or tensor dimensions.

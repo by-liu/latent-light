@@ -1,0 +1,79 @@
+---
+const examples = [
+  { task: 'Translation', input: ['Good', 'morning'], output: ['Bonjour'] },
+  { task: 'Summarization', input: ['Heavy', 'snow', 'delayed', 'the', 'train'], output: ['Snow', 'delays', 'train'] },
+  { task: 'Classification', input: ['The', 'movie', 'was', 'wonderful'], output: ['positive'] },
+  { task: 'Object detection', input: [], output: ['house', 'box coordinates'], visual: true },
+];
+---
+
+<figure class="sequence-map" aria-labelledby="sequence-formulation-title" aria-describedby="sequence-formulation-note">
+  <figcaption id="sequence-formulation-title" class="map-title">Different tasks, one formulation</figcaption>
+  <div class="column-heads" aria-hidden="true"><span>Input sequence</span><span></span><span>Learned mapping</span><span></span><span>Output sequence</span></div>
+  <div class="examples">
+    {examples.map(example => <section class="example" aria-label={example.task}>
+      <div class="task-name">{example.task}</div>
+      <div class="mapping">
+        <div class="sequence input" aria-label="Input sequence">
+          <span class="mobile-label">Input sequence</span>
+          {example.visual ? <div class="visual-input">
+            <svg class="patch-image" viewBox="0 0 120 78" role="img" aria-label="Illustrative house image divided into a three by two grid of patches">
+              <rect class="scene-base" x="1" y="1" width="118" height="76" rx="5" />
+              <path class="scene-ground" d="M1 56H119V72Q119 77 114 77H6Q1 77 1 72Z" />
+              <path class="scene-house" d="M40 38H83V64H40Z" />
+              <path class="scene-roof" d="M33 38L61.5 16L90 38Z" />
+              <rect class="scene-door" x="57" y="47" width="10" height="17" />
+              <path class="patch-grid" d="M40 1V77M80 1V77M1 39H119" />
+            </svg>
+            <span class="image-label">Image features</span>
+          </div> : <div class="units">{example.input.map(unit => <span class="unit">{unit}</span>)}</div>}
+        </div>
+        <span class="arrow" aria-hidden="true">→</span>
+        <div class="model"><span>Transformer</span><svg class="model-stack" viewBox="0 0 68 24" aria-hidden="true"><rect x="5" y="1" width="58" height="5" rx="2" /><rect x="5" y="9" width="58" height="5" rx="2" /><rect x="5" y="17" width="58" height="5" rx="2" /></svg></div>
+        <span class="arrow" aria-hidden="true">→</span>
+        <div class="sequence output" aria-label="Output sequence"><span class="mobile-label">Output sequence</span><div class="units">{example.output.map(unit => <span class="unit">{unit}</span>)}</div></div>
+      </div>
+    </section>)}
+  </div>
+  <div class="map-footer" id="sequence-formulation-note"><span>Input and output lengths can differ.</span><span>A single label is a sequence, too.</span></div>
+</figure>
+
+<style>
+  .sequence-map{--input-color:var(--nb-info);--output-color:light-dark(#7853a1,#c7ace8);margin:1.5rem 0;padding:1.15rem;border:1px solid var(--nb-border);border-radius:1rem;background:var(--nb-background);color:var(--nb-foreground);min-width:0;}
+  .map-title{font-size:1rem;font-weight:600;line-height:1.5;margin-bottom:1.1rem;}
+  .column-heads,.mapping{display:grid;grid-template-columns:minmax(0,1fr) 1.2rem 6.4rem 1.2rem minmax(0,1fr);gap:.45rem;align-items:center;}
+  .column-heads{font-size:.7rem;color:var(--nb-muted-foreground);margin-bottom:.6rem;}
+  .column-heads span:nth-child(3){text-align:center;}
+  .examples{display:grid;gap:.9rem;}
+  .example{min-width:0;}
+  .example+.example{padding-top:.9rem;border-top:1px solid var(--nb-border);}
+  .task-name{font-size:.75rem;font-weight:600;margin-bottom:.4rem;}
+  .sequence{min-width:0;min-height:4rem;display:flex;align-items:center;box-sizing:border-box;}
+  .units{display:flex;flex-wrap:wrap;gap:.3rem;min-width:0;}
+  .unit{padding:.35rem .5rem;border-radius:.35rem;font-size:.8rem;line-height:1.3;color:var(--nb-foreground);overflow-wrap:anywhere;}
+  .input .unit{background:color-mix(in srgb,var(--input-color),transparent 88%);border-bottom:2px solid color-mix(in srgb,var(--input-color),transparent 65%);}
+  .output .unit{background:color-mix(in srgb,var(--output-color),transparent 87%);border-bottom:2px solid color-mix(in srgb,var(--output-color),transparent 65%);}
+  .arrow{color:var(--nb-muted-foreground);font-size:1.1rem;text-align:center;}
+  .model{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.35rem;min-height:4rem;padding:.45rem .25rem;border:1px solid var(--nb-border);border-radius:.55rem;background:var(--nb-muted);font-size:.78rem;font-weight:550;box-sizing:border-box;}
+  .model-stack{display:block;width:3.5rem;height:1.2rem;fill:color-mix(in srgb,var(--input-color),transparent 55%);}
+  .visual-input{display:flex;align-items:center;gap:.55rem;flex-wrap:wrap;}
+  .patch-image{display:block;width:6rem;height:auto;max-width:100%;}
+  .scene-base{fill:color-mix(in srgb,var(--input-color),var(--nb-background) 92%);stroke:var(--nb-border);}
+  .scene-ground{fill:color-mix(in srgb,var(--input-color),var(--nb-background) 84%);}
+  .scene-house{fill:color-mix(in srgb,var(--input-color),var(--nb-background) 60%);}
+  .scene-roof{fill:var(--input-color);}.scene-door{fill:var(--nb-background);}
+  .patch-grid{fill:none;stroke:var(--nb-background);stroke-width:2;}
+  .image-label{font-size:.72rem;color:var(--nb-muted-foreground);}
+  .map-footer{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.35rem 1rem;margin-top:1rem;padding-top:.8rem;border-top:1px solid var(--nb-border);font-size:.72rem;color:var(--nb-muted-foreground);}
+  .mobile-label{display:none;}
+  @container sequence-canvas (max-width:450px){
+    .column-heads{display:none;}.mapping{grid-template-columns:minmax(0,1fr);gap:.3rem;}
+    .sequence{min-height:0;display:flex;flex-direction:column;align-items:flex-start;gap:.35rem;}
+    .mobile-label{display:block;font-size:.68rem;color:var(--nb-muted-foreground);}
+    .arrow{transform:rotate(90deg);line-height:1.1;}
+    .model{min-height:0;flex-direction:row;justify-content:space-between;padding:.55rem .7rem;}
+    .examples{gap:1rem;}.map-footer{flex-direction:column;}
+  }
+  @media(max-width:500px){.sequence-map{padding:.9rem;}}
+  @media print{.sequence-map{break-inside:avoid;}}
+</style>

@@ -1,0 +1,85 @@
+---
+title: GPT-2
+description: Trace a causal language decoder through learned position, pre-normalized residual blocks, vocabulary logits, and cached history.
+lastUpdated: 2026-10-05
+---
+
+import FocusCanvas from '../../../../components/FocusCanvas.astro';
+import ArchitectureDiagram from '../../../../components/architectures/ArchitectureDiagram.astro';
+
+GPT-2 is a useful architectural baseline: one stream reads a text prefix and
+produces scores for what comes next. There is no separate encoder or encoder
+memory connection in its released language decoder.[^code]
+
+This study uses the 2019 report and OpenAI's released `src/model.py` at commit
+`9b63575`. It inspects code rather than running a checkpoint. Selected evidence
+checked October 5, 2026.[^report][^code]
+
+## Follow the prediction contract
+
+A causal language model factorizes a sequence into next token conditionals:[^report]
+
+<MathExpression display number="1" tex="p(x_{1:T})=\prod_{t=1}^{T}p(x_t\mid x_{\lt t})" />
+
+The released code adds token embeddings and learned position embeddings,
+applies repeated blocks, then final LayerNorm and a vocabulary projection
+using the token embedding weights. It returns logits; softmax and token
+selection are not inside this `model` function.[^code]
+
+<FocusCanvas size="diagram" label="GPT-2 architecture and residual block">
+  <ArchitectureDiagram kind="gpt2" id="figure-1">
+    **Figure 1.** A causal decoder with two residual bypasses per block. Original schematic based on the pinned released code.[^code]
+  </ArchitectureDiagram>
+</FocusCanvas>
+
+The block's attention branch reads normalized input, then adds its result
+to the original stream. The FFN does the same with the updated stream:
+
+<MathExpression display number="2" tex="
+\begin{aligned}
+u &= x+\operatorname{Attention}(\operatorname{LN}_1(x)) \\
+h &= u+\operatorname{FFN}(\operatorname{LN}_2(u))
+\end{aligned}
+" />
+
+This is **pre-normalization**, not the original Transformer's Add then Norm
+ordering. The FFN expands width `D` to `4D`, applies the code's GELU
+approximation, and projects back to `D`.[^code] The report also describes
+normalization and residual initialization changes; the inference file alone
+is not a complete training implementation.[^report]
+
+## Read the tensor contract
+
+For batch `B`, current input length `T`, model width `D`, and vocabulary `V`:
+
+| Value | Shape | Meaning |
+| --- | --- | --- |
+| Token IDs | `B × T` | Current input indices |
+| Hidden stream | `B × T × D` | Token features throughout the blocks |
+| FFN intermediate | `B × T × 4D` | Expanded per position features |
+| Logits | `B × T × V` | Vocabulary scores at each current position |
+
+These are symbolic shape counts from the code, not dimensions of a selected
+checkpoint.[^code]
+
+## Cached history: check what is returned
+
+The code accepts `past` keys and values and concatenates them with current
+keys and values for attention. Crucially, `present` is formed **before** that
+concatenation: it contains this call's new KV tensors, not automatically the
+entire accumulated history. The caller must manage cache accumulation.
+Position indices are offset by the cached length.[^code]
+
+Caching avoids recomputing previous KV projections; it does not make reading
+the retained context free. The [attention page](/architectures/evolution/attention-and-memory/)
+separates cache storage from attention execution.
+
+## The transferable lesson
+
+Trace a residual stream, distinguish logits from generation policy, and read
+cache input and output semantics in code rather than assuming an API contract.
+This page makes no current performance ranking, deployment recommendation,
+or claim that GPT-2 is an instruction tuned assistant.
+
+[^report]: Alec Radford et al., [Language Models are Unsupervised Multitask Learners](https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf), 2019, section 2 for the autoregressive formulation and section 2.3 for architecture changes.
+[^code]: OpenAI, [`src/model.py`](https://github.com/openai/gpt-2/blob/9b63575ef42771a015060c964af2c3da4cf7c8ab/src/model.py), commit `9b63575ef42771a015060c964af2c3da4cf7c8ab`, functions `attn`, `mlp`, `block`, `past_shape`, and `model`. Inspected October 5, 2026; no copied code excerpt or checkpoint execution.

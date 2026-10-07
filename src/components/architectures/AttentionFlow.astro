@@ -1,0 +1,182 @@
+---
+interface Props { id?: string; }
+const { id = 'attention-flow' } = Astro.props;
+const stages = [
+  { key: 'compare', title: '1  Compare', formula: 'QKᵀ / √dₖ', detail: 'match + scale' },
+  { key: 'mask', title: '2  Mask', formula: 'blocked → −∞', detail: 'only if needed' },
+  { key: 'normalize', title: '3  Normalize', formula: 'softmax → A', detail: 'weights over keys' },
+  { key: 'mix', title: '4  Mix values', formula: 'A V', detail: 'weighted content' },
+];
+const layouts = [
+  { name: 'wide', viewBox: '0 0 820 280',
+    positions: [[18, 68], [222, 68], [426, 68], [630, 68]],
+    edges: ['M192 118H222', 'M396 118H426', 'M600 118H630'],
+    inputEdge: 'M105 42V68', valueEdge: 'M172 236H717V168',
+    valueBox: {x: 18, y: 216, width: 154, height: 40},
+  },
+  { name: 'narrow', viewBox: '0 0 440 428',
+    positions: [[18, 68], [248, 68], [18, 240], [248, 240]],
+    edges: ['M192 118H248', 'M335 168V202H105V240', 'M192 290H248'],
+    inputEdge: 'M105 42V68', valueEdge: 'M335 378V340',
+    valueBox: {x: 258, y: 378, width: 154, height: 40},
+  },
+].map(layout => ({...layout, prefix: `${id}-${layout.name}`}));
+const positions = [1, 2, 3];
+const example = [
+  { label: 'Scores', values: ['2', '1', '4'] },
+  { label: 'Masked', values: ['2', '1', '−∞'] },
+  { label: 'Weights', values: ['0.731', '0.269', '0'] },
+];
+---
+
+<figure id={id} class="attention-flow" aria-labelledby={`${id}-heading`}>
+  <figcaption id={`${id}-heading`} class="visual-title">One head: from scores to content</figcaption>
+  {layouts.map(layout => (
+    <svg class={`flow-diagram layout-${layout.name}`} viewBox={layout.viewBox} role="img"
+      aria-labelledby={`${layout.prefix}-title ${layout.prefix}-desc`}>
+      <title id={`${layout.prefix}-title`}>Queries and keys determine weights; values supply content</title>
+      <desc id={`${layout.prefix}-desc`}>
+        Queries Q and keys K form scaled dot product scores. Optional masking
+        sets forbidden scores to negative infinity. Softmax over key positions
+        produces weights A. The separate value input V enters only at the last
+        step, where A times V produces a weighted mixture of value vectors.
+        The numbered steps run from compare to mask to normalize to mix values.
+      </desc>
+      <defs>
+        <marker id={`${layout.prefix}-arrow`} viewBox="0 0 10 10" refX="10" refY="5"
+          markerWidth="6" markerHeight="6" orient="auto">
+          <path d="M0 0L10 5L0 10Z" fill="var(--attention-line)" />
+        </marker>
+        <marker id={`${layout.prefix}-value-arrow`} viewBox="0 0 10 10" refX="10" refY="5"
+          markerWidth="6" markerHeight="6" orient="auto">
+          <path d="M0 0L10 5L0 10Z" fill="var(--attention-value)" />
+        </marker>
+      </defs>
+      <text class="input-label" x="105" y="28" text-anchor="middle">Q and K</text>
+      <path class="data-flow" d={layout.inputEdge} marker-end={`url(#${layout.prefix}-arrow)`} />
+      {layout.edges.map((edge, index) => <path class="data-flow" data-edge={`${stages[index].key}-to-${stages[index + 1].key}`}
+        d={edge} marker-end={`url(#${layout.prefix}-arrow)`} />)}
+      <path class="value-flow" data-edge="values-to-mix" d={layout.valueEdge}
+        marker-end={`url(#${layout.prefix}-value-arrow)`} />
+      <g class="value-input" transform={`translate(${layout.valueBox.x},${layout.valueBox.y})`}>
+        <rect width={layout.valueBox.width} height={layout.valueBox.height} rx="9" />
+        <text x={layout.valueBox.width / 2} y="26" text-anchor="middle">V · content</text>
+      </g>
+      {stages.map((stage, index) => (
+        <g class={`stage stage-${stage.key}`} data-stage={stage.key}
+          transform={`translate(${layout.positions[index][0]},${layout.positions[index][1]})`}>
+          <rect width="174" height="100" rx="11" />
+          <text class="stage-title" x="87" y="27" text-anchor="middle">{stage.title}</text>
+          <text class="stage-formula" x="87" y="58" text-anchor="middle">{stage.formula}</text>
+          <text class="stage-detail" x="87" y="84" text-anchor="middle">{stage.detail}</text>
+        </g>
+      ))}
+    </svg>
+  ))}
+  <div class="evidence-panels">
+    <section class="mask-panel" aria-labelledby={`${id}-mask-heading`}>
+      <strong id={`${id}-mask-heading`} class="panel-title">Causal visibility</strong>
+      <div class="visibility" role="img"
+        aria-label="Three query rows and three key columns, numbered one through three. Query i can see keys j less than or equal to i. Check marks mean visible, crosses mean blocked, not attention weights. The highlighted second row can see keys one and two, but not key three.">
+        <span class="axis-label">Keys →</span>
+        <div class="matrix">
+          <span class="matrix-corner">i / j</span>
+          {positions.map(position => <span class="column-label">{position}</span>)}
+          {positions.map(row => <>
+            <span class:list={['row-label', {selected: row === 2}]}>{row}</span>
+            {positions.map(column => <span class:list={['cell', {allowed: column <= row, 'example-cell': row === 2}]}
+              data-row={row} data-column={column}>{column <= row ? '✓' : '×'}</span>)}
+          </>)}
+        </div>
+        <span class="axis-label">Queries ↓</span>
+      </div>
+      <p class="panel-note">✓ visible · × blocked<br />Visibility is not an attention weight.</p>
+    </section>
+    <section class="example-panel" aria-labelledby={`${id}-example-heading`}>
+      <strong id={`${id}-example-heading`} class="panel-title">Follow query 2</strong>
+      <table aria-label="Illustrative scaled scores, masked scores, and attention weights for query two">
+        <thead><tr><th scope="col">Stage</th>{positions.map(position => <th scope="col">Key {position}</th>)}</tr></thead>
+        <tbody>{example.map(row => <tr class:list={{'weight-row': row.label === 'Weights'}}>
+          <th scope="row">{row.label}</th>{row.values.map(value => <td>{value}</td>)}
+        </tr>)}</tbody>
+      </table>
+      <p class="mix-example">Output ≈ 0.731 v₁ + 0.269 v₂</p>
+      <p class="panel-note">Key 3 has the highest score, but is in the future.<br />Masking gives it zero weight. These numbers are illustrative.</p>
+    </section>
+  </div>
+  <p class="visual-note">The diagonal is visible. Padding can exclude additional keys.</p>
+</figure>
+
+<style>
+  .attention-flow {
+    --attention-line: var(--nb-muted-foreground);
+    --attention-route: var(--nb-info);
+    --attention-value: light-dark(#34785b, #83c9ab);
+    container-type: inline-size;
+    container-name: attention-flow;
+    margin: 1.5rem 0;
+    padding: 1rem;
+    min-width: 0;
+    border: 1px solid var(--nb-border);
+    border-radius: 1rem;
+    background: var(--nb-muted);
+    color: var(--nb-foreground);
+  }
+  .visual-title {font-size: 1rem; font-weight: 650; line-height: 1.5; margin-bottom: .5rem;}
+  .flow-diagram {display: block; width: 100%; height: auto; max-width: 51.25rem; margin-inline: auto;}
+  .layout-narrow {display: none; max-width: 27.5rem;}
+  text {fill: var(--nb-foreground); font-family: Inter, ui-sans-serif, system-ui, sans-serif;}
+  .stage rect {fill: var(--nb-background); stroke: var(--attention-route); stroke-width: 1.5;}
+  .stage-mask rect {stroke: var(--attention-line); stroke-dasharray: 5 4;}
+  .stage-mix rect, .value-input rect {stroke: var(--attention-value);}
+  .stage-title {font-size: 21px; font-weight: 650;}
+  .stage-formula {font-size: 24px; font-family: ui-serif, Georgia, serif;}
+  .stage-detail {font-size: 17px; fill: var(--nb-muted-foreground);}
+  .input-label {font-size: 22px; font-weight: 600;}
+  .data-flow, .value-flow {fill: none; stroke: var(--attention-line); stroke-width: 2;}
+  .value-flow {stroke: var(--attention-value);}
+  .value-input rect {fill: var(--nb-background); stroke-width: 1.5;}
+  .value-input text {font-size: 21px; font-weight: 600; fill: var(--attention-value);}
+  .evidence-panels {display: grid; grid-template-columns: minmax(11rem, .8fr) minmax(0, 1.4fr); gap: 1rem;}
+  .mask-panel, .example-panel {padding: .9rem; min-width: 0; border: 1px solid var(--nb-border); border-radius: .7rem; background: var(--nb-background);}
+  .panel-title {display: block; font-size: .87rem; line-height: 1.5; margin-bottom: .6rem;}
+  .visibility {max-width: 13rem;}
+  .axis-label {display: block; font-size: .72rem; color: var(--nb-muted-foreground);}
+  .visibility > .axis-label:first-child {margin-left: 2rem;}
+  .matrix {display: grid; grid-template-columns: 1.75rem repeat(3, minmax(0, 1fr)); gap: .25rem; margin: .4rem 0 .6rem;}
+  .cell, .row-label, .column-label, .matrix-corner {display: flex; align-items: center; justify-content: center; font-size: .8rem;}
+  .column-label, .matrix-corner {height: 1.4rem; color: var(--nb-muted-foreground);}
+  .matrix-corner {font-size: .65rem;}
+  .cell {aspect-ratio: 1; border: 1px solid var(--nb-border); border-radius: .3rem; color: var(--nb-muted-foreground); font-weight: 650;}
+  .cell.allowed {background: color-mix(in srgb, var(--attention-route), transparent 89%); color: var(--nb-foreground);}
+  .cell.example-cell {border-color: var(--attention-route); border-width: 2px;}
+  .row-label.selected {color: var(--attention-route); font-weight: 750;}
+  .panel-note, .visual-note {font-size: .75rem; line-height: 1.65; color: var(--nb-muted-foreground); margin: .65rem 0 0;}
+  table {width: 100%; border-collapse: collapse; font-size: .76rem; line-height: 1.5; font-variant-numeric: tabular-nums;}
+  th, td {padding: .55rem .25rem; text-align: center; border-bottom: 1px solid var(--nb-border); white-space: nowrap;}
+  th:first-child {text-align: left;}
+  thead th {font-weight: 500; color: var(--nb-muted-foreground);}
+  tbody th {font-weight: 550;}
+  .weight-row {background: color-mix(in srgb, var(--attention-route), transparent 93%);}
+  .weight-row td {font-weight: 650;}
+  .mix-example {font-size: .78rem; line-height: 1.6; font-family: ui-serif, Georgia, serif; margin: .75rem 0 0;}
+  .visual-note {margin-top: .75rem;}
+  @container attention-flow (max-width: 590px) {
+    .layout-wide {display: none;}
+    .layout-narrow {display: block;}
+    .evidence-panels {grid-template-columns: 1fr; gap: .75rem; margin-top: .5rem;}
+    .mask-panel {display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: 1rem; align-items: center;}
+    .mask-panel .panel-title {grid-column: 1 / -1;}
+    .mask-panel .panel-note {margin: 0;}
+  }
+  @container attention-flow (max-width: 300px) {
+    .mask-panel {grid-template-columns: 1fr;}
+    .mask-panel .panel-note {margin-top: .65rem;}
+    .visibility {width: 100%; max-width: 10rem;}
+  }
+  @media print {
+    .layout-wide {display: block;}
+    .layout-narrow {display: none;}
+    .attention-flow {break-inside: avoid;}
+  }
+</style>

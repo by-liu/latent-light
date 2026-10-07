@@ -8,7 +8,9 @@
 import Icon from "@cloudflare/nimbus-docs/components/Icon.astro";
 import BaseLayout from "./BaseLayout.astro";
 import ReadingControls from '../components/ReadingControls.astro';
-import LocalSourceEditor from '../components/LocalSourceEditor.astro';
+const LocalSourceEditor = import.meta.env.DEV
+  ? (await import('../components/LocalSourceEditor.astro')).default
+  : null;
 import "../styles/latent-light.css";
 import Header from "@/components/Header.astro";
 import { Banner } from "@/components/ui/banner";
@@ -219,7 +221,6 @@ const hasPagination = Astro.slots.has("pagination");
                     )}
                     <div class="flex flex-wrap items-center gap-x-2">
                       <PageActions markdownUrl={markdownUrl} lastUpdated={lastUpdated} class={description ? undefined : "mt-3"} />
-                      {import.meta.env.DEV && Astro.props.sourcePath && <LocalSourceEditor sourcePath={Astro.props.sourcePath} />}
                     </div>
                     {headings !== false && headings.length > 0 && (
                       <div class="border-border bg-background/95 supports-[backdrop-filter]:bg-background/80 sticky top-14 z-20 -mx-4 mt-3 border-y px-4 py-2 backdrop-blur md:-mx-6 md:px-6 xl:hidden">
@@ -271,6 +272,8 @@ const hasPagination = Astro.slots.has("pagination");
     )}
 
   </div>
+
+  {LocalSourceEditor && Astro.props.sourcePath && <LocalSourceEditor sourcePath={Astro.props.sourcePath} pageTitle={title} />}
 
   {showSidebar && (
     /* Mobile sidebar — native <dialog> for free focus trap, escape, backdrop. */

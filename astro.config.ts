@@ -5,6 +5,9 @@ import nimbus, {
 } from "@cloudflare/nimbus-docs";
 import { tableScroll } from "@cloudflare/nimbus-docs/markdown";
 import { localContentEditor } from './plugins/local-content-editor.mjs';
+import { referenceHeading } from './plugins/reference-heading.mjs';
+import { satteri } from '@astrojs/markdown-satteri';
+import { mathTypesetting, mathAsMarkdown } from './plugins/math-typesetting.mjs';
 
 const nimbusConfig = defineNimbusConfig({
   // CHANGE_ME: your site's canonical origin (no trailing slash). Drives
@@ -20,6 +23,23 @@ const nimbusConfig = defineNimbusConfig({
   sidebar: {
     items: [
       { label: "Welcome", link: "/" },
+      { label: "LLM & VLM Architectures", items: [
+        { label: "Overview", link: "/architectures/" },
+        { label: "Foundations", link: "/architectures/foundations/" },
+        { label: "Architectural Evolution", items: [
+          { label: "Overview", link: "/architectures/evolution/" },
+          { label: "Attention and memory", link: "/architectures/evolution/attention-and-memory/" },
+          { label: "Position and long context", link: "/architectures/evolution/position-and-long-context/" },
+          { label: "FFNs and experts", link: "/architectures/evolution/ffns-and-experts/" },
+          { label: "Multimodal integration", link: "/architectures/evolution/multimodal-integration/" },
+          { label: "Emerging directions", link: "/architectures/evolution/emerging-directions/" },
+        ] },
+        { label: "Model Studies", items: [
+          { label: "Reading model architectures", link: "/architectures/models/" },
+          { label: "GPT-2", link: "/architectures/models/gpt-2/" },
+          { label: "Qwen3-VL", link: "/architectures/models/qwen3-vl/" },
+        ] },
+      ] },
       { label: "About", items: [
         { label: "About Latent Light", link: "/about/" },
         { label: "How this site is built", link: "/about/framework/" },
@@ -75,10 +95,14 @@ export default defineConfig({
         "nimbus/frontmatter-shape": "error",
         "nimbus/internal-link": "error",
       },
-      // Wrap wide tables so they scroll instead of overflowing the page
-      // (styled by `.nb-table-scroll` in src/styles/prose.css).
+      // Use the same native Sätteri processor as Nimbus, with math enabled.
+      // Nimbus still supplies its admonitions and the normal Astro passes.
       markdown: {
-        hastPlugins: [tableScroll()],
+        processor: satteri({
+          features: { math: true },
+          hastPlugins: [tableScroll(), referenceHeading(), mathTypesetting()],
+        }),
+        componentMap: { MathExpression: mathAsMarkdown },
       },
     }),
   ],

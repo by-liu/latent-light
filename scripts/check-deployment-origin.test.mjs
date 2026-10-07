@@ -76,7 +76,7 @@ test('deployment lifecycle requires the origin check and complete validation', (
   const { scripts } = JSON.parse(readFileSync(packageFile, 'utf8'));
   assert.equal(scripts.predeploy, 'npm run check:deploy-origin && npm run validate');
   assert.equal(scripts.deploy, 'wrangler deploy');
-  assert.equal(scripts.validate, 'npm run test:deployment && npm run typecheck && npm run lint:docs && npm run build');
+  assert.equal(scripts.validate, 'npm run test:deployment && npm run test:content && npm run typecheck && npm run lint:docs && npm run build');
   assert.equal(scripts.postdeploy, 'npm run verify:deployment');
 });
 

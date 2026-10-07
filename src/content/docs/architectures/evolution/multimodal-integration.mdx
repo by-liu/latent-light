@@ -1,0 +1,84 @@
+---
+title: Multimodal Integration
+description: Trace how visual evidence becomes available to language computation through queries, projections, merging, and depth connections.
+lastUpdated: 2026-10-05
+---
+
+import FocusCanvas from '../../../../components/FocusCanvas.astro';
+import ArchitectureDiagram from '../../../../components/architectures/ArchitectureDiagram.astro';
+
+A language model cannot read pixels merely because an image is attached.
+A visual interface must turn image evidence into features the language system
+can consume. Its design determines **what survives**, **how much enters**, and
+**where the decoder can use it**.[^blip][^llava][^qwen]
+
+## Three instructive interfaces
+
+<FocusCanvas size="diagram" label="Vision and language interfaces">
+  <ArchitectureDiagram kind="interfaces" id="figure-1">
+    **Figure 1.** Different bridges between vision and language. Original comparison of the named architectures and training stages.[^blip][^llava][^qwen]
+  </ArchitectureDiagram>
+</FocusCanvas>
+
+BLIP-2 uses learned queries in a Q-Former to read image encoder features.
+In its generative pretraining stage, projected query outputs become soft
+visual prompts for a frozen language model. The image encoder is also
+frozen.[^blip]
+
+The original LLaVA instead projects CLIP image features directly into the
+language embedding space. It first trains that projection with both
+backbones frozen, then trains the projection and language model for
+instruction following while keeping the image encoder frozen. These labels
+refer to the original design, not every later LLaVA variant.[^llava]
+
+Qwen3-VL merges visual features for the decoder input and also uses
+intermediate encoder features at early decoder depths. Its
+[model study](/architectures/models/qwen3-vl/) explains those additional
+DeepStack connections.[^qwen]
+
+The key difference is not simply connector size: a query bottleneck, direct
+projection, and input plus depth integration give evidence different routes.
+
+## Count the evidence before estimating cost
+
+For an image of height `H` and width `W`, split into square patches of side
+`P`, the basic patch count is:[^vit]
+
+<MathExpression display number="1" tex="N_{\mathrm{patch}}=\frac{H}{P}\frac{W}{P}" />
+
+This assumes both dimensions are divisible by `P`, with no padding or crops.
+Doubling both dimensions gives four times as many patches, not necessarily
+four times the total latency. These are geometry calculations, not a
+checkpoint's final token count.
+
+Processing can resize, crop, sample video frames, merge features, and add
+special tokens. Count **encoder patches** separately from **visual tokens
+passed to the language model**. BLIP-2's fixed set of query outputs illustrates
+why those counts need not match.[^blip]
+
+## Architecture and training belong together
+
+| Question | Why it matters |
+| --- | --- |
+| Which backbone is frozen? | A connector may need to align features to a fixed language representation |
+| What supervision is used? | Caption alignment and instruction following teach different interfaces |
+| What is compressed? | A shorter visual sequence may omit fine details needed by the task |
+| Where do features enter? | Input embeddings and additional depth connections are different designs |
+
+This is a local comparison framework, not a claim that one interface always
+preserves more information. Its usefulness must be tested.
+
+## Test whether the answer uses the image
+
+Proposed evaluations should compare correct, missing, and contradictory visual
+evidence. Include small text, charts, spatial relations, and questions that
+cannot be answered from text alone. Control resolution, visual budget, and
+training conditions before attributing gains to the connector.
+
+The cited models are examples of design choices, not recommendations or
+guarantees of visual grounding. Selected mechanisms checked October 5, 2026.
+
+[^blip]: Junnan Li et al., [BLIP-2: Bootstrapping Language-Image Pre-training with Frozen Image Encoders and Large Language Models](https://arxiv.org/html/2301.12597v3), 2023, sections 3.1 to 3.3. The figure shows the generative stage and abstracts over the decoder and encoder decoder language model choices.
+[^llava]: Haotian Liu et al., [Visual Instruction Tuning](https://arxiv.org/html/2304.08485v2), 2023, sections 4.1 and 4.2. The original connector is a linear projection.
+[^qwen]: Qwen Team, [Qwen3-VL Technical Report](https://arxiv.org/html/2511.21631v1), 2025, section 2, especially the vision language merger and DeepStack. This comparison is report level, not a checkpoint execution trace.
+[^vit]: Alexey Dosovitskiy et al., [An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale](https://arxiv.org/html/2010.11929v2), 2021, section 3.1: an image becomes `HW/P²` patches. The scaling example and assumptions here are local calculations, not measured latency.

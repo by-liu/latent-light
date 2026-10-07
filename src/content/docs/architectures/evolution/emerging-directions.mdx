@@ -1,0 +1,44 @@
+---
+title: Emerging Directions
+description: A focused research agenda for architectural questions, controlled tests, and evidence that would change our conclusions.
+lastUpdated: 2026-10-05
+---
+
+The next useful architecture is not necessarily the next release.
+This page collects questions worth investigating and the evidence that would
+make their answers useful. It is an editorial research agenda, not a forecast
+or a claim that these questions are unsolved everywhere.
+
+## Questions and tests
+
+| Direction | Question to investigate | A useful controlled test |
+| --- | --- | --- |
+| [Memory](/architectures/evolution/attention-and-memory/) | Which facts need explicit history, and which can survive a state summary? | Vary dependency distance and repeated distractors; measure retrieval quality, state size, and decoding latency |
+| [Visual allocation](/architectures/evolution/multimodal-integration/) | Can the visual budget follow the evidence a question needs? | Compare fine detail tasks at matched image and inference budgets; include questions needing several regions |
+| [Feature computation](/architectures/evolution/ffns-and-experts/) | When do richer FFNs or sparse experts justify their complexity? | Match active compute and training budget; separately report total weights, routing, and communication costs |
+| [Position](/architectures/evolution/position-and-long-context/) | Which spatial and temporal relationships survive preprocessing? | Change sampling, resolution, and evidence position independently; test whether the answer still depends on the right evidence |
+| [Integration](/architectures/models/qwen3-vl/) | Where should visual features enter the decoder? | Hold encoder, data, and training budget fixed; ablate input only versus additional depth connections |
+
+These are proposed tests, not experiments performed by Latent Light.
+They describe what to measure, not which model will win.
+
+## What would change our view?
+
+A promising result first enters as an attributed finding under its tested
+conditions. A broader recommendation needs relevant comparisons, enough
+implementation detail to inspect, and evidence beyond a favorable example.
+Negative results matter too: a gain that disappears when budgets are matched
+should change the explanation.
+
+Separate a mechanism's plausibility from demonstrated usefulness.
+For a proprietary model, public disclosure and plausible reconstruction are
+different evidence. An unknown internal detail must not become a fact through
+analogy with another paper.
+
+## Add a model when it teaches something
+
+A new [model study](/architectures/models/) earns its place by revealing
+a distinct mechanism, an instructive combination, or a clear implementation.
+Connect it to the existing design questions and revise any conclusion that
+its evidence challenges. A release announcement alone is not a reason to add
+another page.

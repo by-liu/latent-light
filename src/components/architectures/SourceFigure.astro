@@ -1,0 +1,20 @@
+---
+interface Props { src: string; alt: string; narrow?: boolean; id?: string; }
+const { src, alt, narrow = false, id } = Astro.props;
+---
+<figure id={id} class:list={['source-figure', {narrow}]}>
+  <a href={src} target="_blank" rel="noopener" aria-label={`Open full resolution: ${alt}`}>
+    <slot name="image" />
+    <span class="zoom-hint" aria-hidden="true">Open full size ↗</span>
+  </a>
+  <figcaption class="source-caption"><slot /></figcaption>
+</figure>
+<style>
+  .source-figure{margin:1.5rem auto;min-width:0;}.narrow{max-width:30rem;}
+  .source-figure :global(img){display:block;width:100%;height:auto;background:#fff;border:1px solid var(--nb-border);border-radius:.75rem;padding:.5rem;}
+  .source-figure :global([slot="image"] p){margin:0;}
+  a{display:block;border-radius:.75rem;}a:focus-visible{outline:2px solid var(--nb-primary);outline-offset:4px;}
+  a:hover{cursor:zoom-in;}
+  .zoom-hint{display:block;text-align:right;font-size:.72rem;line-height:1.5;color:var(--nb-muted-foreground);margin:.35rem 0;}
+  .source-caption{font-size:.8rem;line-height:1.6;color:var(--nb-muted-foreground);margin-top:.65rem;}
+</style>

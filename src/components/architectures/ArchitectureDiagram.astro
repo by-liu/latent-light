@@ -1,0 +1,162 @@
+---
+type Kind = 'memory' | 'rope' | 'gate' | 'routing' | 'interfaces' | 'gpt2' | 'deepstack';
+interface Props { kind: Kind; id: string; }
+const { kind, id } = Astro.props;
+const titles: Record<Kind, string> = {
+  memory: 'What changes when attention becomes efficient?',
+  rope: 'Position rotates a feature pair',
+  gate: 'A feature gate inside one FFN',
+  routing: 'A router chooses one expert',
+  interfaces: 'Three ways to connect vision and language',
+  gpt2: 'A language decoder and its residual block',
+  deepstack: 'One visual input, several integration depths',
+};
+const memory = [
+  {title: 'Execution', name: 'FlashAttention', cells: ['Load Q, K, V tiles', 'Compute in SRAM', 'Update output'], note: 'Same dense softmax operator; no full score matrix in HBM.'},
+  {title: 'Stored heads', name: 'GQA', cells: ['Project fewer K, V heads', 'Append by position', 'Queries read shared cache'], note: 'Query groups share KV heads; retained positions still grow with history.'},
+  {title: 'Memory operator', name: 'Causal linear attention', cells: ['New key and value', 'Update states S and z', 'Read with query'], note: 'Fixed size history state for fixed feature widths; a different operator.'},
+];
+const interfaces = [
+  {name: 'BLIP-2', detail: 'Generative pretraining stage', cells: ['Frozen vision encoder', 'Q-Former + projection', 'Frozen language model'], note: 'Learned queries read image features; projected outputs become visual prompts.'},
+  {name: 'Original LLaVA', detail: 'Instruction tuning stage', cells: ['Frozen CLIP encoder', 'Trained linear projection', 'Trained language model'], note: 'Projected visual features join text embeddings at the input.'},
+  {name: 'Qwen3-VL', detail: 'Reported architecture', cells: ['Vision encoder', 'Visual feature mergers', 'Language decoder'], note: 'Main visual tokens enter at the input; intermediate features also enter early layers.'},
+];
+---
+
+<figure id={id} class={`architecture-visual kind-${kind}`} aria-labelledby={`${id}-title`}>
+  <strong id={`${id}-title`} class="visual-title">{titles[kind]}</strong>
+
+  {kind === 'memory' && <div class="comparison">
+    {memory.map(row => <section class="comparison-row">
+      <div class="row-heading"><span class="eyebrow">{row.title}</span><strong>{row.name}</strong></div>
+      <ol class="flow">{row.cells.map(cell => <li>{cell}</li>)}</ol>
+      <p class="note">{row.note}</p>
+    </section>)}
+  </div>}
+
+  {kind === 'rope' && <div class="rope-layout">
+    <svg viewBox="0 0 360 290" role="img" aria-labelledby={`${id}-svg-title ${id}-svg-desc`}>
+      <title id={`${id}-svg-title`}>A toy rotary position example with two unit vectors</title>
+      <desc id={`${id}-svg-desc`}>Before rotation both vectors are (1,0). With theta equal to pi over four, the query at position one rotates 45 degrees and the key at position two rotates 90 degrees. The rotated vectors have 45 degrees of separation. These are illustrative feature vectors, not measured attention weights.</desc>
+      <defs><marker id={`${id}-arrow`} viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="context-stroke" /></marker></defs>
+      <path class="axis" d="M60 240H332M90 260V26" />
+      <path class="guide" d="M90 85A155 155 0 0 1 245 240" />
+      <path class="vector base" d="M90 240H245" marker-end={`url(#${id}-arrow)`} />
+      <path class="vector query" d="M90 240L200 130" marker-end={`url(#${id}-arrow)`} />
+      <path class="vector key" d="M90 240V85" marker-end={`url(#${id}-arrow)`} />
+      <path class="angle" d="M90 180A60 60 0 0 1 132.4 197.6" />
+      <text class="base-label" x="162" y="271">q = k = (1, 0)</text>
+      <text class="query-label" x="205" y="119">R(mθ)q</text>
+      <text class="key-label" x="100" y="65">R(nθ)k</text>
+      <text x="114" y="178">45°</text>
+    </svg>
+    <div class="legend">
+      <p><strong>Before:</strong> identical unit vectors.</p>
+      <p><strong>Positions:</strong> m = 1 and n = 2.</p>
+      <p><strong>Toy frequency:</strong> θ = π/4.</p>
+      <p><strong>After:</strong> query at 45°, key at 90°.</p>
+      <p class="note">Real heads use many feature pairs with different frequencies. Content still matters.</p>
+    </div>
+  </div>}
+
+  {kind === 'gate' && <div class="gate-layout">
+    <div class="node input">Token features x · width D</div>
+    <div class="fork" aria-hidden="true">↙ <span>same input</span> ↘</div>
+    <div class="branches">
+      <div class="branch"><div class="node">Gate projection · D → F</div><span class="arrow" aria-hidden="true">↓</span><div class="node accent">SiLU activation</div></div>
+      <div class="branch"><div class="node">Up projection · D → F</div><span class="arrow" aria-hidden="true">↓</span><div class="node">Linear features</div></div>
+    </div>
+    <div class="fork" aria-hidden="true">↘ <span>two branches</span> ↙</div>
+    <div class="node accent">Elementwise multiply · width F</div>
+    <span class="arrow" aria-hidden="true">↓</span>
+    <div class="node">Down projection · F → D</div>
+    <p class="note">Both branches are computed. The feature gate is not an expert selection probability.</p>
+  </div>}
+
+  {kind === 'routing' && <div class="routing-layout">
+    <div class="node input">Token features x</div><span class="arrow" aria-hidden="true">↓</span>
+    <div class="node">Router softmax · p = [0.7, 0.2, 0.1]</div><span class="arrow" aria-hidden="true">↓</span>
+    <div class="node accent">Top 1 selects expert 1</div><span class="arrow" aria-hidden="true">↓</span>
+    <div class="node chosen"><strong>Expert 1</strong><span>Compute E₁(x)</span></div>
+    <span class="arrow" aria-hidden="true">↓ selected output only</span>
+    <div class="node accent">Weight output · y = 0.7 E₁(x)</div>
+    <p class="note">Outside this token's computation path:</p>
+    <div class="experts"><div class="node inactive"><strong>Expert 2</strong><span>Not dispatched</span></div><div class="node inactive"><strong>Expert 3</strong><span>Not dispatched</span></div></div>
+    <p class="note">Illustrative probabilities and three experts. Assumes expert capacity is available.</p>
+  </div>}
+
+  {kind === 'interfaces' && <div class="comparison">
+    {interfaces.map(row => <section class="comparison-row">
+      <div class="row-heading"><strong>{row.name}</strong><span class="eyebrow">{row.detail}</span></div>
+      <ol class="flow">{row.cells.map(cell => <li>{cell}</li>)}</ol>
+      <p class="note">{row.note}</p>
+    </section>)}
+    <p class="note">Text enters the language side in all three. Frozen and trained labels describe the named stage, not every stage or later variant.</p>
+  </div>}
+
+  {kind === 'gpt2' && <div class="gpt-layout">
+    <ol class="vertical-flow">
+      <li>Token IDs</li><li>Token + learned position embeddings</li><li class="accent">Residual block × L</li><li>Final LayerNorm</li><li>Vocabulary logits · tied token embedding weights</li><li>Softmax + next token selection outside the model</li>
+    </ol>
+    <svg viewBox="0 0 400 550" role="img" aria-labelledby={`${id}-svg-title ${id}-svg-desc`}>
+      <title id={`${id}-svg-title`}>One GPT-2 block with two residual bypasses</title>
+      <desc id={`${id}-svg-desc`}>Input x passes through LayerNorm and causal multi-head attention; its output is added to the unnormalized input. The resulting u passes through LayerNorm and a GELU FFN; that output is added to u. Each bypass avoids both normalization and the branch computation.</desc>
+      <defs><marker id={`${id}-arrow`} viewBox="0 0 10 10" refX="10" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="var(--diagram-line)" /></marker></defs>
+      <path class="edge" d="M220 45V80M220 122V155M220 217V233M220 267V300M220 342V375M220 437V453M220 487V517" marker-end={`url(#${id}-arrow)`} />
+      <path class="edge bypass" d="M220 58H40V250H203M220 283H40V470H203" marker-end={`url(#${id}-arrow)`} />
+      <text class="strong" x="220" y="30" text-anchor="middle">Input x</text>
+      <g class="box"><rect x="130" y="80" width="180" height="42" rx="8" /><text x="220" y="107" text-anchor="middle">LayerNorm</text></g>
+      <g class="box"><rect x="130" y="155" width="180" height="62" rx="8" /><text x="220" y="181" text-anchor="middle">Causal attention</text><text class="detail" x="220" y="203" text-anchor="middle">MHA + projection</text></g>
+      <g class="addition"><circle cx="220" cy="250" r="17" /><text x="220" y="257" text-anchor="middle">+</text></g>
+      <text class="detail" x="66" y="215">x</text><text class="strong" x="253" y="280">u</text>
+      <g class="box"><rect x="130" y="300" width="180" height="42" rx="8" /><text x="220" y="327" text-anchor="middle">LayerNorm</text></g>
+      <g class="box"><rect x="130" y="375" width="180" height="62" rx="8" /><text x="220" y="401" text-anchor="middle">GELU FFN</text><text class="detail" x="220" y="423" text-anchor="middle">D → 4D → D</text></g>
+      <g class="addition"><circle cx="220" cy="470" r="17" /><text x="220" y="477" text-anchor="middle">+</text></g>
+      <text class="detail" x="66" y="435">u</text><text class="strong" x="220" y="540" text-anchor="middle">Block output</text>
+    </svg>
+  </div>}
+
+  {kind === 'deepstack' && <div class="deepstack-layout">
+    <div class="node">Image or sampled frames → vision encoder</div>
+    <span class="arrow" aria-hidden="true">↓ two feature paths</span>
+    <div class="deepstack-paths">
+      <section><strong class="path-heading">Main input path</strong><ol class="vertical-flow"><li>Final visual features</li><li>2 × 2 feature merger</li><li>Visual embeddings + text embeddings</li><li>Language decoder stream</li></ol></section>
+      <section><strong class="path-heading">DeepStack side path</strong><ol class="vertical-flow"><li>Features from three encoder levels</li><li>Three dedicated mergers</li><li>Aligned visual features at language width</li><li>Add at early decoder depths</li></ol></section>
+    </div>
+    <div class="injection-ledger">
+      <div><span>Layer 1 output</span><strong>+ level A features</strong></div>
+      <div><span>Layer 2 output</span><strong>+ level B features</strong></div>
+      <div><span>Layer 3 output</span><strong>+ level C features</strong></div>
+    </div>
+    <p class="note">Additions affect visual positions, not every text position. A, B and C label three feature levels, not checkpoint layer indices. Output additions are checked in Transformers v4.57.1; the rest is a report level schematic.</p>
+  </div>}
+
+  <figcaption><slot /></figcaption>
+</figure>
+
+<style>
+  .architecture-visual{--diagram-line:var(--nb-muted-foreground);--diagram-accent:var(--nb-primary);container-type:inline-size;container-name:architecture;margin:1.75rem 0;min-width:0;border:1px solid var(--nb-border);border-radius:.85rem;padding:1.2rem;background:var(--nb-background);font-size:.9rem;line-height:1.5;}
+  .visual-title{display:block;font-size:1rem;line-height:1.4;margin-bottom:1.25rem;color:var(--nb-foreground);}
+  figcaption{font-size:.8rem;line-height:1.6;color:var(--nb-muted-foreground);border-top:1px solid var(--nb-border);padding-top:.8rem;margin-top:1.1rem;}
+  .comparison{display:grid;gap:1rem;}.comparison-row{min-width:0;border-bottom:1px solid var(--nb-border);padding-bottom:1rem;}.comparison-row:last-of-type{border:0;padding-bottom:0;}
+  .row-heading{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:.4rem;margin-bottom:.7rem;}.eyebrow{font-size:.78rem;color:var(--nb-muted-foreground);}
+  .flow,.vertical-flow{padding:0;margin:0;list-style:none!important;}.flow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.5rem;}
+  .flow li,.vertical-flow li,.node{position:relative;min-width:0;margin:0;border:1px solid var(--nb-border);border-radius:.5rem;padding:.7rem;text-align:center;background:var(--nb-card,var(--nb-background));color:var(--nb-foreground);}
+  .flow li:not(:last-child)::after{content:'→';position:absolute;right:-1.25rem;top:50%;transform:translateY(-50%);color:var(--diagram-line);}
+  .vertical-flow{display:grid;gap:1.5rem;}.vertical-flow li:not(:last-child)::after{content:'↓';position:absolute;left:50%;bottom:-1.3rem;transform:translateX(-50%);color:var(--diagram-line);}
+  .note{font-size:.8rem;line-height:1.55;color:var(--nb-muted-foreground);margin:.7rem 0 0;}.arrow{display:block;text-align:center;color:var(--diagram-line);padding:.25rem;}
+  .accent,.chosen{border-color:var(--diagram-accent)!important;background:color-mix(in srgb,var(--diagram-accent) 8%,var(--nb-background))!important;}
+  .gate-layout,.routing-layout{max-width:42rem;margin:auto;}.branches{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}.fork{display:flex;justify-content:space-around;align-items:center;padding:.3rem;color:var(--diagram-line);}.fork span{font-size:.75rem;}
+  .experts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.6rem;margin-top:.5rem;}.experts strong,.experts span,.chosen strong,.chosen span{display:block;}.experts span,.chosen span{font-size:.76rem;}.inactive{border-style:dashed;color:var(--nb-muted-foreground);}
+  .rope-layout{display:grid;grid-template-columns:1.15fr 1fr;gap:1rem;align-items:center;}.legend p{margin:.5rem 0;}.legend{font-size:.83rem;}
+  svg{display:block;width:100%;height:auto;min-width:0;max-width:34rem;margin:auto;overflow:visible;}
+  text{fill:var(--nb-foreground);font:20px system-ui,sans-serif;}.detail{font-size:20px;}.strong{font-weight:650;}.axis{stroke:var(--nb-border);stroke-width:1.5;fill:none;}.guide{stroke:var(--nb-border);stroke-dasharray:4 5;fill:none;}
+  .vector{stroke-width:3;fill:none;}.base{stroke:var(--nb-muted-foreground);}.query{stroke:var(--diagram-accent);}.key{stroke:var(--nb-foreground);}.angle{stroke:var(--nb-muted-foreground);stroke-width:1.5;fill:none;}.query-label{fill:var(--diagram-accent);}.base-label{font-size:18px;}
+  .edge{stroke:var(--diagram-line);stroke-width:2;fill:none;}.bypass{stroke-dasharray:5 4;}.box rect{fill:var(--nb-card,var(--nb-background));stroke:var(--nb-border);stroke-width:1.5;}.addition circle{fill:var(--nb-background);stroke:var(--diagram-accent);stroke-width:2;}
+  .gpt-layout{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;align-items:center;}.gpt-layout .vertical-flow{font-size:.83rem;}
+  .deepstack-paths{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;}.path-heading{display:flex;align-items:center;justify-content:center;min-height:2.4rem;text-align:center;font-size:.8rem;margin-bottom:.7rem;}.injection-ledger{display:grid;gap:1.5rem;margin-top:1.25rem;}.injection-ledger div{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:.6rem;border:1px solid var(--nb-border);padding:.65rem;border-radius:.5rem;font-size:.8rem;}.injection-ledger div:not(:last-child)::after{content:'↓';position:absolute;left:25%;bottom:-1.3rem;color:var(--diagram-line);}.injection-ledger strong{color:var(--diagram-accent);font-weight:500;}
+  @container architecture (max-width:590px){.rope-layout,.gpt-layout{grid-template-columns:1fr;}.rope-layout svg{max-width:24rem;}.flow{grid-template-columns:1fr;gap:1.4rem;}.flow li:not(:last-child)::after{content:'↓';right:auto;left:50%;top:auto;bottom:-1.3rem;transform:translateX(-50%);}}
+  @media(max-width:590px){.rope-layout,.gpt-layout{grid-template-columns:1fr;}.rope-layout svg{max-width:24rem;}.flow{grid-template-columns:1fr;gap:1.4rem;}.flow li:not(:last-child)::after{content:'↓';right:auto;left:50%;top:auto;bottom:-1.3rem;transform:translateX(-50%);}}
+  @media(max-width:390px){.architecture-visual{padding:.85rem;font-size:.85rem;}.branches,.deepstack-paths{gap:.6rem;}.node{padding:.6rem .35rem;}.experts{grid-template-columns:1fr;}.injection-ledger div{font-size:.75rem;}.visual-title{font-size:.95rem;}}
+  @media print{.architecture-visual{break-inside:avoid;}.flow{grid-template-columns:repeat(3,minmax(0,1fr));}.flow li:not(:last-child)::after{content:'→';left:auto;right:-1.25rem;top:50%;bottom:auto;transform:translateY(-50%);}.gpt-layout,.rope-layout{grid-template-columns:1fr 1fr;}}
+</style>
