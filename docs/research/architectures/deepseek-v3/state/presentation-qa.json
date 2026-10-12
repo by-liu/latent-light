@@ -1,0 +1,215 @@
+{
+  "revision": 4,
+  "checked": "2026-10-10T18:07:46.764Z",
+  "site_page_sha256": "8aef0813fe1b922ea3050dc0595ea769993b2f04ae9d2c4fe06c69376da76ecb",
+  "source_resources": {
+    "report": "https://arxiv.org/pdf/2412.19437v1",
+    "hugging_face": "https://huggingface.co/deepseek-ai/DeepSeek-V3",
+    "checkpoint": "deepseek-ai/DeepSeek-V3"
+  },
+  "prior_review_record": "state/presentation-qa-revision-3.json",
+  "collection_checks": {
+    "site_validation": "106 automated tests, zero Astro diagnostics, static build and 43 docs lint clean. Existing bundler/redirect warnings unchanged.",
+    "browser_views": 18,
+    "guidance_browser_views": 8,
+    "all_25_exports": true,
+    "source_crops": 8,
+    "manual_model_figures": 18,
+    "model_benchmarks": "Not executed."
+  },
+  "viewports": [
+    {
+      "slug": "deepseek-v3",
+      "width": 1440,
+      "mode": "light",
+      "title": "DeepSeek-V3",
+      "titleCount": 1,
+      "overflow": false,
+      "figures": [
+        {
+          "id": "figure-1",
+          "caption": "Figure 1. MLA and the shared and routed expert branches. Reproduced from DeepSeek-AI, V3 report Figure 2.4"
+        },
+        {
+          "id": "figure-2",
+          "caption": "Figure 2. Routing control and mixture weights are separate. Independent mechanism diagram based on Section 2.1.2 and the inspected gate code.65"
+        },
+        {
+          "id": "figure-3",
+          "caption": "Figure 3. Sequential prediction depths preserve the causal chain. Reproduced from DeepSeek-AI, report Figure 3.8"
+        }
+      ],
+      "resources": [
+        {
+          "kind": "report",
+          "href": "https://arxiv.org/pdf/2412.19437v1",
+          "label": "Technical reportRead the original research"
+        },
+        {
+          "kind": "model",
+          "href": "https://huggingface.co/deepseek-ai/DeepSeek-V3",
+          "label": "Hugging Facedeepseek-ai/DeepSeek-V3"
+        }
+      ],
+      "visibleHashes": [],
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "missingImages": [],
+      "activeNav": [
+        {
+          "label": "DeepSeek-V3",
+          "visible": true
+        }
+      ],
+      "panFrames": [
+        {
+          "tabindex": 0,
+          "scrolls": false,
+          "frame": 648,
+          "image": 648
+        },
+        {
+          "tabindex": 0,
+          "scrolls": false,
+          "frame": 648,
+          "image": 648
+        },
+        {
+          "tabindex": 0,
+          "scrolls": false,
+          "frame": 648,
+          "image": 648
+        }
+      ]
+    },
+    {
+      "slug": "deepseek-v3",
+      "width": 390,
+      "mode": "light",
+      "title": "DeepSeek-V3",
+      "titleCount": 1,
+      "overflow": false,
+      "figures": [
+        {
+          "id": "figure-1",
+          "caption": "Figure 1. MLA and the shared and routed expert branches. Reproduced from DeepSeek-AI, V3 report Figure 2.4"
+        },
+        {
+          "id": "figure-2",
+          "caption": "Figure 2. Routing control and mixture weights are separate. Independent mechanism diagram based on Section 2.1.2 and the inspected gate code.65"
+        },
+        {
+          "id": "figure-3",
+          "caption": "Figure 3. Sequential prediction depths preserve the causal chain. Reproduced from DeepSeek-AI, report Figure 3.8"
+        }
+      ],
+      "resources": [
+        {
+          "kind": "report",
+          "href": "https://arxiv.org/pdf/2412.19437v1",
+          "label": "Technical reportRead the original research"
+        },
+        {
+          "kind": "model",
+          "href": "https://huggingface.co/deepseek-ai/DeepSeek-V3",
+          "label": "Hugging Facedeepseek-ai/DeepSeek-V3"
+        }
+      ],
+      "visibleHashes": [],
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "missingImages": [],
+      "activeNav": [
+        {
+          "label": "DeepSeek-V3",
+          "visible": false
+        }
+      ],
+      "panFrames": [
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 358,
+          "image": 620
+        },
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 358,
+          "image": 650
+        },
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 358,
+          "image": 860
+        }
+      ]
+    },
+    {
+      "slug": "deepseek-v3",
+      "width": 320,
+      "mode": "dark",
+      "title": "DeepSeek-V3",
+      "titleCount": 1,
+      "overflow": false,
+      "figures": [
+        {
+          "id": "figure-1",
+          "caption": "Figure 1. MLA and the shared and routed expert branches. Reproduced from DeepSeek-AI, V3 report Figure 2.4"
+        },
+        {
+          "id": "figure-2",
+          "caption": "Figure 2. Routing control and mixture weights are separate. Independent mechanism diagram based on Section 2.1.2 and the inspected gate code.65"
+        },
+        {
+          "id": "figure-3",
+          "caption": "Figure 3. Sequential prediction depths preserve the causal chain. Reproduced from DeepSeek-AI, report Figure 3.8"
+        }
+      ],
+      "resources": [
+        {
+          "kind": "report",
+          "href": "https://arxiv.org/pdf/2412.19437v1",
+          "label": "Technical reportRead the original research"
+        },
+        {
+          "kind": "model",
+          "href": "https://huggingface.co/deepseek-ai/DeepSeek-V3",
+          "label": "Hugging Facedeepseek-ai/DeepSeek-V3"
+        }
+      ],
+      "visibleHashes": [],
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "missingImages": [],
+      "activeNav": [
+        {
+          "label": "DeepSeek-V3",
+          "visible": false
+        }
+      ],
+      "panFrames": [
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 288,
+          "image": 620
+        },
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 288,
+          "image": 650
+        },
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 288,
+          "image": 860
+        }
+      ]
+    }
+  ],
+  "reuse_review": "Specific fair-dealing assessments documented; no permissive artwork grant or universal legal assurance asserted."
+}

@@ -1,0 +1,209 @@
+{
+  "revision": 3,
+  "checked": "2026-10-10T17:36:51.557Z",
+  "site_page_sha256": "5bcb3378f54367f49834ba5dceff1d66daf7b9630bcfebdd7cd8a93e43931ff0",
+  "source_resources": {
+    "report": "https://arxiv.org/pdf/2405.04434v1",
+    "hugging_face": "https://huggingface.co/deepseek-ai/DeepSeek-V2",
+    "checkpoint": "deepseek-ai/DeepSeek-V2"
+  },
+  "prior_review_record": "state/presentation-qa-revision-2.json",
+  "collection_checks": {
+    "site_validation": "106 tests, zero Astro diagnostics, static build and all 43 docs lint passed.",
+    "browser_views": 81,
+    "renewed_views_after_final_locator_corrections": 6,
+    "numbered_model_figures": 66,
+    "source_figure_assets": 42,
+    "source_figure_placements": 43,
+    "model_benchmarks": "Not executed."
+  },
+  "viewports": [
+    {
+      "slug": "deepseek-v2",
+      "width": 1440,
+      "mode": "light",
+      "title": "DeepSeek-V2",
+      "titleCount": 1,
+      "overflow": false,
+      "figures": [
+        {
+          "id": "figure-1",
+          "caption": "Figure 1. MLA and shared plus routed experts. Reproduced from the release documentation’s Figure 2, under MIT terms.5"
+        },
+        {
+          "id": "figure-2",
+          "caption": "Figure 2. Different ways to retain attention history. Reproduced intact from V2 documentation, Figure 3, under MIT terms.7"
+        }
+      ],
+      "resources": [
+        {
+          "kind": "report",
+          "href": "https://arxiv.org/pdf/2405.04434v1",
+          "label": "Technical reportRead the original research"
+        },
+        {
+          "kind": "model",
+          "href": "https://huggingface.co/deepseek-ai/DeepSeek-V2",
+          "label": "Hugging Facedeepseek-ai/DeepSeek-V2"
+        }
+      ],
+      "visibleHashes": [],
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "missingImages": [],
+      "activeNav": [
+        {
+          "label": "DeepSeek-V2",
+          "visible": true
+        }
+      ],
+      "panFrames": [
+        {
+          "tabindex": 0,
+          "scrolls": false,
+          "frame": 648,
+          "image": 648
+        },
+        {
+          "tabindex": 0,
+          "scrolls": false,
+          "frame": 648,
+          "image": 648
+        }
+      ]
+    },
+    {
+      "slug": "deepseek-v2",
+      "width": 390,
+      "mode": "light",
+      "title": "DeepSeek-V2",
+      "titleCount": 1,
+      "overflow": false,
+      "figures": [
+        {
+          "id": "figure-1",
+          "caption": "Figure 1. MLA and shared plus routed experts. Reproduced from the release documentation’s Figure 2, under MIT terms.5"
+        },
+        {
+          "id": "figure-2",
+          "caption": "Figure 2. Different ways to retain attention history. Reproduced intact from V2 documentation, Figure 3, under MIT terms.7"
+        }
+      ],
+      "resources": [
+        {
+          "kind": "report",
+          "href": "https://arxiv.org/pdf/2405.04434v1",
+          "label": "Technical reportRead the original research"
+        },
+        {
+          "kind": "model",
+          "href": "https://huggingface.co/deepseek-ai/DeepSeek-V2",
+          "label": "Hugging Facedeepseek-ai/DeepSeek-V2"
+        }
+      ],
+      "visibleHashes": [],
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "missingImages": [],
+      "activeNav": [
+        {
+          "label": "DeepSeek-V2",
+          "visible": false
+        }
+      ],
+      "panFrames": [
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 358,
+          "image": 620
+        },
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 358,
+          "image": 720
+        }
+      ]
+    },
+    {
+      "slug": "deepseek-v2",
+      "width": 320,
+      "mode": "dark",
+      "title": "DeepSeek-V2",
+      "titleCount": 1,
+      "overflow": false,
+      "figures": [
+        {
+          "id": "figure-1",
+          "caption": "Figure 1. MLA and shared plus routed experts. Reproduced from the release documentation’s Figure 2, under MIT terms.5"
+        },
+        {
+          "id": "figure-2",
+          "caption": "Figure 2. Different ways to retain attention history. Reproduced intact from V2 documentation, Figure 3, under MIT terms.7"
+        }
+      ],
+      "resources": [
+        {
+          "kind": "report",
+          "href": "https://arxiv.org/pdf/2405.04434v1",
+          "label": "Technical reportRead the original research"
+        },
+        {
+          "kind": "model",
+          "href": "https://huggingface.co/deepseek-ai/DeepSeek-V2",
+          "label": "Hugging Facedeepseek-ai/DeepSeek-V2"
+        }
+      ],
+      "visibleHashes": [],
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "missingImages": [],
+      "activeNav": [
+        {
+          "label": "DeepSeek-V2",
+          "visible": false
+        }
+      ],
+      "panFrames": [
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 288,
+          "image": 620
+        },
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 288,
+          "image": 720
+        }
+      ]
+    }
+  ],
+  "manual_review": {
+    "complete": true,
+    "reviewedFigures": 66,
+    "contactSheets": 6,
+    "newDenseVisuals": true,
+    "fullSizeNativeReview": [
+      "qwen3-vl figure 1: full visual pipeline, side path no longer obscured",
+      "qwen3-vl figure 3: schematic frequency interleaving and timestamp distinction",
+      "llama-3 figure 2: block-diagonal causal packed-document mask",
+      "deepseek-v3 figure 2: routing selection and unmodified mixture weights",
+      "deepseek-r1 figure 2: old, current and reference policies",
+      "qwen3 figure 2: student-generated trajectory and teacher scoring",
+      "kimi-linear figure 3: causal intra-chunk computation and recurrent boundary",
+      "llava figure 2: separate HD extension and 1312-position arithmetic",
+      "qwen2-vl figure 2: visual coordinate example and ordinal tube indices"
+    ],
+    "narrowThemeReview": [
+      "qwen3-vl figure 1 at 390px light",
+      "qwen3-vl figure 3 at 320px dark",
+      "deepseek-v3 figure 2 at 320px dark",
+      "llama-3 figure 2 at 390px light"
+    ],
+    "sourceArtReview": "All current source crops inspected in rendered contact sheets; exact full PDF/page and crop comparisons performed by owning agents, with root direct review for V4 cache layout and V4.1 hierarchical indexer. Artwork labels/axes retained; no AI repainting.",
+    "boundary": "Visual and source verification only. Model checkpoints, benchmarks and training were not executed."
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "pages": 27,
+  "bytes": 3870631,
+  "source_segments_checked": 364,
+  "missing_source_segments": [],
+  "blank_pages": [],
+  "unique_external_links": 19,
+  "internal_links": 118,
+  "invalid_internal_links": [],
+  "bookmarks": 15,
+  "fonts": [
+    "/AAAAAA+NotoSans-Bold",
+    "/AAAAAA+NotoSans-Regular",
+    "/AAAAAA+NotoSerif-Bold",
+    "/Helvetica"
+  ],
+  "outside_page_bounds": [],
+  "replacement_glyphs": false,
+  "figures": 3,
+  "references": 18,
+  "sha256": "59c665a0b96b0c66cee6c4fc41f63fbd34ea8fd4e9e521c3c3861927eae03582",
+  "checked_at": "2026-10-11T16:27:24Z"
+}

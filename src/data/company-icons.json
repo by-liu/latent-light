@@ -1,0 +1,988 @@
+[
+  {
+    "id": "1x",
+    "name": "1X",
+    "keys": [
+      "1x.tech"
+    ],
+    "initials": "1N",
+    "asset": "/company-icons/1x.png"
+  },
+  {
+    "id": "agibot",
+    "name": "AGIBOT",
+    "keys": [
+      "agibot.com"
+    ],
+    "initials": "A",
+    "asset": "/company-icons/agibot.png"
+  },
+  {
+    "id": "agilityrobotics",
+    "name": "Agility Robotics",
+    "keys": [
+      "agilityrobotics.com"
+    ],
+    "initials": "AR",
+    "asset": "/company-icons/agilityrobotics.png"
+  },
+  {
+    "id": "alibabagroup",
+    "name": "Alibaba",
+    "keys": [
+      "alibabagroup.com",
+      "github.com/alibaba-damo-academy/RynnBrain"
+    ],
+    "initials": "AL",
+    "asset": null
+  },
+  {
+    "id": "amazon",
+    "name": "Amazon",
+    "keys": [
+      "aboutamazon.com"
+    ],
+    "initials": "AM",
+    "asset": "/company-icons/amazon.png"
+  },
+  {
+    "id": "anthropic",
+    "name": "Anthropic",
+    "keys": [
+      "claude.com"
+    ],
+    "initials": "AN",
+    "asset": "/company-icons/anthropic.png"
+  },
+  {
+    "id": "anybotics",
+    "name": "ANYbotics",
+    "keys": [
+      "anybotics.com"
+    ],
+    "initials": "A",
+    "asset": null
+  },
+  {
+    "id": "apple",
+    "name": "Apple",
+    "keys": [
+      "apple.com"
+    ],
+    "initials": "AP",
+    "asset": "/company-icons/apple.png"
+  },
+  {
+    "id": "apptronik",
+    "name": "Apptronik",
+    "keys": [
+      "apptronik.com"
+    ],
+    "initials": "AA",
+    "asset": "/company-icons/apptronik.png"
+  },
+  {
+    "id": "askjo",
+    "name": "jo",
+    "keys": [
+      "askjo.ai"
+    ],
+    "initials": "JO",
+    "asset": null
+  },
+  {
+    "id": "astribot",
+    "name": "Astribot",
+    "keys": [
+      "astribot.com"
+    ],
+    "initials": "A",
+    "asset": "/company-icons/astribot.png"
+  },
+  {
+    "id": "baidu",
+    "name": "Baidu",
+    "keys": [
+      "wenxin.baidu.com"
+    ],
+    "initials": "BA",
+    "asset": "/company-icons/baidu.png"
+  },
+  {
+    "id": "bostondynamics",
+    "name": "Boston Dynamics",
+    "keys": [
+      "bostondynamics.com"
+    ],
+    "initials": "BD",
+    "asset": "/company-icons/bostondynamics.png"
+  },
+  {
+    "id": "bytedance",
+    "name": "ByteDance",
+    "keys": [
+      "doubao.com",
+      "seed.bytedance.com"
+    ],
+    "initials": "BY",
+    "asset": "/company-icons/bytedance.png"
+  },
+  {
+    "id": "character",
+    "name": "Character.AI",
+    "keys": [
+      "character.ai"
+    ],
+    "initials": "CH",
+    "asset": "/company-icons/character.png"
+  },
+  {
+    "id": "d-robotics",
+    "name": "D-Robotics",
+    "keys": [
+      "en.d-robotics.cc"
+    ],
+    "initials": "DR",
+    "asset": "/company-icons/d-robotics.png"
+  },
+  {
+    "id": "daydream",
+    "name": "Daydream",
+    "keys": [
+      "daydream.ing"
+    ],
+    "initials": "DA",
+    "asset": "/company-icons/daydream.png"
+  },
+  {
+    "id": "deeprobotics",
+    "name": "DEEP Robotics",
+    "keys": [
+      "deeprobotics.cn"
+    ],
+    "initials": "DR",
+    "asset": "/company-icons/deeprobotics.png"
+  },
+  {
+    "id": "deepseek",
+    "name": "深度求索 DeepSeek",
+    "keys": [
+      "deepseek.com"
+    ],
+    "initials": "D度",
+    "asset": "/company-icons/deepseek.png"
+  },
+  {
+    "id": "dexterity",
+    "name": "Dexterity",
+    "keys": [
+      "dexterity.ai"
+    ],
+    "initials": "DM",
+    "asset": "/company-icons/dexterity.png"
+  },
+  {
+    "id": "dobot-robots",
+    "name": "Dobot",
+    "keys": [
+      "dobot-robots.com"
+    ],
+    "initials": "D",
+    "asset": "/company-icons/dobot-robots.png"
+  },
+  {
+    "id": "dyna",
+    "name": "DYNA Robotics",
+    "keys": [
+      "dyna.co"
+    ],
+    "initials": "DR",
+    "asset": "/company-icons/dyna.png"
+  },
+  {
+    "id": "elevenlabs",
+    "name": "ElevenLabs",
+    "keys": [
+      "elevenreader.io"
+    ],
+    "initials": "EL",
+    "asset": "/company-icons/elevenlabs.png"
+  },
+  {
+    "id": "endel",
+    "name": "Endel",
+    "keys": [
+      "endel.io"
+    ],
+    "initials": "EN",
+    "asset": "/company-icons/endel.png"
+  },
+  {
+    "id": "engineai-com",
+    "name": "EngineAI",
+    "keys": [
+      "engineai.com.cn"
+    ],
+    "initials": "E",
+    "asset": "/company-icons/engineai-com.png"
+  },
+  {
+    "id": "fftai",
+    "name": "Fourier",
+    "keys": [
+      "fftai.com"
+    ],
+    "initials": "F",
+    "asset": "/company-icons/fftai.png"
+  },
+  {
+    "id": "fieldai",
+    "name": "FieldAI",
+    "keys": [
+      "fieldai.com"
+    ],
+    "initials": "F",
+    "asset": "/company-icons/fieldai.png"
+  },
+  {
+    "id": "figure",
+    "name": "Figure",
+    "keys": [
+      "figure.ai"
+    ],
+    "initials": "F",
+    "asset": "/company-icons/figure.png"
+  },
+  {
+    "id": "flexiv",
+    "name": "Flexiv",
+    "keys": [
+      "flexiv.com"
+    ],
+    "initials": "F",
+    "asset": "/company-icons/flexiv.png"
+  },
+  {
+    "id": "flowith",
+    "name": "Flowith",
+    "keys": [
+      "flowith.io"
+    ],
+    "initials": "FL",
+    "asset": "/company-icons/flowith.png"
+  },
+  {
+    "id": "folotoy",
+    "name": "FoloToy",
+    "keys": [
+      "folotoy.com"
+    ],
+    "initials": "FO",
+    "asset": "/company-icons/folotoy.png"
+  },
+  {
+    "id": "foxglove",
+    "name": "Foxglove",
+    "keys": [
+      "foxglove.dev"
+    ],
+    "initials": "FO",
+    "asset": "/company-icons/foxglove.png"
+  },
+  {
+    "id": "galaxea-ai",
+    "name": "Galaxea AI",
+    "keys": [
+      "galaxea-ai.com"
+    ],
+    "initials": "GA",
+    "asset": "/company-icons/galaxea-ai.png"
+  },
+  {
+    "id": "galbot",
+    "name": "Galbot",
+    "keys": [
+      "galbot.com"
+    ],
+    "initials": "G",
+    "asset": "/company-icons/galbot.png"
+  },
+  {
+    "id": "geekplus",
+    "name": "Geek+",
+    "keys": [
+      "geekplus.com"
+    ],
+    "initials": "G",
+    "asset": "/company-icons/geekplus.png"
+  },
+  {
+    "id": "generalistai",
+    "name": "Generalist",
+    "keys": [
+      "generalistai.com"
+    ],
+    "initials": "G",
+    "asset": "/company-icons/generalistai.png"
+  },
+  {
+    "id": "getduckbill",
+    "name": "Duckbill",
+    "keys": [
+      "getduckbill.com"
+    ],
+    "initials": "DU",
+    "asset": "/company-icons/getduckbill.png"
+  },
+  {
+    "id": "google",
+    "name": "Google",
+    "keys": [
+      "gemini.google",
+      "deepmind.google"
+    ],
+    "initials": "GO",
+    "asset": "/company-icons/google.png"
+  },
+  {
+    "id": "hairobotics",
+    "name": "Hai Robotics",
+    "keys": [
+      "hairobotics.com"
+    ],
+    "initials": "HR",
+    "asset": "/company-icons/hairobotics.png"
+  },
+  {
+    "id": "haivivi",
+    "name": "跃然创新",
+    "keys": [
+      "haivivi.cn"
+    ],
+    "initials": "然然",
+    "asset": "/company-icons/haivivi.png"
+  },
+  {
+    "id": "huggingface",
+    "name": "Hugging Face",
+    "keys": [
+      "huggingface.co"
+    ],
+    "initials": "HF",
+    "asset": "/company-icons/huggingface.png"
+  },
+  {
+    "id": "keenon",
+    "name": "KEENON Robotics",
+    "keys": [
+      "keenon.com"
+    ],
+    "initials": "KR",
+    "asset": "/company-icons/keenon.png"
+  },
+  {
+    "id": "kimi",
+    "name": "月之暗面 Moonshot AI",
+    "keys": [
+      "kimi.com"
+    ],
+    "initials": "MA",
+    "asset": "/company-icons/kimi.png"
+  },
+  {
+    "id": "krea",
+    "name": "Krea",
+    "keys": [
+      "krea.ai"
+    ],
+    "initials": "KR",
+    "asset": "/company-icons/krea.png"
+  },
+  {
+    "id": "leju",
+    "name": "Leju",
+    "keys": [
+      "letools.lejurobot.com"
+    ],
+    "initials": "LJ",
+    "asset": null
+  },
+  {
+    "id": "liblib",
+    "name": "演语科技 Evoken",
+    "keys": [
+      "liblib.art"
+    ],
+    "initials": "E语",
+    "asset": "/company-icons/liblib.png"
+  },
+  {
+    "id": "limxdynamics",
+    "name": "LimX Dynamics",
+    "keys": [
+      "limxdynamics.com"
+    ],
+    "initials": "LD",
+    "asset": "/company-icons/limxdynamics.png"
+  },
+  {
+    "id": "listenhub",
+    "name": "MarsWave",
+    "keys": [
+      "listenhub.ai"
+    ],
+    "initials": "MA",
+    "asset": "/company-icons/listenhub.png"
+  },
+  {
+    "id": "littlebird",
+    "name": "Littlebird",
+    "keys": [
+      "littlebird.ai"
+    ],
+    "initials": "LI",
+    "asset": "/company-icons/littlebird.png"
+  },
+  {
+    "id": "loopit-com",
+    "name": "涌跃智能",
+    "keys": [
+      "loopit.com.cn"
+    ],
+    "initials": "跃跃",
+    "asset": "/company-icons/loopit-com.png"
+  },
+  {
+    "id": "macaron",
+    "name": "Macaron",
+    "keys": [
+      "macaron.im"
+    ],
+    "initials": "MA",
+    "asset": "/company-icons/macaron.png"
+  },
+  {
+    "id": "meta",
+    "name": "Meta",
+    "keys": [
+      "meta.ai"
+    ],
+    "initials": "ME",
+    "asset": "/company-icons/meta.png"
+  },
+  {
+    "id": "metaso",
+    "name": "秘塔科技",
+    "keys": [
+      "metaso.cn"
+    ],
+    "initials": "塔塔",
+    "asset": "/company-icons/metaso.png"
+  },
+  {
+    "id": "microsoft",
+    "name": "Microsoft",
+    "keys": [
+      "microsoft.com"
+    ],
+    "initials": "MI",
+    "asset": "/company-icons/microsoft.png"
+  },
+  {
+    "id": "midjourney",
+    "name": "Midjourney",
+    "keys": [
+      "midjourney.com"
+    ],
+    "initials": "MJ",
+    "asset": null
+  },
+  {
+    "id": "mindtrip",
+    "name": "Mindtrip",
+    "keys": [
+      "mindtrip.ai"
+    ],
+    "initials": "MI",
+    "asset": "/company-icons/mindtrip.png"
+  },
+  {
+    "id": "minimax",
+    "name": "MiniMax",
+    "keys": [
+      "ir.minimax.io"
+    ],
+    "initials": "MI",
+    "asset": "/company-icons/minimax.png"
+  },
+  {
+    "id": "most-robotic",
+    "name": "Most Robotic",
+    "keys": [
+      "ycombinator.com/companies/most-robotic"
+    ],
+    "initials": "MR",
+    "asset": null
+  },
+  {
+    "id": "natureselect",
+    "name": "自然选择",
+    "keys": [
+      "natureselect.ai"
+    ],
+    "initials": "EV",
+    "asset": null
+  },
+  {
+    "id": "neura-robotics",
+    "name": "NEURA Robotics",
+    "keys": [
+      "neura-robotics.com"
+    ],
+    "initials": "NR",
+    "asset": "/company-icons/neura-robotics.png"
+  },
+  {
+    "id": "nomi",
+    "name": "Nomi",
+    "keys": [
+      "nomi.ai"
+    ],
+    "initials": "NO",
+    "asset": "/company-icons/nomi.png"
+  },
+  {
+    "id": "nvidia",
+    "name": "NVIDIA",
+    "keys": [
+      "developer.nvidia.com"
+    ],
+    "initials": "NV",
+    "asset": "/company-icons/nvidia.png"
+  },
+  {
+    "id": "ohai",
+    "name": "Ohai",
+    "keys": [
+      "ohai.ai"
+    ],
+    "initials": "OH",
+    "asset": "/company-icons/ohai.png"
+  },
+  {
+    "id": "one-robot",
+    "name": "One Robot",
+    "keys": [
+      "ycombinator.com/companies/one-robot"
+    ],
+    "initials": "OR",
+    "asset": null
+  },
+  {
+    "id": "openai",
+    "name": "OpenAI",
+    "keys": [
+      "chatgpt.com",
+      "openai.com"
+    ],
+    "initials": "OP",
+    "asset": "/company-icons/openai.png"
+  },
+  {
+    "id": "oral-craft",
+    "name": "可栗口语",
+    "keys": [
+      "oral-craft.com"
+    ],
+    "initials": "栗栗",
+    "asset": "/company-icons/oral-craft.png"
+  },
+  {
+    "id": "phia",
+    "name": "Phia",
+    "keys": [
+      "phia.me"
+    ],
+    "initials": "PH",
+    "asset": "/company-icons/phia.png"
+  },
+  {
+    "id": "physicalintelligence",
+    "name": "Physical Intelligence",
+    "keys": [
+      "physicalintelligence.company"
+    ],
+    "initials": "PI",
+    "asset": null
+  },
+  {
+    "id": "pika",
+    "name": "Pika",
+    "keys": [
+      "pika.art"
+    ],
+    "initials": "PI",
+    "asset": "/company-icons/pika.png"
+  },
+  {
+    "id": "pilotplans",
+    "name": "Pilot",
+    "keys": [
+      "pilotplans.com"
+    ],
+    "initials": "PI",
+    "asset": "/company-icons/pilotplans.png"
+  },
+  {
+    "id": "pixverse",
+    "name": "PixVerse",
+    "keys": [
+      "pixverse.ai"
+    ],
+    "initials": "PI",
+    "asset": "/company-icons/pixverse.png"
+  },
+  {
+    "id": "praktika",
+    "name": "Praktika",
+    "keys": [
+      "praktika.ai"
+    ],
+    "initials": "PR",
+    "asset": "/company-icons/praktika.png"
+  },
+  {
+    "id": "pudurobotics",
+    "name": "Pudu Robotics",
+    "keys": [
+      "pudurobotics.com"
+    ],
+    "initials": "PR",
+    "asset": "/company-icons/pudurobotics.png"
+  },
+  {
+    "id": "replika",
+    "name": "Replika",
+    "keys": [
+      "replika.com"
+    ],
+    "initials": "RE",
+    "asset": "/company-icons/replika.png"
+  },
+  {
+    "id": "robbyant",
+    "name": "Ant Group",
+    "keys": [
+      "github.com/RobbyAnt"
+    ],
+    "initials": "RB",
+    "asset": "/company-icons/robbyant.png"
+  },
+  {
+    "id": "robopoet",
+    "name": "珞博智能 Robopoet",
+    "keys": [
+      "robopoet.com"
+    ],
+    "initials": "RP",
+    "asset": null
+  },
+  {
+    "id": "robotera",
+    "name": "Robotera",
+    "keys": [
+      "robotera.com"
+    ],
+    "initials": "R",
+    "asset": "/company-icons/robotera.png"
+  },
+  {
+    "id": "roboto",
+    "name": "Roboto",
+    "keys": [
+      "roboto.ai"
+    ],
+    "initials": "RO",
+    "asset": "/company-icons/roboto.png"
+  },
+  {
+    "id": "ropetai",
+    "name": "萌友智能",
+    "keys": [
+      "ropetai.cn"
+    ],
+    "initials": "友友",
+    "asset": "/company-icons/ropetai.png"
+  },
+  {
+    "id": "rosebud",
+    "name": "Rosebud",
+    "keys": [
+      "rosebud.app"
+    ],
+    "initials": "RO",
+    "asset": "/company-icons/rosebud.png"
+  },
+  {
+    "id": "runway",
+    "name": "Runway Robotics",
+    "keys": [
+      "runway.com"
+    ],
+    "initials": "RR",
+    "asset": "/company-icons/runway.png"
+  },
+  {
+    "id": "sanctuary",
+    "name": "Sanctuary AI",
+    "keys": [
+      "sanctuary.ai"
+    ],
+    "initials": "SA",
+    "asset": "/company-icons/sanctuary.png"
+  },
+  {
+    "id": "scale",
+    "name": "Scale AI",
+    "keys": [
+      "scale.com"
+    ],
+    "initials": "SA",
+    "asset": "/company-icons/scale.png"
+  },
+  {
+    "id": "seaart",
+    "name": "海艺智创",
+    "keys": [
+      "seaart.ai"
+    ],
+    "initials": "艺艺",
+    "asset": "/company-icons/seaart.png"
+  },
+  {
+    "id": "second",
+    "name": "Second Me",
+    "keys": [
+      "second.me",
+      "mindverse.com"
+    ],
+    "initials": "SM",
+    "asset": "/company-icons/second.png"
+  },
+  {
+    "id": "seeles",
+    "name": "SEELE 全灵",
+    "keys": [
+      "seeles.ai"
+    ],
+    "initials": "SE",
+    "asset": "/company-icons/seeles.png"
+  },
+  {
+    "id": "sekaiapp",
+    "name": "Sekai",
+    "keys": [
+      "sekaiapp.com"
+    ],
+    "initials": "SE",
+    "asset": "/company-icons/sekaiapp.png"
+  },
+  {
+    "id": "signalflag",
+    "name": "SignalFlag",
+    "keys": [
+      "signalflag.ai"
+    ],
+    "initials": "SF",
+    "asset": "/company-icons/signalflag.png"
+  },
+  {
+    "id": "skild",
+    "name": "Skild AI",
+    "keys": [
+      "skild.ai"
+    ],
+    "initials": "SA",
+    "asset": "/company-icons/skild.png"
+  },
+  {
+    "id": "speak",
+    "name": "Speak",
+    "keys": [
+      "speak.com"
+    ],
+    "initials": "SP",
+    "asset": "/company-icons/speak.png"
+  },
+  {
+    "id": "spirit-ai",
+    "name": "Spirit AI",
+    "keys": [
+      "spirit-ai.com"
+    ],
+    "initials": "SA",
+    "asset": "/company-icons/spirit-ai.png"
+  },
+  {
+    "id": "studyfetch",
+    "name": "StudyFetch",
+    "keys": [
+      "studyfetch.com"
+    ],
+    "initials": "ST",
+    "asset": "/company-icons/studyfetch.png"
+  },
+  {
+    "id": "suno",
+    "name": "Suno",
+    "keys": [
+      "suno.com"
+    ],
+    "initials": "SU",
+    "asset": "/company-icons/suno.png"
+  },
+  {
+    "id": "synthesis",
+    "name": "Synthesis Tutor",
+    "keys": [
+      "synthesis.com"
+    ],
+    "initials": "ST",
+    "asset": "/company-icons/synthesis.png"
+  },
+  {
+    "id": "tencent",
+    "name": "Tencent",
+    "keys": [
+      "yuanbao.tencent.com"
+    ],
+    "initials": "TE",
+    "asset": "/company-icons/tencent.png"
+  },
+  {
+    "id": "tesla",
+    "name": "Tesla",
+    "keys": [
+      "tesla.com"
+    ],
+    "initials": "TS",
+    "asset": null
+  },
+  {
+    "id": "tolans",
+    "name": "Tolan",
+    "keys": [
+      "tolans.com"
+    ],
+    "initials": "TO",
+    "asset": "/company-icons/tolans.png"
+  },
+  {
+    "id": "town",
+    "name": "Town",
+    "keys": [
+      "town.com"
+    ],
+    "initials": "TO",
+    "asset": "/company-icons/town.png"
+  },
+  {
+    "id": "tripo3d",
+    "name": "VAST",
+    "keys": [
+      "tripo3d.ai"
+    ],
+    "initials": "VA",
+    "asset": "/company-icons/tripo3d.png"
+  },
+  {
+    "id": "ubtrobot",
+    "name": "UBTECH",
+    "keys": [
+      "ubtrobot.com"
+    ],
+    "initials": "U",
+    "asset": null
+  },
+  {
+    "id": "unitree",
+    "name": "Unitree",
+    "keys": [
+      "unitree.com"
+    ],
+    "initials": "U",
+    "asset": "/company-icons/unitree.png"
+  },
+  {
+    "id": "useorigin",
+    "name": "Origin",
+    "keys": [
+      "useorigin.com"
+    ],
+    "initials": "OR",
+    "asset": "/company-icons/useorigin.png"
+  },
+  {
+    "id": "vidu",
+    "name": "生数科技",
+    "keys": [
+      "vidu.com"
+    ],
+    "initials": "数数",
+    "asset": "/company-icons/vidu.png"
+  },
+  {
+    "id": "viggle",
+    "name": "Viggle",
+    "keys": [
+      "viggle.ai"
+    ],
+    "initials": "VI",
+    "asset": "/company-icons/viggle.png"
+  },
+  {
+    "id": "worldlabs",
+    "name": "World Labs",
+    "keys": [
+      "worldlabs.ai"
+    ],
+    "initials": "WL",
+    "asset": "/company-icons/worldlabs.png"
+  },
+  {
+    "id": "x2robot",
+    "name": "X Square",
+    "keys": [
+      "x2robot.com"
+    ],
+    "initials": "XS",
+    "asset": "/company-icons/x2robot.png"
+  },
+  {
+    "id": "xpeng",
+    "name": "XPENG",
+    "keys": [
+      "xpeng.com"
+    ],
+    "initials": "XI",
+    "asset": "/company-icons/xpeng.png"
+  },
+  {
+    "id": "youmind",
+    "name": "YouMind",
+    "keys": [
+      "youmind.com"
+    ],
+    "initials": "YO",
+    "asset": "/company-icons/youmind.png"
+  },
+  {
+    "id": "yutori",
+    "name": "Yutori",
+    "keys": [
+      "yutori.com"
+    ],
+    "initials": "YU",
+    "asset": "/company-icons/yutori.png"
+  }
+]

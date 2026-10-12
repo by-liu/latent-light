@@ -1,0 +1,209 @@
+{
+  "revision": 3,
+  "checked": "2026-10-10T17:36:51.557Z",
+  "site_page_sha256": "12ac00f8fcc89540c3b39562b852ca04ebaf7264395eb40f81002ca983321bc6",
+  "source_resources": {
+    "report": "https://arxiv.org/abs/2409.12191v2",
+    "hugging_face": "https://huggingface.co/Qwen/Qwen2-VL-7B-Instruct",
+    "checkpoint": "Qwen/Qwen2-VL-7B-Instruct"
+  },
+  "prior_review_record": "state/presentation-qa-revision-2.json",
+  "collection_checks": {
+    "site_validation": "106 tests, zero Astro diagnostics, static build and all 43 docs lint passed.",
+    "browser_views": 81,
+    "renewed_views_after_final_locator_corrections": 6,
+    "numbered_model_figures": 66,
+    "source_figure_assets": 42,
+    "source_figure_placements": 43,
+    "model_benchmarks": "Not executed."
+  },
+  "viewports": [
+    {
+      "slug": "qwen2-vl",
+      "width": 1440,
+      "mode": "light",
+      "title": "Qwen2-VL: adaptive visual budgets and multimodal positions",
+      "titleCount": 1,
+      "overflow": false,
+      "figures": [
+        {
+          "id": "figure-1",
+          "caption": "Figure 1. The patch grid is larger than the language sequence. Original worked diagram based on the selected processor and merger.234"
+        },
+        {
+          "id": "figure-2",
+          "caption": "Figure 2. Geometry is not sequence length. Original coordinate example derived from the inspected position builder.4"
+        }
+      ],
+      "resources": [
+        {
+          "kind": "report",
+          "href": "https://arxiv.org/abs/2409.12191v2",
+          "label": "Technical reportRead the original research"
+        },
+        {
+          "kind": "model",
+          "href": "https://huggingface.co/Qwen/Qwen2-VL-7B-Instruct",
+          "label": "Hugging FaceQwen/Qwen2-VL-7B-Instruct"
+        }
+      ],
+      "visibleHashes": [],
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "missingImages": [],
+      "activeNav": [
+        {
+          "label": "Qwen2-VL",
+          "visible": true
+        }
+      ],
+      "panFrames": [
+        {
+          "tabindex": 0,
+          "scrolls": false,
+          "frame": 648,
+          "image": 648
+        },
+        {
+          "tabindex": 0,
+          "scrolls": false,
+          "frame": 648,
+          "image": 648
+        }
+      ]
+    },
+    {
+      "slug": "qwen2-vl",
+      "width": 390,
+      "mode": "light",
+      "title": "Qwen2-VL: adaptive visual budgets and multimodal positions",
+      "titleCount": 1,
+      "overflow": false,
+      "figures": [
+        {
+          "id": "figure-1",
+          "caption": "Figure 1. The patch grid is larger than the language sequence. Original worked diagram based on the selected processor and merger.234"
+        },
+        {
+          "id": "figure-2",
+          "caption": "Figure 2. Geometry is not sequence length. Original coordinate example derived from the inspected position builder.4"
+        }
+      ],
+      "resources": [
+        {
+          "kind": "report",
+          "href": "https://arxiv.org/abs/2409.12191v2",
+          "label": "Technical reportRead the original research"
+        },
+        {
+          "kind": "model",
+          "href": "https://huggingface.co/Qwen/Qwen2-VL-7B-Instruct",
+          "label": "Hugging FaceQwen/Qwen2-VL-7B-Instruct"
+        }
+      ],
+      "visibleHashes": [],
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "missingImages": [],
+      "activeNav": [
+        {
+          "label": "Qwen2-VL",
+          "visible": false
+        }
+      ],
+      "panFrames": [
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 358,
+          "image": 680
+        },
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 358,
+          "image": 680
+        }
+      ]
+    },
+    {
+      "slug": "qwen2-vl",
+      "width": 320,
+      "mode": "dark",
+      "title": "Qwen2-VL: adaptive visual budgets and multimodal positions",
+      "titleCount": 1,
+      "overflow": false,
+      "figures": [
+        {
+          "id": "figure-1",
+          "caption": "Figure 1. The patch grid is larger than the language sequence. Original worked diagram based on the selected processor and merger.234"
+        },
+        {
+          "id": "figure-2",
+          "caption": "Figure 2. Geometry is not sequence length. Original coordinate example derived from the inspected position builder.4"
+        }
+      ],
+      "resources": [
+        {
+          "kind": "report",
+          "href": "https://arxiv.org/abs/2409.12191v2",
+          "label": "Technical reportRead the original research"
+        },
+        {
+          "kind": "model",
+          "href": "https://huggingface.co/Qwen/Qwen2-VL-7B-Instruct",
+          "label": "Hugging FaceQwen/Qwen2-VL-7B-Instruct"
+        }
+      ],
+      "visibleHashes": [],
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "missingImages": [],
+      "activeNav": [
+        {
+          "label": "Qwen2-VL",
+          "visible": false
+        }
+      ],
+      "panFrames": [
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 288,
+          "image": 680
+        },
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 288,
+          "image": 680
+        }
+      ]
+    }
+  ],
+  "manual_review": {
+    "complete": true,
+    "reviewedFigures": 66,
+    "contactSheets": 6,
+    "newDenseVisuals": true,
+    "fullSizeNativeReview": [
+      "qwen3-vl figure 1: full visual pipeline, side path no longer obscured",
+      "qwen3-vl figure 3: schematic frequency interleaving and timestamp distinction",
+      "llama-3 figure 2: block-diagonal causal packed-document mask",
+      "deepseek-v3 figure 2: routing selection and unmodified mixture weights",
+      "deepseek-r1 figure 2: old, current and reference policies",
+      "qwen3 figure 2: student-generated trajectory and teacher scoring",
+      "kimi-linear figure 3: causal intra-chunk computation and recurrent boundary",
+      "llava figure 2: separate HD extension and 1312-position arithmetic",
+      "qwen2-vl figure 2: visual coordinate example and ordinal tube indices"
+    ],
+    "narrowThemeReview": [
+      "qwen3-vl figure 1 at 390px light",
+      "qwen3-vl figure 3 at 320px dark",
+      "deepseek-v3 figure 2 at 320px dark",
+      "llama-3 figure 2 at 390px light"
+    ],
+    "sourceArtReview": "All current source crops inspected in rendered contact sheets; exact full PDF/page and crop comparisons performed by owning agents, with root direct review for V4 cache layout and V4.1 hierarchical indexer. Artwork labels/axes retained; no AI repainting.",
+    "boundary": "Visual and source verification only. Model checkpoints, benchmarks and training were not executed."
+  }
+}

@@ -1,0 +1,193 @@
+{
+  "revision": 2,
+  "checked": "2026-10-10T15:45:39.761Z",
+  "site_page_sha256": "c6546006dcafd368c16df78eb919107b6b65eab5356558a7cb829433a32fe25d",
+  "source_resources": {
+    "report": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash/blob/553034d7dd9e06c2eeaee68cf85a17d6d4754cf0/DeepSeek_V4.pdf",
+    "hugging_face": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash",
+    "checkpoint": "DeepSeek-V4-Flash: original preview studied"
+  },
+  "collection_checks": {
+    "site_validation": "106 tests, zero Astro diagnostics, build and all 43 docs lint passed.",
+    "browser_views": 81,
+    "model_benchmarks": "Not executed.",
+    "source_figures": "32 unique report assets; 33 placements; 48 total numbered collection figures. Rights retained per asset."
+  },
+  "viewports": [
+    {
+      "slug": "deepseek-v4",
+      "width": 1440,
+      "mode": "light",
+      "title": "DeepSeek-V4",
+      "titleCount": 1,
+      "overflow": false,
+      "figures": [
+        {
+          "id": "figure-1",
+          "caption": "Figure 1. Hybrid attention and expert FFNs inside a multistream residual block. Reproduced from report Figure 2.1 MIT documentation notice."
+        },
+        {
+          "id": "figure-2",
+          "caption": "Figure 2. CSA selects compressed history and keeps a local detail path. Reproduced from report Figure 3.1 MIT documentation notice."
+        },
+        {
+          "id": "figure-3",
+          "caption": "Figure 3. HCA reads a coarser history without an indexer. Reproduced from report Figure 4.1 MIT documentation notice."
+        }
+      ],
+      "resources": [
+        {
+          "kind": "report",
+          "href": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash/blob/553034d7dd9e06c2eeaee68cf85a17d6d4754cf0/DeepSeek_V4.pdf",
+          "label": "Technical reportRead the original research"
+        },
+        {
+          "kind": "model",
+          "href": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash",
+          "label": "Hugging FaceDeepSeek-V4-Flash: original preview studied"
+        }
+      ],
+      "visibleHashes": [],
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "missingImages": [],
+      "activeNav": [
+        {
+          "label": "DeepSeek-V4",
+          "visible": true
+        }
+      ],
+      "panFrames": [
+        {
+          "tabindex": 0,
+          "scrolls": false,
+          "frame": 648,
+          "image": 648
+        },
+        {
+          "tabindex": 0,
+          "scrolls": false,
+          "frame": 648,
+          "image": 648
+        }
+      ]
+    },
+    {
+      "slug": "deepseek-v4",
+      "width": 390,
+      "mode": "light",
+      "title": "DeepSeek-V4",
+      "titleCount": 1,
+      "overflow": false,
+      "figures": [
+        {
+          "id": "figure-1",
+          "caption": "Figure 1. Hybrid attention and expert FFNs inside a multistream residual block. Reproduced from report Figure 2.1 MIT documentation notice."
+        },
+        {
+          "id": "figure-2",
+          "caption": "Figure 2. CSA selects compressed history and keeps a local detail path. Reproduced from report Figure 3.1 MIT documentation notice."
+        },
+        {
+          "id": "figure-3",
+          "caption": "Figure 3. HCA reads a coarser history without an indexer. Reproduced from report Figure 4.1 MIT documentation notice."
+        }
+      ],
+      "resources": [
+        {
+          "kind": "report",
+          "href": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash/blob/553034d7dd9e06c2eeaee68cf85a17d6d4754cf0/DeepSeek_V4.pdf",
+          "label": "Technical reportRead the original research"
+        },
+        {
+          "kind": "model",
+          "href": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash",
+          "label": "Hugging FaceDeepSeek-V4-Flash: original preview studied"
+        }
+      ],
+      "visibleHashes": [],
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "missingImages": [],
+      "activeNav": [
+        {
+          "label": "DeepSeek-V4",
+          "visible": false
+        }
+      ],
+      "panFrames": [
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 358,
+          "image": 680
+        },
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 358,
+          "image": 540
+        }
+      ]
+    },
+    {
+      "slug": "deepseek-v4",
+      "width": 320,
+      "mode": "dark",
+      "title": "DeepSeek-V4",
+      "titleCount": 1,
+      "overflow": false,
+      "figures": [
+        {
+          "id": "figure-1",
+          "caption": "Figure 1. Hybrid attention and expert FFNs inside a multistream residual block. Reproduced from report Figure 2.1 MIT documentation notice."
+        },
+        {
+          "id": "figure-2",
+          "caption": "Figure 2. CSA selects compressed history and keeps a local detail path. Reproduced from report Figure 3.1 MIT documentation notice."
+        },
+        {
+          "id": "figure-3",
+          "caption": "Figure 3. HCA reads a coarser history without an indexer. Reproduced from report Figure 4.1 MIT documentation notice."
+        }
+      ],
+      "resources": [
+        {
+          "kind": "report",
+          "href": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash/blob/553034d7dd9e06c2eeaee68cf85a17d6d4754cf0/DeepSeek_V4.pdf",
+          "label": "Technical reportRead the original research"
+        },
+        {
+          "kind": "model",
+          "href": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash",
+          "label": "Hugging FaceDeepSeek-V4-Flash: original preview studied"
+        }
+      ],
+      "visibleHashes": [],
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "missingImages": [],
+      "activeNav": [
+        {
+          "label": "DeepSeek-V4",
+          "visible": false
+        }
+      ],
+      "panFrames": [
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 288,
+          "image": 680
+        },
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 288,
+          "image": 540
+        }
+      ]
+    }
+  ],
+  "manual_review": "All 48 figure renders inspected as contact sheets; source figure completeness, labels and supplemental diagrams reviewed. Dense focus view and native dark diagrams inspected separately."
+}

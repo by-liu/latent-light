@@ -1,0 +1,257 @@
+Model Deep Dives: third-party figure notices
+
+Checked October 10, 2026. Original technical-report artwork is not covered by
+Latent Light's MIT grant. Each credited figure retains its original copyright
+and any applicable license; some selected excerpts have an exception-based
+assessment instead of a permissive artwork grant. The
+site adds numbered captions, explanatory text, display borders and zoom/pan
+controls. Source figure labels, axes, legends and arrows are not redrawn.
+No endorsement by the original authors is implied.
+
+Jacob Devlin et al., BERT, NAACL 2019
+Original edition: https://aclanthology.org/N19-1423.pdf
+Permission evidence: https://aclanthology.org/N19-1423/
+License: CC BY 4.0, https://creativecommons.org/licenses/by/4.0/
+ACL Anthology footer grants CC BY 4.0 to material published from 2016 onward; this exact paper is published by ACL in 2019.
+Changes: Source figure regions cropped; surrounding paper prose and captions omitted. Figure labels, colors, axes and drawing retained. No AI repainting.
+  /figures/model-studies/bert/pretraining-and-adaptation.png — original Figure 1, PDF page 3.
+  /figures/model-studies/bert/input-embeddings.png — original Figure 2, PDF page 5.
+
+Colin Raffel et al., T5, JMLR 21(140), 2020
+Original edition: https://www.jmlr.org/papers/volume21/20-074/20-074.pdf
+Permission evidence: https://www.jmlr.org/papers/v21/20-074.html
+License: CC BY 4.0, https://creativecommons.org/licenses/by/4.0/
+JMLR PDF page 1 explicitly states License: CC-BY 4.0 and lists the authors as copyright holders.
+Changes: Source figure regions cropped; surrounding paper prose and captions omitted. Figure labels, colors, axes and drawing retained. No AI repainting.
+  /figures/model-studies/t5/text-to-text-interface.png — original Figure 1, PDF page 3.
+  /figures/model-studies/t5/architecture-contracts.png — original Figure 4, PDF page 16.
+  /figures/model-studies/t5/span-corruption.png — original Figure 2, PDF page 13.
+
+Hugo Touvron et al., LLaMA, 2023
+Original edition: https://arxiv.org/pdf/2302.13971v1
+Permission evidence: https://arxiv.org/abs/2302.13971v1
+License: CC BY 4.0, https://creativecommons.org/licenses/by/4.0/
+The version-specific arXiv landing page links Rights to this article to CC BY 4.0.
+Changes: Source figure regions cropped; surrounding paper prose and captions omitted. Figure labels, colors, axes and drawing retained. No AI repainting.
+  /figures/model-studies/llama/training-loss.png — original Figure 1, PDF page 3.
+
+Albert Q. Jiang et al., Mistral 7B, 2023
+Original edition: https://arxiv.org/pdf/2310.06825v1
+Permission evidence: https://arxiv.org/abs/2310.06825v1
+License: CC BY 4.0, https://creativecommons.org/licenses/by/4.0/
+The version-specific arXiv landing page links Rights to this article to CC BY 4.0.
+Changes: Source figure regions cropped; surrounding paper prose and captions omitted. Figure labels, colors, axes and drawing retained. No AI repainting.
+  /figures/model-studies/mistral-7b/sliding-attention.png — original Figure 1, PDF page 2.
+  /figures/model-studies/mistral-7b/rolling-cache.png — original Figure 2, PDF page 3.
+  /figures/model-studies/mistral-7b/chunked-prefill.png — original Figure 3, PDF page 3.
+
+Albert Q. Jiang et al., Mixtral of Experts, 2024
+Original edition: https://arxiv.org/pdf/2401.04088v1
+Permission evidence: https://arxiv.org/abs/2401.04088v1
+License: CC BY 4.0, https://creativecommons.org/licenses/by/4.0/
+The version-specific arXiv landing page links Rights to this article to CC BY 4.0.
+Changes: Source figure regions cropped; surrounding paper prose and captions omitted. Figure labels, colors, axes and drawing retained. No AI repainting.
+  /figures/model-studies/mixtral/expert-routing.png — original Figure 1, PDF page 2.
+
+Gemma Team, Gemma 3 Technical Report, 2025
+Original edition: https://arxiv.org/pdf/2503.19786v1
+Permission evidence: https://arxiv.org/abs/2503.19786v1
+License: CC BY 4.0, https://creativecommons.org/licenses/by/4.0/
+The version-specific arXiv landing page links Rights to this article to CC BY 4.0.
+Changes: Source figure regions cropped; surrounding paper prose and captions omitted. Figure labels, colors, axes and drawing retained. No AI repainting.
+  /figures/model-studies/gemma-3/cache-versus-context.png — original Figure 6, PDF page 7.
+  /figures/model-studies/gemma-3/long-context-training.png — original Figure 7, PDF page 7.
+
+Albert Gu and Tri Dao, Mamba, 2024 version 2
+Original edition: https://arxiv.org/pdf/2312.00752v2
+Permission evidence: https://arxiv.org/abs/2312.00752v2
+License: CC BY 4.0, https://creativecommons.org/licenses/by/4.0/
+The version-specific arXiv landing page links Rights to this article to CC BY 4.0.
+Changes: Source figure regions cropped; surrounding paper prose and captions omitted. Figure labels, colors, axes and drawing retained. No AI repainting.
+  /figures/model-studies/mamba/block-architecture.png — original Figure 3, PDF page 8.
+  /figures/model-studies/mamba/selective-state.png — original Figure 1, PDF page 3.
+
+CLIP, BLIP-2, LLaVA and InternVL3 source figures
+
+Licensed CC BY 4.0. Exact author credit, paper editions, figure/panel scope,
+permission evidence and extraction details are retained in these public notices:
+  /figures/model-studies/clip/SOURCES.md
+  /figures/model-studies/blip-2/SOURCES.md
+  /figures/model-studies/llava/SOURCES.md
+  /figures/model-studies/internvl-3/SOURCES.md
+
+CLIP uses the licensed PMLR venue edition, not an inferred code license.
+LLaVA studies distinguish original architecture from LLaVA-1.5. InternVL3's
+source plot is an explicitly labeled controlled InternVL2-8B experiment.
+
+DeepSeek-V2 and V3, R1, GLM-5, Kimi K2, K3 and Linear
+
+Full attribution, exact source edition, changes and applicable license notices:
+  /figures/model-studies/deepseek-v2/NOTICE.md
+  /figures/model-studies/deepseek-r1/NOTICE.md
+  /figures/model-studies/glm-5/NOTICE.md
+  /figures/model-studies/kimi-k2/NOTICE.md
+  /figures/model-studies/kimi-k3/NOTICE.md
+  /figures/model-studies/kimi-linear/NOTICE.md
+
+DeepSeek-V3 reuses the permitted V2 generic architecture with an explicit
+caption, not as a V3 parameter specification. R1 uses the later CC BY 4.0
+Nature illustration; original January report results retain their own scope.
+V2 and Kimi Linear use the associated-documentation MIT grants of exact
+official repositories that contain their report and matching source artwork.
+Kimi K3 uses its custom documentation-inclusive license, not generic MIT.
+Kimi K2 Figures 4 and 8 retain CC BY-NC-ND 4.0: complete unchanged artwork,
+noncommercial reproduction only. Review rights before monetizing the site,
+changing this figure, or redistributing it for commercial use.
+
+DeepSeek-V4 and V4.1-Flash
+
+Exact official release repositories contain the reproduced reports and apply
+MIT expressly to associated documentation, with no identified report exclusion.
+Copyright (c) 2023 DeepSeek. Complete notices are retained at:
+  /licenses/deepseek-v4-documentation-MIT.txt
+  /licenses/deepseek-v41-documentation-MIT.txt
+
+/figures/model-studies/deepseek-v4/architecture.png
+  Original Figure 2, PDF page 6.
+  Source: https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash/blob/553034d7dd9e06c2eeaee68cf85a17d6d4754cf0/DeepSeek_V4.pdf
+  Grant: https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash/blob/553034d7dd9e06c2eeaee68cf85a17d6d4754cf0/LICENSE
+  Changes: Whitespace and source prose outside the complete diagram omitted; all diagram labels and arrows retained.
+
+/figures/model-studies/deepseek-v4/compressed-sparse-attention.png
+  Original Figure 3, PDF page 9.
+  Source: https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash/blob/553034d7dd9e06c2eeaee68cf85a17d6d4754cf0/DeepSeek_V4.pdf
+  Grant: https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash/blob/553034d7dd9e06c2eeaee68cf85a17d6d4754cf0/LICENSE
+  Changes: Whitespace and source prose outside the complete diagram omitted; all diagram labels and arrows retained.
+
+/figures/model-studies/deepseek-v4/heavily-compressed-attention.png
+  Original Figure 4, PDF page 11.
+  Source: https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash/blob/553034d7dd9e06c2eeaee68cf85a17d6d4754cf0/DeepSeek_V4.pdf
+  Grant: https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash/blob/553034d7dd9e06c2eeaee68cf85a17d6d4754cf0/LICENSE
+  Changes: Whitespace and source prose outside the complete diagram omitted; all diagram labels and arrows retained.
+
+/figures/model-studies/deepseek-v4-1-flash/architecture.png
+  Original Figure 3, PDF page 7.
+  Source: https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash/blob/2cba9e42aa026125f3ed06c6d98c1db82f7ca027/DeepSeek_V41_Tech_Report.pdf
+  Grant: https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash/blob/2cba9e42aa026125f3ed06c6d98c1db82f7ca027/LICENSE
+  Changes: Whitespace and source prose outside the complete diagram omitted; all diagram labels and arrows retained.
+
+/figures/model-studies/deepseek-v4-1-flash/csa2-modes.png
+  Original Figure 4, PDF page 10.
+  Source: https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash/blob/2cba9e42aa026125f3ed06c6d98c1db82f7ca027/DeepSeek_V41_Tech_Report.pdf
+  Grant: https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash/blob/2cba9e42aa026125f3ed06c6d98c1db82f7ca027/LICENSE
+  Changes: Whitespace and source prose outside the complete diagram omitted; all diagram labels and arrows retained.
+
+Independent artwork
+
+GPT-2's report has no architecture or cache-ownership figure. Its diagrams
+are original code-grounded explanations. Other independent site schematics
+also retain their MIT terms. They are distinct from reproduced source figures,
+including the exception-based excerpts documented below. A model weight or
+code license is not presumed to license an external paper or image.
+
+Research metadata and historical extraction records remain under
+docs/research/architectures/. They do not change these upstream terms.
+
+Revision 3 additional source figures, October 10, 2026
+
+/figures/model-studies/deepseek-v4/cache-lifetimes.png
+  Original Figure 6, PDF page 22 of the exact V4 report linked above.
+/figures/model-studies/deepseek-v4-1-flash/hierarchical-indexer.png
+  Original Figure 5, PDF page 11 of the exact V4.1 report linked above.
+  Both use the corresponding associated-documentation MIT grants and retained
+  full notices listed above. Surrounding prose/whitespace omitted; complete
+  figure panels, labels and arrows retained without recoloring or redrawing.
+
+Qwen3-VL visual-pipeline.svg and positions-and-time.svg are independent
+original mechanism illustrations, not copied or traced report artwork.
+The superseded visual-pipeline.svg is retained unchanged outside the deployment at
+docs/research/architectures/qwen3-vl/visuals/archive/visual-pipeline.svg.
+Sources, scope and authoring record: /figures/model-studies/qwen3-vl/SOURCES.md
+
+Additional revision 3 report artwork
+
+/figures/model-studies/t5/repetition-and-loss.png
+  Colin Raffel et al., JMLR edition Figure 6, PDF page 29.
+  Original edition, author credit, permission evidence and CC BY 4.0 grant
+  are listed in the T5 notice above. Complete axes and panel labels retained.
+
+/figures/model-studies/mixtral/routing-locality.png
+  Albert Q. Jiang et al., arXiv v1 Figure 10, PDF page 13.
+  Original edition, author credit, permission evidence and CC BY 4.0 grant
+  are listed in the Mixtral notice above. Complete axes and panel labels retained.
+
+/figures/model-studies/mamba/selective-copying.png
+  Albert Gu and Tri Dao, arXiv v2 Figure 2, PDF page 6.
+  Original edition, author credit, permission evidence and CC BY 4.0 grant
+  are listed in the Mamba notice above. Complete panels and labels retained.
+
+All three crops remove only surrounding prose, captions and whitespace.
+Artwork is not recolored, redrawn or repainted. Upstream CC BY terms apply,
+not the site MIT grant.
+
+/figures/model-studies/deepseek-v2/attention-comparison.png
+  Original Figure 3, PDF page 7; exact documentation MIT grant and credit:
+  /figures/model-studies/deepseek-v2/NOTICE.md
+/figures/model-studies/glm-5/thinking-context.png
+  Original Figure 7, PDF page 10; exact arXiv v1 CC BY 4.0 grant and credit:
+  /figures/model-studies/glm-5/NOTICE.md
+/figures/model-studies/kimi-k2/rephrasing.png
+  Original Figure 4, PDF page 6; complete unchanged CC BY-NC-ND 4.0 artwork,
+  noncommercial use only. Exact edition, credit and rights:
+  /figures/model-studies/kimi-k2/NOTICE.md
+/figures/model-studies/kimi-k3/quantile-balancing.png
+  Original Figure 5, PDF page 8.
+/figures/model-studies/kimi-k3/prefix-cache.png
+  Original Figure 12, PDF page 23. Both retain the exact K3 custom
+  documentation grant and full notice, not generic MIT:
+  /figures/model-studies/kimi-k3/NOTICE.md
+
+New independent illustrations for Llama 3, DeepSeek-V3, DeepSeek-R1, Qwen3,
+Kimi Linear, LLaVA, Qwen2-VL and Qwen3-VL use the site MIT grant. They are
+mechanism explanations or worked examples, not traced source artwork. Exact
+source locators, scope and editable assets remain in per-model public notices
+and research visual manifests.
+
+Original report excerpts assessed for research and criticism/review
+
+No permissive artwork license is claimed for the selected Qwen3, Qwen2-VL,
+Qwen3-VL, Llama 3 or DeepSeek-V3 report excerpts. The integrated LLaVA-1.5-HD
+diagram also contains a photograph whose separate grant is unknown, despite
+the report artwork carrying CC BY 4.0. Exact figure scope, source editions,
+crops, authors, third-party cautions and case-specific Canadian fair-dealing
+assessments are retained in these public records:
+  /figures/model-studies/qwen3-vl/SOURCES.md
+  /figures/model-studies/qwen2-vl/SOURCES.md
+  /figures/model-studies/qwen3/SOURCES.md
+  /figures/model-studies/llama-3/SOURCES.md
+  /figures/model-studies/deepseek-v3/SOURCES.md
+  /figures/model-studies/llava/SOURCES.md
+These assessments are not licenses or a general permission for downstream
+reuse. Original copyright remains; no endorsement is implied.
+
+FAMILY EXPANSION — 2026-10-10
+
+gpt-oss: public/figures/model-studies/gpt-oss/SOURCES.md
+qwen2-5: public/figures/model-studies/qwen2-5/SOURCES.md
+qwen2-5-vl: public/figures/model-studies/qwen2-5-vl/SOURCES.md
+qwen2-5-1m: public/figures/model-studies/qwen2-5-1m/SOURCES.md
+qwen3-8-flash-next: public/figures/model-studies/qwen3-8-flash-next/SOURCES.md
+glm: public/figures/model-studies/glm/SOURCES.md
+glm-4: public/figures/model-studies/glm-4/SOURCES.md
+glm-4-5: public/figures/model-studies/glm-4-5/SOURCES.md
+glm-4-v: public/figures/model-studies/glm-4-v/SOURCES.md
+gemma: public/figures/model-studies/gemma/SOURCES.md
+gemma-2: public/figures/model-studies/gemma-2/SOURCES.md
+gemma-4: public/figures/model-studies/gemma-4/SOURCES.md
+minimax-01: public/figures/model-studies/minimax-01/SOURCES.md
+minimax-m1: public/figures/model-studies/minimax-m1/SOURCES.md
+minimax-m2: public/figures/model-studies/minimax-m2/SOURCES.md
+minimax-m3: public/figures/model-studies/minimax-m3/SOURCES.md
+
+These per-asset records retain exact source editions, original figure locators,
+crop changes and reuse scope. OpenAI gpt-oss, GLM and Gemma report artwork uses
+its verified CC BY 4.0 terms. Embedded image origins are separately qualified.
+New Qwen and MiniMax source figures use specific bounded copyright-exception
+assessments, not a permissive license claim. Site MIT terms do not cover source
+artwork. No complete model report or model weights are distributed here.

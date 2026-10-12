@@ -55,3 +55,74 @@ scholarly/journalistic reproduction permission; Figure 2 of GQA is CC BY 4.0.
 See `public/licenses/transformer-foundations-figures.txt` and the source record
 in `docs/research/architectures/transformer-foundations.md`. They are excluded
 from Latent Light's MIT grant.
+
+## Model Deep Dive figures
+
+Reproduced report figures under `public/figures/model-studies/` retain their
+original attribution, copyright and applicable reuse terms. The consolidated notice is
+[`public/licenses/model-deep-dive-figures.txt`](public/licenses/model-deep-dive-figures.txt).
+It links per-asset notices and distinguishes CC BY 4.0, unchanged noncommercial
+CC BY-NC-ND 4.0, MIT documentation grants and Kimi K3's custom license.
+These figures are not relicensed by the project's MIT grant. Review the Kimi K2
+figure rights before any monetization or adaptation. Full source editions,
+extraction geometry and checksums are recorded in the research workspaces.
+
+Selected Qwen3, Qwen2-VL, Qwen3-VL, Llama 3 and DeepSeek-V3 report figure
+excerpts, plus the integrated LLaVA-1.5-HD figure, have case-specific Canadian
+fair-dealing assessments in their per-model `SOURCES.md` records. No permissive
+artwork grant is asserted for these exceptions, including embedded photographs
+whose separate licenses are unknown. They remain excluded from the site MIT
+license. Public access and citation alone are not reuse permission.
+
+## Expanded model families, October 10, 2026
+
+New report figures for gpt-oss, GLM/GLM-130B, GLM-4, GLM-4.5, GLM-V and
+Gemma generations retain the exact edition CC BY 4.0 terms documented in each
+per-model SOURCES.md. Integrated photographs/illustrations in GLM-V and Gemma4
+have separate unresolved-origin caveats; the report license is not asserted to
+cover unrelated third-party material.
+
+New Qwen2.5, Qwen2.5-VL, Qwen2.5-1M, Qwen3.8-Flash-Next and MiniMax01/M1/M2/M3
+report excerpts have specific bounded research/criticism assessments, not an
+inferred artwork grant from code, weights or arXiv access. Qwen2.5-VL includes
+integrated source samples whose separate rights are explicitly qualified.
+Model weight licenses and public figure reuse bases are separate decisions.
+See the consolidated figure notice for the exact per-asset records.
+
+## Company explorer marks
+
+Small company and product website icons in `public/company-icons/` identify
+the subjects of the landscape reviews. They are third party marks, not Latent
+Light artwork, and are excluded from the MIT grant. Ownership is retained by
+the respective rights holders; no endorsement or trademark license is implied.
+See [the asset notice](public/licenses/company-icons.txt) and the per-asset
+source and bounded reuse assessments in `docs/branding/company-icons.json`.
+
+## Document AI figures
+
+Architecture and reward figures under `public/figures/document-ai/` retain their individual rights and are excluded from MIT. See `public/licenses/document-ai-figures.txt` for authorship, licenses, changes, report locators, checksums, and the scoped MinerU2.5 criticism/review assessment. The Hunyuan architecture-panel derivative retains CC BY-SA 4.0; the dots.mocr figure remains unchanged under CC BY-NC-ND 4.0.
+
+
+## Agent study figures
+
+The Pi and OpenCode documentation screenshots retain their repository MIT
+notices. The ACE framework figure is reproduced from Zhang et al.,
+*Agentic Context Engineering*, arXiv:2510.04618v3, original Figure 4, under
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Images were converted
+to WebP without cropping or content changes. See
+[the retained notices](public/licenses/agent-study-figures.txt) and the
+source-asset review in `docs/research/agents/frontier-refactor/visuals/`.
+
+## High Agency audio and short videos
+
+The author supplied three Google NotebookLM-generated clips for inclusion on
+Latent Light. Poster excerpts preserve the complete frame and visible producer
+mark. The imagery and narration are excluded from the site's MIT grant; no
+separate public media license is asserted. See
+[the media notice](public/licenses/high-agency-media.txt) and the exact source
+and text-equivalent records in `docs/research/human-capabilities/high-agency/media/`.
+
+The author supplied the complete NotebookLM-generated podcast for MP3 hosting
+and article playback. Its original recording is unchanged; the audio and its
+automatic text equivalent are also excluded from the site's MIT grant. The
+same media notice and research records retain its exact source and review limits.

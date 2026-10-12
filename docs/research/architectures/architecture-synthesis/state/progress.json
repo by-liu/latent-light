@@ -1,0 +1,25 @@
+{
+  "schema_version": 2,
+  "topic_id": "architecture-synthesis-and-visual-review",
+  "status": "complete",
+  "coverage": {
+    "primary_sources": 36,
+    "verified_claims": 26,
+    "evolution_pages": 7,
+    "new_depth_page": true,
+    "numbered_visuals": 14
+  },
+  "open_questions": [
+    "Which hybrid ratios preserve multi-fact retrieval under matched training and serving budgets, including global cache costs?",
+    "When do residual-source retention and communication outweigh optimization improvements?",
+    "Which visual token and depth budgets preserve fine detail at matched resolution and training conditions?"
+  ],
+  "recommended_next_direction": null,
+  "last_seen": "2026-10-10T22:28:46.654Z",
+  "quality_gate": {
+    "evidence_verified": true,
+    "contradictions_reviewed": true,
+    "report_reviewed": true,
+    "visuals_reviewed": true
+  }
+}

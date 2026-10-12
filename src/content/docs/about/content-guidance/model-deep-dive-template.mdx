@@ -1,0 +1,228 @@
+---
+title: Model Deep Dive template
+description: A copyable study scaffold with source-figure and equation recipes.
+lastUpdated: 2026-10-10
+---
+
+Use this starter with the [Model Deep Dive guide](/about/content-guidance/model-deep-dive-guide/).
+It provides a flexible structure, not a section quota or a completed study.
+
+Copy it into `src/content/docs/architectures/models/<model-slug>.mdx`.
+Replace every `REPLACE_` placeholder with inspected evidence. Remove unused sections and instructional comments before adding the page to navigation.
+Do not publish a scaffold with missing evidence or empty sections.
+
+The import paths below match that source directory. `ModelResources`, `ModelFlow`, and `MathExpression` are globally registered.
+`FocusCanvas` and `SourceFigure` require the explicit imports shown in the starter.
+
+## Copy the scaffold
+
+<details>
+<summary>MDX starter with an original report figure</summary>
+
+```mdx
+---
+title: REPLACE_MODEL_NAME
+description: REPLACE_MODEL_SPECIFIC_LEARNING_GOAL
+lastUpdated: REPLACE_YYYY_MM_DD
+---
+
+import FocusCanvas from '../../../../components/FocusCanvas.astro';
+import SourceFigure from '../../../../components/architectures/SourceFigure.astro';
+
+<ModelResources
+  reportHref="REPLACE_ORIGINAL_TECHNICAL_DOCUMENT_URL"
+  modelHref="REPLACE_HUGGING_FACE_REPOSITORY_URL"
+  modelName="REPLACE_ORGANIZATION_AND_CHECKPOINT"
+/>
+
+REPLACE_SHORT_TASK_INTUITION_AND_CENTRAL_IDEA.[^report]
+
+## Highlights
+
+- **REPLACE_DEFINING_IDEA.** REPLACE_DIFFERENCE_AND_LEARNING_VALUE.[^report]
+- **REPLACE_SECOND_IDEA.** REPLACE_PROBLEM_AND_TRADEOFF.[^report]
+
+Study scope: REPLACE_DOCUMENT_TYPE_EDITION_CHECKPOINT_AND_INSPECTED_ARTIFACTS.
+Evidence checked REPLACE_DATE. REPLACE_EXECUTION_BOUNDARY_AND_REPORT_TO_RELEASE_MISMATCH_IF_ANY.
+
+## Model in numbers
+
+Representative checkpoint: REPLACE_EXACT_SIZE_AND_VARIANT.
+
+| Dimension | Value and scope |
+| --- | --- |
+| Parameters | REPLACE_TOTAL_ACTIVE_COMPONENTS_AND_DEFINITION.[^report] |
+| Pretraining data | REPLACE_UNITS_STAGES_AND_EXPOSURE_DEFINITION.[^report] |
+| Post-training data | REPLACE_COUNTS_STAGES_OR_UNDISCLOSED.[^report] |
+| Training compute | REPLACE_HARDWARE_DURATION_AND_COVERED_STAGES_OR_UNDISCLOSED.[^report] |
+| Context | REPLACE_TRAINED_CONFIGURED_AND_EVALUATED_BOUNDARIES.[^report][^artifact] |
+
+{/* Keep only useful rows. Cite every number beside its value.
+    Do not mix sizes, stages, unique data, or repeated token exposure.
+    Do not use rounded model names as exact parameter counts. */}
+
+## What changed
+
+REPLACE_MOTIVATION_PREDECESSOR_AND_DISTINCTIVE_DIFFERENCE.[^report]
+
+## Architecture
+
+REPLACE_REPRESENTATIVE_INPUT_TO_OUTPUT_TRACE.[^report][^artifact]
+
+{/* Replace both image paths with the same reviewed derivative.
+    Adjust minWidth after inspecting label readability.
+    Retain the original figure's essential labels, legends, and panels.
+    Remove these comments before publication. */}
+
+<FocusCanvas label="REPLACE_VISUAL_PURPOSE" size="diagram">
+<SourceFigure
+  id="figure-1"
+  src="/figures/model-studies/REPLACE_SLUG/REPLACE_ARCHITECTURE.png"
+  alt="REPLACE_INPUTS_BRANCHES_AND_OUTPUT_RELATIONSHIP"
+  minWidth={720}
+>
+<div slot="image">
+
+![REPLACE_MEANINGFUL_ALTERNATIVE_TEXT](/figures/model-studies/REPLACE_SLUG/REPLACE_ARCHITECTURE.png)
+
+</div>
+
+**Figure 1.** REPLACE_SHORT_CAPTION. Original report Figure REPLACE_NUMBER; REPLACE_CROP_OR_ADAPTATION_AND_REUSE_BASIS.[^report][^figures]
+</SourceFigure>
+</FocusCanvas>
+
+REPLACE_WHAT_TO_NOTICE_AND_HOW_IT_CONNECTS_TO_THE_COMPUTATION.[^report]
+
+## REPLACE_MODEL_SPECIFIC_MECHANISM_HEADING
+
+REPLACE_MOTIVATION_INTUITION_COMPUTATION_TRADEOFFS_AND_EVIDENCE.[^report]
+
+{/* Add distinct mechanism sections as needed.
+    Link shared theory instead of repeating a Transformer tutorial.
+    Trace shapes, routing, positions, retained state, or visual injection.
+    Separate the report's claim from our derivation or interpretation. */}
+
+## Training
+
+| Stage | Objective and data | Updated modules | Disclosed settings |
+| --- | --- | --- | --- |
+| REPLACE_STAGE | REPLACE_OBJECTIVE_AND_DATA | REPLACE_MODULES | REPLACE_SETTINGS.[^report] |
+
+REPLACE_STAGE_TRANSITIONS_AND_IMPORTANT_UNDISCLOSED_DETAILS.[^report]
+
+## Inference
+
+REPLACE_PROCESSOR_PREFILL_STATE_DECODE_AND_OUTPUT_TRACE.[^artifact]
+
+REPLACE_NETWORK_VERSUS_SAMPLING_TOOLS_AND_SERVING_BOUNDARY.
+
+{/* State conceptual, code-inspected, or executed scope.
+    Do not imply execution from reading code.
+    Preserve hardware, backend, precision, load, and lengths for measurements. */}
+
+## Evaluation and ablations
+
+| Question | Checkpoint and conditions | Result and metric | Evidence |
+| --- | --- | --- | --- |
+| REPLACE_QUESTION | REPLACE_CONTROLS_AND_VARIANT | REPLACE_RESULT | REPLACE_LOCATOR.[^report] |
+
+REPLACE_AUTHOR_REPORTED_OR_MEASURED_SCOPE_AND_COMPARISON_LIMITS.
+
+## Limitations and lessons
+
+REPLACE_DOCUMENTED_FAILURES_MISSING_DISCLOSURES_AND_TRANSFERABLE_IDEAS.[^report]
+
+REPLACE_RELATED_MODEL_AND_SHARED_THEORY_LINKS.
+
+{/* Use semantic citation labels. Do not add a manual References heading.
+    Name readable versions and source locators, not visible commit hashes.
+    Replace all URLs below with inspected sources. */}
+
+[^report]: REPLACE_AUTHORS. [REPLACE_DOCUMENT_TITLE](REPLACE_REPORT_URL), REPLACE_YEAR_EDITION_AND_SECTIONS.
+[^artifact]: REPLACE_ORGANIZATION. [REPLACE_CHECKPOINT_CONFIGURATION_OR_IMPLEMENTATION](REPLACE_IMMUTABLE_SOURCE_URL), REPLACE_READABLE_VERSION_FUNCTIONS_AND_INSPECTION_SCOPE.
+[^figures]: [Figure extraction and attribution record](/figures/model-studies/REPLACE_SLUG/SOURCES.md), REPLACE_DOCUMENTED_TERMS_AND_REQUIRED_NOTICES.
+```
+
+</details>
+
+The original figure is a starting example, not a requirement to reproduce unsuitable artwork.
+If the report has no useful architecture figure, use an independent mechanism diagram and explain that choice in the audit.
+Remove unused imports when removing the corresponding components.
+
+## Rendering recipes
+
+### Dense original figures
+
+Use the starter's `FocusCanvas` and `SourceFigure` pattern. Keep the source URL and Markdown image path identical.
+Use a meaningful text equivalent, not just “architecture diagram.”
+
+Set `minWidth` only after checking labels. Mobile should pan within the frame while desktop shows the complete figure.
+Test keyboard scrolling, full-size links, dark mode, and focus view. Number later figures sequentially with matching `figure-2` anchors.
+
+Keep the caption short. Put detailed interpretation in the following paragraph.
+Record the original edition, page, figure number, crop, checksum, and reuse basis in the asset records.
+
+### Independent mechanism diagrams
+
+`ModelFlow` is useful for a short execution sequence or parallel paths. It is not a replacement for a more informative source architecture figure.
+Use native SVG or another precise diagram when geometry, matrices, or dense branching matter.
+
+```mdx
+<FocusCanvas label="REPLACE_MECHANISM_PURPOSE" size="diagram">
+<ModelFlow
+  id="figure-2"
+  title="REPLACE_MECHANISM_TITLE"
+  lanesJson='[{"label":"REPLACE_PATH","steps":[{"label":"REPLACE_INPUT","detail":"REPLACE_SHAPE"},{"label":"REPLACE_OPERATION","detail":"REPLACE_COMPUTATION","accent":true},{"label":"REPLACE_OUTPUT","detail":"REPLACE_SHAPE"}],"note":"REPLACE_SCOPE_AND_STATE_BOUNDARY"}]'
+>
+**Figure 2.** REPLACE_SHORT_CAPTION. Independent explanation of REPLACE_SOURCE_MECHANISM.[^report]
+</ModelFlow>
+</FocusCanvas>
+```
+
+The Markdown export must retain every meaningful lane, step, detail, and note.
+Do not expose raw `lanesJson` instead of that explanation.
+
+### Numbered equations
+
+Use `MathExpression` for an equation that helps explain the mechanism. Define its symbols and assumptions beside it.
+
+```mdx
+<MathExpression display number="1" tex="y = \sum_{i=1}^{k} w_i v_i" />
+
+Here, k is the number of selected contributions, w_i is a weight, and v_i is a value vector.
+State the model-specific selection and normalization rule before using this expression.
+```
+
+This is a rendering example, not a claim about any model's computation.
+Use single literal backslashes in a static MDX `tex` attribute. JavaScript string escaping rules do not apply there.
+Use `\lt` and `\gt` for mathematical inequalities. Let `number` supply the equation tag instead of adding a second tag.
+Inspect the rendered KaTeX output. A numbering check alone cannot establish correct parsing.
+
+## Research files and handoff
+
+Create the study records under `docs/research/architectures/<model-slug>/`:
+
+```text
+coverage-audit.md          Mechanism and figure coverage, with source locators
+state/task_spec.md         Subject, scope, constraints, and deliverables
+state/progress.json        Actual progress, gaps, and completed reviews
+state/sources.jsonl        Inspected editions, artifacts, and revisions
+state/claims.jsonl         Consequential claims and supporting evidence
+state/runs.jsonl           Commands, measurements, and validation results
+state/visuals.jsonl        Selected figures, derivatives, and provenance
+```
+
+For new site studies, the MDX page is the canonical explanation, not a second
+`report.md`. Record its repository-relative path in the schema 3 output contract
+from the [Research workflow](/about/content-guidance/research-workflow/).
+A requested standalone report can be canonical instead. Preserve existing
+schema 2 reports and records without automatic migration.
+Keep hashes and detailed source pins here. These files must still be safe for the public repository.
+Use `public/figures/model-studies/<model-slug>/SOURCES.md` and `NOTICE.md` for public asset records and applicable notices.
+Keep restricted or unclear-rights PDFs outside the public repository.
+
+Before handoff, follow the guide's [completion checklist](/about/content-guidance/model-deep-dive-guide/#completion-checklist)
+and the [site validation checks](/about/maintenance/#validate-a-change).
+Review the explanation and visuals, fix the findings, then inspect the result again.
+Check HTML, Markdown, MDX, navigation, search, and agent indexes.
+Record only checks that actually occurred. Passing validation does not establish factual accuracy or authorize publication.

@@ -1,0 +1,227 @@
+{
+  "revision": 4,
+  "checked": "2026-10-10T18:07:46.764Z",
+  "site_page_sha256": "736a99bae65dd2294c7570e9b1c1141f19a9213ad0d089e95cb580e0f8d85602",
+  "source_resources": {
+    "report": "https://arxiv.org/abs/2310.03744v2",
+    "hugging_face": "https://huggingface.co/liuhaotian/llava-v1.5-7b",
+    "checkpoint": "liuhaotian/llava-v1.5-7b"
+  },
+  "prior_review_record": "state/presentation-qa-revision-3.json",
+  "collection_checks": {
+    "site_validation": "106 automated tests, zero Astro diagnostics, static build and 43 docs lint clean. Existing bundler/redirect warnings unchanged.",
+    "browser_views": 18,
+    "guidance_browser_views": 8,
+    "all_25_exports": true,
+    "source_crops": 8,
+    "manual_model_figures": 18,
+    "model_benchmarks": "Not executed."
+  },
+  "viewports": [
+    {
+      "slug": "llava",
+      "width": 1440,
+      "mode": "light",
+      "title": "LLaVA",
+      "titleCount": 1,
+      "overflow": false,
+      "figures": [
+        {
+          "id": "figure-1",
+          "caption": "Figure 1. The original LLaVA interface. Liu et al., Figure 1; cropped, CC BY 4.0.7"
+        },
+        {
+          "id": "figure-2",
+          "caption": "Figure 2. The HD extension combines local tiles with a global view. Reproduced from Haotian Liu et al., report Figure 2.8"
+        },
+        {
+          "id": "figure-3",
+          "caption": "Figure 3. Local detail plus global context. Original worked example of the separate HD extension.2"
+        },
+        {
+          "id": "figure-4",
+          "caption": "Figure 4. Instruction-mixture subsampling. Liu et al., LLaVA-1.5 report, Figure 4; cropped, CC BY 4.0.10"
+        }
+      ],
+      "resources": [
+        {
+          "kind": "report",
+          "href": "https://arxiv.org/abs/2310.03744v2",
+          "label": "Technical reportRead the original research"
+        },
+        {
+          "kind": "model",
+          "href": "https://huggingface.co/liuhaotian/llava-v1.5-7b",
+          "label": "Hugging Faceliuhaotian/llava-v1.5-7b"
+        }
+      ],
+      "visibleHashes": [],
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "missingImages": [],
+      "activeNav": [
+        {
+          "label": "LLaVA / 1.5",
+          "visible": true
+        }
+      ],
+      "panFrames": [
+        {
+          "tabindex": 0,
+          "scrolls": false,
+          "frame": 648,
+          "image": 648
+        },
+        {
+          "tabindex": 0,
+          "scrolls": false,
+          "frame": 648,
+          "image": 648
+        },
+        {
+          "tabindex": 0,
+          "scrolls": false,
+          "frame": 648,
+          "image": 648
+        }
+      ]
+    },
+    {
+      "slug": "llava",
+      "width": 390,
+      "mode": "light",
+      "title": "LLaVA",
+      "titleCount": 1,
+      "overflow": false,
+      "figures": [
+        {
+          "id": "figure-1",
+          "caption": "Figure 1. The original LLaVA interface. Liu et al., Figure 1; cropped, CC BY 4.0.7"
+        },
+        {
+          "id": "figure-2",
+          "caption": "Figure 2. The HD extension combines local tiles with a global view. Reproduced from Haotian Liu et al., report Figure 2.8"
+        },
+        {
+          "id": "figure-3",
+          "caption": "Figure 3. Local detail plus global context. Original worked example of the separate HD extension.2"
+        },
+        {
+          "id": "figure-4",
+          "caption": "Figure 4. Instruction-mixture subsampling. Liu et al., LLaVA-1.5 report, Figure 4; cropped, CC BY 4.0.10"
+        }
+      ],
+      "resources": [
+        {
+          "kind": "report",
+          "href": "https://arxiv.org/abs/2310.03744v2",
+          "label": "Technical reportRead the original research"
+        },
+        {
+          "kind": "model",
+          "href": "https://huggingface.co/liuhaotian/llava-v1.5-7b",
+          "label": "Hugging Faceliuhaotian/llava-v1.5-7b"
+        }
+      ],
+      "visibleHashes": [],
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "missingImages": [],
+      "activeNav": [
+        {
+          "label": "LLaVA / 1.5",
+          "visible": false
+        }
+      ],
+      "panFrames": [
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 358,
+          "image": 800
+        },
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 358,
+          "image": 680
+        },
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 358,
+          "image": 460
+        }
+      ]
+    },
+    {
+      "slug": "llava",
+      "width": 320,
+      "mode": "dark",
+      "title": "LLaVA",
+      "titleCount": 1,
+      "overflow": false,
+      "figures": [
+        {
+          "id": "figure-1",
+          "caption": "Figure 1. The original LLaVA interface. Liu et al., Figure 1; cropped, CC BY 4.0.7"
+        },
+        {
+          "id": "figure-2",
+          "caption": "Figure 2. The HD extension combines local tiles with a global view. Reproduced from Haotian Liu et al., report Figure 2.8"
+        },
+        {
+          "id": "figure-3",
+          "caption": "Figure 3. Local detail plus global context. Original worked example of the separate HD extension.2"
+        },
+        {
+          "id": "figure-4",
+          "caption": "Figure 4. Instruction-mixture subsampling. Liu et al., LLaVA-1.5 report, Figure 4; cropped, CC BY 4.0.10"
+        }
+      ],
+      "resources": [
+        {
+          "kind": "report",
+          "href": "https://arxiv.org/abs/2310.03744v2",
+          "label": "Technical reportRead the original research"
+        },
+        {
+          "kind": "model",
+          "href": "https://huggingface.co/liuhaotian/llava-v1.5-7b",
+          "label": "Hugging Faceliuhaotian/llava-v1.5-7b"
+        }
+      ],
+      "visibleHashes": [],
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "missingImages": [],
+      "activeNav": [
+        {
+          "label": "LLaVA / 1.5",
+          "visible": false
+        }
+      ],
+      "panFrames": [
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 288,
+          "image": 800
+        },
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 288,
+          "image": 680
+        },
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 288,
+          "image": 460
+        }
+      ]
+    }
+  ],
+  "reuse_review": "Specific fair-dealing assessments documented; no permissive artwork grant or universal legal assurance asserted."
+}

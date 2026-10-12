@@ -1,0 +1,376 @@
+{
+  "revision": 5,
+  "checked": "2026-10-10T06:59:19.851Z",
+  "validation": {
+    "result": "pass",
+    "deployment_tests": 48,
+    "content_tests": 25,
+    "astro_files": 119,
+    "astro_errors": 0,
+    "astro_warnings": 0,
+    "astro_hints": 0,
+    "build_pages": 18,
+    "search_pages": 17,
+    "preexisting_notices": [
+      "MDX head-injection bundler notices",
+      "Minimal philosophy redirect lacks outer html"
+    ]
+  },
+  "browser": {
+    "result": "pass",
+    "views": [
+      {
+        "width": 1440,
+        "mode": "light",
+        "focus": false,
+        "visibleLinks": 1,
+        "src": "/figures/model-release-map/model-evolution-light-v5.png",
+        "href": "/figures/model-release-map/model-evolution-light-v5.png",
+        "loaded": true,
+        "dimensions": [
+          1536,
+          1024
+        ],
+        "padding": "0px",
+        "background": "rgba(0, 0, 0, 0)",
+        "figureWidth": 648,
+        "overflow": false,
+        "footnotes": 54,
+        "highlights": [
+          "Transformer",
+          "GPT",
+          "BERT",
+          "GPT-3",
+          "InstructGPT",
+          "ChatGPT",
+          "LLaMA",
+          "GPT-4",
+          "Claude 3",
+          "OpenAI o1",
+          "DeepSeek-V3",
+          "DeepSeek-R1",
+          "Gemini 2.5 Pro",
+          "Qwen3",
+          "Claude 4",
+          "GPT-5",
+          "GLM-5",
+          "Claude Mythos Preview",
+          "Kimi K3",
+          "GPT-6 Astra",
+          "Claude Opus 5.5",
+          "Gemini 4 Argon"
+        ],
+        "broken": []
+      },
+      {
+        "width": 1440,
+        "mode": "dark",
+        "focus": false,
+        "visibleLinks": 1,
+        "src": "/figures/model-release-map/model-evolution-dark-v5.png",
+        "href": "/figures/model-release-map/model-evolution-dark-v5.png",
+        "loaded": true,
+        "dimensions": [
+          1536,
+          1024
+        ],
+        "padding": "0px",
+        "background": "rgba(0, 0, 0, 0)",
+        "figureWidth": 648,
+        "overflow": false,
+        "footnotes": 54,
+        "highlights": [
+          "Transformer",
+          "GPT",
+          "BERT",
+          "GPT-3",
+          "InstructGPT",
+          "ChatGPT",
+          "LLaMA",
+          "GPT-4",
+          "Claude 3",
+          "OpenAI o1",
+          "DeepSeek-V3",
+          "DeepSeek-R1",
+          "Gemini 2.5 Pro",
+          "Qwen3",
+          "Claude 4",
+          "GPT-5",
+          "GLM-5",
+          "Claude Mythos Preview",
+          "Kimi K3",
+          "GPT-6 Astra",
+          "Claude Opus 5.5",
+          "Gemini 4 Argon"
+        ],
+        "broken": []
+      },
+      {
+        "width": 1440,
+        "mode": "light",
+        "focus": true,
+        "visibleLinks": 1,
+        "src": "/figures/model-release-map/model-evolution-light-v5.png",
+        "href": "/figures/model-release-map/model-evolution-light-v5.png",
+        "loaded": true,
+        "dimensions": [
+          1536,
+          1024
+        ],
+        "padding": "0px",
+        "background": "rgba(0, 0, 0, 0)",
+        "figureWidth": 1216,
+        "overflow": false,
+        "footnotes": 54,
+        "highlights": [
+          "Transformer",
+          "GPT",
+          "BERT",
+          "GPT-3",
+          "InstructGPT",
+          "ChatGPT",
+          "LLaMA",
+          "GPT-4",
+          "Claude 3",
+          "OpenAI o1",
+          "DeepSeek-V3",
+          "DeepSeek-R1",
+          "Gemini 2.5 Pro",
+          "Qwen3",
+          "Claude 4",
+          "GPT-5",
+          "GLM-5",
+          "Claude Mythos Preview",
+          "Kimi K3",
+          "GPT-6 Astra",
+          "Claude Opus 5.5",
+          "Gemini 4 Argon"
+        ],
+        "broken": []
+      },
+      {
+        "width": 390,
+        "mode": "light",
+        "focus": false,
+        "visibleLinks": 1,
+        "src": "/figures/model-release-map/model-evolution-light-v5.png",
+        "href": "/figures/model-release-map/model-evolution-light-v5.png",
+        "loaded": true,
+        "dimensions": [
+          1536,
+          1024
+        ],
+        "padding": "0px",
+        "background": "rgba(0, 0, 0, 0)",
+        "figureWidth": 358,
+        "overflow": false,
+        "footnotes": 54,
+        "highlights": [
+          "Transformer",
+          "GPT",
+          "BERT",
+          "GPT-3",
+          "InstructGPT",
+          "ChatGPT",
+          "LLaMA",
+          "GPT-4",
+          "Claude 3",
+          "OpenAI o1",
+          "DeepSeek-V3",
+          "DeepSeek-R1",
+          "Gemini 2.5 Pro",
+          "Qwen3",
+          "Claude 4",
+          "GPT-5",
+          "GLM-5",
+          "Claude Mythos Preview",
+          "Kimi K3",
+          "GPT-6 Astra",
+          "Claude Opus 5.5",
+          "Gemini 4 Argon"
+        ],
+        "broken": []
+      },
+      {
+        "width": 320,
+        "mode": "dark",
+        "focus": false,
+        "visibleLinks": 1,
+        "src": "/figures/model-release-map/model-evolution-dark-v5.png",
+        "href": "/figures/model-release-map/model-evolution-dark-v5.png",
+        "loaded": true,
+        "dimensions": [
+          1536,
+          1024
+        ],
+        "padding": "0px",
+        "background": "rgba(0, 0, 0, 0)",
+        "figureWidth": 288,
+        "overflow": false,
+        "footnotes": 54,
+        "highlights": [
+          "Transformer",
+          "GPT",
+          "BERT",
+          "GPT-3",
+          "InstructGPT",
+          "ChatGPT",
+          "LLaMA",
+          "GPT-4",
+          "Claude 3",
+          "OpenAI o1",
+          "DeepSeek-V3",
+          "DeepSeek-R1",
+          "Gemini 2.5 Pro",
+          "Qwen3",
+          "Claude 4",
+          "GPT-5",
+          "GLM-5",
+          "Claude Mythos Preview",
+          "Kimi K3",
+          "GPT-6 Astra",
+          "Claude Opus 5.5",
+          "Gemini 4 Argon"
+        ],
+        "broken": []
+      },
+      {
+        "width": 1440,
+        "mode": "light",
+        "focus": false,
+        "visibleLinks": 1,
+        "src": "/figures/model-release-map/model-evolution-light-v5.png",
+        "href": "/figures/model-release-map/model-evolution-light-v5.png",
+        "loaded": true,
+        "dimensions": [
+          1536,
+          1024
+        ],
+        "padding": "0px",
+        "background": "rgba(0, 0, 0, 0)",
+        "figureWidth": 648,
+        "overflow": false,
+        "footnotes": 54,
+        "highlights": [
+          "Transformer",
+          "GPT",
+          "BERT",
+          "GPT-3",
+          "InstructGPT",
+          "ChatGPT",
+          "LLaMA",
+          "GPT-4",
+          "Claude 3",
+          "OpenAI o1",
+          "DeepSeek-V3",
+          "DeepSeek-R1",
+          "Gemini 2.5 Pro",
+          "Qwen3",
+          "Claude 4",
+          "GPT-5",
+          "GLM-5",
+          "Claude Mythos Preview",
+          "Kimi K3",
+          "GPT-6 Astra",
+          "Claude Opus 5.5",
+          "Gemini 4 Argon"
+        ],
+        "broken": []
+      }
+    ],
+    "releaseCount": 56,
+    "highlightCount": 22,
+    "keyboardThemeToggle": true,
+    "themePreferencePersists": true,
+    "printUsesLight": true,
+    "defaultPaperFramingPreserved": {
+      "links": 1,
+      "padding": "8px",
+      "background": "rgb(255, 255, 255)"
+    },
+    "reducedMotion": true,
+    "textExports": "All 56 names, dates, 22 bold selections, image paths, caption and citations retained."
+  },
+  "search_and_exports": {
+    "result": "pass",
+    "search": [
+      {
+        "query": "ChatGLM",
+        "results": [
+          {
+            "url": "/architectures/models/",
+            "title": "Model Deep Dives"
+          }
+        ]
+      },
+      {
+        "query": "Kimi K2",
+        "results": [
+          {
+            "url": "/architectures/models/",
+            "title": "Model Deep Dives"
+          }
+        ]
+      },
+      {
+        "query": "Gemma 3",
+        "results": [
+          {
+            "url": "/architectures/models/",
+            "title": "Model Deep Dives"
+          }
+        ]
+      },
+      {
+        "query": "Mythos",
+        "results": [
+          {
+            "url": "/architectures/models/",
+            "title": "Model Deep Dives"
+          }
+        ]
+      },
+      {
+        "query": "Fable",
+        "results": [
+          {
+            "url": "/architectures/models/",
+            "title": "Model Deep Dives"
+          }
+        ]
+      },
+      {
+        "query": "DeepSeek-V4.1-Flash",
+        "results": [
+          {
+            "url": "/architectures/models/",
+            "title": "Model Deep Dives"
+          }
+        ]
+      }
+    ],
+    "exports": [
+      {
+        "path": "/architectures/models/index.md",
+        "status": 200
+      },
+      {
+        "path": "/architectures/models/index.mdx",
+        "status": 200
+      },
+      {
+        "path": "/architectures/llms.txt",
+        "status": 200
+      },
+      {
+        "path": "/llms.txt",
+        "status": 200
+      },
+      {
+        "path": "/llms-full.txt",
+        "status": 200
+      }
+    ]
+  },
+  "manual_visual_review": "All 56 names and 22 highlights checked at native size; desktop focus, dark, mobile light and mobile dark screenshots inspected."
+}

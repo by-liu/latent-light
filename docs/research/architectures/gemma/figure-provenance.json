@@ -1,0 +1,50 @@
+{
+  "model": "gemma",
+  "source_report": "Gemma: Open Models Based on Gemini Research and Technology",
+  "version": "v4",
+  "checked": "2026-10-10",
+  "pdf_sha256": "d8f89e0a7e62c57e035d391b3174d8307a73f72ee84f6494ba58aa8fe7e38383",
+  "figures": [
+    {
+      "id": "V001",
+      "asset": "../../../../public/figures/model-studies/gemma/architecture.svg",
+      "sha256": "2fec86b00f4398412d7e5ce14be63e9202c0884887c3a9832b013d8d0fa55f75",
+      "original_figure": null,
+      "pdf_page": null,
+      "crop_points": null,
+      "raster_dpi": null,
+      "alterations": "Original SVG explanatory synthesis,not a paper-figure reconstruction.",
+      "license": {
+        "status": "verified",
+        "value": "MIT, original explanatory SVG",
+        "url": "https://github.com/by-liu/latent-light/blob/main/LICENSE"
+      },
+      "assessment": "Independently authored vector explanation under repository MIT. No traced author artwork.",
+      "review": "Native SVG raster manually inspected; representation flow, labels, arrow order and variant scope reviewed.",
+      "browser_pending": true
+    },
+    {
+      "id": "V002",
+      "asset": "../../../../public/figures/model-studies/gemma/report-capabilities.png",
+      "sha256": "2df209a8ea7b60974b1191f17fe6aee92c5dc67b1d6f4e6a842e2889f40d932a",
+      "original_figure": 1,
+      "pdf_page": 2,
+      "crop_points": [
+        62,
+        84,
+        482,
+        200
+      ],
+      "raster_dpi": 300,
+      "alterations": "Bounding crop and PDF rasterization only;no recoloring or scientific relabeling.",
+      "license": {
+        "status": "verified",
+        "value": "CC BY 4.0",
+        "url": "https://creativecommons.org/licenses/by/4.0/"
+      },
+      "assessment": "Exact version-specific arXivHTML identifies CC BY4.0; author/title/version/locator/link and crop modification credited. No separate exclusions located.",
+      "review": "300dpi crop manually compared with the full original page; all essential labels, legends, arrowheads and boundaries retained.",
+      "browser_pending": true
+    }
+  ]
+}

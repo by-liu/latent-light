@@ -1,0 +1,23 @@
+{
+  "title": "Gemma 4 Technical Report",
+  "authors": [
+    "Gemma Team, Google DeepMind"
+  ],
+  "year": 2026,
+  "arxiv_id": "2607.02770",
+  "version": "v2",
+  "version_date": "2026-07-24",
+  "report_url": "https://arxiv.org/abs/2607.02770v2",
+  "pdf_url": "https://arxiv.org/pdf/2607.02770v2",
+  "inspected_pdf_archive": "/tmp/gemma-expansion/gemma-4.pdf",
+  "archive_boundary": "Outside public repository;temporary session archive. Canonical version URL and checksum retained for exact refetch.",
+  "pdf_sha256": "b20b25f18d76217d0c49c89f9ed1ffe3cf1912cd8ce710e1a325977653c7bfa6",
+  "inspection_scope": "Main §§2–3 including vision,audio,encoder-free,QAT,MTP,training,format; Tables1–3,6,9,12; AppendixAlgorithm1 andFigures1–2",
+  "accessed": "2026-10-10",
+  "license": {
+    "status": "verified",
+    "value": "CC BY 4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "license_evidence": "Version-specific arXivHTML top-level Creative Commons CC BY4.0 link inspected; CC deed inspected; distinct model/software terms retained."
+}

@@ -1,0 +1,142 @@
+{
+  "revision": 2,
+  "checked": "2026-10-10T15:45:39.761Z",
+  "site_page_sha256": "2ac07c533ddc5a1f1269a9d288ac9cbc7c5cb750b8af77d7fa95879985d50b68",
+  "source_resources": {
+    "report": "https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf",
+    "hugging_face": "https://huggingface.co/openai-community/gpt2",
+    "checkpoint": "openai-community/gpt2"
+  },
+  "collection_checks": {
+    "site_validation": "106 tests, zero Astro diagnostics, build and all 43 docs lint passed.",
+    "browser_views": 81,
+    "model_benchmarks": "Not executed.",
+    "source_figures": "32 unique report assets; 33 placements; 48 total numbered collection figures. Rights retained per asset."
+  },
+  "viewports": [
+    {
+      "slug": "gpt-2",
+      "width": 1440,
+      "mode": "light",
+      "title": "GPT-2",
+      "titleCount": 1,
+      "overflow": false,
+      "figures": [
+        {
+          "id": "figure-1",
+          "caption": "Figure 1. Causal decoder and residual paths. Original schematic based on the pinned released code.2"
+        },
+        {
+          "id": "figure-2",
+          "caption": "Figure 2. Sampling and cache growth belong to the caller. Original diagram from the released model and sampling functions.23"
+        }
+      ],
+      "resources": [
+        {
+          "kind": "report",
+          "href": "https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf",
+          "label": "Technical reportRead the original research"
+        },
+        {
+          "kind": "model",
+          "href": "https://huggingface.co/openai-community/gpt2",
+          "label": "Hugging Faceopenai-community/gpt2"
+        }
+      ],
+      "visibleHashes": [],
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "missingImages": [],
+      "activeNav": [
+        {
+          "label": "GPT-2",
+          "visible": true
+        }
+      ],
+      "panFrames": []
+    },
+    {
+      "slug": "gpt-2",
+      "width": 390,
+      "mode": "light",
+      "title": "GPT-2",
+      "titleCount": 1,
+      "overflow": false,
+      "figures": [
+        {
+          "id": "figure-1",
+          "caption": "Figure 1. Causal decoder and residual paths. Original schematic based on the pinned released code.2"
+        },
+        {
+          "id": "figure-2",
+          "caption": "Figure 2. Sampling and cache growth belong to the caller. Original diagram from the released model and sampling functions.23"
+        }
+      ],
+      "resources": [
+        {
+          "kind": "report",
+          "href": "https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf",
+          "label": "Technical reportRead the original research"
+        },
+        {
+          "kind": "model",
+          "href": "https://huggingface.co/openai-community/gpt2",
+          "label": "Hugging Faceopenai-community/gpt2"
+        }
+      ],
+      "visibleHashes": [],
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "missingImages": [],
+      "activeNav": [
+        {
+          "label": "GPT-2",
+          "visible": false
+        }
+      ],
+      "panFrames": []
+    },
+    {
+      "slug": "gpt-2",
+      "width": 320,
+      "mode": "dark",
+      "title": "GPT-2",
+      "titleCount": 1,
+      "overflow": false,
+      "figures": [
+        {
+          "id": "figure-1",
+          "caption": "Figure 1. Causal decoder and residual paths. Original schematic based on the pinned released code.2"
+        },
+        {
+          "id": "figure-2",
+          "caption": "Figure 2. Sampling and cache growth belong to the caller. Original diagram from the released model and sampling functions.23"
+        }
+      ],
+      "resources": [
+        {
+          "kind": "report",
+          "href": "https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf",
+          "label": "Technical reportRead the original research"
+        },
+        {
+          "kind": "model",
+          "href": "https://huggingface.co/openai-community/gpt2",
+          "label": "Hugging Faceopenai-community/gpt2"
+        }
+      ],
+      "visibleHashes": [],
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "missingImages": [],
+      "activeNav": [
+        {
+          "label": "GPT-2",
+          "visible": false
+        }
+      ],
+      "panFrames": []
+    }
+  ],
+  "manual_review": "All 48 figure renders inspected as contact sheets; source figure completeness, labels and supplemental diagrams reviewed. Dense focus view and native dark diagrams inspected separately."
+}

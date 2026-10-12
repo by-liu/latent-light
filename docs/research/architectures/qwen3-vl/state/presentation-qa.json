@@ -1,0 +1,197 @@
+{
+  "revision": 4,
+  "checked": "2026-10-10T18:07:46.764Z",
+  "site_page_sha256": "d98536df9fee2d06408914f44d0c0c0f70552186c87cb959f843e7e612cae87e",
+  "source_resources": {
+    "report": "https://arxiv.org/abs/2511.21631v1",
+    "hugging_face": "https://huggingface.co/Qwen/Qwen3-VL-8B-Instruct",
+    "checkpoint": "Qwen/Qwen3-VL-8B-Instruct"
+  },
+  "prior_review_record": "state/presentation-qa-revision-3.json",
+  "collection_checks": {
+    "site_validation": "106 automated tests, zero Astro diagnostics, static build and 43 docs lint clean. Existing bundler/redirect warnings unchanged.",
+    "browser_views": 18,
+    "guidance_browser_views": 8,
+    "all_25_exports": true,
+    "source_crops": 8,
+    "manual_model_figures": 18,
+    "model_benchmarks": "Not executed."
+  },
+  "viewports": [
+    {
+      "slug": "qwen3-vl",
+      "width": 1440,
+      "mode": "light",
+      "title": "Qwen3-VL",
+      "titleCount": 1,
+      "overflow": false,
+      "figures": [
+        {
+          "id": "figure-1",
+          "caption": "Figure 1. Qwen3-VL’s multimodal framework. Reproduced from Qwen Team, report Figure 1.5"
+        },
+        {
+          "id": "figure-2",
+          "caption": "Figure 2. Visual input plus early depth connections. Original schematic,\nwith residual additions checked in the pinned implementation.12"
+        },
+        {
+          "id": "figure-3",
+          "caption": "Figure 3. Position channels and timestamp text solve different problems. Original schematic; the 24/20/20 allocation is checkpoint specific.132"
+        }
+      ],
+      "resources": [
+        {
+          "kind": "report",
+          "href": "https://arxiv.org/abs/2511.21631v1",
+          "label": "Technical reportRead the original research"
+        },
+        {
+          "kind": "model",
+          "href": "https://huggingface.co/Qwen/Qwen3-VL-8B-Instruct",
+          "label": "Hugging FaceQwen/Qwen3-VL-8B-Instruct"
+        }
+      ],
+      "visibleHashes": [],
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "missingImages": [],
+      "activeNav": [
+        {
+          "label": "Qwen3-VL",
+          "visible": true
+        }
+      ],
+      "panFrames": [
+        {
+          "tabindex": 0,
+          "scrolls": false,
+          "frame": 648,
+          "image": 648
+        },
+        {
+          "tabindex": 0,
+          "scrolls": false,
+          "frame": 648,
+          "image": 648
+        }
+      ]
+    },
+    {
+      "slug": "qwen3-vl",
+      "width": 390,
+      "mode": "light",
+      "title": "Qwen3-VL",
+      "titleCount": 1,
+      "overflow": false,
+      "figures": [
+        {
+          "id": "figure-1",
+          "caption": "Figure 1. Qwen3-VL’s multimodal framework. Reproduced from Qwen Team, report Figure 1.5"
+        },
+        {
+          "id": "figure-2",
+          "caption": "Figure 2. Visual input plus early depth connections. Original schematic,\nwith residual additions checked in the pinned implementation.12"
+        },
+        {
+          "id": "figure-3",
+          "caption": "Figure 3. Position channels and timestamp text solve different problems. Original schematic; the 24/20/20 allocation is checkpoint specific.132"
+        }
+      ],
+      "resources": [
+        {
+          "kind": "report",
+          "href": "https://arxiv.org/abs/2511.21631v1",
+          "label": "Technical reportRead the original research"
+        },
+        {
+          "kind": "model",
+          "href": "https://huggingface.co/Qwen/Qwen3-VL-8B-Instruct",
+          "label": "Hugging FaceQwen/Qwen3-VL-8B-Instruct"
+        }
+      ],
+      "visibleHashes": [],
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "missingImages": [],
+      "activeNav": [
+        {
+          "label": "Qwen3-VL",
+          "visible": false
+        }
+      ],
+      "panFrames": [
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 358,
+          "image": 880
+        },
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 358,
+          "image": 820
+        }
+      ]
+    },
+    {
+      "slug": "qwen3-vl",
+      "width": 320,
+      "mode": "dark",
+      "title": "Qwen3-VL",
+      "titleCount": 1,
+      "overflow": false,
+      "figures": [
+        {
+          "id": "figure-1",
+          "caption": "Figure 1. Qwen3-VL’s multimodal framework. Reproduced from Qwen Team, report Figure 1.5"
+        },
+        {
+          "id": "figure-2",
+          "caption": "Figure 2. Visual input plus early depth connections. Original schematic,\nwith residual additions checked in the pinned implementation.12"
+        },
+        {
+          "id": "figure-3",
+          "caption": "Figure 3. Position channels and timestamp text solve different problems. Original schematic; the 24/20/20 allocation is checkpoint specific.132"
+        }
+      ],
+      "resources": [
+        {
+          "kind": "report",
+          "href": "https://arxiv.org/abs/2511.21631v1",
+          "label": "Technical reportRead the original research"
+        },
+        {
+          "kind": "model",
+          "href": "https://huggingface.co/Qwen/Qwen3-VL-8B-Instruct",
+          "label": "Hugging FaceQwen/Qwen3-VL-8B-Instruct"
+        }
+      ],
+      "visibleHashes": [],
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "missingImages": [],
+      "activeNav": [
+        {
+          "label": "Qwen3-VL",
+          "visible": false
+        }
+      ],
+      "panFrames": [
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 288,
+          "image": 880
+        },
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 288,
+          "image": 820
+        }
+      ]
+    }
+  ],
+  "reuse_review": "Specific fair-dealing assessments documented; no permissive artwork grant or universal legal assurance asserted."
+}

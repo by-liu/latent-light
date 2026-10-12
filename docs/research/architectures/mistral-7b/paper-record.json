@@ -1,0 +1,20 @@
+{
+  "canonical": "https://arxiv.org/abs/2310.06825v1",
+  "version": "v1",
+  "accessed": "2026-10-10",
+  "local_study_copy": "/tmp/latent-mistral-7b-paper.pdf",
+  "sha256": "dfbac4e7035344b305c947481f2e7e8a02f7a24a563917eb6e47f6591d14c5ae",
+  "distribution": "Exact study PDFs remain outside public repository; selected figure crops distributed under a verified CC BY 4.0 grant with attribution.",
+  "figure_edition": {
+    "url": "https://arxiv.org/abs/2310.06825v1",
+    "pdf_url": "https://arxiv.org/pdf/2310.06825v1",
+    "local_study_copy": "/tmp/latent-mistral-7b-paper.pdf",
+    "sha256": "dfbac4e7035344b305c947481f2e7e8a02f7a24a563917eb6e47f6591d14c5ae",
+    "reuse_grant": {
+      "status": "verified",
+      "value": "CC BY 4.0",
+      "url": "https://creativecommons.org/licenses/by/4.0/"
+    },
+    "grant_evidence": "The version-specific arXiv landing page links Rights to this article to CC BY 4.0."
+  }
+}

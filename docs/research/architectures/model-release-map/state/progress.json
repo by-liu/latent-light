@@ -1,0 +1,20 @@
+{
+  "schema_version": 2,
+  "topic_id": "major-llm-and-vlm-release-map",
+  "status": "complete",
+  "coverage": {
+    "milestones": 56,
+    "primary_sources": 59,
+    "years": "2017 through 2026",
+    "highlighted_models": 22
+  },
+  "open_questions": [],
+  "recommended_next_direction": "User review; prepare reusable Model Deep Dive guidance before expanding model pages.",
+  "last_seen": "2026-10-10T06:59:19.851Z",
+  "quality_gate": {
+    "evidence_verified": true,
+    "contradictions_reviewed": true,
+    "report_reviewed": true,
+    "visuals_reviewed": true
+  }
+}

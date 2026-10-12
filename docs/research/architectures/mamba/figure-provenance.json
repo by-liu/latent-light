@@ -1,0 +1,97 @@
+{
+  "model": "mamba",
+  "checked": "2026-10-10",
+  "source": "Albert Gu and Tri Dao, Mamba, 2024 version 2",
+  "source_url": "https://arxiv.org/abs/2312.00752v2",
+  "pdf_url": "https://arxiv.org/pdf/2312.00752v2",
+  "sha256": "adf70ed1803c85b1899dec3e21f3af0b124411439e8654b840ea65f7b9f52b2e",
+  "license": {
+    "status": "verified",
+    "value": "CC BY 4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "grant_evidence": "The version-specific arXiv landing page links Rights to this article to CC BY 4.0.",
+  "modifications": "Source figure regions cropped; surrounding paper prose and captions omitted. Figure labels, colors, axes and drawing retained. No AI repainting.",
+  "extraction": "Poppler pdftoppm v26.08.0, page rendered with scale-to 4200; crop coordinates recorded at 1400 pixel page preview and multiplied by 3.",
+  "figures": [
+    {
+      "asset": "public/figures/model-studies/mamba/block-architecture.png",
+      "source_figure": 3,
+      "pdf_page": 8,
+      "page_preview_crop": [
+        155,
+        124,
+        850,
+        315
+      ],
+      "output_pixels": [
+        2550,
+        945
+      ],
+      "alt": "The Mamba block combines a convolution and state space path with a parallel activated gate, then multiplies the branches and projects back. H3 and gated MLP panels show its design ancestry.",
+      "caption": "Mamba combines sequence mixing with a parallel gate. Reproduced from Gu and Dao, Figure 3; figure crop, CC BY 4.0.",
+      "purpose": "Read Figure 1 upward from the input. Mamba’s main branch contains convolution, activation and an SSM; the other branch supplies a gate. Their outputs multiply before the final projection. The black box groups the mixer, not the residual skip, which the surrounding language block supplies.",
+      "asset_sha256": "ed2863a94a6185215904185fa6a3cc15feb65dc129cb939e245a3297f8e8976d"
+    },
+    {
+      "asset": "public/figures/model-studies/mamba/selective-state.png",
+      "source_figure": 1,
+      "pdf_page": 3,
+      "page_preview_crop": [
+        123,
+        124,
+        875,
+        338
+      ],
+      "output_pixels": [
+        2625,
+        1014
+      ],
+      "alt": "Current features project to input dependent B, C and delta. Delta discretizes the fixed underlying A transition; the expanded channel state carries history from h previous to h current, and C reads the output.",
+      "caption": "The input controls writing, updating and reading state. Reproduced from Gu and Dao, Figure 1; figure crop, CC BY 4.0.",
+      "purpose": "In Figure 2, the blue projections make B, C and Δ depend on the current input; A remains a learned underlying transition. Orange paths carry the expanded recurrent state. The GPU memory inset motivates computing that large state efficiently on chip instead of storing its full history in HBM.",
+      "asset_sha256": "168dcccc689b767e47997d5b1fcf223ff70a4a5a4ef89557f419174c4be6524c"
+    },
+    {
+      "asset": "public/figures/model-studies/mamba/selective-copying.png",
+      "source_figure": 2,
+      "pdf_page": 6,
+      "page_preview_crop": [
+        122,
+        123,
+        878,
+        221
+      ],
+      "output_pixels": [
+        2634,
+        663
+      ],
+      "alt": "Fixed copying uses predictable gaps, selective copying places relevant A B C D tokens among variable distractors, and induction requires recalling the value that followed a repeated key.",
+      "caption": "Content changes what should be remembered. Reproduced from Gu and Dao, Figure 2; figure crop, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).",
+      "purpose": "In Figure 1, fixed copying can use predictable offsets. Selective copying must preserve relevant tokens despite varying gaps. Induction must recognize a repeated key and recall what followed it. These are controlled toy tasks that motivate selectivity, not demonstrations that a released language model remembers everything.[^1]",
+      "asset_sha256": "d5b805c2f08c9f03f31561f2c9440bf8ac71f97dfc91693e78f039c1e418116e"
+    }
+  ],
+  "restricted_candidates": [],
+  "review": {
+    "source_artwork": true,
+    "crop_integrity": true,
+    "license": true,
+    "desktop_mobile_browser": true,
+    "checked": "2026-10-10T17:36:51.557Z",
+    "revision": 3
+  },
+  "revision": 3,
+  "review_history": [
+    {
+      "revision": 2,
+      "review": {
+        "source_artwork": true,
+        "crop_integrity": true,
+        "license": true,
+        "desktop_mobile_browser": false,
+        "checked": "2026-10-10T17:23:12.642Z"
+      }
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "model": "llama",
+  "checked": "2026-10-10",
+  "source": "Hugo Touvron et al., LLaMA, 2023",
+  "source_url": "https://arxiv.org/abs/2302.13971v1",
+  "pdf_url": "https://arxiv.org/pdf/2302.13971v1",
+  "sha256": "2e663675ae36ad12adb2f5a05281bac2747ecf8d23d92bedd9f937a89fee7136",
+  "license": {
+    "status": "verified",
+    "value": "CC BY 4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "grant_evidence": "The version-specific arXiv landing page links Rights to this article to CC BY 4.0.",
+  "modifications": "Source figure regions cropped; surrounding paper prose and captions omitted. Figure labels, colors, axes and drawing retained. No AI repainting.",
+  "extraction": "Poppler pdftoppm v26.08.0, page rendered with scale-to 4200; crop coordinates recorded at 1400 pixel page preview and multiplied by 3.",
+  "figures": [
+    {
+      "asset": "public/figures/model-studies/llama/training-loss.png",
+      "source_figure": 1,
+      "pdf_page": 3,
+      "page_preview_crop": [
+        503,
+        319,
+        376,
+        251
+      ],
+      "output_pixels": [
+        1128,
+        753
+      ],
+      "alt": "LLaMA training loss continues downward across the reported token budgets. The 7B and 13B curves stop at one trillion tokens; 33B and 65B continue to 1.4 trillion.",
+      "caption": "Longer training still reduces loss. Reproduced from Touvron et al., Figure 1; figure crop, CC BY 4.0.",
+      "purpose": "Figure 2 makes the exposure boundary visible: 7B and 13B stop at 1T tokens, while 33B and 65B reach 1.4T. Falling training loss motivates spending more on a model that will later be cheaper to serve; it does not by itself prove equivalent improvement on every downstream task.",
+      "asset_sha256": "62f163a401c3b32dfc19eb94ee80c07927f9c87a75ae02d84c48fb6b5caadc42"
+    }
+  ],
+  "restricted_candidates": [],
+  "review": {
+    "source_artwork": true,
+    "crop_integrity": true,
+    "license": true,
+    "desktop_mobile_browser": true,
+    "checked": "2026-10-10T17:36:51.557Z",
+    "revision": 3
+  },
+  "revision": 3,
+  "review_history": [
+    {
+      "revision": 2,
+      "review": {
+        "source_artwork": true,
+        "crop_integrity": true,
+        "license": true,
+        "desktop_mobile_browser": true,
+        "checked": "2026-10-10T15:45:39.761Z"
+      }
+    }
+  ]
+}

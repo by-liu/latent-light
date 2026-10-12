@@ -1,0 +1,38 @@
+{
+  "schema_version": 2,
+  "topic_id": "qwen3-technical-deep-dive",
+  "status": "complete",
+  "coverage": {
+    "eligibility": "official technical report and public artifact confirmed",
+    "mechanisms": "Revision3: complete report and relevant appendices compared to study; targeted artifact paths checked; coverage-audit.md records mechanisms/training/inference/ablations and omissions.",
+    "artifacts": "pinned config, tokenizer metadata where relevant and license inspected",
+    "runtime": "not executed",
+    "adversarial_review": "Distinct revision3 check: source section/equation locators, count and cost units, causal ordering, input-prefix/reward/policy distinctions, source-art grants, future-versus-implemented systems and diagram text/arrow boundaries. Corrections documented in coverage-audit.md.",
+    "presentation": "Revision 4 desktop/mobile/theme/focus and export checks passed. All 18 revised-page figures and eight source crops manually reviewed; no model execution.",
+    "figure_rights": "arXiv v1 uses nonexclusive distribution grant to arXiv. Official Qwen3 repository contains report but no repository documentation/image license; README Apache2 statement expressly concerns open weight models. No source figure copied. Native independent mechanism layout retained; original source Figure1 p.9 linked.",
+    "licensing": "Original figure copyright retained. Selected excerpts have documented case-specific exception assessments, distinct from code/weight licenses; no new artwork grant claimed.",
+    "coverage_audit": "Original-figure selection revisited under updated guidance; selected source artwork added without removing distinct worked examples."
+  },
+  "open_questions": [
+    "Which undisclosed recipe details materially affect reproduction? Runtime measurements and independent benchmark reproduction remain outside this source-based study."
+  ],
+  "recommended_next_direction": null,
+  "last_seen": "2026-10-10T18:07:46.764Z",
+  "quality_gate": {
+    "evidence_verified": true,
+    "contradictions_reviewed": true,
+    "report_reviewed": true,
+    "visuals_reviewed": true
+  },
+  "artifact_record": {
+    "github": {
+      "sha": "7a2f61ffc7a20d47efcd2bf97f6f2bf52729042e",
+      "date": "2026-01-09T03:05:46Z"
+    },
+    "huggingface": "8efa61729e24bd65b1d152b5ab5409052aa80e65",
+    "report_url": "https://arxiv.org/pdf/2505.09388v1",
+    "pdf_sha256": "84a5e2b1fa04bb774bf12ae606d1e6d9dd2147ed2ebe78a4cfeb91ba380ffdd5",
+    "archive": "Exact source PDFs retained unchanged under /tmp only; publication includes only inspected figure excerpts under their individual grants.",
+    "figure_editions": []
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "schema_version": 2,
+  "topic_id": "minimax-m2-technical-deep-dive",
+  "status": "complete",
+  "coverage": {
+    "eligibility": "Official report and public artifact inspected",
+    "mechanisms": "Sections 2 to 8, Tables 1 to 4, Figures 2 and 4 to 6",
+    "adversarial_review": "Full attention rather than M1hybrid;29.2T stage accounting;192K trained versus204800 artifact ceiling. Sequential MTP and draft verification. Agent/environment boundary not differentiation through tools. FIFO speed-induced distribution bias; causal prefix branches;40x favorable workload not whole run. MMLU-Pro regression. M2.7 terms noncommercial, not MIT.",
+    "runtime": "Not executed",
+    "presentation": "122 site tests pass, zero Astro diagnostics, 59-page static build and 59-doc lint clean. Fresh browser regression checks cover all 41 model pages plus the catalog and Foundations at 1440 px light, 390 px light and 320 px dark (129 views), reduced motion, desktop focus, active family navigation, figure order, loaded images and local anchors; narrow figures remain keyboard-pannable and link to full-size originals. All 41 Markdown/MDX exports and both agent manifests checked; representative search queries resolve. All 35 new desktop figure renders received manual contact-sheet review; dense focus/mobile views and resource-card/catalog layout received additional manual inspection. Existing bundler directive and philosophy-redirect indexing warnings remain. No model execution or benchmark reproduction.",
+    "figure_rights": "Specific excerpt assessment, not inferred permissive terms",
+    "integrated_browser_qa": "122 site tests pass, zero Astro diagnostics, 59-page static build and 59-doc lint clean. Fresh browser regression checks cover all 41 model pages plus the catalog and Foundations at 1440 px light, 390 px light and 320 px dark (129 views), reduced motion, desktop focus, active family navigation, figure order, loaded images and local anchors; narrow figures remain keyboard-pannable and link to full-size originals. All 41 Markdown/MDX exports and both agent manifests checked; representative search queries resolve. All 35 new desktop figure renders received manual contact-sheet review; dense focus/mobile views and resource-card/catalog layout received additional manual inspection. Existing bundler directive and philosophy-redirect indexing warnings remain. No model execution or benchmark reproduction.",
+    "final_report_review": "Source-scoped report and public MDX reviewed; no placeholder conclusions, undisclosed recipe invention or benchmark reproduction claim.",
+    "peer_review": "Cross-review corrected total-parameter attribution and hybrid-design scope, jointly learned routing shifts with reduced—not eliminated—balancing loss. Added human-steered operational self-evolution and scoped22-competition/three24h-trial MLE evaluation, not autonomous weight self-improvement."
+  },
+  "open_questions": [
+    "Unreleased recipe and application robustness require separate research."
+  ],
+  "recommended_next_direction": "Refresh on substantive report/artifact evidence; runtime and benchmark reproduction remain separate future work.",
+  "last_seen": "2026-10-10T18:52:33.833Z",
+  "quality_gate": {
+    "evidence_verified": true,
+    "contradictions_reviewed": true,
+    "report_reviewed": true,
+    "visuals_reviewed": true
+  },
+  "artifact_record": {
+    "huggingface": "d494266a4affc0d2995ba1fa35c8481cbd84294b",
+    "report_url": "https://arxiv.org/pdf/2605.26494v2",
+    "pdf_sha256": "866e92e58242b520f25a8a19107e5c54d73d9effcf9e11e02c6b651782dc6b08",
+    "archive": "Unmodified PDF in /tmp only; publication contains bounded figure excerpts."
+  }
+}

@@ -1,20 +1,38 @@
 ---
-interface Props { src: string; alt: string; narrow?: boolean; id?: string; }
-const { src, alt, narrow = false, id } = Astro.props;
+interface Props { src: string; darkSrc?: string; alt: string; narrow?: boolean; poster?: boolean; id?: string; minWidth?: number; }
+const { src, darkSrc, alt, narrow = false, poster = false, id, minWidth } = Astro.props;
+if (minWidth !== undefined && (!Number.isFinite(minWidth) || minWidth < 0 || minWidth > 1600)) throw new Error('SourceFigure minWidth must be between 0 and 1600 pixels.');
 ---
-<figure id={id} class:list={['source-figure', {narrow}]}>
-  <a href={src} target="_blank" rel="noopener" aria-label={`Open full resolution: ${alt}`}>
+<figure id={id} class:list={['source-figure', {narrow, poster}]}>
+  <div class:list={['image-viewport', {pannable: Boolean(minWidth)}]} style={minWidth ? `--source-min-width:${minWidth}px` : undefined} tabindex={minWidth ? '0' : undefined} role={minWidth ? 'region' : undefined} aria-label={minWidth ? `Scrollable figure: ${alt}` : undefined}>
+  <a class:list={{'theme-light': Boolean(darkSrc)}} href={src} target="_blank" rel="noopener" aria-label={`Open full resolution: ${alt}`}>
     <slot name="image" />
     <span class="zoom-hint" aria-hidden="true">Open full size ↗</span>
   </a>
+  {darkSrc && (
+    <a class="theme-dark" href={darkSrc} target="_blank" rel="noopener" aria-label={`Open full resolution: ${alt}`}>
+      <img src={darkSrc} alt={alt} loading="lazy" decoding="async" />
+      <span class="zoom-hint" aria-hidden="true">Open full size ↗</span>
+    </a>
+  )}
+  </div>
+  {minWidth && <div class="figure-tools"><span>Pan on smaller screens</span><a href={src} target="_blank" rel="noopener">Open full size ↗</a></div>}
   <figcaption class="source-caption"><slot /></figcaption>
 </figure>
 <style>
   .source-figure{margin:1.5rem auto;min-width:0;}.narrow{max-width:30rem;}
+  .image-viewport{min-width:0;}.pannable{overflow-x:auto;overscroll-behavior-inline:contain;border-radius:.75rem;}.pannable>a{min-width:var(--source-min-width);}.pannable:focus-visible{outline:2px solid var(--nb-primary);outline-offset:4px;}.pannable .zoom-hint{display:none;}
+  .figure-tools{display:flex;justify-content:space-between;align-items:center;gap:.6rem;margin-top:.5rem;color:var(--nb-muted-foreground);font-size:.72rem;line-height:1.5;}.figure-tools a{white-space:nowrap;}
   .source-figure :global(img){display:block;width:100%;height:auto;background:#fff;border:1px solid var(--nb-border);border-radius:.75rem;padding:.5rem;}
+  .poster :global(img){padding:0;background:transparent;}
+  .theme-dark{display:none;}
+  :global(html[data-mode='dark']) .theme-light{display:none;}
+  :global(html[data-mode='dark']) .theme-dark{display:block;}
+  @media print{.theme-light{display:block !important;}.theme-dark{display:none !important;}}
   .source-figure :global([slot="image"] p){margin:0;}
-  a{display:block;border-radius:.75rem;}a:focus-visible{outline:2px solid var(--nb-primary);outline-offset:4px;}
-  a:hover{cursor:zoom-in;}
+  .image-viewport>a{display:block;border-radius:.75rem;}.image-viewport>a:focus-visible,.figure-tools a:focus-visible{outline:2px solid var(--nb-primary);outline-offset:4px;}
+  .image-viewport>a:hover{cursor:zoom-in;}
   .zoom-hint{display:block;text-align:right;font-size:.72rem;line-height:1.5;color:var(--nb-muted-foreground);margin:.35rem 0;}
   .source-caption{font-size:.8rem;line-height:1.6;color:var(--nb-muted-foreground);margin-top:.65rem;}
+  @media(min-width:768px){.pannable>a{min-width:0;}.figure-tools>span{visibility:hidden;}}
 </style>

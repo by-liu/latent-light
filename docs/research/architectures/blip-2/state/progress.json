@@ -1,0 +1,27 @@
+{
+  "schema_version": 2,
+  "topic_id": "blip-2",
+  "status": "complete",
+  "coverage": {
+    "identity": "reviewed",
+    "architecture": "Report, appendices and targeted selected-code interfaces audited; explicit technique map in coverage-audit.md.",
+    "training": "Stages, objectives, input/target/frozen scopes and historical-release boundaries audited; undisclosed details remain marked.",
+    "inference": "Static source review and illustrative derivations, not checkpoint execution.",
+    "evaluation": "Task and ablation conditions checked, including counterevidence and variant identity.",
+    "licensing": "Report CC BY 4.0 verified separately from artifact terms.",
+    "presentation": "Revision 3 checked at 1440px light, 390px light, 320px dark and desktop focus. Full desktop art, mobile keyboard pan, full-size access, family navigation, caption order, citations, equations, resources, images, no overflow, search, Markdown/MDX and agent manifests passed. All 66 model figure renders manually inspected. No model execution."
+  },
+  "open_questions": [
+    "No complete combined-license deployment clearance is asserted for the inherited OPT component.",
+    "Checkpoint runtime performance and query bottleneck failure rate were not measured.",
+    "Separate task-finetuned checkpoints have distinct input and frozen-module contracts."
+  ],
+  "recommended_next_direction": null,
+  "last_seen": "2026-10-10T17:36:51.557Z",
+  "quality_gate": {
+    "evidence_verified": true,
+    "contradictions_reviewed": true,
+    "report_reviewed": true,
+    "visuals_reviewed": true
+  }
+}

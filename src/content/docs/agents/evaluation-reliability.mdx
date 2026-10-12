@@ -1,0 +1,125 @@
+---
+title: Evaluation & Reliability
+description: Measure correct outcomes, consistent behavior, operational cost and safe recovery.
+lastUpdated: 2026-10-11
+---
+
+import ModelFlow from '../../../components/architectures/ModelFlow.astro';
+
+An impressive transcript is not the same as a correct outcome. A successful
+attempt is not the same as reliable operation. Agent evaluation needs to
+inspect the work produced, the path taken and the conditions of the run.
+
+Start by specifying the system under test: model, harness, tools, environment,
+task version, grader and budget. Changing any of these can change what a score
+means. An evaluation harness runs tasks and grades outcomes; the agent harness
+is the system doing the work.[^evals]
+
+[Figure 1](#figure-1) separates the system doing work from the system checking it.
+
+<ModelFlow id="figure-1" title="Evaluate the outcome under a specified contract" lanesJson='[{"steps":[{"label":"Specify the task","detail":"Preserve requirements, fixtures and the total budget."},{"label":"Run the agent system","detail":"Record model, harness, environment and work artifacts."},{"label":"Grade independently","detail":"Use checks that can observe the requested result."},{"label":"Inspect failures","detail":"Compare outcomes, trajectories, operations and safety."}],"note":"The grader must not confuse a persuasive transcript with the resulting state."}]'>
+
+**Figure 1.** Latent Light evaluation design informed by documented tasks, graders and harness distinctions.[^evals]
+
+</ModelFlow>
+
+## Measure four different things
+
+This proposed scorecard organizes a review; it is not a standardized benchmark.
+
+| Dimension | Questions | Example evidence |
+| --- | --- | --- |
+| Outcome | Was the requested result correct and complete? | Hidden tests, source checks or final database state |
+| Trajectory | Did the system make appropriate decisions? | Tool arguments, evidence provenance and wasted steps |
+| Operations | Was the work practical to run? | Tail latency, cost, timeouts and recovery effort |
+| Safety | Did it respect authority and data boundaries? | Denied actions, disclosure tests and side-effect records |
+
+A research answer can be fluent but unsupported. A repository patch can pass
+a narrow test while breaking an unrelated behavior. A service agent can update
+the right record but disclose the wrong user's information. These failures
+need different graders and different interventions.
+
+## Capability and consistency are different
+
+`pass@k` asks whether at least one of several attempts succeeds. `pass^k`
+asks whether all of them succeed. They answer different product questions:
+a search for one valid solution versus consistent behavior across repeated
+interactions.[^evals]
+
+For a teaching example, assume independent attempts with the same success
+probability <MathExpression tex="p" />:
+
+<MathExpression display number="1" tex="\begin{aligned} P(\text{at least one success in }k) &= 1-(1-p)^k \\ P(\text{all }k\text{ attempts succeed}) &= p^k \end{aligned}" />
+
+These are elementary probabilities under the stated assumptions, not the
+finite-sample estimator used by every benchmark. With
+<MathExpression tex="p=0.8" /> and <MathExpression tex="k=3" />,
+they are 99.2% and 51.2%. More attempts make one success easier to find while
+making perfect consistency harder to achieve. Real attempts can be correlated,
+and selecting the successful one requires a trustworthy verifier.
+
+Report success rate together with attempts, total cost and the selection rule.
+A result chosen after many retries should not be presented as a first-attempt
+result.
+
+## Choose graders that can see the outcome
+
+Use exact checks for exact requirements, model judgments for qualities that
+need interpretation and human review to calibrate difficult cases. A model
+judge can miss errors or reward persuasive wording; a deterministic grader
+can enforce an unintended or incomplete specification.[^evals]
+
+A proposed evaluation contract should include a solvable reference task,
+an explicit rubric, preserved artifacts and enough trace evidence to explain
+failures. Keep evaluation fixtures and hidden checks outside the agent's
+editable workspace when testing its ability to solve the task rather than
+modify the test.
+
+## Match benchmarks to the work
+
+| Benchmark family | Main task shape | What to check before comparison |
+| --- | --- | --- |
+| SWE-bench | Repository issues and evaluated patches.[^swebench] | Dataset variant, tests, scaffold and access to task information |
+| Terminal-Bench 2.0 | Tasks completed in terminal environments.[^terminal] | Agent and model pair, environment, resources and budget |
+| τ-bench family | Tool and user interactions in service domains.[^tau] | Task, simulator and grader edition; modalities and policies |
+| AgentDojo | Utility and prompt-injection robustness in tool environments.[^dojo] | Attack setting, defense configuration and retained utility |
+
+The current τ-bench repository includes τ³-bench and documents corrected tasks
+and graders. Some earlier scores require regrading for meaningful comparison.
+Treat a benchmark edition as part of the experiment, not a cosmetic label.[^tau]
+
+A public leaderboard is a useful lead, not proof of deployment performance.
+This page does not rank products or combine scores from incompatible settings.
+
+## Test interventions, not just final configurations
+
+For a proposed harness study, begin with a fixed task set and a simple baseline.
+Hold the model and total budget fixed, randomize run order and repeat trials.
+Add one feature at a time, such as persistent notes, retrieval or a critic.
+Inspect both average behavior and failure cases.
+
+Feature effects can depend on ordering and interact with each other. A result
+under one task distribution supports a local conclusion, not a universal
+claim that the feature helps every agent. Record environment failures separately
+rather than quietly discarding inconvenient runs.
+
+## Treat recovery as part of quality
+
+Include interrupted runs, delayed tools, stale observations, denied actions
+and ambiguous external outcomes. Verify that a resumed run does not duplicate
+an effect or mistake a pending operation for completed work. The recovery
+contract is explained in [Context, Memory & State](/agents/context-memory-state/).
+
+Use traces to discover failures, turn important failures into regression tasks
+and rerun them after model or harness changes. Continue with
+[Security & Control](/agents/security-control/).
+
+
+To see these ideas in a specific implementation, explore the
+[Agent Deep Dives comparison](/agents/deep-dives/) and its five studies.
+
+[^evals]: Anthropic. [Demystifying evals for AI agents](https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents), January 9, 2026; tasks, graders and repeated-trial metrics.
+[^swebench]: SWE-bench. [Leaderboards and benchmark variants](https://www.swebench.com/). Checked October 10, 2026.
+[^terminal]: Terminal-Bench. [Version 2.0 leaderboard](https://www.tbench.ai/?version=2.0), separate model and agent fields. Checked October 10, 2026.
+[^tau]: Sierra Research. [τ-bench repository](https://github.com/sierra-research/tau2-bench), current benchmark scope and changelog. Checked October 10, 2026.
+[^dojo]: Edoardo Debenedetti et al. [AgentDojo: A Dynamic Environment to Evaluate Prompt Injection Attacks and Defenses for LLM Agents](https://arxiv.org/abs/2406.13352), 2024.

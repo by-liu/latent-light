@@ -1,0 +1,2894 @@
+{
+  "reviewedAt": "2026-10-11T16:45:34.593Z",
+  "scope": "Company explorers. Physical AI revision 4 adds 36 identities and two scoped parent mappings; earlier records and inspection dates preserved.",
+  "sharedAssessments": {
+    "contextual-editorial-identification": {
+      "basis": "Bounded contextual editorial identification within research and criticism; not a permissive-license claim.",
+      "purpose": "Identify the subjects of the substantive adjacent company and product reviews. See the per-asset purpose and page scope.",
+      "distribution": "Public website and public GitHub source repository were considered.",
+      "amount": "One website identification mark, displayed at 24 by 24 px. The whole small mark is needed for recognition; no unrelated source artwork.",
+      "alternatives": "Text names and initials remain usable, but lose the recognition aid requested for this comparison. The mark does not replace explanation or sourcing.",
+      "nature": "Public corporate or product identification icon, not unreleased work or a full brand kit.",
+      "likelyEffect": "Small referential display with adjacent official links; does not substitute for the source, sell the mark or suggest sponsorship.",
+      "limitations": "Copyright and trademark remain with the owner. Public availability alone is not permission. This is an editorial assessment, not legal assurance; reassess if monetized or repurposed."
+    }
+  },
+  "assets": [
+    {
+      "id": "alibabagroup",
+      "name": "Alibaba",
+      "asset": null,
+      "status": "initials fallback",
+      "checkedAt": "2026-10-11T16:11:16.194Z",
+      "sourcePage": "https://alibabagroup.com/",
+      "sourceUrl": null,
+      "sha256": null,
+      "sourceDimensions": null,
+      "identityLabels": [
+        "Alibaba / Qwen App 千问",
+        "阿里巴巴 Alibaba / 千问 Qwen App",
+        "Alibaba DAMO / RynnBrain"
+      ],
+      "rightsHolder": "Alibaba / respective mark owner; no rights transfer asserted",
+      "identityReview": "No matching usable official icon confirmed; no third party artwork is reproduced.",
+      "transformation": "Original plain-text initials, not an imitation of a logo.",
+      "reuseAssessment": null
+    },
+    {
+      "id": "amazon",
+      "name": "Amazon",
+      "asset": "/company-icons/amazon.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:11:15.401Z",
+      "sourcePage": "https://www.amazon.com/",
+      "sourceUrl": "https://www.amazon.com/favicon.ico",
+      "sha256": "44e05d4178ed6201c7ab8498852c6f194d394f2e6e3d032908fdb3e7b03d91c8",
+      "sourceDimensions": [
+        48,
+        48
+      ],
+      "identityLabels": [
+        "Amazon / Alexa+",
+        "Amazon Robotics / DeepFleet"
+      ],
+      "rightsHolder": "Amazon / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or touch icon; reviewed on the labeled contact sheet. Host mapping follows the company or named product, not the linked accelerator.",
+      "transformation": "Largest available ICO frame or official PNG/SVG converted proportionally to local PNG, at most 96 px; original colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify Amazon beside substantive, sourced product comparisons on consumer-ai, personal-agents, physical-ai.",
+        "scope": [
+          "consumer-ai",
+          "personal-agents",
+          "physical-ai"
+        ]
+      }
+    },
+    {
+      "id": "anthropic",
+      "name": "Anthropic",
+      "asset": "/company-icons/anthropic.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:11:12.368Z",
+      "sourcePage": "https://www.anthropic.com/",
+      "sourceUrl": "https://cdn.prod.website-files.com/67ce28cfec624e2b733f8a52/67d31dd7aa394792257596c5_webclip.png",
+      "sha256": "dcf9cf2eb97d5985b28470d60e37ae70ba02fc35f665e8c4dddf25a11b07fdf0",
+      "sourceDimensions": [
+        256,
+        256
+      ],
+      "identityLabels": [
+        "Anthropic / Claude"
+      ],
+      "rightsHolder": "Anthropic / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or touch icon; reviewed on the labeled contact sheet. Host mapping follows the company or named product, not the linked accelerator.",
+      "transformation": "Largest available ICO frame or official PNG/SVG converted proportionally to local PNG, at most 96 px; original colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify Anthropic beside substantive, sourced product comparisons on consumer-ai.",
+        "scope": [
+          "consumer-ai"
+        ]
+      }
+    },
+    {
+      "id": "apple",
+      "name": "Apple",
+      "asset": "/company-icons/apple.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:11:14.898Z",
+      "sourcePage": "https://www.apple.com/",
+      "sourceUrl": "https://www.apple.com/favicon.ico",
+      "sha256": "b22bd5813efd5bae00c39de347f9c2594f1f27f01bcedbc5d92bed8ba5c976e2",
+      "sourceDimensions": [
+        64,
+        64
+      ],
+      "identityLabels": [
+        "Apple / Apple Intelligence"
+      ],
+      "rightsHolder": "Apple / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or touch icon; reviewed on the labeled contact sheet. Host mapping follows the company or named product, not the linked accelerator.",
+      "transformation": "Largest available ICO frame or official PNG/SVG converted proportionally to local PNG, at most 96 px; original colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify Apple beside substantive, sourced product comparisons on consumer-ai, personal-agents.",
+        "scope": [
+          "consumer-ai",
+          "personal-agents"
+        ]
+      }
+    },
+    {
+      "id": "askjo",
+      "name": "jo",
+      "asset": null,
+      "status": "initials fallback",
+      "checkedAt": "2026-10-11T16:11:41.013Z",
+      "sourcePage": "https://askjo.ai/",
+      "sourceUrl": null,
+      "sha256": null,
+      "sourceDimensions": null,
+      "identityLabels": [
+        "jo"
+      ],
+      "rightsHolder": "jo / respective mark owner; no rights transfer asserted",
+      "identityReview": "No matching usable official icon confirmed; no third party artwork is reproduced.",
+      "transformation": "Original plain-text initials, not an imitation of a logo.",
+      "reuseAssessment": null
+    },
+    {
+      "id": "baidu",
+      "name": "Baidu",
+      "asset": "/company-icons/baidu.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:11:58.427Z",
+      "sourcePage": "https://www.baidu.com/",
+      "sourceUrl": "https://www.baidu.com/favicon.ico",
+      "sha256": "97d755ab259978baaf695d47b20efa7d0caff5e62ad9ef492d8b82aabcb3551f",
+      "sourceDimensions": [
+        64,
+        64
+      ],
+      "identityLabels": [
+        "百度 Baidu / 文心 Wenxin"
+      ],
+      "rightsHolder": "Baidu / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or touch icon; reviewed on the labeled contact sheet. Host mapping follows the company or named product, not the linked accelerator.",
+      "transformation": "Largest available ICO frame or official PNG/SVG converted proportionally to local PNG, at most 96 px; original colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify Baidu beside substantive, sourced product comparisons on china-consumer-ai.",
+        "scope": [
+          "china-consumer-ai"
+        ]
+      }
+    },
+    {
+      "id": "bostondynamics",
+      "name": "Boston Dynamics",
+      "asset": "/company-icons/bostondynamics.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:12:39.505Z",
+      "sourcePage": "https://bostondynamics.com/",
+      "sourceUrl": "https://bostondynamics.com/wp-content/uploads/2023/06/cropped-Boston-Dynamic_favicon-180x180.jpg",
+      "sha256": "a774b51d5bc3a220997e4a9f166f1ff56290fe785b879898e52d2c3d9ca5f843",
+      "sourceDimensions": [
+        180,
+        180
+      ],
+      "identityLabels": [
+        "Boston Dynamics / Atlas"
+      ],
+      "rightsHolder": "Boston Dynamics / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or touch icon; reviewed on the labeled contact sheet. Host mapping follows the company or named product, not the linked accelerator.",
+      "transformation": "Largest available ICO frame or official PNG/SVG converted proportionally to local PNG, at most 96 px; original colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify Boston Dynamics beside substantive, sourced product comparisons on physical-ai.",
+        "scope": [
+          "physical-ai"
+        ]
+      }
+    },
+    {
+      "id": "bytedance",
+      "name": "ByteDance",
+      "asset": "/company-icons/bytedance.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:11:49.364Z",
+      "sourcePage": "https://www.bytedance.com/en/",
+      "sourceUrl": "https://www.bytedance.com/en/#declared-favicon",
+      "sha256": "5f24279b0c5b70f80e240fca02e4cca6278452b80849ccb45f8af1938df87799",
+      "sourceDimensions": [
+        300,
+        300
+      ],
+      "identityLabels": [
+        "字节跳动 ByteDance / 豆包 Doubao",
+        "ByteDance Seed / Robotics"
+      ],
+      "rightsHolder": "ByteDance / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or touch icon; reviewed on the labeled contact sheet. Host mapping follows the company or named product, not the linked accelerator.",
+      "transformation": "Largest available ICO frame or official PNG/SVG converted proportionally to local PNG, at most 96 px; original colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify ByteDance beside substantive, sourced product comparisons on china-consumer-ai.",
+        "scope": [
+          "china-consumer-ai",
+          "physical-ai"
+        ]
+      }
+    },
+    {
+      "id": "character",
+      "name": "Character.AI",
+      "asset": "/company-icons/character.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:11:28.243Z",
+      "sourcePage": "https://character.ai/",
+      "sourceUrl": "https://character.ai/favicon.ico",
+      "sha256": "62593f3359d331eb419157197463a0a8061471830012bd922a4f4f5ac65b696e",
+      "sourceDimensions": [
+        256,
+        256
+      ],
+      "identityLabels": [
+        "Character.AI"
+      ],
+      "rightsHolder": "Character.AI / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or touch icon; reviewed on the labeled contact sheet. Host mapping follows the company or named product, not the linked accelerator.",
+      "transformation": "Largest available ICO frame or official PNG/SVG converted proportionally to local PNG, at most 96 px; original colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify Character.AI beside substantive, sourced product comparisons on consumer-ai.",
+        "scope": [
+          "consumer-ai"
+        ]
+      }
+    },
+    {
+      "id": "daydream",
+      "name": "Daydream",
+      "asset": "/company-icons/daydream.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:11:36.720Z",
+      "sourcePage": "https://daydream.ing/",
+      "sourceUrl": "https://daydream.ing/apple-touch-icon.png",
+      "sha256": "3ab88f5170778d4b45f22d36f9e805c442b5ad2975dc7f10e3c8c00343a09413",
+      "sourceDimensions": [
+        180,
+        180
+      ],
+      "identityLabels": [
+        "Daydream",
+        "Daydream / Dahlia Labs"
+      ],
+      "rightsHolder": "Daydream / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or touch icon; reviewed on the labeled contact sheet. Host mapping follows the company or named product, not the linked accelerator.",
+      "transformation": "Largest available ICO frame or official PNG/SVG converted proportionally to local PNG, at most 96 px; original colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify Daydream beside substantive, sourced product comparisons on consumer-ai, personal-agents.",
+        "scope": [
+          "consumer-ai",
+          "personal-agents"
+        ]
+      }
+    },
+    {
+      "id": "deepseek",
+      "name": "深度求索 DeepSeek",
+      "asset": "/company-icons/deepseek.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:12:02.361Z",
+      "sourcePage": "https://deepseek.com/",
+      "sourceUrl": "https://deepseek.com/favicon.ico",
+      "sha256": "4b0ca92ecc56edf008dcb940dd534896c3a6269a80ad1c645053dbc92be3813a",
+      "sourceDimensions": [
+        225,
+        225
+      ],
+      "identityLabels": [
+        "深度求索 DeepSeek"
+      ],
+      "rightsHolder": "深度求索 DeepSeek / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or touch icon; reviewed on the labeled contact sheet. Host mapping follows the company or named product, not the linked accelerator.",
+      "transformation": "Largest available ICO frame or official PNG/SVG converted proportionally to local PNG, at most 96 px; original colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify 深度求索 DeepSeek beside substantive, sourced product comparisons on china-consumer-ai.",
+        "scope": [
+          "china-consumer-ai"
+        ]
+      }
+    },
+    {
+      "id": "elevenlabs",
+      "name": "ElevenLabs",
+      "asset": "/company-icons/elevenlabs.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:11:22.816Z",
+      "sourcePage": "https://elevenlabs.io/",
+      "sourceUrl": "https://elevenlabs.io/apple-icon.png?6592732ab34b1d42",
+      "sha256": "a59bf4dc510dc0a09b14202ecc15733d5c814d8f19928390c32c206bfac33d84",
+      "sourceDimensions": [
+        180,
+        180
+      ],
+      "identityLabels": [
+        "ElevenLabs / ElevenReader"
+      ],
+      "rightsHolder": "ElevenLabs / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or touch icon; reviewed on the labeled contact sheet. Host mapping follows the company or named product, not the linked accelerator.",
+      "transformation": "Largest available ICO frame or official PNG/SVG converted proportionally to local PNG, at most 96 px; original colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify ElevenLabs beside substantive, sourced product comparisons on consumer-ai.",
+        "scope": [
+          "consumer-ai"
+        ]
+      }
+    },
+    {
+      "id": "endel",
+      "name": "Endel",
+      "asset": "/company-icons/endel.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:11:33.243Z",
+      "sourcePage": "https://endel.io/",
+      "sourceUrl": "https://endel.io/favs/apple-touch-icon.png",
+      "sha256": "2eb28d744cfc10ef93c1ae4c6ea787110967c805a6c9cae00d145b76ce2cbe18",
+      "sourceDimensions": [
+        180,
+        180
+      ],
+      "identityLabels": [
+        "Endel"
+      ],
+      "rightsHolder": "Endel / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or touch icon; reviewed on the labeled contact sheet. Host mapping follows the company or named product, not the linked accelerator.",
+      "transformation": "Largest available ICO frame or official PNG/SVG converted proportionally to local PNG, at most 96 px; original colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify Endel beside substantive, sourced product comparisons on consumer-ai.",
+        "scope": [
+          "consumer-ai"
+        ]
+      }
+    },
+    {
+      "id": "flowith",
+      "name": "Flowith",
+      "asset": "/company-icons/flowith.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:11:38.484Z",
+      "sourcePage": "https://flowith.io/blank",
+      "sourceUrl": "https://flowith.io/apple-touch-icon.png",
+      "sha256": "952073be04a1cadfd50fc288dac9cdf07304ba4d7534ec43d638efbee4530196",
+      "sourceDimensions": [
+        180,
+        180
+      ],
+      "identityLabels": [
+        "Flowith",
+        "Flowith / Agent Neo, FlowithOS"
+      ],
+      "rightsHolder": "Flowith / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or touch icon; reviewed on the labeled contact sheet. Host mapping follows the company or named product, not the linked accelerator.",
+      "transformation": "Largest available ICO frame or official PNG/SVG converted proportionally to local PNG, at most 96 px; original colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify Flowith beside substantive, sourced product comparisons on consumer-ai, personal-agents, china-consumer-ai.",
+        "scope": [
+          "consumer-ai",
+          "personal-agents",
+          "china-consumer-ai"
+        ]
+      }
+    },
+    {
+      "id": "folotoy",
+      "name": "FoloToy",
+      "asset": "/company-icons/folotoy.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:12:34.846Z",
+      "sourcePage": "https://folotoy.com/",
+      "sourceUrl": "https://folotoy.com/favicon.svg",
+      "sha256": "852117ae667068d2a8f645035d9db1d88dd40cba42de395e234238aef3340df1",
+      "sourceDimensions": [
+        1890,
+        1890
+      ],
+      "identityLabels": [
+        "FoloToy"
+      ],
+      "rightsHolder": "FoloToy / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or touch icon; reviewed on the labeled contact sheet. Host mapping follows the company or named product, not the linked accelerator.",
+      "transformation": "Largest available ICO frame or official PNG/SVG converted proportionally to local PNG, at most 96 px; original colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify FoloToy beside substantive, sourced product comparisons on china-consumer-ai.",
+        "scope": [
+          "china-consumer-ai"
+        ]
+      }
+    },
+    {
+      "id": "foxglove",
+      "name": "Foxglove",
+      "asset": "/company-icons/foxglove.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:12:41.805Z",
+      "sourcePage": "https://foxglove.dev/",
+      "sourceUrl": "https://foxglove.dev/apple-touch-icon.png",
+      "sha256": "49d5a0ad69eba9cac4b80b3baa6a3fd0f2fd4df0132a6c8f72ff2bd21e2e8e86",
+      "sourceDimensions": [
+        256,
+        256
+      ],
+      "identityLabels": [
+        "Foxglove"
+      ],
+      "rightsHolder": "Foxglove / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or touch icon; reviewed on the labeled contact sheet. Host mapping follows the company or named product, not the linked accelerator.",
+      "transformation": "Largest available ICO frame or official PNG/SVG converted proportionally to local PNG, at most 96 px; original colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify Foxglove beside substantive, sourced product comparisons on physical-ai.",
+        "scope": [
+          "physical-ai"
+        ]
+      }
+    },
+    {
+      "id": "getduckbill",
+      "name": "Duckbill",
+      "asset": "/company-icons/getduckbill.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:11:40.649Z",
+      "sourcePage": "https://getduckbill.com/",
+      "sourceUrl": "https://getduckbill.com/apple-icon.png",
+      "sha256": "767409ca950115fb4cc6bbb21f122755a1430638022003416213385eb78eecbe",
+      "sourceDimensions": [
+        180,
+        180
+      ],
+      "identityLabels": [
+        "Duckbill"
+      ],
+      "rightsHolder": "Duckbill / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or touch icon; reviewed on the labeled contact sheet. Host mapping follows the company or named product, not the linked accelerator.",
+      "transformation": "Largest available ICO frame or official PNG/SVG converted proportionally to local PNG, at most 96 px; original colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify Duckbill beside substantive, sourced product comparisons on personal-agents.",
+        "scope": [
+          "personal-agents"
+        ]
+      }
+    },
+    {
+      "id": "google",
+      "name": "Google",
+      "asset": "/company-icons/google.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:11:11.789Z",
+      "sourcePage": "https://www.google.com/",
+      "sourceUrl": "https://www.google.com/favicon.ico",
+      "sha256": "465ad9e6824fd7155a5a261c5eb6e6424ecdb952bd39e4d57c9bd5f063d85bbe",
+      "sourceDimensions": [
+        32,
+        32
+      ],
+      "identityLabels": [
+        "Google / Gemini",
+        "Google / Gemini, Spark",
+        "Google DeepMind / Gemini Robotics"
+      ],
+      "rightsHolder": "Google / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or touch icon; reviewed on the labeled contact sheet. Host mapping follows the company or named product, not the linked accelerator.",
+      "transformation": "Largest available ICO frame or official PNG/SVG converted proportionally to local PNG, at most 96 px; original colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify Google beside substantive, sourced product comparisons on consumer-ai, personal-agents, physical-ai.",
+        "scope": [
+          "consumer-ai",
+          "personal-agents",
+          "physical-ai"
+        ]
+      }
+    },
+    {
+      "id": "haivivi",
+      "name": "跃然创新",
+      "asset": "/company-icons/haivivi.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:12:29.714Z",
+      "sourcePage": "https://www.haivivi.cn/",
+      "sourceUrl": "https://haivivi-next-uat.tos-cn-shanghai.volces.com/assets/v2.0/cn/icon.svg",
+      "sha256": "a3adaae38eccba85000d4b48f8328724f0ac598a4078baeba4d082a3b197ebd6",
+      "sourceDimensions": [
+        280,
+        280
+      ],
+      "identityLabels": [
+        "跃然创新 / Haivivi"
+      ],
+      "rightsHolder": "跃然创新 / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or touch icon; reviewed on the labeled contact sheet. Host mapping follows the company or named product, not the linked accelerator.",
+      "transformation": "Largest available ICO frame or official PNG/SVG converted proportionally to local PNG, at most 96 px; original colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify 跃然创新 beside substantive, sourced product comparisons on china-consumer-ai.",
+        "scope": [
+          "china-consumer-ai"
+        ]
+      }
+    },
+    {
+      "id": "kimi",
+      "name": "月之暗面 Moonshot AI",
+      "asset": "/company-icons/kimi.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:12:02.907Z",
+      "sourcePage": "https://www.kimi.com/",
+      "sourceUrl": "https://www.kimi.com/pwa-192.png",
+      "sha256": "21a11ed71892dd174e977c6538508b64f9516621a2f997dc030339c7742288db",
+      "sourceDimensions": [
+        192,
+        192
+      ],
+      "identityLabels": [
+        "月之暗面 Moonshot AI / Kimi"
+      ],
+      "rightsHolder": "月之暗面 Moonshot AI / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or touch icon; reviewed on the labeled contact sheet. Host mapping follows the company or named product, not the linked accelerator.",
+      "transformation": "Largest available ICO frame or official PNG/SVG converted proportionally to local PNG, at most 96 px; original colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify 月之暗面 Moonshot AI beside substantive, sourced product comparisons on china-consumer-ai.",
+        "scope": [
+          "china-consumer-ai"
+        ]
+      }
+    },
+    {
+      "id": "krea",
+      "name": "Krea",
+      "asset": "/company-icons/krea.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:11:26.080Z",
+      "sourcePage": "https://www.krea.ai/",
+      "sourceUrl": "https://www.krea.ai/favicon/favicon-32.png",
+      "sha256": "21636adcd0bd26c2a29bb89cd11c3b4e0cde0c83c585aaf4a57017cfb41dbc51",
+      "sourceDimensions": [
+        32,
+        32
+      ],
+      "identityLabels": [
+        "Krea"
+      ],
+      "rightsHolder": "Krea / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or touch icon; reviewed on the labeled contact sheet. Host mapping follows the company or named product, not the linked accelerator.",
+      "transformation": "Largest available ICO frame or official PNG/SVG converted proportionally to local PNG, at most 96 px; original colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify Krea beside substantive, sourced product comparisons on consumer-ai.",
+        "scope": [
+          "consumer-ai"
+        ]
+      }
+    },
+    {
+      "id": "liblib",
+      "name": "演语科技 Evoken",
+      "asset": "/company-icons/liblib.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:12:09.564Z",
+      "sourcePage": "https://www.liblib.art/",
+      "sourceUrl": "https://www.liblib.art/favicon.ico",
+      "sha256": "8f1400015b0c63e9e34ef9ede039e9d5e7e1192b30a0d6863e8e5861e53a380a",
+      "sourceDimensions": [
+        48,
+        48
+      ],
+      "identityLabels": [
+        "演语科技 Evoken / LiblibAI"
+      ],
+      "rightsHolder": "演语科技 Evoken / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or touch icon; reviewed on the labeled contact sheet. Host mapping follows the company or named product, not the linked accelerator.",
+      "transformation": "Largest available ICO frame or official PNG/SVG converted proportionally to local PNG, at most 96 px; original colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify 演语科技 Evoken beside substantive, sourced product comparisons on china-consumer-ai.",
+        "scope": [
+          "china-consumer-ai"
+        ]
+      }
+    },
+    {
+      "id": "listenhub",
+      "name": "MarsWave",
+      "asset": "/company-icons/listenhub.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:11:23.572Z",
+      "sourcePage": "https://listenhub.ai/",
+      "sourceUrl": "https://listenhub.ai/favicon-180.png",
+      "sha256": "2c47c0166f7d286fea5971938e65fe8c314702dfcc2a5a3da5c1a767d032bf65",
+      "sourceDimensions": [
+        180,
+        180
+      ],
+      "identityLabels": [
+        "MarsWave / ListenHub"
+      ],
+      "rightsHolder": "MarsWave / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or touch icon; reviewed on the labeled contact sheet. Host mapping follows the company or named product, not the linked accelerator.",
+      "transformation": "Largest available ICO frame or official PNG/SVG converted proportionally to local PNG, at most 96 px; original colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify MarsWave beside substantive, sourced product comparisons on consumer-ai, china-consumer-ai.",
+        "scope": [
+          "consumer-ai",
+          "china-consumer-ai"
+        ]
+      }
+    },
+    {
+      "id": "littlebird",
+      "name": "Littlebird",
+      "asset": "/company-icons/littlebird.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:11:47.425Z",
+      "sourcePage": "https://littlebird.ai/",
+      "sourceUrl": "https://cdn.prod.website-files.com/694043d273dceabab479f631/6a55a1a906eabfade48dce1e_69603245cff328dc64a18f61_Base%20Icon%20%5BDO%20NOT%20EDIT%5D%206.png",
+      "sha256": "9212d13ad758932666bc8e3b98ffca288f4dd280cb9891e3afa9cd90b46f67b6",
+      "sourceDimensions": [
+        180,
+        180
+      ],
+      "identityLabels": [
+        "Littlebird"
+      ],
+      "rightsHolder": "Littlebird / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or touch icon; reviewed on the labeled contact sheet. Host mapping follows the company or named product, not the linked accelerator.",
+      "transformation": "Largest available ICO frame or official PNG/SVG converted proportionally to local PNG, at most 96 px; original colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify Littlebird beside substantive, sourced product comparisons on personal-agents.",
+        "scope": [
+          "personal-agents"
+        ]
+      }
+    },
+    {
+      "id": "loopit-com",
+      "name": "涌跃智能",
+      "asset": "/company-icons/loopit-com.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:12:13.889Z",
+      "sourcePage": "https://loopit.com.cn/",
+      "sourceUrl": "https://loopit.com.cn/icon.png?icon.d289fa64.png",
+      "sha256": "4d38ea8b31e022483b4c95e01af75242fe207bc2204cb82d3c19df2ea94a1694",
+      "sourceDimensions": [
+        60,
+        60
+      ],
+      "identityLabels": [
+        "涌跃智能 / Loopit"
+      ],
+      "rightsHolder": "涌跃智能 / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or touch icon; reviewed on the labeled contact sheet. Host mapping follows the company or named product, not the linked accelerator.",
+      "transformation": "Largest available ICO frame or official PNG/SVG converted proportionally to local PNG, at most 96 px; original colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify 涌跃智能 beside substantive, sourced product comparisons on china-consumer-ai.",
+        "scope": [
+          "china-consumer-ai"
+        ]
+      }
+    },
+    {
+      "id": "macaron",
+      "name": "Macaron",
+      "asset": "/company-icons/macaron.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:11:37.666Z",
+      "sourcePage": "https://macaron.im/",
+      "sourceUrl": "https://macaron.im/apple-touch-icon.png",
+      "sha256": "1d33264ac2f1558543a2270fab7ed06f48f5ce9bd26fdd2b75c2c74cfeff337d",
+      "sourceDimensions": [
+        96,
+        96
+      ],
+      "identityLabels": [
+        "Macaron / 心洲科技",
+        "Macaron 马卡龙 / 心洲科技",
+        "心洲科技 / Macaron 马卡龙"
+      ],
+      "rightsHolder": "Macaron / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or touch icon; reviewed on the labeled contact sheet. Host mapping follows the company or named product, not the linked accelerator.",
+      "transformation": "Largest available ICO frame or official PNG/SVG converted proportionally to local PNG, at most 96 px; original colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify Macaron beside substantive, sourced product comparisons on consumer-ai, personal-agents, china-consumer-ai.",
+        "scope": [
+          "consumer-ai",
+          "personal-agents",
+          "china-consumer-ai"
+        ]
+      }
+    },
+    {
+      "id": "meta",
+      "name": "Meta",
+      "asset": "/company-icons/meta.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:11:13.286Z",
+      "sourcePage": "https://www.meta.com/ca/",
+      "sourceUrl": "https://static.xx.fbcdn.net/rsrc.php/yQ/r/0eWKxz9kEoF.webp",
+      "sha256": "1cc253cb7c9f3059f9e1580e0cb4a157f00c9c266b9cdad27d81d7a307ba045b",
+      "sourceDimensions": [
+        180,
+        180
+      ],
+      "identityLabels": [
+        "Meta / Meta AI"
+      ],
+      "rightsHolder": "Meta / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or touch icon; reviewed on the labeled contact sheet. Host mapping follows the company or named product, not the linked accelerator.",
+      "transformation": "Largest available ICO frame or official PNG/SVG converted proportionally to local PNG, at most 96 px; original colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify Meta beside substantive, sourced product comparisons on consumer-ai.",
+        "scope": [
+          "consumer-ai"
+        ]
+      }
+    },
+    {
+      "id": "metaso",
+      "name": "秘塔科技",
+      "asset": "/company-icons/metaso.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:12:19.829Z",
+      "sourcePage": "https://metaso.cn/",
+      "sourceUrl": "https://metaso.cn/apple-touch-icon.png",
+      "sha256": "0e73dc14d365038c37cfc6c2a4a8550e79a5a742150964549d1eecb5f04cd5d0",
+      "sourceDimensions": [
+        1024,
+        1024
+      ],
+      "identityLabels": [
+        "秘塔科技 / MetaSo"
+      ],
+      "rightsHolder": "秘塔科技 / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or touch icon; reviewed on the labeled contact sheet. Host mapping follows the company or named product, not the linked accelerator.",
+      "transformation": "Largest available ICO frame or official PNG/SVG converted proportionally to local PNG, at most 96 px; original colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify 秘塔科技 beside substantive, sourced product comparisons on china-consumer-ai.",
+        "scope": [
+          "china-consumer-ai"
+        ]
+      }
+    },
+    {
+      "id": "microsoft",
+      "name": "Microsoft",
+      "asset": "/company-icons/microsoft.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:11:12.768Z",
+      "sourcePage": "https://www.microsoft.com/",
+      "sourceUrl": "https://www.microsoft.com/favicon.ico?v2",
+      "sha256": "15714bb33a84a4fbe0c306ed477411bf31adbb4af62ca81394dff589d62ea12c",
+      "sourceDimensions": [
+        128,
+        128
+      ],
+      "identityLabels": [
+        "Microsoft / Copilot"
+      ],
+      "rightsHolder": "Microsoft / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or touch icon; reviewed on the labeled contact sheet. Host mapping follows the company or named product, not the linked accelerator.",
+      "transformation": "Largest available ICO frame or official PNG/SVG converted proportionally to local PNG, at most 96 px; original colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify Microsoft beside substantive, sourced product comparisons on consumer-ai, personal-agents.",
+        "scope": [
+          "consumer-ai",
+          "personal-agents"
+        ]
+      }
+    },
+    {
+      "id": "midjourney",
+      "name": "Midjourney",
+      "asset": null,
+      "status": "initials fallback",
+      "checkedAt": "2026-10-11T16:11:24.893Z",
+      "sourcePage": "https://midjourney.com/",
+      "sourceUrl": null,
+      "sha256": null,
+      "sourceDimensions": null,
+      "identityLabels": [
+        "Midjourney"
+      ],
+      "rightsHolder": "Midjourney / respective mark owner; no rights transfer asserted",
+      "identityReview": "No matching usable official icon confirmed; no third party artwork is reproduced.",
+      "transformation": "Original plain-text initials, not an imitation of a logo.",
+      "reuseAssessment": null
+    },
+    {
+      "id": "mindtrip",
+      "name": "Mindtrip",
+      "asset": "/company-icons/mindtrip.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:11:34.769Z",
+      "sourcePage": "https://mindtrip.ai/",
+      "sourceUrl": "https://mindtrip.ai/favicon.ico",
+      "sha256": "ed717071b74152e95e4131f6abf5ee4d1840f9d0935400a675af6c9694efff02",
+      "sourceDimensions": [
+        48,
+        48
+      ],
+      "identityLabels": [
+        "Mindtrip",
+        "Mindtrip / Flights, Stays"
+      ],
+      "rightsHolder": "Mindtrip / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or touch icon; reviewed on the labeled contact sheet. Host mapping follows the company or named product, not the linked accelerator.",
+      "transformation": "Largest available ICO frame or official PNG/SVG converted proportionally to local PNG, at most 96 px; original colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify Mindtrip beside substantive, sourced product comparisons on consumer-ai, personal-agents.",
+        "scope": [
+          "consumer-ai",
+          "personal-agents"
+        ]
+      }
+    },
+    {
+      "id": "minimax",
+      "name": "MiniMax",
+      "asset": "/company-icons/minimax.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:12:04.761Z",
+      "sourcePage": "https://www.minimax.io/",
+      "sourceUrl": "https://www.minimax.io/favicon.ico",
+      "sha256": "032dc95f94c601d127e4b1f1f1c0fbaff107944a718ad06b5606a3b9c0e68733",
+      "sourceDimensions": [
+        32,
+        32
+      ],
+      "identityLabels": [
+        "MiniMax 稀宇 / Hailuo, Talkie"
+      ],
+      "rightsHolder": "MiniMax / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or touch icon; reviewed on the labeled contact sheet. Host mapping follows the company or named product, not the linked accelerator.",
+      "transformation": "Largest available ICO frame or official PNG/SVG converted proportionally to local PNG, at most 96 px; original colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify MiniMax beside substantive, sourced product comparisons on china-consumer-ai.",
+        "scope": [
+          "china-consumer-ai"
+        ]
+      }
+    },
+    {
+      "id": "most-robotic",
+      "name": "Most Robotic",
+      "asset": null,
+      "status": "initials fallback",
+      "checkedAt": "2026-10-11T16:12:45.546Z",
+      "sourcePage": null,
+      "sourceUrl": null,
+      "sha256": null,
+      "sourceDimensions": null,
+      "identityLabels": [
+        "Most Robotic / Instance launch"
+      ],
+      "rightsHolder": "Most Robotic / respective mark owner; no rights transfer asserted",
+      "identityReview": "No matching usable official icon confirmed; no third party artwork is reproduced.",
+      "transformation": "Original plain-text initials, not an imitation of a logo.",
+      "reuseAssessment": null
+    },
+    {
+      "id": "natureselect",
+      "name": "自然选择",
+      "asset": null,
+      "status": "initials fallback",
+      "checkedAt": "2026-10-11T16:12:24.660Z",
+      "sourcePage": "https://natureselect.ai/",
+      "sourceUrl": null,
+      "sha256": null,
+      "sourceDimensions": null,
+      "identityLabels": [
+        "自然选择 / EVE"
+      ],
+      "rightsHolder": "自然选择 / respective mark owner; no rights transfer asserted",
+      "identityReview": "No matching usable official icon confirmed; no third party artwork is reproduced.",
+      "transformation": "Original plain-text initials, not an imitation of a logo.",
+      "reuseAssessment": null
+    },
+    {
+      "id": "nomi",
+      "name": "Nomi",
+      "asset": "/company-icons/nomi.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:11:29.163Z",
+      "sourcePage": "https://nomi.ai/",
+      "sourceUrl": "https://i0.wp.com/nomi.ai/wp-content/uploads/2024/03/nomi-transparent-logo-3.png?fit=180%2C180&#038;ssl=1",
+      "sha256": "69ee41e4ab25faa8efd40924664793f822233af11790073aa381590a9ccb14a5",
+      "sourceDimensions": [
+        180,
+        180
+      ],
+      "identityLabels": [
+        "Nomi"
+      ],
+      "rightsHolder": "Nomi / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or touch icon; reviewed on the labeled contact sheet. Host mapping follows the company or named product, not the linked accelerator.",
+      "transformation": "Largest available ICO frame or official PNG/SVG converted proportionally to local PNG, at most 96 px; original colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify Nomi beside substantive, sourced product comparisons on consumer-ai.",
+        "scope": [
+          "consumer-ai"
+        ]
+      }
+    },
+    {
+      "id": "nvidia",
+      "name": "NVIDIA",
+      "asset": "/company-icons/nvidia.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:12:42.884Z",
+      "sourcePage": "https://www.nvidia.com/en-us/location-selector/",
+      "sourceUrl": "https://www.nvidia.com/favicon.ico",
+      "sha256": "aa73374607c1c57e20dbf7cddf5b969425d9b43b17a02100a4774745b341e8fb",
+      "sourceDimensions": [
+        48,
+        48
+      ],
+      "identityLabels": [
+        "NVIDIA Isaac Sim"
+      ],
+      "rightsHolder": "NVIDIA / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or touch icon; reviewed on the labeled contact sheet. Host mapping follows the company or named product, not the linked accelerator.",
+      "transformation": "Largest available ICO frame or official PNG/SVG converted proportionally to local PNG, at most 96 px; original colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify NVIDIA beside substantive, sourced product comparisons on physical-ai.",
+        "scope": [
+          "physical-ai"
+        ]
+      }
+    },
+    {
+      "id": "ohai",
+      "name": "Ohai",
+      "asset": "/company-icons/ohai.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:11:33.748Z",
+      "sourcePage": "https://www.ohai.ai/",
+      "sourceUrl": "https://www.ohai.ai/images/favicon.ico",
+      "sha256": "facd606cda07d664e15d0ba0127cd31829f1f4e7c02da2d3abe955675911d1a1",
+      "sourceDimensions": [
+        16,
+        16
+      ],
+      "identityLabels": [
+        "Ohai"
+      ],
+      "rightsHolder": "Ohai / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or touch icon; reviewed on the labeled contact sheet. Host mapping follows the company or named product, not the linked accelerator.",
+      "transformation": "Largest available ICO frame or official PNG/SVG converted proportionally to local PNG, at most 96 px; original colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify Ohai beside substantive, sourced product comparisons on consumer-ai, personal-agents.",
+        "scope": [
+          "consumer-ai",
+          "personal-agents"
+        ]
+      }
+    },
+    {
+      "id": "one-robot",
+      "name": "One Robot",
+      "asset": null,
+      "status": "initials fallback",
+      "checkedAt": "2026-10-11T16:12:45.546Z",
+      "sourcePage": null,
+      "sourceUrl": null,
+      "sha256": null,
+      "sourceDimensions": null,
+      "identityLabels": [
+        "One Robot"
+      ],
+      "rightsHolder": "One Robot / respective mark owner; no rights transfer asserted",
+      "identityReview": "No matching usable official icon confirmed; no third party artwork is reproduced.",
+      "transformation": "Original plain-text initials, not an imitation of a logo.",
+      "reuseAssessment": null
+    },
+    {
+      "id": "openai",
+      "name": "OpenAI",
+      "asset": "/company-icons/openai.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:14:34.129Z",
+      "sourcePage": "https://developers.openai.com/",
+      "sourceUrl": "https://developers.openai.com/favicon.png",
+      "sha256": "66a3ba0e8c2b7bee2090388d6df025aa7555a5be197a31e32dff2def8c04427b",
+      "sourceDimensions": [
+        48,
+        48
+      ],
+      "identityLabels": [
+        "OpenAI / ChatGPT",
+        "OpenAI / ChatGPT agent"
+      ],
+      "rightsHolder": "OpenAI / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or touch icon; reviewed on the labeled contact sheet. Host mapping follows the company or named product, not the linked accelerator.",
+      "transformation": "Largest available ICO frame or official PNG/SVG converted proportionally to local PNG, at most 96 px; original colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify OpenAI beside substantive, sourced product comparisons on consumer-ai, personal-agents.",
+        "scope": [
+          "consumer-ai",
+          "personal-agents"
+        ]
+      }
+    },
+    {
+      "id": "oral-craft",
+      "name": "可栗口语",
+      "asset": "/company-icons/oral-craft.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:12:16.692Z",
+      "sourcePage": "https://oral-craft.com/",
+      "sourceUrl": "https://oral-craft.com/apple-touch-icon.png",
+      "sha256": "6873af165b5172d7de2906517faa85a941bb84cc68ad6a363f5b1a1c23d47758",
+      "sourceDimensions": [
+        180,
+        180
+      ],
+      "identityLabels": [
+        "可栗口语 / OralCraft"
+      ],
+      "rightsHolder": "可栗口语 / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or touch icon; reviewed on the labeled contact sheet. Host mapping follows the company or named product, not the linked accelerator.",
+      "transformation": "Largest available ICO frame or official PNG/SVG converted proportionally to local PNG, at most 96 px; original colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify 可栗口语 beside substantive, sourced product comparisons on china-consumer-ai.",
+        "scope": [
+          "china-consumer-ai"
+        ]
+      }
+    },
+    {
+      "id": "phia",
+      "name": "Phia",
+      "asset": "/company-icons/phia.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:11:37.205Z",
+      "sourcePage": "https://phia.me/",
+      "sourceUrl": "https://phia.me/icon.svg?icon.73a56f71.svg",
+      "sha256": "11b52109d157bb407edbd38b45639b64c4cd7852aa8e02b928a85836ecdcb830",
+      "sourceDimensions": [
+        32,
+        32
+      ],
+      "identityLabels": [
+        "Phia"
+      ],
+      "rightsHolder": "Phia / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or touch icon; reviewed on the labeled contact sheet. Host mapping follows the company or named product, not the linked accelerator.",
+      "transformation": "Largest available ICO frame or official PNG/SVG converted proportionally to local PNG, at most 96 px; original colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify Phia beside substantive, sourced product comparisons on consumer-ai, personal-agents.",
+        "scope": [
+          "consumer-ai",
+          "personal-agents"
+        ]
+      }
+    },
+    {
+      "id": "physicalintelligence",
+      "name": "Physical Intelligence",
+      "asset": null,
+      "status": "initials fallback",
+      "checkedAt": "2026-10-11T16:12:40.523Z",
+      "sourcePage": "https://physicalintelligence.company/",
+      "sourceUrl": null,
+      "sha256": null,
+      "sourceDimensions": null,
+      "identityLabels": [
+        "Physical Intelligence"
+      ],
+      "rightsHolder": "Physical Intelligence / respective mark owner; no rights transfer asserted",
+      "identityReview": "No matching usable official icon confirmed; no third party artwork is reproduced.",
+      "transformation": "Original plain-text initials, not an imitation of a logo.",
+      "reuseAssessment": null
+    },
+    {
+      "id": "pika",
+      "name": "Pika",
+      "asset": "/company-icons/pika.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:11:25.078Z",
+      "sourcePage": "https://pika.art/",
+      "sourceUrl": "https://pika.art/apple-icon.png?apple-icon.1pc-f1mhs57mu.png",
+      "sha256": "33f2f8383bced6c8a8e2db85424978c2cd8415de93d546a8a974b5e5649077e6",
+      "sourceDimensions": [
+        180,
+        180
+      ],
+      "identityLabels": [
+        "Pika"
+      ],
+      "rightsHolder": "Pika / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or touch icon; reviewed on the labeled contact sheet. Host mapping follows the company or named product, not the linked accelerator.",
+      "transformation": "Largest available ICO frame or official PNG/SVG converted proportionally to local PNG, at most 96 px; original colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify Pika beside substantive, sourced product comparisons on consumer-ai.",
+        "scope": [
+          "consumer-ai"
+        ]
+      }
+    },
+    {
+      "id": "pilotplans",
+      "name": "Pilot",
+      "asset": "/company-icons/pilotplans.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:11:36.254Z",
+      "sourcePage": "https://www.pilotplans.com/",
+      "sourceUrl": "https://cdn.prod.website-files.com/67a6ba056d889c1e78426c35/67b7bf5f7a4f2aac53802118_256x256.png",
+      "sha256": "60a509dc06c4b0254f75924fda4e65e8bfee69060a66d010155e535e112adb9f",
+      "sourceDimensions": [
+        256,
+        256
+      ],
+      "identityLabels": [
+        "Pilot"
+      ],
+      "rightsHolder": "Pilot / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or touch icon; reviewed on the labeled contact sheet. Host mapping follows the company or named product, not the linked accelerator.",
+      "transformation": "Largest available ICO frame or official PNG/SVG converted proportionally to local PNG, at most 96 px; original colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify Pilot beside substantive, sourced product comparisons on consumer-ai, personal-agents.",
+        "scope": [
+          "consumer-ai",
+          "personal-agents"
+        ]
+      }
+    },
+    {
+      "id": "pixverse",
+      "name": "PixVerse",
+      "asset": "/company-icons/pixverse.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:11:25.749Z",
+      "sourcePage": "https://pixverse.ai/en",
+      "sourceUrl": "https://cdn.pixverse.ai/media/pixverse/favicon.png",
+      "sha256": "e9cf4809b19b7ae4a73384dda15abca7c7b27a7e34b5adc45f3cb2cad436692d",
+      "sourceDimensions": [
+        512,
+        512
+      ],
+      "identityLabels": [
+        "PixVerse",
+        "爱诗科技 / PixVerse"
+      ],
+      "rightsHolder": "PixVerse / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or touch icon; reviewed on the labeled contact sheet. Host mapping follows the company or named product, not the linked accelerator.",
+      "transformation": "Largest available ICO frame or official PNG/SVG converted proportionally to local PNG, at most 96 px; original colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify PixVerse beside substantive, sourced product comparisons on consumer-ai, china-consumer-ai.",
+        "scope": [
+          "consumer-ai",
+          "china-consumer-ai"
+        ]
+      }
+    },
+    {
+      "id": "praktika",
+      "name": "Praktika",
+      "asset": "/company-icons/praktika.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:11:20.636Z",
+      "sourcePage": "https://praktika.ai/",
+      "sourceUrl": "https://praktika.ai/apple-touch-icon.png",
+      "sha256": "93b965da250e80ad7d4bac683fbc87ea021e9d7ff74670e2ea8eee641bccbb2a",
+      "sourceDimensions": [
+        180,
+        180
+      ],
+      "identityLabels": [
+        "Praktika"
+      ],
+      "rightsHolder": "Praktika / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or touch icon; reviewed on the labeled contact sheet. Host mapping follows the company or named product, not the linked accelerator.",
+      "transformation": "Largest available ICO frame or official PNG/SVG converted proportionally to local PNG, at most 96 px; original colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify Praktika beside substantive, sourced product comparisons on consumer-ai.",
+        "scope": [
+          "consumer-ai"
+        ]
+      }
+    },
+    {
+      "id": "replika",
+      "name": "Replika",
+      "asset": "/company-icons/replika.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:11:29.614Z",
+      "sourcePage": "https://replika.com/",
+      "sourceUrl": "https://replika.com/apple-icon.png?58c5aabf1e3f85c0",
+      "sha256": "16fe3f98cbbb6110df64ee663c7d9455094e58e653352142a271897a167ea94d",
+      "sourceDimensions": [
+        180,
+        180
+      ],
+      "identityLabels": [
+        "Replika"
+      ],
+      "rightsHolder": "Replika / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or touch icon; reviewed on the labeled contact sheet. Host mapping follows the company or named product, not the linked accelerator.",
+      "transformation": "Largest available ICO frame or official PNG/SVG converted proportionally to local PNG, at most 96 px; original colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify Replika beside substantive, sourced product comparisons on consumer-ai.",
+        "scope": [
+          "consumer-ai"
+        ]
+      }
+    },
+    {
+      "id": "robopoet",
+      "name": "珞博智能 Robopoet",
+      "asset": null,
+      "status": "initials fallback",
+      "checkedAt": "2026-10-11T16:12:37.238Z",
+      "sourcePage": "https://robopoet.com/",
+      "sourceUrl": null,
+      "sha256": null,
+      "sourceDimensions": null,
+      "identityLabels": [
+        "珞博智能 Robopoet / Fuzozo 芙崽"
+      ],
+      "rightsHolder": "珞博智能 Robopoet / respective mark owner; no rights transfer asserted",
+      "identityReview": "No matching usable official icon confirmed; no third party artwork is reproduced.",
+      "transformation": "Original plain-text initials, not an imitation of a logo.",
+      "reuseAssessment": null
+    },
+    {
+      "id": "roboto",
+      "name": "Roboto",
+      "asset": "/company-icons/roboto.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:12:42.163Z",
+      "sourcePage": "https://www.roboto.ai/",
+      "sourceUrl": "https://www.roboto.ai/assets/favicons/apple-touch-icon.png",
+      "sha256": "6759f8a66bb1cce39f3a9d6b7f84d755254903f482c3bb56cc691f82d73753e6",
+      "sourceDimensions": [
+        180,
+        180
+      ],
+      "identityLabels": [
+        "Roboto"
+      ],
+      "rightsHolder": "Roboto / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or touch icon; reviewed on the labeled contact sheet. Host mapping follows the company or named product, not the linked accelerator.",
+      "transformation": "Largest available ICO frame or official PNG/SVG converted proportionally to local PNG, at most 96 px; original colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify Roboto beside substantive, sourced product comparisons on physical-ai.",
+        "scope": [
+          "physical-ai"
+        ]
+      }
+    },
+    {
+      "id": "ropetai",
+      "name": "萌友智能",
+      "asset": "/company-icons/ropetai.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:12:35.303Z",
+      "sourcePage": "https://ropetai.cn/",
+      "sourceUrl": "https://ropetai.cn/images/logo_icon.png",
+      "sha256": "e72ce8093a8f43fda4839e9ad0b03706ff739138255433675420f153285c303e",
+      "sourceDimensions": [
+        96,
+        96
+      ],
+      "identityLabels": [
+        "萌友智能 / Ropet"
+      ],
+      "rightsHolder": "萌友智能 / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or touch icon; reviewed on the labeled contact sheet. Host mapping follows the company or named product, not the linked accelerator.",
+      "transformation": "Largest available ICO frame or official PNG/SVG converted proportionally to local PNG, at most 96 px; original colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify 萌友智能 beside substantive, sourced product comparisons on china-consumer-ai.",
+        "scope": [
+          "china-consumer-ai"
+        ]
+      }
+    },
+    {
+      "id": "rosebud",
+      "name": "Rosebud",
+      "asset": "/company-icons/rosebud.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:11:31.402Z",
+      "sourcePage": "https://www.rosebud.app/",
+      "sourceUrl": "https://www.rosebud.app/apple-icon.png",
+      "sha256": "c6447889d4f2d81300906156a8ce55476c2ff4c01023fe50105803c071be9318",
+      "sourceDimensions": [
+        256,
+        256
+      ],
+      "identityLabels": [
+        "Rosebud"
+      ],
+      "rightsHolder": "Rosebud / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or touch icon; reviewed on the labeled contact sheet. Host mapping follows the company or named product, not the linked accelerator.",
+      "transformation": "Largest available ICO frame or official PNG/SVG converted proportionally to local PNG, at most 96 px; original colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify Rosebud beside substantive, sourced product comparisons on consumer-ai.",
+        "scope": [
+          "consumer-ai"
+        ]
+      }
+    },
+    {
+      "id": "runway",
+      "name": "Runway Robotics",
+      "asset": "/company-icons/runway.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:12:44.983Z",
+      "sourcePage": "https://runway.com/",
+      "sourceUrl": "https://runway.com/icon.png?icon.35ps9bmugbe1e.png",
+      "sha256": "680a96f718ead0581c2f5e6874631cc3ca48ef716e5c496170422709fa8ec6db",
+      "sourceDimensions": [
+        320,
+        320
+      ],
+      "identityLabels": [
+        "Runway Robotics"
+      ],
+      "rightsHolder": "Runway Robotics / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or touch icon; reviewed on the labeled contact sheet. Host mapping follows the company or named product, not the linked accelerator.",
+      "transformation": "Largest available ICO frame or official PNG/SVG converted proportionally to local PNG, at most 96 px; original colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify Runway Robotics beside substantive, sourced product comparisons on physical-ai.",
+        "scope": [
+          "physical-ai"
+        ]
+      }
+    },
+    {
+      "id": "scale",
+      "name": "Scale AI",
+      "asset": "/company-icons/scale.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:12:41.400Z",
+      "sourcePage": "https://scale.com/",
+      "sourceUrl": "https://scale.com/static/global/favicon/v3/apple-touch-icon.png",
+      "sha256": "3e65dfd94d17640a32360c495eb57328d74d73dc5d547bb042350f5fdb847cb8",
+      "sourceDimensions": [
+        180,
+        180
+      ],
+      "identityLabels": [
+        "Scale AI"
+      ],
+      "rightsHolder": "Scale AI / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or touch icon; reviewed on the labeled contact sheet. Host mapping follows the company or named product, not the linked accelerator.",
+      "transformation": "Largest available ICO frame or official PNG/SVG converted proportionally to local PNG, at most 96 px; original colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify Scale AI beside substantive, sourced product comparisons on physical-ai.",
+        "scope": [
+          "physical-ai"
+        ]
+      }
+    },
+    {
+      "id": "seaart",
+      "name": "海艺智创",
+      "asset": "/company-icons/seaart.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:12:12.929Z",
+      "sourcePage": "https://www.seaart.ai/",
+      "sourceUrl": "https://www.seaart.ai/apple-touch-icon.png",
+      "sha256": "39772a80c5db48be924000c71d3f5868d768602ceffb8b229c77fe5bc6357b7d",
+      "sourceDimensions": [
+        100,
+        100
+      ],
+      "identityLabels": [
+        "海艺智创 / SeaArt"
+      ],
+      "rightsHolder": "海艺智创 / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or touch icon; reviewed on the labeled contact sheet. Host mapping follows the company or named product, not the linked accelerator.",
+      "transformation": "Largest available ICO frame or official PNG/SVG converted proportionally to local PNG, at most 96 px; original colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify 海艺智创 beside substantive, sourced product comparisons on china-consumer-ai.",
+        "scope": [
+          "china-consumer-ai"
+        ]
+      }
+    },
+    {
+      "id": "second",
+      "name": "Second Me",
+      "asset": "/company-icons/second.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:11:42.266Z",
+      "sourcePage": "https://second.me/",
+      "sourceUrl": "https://mindverseglobal.mindverse.com/front-img/crm/1753175020618/og-logo.png",
+      "sha256": "006f35a1269d27061000e66f2e6d1f5811118a74ee2d566eb85e5c4c58548c7c",
+      "sourceDimensions": [
+        1754,
+        1754
+      ],
+      "identityLabels": [
+        "Second Me 小己 / 心识宇宙",
+        "Mindverse AI 心识宇宙"
+      ],
+      "rightsHolder": "Second Me / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or touch icon; reviewed on the labeled contact sheet. Host mapping follows the company or named product, not the linked accelerator.",
+      "transformation": "Largest available ICO frame or official PNG/SVG converted proportionally to local PNG, at most 96 px; original colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify Second Me beside substantive, sourced product comparisons on personal-agents, china-consumer-ai.",
+        "scope": [
+          "personal-agents",
+          "china-consumer-ai"
+        ]
+      }
+    },
+    {
+      "id": "seeles",
+      "name": "SEELE 全灵",
+      "asset": "/company-icons/seeles.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:11:48.756Z",
+      "sourcePage": "https://www.seeles.ai/",
+      "sourceUrl": "https://static.seeles.ai/p/code4agent-site/favicon.ico?v=20250706",
+      "sha256": "9359699deda343062fb13f4a5ebf64999246b5e07ff48d16429733054950f3a7",
+      "sourceDimensions": [
+        128,
+        128
+      ],
+      "identityLabels": [
+        "SEELE 全灵",
+        "全灵 / SEELE"
+      ],
+      "rightsHolder": "SEELE 全灵 / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or touch icon; reviewed on the labeled contact sheet. Host mapping follows the company or named product, not the linked accelerator.",
+      "transformation": "Largest available ICO frame or official PNG/SVG converted proportionally to local PNG, at most 96 px; original colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify SEELE 全灵 beside substantive, sourced product comparisons on personal-agents, china-consumer-ai.",
+        "scope": [
+          "personal-agents",
+          "china-consumer-ai"
+        ]
+      }
+    },
+    {
+      "id": "sekaiapp",
+      "name": "Sekai",
+      "asset": "/company-icons/sekaiapp.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:11:30.609Z",
+      "sourcePage": "https://sekai.ai/",
+      "sourceUrl": "https://sekai.ai/favicon.ico",
+      "sha256": "71d4dbca138d14f280ebd3d2d5b13712ef1669773e4312f712f3792af0f1e02f",
+      "sourceDimensions": [
+        64,
+        64
+      ],
+      "identityLabels": [
+        "Sekai"
+      ],
+      "rightsHolder": "Sekai / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or touch icon; reviewed on the labeled contact sheet. Host mapping follows the company or named product, not the linked accelerator.",
+      "transformation": "Largest available ICO frame or official PNG/SVG converted proportionally to local PNG, at most 96 px; original colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify Sekai beside substantive, sourced product comparisons on consumer-ai.",
+        "scope": [
+          "consumer-ai"
+        ]
+      }
+    },
+    {
+      "id": "skild",
+      "name": "Skild AI",
+      "asset": "/company-icons/skild.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:12:40.863Z",
+      "sourcePage": "https://skild.ai/",
+      "sourceUrl": "https://skild.ai/favicon.ico",
+      "sha256": "8a877dc084e8f921994e54dff8bc03313c6fade5dcd873856f8b079721071045",
+      "sourceDimensions": [
+        256,
+        256
+      ],
+      "identityLabels": [
+        "Skild AI"
+      ],
+      "rightsHolder": "Skild AI / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or touch icon; reviewed on the labeled contact sheet. Host mapping follows the company or named product, not the linked accelerator.",
+      "transformation": "Largest available ICO frame or official PNG/SVG converted proportionally to local PNG, at most 96 px; original colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify Skild AI beside substantive, sourced product comparisons on physical-ai.",
+        "scope": [
+          "physical-ai"
+        ]
+      }
+    },
+    {
+      "id": "speak",
+      "name": "Speak",
+      "asset": "/company-icons/speak.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:11:19.785Z",
+      "sourcePage": "https://www.speak.com/",
+      "sourceUrl": "https://www.speak.com/cdn.prod.website-files.com/61a88c135006e8345b005efd/686a5c29b8678b5802ceb837_WebIcon.png",
+      "sha256": "a63facffe8bc40115077b739e7e85db4a25088256f16e8f6d563a6deef1e2789",
+      "sourceDimensions": [
+        256,
+        256
+      ],
+      "identityLabels": [
+        "Speak"
+      ],
+      "rightsHolder": "Speak / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or touch icon; reviewed on the labeled contact sheet. Host mapping follows the company or named product, not the linked accelerator.",
+      "transformation": "Largest available ICO frame or official PNG/SVG converted proportionally to local PNG, at most 96 px; original colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify Speak beside substantive, sourced product comparisons on consumer-ai.",
+        "scope": [
+          "consumer-ai"
+        ]
+      }
+    },
+    {
+      "id": "studyfetch",
+      "name": "StudyFetch",
+      "asset": "/company-icons/studyfetch.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:11:21.575Z",
+      "sourcePage": "https://www.studyfetch.com/",
+      "sourceUrl": "https://www.studyfetch.com/seo/apple-touch-icon.png?v=4",
+      "sha256": "6ccef5ffd5eb13d7f7ac2a39d47e73dc2096bf407b343fb46790c4d240ab6864",
+      "sourceDimensions": [
+        180,
+        180
+      ],
+      "identityLabels": [
+        "StudyFetch"
+      ],
+      "rightsHolder": "StudyFetch / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or touch icon; reviewed on the labeled contact sheet. Host mapping follows the company or named product, not the linked accelerator.",
+      "transformation": "Largest available ICO frame or official PNG/SVG converted proportionally to local PNG, at most 96 px; original colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify StudyFetch beside substantive, sourced product comparisons on consumer-ai, personal-agents.",
+        "scope": [
+          "consumer-ai",
+          "personal-agents"
+        ]
+      }
+    },
+    {
+      "id": "suno",
+      "name": "Suno",
+      "asset": "/company-icons/suno.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:11:24.428Z",
+      "sourcePage": "https://suno.com/",
+      "sourceUrl": "https://cdn-o.suno.com/apple-touch-icon.png",
+      "sha256": "3661a627e323c1e05702fca43cf4d842bd98bc569874e06f9e203328b6508ca0",
+      "sourceDimensions": [
+        180,
+        180
+      ],
+      "identityLabels": [
+        "Suno"
+      ],
+      "rightsHolder": "Suno / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or touch icon; reviewed on the labeled contact sheet. Host mapping follows the company or named product, not the linked accelerator.",
+      "transformation": "Largest available ICO frame or official PNG/SVG converted proportionally to local PNG, at most 96 px; original colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify Suno beside substantive, sourced product comparisons on consumer-ai.",
+        "scope": [
+          "consumer-ai"
+        ]
+      }
+    },
+    {
+      "id": "synthesis",
+      "name": "Synthesis Tutor",
+      "asset": "/company-icons/synthesis.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:11:21.140Z",
+      "sourcePage": "https://www.synthesis.com/tutor",
+      "sourceUrl": "https://www.synthesis.com/_www/media/647931b3f766baddaeae67a6_dark-webclip.png",
+      "sha256": "d84217bc47cc0a48c5b0ceeb872d96670aac250893cdb65c57e5a762b3fda022",
+      "sourceDimensions": [
+        256,
+        256
+      ],
+      "identityLabels": [
+        "Synthesis Tutor"
+      ],
+      "rightsHolder": "Synthesis Tutor / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or touch icon; reviewed on the labeled contact sheet. Host mapping follows the company or named product, not the linked accelerator.",
+      "transformation": "Largest available ICO frame or official PNG/SVG converted proportionally to local PNG, at most 96 px; original colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify Synthesis Tutor beside substantive, sourced product comparisons on consumer-ai.",
+        "scope": [
+          "consumer-ai"
+        ]
+      }
+    },
+    {
+      "id": "tencent",
+      "name": "Tencent",
+      "asset": "/company-icons/tencent.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:14:34.494Z",
+      "sourcePage": "https://www.tencent.com/en-us/",
+      "sourceUrl": "https://www.tencent.com/wp-content/themes/tencent-web/assets/favicon/apple-touch-icon.png",
+      "sha256": "830e51a0f447e4ecc3f3d16c24ad489321c28fca14a115fbfbc6185fd94b6827",
+      "sourceDimensions": [
+        180,
+        180
+      ],
+      "identityLabels": [
+        "腾讯 Tencent / 元宝 Yuanbao"
+      ],
+      "rightsHolder": "Tencent / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or touch icon; reviewed on the labeled contact sheet. Host mapping follows the company or named product, not the linked accelerator.",
+      "transformation": "Largest available ICO frame or official PNG/SVG converted proportionally to local PNG, at most 96 px; original colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify Tencent beside substantive, sourced product comparisons on china-consumer-ai.",
+        "scope": [
+          "china-consumer-ai"
+        ]
+      }
+    },
+    {
+      "id": "tesla",
+      "name": "Tesla",
+      "asset": null,
+      "status": "initials fallback",
+      "checkedAt": "2026-10-11T16:12:38.159Z",
+      "sourcePage": "https://tesla.com/",
+      "sourceUrl": null,
+      "sha256": null,
+      "sourceDimensions": null,
+      "identityLabels": [
+        "Tesla / Optimus"
+      ],
+      "rightsHolder": "Tesla / respective mark owner; no rights transfer asserted",
+      "identityReview": "No matching usable official icon confirmed; no third party artwork is reproduced.",
+      "transformation": "Original plain-text initials, not an imitation of a logo.",
+      "reuseAssessment": null
+    },
+    {
+      "id": "tolans",
+      "name": "Tolan",
+      "asset": "/company-icons/tolans.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:11:28.491Z",
+      "sourcePage": "https://www.tolans.com/",
+      "sourceUrl": "https://cdn.prod.website-files.com/668499ce7cef6042b2f1a2bc/67abc28e98e86bb683ed1ff9_icon%20-%20edid%20this%20(1).png",
+      "sha256": "24cfdb75d8d1b6d4b5974e198630b1645d9e0b9464f69808a01d24bf001a4fa2",
+      "sourceDimensions": [
+        256,
+        256
+      ],
+      "identityLabels": [
+        "Tolan / Portola"
+      ],
+      "rightsHolder": "Tolan / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or touch icon; reviewed on the labeled contact sheet. Host mapping follows the company or named product, not the linked accelerator.",
+      "transformation": "Largest available ICO frame or official PNG/SVG converted proportionally to local PNG, at most 96 px; original colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify Tolan beside substantive, sourced product comparisons on consumer-ai.",
+        "scope": [
+          "consumer-ai"
+        ]
+      }
+    },
+    {
+      "id": "town",
+      "name": "Town",
+      "asset": "/company-icons/town.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:11:47.759Z",
+      "sourcePage": "https://www.town.com/",
+      "sourceUrl": "https://www.town.com/favicon.png",
+      "sha256": "8ca8c42d08264866af55601b84ebf92c333577cf5f504dfd2994b8a249b2e180",
+      "sourceDimensions": [
+        96,
+        96
+      ],
+      "identityLabels": [
+        "Town"
+      ],
+      "rightsHolder": "Town / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or touch icon; reviewed on the labeled contact sheet. Host mapping follows the company or named product, not the linked accelerator.",
+      "transformation": "Largest available ICO frame or official PNG/SVG converted proportionally to local PNG, at most 96 px; original colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify Town beside substantive, sourced product comparisons on personal-agents.",
+        "scope": [
+          "personal-agents"
+        ]
+      }
+    },
+    {
+      "id": "tripo3d",
+      "name": "VAST",
+      "asset": "/company-icons/tripo3d.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:11:27.018Z",
+      "sourcePage": "https://www.tripo3d.ai/",
+      "sourceUrl": "https://www.tripo3d.ai/favicon.ico",
+      "sha256": "df5b44d785ca58535b1016bf14842e933a1da348f01b618bc6b12bf7cb2b58b1",
+      "sourceDimensions": [
+        48,
+        48
+      ],
+      "identityLabels": [
+        "VAST / Tripo",
+        "三启万物 VAST / Tripo"
+      ],
+      "rightsHolder": "VAST / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or touch icon; reviewed on the labeled contact sheet. Host mapping follows the company or named product, not the linked accelerator.",
+      "transformation": "Largest available ICO frame or official PNG/SVG converted proportionally to local PNG, at most 96 px; original colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify VAST beside substantive, sourced product comparisons on consumer-ai, china-consumer-ai.",
+        "scope": [
+          "consumer-ai",
+          "china-consumer-ai"
+        ]
+      }
+    },
+    {
+      "id": "useorigin",
+      "name": "Origin",
+      "asset": "/company-icons/useorigin.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:11:46.678Z",
+      "sourcePage": "https://useorigin.com/",
+      "sourceUrl": "https://cdn.prod.website-files.com/68acbc076b672f730e0c77b9/68da67a91d421250bd53d4f1_useorigin_icon_256.png",
+      "sha256": "0a6ad735ec7a797a87b0cfe89f2cfaac29bd79d6947a307aa1d84f9f203af603",
+      "sourceDimensions": [
+        256,
+        256
+      ],
+      "identityLabels": [
+        "Origin"
+      ],
+      "rightsHolder": "Origin / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or touch icon; reviewed on the labeled contact sheet. Host mapping follows the company or named product, not the linked accelerator.",
+      "transformation": "Largest available ICO frame or official PNG/SVG converted proportionally to local PNG, at most 96 px; original colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify Origin beside substantive, sourced product comparisons on personal-agents.",
+        "scope": [
+          "personal-agents"
+        ]
+      }
+    },
+    {
+      "id": "vidu",
+      "name": "生数科技",
+      "asset": "/company-icons/vidu.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:12:06.443Z",
+      "sourcePage": "https://www.vidu.com/",
+      "sourceUrl": "https://www.vidu.com/apple-touch-icon.png",
+      "sha256": "a931f48f1db2bc4e3c6150c0cd5c7e637771f14b761c70795e6629fa69dbb33f",
+      "sourceDimensions": [
+        180,
+        180
+      ],
+      "identityLabels": [
+        "生数科技 / Vidu"
+      ],
+      "rightsHolder": "生数科技 / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or touch icon; reviewed on the labeled contact sheet. Host mapping follows the company or named product, not the linked accelerator.",
+      "transformation": "Largest available ICO frame or official PNG/SVG converted proportionally to local PNG, at most 96 px; original colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify 生数科技 beside substantive, sourced product comparisons on china-consumer-ai.",
+        "scope": [
+          "china-consumer-ai"
+        ]
+      }
+    },
+    {
+      "id": "viggle",
+      "name": "Viggle",
+      "asset": "/company-icons/viggle.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:11:25.438Z",
+      "sourcePage": "https://viggle.ai/",
+      "sourceUrl": "https://viggle.ai/apple-touch-icon.png",
+      "sha256": "4915b0b3f52cad594d75380f4a3c498db5e2b3927df227211994f9316f8ba268",
+      "sourceDimensions": [
+        180,
+        180
+      ],
+      "identityLabels": [
+        "Viggle"
+      ],
+      "rightsHolder": "Viggle / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or touch icon; reviewed on the labeled contact sheet. Host mapping follows the company or named product, not the linked accelerator.",
+      "transformation": "Largest available ICO frame or official PNG/SVG converted proportionally to local PNG, at most 96 px; original colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify Viggle beside substantive, sourced product comparisons on consumer-ai.",
+        "scope": [
+          "consumer-ai"
+        ]
+      }
+    },
+    {
+      "id": "worldlabs",
+      "name": "World Labs",
+      "asset": "/company-icons/worldlabs.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:12:39.942Z",
+      "sourcePage": "https://www.worldlabs.ai/",
+      "sourceUrl": "https://www.worldlabs.ai/favicon.ico",
+      "sha256": "ae40bc99cb4e05a38cd7d4c6791c9cacaef99a19afc59b59e2fa12768d8afb6a",
+      "sourceDimensions": [
+        48,
+        48
+      ],
+      "identityLabels": [
+        "World Labs"
+      ],
+      "rightsHolder": "World Labs / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or touch icon; reviewed on the labeled contact sheet. Host mapping follows the company or named product, not the linked accelerator.",
+      "transformation": "Largest available ICO frame or official PNG/SVG converted proportionally to local PNG, at most 96 px; original colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify World Labs beside substantive, sourced product comparisons on physical-ai.",
+        "scope": [
+          "physical-ai"
+        ]
+      }
+    },
+    {
+      "id": "youmind",
+      "name": "YouMind",
+      "asset": "/company-icons/youmind.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:11:38.958Z",
+      "sourcePage": "https://youmind.com/",
+      "sourceUrl": "https://marketing-assets.youmind.com/logo-128.png",
+      "sha256": "2be0ee6fb31dae91ffb98d02a0a9f03a822a841602a201f9feb16e0ef5623573",
+      "sourceDimensions": [
+        128,
+        128
+      ],
+      "identityLabels": [
+        "YouMind"
+      ],
+      "rightsHolder": "YouMind / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or touch icon; reviewed on the labeled contact sheet. Host mapping follows the company or named product, not the linked accelerator.",
+      "transformation": "Largest available ICO frame or official PNG/SVG converted proportionally to local PNG, at most 96 px; original colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify YouMind beside substantive, sourced product comparisons on consumer-ai, personal-agents, china-consumer-ai.",
+        "scope": [
+          "consumer-ai",
+          "personal-agents",
+          "china-consumer-ai"
+        ]
+      }
+    },
+    {
+      "id": "yutori",
+      "name": "Yutori",
+      "asset": "/company-icons/yutori.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:11:41.784Z",
+      "sourcePage": "https://yutori.com/",
+      "sourceUrl": "https://yutori.com/icon-512.png",
+      "sha256": "e8e8d273271862adb0464ddcde1f6d808dbcd26cb72d65c11849ae61a99ac456",
+      "sourceDimensions": [
+        512,
+        512
+      ],
+      "identityLabels": [
+        "Yutori / Scouts, Delegate"
+      ],
+      "rightsHolder": "Yutori / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or touch icon; reviewed on the labeled contact sheet. Host mapping follows the company or named product, not the linked accelerator.",
+      "transformation": "Largest available ICO frame or official PNG/SVG converted proportionally to local PNG, at most 96 px; original colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify Yutori beside substantive, sourced product comparisons on personal-agents.",
+        "scope": [
+          "personal-agents"
+        ]
+      }
+    },
+    {
+      "id": "1x",
+      "name": "1X",
+      "asset": "/company-icons/1x.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:42:39.301Z",
+      "sourcePage": "https://www.1x.tech/",
+      "sourceUrl": "https://www.1x.tech/favicon/favicon-32x32.png",
+      "sha256": "e2c2eb7feecd6a60dc7d521d63e063802fce5787193534b5e8d78c8ccf1aadff",
+      "sourceDimensions": [
+        32,
+        32
+      ],
+      "identityLabels": [
+        "1X / NEO"
+      ],
+      "rightsHolder": "1X / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or identification asset; reviewed on a labeled contact sheet for this specific company or product identity.",
+      "transformation": "Largest ICO frame, or official PNG/SVG converted proportionally to PNG at most 96px; colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify 1X beside substantive sourced Physical AI comparisons.",
+        "scope": [
+          "physical-ai"
+        ]
+      }
+    },
+    {
+      "id": "agibot",
+      "name": "AGIBOT",
+      "asset": "/company-icons/agibot.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:41:49.736Z",
+      "sourcePage": "https://www.agibot.com/",
+      "sourceUrl": "https://www.agibot.com/favicon.ico",
+      "sha256": "4348b7d041bfa71c9215014a5c348b399bf165a26ba31576fb5130c9f535d50a",
+      "sourceDimensions": [
+        32,
+        32
+      ],
+      "identityLabels": [
+        "AGIBOT"
+      ],
+      "rightsHolder": "AGIBOT / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or identification asset; reviewed on a labeled contact sheet for this specific company or product identity.",
+      "transformation": "Largest ICO frame, or official PNG/SVG converted proportionally to PNG at most 96px; colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify AGIBOT beside substantive sourced Physical AI comparisons.",
+        "scope": [
+          "physical-ai"
+        ]
+      }
+    },
+    {
+      "id": "agilityrobotics",
+      "name": "Agility Robotics",
+      "asset": "/company-icons/agilityrobotics.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:42:40.301Z",
+      "sourcePage": "https://www.agilityrobotics.com/",
+      "sourceUrl": "https://cdn.prod.website-files.com/68d6ca150ffa11fdc25d7575/699377a93878add673aad03e_Favicon.png",
+      "sha256": "47166e9333ba61a4abd7758d8bb115a214f225f1de445c111d0e9025c60ce4ab",
+      "sourceDimensions": [
+        32,
+        32
+      ],
+      "identityLabels": [
+        "Agility Robotics / Digit"
+      ],
+      "rightsHolder": "Agility Robotics / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or identification asset; reviewed on a labeled contact sheet for this specific company or product identity.",
+      "transformation": "Largest ICO frame, or official PNG/SVG converted proportionally to PNG at most 96px; colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify Agility Robotics beside substantive sourced Physical AI comparisons.",
+        "scope": [
+          "physical-ai"
+        ]
+      }
+    },
+    {
+      "id": "anybotics",
+      "name": "ANYbotics",
+      "asset": null,
+      "status": "initials fallback",
+      "checkedAt": "2026-10-11T16:42:42.116Z",
+      "sourcePage": "https://www.anybotics.com/",
+      "sourceUrl": null,
+      "sha256": null,
+      "sourceDimensions": null,
+      "identityLabels": [
+        "ANYbotics"
+      ],
+      "rightsHolder": "ANYbotics / respective mark owner; no rights transfer asserted",
+      "identityReview": "No matching usable official icon confirmed; no third party artwork reproduced.",
+      "transformation": "Original plain-text initials, not a logo imitation.",
+      "reuseAssessment": null
+    },
+    {
+      "id": "apptronik",
+      "name": "Apptronik",
+      "asset": "/company-icons/apptronik.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:42:39.854Z",
+      "sourcePage": "https://apptronik.com/",
+      "sourceUrl": "https://cdn.prod.website-files.com/6a0dd86942776facbc2f6ba4/6a0dd86942776facbc2f6e8e_apptronik-favicon.png",
+      "sha256": "9cd59a9e669e716aabbdef4a12661f74d76704eab58ce4ff4f25f30a1066e593",
+      "sourceDimensions": [
+        32,
+        32
+      ],
+      "identityLabels": [
+        "Apptronik / Apollo"
+      ],
+      "rightsHolder": "Apptronik / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or identification asset; reviewed on a labeled contact sheet for this specific company or product identity.",
+      "transformation": "Largest ICO frame, or official PNG/SVG converted proportionally to PNG at most 96px; colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify Apptronik beside substantive sourced Physical AI comparisons.",
+        "scope": [
+          "physical-ai"
+        ]
+      }
+    },
+    {
+      "id": "astribot",
+      "name": "Astribot",
+      "asset": "/company-icons/astribot.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:42:17.000Z",
+      "sourcePage": "https://www.astribot.com/",
+      "sourceUrl": "https://www.astribot.com/favicon-256.png",
+      "sha256": "4885193f98b25bb0de6eec8ff698e4dd91fcf79b70199f454a6c3316e8885ab4",
+      "sourceDimensions": [
+        256,
+        256
+      ],
+      "identityLabels": [
+        "Astribot"
+      ],
+      "rightsHolder": "Astribot / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or identification asset; reviewed on a labeled contact sheet for this specific company or product identity.",
+      "transformation": "Largest ICO frame, or official PNG/SVG converted proportionally to PNG at most 96px; colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify Astribot beside substantive sourced Physical AI comparisons.",
+        "scope": [
+          "physical-ai"
+        ]
+      }
+    },
+    {
+      "id": "d-robotics",
+      "name": "D-Robotics",
+      "asset": "/company-icons/d-robotics.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:42:34.707Z",
+      "sourcePage": "https://en.d-robotics.cc/",
+      "sourceUrl": "https://en.d-robotics.cc/favicon.ico",
+      "sha256": "c8f2570c0a16641b9215007add1527190c154355b59126240e17cfbc858e3c67",
+      "sourceDimensions": [
+        80,
+        80
+      ],
+      "identityLabels": [
+        "D-Robotics"
+      ],
+      "rightsHolder": "D-Robotics / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or identification asset; reviewed on a labeled contact sheet for this specific company or product identity.",
+      "transformation": "Largest ICO frame, or official PNG/SVG converted proportionally to PNG at most 96px; colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify D-Robotics beside substantive sourced Physical AI comparisons.",
+        "scope": [
+          "physical-ai"
+        ]
+      }
+    },
+    {
+      "id": "deeprobotics",
+      "name": "DEEP Robotics",
+      "asset": "/company-icons/deeprobotics.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:42:36.429Z",
+      "sourcePage": "https://www.deeprobotics.cn/",
+      "sourceUrl": "https://www.deeprobotics.cn/favicon.ico",
+      "sha256": "41d0428ea87778661fc1928217837d1273587eb4b48ef3678b07edb1ebc818dc",
+      "sourceDimensions": [
+        32,
+        32
+      ],
+      "identityLabels": [
+        "DEEP Robotics"
+      ],
+      "rightsHolder": "DEEP Robotics / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or identification asset; reviewed on a labeled contact sheet for this specific company or product identity.",
+      "transformation": "Largest ICO frame, or official PNG/SVG converted proportionally to PNG at most 96px; colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify DEEP Robotics beside substantive sourced Physical AI comparisons.",
+        "scope": [
+          "physical-ai"
+        ]
+      }
+    },
+    {
+      "id": "dexterity",
+      "name": "Dexterity",
+      "asset": "/company-icons/dexterity.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:42:41.146Z",
+      "sourcePage": "https://dexterity.ai/",
+      "sourceUrl": "https://dexterity.ai/icon.png?icon.72c05717.png",
+      "sha256": "5e4058f3bd28b763dc241f14f412b24db4c8c93a2d2de69c76f26d935950903c",
+      "sourceDimensions": [
+        32,
+        32
+      ],
+      "identityLabels": [
+        "Dexterity / Mech"
+      ],
+      "rightsHolder": "Dexterity / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or identification asset; reviewed on a labeled contact sheet for this specific company or product identity.",
+      "transformation": "Largest ICO frame, or official PNG/SVG converted proportionally to PNG at most 96px; colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify Dexterity beside substantive sourced Physical AI comparisons.",
+        "scope": [
+          "physical-ai"
+        ]
+      }
+    },
+    {
+      "id": "dobot-robots",
+      "name": "Dobot",
+      "asset": "/company-icons/dobot-robots.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:42:29.415Z",
+      "sourcePage": "https://www.dobot-robots.com/",
+      "sourceUrl": "https://www.dobot-robots.com/themes/en/default/assets/images/favicon.png",
+      "sha256": "0a013b360d23bab2ef75630b6388b04facfd21cc7651cc5478d1b09bd4fa3c74",
+      "sourceDimensions": [
+        32,
+        32
+      ],
+      "identityLabels": [
+        "Dobot"
+      ],
+      "rightsHolder": "Dobot / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or identification asset; reviewed on a labeled contact sheet for this specific company or product identity.",
+      "transformation": "Largest ICO frame, or official PNG/SVG converted proportionally to PNG at most 96px; colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify Dobot beside substantive sourced Physical AI comparisons.",
+        "scope": [
+          "physical-ai"
+        ]
+      }
+    },
+    {
+      "id": "dyna",
+      "name": "DYNA Robotics",
+      "asset": "/company-icons/dyna.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:42:43.093Z",
+      "sourcePage": "https://www.dyna.co/",
+      "sourceUrl": "https://www.dyna.co/favicon.ico?favicon.12yy1.goim0rm.ico?dpl=dpl_C4CAnwpY6XkgSjo7edLmkR8BGyPQ",
+      "sha256": "426c7b33816dd1c10b35bec4033109ee9ad1bd9739a03477a85f6885ec5c15d2",
+      "sourceDimensions": [
+        48,
+        48
+      ],
+      "identityLabels": [
+        "DYNA Robotics"
+      ],
+      "rightsHolder": "DYNA Robotics / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or identification asset; reviewed on a labeled contact sheet for this specific company or product identity.",
+      "transformation": "Largest ICO frame, or official PNG/SVG converted proportionally to PNG at most 96px; colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify DYNA Robotics beside substantive sourced Physical AI comparisons.",
+        "scope": [
+          "physical-ai"
+        ]
+      }
+    },
+    {
+      "id": "engineai-com",
+      "name": "EngineAI",
+      "asset": "/company-icons/engineai-com.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:42:13.803Z",
+      "sourcePage": "https://www.engineai.com.cn/",
+      "sourceUrl": "https://www.engineai.com.cn/favicon.ico",
+      "sha256": "bccdf889b040fefbcdc3eed0678d2f5bc5c4fd574a527da11bac9bd7826c3c0e",
+      "sourceDimensions": [
+        50,
+        50
+      ],
+      "identityLabels": [
+        "EngineAI"
+      ],
+      "rightsHolder": "EngineAI / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or identification asset; reviewed on a labeled contact sheet for this specific company or product identity.",
+      "transformation": "Largest ICO frame, or official PNG/SVG converted proportionally to PNG at most 96px; colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify EngineAI beside substantive sourced Physical AI comparisons.",
+        "scope": [
+          "physical-ai"
+        ]
+      }
+    },
+    {
+      "id": "fftai",
+      "name": "Fourier",
+      "asset": "/company-icons/fftai.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:42:15.662Z",
+      "sourcePage": "https://www.fftai.com/",
+      "sourceUrl": "https://www.fftai.com/favicon.svg",
+      "sha256": "0c05cec0d968717bed6419161dee1d4ead5481747aae4e1664b1076720dad02c",
+      "sourceDimensions": [
+        400,
+        400
+      ],
+      "identityLabels": [
+        "Fourier"
+      ],
+      "rightsHolder": "Fourier / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or identification asset; reviewed on a labeled contact sheet for this specific company or product identity.",
+      "transformation": "Largest ICO frame, or official PNG/SVG converted proportionally to PNG at most 96px; colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify Fourier beside substantive sourced Physical AI comparisons.",
+        "scope": [
+          "physical-ai"
+        ]
+      }
+    },
+    {
+      "id": "fieldai",
+      "name": "FieldAI",
+      "asset": "/company-icons/fieldai.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:42:41.577Z",
+      "sourcePage": "https://www.fieldai.com/",
+      "sourceUrl": "https://cdn.prod.website-files.com/66f60ba0b55a2bf61129d179/69b5f7fffa0d757b41948b51_FAI_favicon.png",
+      "sha256": "57b5425c64bb8e8f4a98625df97e3af50f4d1c0eabc63471d5c10f5d1832045c",
+      "sourceDimensions": [
+        32,
+        32
+      ],
+      "identityLabels": [
+        "FieldAI"
+      ],
+      "rightsHolder": "FieldAI / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or identification asset; reviewed on a labeled contact sheet for this specific company or product identity.",
+      "transformation": "Largest ICO frame, or official PNG/SVG converted proportionally to PNG at most 96px; colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify FieldAI beside substantive sourced Physical AI comparisons.",
+        "scope": [
+          "physical-ai"
+        ]
+      }
+    },
+    {
+      "id": "figure",
+      "name": "Figure",
+      "asset": "/company-icons/figure.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:42:38.907Z",
+      "sourcePage": "https://www.figure.ai/",
+      "sourceUrl": "https://www.figure.ai/favicon.png",
+      "sha256": "c89683bcac6764702553f7fb9a08e33ea4712bde02b9b56f60c0203a90cb071d",
+      "sourceDimensions": [
+        320,
+        320
+      ],
+      "identityLabels": [
+        "Figure"
+      ],
+      "rightsHolder": "Figure / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or identification asset; reviewed on a labeled contact sheet for this specific company or product identity.",
+      "transformation": "Largest ICO frame, or official PNG/SVG converted proportionally to PNG at most 96px; colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify Figure beside substantive sourced Physical AI comparisons.",
+        "scope": [
+          "physical-ai"
+        ]
+      }
+    },
+    {
+      "id": "flexiv",
+      "name": "Flexiv",
+      "asset": "/company-icons/flexiv.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:42:27.937Z",
+      "sourcePage": "https://www.flexiv.com/",
+      "sourceUrl": "https://www.flexiv.com/favicon/favicon.ico",
+      "sha256": "e2c101e0e3a08239e86760ed85dd2f8674f63fd65e1f0eae0bf6e8eb916172a2",
+      "sourceDimensions": [
+        16,
+        16
+      ],
+      "identityLabels": [
+        "Flexiv"
+      ],
+      "rightsHolder": "Flexiv / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or identification asset; reviewed on a labeled contact sheet for this specific company or product identity.",
+      "transformation": "Largest ICO frame, or official PNG/SVG converted proportionally to PNG at most 96px; colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify Flexiv beside substantive sourced Physical AI comparisons.",
+        "scope": [
+          "physical-ai"
+        ]
+      }
+    },
+    {
+      "id": "galaxea-ai",
+      "name": "Galaxea AI",
+      "asset": "/company-icons/galaxea-ai.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:42:06.334Z",
+      "sourcePage": "https://www.galaxea-ai.com/cn",
+      "sourceUrl": "https://www.galaxea-ai.com/favicon.ico",
+      "sha256": "b3e173fed89e56e480edfbda5ae54ed35e09ed18a54d4f266d28cb51b69ac122",
+      "sourceDimensions": [
+        64,
+        64
+      ],
+      "identityLabels": [
+        "Galaxea AI"
+      ],
+      "rightsHolder": "Galaxea AI / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or identification asset; reviewed on a labeled contact sheet for this specific company or product identity.",
+      "transformation": "Largest ICO frame, or official PNG/SVG converted proportionally to PNG at most 96px; colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify Galaxea AI beside substantive sourced Physical AI comparisons.",
+        "scope": [
+          "physical-ai"
+        ]
+      }
+    },
+    {
+      "id": "galbot",
+      "name": "Galbot",
+      "asset": "/company-icons/galbot.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:41:51.359Z",
+      "sourcePage": "https://www.galbot.com/",
+      "sourceUrl": "https://www.galbot.com/favicon.ico",
+      "sha256": "c748b333fdbb6c55d55d41aea27ff7c9f0b47206a3d1ae861e08ca2e9e6b3757",
+      "sourceDimensions": [
+        128,
+        128
+      ],
+      "identityLabels": [
+        "Galbot"
+      ],
+      "rightsHolder": "Galbot / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or identification asset; reviewed on a labeled contact sheet for this specific company or product identity.",
+      "transformation": "Largest ICO frame, or official PNG/SVG converted proportionally to PNG at most 96px; colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify Galbot beside substantive sourced Physical AI comparisons.",
+        "scope": [
+          "physical-ai"
+        ]
+      }
+    },
+    {
+      "id": "geekplus",
+      "name": "Geek+",
+      "asset": "/company-icons/geekplus.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:42:26.720Z",
+      "sourcePage": "https://www.geekplus.com/en",
+      "sourceUrl": "https://www.geekplus.com/hubfs/raw_assets/public/Geek%20Plus%202025/images/module-icons/favicon.png",
+      "sha256": "4ad1669ab1bac9cd6a50de21ddfd11c5cede5cc806637d81283abf25a96115a1",
+      "sourceDimensions": [
+        512,
+        512
+      ],
+      "identityLabels": [
+        "Geek+"
+      ],
+      "rightsHolder": "Geek+ / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or identification asset; reviewed on a labeled contact sheet for this specific company or product identity.",
+      "transformation": "Largest ICO frame, or official PNG/SVG converted proportionally to PNG at most 96px; colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify Geek+ beside substantive sourced Physical AI comparisons.",
+        "scope": [
+          "physical-ai"
+        ]
+      }
+    },
+    {
+      "id": "generalistai",
+      "name": "Generalist",
+      "asset": "/company-icons/generalistai.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:42:43.511Z",
+      "sourcePage": "https://generalistai.com/",
+      "sourceUrl": "https://generalistai.com/assets/favicon/favicon-black.svg",
+      "sha256": "170fc4fc2256025e3429271434b0d4dab80e5b0caaf9deb048ba05d9e2ab9082",
+      "sourceDimensions": [
+        262,
+        262
+      ],
+      "identityLabels": [
+        "Generalist"
+      ],
+      "rightsHolder": "Generalist / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or identification asset; reviewed on a labeled contact sheet for this specific company or product identity.",
+      "transformation": "Largest ICO frame, or official PNG/SVG converted proportionally to PNG at most 96px; colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify Generalist beside substantive sourced Physical AI comparisons.",
+        "scope": [
+          "physical-ai"
+        ]
+      }
+    },
+    {
+      "id": "hairobotics",
+      "name": "Hai Robotics",
+      "asset": "/company-icons/hairobotics.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:42:27.593Z",
+      "sourcePage": "https://www.hairobotics.com/",
+      "sourceUrl": "https://www.hairobotics.com/themes/custom/hairobotics/favicon.ico",
+      "sha256": "789b28dea9cf3a2a577f825d3b041dca041b81af035886d2d8ce2d38a13b2037",
+      "sourceDimensions": [
+        195,
+        195
+      ],
+      "identityLabels": [
+        "Hai Robotics"
+      ],
+      "rightsHolder": "Hai Robotics / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or identification asset; reviewed on a labeled contact sheet for this specific company or product identity.",
+      "transformation": "Largest ICO frame, or official PNG/SVG converted proportionally to PNG at most 96px; colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify Hai Robotics beside substantive sourced Physical AI comparisons.",
+        "scope": [
+          "physical-ai"
+        ]
+      }
+    },
+    {
+      "id": "huggingface",
+      "name": "Hugging Face",
+      "asset": "/company-icons/huggingface.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:42:43.971Z",
+      "sourcePage": "https://huggingface.co/",
+      "sourceUrl": "https://huggingface.co/favicon.ico",
+      "sha256": "b8c2d3c7bee4afb3dcf138239662740bd06e226fdb6d6a4caf5e84dbe35208e0",
+      "sourceDimensions": [
+        256,
+        256
+      ],
+      "identityLabels": [
+        "Hugging Face / LeRobot"
+      ],
+      "rightsHolder": "Hugging Face / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or identification asset; reviewed on a labeled contact sheet for this specific company or product identity.",
+      "transformation": "Largest ICO frame, or official PNG/SVG converted proportionally to PNG at most 96px; colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify Hugging Face beside substantive sourced Physical AI comparisons.",
+        "scope": [
+          "physical-ai"
+        ]
+      }
+    },
+    {
+      "id": "keenon",
+      "name": "KEENON Robotics",
+      "asset": "/company-icons/keenon.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:42:23.947Z",
+      "sourcePage": "https://www.keenon.com/en",
+      "sourceUrl": "https://storage.keenon.cn/assets/site/keenon-static/static.keenon.com/assets/images/common/favicon.ico",
+      "sha256": "26939cc3a4efafb40efaa734bc617c59e002980232fbb145c3700ed8814e37eb",
+      "sourceDimensions": [
+        32,
+        32
+      ],
+      "identityLabels": [
+        "KEENON Robotics"
+      ],
+      "rightsHolder": "KEENON Robotics / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or identification asset; reviewed on a labeled contact sheet for this specific company or product identity.",
+      "transformation": "Largest ICO frame, or official PNG/SVG converted proportionally to PNG at most 96px; colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify KEENON Robotics beside substantive sourced Physical AI comparisons.",
+        "scope": [
+          "physical-ai"
+        ]
+      }
+    },
+    {
+      "id": "leju",
+      "name": "Leju",
+      "asset": null,
+      "status": "initials fallback",
+      "checkedAt": "2026-10-11T16:42:38.294Z",
+      "sourcePage": "https://www.letools.lejurobot.com/",
+      "sourceUrl": null,
+      "sha256": null,
+      "sourceDimensions": null,
+      "identityLabels": [
+        "Leju / Kuavo"
+      ],
+      "rightsHolder": "Leju / respective mark owner; no rights transfer asserted",
+      "identityReview": "No matching usable official icon confirmed; no third party artwork reproduced.",
+      "transformation": "Original plain-text initials, not a logo imitation.",
+      "reuseAssessment": null
+    },
+    {
+      "id": "limxdynamics",
+      "name": "LimX Dynamics",
+      "asset": "/company-icons/limxdynamics.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:42:00.209Z",
+      "sourcePage": "https://www.limxdynamics.com/zh",
+      "sourceUrl": "https://www.limxdynamics.com/favicon.ico?favicon.41f4bc48.ico",
+      "sha256": "2d84e57a6960e128da49e4b56012d90c659d347f8daa4ef43f962612760fa957",
+      "sourceDimensions": [
+        48,
+        48
+      ],
+      "identityLabels": [
+        "LimX Dynamics"
+      ],
+      "rightsHolder": "LimX Dynamics / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or identification asset; reviewed on a labeled contact sheet for this specific company or product identity.",
+      "transformation": "Largest ICO frame, or official PNG/SVG converted proportionally to PNG at most 96px; colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify LimX Dynamics beside substantive sourced Physical AI comparisons.",
+        "scope": [
+          "physical-ai"
+        ]
+      }
+    },
+    {
+      "id": "neura-robotics",
+      "name": "NEURA Robotics",
+      "asset": "/company-icons/neura-robotics.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:42:42.683Z",
+      "sourcePage": "https://neura-robotics.com/",
+      "sourceUrl": "https://neura-robotics.com/apple-touch-icon.png",
+      "sha256": "37e9c17a2be378305208108f75a1a207e5865f9ab8667e0ed3b96c2d9bc33040",
+      "sourceDimensions": [
+        180,
+        180
+      ],
+      "identityLabels": [
+        "NEURA Robotics"
+      ],
+      "rightsHolder": "NEURA Robotics / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or identification asset; reviewed on a labeled contact sheet for this specific company or product identity.",
+      "transformation": "Largest ICO frame, or official PNG/SVG converted proportionally to PNG at most 96px; colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify NEURA Robotics beside substantive sourced Physical AI comparisons.",
+        "scope": [
+          "physical-ai"
+        ]
+      }
+    },
+    {
+      "id": "pudurobotics",
+      "name": "Pudu Robotics",
+      "asset": "/company-icons/pudurobotics.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:42:21.892Z",
+      "sourcePage": "https://www.pudurobotics.com/en",
+      "sourceUrl": "https://www.pudurobotics.com/favicon.ico?v=20260831",
+      "sha256": "47fea6c613f9aa20de2c9fd0654cd4f1a922ec57fb05e3977e2a5942926e26ce",
+      "sourceDimensions": [
+        32,
+        32
+      ],
+      "identityLabels": [
+        "Pudu Robotics"
+      ],
+      "rightsHolder": "Pudu Robotics / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or identification asset; reviewed on a labeled contact sheet for this specific company or product identity.",
+      "transformation": "Largest ICO frame, or official PNG/SVG converted proportionally to PNG at most 96px; colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify Pudu Robotics beside substantive sourced Physical AI comparisons.",
+        "scope": [
+          "physical-ai"
+        ]
+      }
+    },
+    {
+      "id": "robbyant",
+      "name": "Ant Group",
+      "asset": "/company-icons/robbyant.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:42:30.318Z",
+      "sourcePage": "https://www.robbyant.com/",
+      "sourceUrl": "https://avatars.githubusercontent.com/u/212647524?s=200&v=4",
+      "sha256": "0ca47db1fd981a012554d56f448db0b4b25e616b26296c07c5ad746c4252b63d",
+      "sourceDimensions": [
+        200,
+        200
+      ],
+      "identityLabels": [
+        "Ant Group / Robbyant"
+      ],
+      "rightsHolder": "Ant Group / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or identification asset; reviewed on a labeled contact sheet for this specific company or product identity.",
+      "transformation": "Largest ICO frame, or official PNG/SVG converted proportionally to PNG at most 96px; colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify Ant Group beside substantive sourced Physical AI comparisons.",
+        "scope": [
+          "physical-ai"
+        ]
+      }
+    },
+    {
+      "id": "robotera",
+      "name": "Robotera",
+      "asset": "/company-icons/robotera.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:42:11.911Z",
+      "sourcePage": "https://www.robotera.com/",
+      "sourceUrl": "https://www.robotera.com/icon.png",
+      "sha256": "bb06896f89cd11503a65cba8ad271f8e0e21004d1fa0fe61bda20c6441466d1d",
+      "sourceDimensions": [
+        72,
+        72
+      ],
+      "identityLabels": [
+        "Robotera"
+      ],
+      "rightsHolder": "Robotera / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or identification asset; reviewed on a labeled contact sheet for this specific company or product identity.",
+      "transformation": "Largest ICO frame, or official PNG/SVG converted proportionally to PNG at most 96px; colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify Robotera beside substantive sourced Physical AI comparisons.",
+        "scope": [
+          "physical-ai"
+        ]
+      }
+    },
+    {
+      "id": "sanctuary",
+      "name": "Sanctuary AI",
+      "asset": "/company-icons/sanctuary.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:42:40.702Z",
+      "sourcePage": "https://sanctuary.ai/",
+      "sourceUrl": "https://sanctuary.ai/wp-content/uploads/2026/03/cropped-sanctuary-emblem-favicon-dark-32x32.png",
+      "sha256": "a42b34c945ac8d92eaf27fb142cbf82926be1baddbe04da02e58eff68b2a0fcc",
+      "sourceDimensions": [
+        32,
+        32
+      ],
+      "identityLabels": [
+        "Sanctuary AI"
+      ],
+      "rightsHolder": "Sanctuary AI / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or identification asset; reviewed on a labeled contact sheet for this specific company or product identity.",
+      "transformation": "Largest ICO frame, or official PNG/SVG converted proportionally to PNG at most 96px; colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify Sanctuary AI beside substantive sourced Physical AI comparisons.",
+        "scope": [
+          "physical-ai"
+        ]
+      }
+    },
+    {
+      "id": "signalflag",
+      "name": "SignalFlag",
+      "asset": "/company-icons/signalflag.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:42:44.351Z",
+      "sourcePage": "https://signalflag.ai/",
+      "sourceUrl": "https://signalflag.ai/favicon.ico",
+      "sha256": "a3ea5caed2175b938314d08184d4e94f47b040d36051a93d36c7d3d17c794adb",
+      "sourceDimensions": [
+        48,
+        48
+      ],
+      "identityLabels": [
+        "SignalFlag / formerly ReSim"
+      ],
+      "rightsHolder": "SignalFlag / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or identification asset; reviewed on a labeled contact sheet for this specific company or product identity.",
+      "transformation": "Largest ICO frame, or official PNG/SVG converted proportionally to PNG at most 96px; colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify SignalFlag beside substantive sourced Physical AI comparisons.",
+        "scope": [
+          "physical-ai"
+        ]
+      }
+    },
+    {
+      "id": "spirit-ai",
+      "name": "Spirit AI",
+      "asset": "/company-icons/spirit-ai.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:42:08.611Z",
+      "sourcePage": "https://www.spirit-ai.com/",
+      "sourceUrl": "https://www.spirit-ai.com/templates/dist/images/favicon.ico",
+      "sha256": "da25b4fabf78103b3a3f2bddddf159852190b5bf4b62921191119f71206cdca4",
+      "sourceDimensions": [
+        64,
+        64
+      ],
+      "identityLabels": [
+        "Spirit AI"
+      ],
+      "rightsHolder": "Spirit AI / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or identification asset; reviewed on a labeled contact sheet for this specific company or product identity.",
+      "transformation": "Largest ICO frame, or official PNG/SVG converted proportionally to PNG at most 96px; colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify Spirit AI beside substantive sourced Physical AI comparisons.",
+        "scope": [
+          "physical-ai"
+        ]
+      }
+    },
+    {
+      "id": "ubtrobot",
+      "name": "UBTECH",
+      "asset": null,
+      "status": "initials fallback",
+      "checkedAt": "2026-10-11T16:41:55.636Z",
+      "sourcePage": "https://www.ubtrobot.com/",
+      "sourceUrl": null,
+      "sha256": null,
+      "sourceDimensions": null,
+      "identityLabels": [
+        "UBTECH"
+      ],
+      "rightsHolder": "UBTECH / respective mark owner; no rights transfer asserted",
+      "identityReview": "No matching usable official icon confirmed; no third party artwork reproduced.",
+      "transformation": "Original plain-text initials, not a logo imitation.",
+      "reuseAssessment": null
+    },
+    {
+      "id": "unitree",
+      "name": "Unitree",
+      "asset": "/company-icons/unitree.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:41:48.710Z",
+      "sourcePage": "https://www.unitree.com/",
+      "sourceUrl": "https://www.unitree.com/unitree-favicon.svg",
+      "sha256": "6059df9d7d9cc8a558622187665f929ba3ea7d253bfdc6cf33e026dc73883c43",
+      "sourceDimensions": [
+        100,
+        100
+      ],
+      "identityLabels": [
+        "Unitree"
+      ],
+      "rightsHolder": "Unitree / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or identification asset; reviewed on a labeled contact sheet for this specific company or product identity.",
+      "transformation": "Largest ICO frame, or official PNG/SVG converted proportionally to PNG at most 96px; colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify Unitree beside substantive sourced Physical AI comparisons.",
+        "scope": [
+          "physical-ai"
+        ]
+      }
+    },
+    {
+      "id": "x2robot",
+      "name": "X Square",
+      "asset": "/company-icons/x2robot.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:42:03.797Z",
+      "sourcePage": "https://x2robot.com/",
+      "sourceUrl": "https://x2robot.com/api/images/file/logo.svg",
+      "sha256": "178833f73c0b9902b29b1704f28f4886486f94fa53b929fe4434f340124f876c",
+      "sourceDimensions": [
+        95,
+        66
+      ],
+      "identityLabels": [
+        "X Square"
+      ],
+      "rightsHolder": "X Square / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or identification asset; reviewed on a labeled contact sheet for this specific company or product identity.",
+      "transformation": "Largest ICO frame, or official PNG/SVG converted proportionally to PNG at most 96px; colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify X Square beside substantive sourced Physical AI comparisons.",
+        "scope": [
+          "physical-ai"
+        ]
+      }
+    },
+    {
+      "id": "xpeng",
+      "name": "XPENG",
+      "asset": "/company-icons/xpeng.png",
+      "status": "reviewed official mark",
+      "checkedAt": "2026-10-11T16:42:19.682Z",
+      "sourcePage": "https://www.xpeng.com/",
+      "sourceUrl": "https://a-cdn.xpeng.com/mall/public/favicon.svg",
+      "sha256": "6344911b00426b55563a838daa38133483b2d85be7ebd4e4ce874e70c3304e2c",
+      "sourceDimensions": [
+        32,
+        32
+      ],
+      "identityLabels": [
+        "XPENG / IRON"
+      ],
+      "rightsHolder": "XPENG / respective mark owner; no rights transfer asserted",
+      "identityReview": "Official page-declared favicon or identification asset; reviewed on a labeled contact sheet for this specific company or product identity.",
+      "transformation": "Largest ICO frame, or official PNG/SVG converted proportionally to PNG at most 96px; colors retained.",
+      "reuseAssessment": {
+        "sharedAssessment": "contextual-editorial-identification",
+        "purpose": "Identify XPENG beside substantive sourced Physical AI comparisons.",
+        "scope": [
+          "physical-ai"
+        ]
+      }
+    }
+  ]
+}

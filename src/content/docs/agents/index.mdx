@@ -1,0 +1,90 @@
+---
+title: "AI Agents: From models to systems"
+description: Understand the mechanisms, compare real implementations, and follow the frontier of agent systems.
+lastUpdated: 2026-10-11
+---
+
+import AgentCards from '../../../components/agents/AgentCards.astro';
+import AgentLandscape from '../../../components/agents/AgentLandscape.astro';
+import FocusCanvas from '../../../components/FocusCanvas.astro';
+
+An AI model can describe how to investigate a problem. An agent system can
+work through it: choose an action, inspect the result and decide what to do next.
+The useful unit is the **whole system: model, harness, tools, environment and
+feedback**.[^react]
+
+This collection connects the mechanisms with the systems people actually use.
+Choose a route first; the chapters supply the depth.
+
+<AgentCards cardsJson='[{"eyebrow":"Understand","title":"Core Concepts","description":"Follow the agent loop, then study tools, context and coordination. Finish with a complete coding workflow.","href":"/agents/foundations/"},{"eyebrow":"Design for trust","title":"Reliability & Control","description":"Learn how to evaluate outcomes, recover interrupted work and bound what a system can change.","href":"/agents/evaluation-reliability/"},{"eyebrow":"Study implementations","title":"Agent Deep Dives","description":"Explore Claude Code, Codex, Pi, OpenCode and DeepSeek Harness, with an architectural comparison and frontier research.","href":"/agents/deep-dives/"}]' />
+
+## A map of the system
+
+The model proposes decisions. The **harness** is the surrounding software that
+assembles context, manages the loop and coordinates execution. Persistent
+session records and execution environments can have different lifecycles;
+they need not live inside one process.[^managed][^api]
+[Figure 1](#figure-1) connects that work loop to the wider landscape: packaged
+products, extensible harnesses, frameworks and managed runtimes. Select a label
+to explore the corresponding chapter or study.
+
+<FocusCanvas size="diagram" label="The agent landscape: work loop, ecosystem roles and research frontier.">
+<AgentLandscape id="figure-1" title="The agent landscape, at a glance" mapJson='{"intent":"Goal · authority · acceptance criteria","harness":"Manages context, actions and stopping.","feedback":"Results update context: continue, revise or stop.","steps":[{"label":"Context","detail":"Goal, instructions and relevant evidence.","href":"/agents/context-memory-state/"},{"label":"Model","detail":"Choose an action or response.","href":"/agents/foundations/"},{"label":"Action","detail":"Tools act in files, apps or services.","href":"/agents/tools-skills-protocols/"},{"label":"Evidence","detail":"Observe results; check the outcome.","href":"/agents/evaluation-reliability/"}],"capabilities":[{"label":"State & memory","detail":"Context, history and recovery.","href":"/agents/context-memory-state/"},{"label":"Coordination","detail":"Workflows and scoped workers.","href":"/agents/orchestration/"},{"label":"Skills & integrations","detail":"Procedures, protocols and plugins.","href":"/agents/tools-skills-protocols/"}],"controls":[{"label":"Control throughout","detail":"Bound access and actions.","href":"/agents/security-control/"},{"label":"Evaluation throughout","detail":"Check outcomes, cost and reliability.","href":"/agents/evaluation-reliability/"}],"families":[{"label":"Coding products","detail":"Package an end-user workflow.","href":"/agents/deep-dives/","examples":[{"label":"Claude Code","href":"/agents/deep-dives/claude-code/"},{"label":"Codex","href":"/agents/deep-dives/codex/"},{"label":"OpenCode","href":"/agents/deep-dives/opencode/"}]},{"label":"Extensible harnesses","detail":"Provide reusable agent machinery.","href":"/agents/ecosystem/#reusable-harnesses-and-frameworks","examples":[{"label":"Pi","href":"/agents/deep-dives/pi/"},{"label":"DeepSeek Harness","href":"/agents/deep-dives/deepseek-harness/"},{"label":"Deep Agents","href":"/agents/ecosystem/#reusable-harnesses-and-frameworks"}]},{"label":"Frameworks & SDKs","detail":"Build an application-owned system.","href":"/agents/ecosystem/#reusable-harnesses-and-frameworks","examples":[{"label":"LangGraph","href":"/agents/ecosystem/#reusable-harnesses-and-frameworks"},{"label":"Google ADK","href":"/agents/ecosystem/#reusable-harnesses-and-frameworks"},{"label":"Agent SDKs","href":"/agents/ecosystem/#reusable-harnesses-and-frameworks"}]},{"label":"Managed runtimes","detail":"Operate harness and session infrastructure.","href":"/agents/ecosystem/#managed-runtime-ownership","examples":[{"label":"OpenAI Agents API","href":"/agents/ecosystem/#managed-runtime-ownership"},{"label":"Anthropic Managed Agents","href":"/agents/deep-dives/#durable-sessions-beyond-one-running-process"}]}],"frontier":[{"label":"Durable sessions","href":"/agents/deep-dives/#durable-sessions-beyond-one-running-process"},{"label":"Evolving context","href":"/agents/deep-dives/#evolving-context-with-accountable-updates"},{"label":"Useful coordination","href":"/agents/deep-dives/#coordination-that-fits-the-task"},{"label":"Outcome feedback","href":"/agents/deep-dives/#feedback-that-can-actually-distinguish-improvement"}],"note":"Roles overlap; examples are not a quality ranking. DeepSeek Harness is a developer preview."}'>
+
+**Figure 1.** Latent Light synthesis: the work loop, overlapping ecosystem roles and frontier questions. Implementation and research sources are collected in the [deep-dive comparison](/agents/deep-dives/).[^react][^managed][^api][^landscape]
+
+</AgentLandscape>
+</FocusCanvas>
+
+A fixed workflow chooses its path in advance. An agent delegates more path
+selection to the model. Many useful systems combine both: deterministic steps
+handle known work, and a model handles uncertainty.[^patterns] More freedom is
+useful only when the system can observe and verify what it does.
+
+## Learn the mechanisms
+
+| Question | Chapter |
+| --- | --- |
+| How does a response become a sequence of actions? | [How Agents Work](/agents/foundations/) |
+| What can the system do, and how does it connect to other components? | [Tools & Skills](/agents/tools-skills-protocols/) |
+| What is visible now, what persists, and how does work resume? | [Context & Memory](/agents/context-memory-state/) |
+| When should control live in code, one agent or several workers? | [Workflows & Coordination](/agents/orchestration/) |
+| What does the whole process look like on a repository change? | [A Coding Workflow](/agents/deep-dives/coding-agents/) |
+| How do we know the outcome is correct and repeatable? | [Evaluation](/agents/evaluation-reliability/) |
+| How do we bound access, actions and external effects? | [Security & Control](/agents/security-control/) |
+
+For a first reading, follow the first three chapters. Before designing a
+system that changes external state, read evaluation and control as well.
+The coding workflow connects those ideas in one worked example.
+
+## Study the systems
+
+The [deep-dive overview](/agents/deep-dives/) compares the five initial studies
+by execution ownership, persistence, extension mechanisms and control. It also
+connects them to the [broader ecosystem](/agents/ecosystem/), including frameworks,
+SDKs and managed runtimes.
+
+The studies ask different questions. What does Claude Code package into its
+workflow? How does Codex expose a controllable session to clients? What does Pi
+leave to its host and extensions? What does OpenCode's client/server boundary
+make possible? What changes when DeepSeek makes the loop itself a plugin?
+Follow a system from its design to its consequences, rather than counting features.
+
+## Follow the frontier
+
+The [frontier discussion](/agents/deep-dives/#frontier) examines durable sessions,
+evolving context, coordinated workers and feedback that can genuinely grade
+an outcome. Research findings and vendor engineering accounts have different
+limits; a documented feature does not establish reliable task completion.
+
+The individual studies identify their inspected documentation or repository
+snapshot. Source checks for the five studies are **October 11, 2026**. The
+broader directory retains its separately dated checks. These pages explain
+implementations and research; they do not report a new head-to-head benchmark.
+
+[^react]: Shunyu Yao et al. [ReAct: Synergizing Reasoning and Acting in Language Models](https://arxiv.org/abs/2210.03629v3), ICLR 2023.
+[^patterns]: Anthropic. [Building effective agents](https://www.anthropic.com/engineering/building-effective-agents), 2024; workflows and agents.
+[^managed]: Anthropic. [Scaling Managed Agents: Decoupling the brain from the hands](https://www.anthropic.com/engineering/managed-agents), April 8, 2026. Session, harness and sandbox responsibilities; checked October 11, 2026.
+[^api]: OpenAI. [Agents API overview](https://developers.openai.com/api/docs/guides/agents-api/overview), managed harness and application integration; checked October 11, 2026.
+
+[^landscape]: Latent Light. [Agent Deep Dives](/agents/deep-dives/), synthesis of the five inspected implementation studies, ecosystem roles and bounded frontier evidence; source checks October 11, 2026. Categories overlap and do not indicate measured quality.

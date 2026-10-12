@@ -1,0 +1,43 @@
+---
+interface Props {id: string;}
+const {id} = Astro.props;
+---
+<figure id={id} class="cache-figure" aria-labelledby={`${id}-title`}>
+  <strong id={`${id}-title`} class="figure-title">The model reads history. The caller grows it.</strong>
+  <section class="model-call">
+    <span class="eyebrow">One model call</span>
+    <div class="computation">
+      <div class="cell"><strong>Current tokens</strong><span>T positions</span></div>
+      <span class="arrow" aria-hidden="true">→</span>
+      <div class="cell accent"><strong>Decoder attention</strong><span>Reads past + current KV</span></div>
+      <span class="arrow" aria-hidden="true">→</span>
+      <div class="cell"><strong>Vocabulary logits</strong><span>Not a selected token</span></div>
+    </div>
+    <div class="returned"><span aria-hidden="true">↓</span><strong>Returned “present”</strong><span>Only this call's T new KV positions, across all layers</span></div>
+  </section>
+  <section class="caller-state">
+    <span class="eyebrow">Caller: sample and retain state</span>
+    <div class="cache-combine">
+      <div><strong>Past KV · N positions</strong><div class="memory old"><span></span><span></span><span></span><span>…</span></div></div>
+      <span class="operator" aria-hidden="true">+</span>
+      <div><strong>New KV · T positions</strong><div class="memory fresh"><span></span><span>…</span></div></div>
+      <span class="operator" aria-hidden="true">=</span>
+      <div><strong>Retained KV · N + T</strong><div class="memory combined"><span></span><span></span><span></span><span class="new"></span><span>…</span></div></div>
+    </div>
+    <div class="next-call"><span aria-hidden="true">↶</span><span><strong>Next call:</strong> sampled token + retained KV as “past”</span></div>
+    <p class="note">Illustrative position bars, not exact token counts. Sampling and cache concatenation are outside the original model function.</p>
+  </section>
+  <figcaption><slot /></figcaption>
+</figure>
+<style>
+  .cache-figure{container-type:inline-size;container-name:cache;min-width:0;margin:1.75rem 0;padding:1.2rem;border:1px solid var(--nb-border);border-radius:.85rem;background:var(--nb-background);line-height:1.5;}
+  .figure-title{display:block;font-size:1rem;margin-bottom:1rem;}.eyebrow{display:block;color:var(--nb-muted-foreground);font-size:.75rem;margin-bottom:.7rem;}
+  .model-call,.caller-state{min-width:0;}.caller-state{margin-top:1.25rem;padding-top:1rem;border-top:1px solid var(--nb-border);}
+  .computation{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1.3fr) auto minmax(0,1fr);gap:.6rem;align-items:center;}.cell{min-width:0;padding:.8rem .5rem;border:1px solid var(--nb-border);border-radius:.6rem;text-align:center;background:var(--nb-card,var(--nb-background));}.cell strong{display:block;font-size:.86rem;}.cell span{display:block;margin-top:.3rem;color:var(--nb-muted-foreground);font-size:.74rem;}.accent{border-color:var(--nb-primary);background:color-mix(in srgb,var(--nb-primary) 6%,var(--nb-background));}.arrow,.operator{color:var(--nb-muted-foreground);text-align:center;font-size:1.15rem;}
+  .returned{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:.5rem;margin-top:.85rem;font-size:.78rem;}.returned>span:last-child{color:var(--nb-muted-foreground);}
+  .cache-combine{display:grid;grid-template-columns:minmax(0,1.2fr) auto minmax(0,.9fr) auto minmax(0,1.5fr);gap:.6rem;align-items:center;}.cache-combine strong{display:block;font-size:.74rem;line-height:1.5;margin-bottom:.5rem;}.memory{display:flex;gap:3px;height:32px;}.memory span{flex:1;border:1px solid var(--nb-border);border-radius:4px;background:color-mix(in srgb,var(--nb-primary) 10%,var(--nb-background));}.memory span:last-child{background:none;border:0;text-align:center;}.fresh span:first-child,.combined .new{background:color-mix(in srgb,var(--nb-primary) 35%,var(--nb-background));border-color:var(--nb-primary);}
+  .next-call{display:flex;align-items:center;gap:.65rem;border:1px dashed var(--nb-primary);border-radius:.6rem;margin-top:1rem;padding:.6rem .75rem;font-size:.8rem;}.next-call>span:first-child{font-size:1.4rem;color:var(--nb-primary);}.note{font-size:.75rem;line-height:1.5;color:var(--nb-muted-foreground);margin:.7rem 0 0;}
+  figcaption{font-size:.8rem;line-height:1.6;color:var(--nb-muted-foreground);border-top:1px solid var(--nb-border);padding-top:.8rem;margin-top:1rem;}
+  @container cache (max-width:500px){.computation{grid-template-columns:1fr;}.arrow{transform:rotate(90deg);}.cache-combine{grid-template-columns:1fr;gap:.5rem;}.cache-combine strong{text-align:center;}.memory{max-width:16rem;margin:auto;}.returned{text-align:center;}.cell{padding:.8rem;}}
+  @media print{.cache-figure{break-inside:avoid;}}
+</style>

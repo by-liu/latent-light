@@ -1,0 +1,45 @@
+{
+  "schema_version": 2,
+  "topic_id": "qwen2-5-1m-technical-deep-dive",
+  "status": "complete",
+  "coverage": {
+    "eligibility": "Matching first-party report and public checkpoint inspected.",
+    "mechanisms": "A million-token system separates 256K training, DCA extrapolation, sparse chunk-aware selection and persistent KV memory.",
+    "artifacts": "Pinned configuration/card and targeted implementation read; no model/weights run.",
+    "adversarial_review": "Generic Transformers Qwen2 attention does not implement custom DCA. Reported speedups measure complete systems and TP/hardware conditions, not an isolated sparse-attention primitive. Long-context extension has mixed short-task changes; retrieval success does not prove million-token synthesis reliability.",
+    "presentation": "122 site tests pass, zero Astro diagnostics, 59-page static build and 59-doc lint clean. Fresh browser regression checks cover all 41 model pages plus the catalog and Foundations at 1440 px light, 390 px light and 320 px dark (129 views), reduced motion, desktop focus, active family navigation, figure order, loaded images and local anchors; narrow figures remain keyboard-pannable and link to full-size originals. All 41 Markdown/MDX exports and both agent manifests checked; representative search queries resolve. All 35 new desktop figure renders received manual contact-sheet review; dense focus/mobile views and resource-card/catalog layout received additional manual inspection. Existing bundler directive and philosophy-redirect indexing warnings remain. No model execution or benchmark reproduction.",
+    "licensing": "Nonexclusive arXiv rights metadata; per-figure Canadian fair-dealing case assessment in public asset notice. No MIT/report-artwork grant claimed.",
+    "integrated_browser_qa": "122 site tests pass, zero Astro diagnostics, 59-page static build and 59-doc lint clean. Fresh browser regression checks cover all 41 model pages plus the catalog and Foundations at 1440 px light, 390 px light and 320 px dark (129 views), reduced motion, desktop focus, active family navigation, figure order, loaded images and local anchors; narrow figures remain keyboard-pannable and link to full-size originals. All 41 Markdown/MDX exports and both agent manifests checked; representative search queries resolve. All 35 new desktop figure renders received manual contact-sheet review; dense focus/mobile views and resource-card/catalog layout received additional manual inspection. Existing bundler directive and philosophy-redirect indexing warnings remain. No model execution or benchmark reproduction.",
+    "final_report_review": "Source-scoped report and public MDX reviewed; no placeholder conclusions, undisclosed recipe invention or benchmark reproduction claim."
+  },
+  "open_questions": [
+    "Full undisclosed training recipe and independent model reproduction remain outside this source-based study."
+  ],
+  "recommended_next_direction": "Refresh on substantive report/artifact evidence; runtime and benchmark reproduction remain separate future work.",
+  "last_seen": "2026-10-10T18:52:33.833Z",
+  "quality_gate": {
+    "evidence_verified": true,
+    "contradictions_reviewed": true,
+    "report_reviewed": true,
+    "visuals_reviewed": true
+  },
+  "artifact_record": {
+    "huggingface": "e28526f7bb80e2a9c8af03b831a9af3812f18fba",
+    "report_url": "https://arxiv.org/pdf/2501.15383v1",
+    "pdf_sha256": "3701cc42a534f304dc06e3164813d7f18b6d5129d62eaaa0941fe8aa00126af3",
+    "archive": "/tmp/qwen-expansion/qwen2-5-1m.pdf (unchanged, outside public repository)",
+    "runtime": "Not executed",
+    "figures": [
+      {
+        "original_figure": 2,
+        "page": 5,
+        "asset": "report-dca.png"
+      },
+      {
+        "original_figure": 4,
+        "page": 7,
+        "asset": "report-chunked-prefill.png"
+      }
+    ]
+  }
+}

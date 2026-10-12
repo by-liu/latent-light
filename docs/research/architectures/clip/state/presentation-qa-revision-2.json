@@ -1,0 +1,181 @@
+{
+  "revision": 2,
+  "checked": "2026-10-10T15:45:39.761Z",
+  "site_page_sha256": "ac9d458876f8610d1f8591929f71162c8b05e77eeb786072f6dade28645101b1",
+  "source_resources": {
+    "report": "https://arxiv.org/abs/2103.00020v1",
+    "hugging_face": "https://huggingface.co/openai/clip-vit-base-patch32",
+    "checkpoint": "openai/clip-vit-base-patch32"
+  },
+  "collection_checks": {
+    "site_validation": "106 tests, zero Astro diagnostics, build and all 43 docs lint passed.",
+    "browser_views": 81,
+    "model_benchmarks": "Not executed.",
+    "source_figures": "32 unique report assets; 33 placements; 48 total numbered collection figures. Rights retained per asset."
+  },
+  "viewports": [
+    {
+      "slug": "clip",
+      "width": 1440,
+      "mode": "light",
+      "title": "CLIP",
+      "titleCount": 1,
+      "overflow": false,
+      "figures": [
+        {
+          "id": "figure-1",
+          "caption": "Figure 1. Contrastive learning and zero-shot transfer. Radford et al., ICML 2021, Figure 1; cropped, CC BY 4.0.6"
+        },
+        {
+          "id": "figure-2",
+          "caption": "Figure 2. A controlled learning-efficiency comparison. Radford et al., ICML 2021, Figure 2; cropped, CC BY 4.0.6"
+        }
+      ],
+      "resources": [
+        {
+          "kind": "report",
+          "href": "https://arxiv.org/abs/2103.00020v1",
+          "label": "Technical reportRead the original research"
+        },
+        {
+          "kind": "model",
+          "href": "https://huggingface.co/openai/clip-vit-base-patch32",
+          "label": "Hugging Faceopenai/clip-vit-base-patch32"
+        }
+      ],
+      "visibleHashes": [],
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "missingImages": [],
+      "activeNav": [
+        {
+          "label": "CLIP",
+          "visible": true
+        }
+      ],
+      "panFrames": [
+        {
+          "tabindex": 0,
+          "scrolls": false,
+          "frame": 648,
+          "image": 648
+        },
+        {
+          "tabindex": 0,
+          "scrolls": false,
+          "frame": 648,
+          "image": 648
+        }
+      ]
+    },
+    {
+      "slug": "clip",
+      "width": 390,
+      "mode": "light",
+      "title": "CLIP",
+      "titleCount": 1,
+      "overflow": false,
+      "figures": [
+        {
+          "id": "figure-1",
+          "caption": "Figure 1. Contrastive learning and zero-shot transfer. Radford et al., ICML 2021, Figure 1; cropped, CC BY 4.0.6"
+        },
+        {
+          "id": "figure-2",
+          "caption": "Figure 2. A controlled learning-efficiency comparison. Radford et al., ICML 2021, Figure 2; cropped, CC BY 4.0.6"
+        }
+      ],
+      "resources": [
+        {
+          "kind": "report",
+          "href": "https://arxiv.org/abs/2103.00020v1",
+          "label": "Technical reportRead the original research"
+        },
+        {
+          "kind": "model",
+          "href": "https://huggingface.co/openai/clip-vit-base-patch32",
+          "label": "Hugging Faceopenai/clip-vit-base-patch32"
+        }
+      ],
+      "visibleHashes": [],
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "missingImages": [],
+      "activeNav": [
+        {
+          "label": "CLIP",
+          "visible": false
+        }
+      ],
+      "panFrames": [
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 358,
+          "image": 780
+        },
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 358,
+          "image": 440
+        }
+      ]
+    },
+    {
+      "slug": "clip",
+      "width": 320,
+      "mode": "dark",
+      "title": "CLIP",
+      "titleCount": 1,
+      "overflow": false,
+      "figures": [
+        {
+          "id": "figure-1",
+          "caption": "Figure 1. Contrastive learning and zero-shot transfer. Radford et al., ICML 2021, Figure 1; cropped, CC BY 4.0.6"
+        },
+        {
+          "id": "figure-2",
+          "caption": "Figure 2. A controlled learning-efficiency comparison. Radford et al., ICML 2021, Figure 2; cropped, CC BY 4.0.6"
+        }
+      ],
+      "resources": [
+        {
+          "kind": "report",
+          "href": "https://arxiv.org/abs/2103.00020v1",
+          "label": "Technical reportRead the original research"
+        },
+        {
+          "kind": "model",
+          "href": "https://huggingface.co/openai/clip-vit-base-patch32",
+          "label": "Hugging Faceopenai/clip-vit-base-patch32"
+        }
+      ],
+      "visibleHashes": [],
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "missingImages": [],
+      "activeNav": [
+        {
+          "label": "CLIP",
+          "visible": false
+        }
+      ],
+      "panFrames": [
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 288,
+          "image": 780
+        },
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 288,
+          "image": 440
+        }
+      ]
+    }
+  ],
+  "manual_review": "All 48 figure renders inspected as contact sheets; source figure completeness, labels and supplemental diagrams reviewed. Dense focus view and native dark diagrams inspected separately."
+}

@@ -11,5 +11,17 @@
       "@/*": "src/*"
     }
   },
-  "components": []
+  "components": [
+    {
+      "slug": "embed",
+      "type": "registry:ui",
+      "version": "0.17.0",
+      "source": "https://nimbus-docs.com/registry",
+      "hash": "sha256:ccf9df24232e0542ee482ab2a86ae1de4b41f2110a6d30a327b9b3d5439443ad",
+      "files": [
+        "src/components/ui/embed/Embed.astro",
+        "src/components/ui/embed/index.ts"
+      ]
+    }
+  ]
 }

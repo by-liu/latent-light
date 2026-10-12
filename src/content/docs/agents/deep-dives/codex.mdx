@@ -1,0 +1,145 @@
+---
+title: "Codex: Sessions, execution and review"
+description: Understand Codex through its client, harness, task lifecycle, SDK and execution boundaries.
+lastUpdated: 2026-10-11
+---
+
+import AgentArchitecture from '../../../../components/agents/AgentArchitecture.astro';
+import ModelFlow from '../../../../components/architectures/ModelFlow.astro';
+
+Codex is best studied as a **controllable coding workflow with several integration
+surfaces**. An interactive client, a program using the SDK and a cloud task do
+not assign every runtime responsibility to the same owner.[^sdk][^cloud]
+The useful question is where the conversation, execution and review live.
+
+This study uses current official documentation checked **October 11, 2026**.
+It explains documented contracts and an original task scenario. It does not
+claim a new benchmark or knowledge of private service internals.
+
+## Separate the client, harness and workspace
+
+[Figure 1](#figure-1) maps responsibilities rather than equating an app with its
+execution environment. The client presents work; the harness manages decisions
+and tools; the environment supplies files and executable resources.
+
+<AgentArchitecture id="figure-1" title="A controllable session around an execution boundary" layersJson='[{"label":"Client or application","detail":"Choose how to request and review work","parts":[{"title":"Interactive client","body":"Present user input, progress and review controls."},{"title":"SDK automation","body":"Start, continue and resume coding work from a program."},{"title":"Cloud workflow","body":"Start tasks with a prepared project environment."}]},{"label":"Codex harness","detail":"Own the ongoing agent interaction","parts":[{"title":"Thread and turns","body":"Track a conversation and the work responding to each input."},{"title":"Model and tools","body":"Choose actions, handle tool results and manage context."},{"title":"Control events","body":"Surface approvals, steering, interruption and completion."}]},{"label":"Execution and evidence","detail":"Keep the deployment boundary explicit","parts":[{"title":"Workspace","body":"The repository and artifacts available to this task."},{"title":"Sandbox policy","body":"Filesystem and network restrictions for execution."},{"title":"Review","body":"Changed files, checks and observed outcomes."}]}]'>
+
+**Figure 1.** Latent Light synthesis of documented App Server, SDK, cloud and sandbox responsibilities.[^server][^sdk][^cloud][^sandbox]
+
+</AgentArchitecture>
+
+App Server supports custom clients that need conversation history, streamed
+events, authentication and approval interactions. The SDK is the documented
+route for automating coding tasks. These are integration choices, not different
+names for a base model.[^server][^sdk]
+
+## Think in threads, turns and items
+
+The App Server contract distinguishes a **thread** containing a conversation,
+a **turn** containing work in response to user input, and **items** such as
+messages, tool calls, commands and file changes. Initialization establishes a
+connection; thread APIs start or resume work; turn APIs begin or steer it;
+notifications report incremental progress and completion.[^server]
+
+This event model matters when an application displays progress. “The request
+was accepted,” “a command is running,” and “the task completed” are different
+states. Our integration lesson is to preserve those distinctions rather than
+reduce all activity to an animated chat message. A lost client connection also
+needs reconciliation with recorded task state before the application retries.
+
+The TypeScript SDK exposes local thread creation, continuation and resumption.
+The Python SDK controls a local App Server over JSON-RPC and published builds
+include a pinned runtime dependency. An explicit sandbox argument and an omitted
+argument are not equivalent: the omitted value uses the runtime's configured
+default. Check the documentation matching the SDK edition you deploy.[^sdk]
+
+## Local work and cloud tasks have different lifecycles
+
+Codex Cloud uses a prepared project environment and gives each task its own
+workspace. Work can continue while the user's machine is asleep, and the
+workflow exposes changed files and checks for review. Shared setup does not
+mean two tasks share one mutable working tree.[^cloud]
+
+That changes the handoff problem. Local work must coexist with the user's
+current edits and processes. A cloud task must carry enough project setup,
+access and review evidence to make the result understandable after asynchronous
+execution. Neither setting removes the need to inspect the diff.
+
+The **managed Agents API** is another ownership choice: OpenAI manages the Codex
+harness and durable sessions while the application supplies its integrations
+and chooses an environment. The Codex SDK, the OpenAI Agents SDK and this managed
+API should not be collapsed into one product contract.[^managed] Use the
+[broader ecosystem](/agents/ecosystem/) to compare these implementation layers.
+
+## Guidance and skills select what the model sees
+
+AGENTS.md discovery builds an instruction chain from global and project guidance.
+Within each searched directory, override and fallback rules determine which
+file contributes; nearer project guidance is later in the concatenated chain.
+The documentation describes the chain's construction at run start. It is not a
+promise that every instruction file anywhere in a repository loads immediately.[^guidance]
+
+Skills use progressive disclosure: identifying information is available first,
+and the full instructions load when the skill is selected. Supporting scripts
+and references can make a procedure concrete. Installing a skill changes the
+available instructions and resources; it does not change model weights or grant
+new operating-system authority.[^skills]
+
+The current subagent documentation describes explicit requests and applicable
+project or skill instructions as ways to authorize delegation. A delegated
+thread needs a scoped task, relevant evidence and an integration owner. Context
+isolation can help an investigation without making conflicting edits safe.[^workers]
+
+## Approval and containment answer different questions
+
+Sandboxing bounds the resources an operation can reach. Approval handles a
+particular requested action or boundary crossing. The documented CLI presets
+include read-only, workspace-write and full-access execution; filesystem and
+network behavior depends on the effective configuration. Client and operating
+system support also matter.[^sandbox]
+
+A sensible design review therefore checks both policy and observed execution.
+“Run the tests” may be authorized, yet a test command can require network access
+or write a cache elsewhere. Conversely, a command can fit within the sandbox
+and still be the wrong way to solve the user's task. Containment is not an
+outcome grader.
+
+## Follow one task across the boundaries
+
+Consider an original scenario: **repair a parser and prove the reported input
+is handled, while preserving unrelated changes**. [Figure 2](#figure-2) shows
+a review contract an application could use.
+
+<ModelFlow id="figure-2" title="Request, execute, reconcile and review" lanesJson='[{"steps":[{"label":"Define","detail":"Record the target behavior, workspace and allowed effects."},{"label":"Observe","detail":"Track work items, changes, tool outcomes and any pauses."},{"label":"Verify","detail":"Check the requested behavior and relevant regressions."},{"label":"Hand off","detail":"Present the artifact, evidence and remaining uncertainty."}],"note":"If a run is interrupted, inspect recorded progress and the workspace before retrying side effects."}]'>
+
+**Figure 2.** An original review scenario informed by the documented session and execution contracts; not an executed comparison.[^server][^sandbox]
+
+</ModelFlow>
+
+An application should distinguish a denied command from a failing regression
+check. The first calls for an allowed alternative or new authority; the second
+calls for another inspection of the implementation. A final summary should
+identify what actually ran, not merely what a generated plan intended.
+
+For cloud work, review the returned changes against the receiving repository's
+current state. For local work, protect the user's existing edits throughout.
+The same acceptance criteria can apply, even though setup and recovery differ.
+
+## What to learn from Codex
+
+The transferable design is **a task lifecycle that a client can inspect and
+control**. Events, persistent threads and bounded execution give an application
+more structure to work with; the application still needs a trustworthy task
+specification, integration and final review. Compare this with
+[OpenCode's HTTP server boundary](/agents/deep-dives/opencode/),
+[Pi's in-process SDK and subprocess RPC](/agents/deep-dives/pi/) and
+[Claude Code's workflow extensions](/agents/deep-dives/claude-code/).
+
+[^server]: OpenAI. [Codex App Server](https://learn.chatgpt.com/docs/app-server), thread, turn and item model; initialization, streaming and approvals. Checked October 11, 2026.
+[^sdk]: OpenAI. [Codex SDK](https://learn.chatgpt.com/docs/codex-sdk), TypeScript and Python integration, local thread lifecycle and runtime defaults. Checked October 11, 2026.
+[^cloud]: OpenAI. [Codex Cloud](https://learn.chatgpt.com/docs/cloud), task workspaces, project environments and review. Checked October 11, 2026.
+[^sandbox]: OpenAI. [Sandbox](https://learn.chatgpt.com/docs/sandboxing), filesystem, network and sandbox presets. Checked October 11, 2026.
+[^guidance]: OpenAI. [Custom instructions with AGENTS.md](https://learn.chatgpt.com/docs/agent-configuration/agents-md), discovery and instruction precedence. Checked October 11, 2026.
+[^skills]: OpenAI. [Build skills](https://learn.chatgpt.com/docs/build-skills), progressive disclosure and procedure packaging. Checked October 11, 2026.
+[^workers]: OpenAI. [Subagents](https://learn.chatgpt.com/docs/agent-configuration/subagents), delegated threads, applicability and configuration. Checked October 11, 2026.
+[^managed]: OpenAI. [Agents API overview](https://developers.openai.com/api/docs/guides/agents-api/overview), managed Codex harness and application responsibilities. Checked October 11, 2026.

@@ -1,7 +1,7 @@
 ---
 title: Maintenance and upgrades
 description: How to validate changes, review Nimbus upgrades, and prepare for publication.
-lastUpdated: 2026-10-03
+lastUpdated: 2026-10-11
 ---
 
 Maintain the site through small, reviewed changes. Keep Nimbus pinned to an exact
@@ -22,12 +22,24 @@ git status --short
 ```
 
 `validate` runs deployment guard and verification tests, content renderer tests,
-Astro checks, content lint, and the production build.
+Astro checks, the production build, and content lint. The build comes before
+lint because Nimbus checks internal links against the generated route map.
 Review the changed source and output for unintended content or sensitive material.
 
+For research-skill or schema changes, also run:
+
+```bash
+npm run test:research
+```
+
+This separate suite needs Python 3.10 or newer. It checks initialization, output
+contracts, evidence links, visuals, and read-only legacy compatibility in
+isolated fixtures. It is not part of the Node-based `validate` command or the
+production build. Keep the skill and its tests versioned together.
+
 If lint reports a new page as missing, check its source path and sidebar entry.
-If both are correct, run `npm run build` to refresh route metadata.
-Then repeat validation. Do not suppress the broken link rule.
+Run the full validation command to refresh route metadata before checking links.
+Do not suppress the broken link rule.
 
 - Check desktop and mobile layout, links, and horizontal overflow.
 - After interface changes, check keyboard use, reduced motion, sidebar controls,
@@ -115,6 +127,39 @@ requests before changing interaction code. Restart only this project's server wh
 
 Stop the development server before starting preview on the same port.
 Keep the source editor in development mode only. Never include it in preview or production.
+
+## Website analytics
+
+Cloudflare Web Analytics measures browser page views and page performance through a JavaScript beacon.[^web-analytics]
+Real User Measurements (RUM) describes the measurements collected from browsers.
+The site uses the Cloudflare dashboard for this configuration, not a repository script.
+
+**Observed dashboard selection, October 11, 2026:** automatic RUM for `latentlit.com`, excluding visitor data in the EU.
+Cloudflare documents this option as automatic injection outside the EU.[^analytics-setup]
+**Collection check: pending.** The observed selection does not prove that the saved configuration collects data.
+Record configuration and collection checks separately.
+
+To check collection:
+
+1. Open **Web Analytics** in the Cloudflare dashboard.
+2. Select `latentlit.com`.
+3. Open **Manage site** to check the saved option.
+4. Visit a public page from a region that the saved option includes.
+5. Check the browser's Network panel for the beacon script.
+6. Check for a successful beacon `POST` to `/cdn-cgi/rum` or `/cdn-cgi/rum/`.
+7. Check recent page views in the dashboard after a few minutes.
+
+These steps describe a proposed verification procedure, not a completed collection check.
+The beacon sends `POST` requests. A `GET` request to that endpoint is not a valid collection test.[^analytics-faq]
+Do not send synthetic payloads to the endpoint.
+Use one installation method per page.[^analytics-faq]
+Do not add a manual beacon when automatic injection already works.
+
+A missing beacon can reflect EU exclusion or a browser blocker.[^analytics-setup][^analytics-faq]
+Check the request context before concluding that analytics is inactive.
+Browser analytics does not measure agents that only fetch Markdown exports.
+Use request-level analytics for those requests, subject to the available plan.[^analytics-faq]
+Changes to analytics settings require user authorization.
 
 ## Prepare for publication
 
@@ -261,6 +306,17 @@ show new files before the first commit.
    private material and credentials.
 2. Check exclusions for environment files, dependency directories, build output,
    and local tool state. Keep only the reviewed root `.env.example`.
+   Exclude local AWS credentials and state with the root `/.aws` rule.
+   Check the exclusion without opening credential files:
+
+   ```bash
+   git check-ignore -v -- .aws
+   git ls-files -- .aws
+   ```
+
+   The first command must report the ignore rule. The second command must return no tracked paths.
+   An ignore rule does not remove files that Git already tracks.
+   Do not force-add credential paths.
 3. Check media provenance and retain required license notices. Decide the reuse
    terms for original code, writing, and identity artwork separately.
 4. Run `npm audit`. Investigate each advisory and record its relevance to the
@@ -291,6 +347,7 @@ After an authorized deployment, check these items at the public address:
 - Desktop and mobile layout, images, navigation, and theme switching
 - Search results and reading controls
 - `/about/philosophy` and its intended redirect
+- Previous content guidance links and their HTML, Markdown, and MDX redirects
 - An unknown route and its 404 response
 - `/llms.txt`, `/llms-full.txt`, and page Markdown and MDX exports
 - Canonical URLs, sitemap entries, and social image URLs
@@ -325,3 +382,7 @@ If no suitable version exists, prepare the reviewed source in a separate
 working directory. Rebuild with the approved production origin and repeat validation.
 Deploy that recovery build only after authorization. Do not erase local changes
 or reset the current working tree to recover a public deployment.
+
+[^web-analytics]: Cloudflare, [About Web Analytics](https://developers.cloudflare.com/web-analytics/about/). Checked October 11, 2026.
+[^analytics-setup]: Cloudflare, [Enabling Web Analytics](https://developers.cloudflare.com/web-analytics/get-started/), automatic setup and the EU exclusion option. Checked October 11, 2026.
+[^analytics-faq]: Cloudflare, [Web Analytics FAQ](https://developers.cloudflare.com/web-analytics/faq/), beacon methods, installation, blockers and client-side measurement. Checked October 11, 2026.

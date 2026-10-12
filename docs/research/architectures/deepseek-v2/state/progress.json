@@ -1,0 +1,44 @@
+{
+  "schema_version": 2,
+  "topic_id": "deepseek-v2-technical-deep-dive",
+  "status": "complete",
+  "coverage": {
+    "eligibility": "official technical report and public artifact confirmed",
+    "mechanisms": "Revision3: complete report and relevant appendices compared to study; targeted artifact paths checked; coverage-audit.md records mechanisms/training/inference/ablations and omissions.",
+    "artifacts": "pinned config, tokenizer metadata where relevant and license inspected",
+    "runtime": "not executed",
+    "adversarial_review": "Distinct revision3 check: source section/equation locators, count and cost units, causal ordering, input-prefix/reward/policy distinctions, source-art grants, future-versus-implemented systems and diagram text/arrow boundaries. Corrections documented in coverage-audit.md.",
+    "presentation": "Revision 3 checked at 1440px light, 390px light, 320px dark and desktop focus. Full desktop art, mobile keyboard pan, full-size access, family navigation, caption order, citations, equations, resources, images, no overflow, search, Markdown/MDX and agent manifests passed. All 66 model figure renders manually inspected. No model execution.",
+    "figure_rights": "Official repository documentation edition, Figure 2 p.5. MIT LICENSE-CODE explicitly covers associated documentation; the report and identical architecture asset reside in that repository, with no separate exclusion. The arXiv v1 nonexclusive license is not the reproduction basis."
+  },
+  "open_questions": [
+    "Which undisclosed recipe details materially affect reproduction? Runtime measurements and independent benchmark reproduction remain outside this source-based study."
+  ],
+  "recommended_next_direction": null,
+  "last_seen": "2026-10-10T17:36:51.557Z",
+  "quality_gate": {
+    "evidence_verified": true,
+    "contradictions_reviewed": true,
+    "report_reviewed": true,
+    "visuals_reviewed": true
+  },
+  "artifact_record": {
+    "github": {
+      "sha": "ec98ee3cbffc32104cd55dba8af884b3d772602a",
+      "date": "2024-09-25T10:23:55Z"
+    },
+    "huggingface": "4461458f186c35188585855f28f77af5661ad489",
+    "report_url": "https://arxiv.org/pdf/2405.04434v1",
+    "pdf_sha256": "e930bb96dd1f0ecbe57b47b7a27141f8c165cd4a9de41b1cc2e46f54ec96e96b",
+    "archive": "Exact source PDFs retained unchanged under /tmp only; publication includes only inspected figure excerpts under their individual grants.",
+    "figure_editions": [
+      {
+        "url": "https://raw.githubusercontent.com/deepseek-ai/DeepSeek-V2/ec98ee3cbffc32104cd55dba8af884b3d772602a/deepseek-v2-tech-report.pdf",
+        "locator": "Figure 2, PDF page 5",
+        "license": "MIT",
+        "license_url": "https://github.com/deepseek-ai/DeepSeek-V2/blob/ec98ee3cbffc32104cd55dba8af884b3d772602a/LICENSE-CODE",
+        "pdf_sha256": "aedf0bf55b21049cd0f3a4a8b1807814ed4f5f418b75b4a4a06aa2006a494e63"
+      }
+    ]
+  }
+}

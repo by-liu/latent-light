@@ -1,0 +1,30 @@
+High Agency audio, short videos and playback previews
+
+Producer: Bingyuan, using Google NotebookLM and Latent Light's research material.
+The author supplied the clips and directed their inclusion on Latent Light.
+This permission covers these supplied clips, readable text equivalents and the
+poster excerpts used to link to their playback. No general Creative Commons
+or MIT grant is asserted for the media. The site's MIT source-code license
+does not cover the underlying video imagery or narration.
+
+https://www.youtube.com/watch?v=9WYUuK28iNk
+https://www.youtube.com/watch?v=9n5E-vKVKBA
+https://www.youtube.com/watch?v=jkz5TDyKO48
+
+Posters in /media/high-agency/ reproduce a complete frame at 00:03 from each
+corresponding supplied clip. They were resized to 480 by 853 pixels and converted
+to WebP without cropping, semantic changes or watermark removal. The visible
+Gemini NotebookLM mark is retained.
+
+Exact source filenames, hashes, canonical links, metadata checks and review
+limits are retained in docs/research/human-capabilities/high-agency/media/.
+
+The author also supplied the complete 25:03 NotebookLM-generated podcast and
+requested its MP3 conversion, public hosting and inclusion on the article.
+The original recording is retained unchanged. Its MP3 is hosted at:
+https://media.latentlit.com/audio/high-agency/high-agency-your-superpower-in-the-ai-era-v1.mp3
+
+The audio and its readable text equivalent are included under this specific
+author publication instruction, without asserting a separate general media
+license. The transcript is automatic, with disclosed spelling normalization
+and review limits. Exact provenance is retained in the same media records.

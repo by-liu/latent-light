@@ -1,0 +1,221 @@
+{
+  "revision": 3,
+  "checked": "2026-10-10T17:36:51.557Z",
+  "site_page_sha256": "6fd4e1aa63e134c3d0cf1b3db340a93d1b9bece630798e2309225421a80f7564",
+  "source_resources": {
+    "report": "https://arxiv.org/abs/2310.03744v2",
+    "hugging_face": "https://huggingface.co/liuhaotian/llava-v1.5-7b",
+    "checkpoint": "liuhaotian/llava-v1.5-7b"
+  },
+  "prior_review_record": "state/presentation-qa-revision-2.json",
+  "collection_checks": {
+    "site_validation": "106 tests, zero Astro diagnostics, static build and all 43 docs lint passed.",
+    "browser_views": 81,
+    "renewed_views_after_final_locator_corrections": 6,
+    "numbered_model_figures": 66,
+    "source_figure_assets": 42,
+    "source_figure_placements": 43,
+    "model_benchmarks": "Not executed."
+  },
+  "viewports": [
+    {
+      "slug": "llava",
+      "width": 1440,
+      "mode": "light",
+      "title": "LLaVA",
+      "titleCount": 1,
+      "overflow": false,
+      "figures": [
+        {
+          "id": "figure-1",
+          "caption": "Figure 1. The original LLaVA interface. Liu et al., Figure 1; cropped, CC BY 4.0.7"
+        },
+        {
+          "id": "figure-2",
+          "caption": "Figure 2. Local detail plus global context. Original worked example of the separate HD extension.2"
+        },
+        {
+          "id": "figure-3",
+          "caption": "Figure 3. Instruction-mixture subsampling. Liu et al., LLaVA-1.5 report, Figure 4; cropped, CC BY 4.0.9"
+        }
+      ],
+      "resources": [
+        {
+          "kind": "report",
+          "href": "https://arxiv.org/abs/2310.03744v2",
+          "label": "Technical reportRead the original research"
+        },
+        {
+          "kind": "model",
+          "href": "https://huggingface.co/liuhaotian/llava-v1.5-7b",
+          "label": "Hugging Faceliuhaotian/llava-v1.5-7b"
+        }
+      ],
+      "visibleHashes": [],
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "missingImages": [],
+      "activeNav": [
+        {
+          "label": "LLaVA / 1.5",
+          "visible": true
+        }
+      ],
+      "panFrames": [
+        {
+          "tabindex": 0,
+          "scrolls": false,
+          "frame": 648,
+          "image": 648
+        },
+        {
+          "tabindex": 0,
+          "scrolls": false,
+          "frame": 648,
+          "image": 648
+        }
+      ]
+    },
+    {
+      "slug": "llava",
+      "width": 390,
+      "mode": "light",
+      "title": "LLaVA",
+      "titleCount": 1,
+      "overflow": false,
+      "figures": [
+        {
+          "id": "figure-1",
+          "caption": "Figure 1. The original LLaVA interface. Liu et al., Figure 1; cropped, CC BY 4.0.7"
+        },
+        {
+          "id": "figure-2",
+          "caption": "Figure 2. Local detail plus global context. Original worked example of the separate HD extension.2"
+        },
+        {
+          "id": "figure-3",
+          "caption": "Figure 3. Instruction-mixture subsampling. Liu et al., LLaVA-1.5 report, Figure 4; cropped, CC BY 4.0.9"
+        }
+      ],
+      "resources": [
+        {
+          "kind": "report",
+          "href": "https://arxiv.org/abs/2310.03744v2",
+          "label": "Technical reportRead the original research"
+        },
+        {
+          "kind": "model",
+          "href": "https://huggingface.co/liuhaotian/llava-v1.5-7b",
+          "label": "Hugging Faceliuhaotian/llava-v1.5-7b"
+        }
+      ],
+      "visibleHashes": [],
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "missingImages": [],
+      "activeNav": [
+        {
+          "label": "LLaVA / 1.5",
+          "visible": false
+        }
+      ],
+      "panFrames": [
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 358,
+          "image": 680
+        },
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 358,
+          "image": 460
+        }
+      ]
+    },
+    {
+      "slug": "llava",
+      "width": 320,
+      "mode": "dark",
+      "title": "LLaVA",
+      "titleCount": 1,
+      "overflow": false,
+      "figures": [
+        {
+          "id": "figure-1",
+          "caption": "Figure 1. The original LLaVA interface. Liu et al., Figure 1; cropped, CC BY 4.0.7"
+        },
+        {
+          "id": "figure-2",
+          "caption": "Figure 2. Local detail plus global context. Original worked example of the separate HD extension.2"
+        },
+        {
+          "id": "figure-3",
+          "caption": "Figure 3. Instruction-mixture subsampling. Liu et al., LLaVA-1.5 report, Figure 4; cropped, CC BY 4.0.9"
+        }
+      ],
+      "resources": [
+        {
+          "kind": "report",
+          "href": "https://arxiv.org/abs/2310.03744v2",
+          "label": "Technical reportRead the original research"
+        },
+        {
+          "kind": "model",
+          "href": "https://huggingface.co/liuhaotian/llava-v1.5-7b",
+          "label": "Hugging Faceliuhaotian/llava-v1.5-7b"
+        }
+      ],
+      "visibleHashes": [],
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "missingImages": [],
+      "activeNav": [
+        {
+          "label": "LLaVA / 1.5",
+          "visible": false
+        }
+      ],
+      "panFrames": [
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 288,
+          "image": 680
+        },
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 288,
+          "image": 460
+        }
+      ]
+    }
+  ],
+  "manual_review": {
+    "complete": true,
+    "reviewedFigures": 66,
+    "contactSheets": 6,
+    "newDenseVisuals": true,
+    "fullSizeNativeReview": [
+      "qwen3-vl figure 1: full visual pipeline, side path no longer obscured",
+      "qwen3-vl figure 3: schematic frequency interleaving and timestamp distinction",
+      "llama-3 figure 2: block-diagonal causal packed-document mask",
+      "deepseek-v3 figure 2: routing selection and unmodified mixture weights",
+      "deepseek-r1 figure 2: old, current and reference policies",
+      "qwen3 figure 2: student-generated trajectory and teacher scoring",
+      "kimi-linear figure 3: causal intra-chunk computation and recurrent boundary",
+      "llava figure 2: separate HD extension and 1312-position arithmetic",
+      "qwen2-vl figure 2: visual coordinate example and ordinal tube indices"
+    ],
+    "narrowThemeReview": [
+      "qwen3-vl figure 1 at 390px light",
+      "qwen3-vl figure 3 at 320px dark",
+      "deepseek-v3 figure 2 at 320px dark",
+      "llama-3 figure 2 at 390px light"
+    ],
+    "sourceArtReview": "All current source crops inspected in rendered contact sheets; exact full PDF/page and crop comparisons performed by owning agents, with root direct review for V4 cache layout and V4.1 hierarchical indexer. Artwork labels/axes retained; no AI repainting.",
+    "boundary": "Visual and source verification only. Model checkpoints, benchmarks and training were not executed."
+  }
+}

@@ -1,0 +1,151 @@
+{
+  "revision": 2,
+  "checked": "2026-10-10T15:45:39.761Z",
+  "site_page_sha256": "61b66972114cfb63d0452947429a6062aa5778469f1b2619c57a6a66b320f79a",
+  "source_resources": {
+    "report": "https://arxiv.org/pdf/2501.12948v1",
+    "hugging_face": "https://huggingface.co/deepseek-ai/DeepSeek-R1",
+    "checkpoint": "deepseek-ai/DeepSeek-R1"
+  },
+  "collection_checks": {
+    "site_validation": "106 tests, zero Astro diagnostics, build and all 43 docs lint passed.",
+    "browser_views": 81,
+    "model_benchmarks": "Not executed.",
+    "source_figures": "32 unique report assets; 33 placements; 48 total numbered collection figures. Rights retained per asset."
+  },
+  "viewports": [
+    {
+      "slug": "deepseek-r1",
+      "width": 1440,
+      "mode": "light",
+      "title": "DeepSeek-R1",
+      "titleCount": 1,
+      "overflow": false,
+      "figures": [
+        {
+          "id": "figure-1",
+          "caption": "Figure 1. The R1 training pipeline. Reproduced from the later Nature article’s Figure 2, under CC BY 4.0.5"
+        }
+      ],
+      "resources": [
+        {
+          "kind": "report",
+          "href": "https://arxiv.org/pdf/2501.12948v1",
+          "label": "Technical reportRead the original research"
+        },
+        {
+          "kind": "model",
+          "href": "https://huggingface.co/deepseek-ai/DeepSeek-R1",
+          "label": "Hugging Facedeepseek-ai/DeepSeek-R1"
+        }
+      ],
+      "visibleHashes": [],
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "missingImages": [],
+      "activeNav": [
+        {
+          "label": "DeepSeek-R1",
+          "visible": true
+        }
+      ],
+      "panFrames": [
+        {
+          "tabindex": 0,
+          "scrolls": false,
+          "frame": 648,
+          "image": 648
+        }
+      ]
+    },
+    {
+      "slug": "deepseek-r1",
+      "width": 390,
+      "mode": "light",
+      "title": "DeepSeek-R1",
+      "titleCount": 1,
+      "overflow": false,
+      "figures": [
+        {
+          "id": "figure-1",
+          "caption": "Figure 1. The R1 training pipeline. Reproduced from the later Nature article’s Figure 2, under CC BY 4.0.5"
+        }
+      ],
+      "resources": [
+        {
+          "kind": "report",
+          "href": "https://arxiv.org/pdf/2501.12948v1",
+          "label": "Technical reportRead the original research"
+        },
+        {
+          "kind": "model",
+          "href": "https://huggingface.co/deepseek-ai/DeepSeek-R1",
+          "label": "Hugging Facedeepseek-ai/DeepSeek-R1"
+        }
+      ],
+      "visibleHashes": [],
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "missingImages": [],
+      "activeNav": [
+        {
+          "label": "DeepSeek-R1",
+          "visible": false
+        }
+      ],
+      "panFrames": [
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 358,
+          "image": 700
+        }
+      ]
+    },
+    {
+      "slug": "deepseek-r1",
+      "width": 320,
+      "mode": "dark",
+      "title": "DeepSeek-R1",
+      "titleCount": 1,
+      "overflow": false,
+      "figures": [
+        {
+          "id": "figure-1",
+          "caption": "Figure 1. The R1 training pipeline. Reproduced from the later Nature article’s Figure 2, under CC BY 4.0.5"
+        }
+      ],
+      "resources": [
+        {
+          "kind": "report",
+          "href": "https://arxiv.org/pdf/2501.12948v1",
+          "label": "Technical reportRead the original research"
+        },
+        {
+          "kind": "model",
+          "href": "https://huggingface.co/deepseek-ai/DeepSeek-R1",
+          "label": "Hugging Facedeepseek-ai/DeepSeek-R1"
+        }
+      ],
+      "visibleHashes": [],
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "missingImages": [],
+      "activeNav": [
+        {
+          "label": "DeepSeek-R1",
+          "visible": false
+        }
+      ],
+      "panFrames": [
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 288,
+          "image": 700
+        }
+      ]
+    }
+  ],
+  "manual_review": "All 48 figure renders inspected as contact sheets; source figure completeness, labels and supplemental diagrams reviewed. Dense focus view and native dark diagrams inspected separately."
+}

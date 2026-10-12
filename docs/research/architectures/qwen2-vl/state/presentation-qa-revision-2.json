@@ -1,0 +1,151 @@
+{
+  "revision": 2,
+  "checked": "2026-10-10T15:45:39.761Z",
+  "site_page_sha256": "9dc957d8fd7da8cdf52db60d0d45d225479f8ed69c45a8b92799067377dd85e7",
+  "source_resources": {
+    "report": "https://arxiv.org/abs/2409.12191v2",
+    "hugging_face": "https://huggingface.co/Qwen/Qwen2-VL-7B-Instruct",
+    "checkpoint": "Qwen/Qwen2-VL-7B-Instruct"
+  },
+  "collection_checks": {
+    "site_validation": "106 tests, zero Astro diagnostics, build and all 43 docs lint passed.",
+    "browser_views": 81,
+    "model_benchmarks": "Not executed.",
+    "source_figures": "32 unique report assets; 33 placements; 48 total numbered collection figures. Rights retained per asset."
+  },
+  "viewports": [
+    {
+      "slug": "qwen2-vl",
+      "width": 1440,
+      "mode": "light",
+      "title": "Qwen2-VL: adaptive visual budgets and multimodal positions",
+      "titleCount": 1,
+      "overflow": false,
+      "figures": [
+        {
+          "id": "figure-1",
+          "caption": "Figure 1. The patch grid is larger than the language sequence. Original worked diagram based on the selected processor and merger.234"
+        }
+      ],
+      "resources": [
+        {
+          "kind": "report",
+          "href": "https://arxiv.org/abs/2409.12191v2",
+          "label": "Technical reportRead the original research"
+        },
+        {
+          "kind": "model",
+          "href": "https://huggingface.co/Qwen/Qwen2-VL-7B-Instruct",
+          "label": "Hugging FaceQwen/Qwen2-VL-7B-Instruct"
+        }
+      ],
+      "visibleHashes": [],
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "missingImages": [],
+      "activeNav": [
+        {
+          "label": "Qwen2-VL",
+          "visible": true
+        }
+      ],
+      "panFrames": [
+        {
+          "tabindex": 0,
+          "scrolls": false,
+          "frame": 648,
+          "image": 648
+        }
+      ]
+    },
+    {
+      "slug": "qwen2-vl",
+      "width": 390,
+      "mode": "light",
+      "title": "Qwen2-VL: adaptive visual budgets and multimodal positions",
+      "titleCount": 1,
+      "overflow": false,
+      "figures": [
+        {
+          "id": "figure-1",
+          "caption": "Figure 1. The patch grid is larger than the language sequence. Original worked diagram based on the selected processor and merger.234"
+        }
+      ],
+      "resources": [
+        {
+          "kind": "report",
+          "href": "https://arxiv.org/abs/2409.12191v2",
+          "label": "Technical reportRead the original research"
+        },
+        {
+          "kind": "model",
+          "href": "https://huggingface.co/Qwen/Qwen2-VL-7B-Instruct",
+          "label": "Hugging FaceQwen/Qwen2-VL-7B-Instruct"
+        }
+      ],
+      "visibleHashes": [],
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "missingImages": [],
+      "activeNav": [
+        {
+          "label": "Qwen2-VL",
+          "visible": false
+        }
+      ],
+      "panFrames": [
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 358,
+          "image": 680
+        }
+      ]
+    },
+    {
+      "slug": "qwen2-vl",
+      "width": 320,
+      "mode": "dark",
+      "title": "Qwen2-VL: adaptive visual budgets and multimodal positions",
+      "titleCount": 1,
+      "overflow": false,
+      "figures": [
+        {
+          "id": "figure-1",
+          "caption": "Figure 1. The patch grid is larger than the language sequence. Original worked diagram based on the selected processor and merger.234"
+        }
+      ],
+      "resources": [
+        {
+          "kind": "report",
+          "href": "https://arxiv.org/abs/2409.12191v2",
+          "label": "Technical reportRead the original research"
+        },
+        {
+          "kind": "model",
+          "href": "https://huggingface.co/Qwen/Qwen2-VL-7B-Instruct",
+          "label": "Hugging FaceQwen/Qwen2-VL-7B-Instruct"
+        }
+      ],
+      "visibleHashes": [],
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "missingImages": [],
+      "activeNav": [
+        {
+          "label": "Qwen2-VL",
+          "visible": false
+        }
+      ],
+      "panFrames": [
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 288,
+          "image": 680
+        }
+      ]
+    }
+  ],
+  "manual_review": "All 48 figure renders inspected as contact sheets; source figure completeness, labels and supplemental diagrams reviewed. Dense focus view and native dark diagrams inspected separately."
+}

@@ -1,0 +1,68 @@
+{
+  "date": "2026-10-12",
+  "purpose": "Keep superseded figure bytes and provenance without deploying unused artwork.",
+  "path_base": "repository-root",
+  "historical_records": "Dated event ledgers retain their original paths. This map resolves those historical public paths to the unchanged archives. Current provenance locators use the archives.",
+  "assets": [
+    {
+      "former_public_path": "public/figures/human-capabilities/high-agency/overview-v1.webp",
+      "archived_path": "docs/research/human-capabilities/high-agency/visuals/archive/overview-v1.webp",
+      "sha256": "dd1f01019bdc759cb01c28d0d4d28864eb9e89b15b9d87a92fdf8bd2bb5e042b",
+      "bytes": 211258
+    },
+    {
+      "former_public_path": "public/figures/human-capabilities/high-agency/overview-v2.webp",
+      "archived_path": "docs/research/human-capabilities/high-agency/visuals/archive/overview-v2.webp",
+      "sha256": "f4f8c1623d7ba3f4f1dd746286eb31254a66241a6866d2ec199a3db71748c87f",
+      "bytes": 202790
+    },
+    {
+      "former_public_path": "public/figures/human-capabilities/taste/overview-v1.webp",
+      "archived_path": "docs/research/human-capabilities/taste/visuals/archive/overview-v1.webp",
+      "sha256": "e5994cbf6e90b0f794c13e5b6b1bc6cd4e860f0ca3d7c0df2f82653676b4370a",
+      "bytes": 290144
+    },
+    {
+      "former_public_path": "public/figures/human-capabilities/taste/overview-v2.webp",
+      "archived_path": "docs/research/human-capabilities/taste/visuals/archive/overview-v2.webp",
+      "sha256": "4d5fee6e5958125dafdce686ba081af61872b7cb68226e0776f00add6d419a2a",
+      "bytes": 387264
+    },
+    {
+      "former_public_path": "public/figures/landscapes/physical-ai-overview-v1.webp",
+      "archived_path": "docs/research/landscapes/physical-ai/visuals/archive/physical-ai-overview-v1.webp",
+      "sha256": "67c724253c2e5fe34af4a4d0035f5a4edf5ebb6fdf87fd5ef6848924161f0d83",
+      "bytes": 1103638
+    },
+    {
+      "former_public_path": "public/figures/model-release-map/model-evolution-dark-v4.png",
+      "archived_path": "docs/research/architectures/model-release-map/visuals/archive/model-evolution-dark-v4.png",
+      "sha256": "6f41c799962b81543cc85a354873c05b36cb087356833bac6114b75da4bddaea",
+      "bytes": 1793053
+    },
+    {
+      "former_public_path": "public/figures/model-release-map/model-evolution-generated-v1.png",
+      "archived_path": "docs/research/architectures/model-release-map/visuals/archive/model-evolution-generated-v1.png",
+      "sha256": "1efc8a9fb07ca9ee44c5fba9b2b7c3e780f8e8510e0930b4ed45bd8d011ce489",
+      "bytes": 1405258
+    },
+    {
+      "former_public_path": "public/figures/model-release-map/model-evolution-generated-v3.png",
+      "archived_path": "docs/research/architectures/model-release-map/visuals/archive/model-evolution-generated-v3.png",
+      "sha256": "5e452a8c6e5c3612a00f0f48e2d9e59c86d2ee3260791c0348af7c8c1bdb6da4",
+      "bytes": 1893494
+    },
+    {
+      "former_public_path": "public/figures/model-release-map/model-evolution-light-v4.png",
+      "archived_path": "docs/research/architectures/model-release-map/visuals/archive/model-evolution-light-v4.png",
+      "sha256": "5e9c370de18cf213c26c98db2142eff99412260481807206069b93535ecce0b7",
+      "bytes": 1527648
+    },
+    {
+      "former_public_path": "public/figures/model-studies/qwen3-vl/visual-pipeline.svg",
+      "archived_path": "docs/research/architectures/qwen3-vl/visuals/archive/visual-pipeline.svg",
+      "sha256": "ea3290fabdd1340c8bebb4ebcb54526f761e546cbf15b6656ec6f8a4928066f6",
+      "bytes": 5059
+    }
+  ]
+}

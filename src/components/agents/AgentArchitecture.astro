@@ -1,0 +1,39 @@
+---
+import {readAgentData} from '../../../plugins/agent-presentation.mjs';
+interface Props {id:string; title:string; subtitle?:string; layersJson:string; footer?:string;}
+interface Layer {label:string; detail:string; parts:{title:string; body:string}[];}
+const {id,title,subtitle,layersJson,footer}=Astro.props;
+const layers:Layer[]=readAgentData(layersJson,'layers');
+---
+<figure {id} class="agent-architecture" aria-labelledby={`${id}-title`}>
+  <header><span class="figure-kicker">System anatomy</span><strong id={`${id}-title`}>{title}</strong>{subtitle&&<p>{subtitle}</p>}</header>
+  <div class="architecture-layers">
+    {layers.map((layer,i)=><section class:list={['architecture-layer',{central:i===1}]}>
+      <div class="layer-heading"><strong>{layer.label}</strong><span>{layer.detail}</span></div>
+      <ul>{layer.parts.map(part=><li><strong>{part.title}</strong><p>{part.body}</p></li>)}</ul>
+    </section>)}
+  </div>
+  {footer&&<p class="architecture-note">{footer}</p>}
+  <figcaption><slot /></figcaption>
+</figure>
+<style>
+  .agent-architecture{--agent-ink:#306c91;container-type:inline-size;min-width:0;margin:1.7rem 0;border:1px solid var(--nb-border);border-radius:1rem;overflow:hidden;color:var(--nb-foreground);background:var(--nb-background);line-height:1.5;}
+  :global(html[data-mode='dark']) .agent-architecture{--agent-ink:#90c4df;}
+  header{padding:1.25rem 1.35rem 1.1rem;border-bottom:1px solid var(--nb-border);background:color-mix(in srgb,var(--agent-ink) 5%,var(--nb-background));}
+  .figure-kicker{display:block;font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--agent-ink);font-weight:650;margin-bottom:.45rem;}
+  header>strong{display:block;font-size:1.2rem;line-height:1.35;letter-spacing:-.025em;}
+  header p{font-size:.84rem;color:var(--nb-muted-foreground);margin:.45rem 0 0;}
+  .architecture-layers{padding:1.1rem;display:grid;gap:1rem;}
+  .architecture-layer{padding:1rem;border:1px solid var(--nb-border);border-radius:.65rem;min-width:0;}
+  .architecture-layer.central{border-color:color-mix(in srgb,var(--agent-ink) 40%,var(--nb-border));background:color-mix(in srgb,var(--agent-ink) 3%,var(--nb-background));}
+  .layer-heading{display:flex;justify-content:space-between;align-items:baseline;gap:.5rem;margin-bottom:.85rem;}
+  .layer-heading>strong{font-size:.85rem;color:var(--agent-ink);}.layer-heading>span{font-size:.73rem;color:var(--nb-muted-foreground);text-align:right;}
+  ul{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.8rem;list-style:none!important;padding:0!important;margin:0!important;}
+  li{margin:0;min-width:0;padding-inline-start:.7rem;border-inline-start:2px solid var(--nb-border);}
+  li strong{display:block;font-size:.85rem;line-height:1.4;}li p{font-size:.77rem;line-height:1.55;color:var(--nb-muted-foreground);margin:.3rem 0 0;}
+  .architecture-note{margin:0;padding:.2rem 1.35rem 1.05rem;font-size:.8rem;color:var(--nb-muted-foreground);}
+  figcaption{padding:1rem 1.35rem;border-top:1px solid var(--nb-border);font-size:.8rem;color:var(--nb-muted-foreground);}
+  @container(max-width:480px){ul{grid-template-columns:1fr;}li{padding:.4rem 0 .4rem .75rem;}.layer-heading{display:block;}.layer-heading>span{display:block;text-align:left;margin-top:.25rem;}.architecture-layer{padding:.85rem;}}
+  @media(max-width:620px){header,figcaption{padding:1rem;}.architecture-layers{padding:.85rem;}}
+  @media print{.architecture-layer{break-inside:avoid;}}
+</style>

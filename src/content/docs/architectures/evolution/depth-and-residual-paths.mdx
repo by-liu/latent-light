@@ -1,0 +1,108 @@
+---
+title: Depth and Residual Paths
+description: Compare ordinary residuals, constrained multiple streams, depth attention and gated reads and writes.
+lastUpdated: 2026-10-10
+---
+
+import FocusCanvas from '../../../../components/FocusCanvas.astro';
+import ArchitectureAtlas from '../../../../components/architectures/ArchitectureAtlas.astro';
+
+Attention asks which **positions** to read. A residual design asks which
+**representations across layers** reach the next computation. Changing this
+route can matter even when the attention and FFN inside a sublayer stay familiar.
+Depth is a separate architectural axis, not another name for long context.[^mhc][^kimi][^qwen]
+
+## Four routes through depth
+
+<FocusCanvas size="diagram" label="Four residual designs and their information routes">
+<ArchitectureAtlas kind="depth" id="figure-1">
+
+**Figure 1.** Accumulate, mix streams, attend across depth, or gate reads and writes. Independent mechanism comparison; normalization and full model details are omitted.[^transformer][^mhc][^kimi][^qwen]
+
+</ArchitectureAtlas>
+</FocusCanvas>
+
+The drawings in [Figure 1](#figure-1) isolate routing. They are not complete
+model blocks or claims that every design has the same parameter, memory,
+or optimization budget.
+
+## The baseline: one running stream
+
+An ordinary residual block adds a sublayer update to its input:
+
+<MathExpression display number="1" tex="x_{\ell+1}=x_\ell+F_\ell(x_\ell)" />
+
+F here abstracts over normalization and the sublayer. Pre normalization and
+post normalization have different exact formulas; the schematic does not
+erase that distinction. The bypass gives earlier features a direct route
+alongside newly computed features.[^transformer][^mhc]
+See [Foundations](/architectures/foundations/#components-and-full-model)
+for the original ordering, and [GPT-2](/architectures/models/gpt-2/) for a
+concrete pre normalized decoder.
+
+## Multiple streams: widen the route, not necessarily the sublayer
+
+Hyper connections keep several residual streams. One mapping reads them into
+a sublayer input, another distributes the update, and a third mixes the
+bypass. With X containing r rows of width D, a local abstraction is:[^mhc]
+
+<MathExpression display number="2" tex="X_{\ell+1}=B_\ell X_\ell+C_\ell F_\ell(A_\ell X_\ell)" />
+
+A has shape 1 × r, B has shape r × r, and C has shape r × 1.
+The sublayer still receives width D, while the residual carries rD values.
+This does not make residual storage or memory traffic free.
+
+Unrestricted products of bypass mixing matrices can amplify or suppress
+signals. mHC constrains B to be nonnegative with row and column sums one,
+using a practical Sinkhorn projection. The ideal doubly stochastic bypass
+has useful conservation and norm properties. Those properties do not prove
+that the entire nonlinear network is nonexpansive or immune to instability.[^mhc]
+For an applied model study, read [DeepSeek-V4](/architectures/models/deepseek-v4/).
+
+## Attention Residuals: select earlier representations
+
+Attention Residuals use a learned query to score earlier representations for
+the current token. Softmax weights mix their original values, rather than
+uniformly accumulating every update.[^kimi]
+
+In a simplified full depth formulation:
+
+<MathExpression display number="3" tex="\alpha_{\ell,i}=\operatorname{softmax}_i\!\bigl(w_\ell^\top\operatorname{RMSNorm}(v_i)\bigr),\qquad h_\ell=\sum_i\alpha_{\ell,i}v_i" />
+
+v<sub>i</sub> are earlier sublayer outputs or the embedding, and w<sub>ℓ</sub>
+is a learned query. The sources here are **depth representations for this
+token**, not past tokens in the KV cache.
+
+Keeping every earlier source adds memory and pipeline communication costs.
+Block Attention Residuals reduce that overhead through block summaries.
+The [Kimi K3 study](/architectures/models/kimi-k3/) explains its concrete
+use and the difference between full and block forms.[^kimi]
+
+## Gated residuals: learn reads and writes
+
+Qwen3.8-Next keeps four branches, normalizes them separately, and uses
+elementwise read gates to form a sublayer input. Separate branch write gates
+distribute the resulting update. Its design does not use an unrestricted
+matrix that continuously remixes every bypass branch into every other branch.[^qwen]
+
+The report finds that limiting reads to the two highest gated branches can
+look nearly harmless in pretraining metrics yet degrade later quality.
+This is a useful negative result: a plausible shortcut must survive the
+rest of training, not only one loss curve.[^qwen]
+
+## Judge the route and its overhead together
+
+Compare matched sublayer widths and training budgets. Inspect activation
+magnitudes, gradients, memory traffic, retained depth sources, and final task
+quality. A stable bypass is not enough if the added state makes execution
+impractical; lower pretraining loss is not enough if later behavior regresses.
+
+These are proposed review criteria, not experiments performed here.
+Selected mechanisms rechecked October 10, 2026. For the computation inside
+the route, continue with [FFNs and experts](/architectures/evolution/ffns-and-experts/)
+or [Attention and memory](/architectures/evolution/attention-and-memory/).
+
+[^transformer]: Ashish Vaswani et al. [Attention Is All You Need](https://arxiv.org/html/1706.03762v7), 2017, section 3.1: residual connections and post normalization.
+[^mhc]: Zhenda Xie et al. [mHC: Manifold-Constrained Hyper-Connections](https://arxiv.org/html/2512.24880v1), 2025, sections 3 and 4. Equations (1) and (2) use equivalent local schematic notation; Equation (2) suppresses transpose notation by defining C as a column.
+[^kimi]: Kimi Team. [Kimi K3: Open Frontier Intelligence](https://arxiv.org/html/2607.24653v1), 2026, section 2.2, equations 8 to 11. Equation (3) abstracts the full depth form; the released model's block handling is discussed separately in its study.
+[^qwen]: Qwen Team. [On the Design of Qwen3.8-Next Architecture](https://arxiv.org/html/2608.30320v1), 2026, section 2.2: Gated Residual and branch read ablations.

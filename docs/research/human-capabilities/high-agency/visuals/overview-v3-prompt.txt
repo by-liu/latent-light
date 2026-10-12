@@ -1,0 +1,20 @@
+Use case: style-transfer
+Asset type: Figure 1, an opening infographic for the article "High Agency: Your superpower in the AI era".
+Input images: Image 1 is the edit target. Preserve its teaching structure and exact wording, but transform its artwork and visual design.
+Primary request: Make this infographic substantially more polished and visually striking with a sophisticated cyber-future aesthetic. This is a finished educational poster for nontechnical adults, not a busy sci-fi interface.
+Composition: Square canvas, prominent headline and subtitle at the top, followed by three horizontal panels stacked vertically for what, why and how, with a short footer. Each panel pairs a compact illustration with large readable copy. Keep the existing hierarchy and enough clean space for every word. The complete poster must be readable in a 320 to 390 pixel wide phone screen.
+Style: Cinematic editorial digital illustration with refined futuristic materials, convincing depth, crisp silhouettes and elegant lighting. Replace the warm paper/cartoon treatment with a deep midnight navy backdrop, subtle atmospheric depth, luminous cyan and teal, restrained violet accents and a little warm amber. Use beautifully composed holographic interfaces and translucent glass panels. Keep the atmosphere optimistic, purposeful and human.
+Panel illustrations: In the first panel, a purposeful person steps along a luminous route toward a clear destination, with a holographic compass as a visual anchor. In the middle panel, the person actively uses a directional holographic interface while a compact AI presence expands several paths of possibility; the person visibly chooses the direction. Replace the toy-like robot with a refined luminous AI orb or abstract assistant. In the last panel, retain the seedling/growth metaphor, helpful communication bubbles and a feedback loop, rendered as an elegant futuristic growth scene with soft glowing connections. These illustrations communicate direction, amplified reach, help and learning.
+Typography: Large, exceptionally clear contemporary sans-serif. Bright ivory main copy against dark quiet areas; use cyan accents selectively. Make "HIGH AGENCY" and "Your superpower in the AI era" instantly legible. Body copy must remain crisp, with no glow, texture or distortion obscuring letters. Reflow lines as needed and simplify illustrations to protect text size.
+Text (verbatim; no other writing anywhere):
+"HIGH AGENCY"
+"Your superpower in the AI era"
+"What it is"
+"Turn intention into useful action."
+"Why it matters with AI"
+"Start easier. Reach further."
+"You choose. Check. Adapt."
+"How to build it"
+"Start small. Ask for help. Use feedback."
+"Agency includes limits, teamwork and rest."
+Constraints: Preserve all wording exactly, its what/why/how meaning and the reminder about limits, teamwork and rest. Keep the human directing AI. Do not add statistics, numerical scores, charts, decorative microtext, fake HUD labels, logos or watermarks. Avoid visual clutter, excessive circuitry, weapons and dystopian imagery. This is a conceptual illustration, with no promise of guaranteed success. Opaque background.

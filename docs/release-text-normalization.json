@@ -1,0 +1,683 @@
+{
+  "date": "2026-10-12",
+  "purpose": "Formatting-only fixes found by the authoritative staged Git check before release.",
+  "content_unchanged": "Formatting changed no nonwhitespace characters. Related current SVG checksum metadata was updated separately, retaining the prior hashes as history. Original copyright and license wording, SVG markup and visual meaning are unchanged.",
+  "preserved_archive": {
+    "path": "docs/research/architectures/qwen3-vl/visuals/archive/visual-pipeline.svg",
+    "sha256": "ea3290fabdd1340c8bebb4ebcb54526f761e546cbf15b6656ec6f8a4928066f6",
+    "note": "Exact archived bytes are preserved. A scoped Git attribute permits the historical trailing blank line; all other staged files use the normal whitespace check."
+  },
+  "files": [
+    {
+      "path": "docs/research/architectures/deepseek-r1/coverage-audit.md",
+      "before_sha256": "d9710a6980fc2944d1ec0bb7e63edaeaa7cc74c7082da04b14d2c4784090ccdd",
+      "after_sha256": "290b0309cd5cd8c7efc043966eb704e7bdac7d49043c8e1d7b499d5993d0ce57",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "docs/research/architectures/deepseek-r1/state/audit.md",
+      "before_sha256": "9861e5fd4aea8e2ce83a51006dfdde1173aa57b47d587c728a350823f35f754a",
+      "after_sha256": "91599d6a3e9960721011ddce3263ca690df4b7e3a421642934d67b22c38490a7",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "docs/research/architectures/deepseek-r1/state/claims.jsonl",
+      "before_sha256": "6960d446e1eabe017ad2905df0a349b5685bc05b910bfce6df42e00bd0307987",
+      "after_sha256": "228064c17eeedb3ab849f6f84f100057c69c93525f963736e0416c18964a215f",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "docs/research/architectures/deepseek-r1/state/progress.json",
+      "before_sha256": "21672feb2df4c5d9cc60a7cbc7d8677a97943850c61c6db0960d5c894755c5e4",
+      "after_sha256": "88e7ab639a15cb24547e841ff1d541bca4010b26d468c1182d30a1e15a4eb52a",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "docs/research/architectures/deepseek-r1/state/runs.jsonl",
+      "before_sha256": "42690257ccf37c368e9d5206fd654912b4479dea85fcd58f1fc3c427eae1b7a9",
+      "after_sha256": "b34c693698d917ee27d0a2ea908bbc64deea6f7817631718fbdc10cd703801ab",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "docs/research/architectures/deepseek-r1/state/sources.jsonl",
+      "before_sha256": "387acae7238eac7042c039a57b3deeff31b1226c974c74746b7be9441f67050c",
+      "after_sha256": "dd0ba2485a9edfa931ab3cbd869ad03cf3ce50735efeca7fdeaac9cf39277ae2",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "docs/research/architectures/deepseek-r1/state/visuals.jsonl",
+      "before_sha256": "78e2cfa7eb68af8b1afc3fe1ae948d6fc80b5e6a28713967608a7a15ca781e9a",
+      "after_sha256": "d660daa813581494ddb7f8cb9628c12b8c1684617214539c728e3f8e1a44a14b",
+      "method": "Extra blank lines at EOF removed; one final newline retained. Current SVG checksums and their historical values are recorded separately in this ledger.",
+      "normalized_only_sha256": "8ea293509dc0624feaa817f5e3feead8c97b375205b631776d7e229021b540fe"
+    },
+    {
+      "path": "docs/research/architectures/deepseek-r1/visuals/figure-1.md",
+      "before_sha256": "4c08860d1756cacac9a155b766eb5051b54f46112c8a2fa7f0a8b6e8d7d6df55",
+      "after_sha256": "56243bd4257caf602c1d36c0aac21b4578d84ec8a88e3bce49deba888fbc6474",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "docs/research/architectures/deepseek-r1/visuals/figure-2.md",
+      "before_sha256": "18fee1f0402ff54d49c163e621fdbf24c263b7b2e1c660bd2402f447f2e299ce",
+      "after_sha256": "a89ac3a58f209c0013c7b0c8190fdbfbc10f4fe70d86d13f365e0e026fb0c1c5",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "docs/research/architectures/deepseek-r1/visuals/source-figures.md",
+      "before_sha256": "583b3e07f9488ac69a565b82d7aede6f1b3b64b945e6dadcc552927da1ea429d",
+      "after_sha256": "bcb98ae0f335ce6b15ac5f0d260168bc9e690bc993ad5563755d143794acf5a1",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "docs/research/architectures/deepseek-v2/coverage-audit.md",
+      "before_sha256": "6fa11c61d9bb5ea1482ce3d8b88a4adb6d1eda83d394bf168abc70e45ee7854b",
+      "after_sha256": "d7acff9668db5657ba49e23c0578f722930dc04202c5803ba8aa18b0cf00aad1",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "docs/research/architectures/deepseek-v2/state/claims.jsonl",
+      "before_sha256": "e2d28794853941fa2cb3cde9c8da06960b76763d908bc41ef9125f9a5b6c7dcc",
+      "after_sha256": "af4d5276852797a0da2b21a6b366d3c7a9ed6d911e933f4857305a1aeb1270cc",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "docs/research/architectures/deepseek-v2/state/progress.json",
+      "before_sha256": "8a9d593ef92bf562410e864eb3befe42fddf2e633fd3b79eb77a4e9d8bd3793d",
+      "after_sha256": "c68ff302c9ad5c5caea2d458927e650acd63b3480827864101d77e52b0060768",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "docs/research/architectures/deepseek-v2/state/runs.jsonl",
+      "before_sha256": "9d3bf968ac29e7244c03499dabb96df214d43acc9869416ac1efa691382579c4",
+      "after_sha256": "22d1f1e503a2dfec8e4dda5a711b0e7c4278d734f2f6d05de4439a0cada60450",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "docs/research/architectures/deepseek-v2/state/sources.jsonl",
+      "before_sha256": "10ed92d39294f4102907a1cb6d7ce2d4e48a75bb7badbed81b33a12167ac579e",
+      "after_sha256": "84e115a1d4f2d4bfc642af756890e06313a29c9f43632d62282d4e577f3c3437",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "docs/research/architectures/deepseek-v2/state/visuals.jsonl",
+      "before_sha256": "541ce336aacb74bbb7113bd9ab33387ffc96b4b19d820551dd586fb08b3f5357",
+      "after_sha256": "171ba58602e72291ddd5d43855d40a8223972f8fca17b6d6b8a3e1267cde9b72",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "docs/research/architectures/deepseek-v2/visuals/figure-1.md",
+      "before_sha256": "3c89f7ca6f80c5bb7d1f082bbf288b1d746e33d898c33d356139a4bf876c003c",
+      "after_sha256": "4547fa92dbf5ff8946f9f3859639b7fa2081dd070fd3ee128ff9170d7de98660",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "docs/research/architectures/deepseek-v2/visuals/figure-2.md",
+      "before_sha256": "c4cf172dd9af4a6998a61bc6613beaa9010cae4c09e292772aef8c78980fcaae",
+      "after_sha256": "6244b30a2f36ee9b53c2985010239ebed8251bfe71966261fb4f6b081461dff1",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "docs/research/architectures/deepseek-v2/visuals/source-figures.md",
+      "before_sha256": "133fd7c165bc139b639107e52c70e0acd22c1dddc18bee47d9fc8534410b231f",
+      "after_sha256": "4e6e1e3b248a8ec8e7cad9d47982d5c602161f13e94d18f828acd4705ba902f3",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "docs/research/architectures/deepseek-v3/coverage-audit.md",
+      "before_sha256": "3b9c29cdfd904507c9afca841f8efaa7e5f2411f543adcc13577e111a860bdf1",
+      "after_sha256": "cebe989cb6ba7e4d74dc32d2b603e28ba7c8ef1e230320dd4710ca4fb2f537c1",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "docs/research/architectures/deepseek-v3/state/audit.md",
+      "before_sha256": "aab2db6303e2a939aa3e3aa373b2533cddd30736de017febc67dcac0aaa0dde7",
+      "after_sha256": "6c671760dfd6b36050d1db30d73c129501c7f47620bdb9c5d3b38d51fe6c5d46",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "docs/research/architectures/deepseek-v3/state/claims.jsonl",
+      "before_sha256": "5c1113a4f12034bfcbbe3b1f8563099337b934b61d5667d63c2e91db62793def",
+      "after_sha256": "82cd59f0c8895de1fec80b1f7e1e91b25e1c614a7353c21591ccc176e8994cc5",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "docs/research/architectures/deepseek-v3/state/progress.json",
+      "before_sha256": "8bbc196759f4d6d75e7efb43c32d61e576b5a71d8f7f2e38f62d9d30c168d24e",
+      "after_sha256": "13196f5b294a0292c7e1b0efbc4bf00982babecba17a58a2abfd734f165f2617",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "docs/research/architectures/deepseek-v3/state/runs.jsonl",
+      "before_sha256": "f55c90312a02f192db9414ed7011b3f8ab23e11dfa50a527507ae1529f3fe263",
+      "after_sha256": "c3f0fa031ac10ed4574480805293e83dff80b0e6ba4d228e87185114fac6fa37",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "docs/research/architectures/deepseek-v3/state/sources.jsonl",
+      "before_sha256": "becc34841632fc299a5e4912521d695b247e2b4a3dbdb49a89cd8dce63f732fb",
+      "after_sha256": "986e511e08b9f5e695070c7404c23f3a7931ad3df5ad812f71ef23da07897780",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "docs/research/architectures/deepseek-v3/state/visuals.jsonl",
+      "before_sha256": "04ede96e01837d9c72b22f0225ff5a83d62c3c9c7e14ef928454e1fcac8d6556",
+      "after_sha256": "c385c0f07dcda695cac3d6b77d5619ce6e406d347fdcc0ffd429833293a6fcdb",
+      "method": "Extra blank lines at EOF removed; one final newline retained. Current SVG checksums and their historical values are recorded separately in this ledger.",
+      "normalized_only_sha256": "a1c4cb1418c5055b675287aa5a7c74fb9368c87d2abf17b53317db032436a447"
+    },
+    {
+      "path": "docs/research/architectures/deepseek-v3/visuals/figure-1.md",
+      "before_sha256": "07dfb4a02cf2e12a08885ebb9fefb64a09af6ef6c6d12d418d5dd79519f282b5",
+      "after_sha256": "95886f8c9a705c9c32428b935ef1373468d75c41c4bd824ddd9d5d7169c6044d",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "docs/research/architectures/deepseek-v3/visuals/figure-2.md",
+      "before_sha256": "1b0a09812f31a93c9eebfb058e4600a74ef7ca3c7c04cd8930bcc9c997ea16be",
+      "after_sha256": "10b085162c403a3de9b434557a152221c8d40ea18123997a527c75d5418cabe2",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "docs/research/architectures/deepseek-v3/visuals/figure-3.md",
+      "before_sha256": "703e7d491890d71dd31d922646592686c25c8b705062c3a094aea25b4c8ae603",
+      "after_sha256": "47fca66875169c0e94b4d2517969148e7344ce55fc16604c7539eb0ef76bccf6",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "docs/research/architectures/deepseek-v3/visuals/source-figures.md",
+      "before_sha256": "107db3fec6bd6009f66f8ef8ce85975d9399951bb30fd3baf4bf9e3ef506a0c7",
+      "after_sha256": "890049111f6b244b779d30b3590b8b02f30ef5733f5b286432372119e15344b2",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "docs/research/architectures/glm-5/coverage-audit.md",
+      "before_sha256": "85de5a4ae05dd7359cb16dbf46eeea2b5cdcf011bcdb6775cd0f73bce22d8de4",
+      "after_sha256": "82c9a2d2a6c4d2f6bc63ee21031bd3d9fc8b9a86592ed649499cb1410f7fc6b6",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "docs/research/architectures/glm-5/report.md",
+      "before_sha256": "de5de1f660ca202718031bca890ac3e12256ee28b709839659840735402befbb",
+      "after_sha256": "9ec584dabe1355537043cc68ee2b03adb3affbc7ba61c17ede8e826495b52832",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "docs/research/architectures/glm-5/state/audit.md",
+      "before_sha256": "5520fdddce5c29caf2fe80374bfcce70ec4779ca2558f9a5fcee888d5cec976b",
+      "after_sha256": "369c9de3f55081f9a452c2c312332964f6e1e60dfd32cd8ade05dd5d4eb60e06",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "docs/research/architectures/glm-5/state/claims.jsonl",
+      "before_sha256": "e3cf3b58b881f2d0e83e6e46bff3395d1a98da66d09c90ac6d3dba3a93aa05b8",
+      "after_sha256": "3b7a251904a7f3f53ac08a81aa90cd10c4cba48c29dada7a1650e44c3cc569fe",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "docs/research/architectures/glm-5/state/progress.json",
+      "before_sha256": "be8144ab971fe6d1cc39a1e306f8e4f908c245577bb44d0eabd9ee91cf18d213",
+      "after_sha256": "670eb296fdae3328ff04f7b94e78bb54e825f494a430432becaae947391ab16e",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "docs/research/architectures/glm-5/state/runs.jsonl",
+      "before_sha256": "4d3dc685d6a994c3258bcab4017ee25c5cb0e0d578694ebf3a7455a500ac4092",
+      "after_sha256": "0b4a73b856c6f821563c2379e21c754bfe5b85337aae5a7a1b250bdbc4b1cbb4",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "docs/research/architectures/glm-5/state/sources.jsonl",
+      "before_sha256": "d128160d9d11c1c9497b740b25053d1740ac009096cdcff298930486a4e90fb2",
+      "after_sha256": "cf27dd03c14c5515d3192b0e98d683305454318dac588cb5a4b76567c1288f82",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "docs/research/architectures/glm-5/state/visuals.jsonl",
+      "before_sha256": "906cc66aec88c8db7fca5441854dcecedf932eef812efbdcd2e7694ec936e1ad",
+      "after_sha256": "738a226dbcdd0b24651c4c330f816e9ed43338d4d70dee370bdc4af32ac96ceb",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "docs/research/architectures/glm-5/visuals/figure-1.md",
+      "before_sha256": "f27a0abf2e2aade33fe88d3020c9c5c04d7f145e33b203f41ae91a6aefa4e898",
+      "after_sha256": "f13e9bffea5f9475265b2a7b8662bb16249f820983f8c43ec919b1d7ac0d9005",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "docs/research/architectures/glm-5/visuals/figure-2.md",
+      "before_sha256": "769639137af997ca9597757a6f20a15b8ea2d134b27cb61565aece5b1cdab71e",
+      "after_sha256": "b27937a756606daa1ae1c62f4e986cf16643e8274c66a56fb2cf5eae817e77b1",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "docs/research/architectures/glm-5/visuals/figure-3.md",
+      "before_sha256": "2aeeca253bb6b87cca20e211e96f77cfc449e9828cc4cacf6b07f1d2498d2205",
+      "after_sha256": "9b7e831ab3c8e0b4b7283362915a4890acdcb8aa71630bf6632f704025dc0f18",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "docs/research/architectures/glm-5/visuals/source-figures.md",
+      "before_sha256": "dfa633510946ccb84a07323110f9c65b2bbdded7aff5e59c422c4ee1a02c25c1",
+      "after_sha256": "fea0c9fdcf3675309c21d95bdbf6eb69d0742ad4287bdcde60e285e69db64038",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "docs/research/architectures/kimi-k2/coverage-audit.md",
+      "before_sha256": "8307c6e5f7d4928c4cdab5883341b75cb886d050e390a2a7bb28a8ef6d2fbbd6",
+      "after_sha256": "9f8ff84aecddf42f61e0846a9029922ad7fbd617de87abb46613f7eaf76e44af",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "docs/research/architectures/kimi-k2/state/audit.md",
+      "before_sha256": "0fa34c71f5f0e7794b0a1df41532c55e655520cff85cdb652230d978e78a5329",
+      "after_sha256": "31be06276e72a0f3bb7cf3957e7a35d17f614e37412405c55949cb365925ab4b",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "docs/research/architectures/kimi-k2/state/claims.jsonl",
+      "before_sha256": "3f8b11688bb2f57c6c928d30e6e0f5cb8f91d7f6d9f00ece84521069b89448bd",
+      "after_sha256": "35cfe93194fff076819c6fc72ba005298e392361b989b08714536852f0a58629",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "docs/research/architectures/kimi-k2/state/progress.json",
+      "before_sha256": "e59b452f6b13a9648ae9c3129fffd35b3bca674cd7256d2a1baba4ad38f3ad4f",
+      "after_sha256": "70b72c28a6d8b1402134d07e242dee57e513a498bd80a197d7af3067588d070b",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "docs/research/architectures/kimi-k2/state/runs.jsonl",
+      "before_sha256": "563d7f7858949621337fb48700614a030e7753b6177dbaaf683310050fd0a485",
+      "after_sha256": "be6444b99f249adb5c1b16f73693cdfc47dc1bbcdc6570fc788a401069456fda",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "docs/research/architectures/kimi-k2/state/sources.jsonl",
+      "before_sha256": "06d0688b4019ac46c03ee44d0551d26ed90a79b7cb9c07081284c49110207ae1",
+      "after_sha256": "fafc567cd423ab198677a1477f8432466c11adef43a1c466e309a410793d4f8c",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "docs/research/architectures/kimi-k2/state/visuals.jsonl",
+      "before_sha256": "5968f362736b67e740990e345452ddaa5bdbfa51c24890828f28a034c46a2c76",
+      "after_sha256": "a244b559d752413300078cfb702bacf5b28b5a01902e074e11bacf351f298131",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "docs/research/architectures/kimi-k2/visuals/figure-1.md",
+      "before_sha256": "f49d65fc12a9861baf1fe539f828f1faf360d0c4977ea0dafdcd8d6eb7920c90",
+      "after_sha256": "a89111b588109932765919b4741e1e66b29140156e6d090ba6dfce07817c1efa",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "docs/research/architectures/kimi-k2/visuals/figure-2.md",
+      "before_sha256": "ca62f22e975a32f7da7a1252a519866c3f21ceb0f6c44bdd8a84cb04ea454faa",
+      "after_sha256": "32e7adc53bcea404260ece9aa3d3af71a7d6008e9d3f75e731a60a82c0add157",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "docs/research/architectures/kimi-k2/visuals/figure-3.md",
+      "before_sha256": "7b904aeac2ab8e6306d400192fa6807c0dc943ce9fdf04a879d38e6cbf2f7618",
+      "after_sha256": "04d03dacc0103f9a7c1984b596fb7c7ccb37cd568b5b7cfcca00340b289db44b",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "docs/research/architectures/kimi-k2/visuals/source-figures.md",
+      "before_sha256": "e0c4a1ba7c35a2542832aec466cd5d2b0e4d996a84b3363bcce5023ffdcd04a8",
+      "after_sha256": "a56750bec3f50b2a44f3f3d3404f4d96389f42b3fbf3d3d41f6c4b457d4e0fc9",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "docs/research/architectures/kimi-k3/coverage-audit.md",
+      "before_sha256": "6cdbdce557ae3716f9885dc5331304b0edf274e50ddd4dd9ff74ab3b4283f870",
+      "after_sha256": "03e1d00336046008bbbb7a507ba5c65f2319f1ad7aaf771eb2945a48b5d5d29d",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "docs/research/architectures/kimi-k3/report.md",
+      "before_sha256": "6e02b1fd27c9dc9912b5dc929401cd1d2a835005d89a6c34b34ec3270a1310f3",
+      "after_sha256": "01e3b16e01b67d6e288778daf12c6d12549c509a39ca0a58e8a23faf30381fb5",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "docs/research/architectures/kimi-k3/state/claims.jsonl",
+      "before_sha256": "b86b37eead08b852a8e4920b45623ff1edaea8f35234adf8a9b1655d323f6628",
+      "after_sha256": "d8c02638150b8e8567652fcaece403563b2de19eac29bfd07c1def40b2960048",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "docs/research/architectures/kimi-k3/state/progress.json",
+      "before_sha256": "3863b8d142575d02e7cefa2e94eb6f3ddea6860b9b7850f70f74fcdbed5c2d54",
+      "after_sha256": "66df1daa10c3695ad91053e07b2db5730fd206797dc8ba5a9f9beff73fcd75c6",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "docs/research/architectures/kimi-k3/state/runs.jsonl",
+      "before_sha256": "63e0d32997b784f9f588e6c4c852aa7fa55343203bbe39d75af2cbf4e490e8cb",
+      "after_sha256": "230eac7cf1e2294ac25315425828cb77c5b3d79ab04749fa79664714a2e0791d",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "docs/research/architectures/kimi-k3/state/sources.jsonl",
+      "before_sha256": "54a64ab4e68d0019ca4216651ee1c9f50335df31572df60a468da14f61ccb7fe",
+      "after_sha256": "9ee7e7f21990f23702ae8a8e894eb5d940e7de438b9264d904c468f3f00652d8",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "docs/research/architectures/kimi-k3/state/visuals.jsonl",
+      "before_sha256": "dd4ecca0054aefb62e92ec1c3bf0d8f2a6f1f335fec7e775d85f6dc92ef4a480",
+      "after_sha256": "77558e7b9fae576e1796e2f93ff3b37be00f20ae1997a7c10ca2441501cb4ccb",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "docs/research/architectures/kimi-k3/visuals/figure-1.md",
+      "before_sha256": "11140e9c0c822f4cf69e71b9b4d821c5a2d19f050416ce4f7766487507686d12",
+      "after_sha256": "969aab7a90e28d0daaf00b5e5474e97ed62318c0d08855d908570903c061832d",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "docs/research/architectures/kimi-k3/visuals/figure-2.md",
+      "before_sha256": "741dec66c112b49df618e5dd08cdda9c4f529081d0e0436f68551a06a6fcc11c",
+      "after_sha256": "50061f8a47b9b65a8968bcdf93e7e31364a64d856bfa14faff95484edaa4d0f2",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "docs/research/architectures/kimi-k3/visuals/figure-3.md",
+      "before_sha256": "f566c64bbc70f2efeb2a646d4331dbd289c22045a0b3ddad873cf3113f8a2456",
+      "after_sha256": "7eedfae80fe03473058fc59eb3ba35ad8f206a6321428aea7f2c4cce2dd930ce",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "docs/research/architectures/kimi-k3/visuals/source-figures.md",
+      "before_sha256": "2e70db65b7f7914e83f587bbab9a7439d554d05a6ad79cc535670347ca1b2e6c",
+      "after_sha256": "3c6d4d1413f55176e24ff0a7c52c7fb3f1de2d37f141a72cc6f782662b28d4b8",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "docs/research/architectures/kimi-linear/coverage-audit.md",
+      "before_sha256": "b041cbc53efd9db69bce8824df0a34c6a512c02df476d66d2aaaff4c8c396a9f",
+      "after_sha256": "0acb5d9a54533c862a7b43612af90d8bee89ea0c2295b678f9044ed082cf89af",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "docs/research/architectures/kimi-linear/state/claims.jsonl",
+      "before_sha256": "91c4df162de37ccc17ef2e1ae7a1551f5b990e2b61955d9a3d0678724401af69",
+      "after_sha256": "e80f9327df593a258788da7c72e967af5b69f26a65fa2fe38a4b1a48ea16d80f",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "docs/research/architectures/kimi-linear/state/progress.json",
+      "before_sha256": "0b221835ffc967f85d98efc0cb41d589b973e7edc95f8b80bd30267d6590227a",
+      "after_sha256": "1550c847e3608df576a3a8aa59e3c291b01cf8d3db4773a2dc448ca48d98f54c",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "docs/research/architectures/kimi-linear/state/runs.jsonl",
+      "before_sha256": "65119c74201eb6d91e01df280c30a0007474450fce56255904f3f4d30df6fdf8",
+      "after_sha256": "e7916301360ec0a240b4fe3d2156bbbc761397348b846da7b7ef55adf2028172",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "docs/research/architectures/kimi-linear/state/sources.jsonl",
+      "before_sha256": "58aa21d95348956a272143f49522e8edec03c59e030be93eca82a3abc0436a50",
+      "after_sha256": "3f1cf4efbcfc1dfc5b2ba070a80e93087df21437b047a2935f3f603794f37b2b",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "docs/research/architectures/kimi-linear/state/visuals.jsonl",
+      "before_sha256": "e6c8089380dffce7854ba18cf5f4f5bb244024f84b8b2d50834dd0197b909c61",
+      "after_sha256": "9b2c1797eb2efda3e29b7661c8310c2c65efe554fa716091ebd12fa2025aa887",
+      "method": "Extra blank lines at EOF removed; one final newline retained. Current SVG checksums and their historical values are recorded separately in this ledger.",
+      "normalized_only_sha256": "96b5cbced91b041aad1885ab1f54638c1a17ed3b2edd0029b9737209d053bee5"
+    },
+    {
+      "path": "docs/research/architectures/kimi-linear/visuals/figure-1.md",
+      "before_sha256": "86d624fa2a5fbae03b1b848af77b361565f40c108ae19bdb97f2f9bb70b3b75c",
+      "after_sha256": "8823b8da5fddf8c2c053c11221b66a97fe1544eea179d18657b26900500a7189",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "docs/research/architectures/kimi-linear/visuals/figure-2.md",
+      "before_sha256": "2b9843c23d92ee8b8a2db2b30c767c6296bbb6ed24d9d749f9bf4ac3cd1def6b",
+      "after_sha256": "54b500785dccaae2cf314c957c9c5c2431dfcbfe722ca5f6854fb1c5388d1388",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "docs/research/architectures/kimi-linear/visuals/figure-3.md",
+      "before_sha256": "37e68ab4d2a97a6759d3281ae3c52563d8e0895b057186e2051893892a42ab01",
+      "after_sha256": "c588f0ccfc1b617ae127e3b3639792abd3ec37383b73c395e2f1fcea2a400d77",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "docs/research/architectures/kimi-linear/visuals/source-figures.md",
+      "before_sha256": "c9d7dfe14a496fde9e0b1409b1ebe4a557c79c68fe824bacdd349d306949ce36",
+      "after_sha256": "04e394d65f83dde7f9e1f0f74b29ab16ea29307d98547b9200a7450890891c18",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "docs/research/architectures/qwen3/coverage-audit.md",
+      "before_sha256": "95e84705657a1ea4719eaeb0a589b686253e404f2769a7fe5c14155c906be4d1",
+      "after_sha256": "a7fb4517bf8371e4d1d87aa0d7b475d988c684df90f61c0ed8eeafb9f1d85d16",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "docs/research/architectures/qwen3/report.md",
+      "before_sha256": "9199e2d248fb13ed11f5f38bd3150a250fa24c785f65eac78d03bb54bc377c69",
+      "after_sha256": "d908d3e9d601de162489df4e92c66c4605cc57874df38e54ab9dba7d7493248d",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "docs/research/architectures/qwen3/state/audit.md",
+      "before_sha256": "375e6992d6f647b576773df6c216ca227446f291e2ac8320557e132fbf90ea1e",
+      "after_sha256": "ee7a3d9fc0699b1625d19fec4c02f03ca97bf92d956eaa1f7a2b0c481e601074",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "docs/research/architectures/qwen3/state/claims.jsonl",
+      "before_sha256": "6b363ea9bd6a09fe24bbd975ac6d0999422333db1cbe5d4e8298e827f9f6ada5",
+      "after_sha256": "b9fa807162bbe23ae926c4ce3815f02be98360ef987de29b32fe52f5185c3ca4",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "docs/research/architectures/qwen3/state/progress.json",
+      "before_sha256": "9fb288a81b6c9d301eb38c2467503700b71abb3bd3477738a5fb7a41d84bdd8d",
+      "after_sha256": "bfc198be83a7adb4c40b04c76226a8631d134eb39e967225790a859cc5f76091",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "docs/research/architectures/qwen3/state/runs.jsonl",
+      "before_sha256": "3ac516644a52d7b02d2ffa5613320a63593b1aa0ec0f7d25a86c68aa419870eb",
+      "after_sha256": "b5bd02f28f6af3fbca960332ee19cd5335e6d98488d54166c443c1eca781b0d7",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "docs/research/architectures/qwen3/state/sources.jsonl",
+      "before_sha256": "4785a36e3ae27eb2266b8f7f2ee52395503b1d3634e0edd2d83ed6bbb2d8d672",
+      "after_sha256": "31df5a6d59ed20aa6e95b02d96ffae3cbc55c034ca362dfd666cf15a95c73e9a",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "docs/research/architectures/qwen3/state/visuals.jsonl",
+      "before_sha256": "444e76ad0c0d45f549116ec2d492896c97ee060bf70573156a32c23276278ced",
+      "after_sha256": "2943ee31afe38582ba2d7d0fa2c56f8bcd7d07f1ba5939d824f3f851ca4c2540",
+      "method": "Extra blank lines at EOF removed; one final newline retained. Current SVG checksums and their historical values are recorded separately in this ledger.",
+      "normalized_only_sha256": "3700621b799e2116ebcc8d5367b7b35187042d339ed1c28e94985937ce96fada"
+    },
+    {
+      "path": "docs/research/architectures/qwen3/visuals/figure-1.md",
+      "before_sha256": "4ad6a1d43341e64740b2385a0fb1ea1d58211e1e9d93ee9f3f93e320fc8f8ee1",
+      "after_sha256": "ded5a247efc947f7dee9f5085e9ec59f2b2881d4f4fdb52805543dfc9901ec88",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "docs/research/architectures/qwen3/visuals/figure-2.md",
+      "before_sha256": "5a6e7eab2cdf7966e1ad0ff7770e6a453f51d83744bff16c61339dd779fe0207",
+      "after_sha256": "a71ba8874eae7d1257a991c12e61c42909c06f0c54f5c99e06b3994fe0d6394f",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "docs/research/architectures/qwen3/visuals/source-figures.md",
+      "before_sha256": "b873ce88213fcdce5d0dae5614a0c77fb8f555bf16002650e9ffc38dc44d3bee",
+      "after_sha256": "3dd34c61d0c295929ebadeec8c2814c850cf132583e0ce15e7c262d8ae46ed8f",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "public/figures/model-studies/blip-2/SOURCES.md",
+      "before_sha256": "cb99fa381e70b2b5440df390d3d22577cec7a421f01d88f8efe34b324c2ef7df",
+      "after_sha256": "33a2b91216e935129468880897cd35af05e78cd21928784e111f99fb24b820a1",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "public/figures/model-studies/clip/SOURCES.md",
+      "before_sha256": "18bafd8a909bb8644bbe60e2aac35f7d526ccfa026c98c0271720b67c87e97a7",
+      "after_sha256": "6068062446e1ace329f3b0318779c3622ea8d9caa0902aa926bf995babab69cd",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "public/figures/model-studies/deepseek-r1/grpo-policies.svg",
+      "before_sha256": "a96272aebb1cee4a3393ecece5ec9b1f84b242214e657e571d84ab325a4d9440",
+      "after_sha256": "81d86056e30649a137be73e7e1b63cc1a6c3cf57f85fb243171cb81ce44a8d08",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "public/figures/model-studies/deepseek-v3/routing-controller.svg",
+      "before_sha256": "44a84ab6f056c3ab5c427db6d13105c412b1b21eebf8de39b8909a8b7ebe134f",
+      "after_sha256": "3f748a0484d93472991d4fbcba851342fd64cd842a7613f52ec88864a05c0a4b",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "public/figures/model-studies/internvl-3/SOURCES.md",
+      "before_sha256": "d0e87183ee2ada58f1f057674d0443943fe2eab678f4851dacee5dbdcc2f29e3",
+      "after_sha256": "c6bc7a028294f58fe3998930979139eb98637d61b0a88353bc8b9bcbe027cfa5",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "public/figures/model-studies/kimi-k2/NOTICE.md",
+      "before_sha256": "1ceffc3a3817a5d0aec213a7edd4ab61d4a39d047ac92ef2ec4cc674d17c9555",
+      "after_sha256": "d4419ff10797a75a6ce8031b800cfd25f1f924115ad4dbd1fc2e777ecbd44e5c",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "public/figures/model-studies/kimi-linear/NOTICE.md",
+      "before_sha256": "5fc14d9e7cdb6d7facc57065b0cf7784d4bd65ab2dc5e97d6f8a2b1bbebb58b7",
+      "after_sha256": "892985942e2fcc3eb885f6566dd0b92df4457b376364ebf98c6a2737b4193916",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "public/figures/model-studies/kimi-linear/chunk-computation.svg",
+      "before_sha256": "36f40384ac09c31f36215d89e76f4a690e10a54785a776854d30b3a28ad05634",
+      "after_sha256": "1076319745cab4ff4371cc6131eb2cc8740641a5a2c06dc01fb0b4972eb376bf",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "public/figures/model-studies/llava/SOURCES.md",
+      "before_sha256": "c248ad7bce20c1b65c57932c228194bebe43172c572fe251696220f45c7d0f0d",
+      "after_sha256": "061e31516aff38f839da8a02cd4a96a57e67bbb46b6048b16696c548870cfec2",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "public/figures/model-studies/qwen2-vl/SOURCES.md",
+      "before_sha256": "385792b95a9a39e6658a19dac5a005fd14535fef2153356547b7131b8befd2dc",
+      "after_sha256": "b78d89d8c8eca62c0126aebea461eec587859c9d40a72b7188bf20a14dc96031",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "public/figures/model-studies/qwen3-vl/positions-and-time.svg",
+      "before_sha256": "f35ae01c2903983e5f36bf437def1ef3695e35010185833f1ab99768baf010e5",
+      "after_sha256": "82a46c18c2526f6ee314807a26d541b16193dfc96a48ed772d3702813387f091",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "public/figures/model-studies/qwen3/on-policy-distillation.svg",
+      "before_sha256": "69ec1e5499e4f1eac942fcfc3b94d8499b17d6d5a1325ec923680bf179b31691",
+      "after_sha256": "fba6d9114a47eb8cb43df862290bd618176acec2a7103e5a4cea32996182a531",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "public/licenses/deepseek-v4-documentation-MIT.txt",
+      "before_sha256": "f2c6c602815669d292889e5be8c802f2ed950653b77999b1584e8e6aed25d040",
+      "after_sha256": "6e4c38e1172f42fdbff13edf9a7a017679fb82b0fde415a3e8b3c31c6ed4a4e4",
+      "method": "CRLF converted to LF; one final newline added. License wording is unchanged."
+    },
+    {
+      "path": "public/licenses/deepseek-v41-documentation-MIT.txt",
+      "before_sha256": "f2c6c602815669d292889e5be8c802f2ed950653b77999b1584e8e6aed25d040",
+      "after_sha256": "6e4c38e1172f42fdbff13edf9a7a017679fb82b0fde415a3e8b3c31c6ed4a4e4",
+      "method": "CRLF converted to LF; one final newline added. License wording is unchanged."
+    },
+    {
+      "path": "src/content/docs/architectures/models/deepseek-r1.mdx",
+      "before_sha256": "7cb58657605c57e134ef7320086b17780bec49d886f8da99f57b6998582a06a8",
+      "after_sha256": "89f2af1a6a03ff7797c5b5f5acf911d526b6a3fad04e5cc0824953ffdf092232",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "src/content/docs/architectures/models/deepseek-v2.mdx",
+      "before_sha256": "5bcb3378f54367f49834ba5dceff1d66daf7b9630bcfebdd7cd8a93e43931ff0",
+      "after_sha256": "bdb00e0b140f3d035f73e0a0acc62c7d2f0735ba19f18e2e42e4727893bdc996",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "src/content/docs/architectures/models/deepseek-v3.mdx",
+      "before_sha256": "8aef0813fe1b922ea3050dc0595ea769993b2f04ae9d2c4fe06c69376da76ecb",
+      "after_sha256": "234f0d2999ec61e4dd189e41841727de4aeee70f7b5b025b1a66db0550340031",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "src/content/docs/architectures/models/gemma-2.mdx",
+      "before_sha256": "6e72cf6d3d71e593cde438283dce2eff86054a77648a625ad77c451e681e9e4a",
+      "after_sha256": "c0039225eb216e787217b74f4691adc959cbe5b3cf774bc53cdefb0cae7d6978",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "src/content/docs/architectures/models/gemma-4.mdx",
+      "before_sha256": "22d0fff2a877f064e3d0248e2b34aab56492160dca2dda8e80d2e7542dca1ef4",
+      "after_sha256": "bbd9744a4b9f1ac9b2108a24e6ac03b0cb43568f2c686e7eddbad8028e179ed5",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "src/content/docs/architectures/models/gemma.mdx",
+      "before_sha256": "ba96f32784a3d174c5efd4bd5a07bf5bbb4e09490b33339b53a1c3fea7a0a957",
+      "after_sha256": "1c3fb1310adf77a728e67a4c66b1138f3f8293ed5e0b341e324df07d41822651",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "src/content/docs/architectures/models/glm-5.mdx",
+      "before_sha256": "479dc85f54682e88004c05d67132330c0b71d859c5a0b7eaf5746a34c0034da5",
+      "after_sha256": "466a23f0c929d1c22c6938f3165d9ee78f75bc182969efc2c722c41c7adcd945",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "src/content/docs/architectures/models/kimi-k2.mdx",
+      "before_sha256": "8a8ff877d06277863a3b87f40b70dafcd9e8f1fe93bd0b51205a2871a4597b93",
+      "after_sha256": "b0af53ce09fef213d44f21b2334b7ab0f64a33cf6d9c8808e8ecda75f1feb387",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "src/content/docs/architectures/models/kimi-k3.mdx",
+      "before_sha256": "5737947a330c8b7596102d35f7f8cc74ecbfa9344a90bc7cf271393850ca3dec",
+      "after_sha256": "9ba19ae3aed75de3d2f2219d484fbba4a57b142beb315e6837cfd7a735746c01",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "src/content/docs/architectures/models/kimi-linear.mdx",
+      "before_sha256": "2a0b5ee2c07f3b20544ccb1acdc69e2b7463863061874b32e6905fa2315e924a",
+      "after_sha256": "29457828198273ead39322253f4958824ae586628b4a26982515a15ed7da8f9b",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    },
+    {
+      "path": "src/content/docs/architectures/models/qwen3.mdx",
+      "before_sha256": "69ca415c1ceca88175a7114226cd2ce8ff965542f4e58ae74fe3f54edb043688",
+      "after_sha256": "8d9daa65e04f1cb0b2b95f526256440d09e88d165b7fbd430c9cd72c93feab5c",
+      "method": "Extra blank lines at EOF removed; one final newline retained."
+    }
+  ],
+  "metadata_updates": [
+    "docs/research/architectures/deepseek-r1/state/visuals.jsonl",
+    "docs/research/architectures/deepseek-v3/state/visuals.jsonl",
+    "docs/research/architectures/kimi-linear/state/visuals.jsonl",
+    "docs/research/architectures/qwen3-vl/state/visuals.jsonl",
+    "docs/research/architectures/qwen3/state/visuals.jsonl"
+  ]
+}

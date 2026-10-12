@@ -1,0 +1,32 @@
+Use case: infographic-diagram
+Asset type: opening infographic for a researched website article about taste as a human capability.
+Primary request: Create one polished square editorial infographic that is memorable at a glance and readable on a phone. Explain how a person uses taste to recognize, select and refine work when AI provides many possibilities.
+
+Style: elegant illustrated editorial design, gallery-like, with subtle futuristic elements. Warm ivory, deep ink blue, restrained teal and soft luminous accents. Beautiful spacing, clear hierarchy, crisp large typography. Detailed enough to feel crafted, simple enough to understand immediately.
+
+Main visual: a thoughtful human creator arranging several diverse, plausible AI-assisted drafts and forms into one coherent piece of work. Show discernment and shaping, not a machine choosing for the person. The alternatives should look like legitimate different directions, without red crosses or a simplistic good-versus-bad ranking. Use abstract design drafts rather than actual product interfaces, brands or copyrighted artwork.
+
+Composition: one integrated illustration and three clearly separated teaching panels. Put the short headline and two-line message prominently at the top. Give each panel a large keyword and very readable supporting text. Keep illustrations subordinate to the information. Use ample margins. All essential text must be large enough to remain legible when the full image is displayed at about 350 pixels wide. Do not add fine print.
+
+Text to render exactly, with no other text:
+"TASTE"
+"Knowing what's good in the AI era"
+"AI expands the possibilities."
+"Taste gives them direction."
+
+Panel 1:
+"NOTICE"
+"Recognize qualities and differences."
+
+Panel 2:
+"CHOOSE"
+"Judge against purpose and audience."
+
+Panel 3:
+"REFINE"
+"Improve through making and feedback."
+
+Closing line:
+"Context matters. Good choices can differ."
+
+Constraints: accurate spelling, high text contrast, no cramped text, no fake statistics, no claim that AI lacks taste forever, no logos, no watermark, no decorative gibberish. This is a conceptual teaching illustration, not research data. Opaque background.

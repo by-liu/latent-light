@@ -1,0 +1,57 @@
+{
+  "schema_version": 3,
+  "topic_id": "consumer-ai-products",
+  "status": "complete",
+  "coverage": {
+    "user needs and interfaces": "covered, with provider claims and limitations identified",
+    "representative advertised offers": "covered, with provider claims and limitations identified",
+    "return loops and continuity": "covered, with provider claims and limitations identified",
+    "subscription economics and metric definitions": "covered, with provider claims and limitations identified",
+    "counterevidence to features or engagement proving durable value": "covered, with provider claims and limitations identified",
+    "directory breadth and company explorer": "Complete expanded directory; searchable on the site and unfiltered in text exports.",
+    "large providers and ecosystem boundaries": "Inspected first-party descriptions added; company, app, model, release and execution boundaries remain explicit.",
+    "generated overview and text equivalence": "Selected generated illustration reviewed after targeted refinement; complete meaning retained in the explorer, comparison table and analysis.",
+    "dated funding and geography revision": "Reviewed: event-dated finance / ownership separate from product status. Exact identities, parent programs, valuations, cumulative amounts, secondary sales and pending events remain distinct. Physical AI has a selected Company base filter, not an exclusive market classification."
+  },
+  "open_questions": [
+    "Independent learning and wellbeing outcomes",
+    "Comparable cohort retention and total cost per useful outcome",
+    "Portability and commercial incentives across the selected products",
+    "Current financing cannot be established for all private providers; older records remain explicitly historical.",
+    "YouMind later financing stage labels conflict across secondary bulletins; direct current company/investor confirmation remains missing."
+  ],
+  "recommended_next_direction": "Refresh mutable product claims when adding new evidence; independent outcomes remain open research questions.",
+  "last_seen": "2026-10-11T18:10:57.440Z",
+  "output": {
+    "kind": "site-page",
+    "path": "src/content/docs/products-markets/landscapes/consumer-ai.mdx",
+    "status": "reviewed",
+    "revision": 4,
+    "updated": "2026-10-11",
+    "evidence_cutoff": "2026-10-11",
+    "audience": "Curious builders and product-minded readers"
+  },
+  "quality_gate": {
+    "evidence_verified": true,
+    "contradictions_reviewed": true,
+    "output_reviewed": true,
+    "visuals_reviewed": true
+  },
+  "delivery_checks": {
+    "validation": {
+      "status": "passed",
+      "method": "npm run validate: 48 deployment tests, 121 content tests, Astro typecheck, static build and 76-file docs lint; existing build/redirect warnings only. Research records validated separately.",
+      "checked_at": "2026-10-11T18:10:57.440Z"
+    },
+    "rendering": {
+      "status": "passed",
+      "method": "Real Chromium: 20 landscape desktop/mobile/theme views plus 8 Focus views; citations, local marks, search/filter/reset, print, no-JavaScript, fallback and privacy checks. Funding columns inspected at 1440/390/320px; Physical AI base/category/search intersection checked.",
+      "checked_at": "2026-10-11T18:10:48.404Z"
+    },
+    "exports": {
+      "status": "passed",
+      "method": "Every native explorer row and its citations retained in unfiltered built Markdown; MDX endpoints, watchlist funding header, Pagefind and nonpublication of editor/private paths checked.",
+      "checked_at": "2026-10-11T18:10:48.404Z"
+    }
+  }
+}

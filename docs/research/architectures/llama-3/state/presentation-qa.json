@@ -1,0 +1,215 @@
+{
+  "revision": 4,
+  "checked": "2026-10-10T18:07:46.764Z",
+  "site_page_sha256": "bfdacaad22ae4cf62b23f5d90dbe76817dcc8808b3434fc19f74f580fb57335d",
+  "source_resources": {
+    "report": "https://arxiv.org/abs/2407.21783v3",
+    "hugging_face": "https://huggingface.co/meta-llama/Llama-3.1-8B-Instruct",
+    "checkpoint": "meta-llama/Llama-3.1-8B-Instruct"
+  },
+  "prior_review_record": "state/presentation-qa-revision-3.json",
+  "collection_checks": {
+    "site_validation": "106 automated tests, zero Astro diagnostics, static build and 43 docs lint clean. Existing bundler/redirect warnings unchanged.",
+    "browser_views": 18,
+    "guidance_browser_views": 8,
+    "all_25_exports": true,
+    "source_crops": 8,
+    "manual_model_figures": 18,
+    "model_benchmarks": "Not executed."
+  },
+  "viewports": [
+    {
+      "slug": "llama-3",
+      "width": 1440,
+      "mode": "light",
+      "title": "Llama 3 and 3.1",
+      "titleCount": 1,
+      "overflow": false,
+      "figures": [
+        {
+          "id": "figure-1",
+          "caption": "Figure 1. The text decoder and its generation loop. Reproduced from Abhimanyu Dubey et al., report Figure 1.5"
+        },
+        {
+          "id": "figure-2",
+          "caption": "Figure 2. Pack tokens without mixing their documents. Original illustrative mask based on the reported document isolation rule; four tokens per document are a teaching choice, not the training length.1"
+        },
+        {
+          "id": "figure-3",
+          "caption": "Figure 3. Data, ranking and policy updates form a loop. Reproduced from Abhimanyu Dubey et al., report Figure 7.6"
+        }
+      ],
+      "resources": [
+        {
+          "kind": "report",
+          "href": "https://arxiv.org/abs/2407.21783v3",
+          "label": "Technical reportRead the original research"
+        },
+        {
+          "kind": "model",
+          "href": "https://huggingface.co/meta-llama/Llama-3.1-8B-Instruct",
+          "label": "Hugging Facemeta-llama/Llama-3.1-8B-Instruct"
+        }
+      ],
+      "visibleHashes": [],
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "missingImages": [],
+      "activeNav": [
+        {
+          "label": "Llama 3 / 3.1",
+          "visible": true
+        }
+      ],
+      "panFrames": [
+        {
+          "tabindex": 0,
+          "scrolls": false,
+          "frame": 648,
+          "image": 648
+        },
+        {
+          "tabindex": 0,
+          "scrolls": false,
+          "frame": 648,
+          "image": 648
+        },
+        {
+          "tabindex": 0,
+          "scrolls": false,
+          "frame": 648,
+          "image": 648
+        }
+      ]
+    },
+    {
+      "slug": "llama-3",
+      "width": 390,
+      "mode": "light",
+      "title": "Llama 3 and 3.1",
+      "titleCount": 1,
+      "overflow": false,
+      "figures": [
+        {
+          "id": "figure-1",
+          "caption": "Figure 1. The text decoder and its generation loop. Reproduced from Abhimanyu Dubey et al., report Figure 1.5"
+        },
+        {
+          "id": "figure-2",
+          "caption": "Figure 2. Pack tokens without mixing their documents. Original illustrative mask based on the reported document isolation rule; four tokens per document are a teaching choice, not the training length.1"
+        },
+        {
+          "id": "figure-3",
+          "caption": "Figure 3. Data, ranking and policy updates form a loop. Reproduced from Abhimanyu Dubey et al., report Figure 7.6"
+        }
+      ],
+      "resources": [
+        {
+          "kind": "report",
+          "href": "https://arxiv.org/abs/2407.21783v3",
+          "label": "Technical reportRead the original research"
+        },
+        {
+          "kind": "model",
+          "href": "https://huggingface.co/meta-llama/Llama-3.1-8B-Instruct",
+          "label": "Hugging Facemeta-llama/Llama-3.1-8B-Instruct"
+        }
+      ],
+      "visibleHashes": [],
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "missingImages": [],
+      "activeNav": [
+        {
+          "label": "Llama 3 / 3.1",
+          "visible": false
+        }
+      ],
+      "panFrames": [
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 358,
+          "image": 800
+        },
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 358,
+          "image": 560
+        },
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 358,
+          "image": 850
+        }
+      ]
+    },
+    {
+      "slug": "llama-3",
+      "width": 320,
+      "mode": "dark",
+      "title": "Llama 3 and 3.1",
+      "titleCount": 1,
+      "overflow": false,
+      "figures": [
+        {
+          "id": "figure-1",
+          "caption": "Figure 1. The text decoder and its generation loop. Reproduced from Abhimanyu Dubey et al., report Figure 1.5"
+        },
+        {
+          "id": "figure-2",
+          "caption": "Figure 2. Pack tokens without mixing their documents. Original illustrative mask based on the reported document isolation rule; four tokens per document are a teaching choice, not the training length.1"
+        },
+        {
+          "id": "figure-3",
+          "caption": "Figure 3. Data, ranking and policy updates form a loop. Reproduced from Abhimanyu Dubey et al., report Figure 7.6"
+        }
+      ],
+      "resources": [
+        {
+          "kind": "report",
+          "href": "https://arxiv.org/abs/2407.21783v3",
+          "label": "Technical reportRead the original research"
+        },
+        {
+          "kind": "model",
+          "href": "https://huggingface.co/meta-llama/Llama-3.1-8B-Instruct",
+          "label": "Hugging Facemeta-llama/Llama-3.1-8B-Instruct"
+        }
+      ],
+      "visibleHashes": [],
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "missingImages": [],
+      "activeNav": [
+        {
+          "label": "Llama 3 / 3.1",
+          "visible": false
+        }
+      ],
+      "panFrames": [
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 288,
+          "image": 800
+        },
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 288,
+          "image": 560
+        },
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 288,
+          "image": 850
+        }
+      ]
+    }
+  ],
+  "reuse_review": "Specific fair-dealing assessments documented; no permissive artwork grant or universal legal assurance asserted."
+}

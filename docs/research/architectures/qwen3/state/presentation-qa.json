@@ -1,0 +1,185 @@
+{
+  "revision": 4,
+  "checked": "2026-10-10T18:07:46.764Z",
+  "site_page_sha256": "69ca415c1ceca88175a7114226cd2ce8ff965542f4e58ae74fe3f54edb043688",
+  "source_resources": {
+    "report": "https://arxiv.org/pdf/2505.09388v1",
+    "hugging_face": "https://huggingface.co/Qwen/Qwen3-235B-A22B",
+    "checkpoint": "Qwen/Qwen3-235B-A22B"
+  },
+  "prior_review_record": "state/presentation-qa-revision-3.json",
+  "collection_checks": {
+    "site_validation": "106 automated tests, zero Astro diagnostics, static build and 43 docs lint clean. Existing bundler/redirect warnings unchanged.",
+    "browser_views": 18,
+    "guidance_browser_views": 8,
+    "all_25_exports": true,
+    "source_crops": 8,
+    "manual_model_figures": 18,
+    "model_benchmarks": "Not executed."
+  },
+  "viewports": [
+    {
+      "slug": "qwen3",
+      "width": 1440,
+      "mode": "light",
+      "title": "Qwen3",
+      "titleCount": 1,
+      "overflow": false,
+      "figures": [
+        {
+          "id": "figure-1",
+          "caption": "Figure 1. Flagship training and student distillation are different paths. Reproduced from Qwen Team, report Figure 1.5"
+        },
+        {
+          "id": "figure-2",
+          "caption": "Figure 2. The student chooses the trajectory; the teacher scores it. Independent diagram of on policy distillation, not a copied report figure.7"
+        }
+      ],
+      "resources": [
+        {
+          "kind": "report",
+          "href": "https://arxiv.org/pdf/2505.09388v1",
+          "label": "Technical reportRead the original research"
+        },
+        {
+          "kind": "model",
+          "href": "https://huggingface.co/Qwen/Qwen3-235B-A22B",
+          "label": "Hugging FaceQwen/Qwen3-235B-A22B"
+        }
+      ],
+      "visibleHashes": [],
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "missingImages": [],
+      "activeNav": [
+        {
+          "label": "Qwen3",
+          "visible": true
+        }
+      ],
+      "panFrames": [
+        {
+          "tabindex": 0,
+          "scrolls": false,
+          "frame": 648,
+          "image": 648
+        },
+        {
+          "tabindex": 0,
+          "scrolls": false,
+          "frame": 648,
+          "image": 648
+        }
+      ]
+    },
+    {
+      "slug": "qwen3",
+      "width": 390,
+      "mode": "light",
+      "title": "Qwen3",
+      "titleCount": 1,
+      "overflow": false,
+      "figures": [
+        {
+          "id": "figure-1",
+          "caption": "Figure 1. Flagship training and student distillation are different paths. Reproduced from Qwen Team, report Figure 1.5"
+        },
+        {
+          "id": "figure-2",
+          "caption": "Figure 2. The student chooses the trajectory; the teacher scores it. Independent diagram of on policy distillation, not a copied report figure.7"
+        }
+      ],
+      "resources": [
+        {
+          "kind": "report",
+          "href": "https://arxiv.org/pdf/2505.09388v1",
+          "label": "Technical reportRead the original research"
+        },
+        {
+          "kind": "model",
+          "href": "https://huggingface.co/Qwen/Qwen3-235B-A22B",
+          "label": "Hugging FaceQwen/Qwen3-235B-A22B"
+        }
+      ],
+      "visibleHashes": [],
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "missingImages": [],
+      "activeNav": [
+        {
+          "label": "Qwen3",
+          "visible": false
+        }
+      ],
+      "panFrames": [
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 358,
+          "image": 800
+        },
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 358,
+          "image": 640
+        }
+      ]
+    },
+    {
+      "slug": "qwen3",
+      "width": 320,
+      "mode": "dark",
+      "title": "Qwen3",
+      "titleCount": 1,
+      "overflow": false,
+      "figures": [
+        {
+          "id": "figure-1",
+          "caption": "Figure 1. Flagship training and student distillation are different paths. Reproduced from Qwen Team, report Figure 1.5"
+        },
+        {
+          "id": "figure-2",
+          "caption": "Figure 2. The student chooses the trajectory; the teacher scores it. Independent diagram of on policy distillation, not a copied report figure.7"
+        }
+      ],
+      "resources": [
+        {
+          "kind": "report",
+          "href": "https://arxiv.org/pdf/2505.09388v1",
+          "label": "Technical reportRead the original research"
+        },
+        {
+          "kind": "model",
+          "href": "https://huggingface.co/Qwen/Qwen3-235B-A22B",
+          "label": "Hugging FaceQwen/Qwen3-235B-A22B"
+        }
+      ],
+      "visibleHashes": [],
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "missingImages": [],
+      "activeNav": [
+        {
+          "label": "Qwen3",
+          "visible": false
+        }
+      ],
+      "panFrames": [
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 288,
+          "image": 800
+        },
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 288,
+          "image": 640
+        }
+      ]
+    }
+  ],
+  "reuse_review": "Specific fair-dealing assessments documented; no permissive artwork grant or universal legal assurance asserted."
+}

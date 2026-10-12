@@ -1,0 +1,50 @@
+{
+  "model": "gemma-2",
+  "source_report": "Gemma 2: Improving Open Language Models at a Practical Size",
+  "version": "v3",
+  "checked": "2026-10-10",
+  "pdf_sha256": "e81333353e58a01cbca0b6d5aec28caa5a7c6d26b52d227844bcce1bd87dc557",
+  "figures": [
+    {
+      "id": "V001",
+      "asset": "../../../../public/figures/model-studies/gemma-2/architecture.svg",
+      "sha256": "5ec3b21efa9999a1cfea04c722054958fe8bbd5be488d103d9cbe524fe768f81",
+      "original_figure": null,
+      "pdf_page": null,
+      "crop_points": null,
+      "raster_dpi": null,
+      "alterations": "Original SVG explanatory synthesis,not a paper-figure reconstruction.",
+      "license": {
+        "status": "verified",
+        "value": "MIT, original explanatory SVG",
+        "url": "https://github.com/by-liu/latent-light/blob/main/LICENSE"
+      },
+      "assessment": "Independently authored vector explanation under repository MIT. No traced author artwork.",
+      "review": "Native SVG raster manually inspected; representation flow, labels, arrow order and variant scope reviewed.",
+      "browser_pending": true
+    },
+    {
+      "id": "V002",
+      "asset": "../../../../public/figures/model-studies/gemma-2/report-memorization.png",
+      "sha256": "24b96b699605614306ad82696f0a2d3c37e526db9118f49d07ed7d988b1b4533",
+      "original_figure": 1,
+      "pdf_page": 9,
+      "crop_points": [
+        304,
+        84,
+        238,
+        157
+      ],
+      "raster_dpi": 300,
+      "alterations": "Bounding crop and PDF rasterization only;no recoloring or scientific relabeling.",
+      "license": {
+        "status": "verified",
+        "value": "CC BY 4.0",
+        "url": "https://creativecommons.org/licenses/by/4.0/"
+      },
+      "assessment": "Exact version-specific arXivHTML identifies CC BY4.0; author/title/version/locator/link and crop modification credited. No separate exclusions located.",
+      "review": "300dpi crop manually compared with the full original page; all essential labels, legends, arrowheads and boundaries retained.",
+      "browser_pending": true
+    }
+  ]
+}

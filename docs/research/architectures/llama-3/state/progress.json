@@ -1,0 +1,39 @@
+{
+  "schema_version": 2,
+  "topic_id": "llama-3",
+  "status": "complete",
+  "coverage": {
+    "report": "inspected",
+    "artifacts": "Pinned official 3.1 card and license inspected. Selected HF checkpoint config is gated and was not accessed. Targeted public decoder code inspected; no weights executed.",
+    "implementation": "Targeted functions inspected, not a complete runtime trace",
+    "evidence_review": "Separate adversarial source pass complete: checkpoint scope, units, causal attribution, code defaults, access gaps and citation support checked",
+    "presentation": "Revision 4 desktop/mobile/theme/focus and export checks passed. All 18 revised-page figures and eight source crops manually reviewed; no model execution.",
+    "figure_reuse": "The version-specific arXiv landing page links only the arXiv nonexclusive distribution license. No general public reproduction grant found; source figures linked rather than copied.",
+    "technical_audit": "Revision 3 mechanism/training/inference/ablations audit in coverage-audit.md; report and targeted code re-inspected.",
+    "licensing": "Original figure copyright retained. Selected excerpts have documented case-specific exception assessments, distinct from code/weight licenses; no new artwork grant claimed.",
+    "coverage_audit": "Original-figure selection revisited under updated guidance; selected source artwork added without removing distinct worked examples."
+  },
+  "open_questions": [
+    "Which exact data subsets and optimization settings differ across 8B, 70B, and 405B? The selected configuration remains access-gated and was not inspected."
+  ],
+  "recommended_next_direction": null,
+  "last_seen": "2026-10-10T18:07:46.764Z",
+  "quality_gate": {
+    "evidence_verified": true,
+    "contradictions_reviewed": true,
+    "report_reviewed": true,
+    "visuals_reviewed": true
+  },
+  "coverage_history": [
+    {
+      "revision": 2,
+      "presentation": "Final revision2 checked in Chromium at 1440 px light, 390 px light and 320 px dark plus desktop focus. All report figures fit desktop; mobile pan and full size links, captions, source-resource cards, no displayed hashes, citation/equation anchors, Markdown/MDX, search and agent manifests checked. All 48 collection figures manually reviewed. No checkpoint execution.",
+      "quality_gate": {
+        "evidence_verified": true,
+        "contradictions_reviewed": true,
+        "report_reviewed": true,
+        "visuals_reviewed": false
+      }
+    }
+  ]
+}

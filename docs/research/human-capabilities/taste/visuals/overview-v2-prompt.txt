@@ -1,0 +1,39 @@
+Use case: infographic-diagram
+Asset type: the opening infographic of a researched website article about taste as a human capability.
+Primary request: Revise the supplied infographic to contain substantially more useful information while preserving its beautiful illustrated editorial style, warm ivory and deep ink palette, subtle futuristic city, thoughtful creator and legitimate diverse design alternatives.
+
+The current image is beautiful but too sparse. Recompose it as an elegant portrait infographic, approximately 4:5, with a smaller integrated studio illustration and four spacious teaching panels. Prioritize information hierarchy and readable type. Retain the same person, art direction, warm light, teal/gold accents, serif typography and hand-crafted feeling. Keep the composition coherent; do not turn it into a dense document or a busy dashboard.
+
+Layout: large title and subtitle at top; short two-line message and creator scene occupying roughly the top third; four information panels in a clear two-by-two arrangement occupying most of the remaining space; a compact visual working loop at the bottom. Each panel has a strong heading, a concise explanation and a small meaningful illustration. Preserve generous margins. Supporting type must be large and high contrast. Increase the canvas height rather than shrinking the typography to squeeze everything in. No fine print.
+
+Text to render exactly, with no additional text:
+
+"TASTE"
+"Knowing what’s good in the AI era"
+"AI expands the possibilities."
+"Taste gives them direction."
+
+Panel 1:
+"WHAT IS TASTE?"
+"Developed discernment: notice, choose and shape quality for a purpose, audience and point of view."
+
+Panel 2:
+"WHY IT MATTERS WITH AI"
+"More options do not automatically mean better selection. Decide what to keep and improve."
+
+Panel 3:
+"HOW TO DEVELOP IT"
+"Compare work in one domain. Explain your choices. Make, critique and revise. Seek informed feedback."
+
+Panel 4:
+"KEEP PERSPECTIVE"
+"Preference, expertise and status affect judgment. Context matters. Good choices can differ."
+
+Bottom visual loop:
+"NOTICE → CHOOSE → REFINE"
+"Recognize differences → judge fit → improve through feedback"
+
+Closing line:
+"Develop reasons for your choices. Stay open to revision."
+
+Constraints: keep the beautiful visual style of the reference; accurate spelling and all supplied wording; original conceptual artwork; no copied brand assets, logos, watermark or invented statistics; no universal taste score; no claim that AI can never learn taste or that taste guarantees career success. Diverse drafts remain legitimate alternatives, without simplistic good-versus-bad rankings. Opaque background.

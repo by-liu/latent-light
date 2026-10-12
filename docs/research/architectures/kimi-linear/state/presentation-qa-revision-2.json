@@ -1,0 +1,163 @@
+{
+  "revision": 2,
+  "checked": "2026-10-10T15:45:39.761Z",
+  "site_page_sha256": "de96b64b47e90b8389d25468168f578d9b7d33872252491a99535b2166debf31",
+  "source_resources": {
+    "report": "https://arxiv.org/pdf/2510.26692v1",
+    "hugging_face": "https://huggingface.co/moonshotai/Kimi-Linear-48B-A3B-Instruct",
+    "checkpoint": "moonshotai/Kimi-Linear-48B-A3B-Instruct"
+  },
+  "collection_checks": {
+    "site_validation": "106 tests, zero Astro diagnostics, build and all 43 docs lint passed.",
+    "browser_views": 81,
+    "model_benchmarks": "Not executed.",
+    "source_figures": "32 unique report assets; 33 placements; 48 total numbered collection figures. Rights retained per asset."
+  },
+  "viewports": [
+    {
+      "slug": "kimi-linear",
+      "width": 1440,
+      "mode": "light",
+      "title": "Kimi Linear",
+      "titleCount": 1,
+      "overflow": false,
+      "figures": [
+        {
+          "id": "figure-1",
+          "caption": "Figure 1. The hybrid decoder and KDA module. Reproduced from the release documentation’s Figure 3, under MIT terms.4"
+        },
+        {
+          "id": "figure-2",
+          "caption": "Figure 2. Recurrent memory and direct history lookup. Original explanatory diagram informed by the recurrence and hybrid design.13"
+        }
+      ],
+      "resources": [
+        {
+          "kind": "report",
+          "href": "https://arxiv.org/pdf/2510.26692v1",
+          "label": "Technical reportRead the original research"
+        },
+        {
+          "kind": "model",
+          "href": "https://huggingface.co/moonshotai/Kimi-Linear-48B-A3B-Instruct",
+          "label": "Hugging Facemoonshotai/Kimi-Linear-48B-A3B-Instruct"
+        }
+      ],
+      "visibleHashes": [],
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "missingImages": [],
+      "activeNav": [
+        {
+          "label": "Kimi Linear",
+          "visible": true
+        }
+      ],
+      "panFrames": [
+        {
+          "tabindex": 0,
+          "scrolls": false,
+          "frame": 648,
+          "image": 648
+        }
+      ]
+    },
+    {
+      "slug": "kimi-linear",
+      "width": 390,
+      "mode": "light",
+      "title": "Kimi Linear",
+      "titleCount": 1,
+      "overflow": false,
+      "figures": [
+        {
+          "id": "figure-1",
+          "caption": "Figure 1. The hybrid decoder and KDA module. Reproduced from the release documentation’s Figure 3, under MIT terms.4"
+        },
+        {
+          "id": "figure-2",
+          "caption": "Figure 2. Recurrent memory and direct history lookup. Original explanatory diagram informed by the recurrence and hybrid design.13"
+        }
+      ],
+      "resources": [
+        {
+          "kind": "report",
+          "href": "https://arxiv.org/pdf/2510.26692v1",
+          "label": "Technical reportRead the original research"
+        },
+        {
+          "kind": "model",
+          "href": "https://huggingface.co/moonshotai/Kimi-Linear-48B-A3B-Instruct",
+          "label": "Hugging Facemoonshotai/Kimi-Linear-48B-A3B-Instruct"
+        }
+      ],
+      "visibleHashes": [],
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "missingImages": [],
+      "activeNav": [
+        {
+          "label": "Kimi Linear",
+          "visible": false
+        }
+      ],
+      "panFrames": [
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 358,
+          "image": 560
+        }
+      ]
+    },
+    {
+      "slug": "kimi-linear",
+      "width": 320,
+      "mode": "dark",
+      "title": "Kimi Linear",
+      "titleCount": 1,
+      "overflow": false,
+      "figures": [
+        {
+          "id": "figure-1",
+          "caption": "Figure 1. The hybrid decoder and KDA module. Reproduced from the release documentation’s Figure 3, under MIT terms.4"
+        },
+        {
+          "id": "figure-2",
+          "caption": "Figure 2. Recurrent memory and direct history lookup. Original explanatory diagram informed by the recurrence and hybrid design.13"
+        }
+      ],
+      "resources": [
+        {
+          "kind": "report",
+          "href": "https://arxiv.org/pdf/2510.26692v1",
+          "label": "Technical reportRead the original research"
+        },
+        {
+          "kind": "model",
+          "href": "https://huggingface.co/moonshotai/Kimi-Linear-48B-A3B-Instruct",
+          "label": "Hugging Facemoonshotai/Kimi-Linear-48B-A3B-Instruct"
+        }
+      ],
+      "visibleHashes": [],
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "missingImages": [],
+      "activeNav": [
+        {
+          "label": "Kimi Linear",
+          "visible": false
+        }
+      ],
+      "panFrames": [
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 288,
+          "image": 560
+        }
+      ]
+    }
+  ],
+  "manual_review": "All 48 figure renders inspected as contact sheets; source figure completeness, labels and supplemental diagrams reviewed. Dense focus view and native dark diagrams inspected separately."
+}

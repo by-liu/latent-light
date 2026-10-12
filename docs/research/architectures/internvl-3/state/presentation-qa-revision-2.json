@@ -1,0 +1,181 @@
+{
+  "revision": 2,
+  "checked": "2026-10-10T15:45:39.761Z",
+  "site_page_sha256": "c26e41a06e689128e16baf6770804f056ad15ad7f5d8dbebc8d4fb5bb690de53",
+  "source_resources": {
+    "report": "https://arxiv.org/abs/2504.10479v1",
+    "hugging_face": "https://huggingface.co/OpenGVLab/InternVL3-8B",
+    "checkpoint": "OpenGVLab/InternVL3-8B"
+  },
+  "collection_checks": {
+    "site_validation": "106 tests, zero Astro diagnostics, build and all 43 docs lint passed.",
+    "browser_views": 81,
+    "model_benchmarks": "Not executed.",
+    "source_figures": "32 unique report assets; 33 placements; 48 total numbered collection figures. Rights retained per asset."
+  },
+  "viewports": [
+    {
+      "slug": "internvl-3",
+      "width": 1440,
+      "mode": "light",
+      "title": "InternVL 3",
+      "titleCount": 1,
+      "overflow": false,
+      "figures": [
+        {
+          "id": "figure-1",
+          "caption": "Figure 1. Four local crops and one global view become 1,280 visual positions. Original worked diagram based on the selected artifact.23"
+        },
+        {
+          "id": "figure-2",
+          "caption": "Figure 2. Native versus post-hoc training. Zhu et al., Figure 3; cropped, CC BY 4.0.4"
+        }
+      ],
+      "resources": [
+        {
+          "kind": "report",
+          "href": "https://arxiv.org/abs/2504.10479v1",
+          "label": "Technical reportRead the original research"
+        },
+        {
+          "kind": "model",
+          "href": "https://huggingface.co/OpenGVLab/InternVL3-8B",
+          "label": "Hugging FaceOpenGVLab/InternVL3-8B"
+        }
+      ],
+      "visibleHashes": [],
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "missingImages": [],
+      "activeNav": [
+        {
+          "label": "InternVL 3",
+          "visible": true
+        }
+      ],
+      "panFrames": [
+        {
+          "tabindex": 0,
+          "scrolls": false,
+          "frame": 648,
+          "image": 648
+        },
+        {
+          "tabindex": 0,
+          "scrolls": false,
+          "frame": 648,
+          "image": 648
+        }
+      ]
+    },
+    {
+      "slug": "internvl-3",
+      "width": 390,
+      "mode": "light",
+      "title": "InternVL 3",
+      "titleCount": 1,
+      "overflow": false,
+      "figures": [
+        {
+          "id": "figure-1",
+          "caption": "Figure 1. Four local crops and one global view become 1,280 visual positions. Original worked diagram based on the selected artifact.23"
+        },
+        {
+          "id": "figure-2",
+          "caption": "Figure 2. Native versus post-hoc training. Zhu et al., Figure 3; cropped, CC BY 4.0.4"
+        }
+      ],
+      "resources": [
+        {
+          "kind": "report",
+          "href": "https://arxiv.org/abs/2504.10479v1",
+          "label": "Technical reportRead the original research"
+        },
+        {
+          "kind": "model",
+          "href": "https://huggingface.co/OpenGVLab/InternVL3-8B",
+          "label": "Hugging FaceOpenGVLab/InternVL3-8B"
+        }
+      ],
+      "visibleHashes": [],
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "missingImages": [],
+      "activeNav": [
+        {
+          "label": "InternVL 3",
+          "visible": false
+        }
+      ],
+      "panFrames": [
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 358,
+          "image": 680
+        },
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 358,
+          "image": 900
+        }
+      ]
+    },
+    {
+      "slug": "internvl-3",
+      "width": 320,
+      "mode": "dark",
+      "title": "InternVL 3",
+      "titleCount": 1,
+      "overflow": false,
+      "figures": [
+        {
+          "id": "figure-1",
+          "caption": "Figure 1. Four local crops and one global view become 1,280 visual positions. Original worked diagram based on the selected artifact.23"
+        },
+        {
+          "id": "figure-2",
+          "caption": "Figure 2. Native versus post-hoc training. Zhu et al., Figure 3; cropped, CC BY 4.0.4"
+        }
+      ],
+      "resources": [
+        {
+          "kind": "report",
+          "href": "https://arxiv.org/abs/2504.10479v1",
+          "label": "Technical reportRead the original research"
+        },
+        {
+          "kind": "model",
+          "href": "https://huggingface.co/OpenGVLab/InternVL3-8B",
+          "label": "Hugging FaceOpenGVLab/InternVL3-8B"
+        }
+      ],
+      "visibleHashes": [],
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "missingImages": [],
+      "activeNav": [
+        {
+          "label": "InternVL 3",
+          "visible": false
+        }
+      ],
+      "panFrames": [
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 288,
+          "image": 680
+        },
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 288,
+          "image": 900
+        }
+      ]
+    }
+  ],
+  "manual_review": "All 48 figure renders inspected as contact sheets; source figure completeness, labels and supplemental diagrams reviewed. Dense focus view and native dark diagrams inspected separately."
+}

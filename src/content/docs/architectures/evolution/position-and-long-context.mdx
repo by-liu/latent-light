@@ -1,84 +1,125 @@
 ---
 title: Position and Long Context
-description: Understand how rotary position affects matching, and why accepting a long sequence is not the same as using it well.
-lastUpdated: 2026-10-05
+description: Separate matching geometry, trained context, visible evidence and useful recall.
+lastUpdated: 2026-10-10
 ---
 
 import FocusCanvas from '../../../../components/FocusCanvas.astro';
-import ArchitectureDiagram from '../../../../components/architectures/ArchitectureDiagram.astro';
+import ArchitectureAtlas from '../../../../components/architectures/ArchitectureAtlas.astro';
+import ModelFlow from '../../../../components/architectures/ModelFlow.astro';
 
-An attention layer needs information about order as well as content.
-But three questions are different: how position is represented, how much
-context a system can accept, and how well it uses evidence inside that context.
-Keeping them separate avoids treating a large context limit as a quality guarantee.
+Position tells a model where evidence belongs. A context limit tells you how
+much input a system accepts. Neither tells you how reliably the model uses
+that input. Keep **representation, capacity, visibility, and usefulness**
+separate when reading a long context claim.
 
-## From added position to rotated features
+## Position changes matching geometry
 
-The original Transformer adds sinusoidal position vectors to token embeddings.
-GPT-2's released implementation instead adds learned absolute position
-embeddings.[^transformer][^gpt-code] RoPE applies position dependent rotations
-to query and key feature pairs, so their dot product also carries relative
-position information.[^rope]
+The original Transformer adds sinusoidal position vectors to embeddings.
+RoPE instead rotates query and key feature pairs before their dot product.
+It exposes relative displacement through matching geometry rather than
+adding another vector to the residual stream.[^transformer][^rope]
 
-For one two dimensional feature pair, define:
+For one feature pair, with column vectors q and k:
 
-<MathExpression display number="1" tex="
-R(a)=\begin{bmatrix}\cos a & -\sin a\\\sin a & \cos a\end{bmatrix}
-" />
+<MathExpression display number="1" tex="R(a)=\begin{bmatrix}\cos a&-\sin a\\\sin a&\cos a\end{bmatrix}" />
 
-At positions `m` and `n`, the rotated vectors are `R(mθ)q` and `R(nθ)k`.
-The orthogonality of rotation gives:[^rope]
+At positions m and n, the rotated dot product becomes:
 
-<MathExpression display number="2" tex="
-\bigl(R(m\theta)q\bigr)^\top R(n\theta)k
-=q^\top R\bigl((n-m)\theta\bigr)k
-" />
+<MathExpression display number="2" tex="\bigl(R(m\theta)q\bigr)^\top R(n\theta)k=q^\top R\bigl((n-m)\theta\bigr)k" />
 
-The position term depends on the difference `n − m`, but the content vectors
-still determine the score. Real heads use many pairs with different
-frequencies, not a single angle for the whole vector.[^rope]
+θ is the frequency for this pair. [Equation (2)](#equation-2) follows from
+the orthogonality of rotation. Real heads contain many pairs with different
+frequencies; content still determines the score.[^rope]
 
-<FocusCanvas size="diagram" label="Rotary position intuition">
-  <ArchitectureDiagram kind="rope" id="figure-1">
-    **Figure 1.** Position changes the angle used in matching. Original toy illustration of RoPE, not a measured attention pattern.[^rope]
-  </ArchitectureDiagram>
+<FocusCanvas size="diagram" label="Two rotary examples with the same relative position">
+<ArchitectureAtlas kind="rope" id="figure-1">
+
+**Figure 1.** Absolute angles change; the relative offset stays the same. Original toy geometry for identical unit vectors, informed by RoFormer.[^rope]
+
+</ArchitectureAtlas>
 </FocusCanvas>
 
-In this example, both unrotated vectors are `(1, 0)`. With `θ = π/4`, position
-1 rotates the query by 45° and position 2 rotates the key by 90°. Their
-separation is 45°. Different content vectors would add their own geometry.
+[Figure 1](#figure-1) does not mean a complete model is invariant to every input shift.
+Masks, boundaries, content, and other position handling remain part of its
+computation. Nor does a rotation formula establish reliable extrapolation.
 
-## Capacity is not useful reach
+## Four questions behind a long context claim
 
-| Question | What to inspect |
-| --- | --- |
-| Representation | Where does position enter, and which relationships does it encode? |
-| Capacity | What do the checkpoint, processor, cache, and memory budget permit? |
-| Usefulness | Does the answer still depend on the right evidence as distance and distractors increase? |
+| Question | What to inspect | What it does not establish |
+| --- | --- | --- |
+| Representation | Position IDs, frequencies, scaling, image and time coordinates | Reliable performance at an unseen length |
+| Capacity | Trained length, configured limit, backend, memory and processor | Every accepted position is used well |
+| Visibility | Dense, local, compressed or selected history | A long input means every layer directly reads all of it |
+| Usefulness | Retrieval, reasoning, ordering and failures across positions | A single needle test proves every long document task |
 
-RoPE does not by itself establish reliable extrapolation to unseen lengths.
-A position formula is not an evaluation of evidence use. A useful proposed
-test varies evidence location, dependency distance, and distractors separately,
-while keeping the answer and necessary facts controlled. Report quality
-alongside memory and latency, not just the accepted token count.
+This is an interpretation framework used here, not a performance table.
+Compare it with [Attention and memory](/architectures/evolution/attention-and-memory/),
+which explains how visibility and storage change.
 
-## Images and video add more coordinates
+### Extend the learned positional regime
 
-For visual inputs, sequence order alone need not express spatial or temporal
-relationships. Qwen3-VL's official summary describes Interleaved MRoPE,
-which allocates rotary frequencies across time, width, and height. It also
-uses textual timestamps for video, a distinct channel for time information.[^qwen-summary]
+YaRN adjusts RoPE frequencies by their wavelength regimes and applies
+attention scaling. It pairs that adaptation with additional training, rather
+than establish a universal rule that changing one configuration value is enough.[^yarn]
+[DeepSeek-V2](/architectures/models/deepseek-v2/) and
+[Qwen2.5 1M](/architectures/models/qwen2-5-1m/) show why trained length,
+extension technique, accepted length, and evaluation length must be recorded separately.
 
-These mechanisms expose coordinates; they do not guarantee that an answer
-is correctly grounded in a frame or region. Read the
-[Qwen3-VL study](/architectures/models/qwen3-vl/) for its architecture and
-[Multimodal integration](/architectures/evolution/multimodal-integration/)
-for the processing choices that determine which evidence reaches the model.
+Qwen2.5-1M also uses Dual Chunk Attention: it remaps within-chunk, neighboring
+and distant positional relationships to ranges seen during training. This is
+not KV compression or simply dropping distant tokens. Remapping can make
+distinct long distances look similar; useful recall still needs evaluation.[^qwen1m]
 
-Selected mechanisms checked October 5, 2026. Long context tests above are
-proposals, not results from this site.
+### Let depth carry information beyond a local window
 
-[^transformer]: Ashish Vaswani et al., [Attention Is All You Need](https://arxiv.org/html/1706.03762v7), 2017, section 3.5. The [Foundations position section](/architectures/foundations/#components-and-full-model) explains the sinusoidal construction.
-[^gpt-code]: OpenAI, [`src/model.py`](https://github.com/openai/gpt-2/blob/9b63575ef42771a015060c964af2c3da4cf7c8ab/src/model.py), commit `9b63575`, function `model`: token embeddings plus learned position embeddings, with positions offset by cached history length.
-[^rope]: Jianlin Su et al., [RoFormer: Enhanced Transformer with Rotary Position Embedding](https://arxiv.org/html/2104.09864v5), 2023 revision of the 2021 preprint, sections 3.1 and 3.2. Equations (1) and (2) use equivalent local notation with column vectors.
-[^qwen-summary]: Qwen Team, [Qwen3-VL official repository](https://github.com/QwenLM/Qwen3-VL#model-architecture-updates), architecture summary inspected October 5, 2026. This is not a pinned processor or checkpoint study.
+In Mistral's sliding attention, a layer reads nearby positions, while
+representations can carry information farther through stacked layers.[^mistral]
+A theoretical path does not guarantee that the necessary detail survives it.
+Local visibility and successful distant recall are different claims.
+
+## Images and video need coordinates, not just indices
+
+“Two dimensional” does not always mean image height and width. Original
+[GLM](/architectures/models/glm/#blank-infilling-step-by-step) uses learned
+coordinates for a missing span's location and progress inside that span.
+It is a task-specific positional design, not multimodal RoPE.[^glm]
+
+An image has height and width. A video adds time, and sampling rate changes
+which frames become visible. Qwen2.5-VL aligns temporal rotary positions
+with elapsed time; Qwen3-VL adds explicit timestamp text and interleaves
+rotary frequencies across temporal and spatial coordinates.[^qwen25][^qwen3]
+
+<FocusCanvas size="diagram" label="Video evidence passes through sampling, coordinates and visual tokens">
+<ModelFlow id="figure-2" title="Frame index is not elapsed time" lanesJson='[{"label":"Visual evidence path","steps":[{"label":"Sampled frames","detail":"FPS and resolution choose what remains visible."},{"label":"Position and time","detail":"Represent spatial coordinates and the time of each frame group.","accent":true},{"label":"Language context","detail":"Visual tokens and any timestamp text share the model budget."}],"note":"Removing a frame removes its direct evidence. Better coordinates cannot reconstruct an unseen event."}]'>
+
+**Figure 2.** Sampling and time representation solve different problems. Original pipeline abstraction from the named Qwen reports.[^qwen25][^qwen3]
+
+</ModelFlow>
+</FocusCanvas>
+
+[Figure 2](#figure-2) is a conceptual pipeline, not a claim that preprocessing alone guarantees
+temporal grounding. For resizing, patches, crops and merging, continue with
+[Multimodal integration](/architectures/evolution/multimodal-integration/).
+
+## Test useful reach, not only accepted length
+
+Vary evidence location, distractor count, and dependency distance independently.
+Include several facts that must be combined, conflicting evidence, and questions
+whose answer changes when the relevant evidence changes. For video, vary FPS
+and event timing separately. Report accuracy alongside state and latency.
+
+These are proposed checks, not results measured here. Selected mechanisms
+rechecked October 10, 2026. [Gemma 3](/architectures/models/gemma-3/) supplies
+useful local/global and position ablations; the
+[model studies](/architectures/models/) retain the conditions behind each
+published context claim.
+
+[^transformer]: Ashish Vaswani et al. [Attention Is All You Need](https://arxiv.org/html/1706.03762v7), 2017, section 3.5.
+[^rope]: Jianlin Su et al. [RoFormer](https://arxiv.org/html/2104.09864v5), 2023 revision of the 2021 preprint, sections 3.1 and 3.2. Equations (1) and (2) use equivalent local notation.
+[^yarn]: Bowen Peng et al. [YaRN: Efficient Context Window Extension of Large Language Models](https://arxiv.org/html/2309.00071v2), 2023, section 3 and training experiments.
+[^mistral]: Albert Q. Jiang et al. [Mistral 7B](https://arxiv.org/html/2310.06825v1), 2023, section 2: sliding attention and reach through depth.
+[^qwen25]: Qwen Team. [Qwen2.5-VL Technical Report](https://arxiv.org/html/2502.13923v1), 2025, sections 2.1.2 and 2.1.3.
+[^qwen3]: Qwen Team. [Qwen3-VL Technical Report](https://arxiv.org/html/2511.21631v1), 2025, sections 2.1 and 2.3. Timestamp text and Interleaved MRoPE are distinct mechanisms.
+[^qwen1m]: Qwen Team. [Qwen2.5-1M Technical Report](https://arxiv.org/html/2501.15383v1), 2025, section 5.1: Dual Chunk Attention remaps positional relationships; the separate sparse runtime is described in section 5.2.
+[^glm]: Zhengxiao Du et al. [GLM](https://arxiv.org/html/2103.10360v2), 2022 revision, section 2.2.1: two learned positional coordinates for blank infilling.

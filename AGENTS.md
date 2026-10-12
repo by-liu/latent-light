@@ -1,7 +1,8 @@
 # Latent Light working instructions
 
 This file is the agent entry point. Detailed guidance lives in the About source
-pages. Read those files directly. A running site is not required.
+pages. Its Content Guidance group contains writing standards and study workflows.
+Read the source files directly. A running site is not required.
 
 ## Before changes
 
@@ -10,13 +11,17 @@ pages. Read those files directly. A running site is not required.
 3. Read [About Latent Light](./src/content/docs/about/index.mdx) for purpose and philosophy.
 4. Read [How this site is built](./src/content/docs/about/framework.mdx) for the shared workflow.
 5. Read each guide that applies to the task:
-   - [Content standards](./src/content/docs/about/content-standards.mdx) for writing, research, and media.
+   - [Content standards](./src/content/docs/about/content-guidance/content-standards.mdx) for writing, research, and media.
+   - [Research workflow](./src/content/docs/about/content-guidance/research-workflow.mdx) for substantial research and evidence-heavy page updates.
+   - [Model Deep Dive guide](./src/content/docs/about/content-guidance/model-deep-dive-guide.mdx) for model reports, released artifacts, and technical studies.
    - [Development guide](./src/content/docs/about/development-guide.mdx) for pages, components, styles, and exports.
    - [Maintenance and upgrades](./src/content/docs/about/maintenance.mdx) for validation, dependencies, upgrades, and publication.
 
-Edit the About source pages when guidance changes. Do not duplicate detailed
+Edit the applicable guidance source page when its rules change. Do not duplicate detailed
 guidance in this file or README.md. Configuration and package files define the
 installed implementation. Correct the guidance if it no longer matches them.
+
+For substantial research, use the repo-local [latent-light-deep-research skill](./.agents/skills/latent-light-deep-research/SKILL.md). Its files are Git-managed here; the About source pages remain authoritative. Run `npm run test:research` when changing its tools.
 
 ## Essential boundaries
 

@@ -1,0 +1,239 @@
+{
+  "revision": 3,
+  "checked": "2026-10-10T17:36:51.557Z",
+  "site_page_sha256": "5737947a330c8b7596102d35f7f8cc74ecbfa9344a90bc7cf271393850ca3dec",
+  "source_resources": {
+    "report": "https://raw.githubusercontent.com/MoonshotAI/Kimi-K3/3cb39dfd32e51c3328e2e4b4af21341247d06c43/k3_tech_report.pdf",
+    "hugging_face": "https://huggingface.co/moonshotai/Kimi-K3",
+    "checkpoint": "moonshotai/Kimi-K3"
+  },
+  "prior_review_record": "state/presentation-qa-revision-2.json",
+  "collection_checks": {
+    "site_validation": "106 tests, zero Astro diagnostics, static build and all 43 docs lint passed.",
+    "browser_views": 81,
+    "renewed_views_after_final_locator_corrections": 6,
+    "numbered_model_figures": 66,
+    "source_figure_assets": 42,
+    "source_figure_placements": 43,
+    "model_benchmarks": "Not executed."
+  },
+  "viewports": [
+    {
+      "slug": "kimi-k3",
+      "width": 1440,
+      "mode": "light",
+      "title": "Kimi K3",
+      "titleCount": 1,
+      "overflow": false,
+      "figures": [
+        {
+          "id": "figure-1",
+          "caption": "Figure 1. Token, depth, and expert mixing. Reproduced from the report’s Figure 2, under the Kimi K3 documentation grant.12"
+        },
+        {
+          "id": "figure-2",
+          "caption": "Figure 2. Quantile balancing chooses the next selection bias. Reproduced intact from report Figure 5 under the K3 documentation grant.6"
+        },
+        {
+          "id": "figure-3",
+          "caption": "Figure 3. Reuse requires both memory types at one boundary. Reproduced intact from report Figure 12 under the K3 documentation grant.9"
+        }
+      ],
+      "resources": [
+        {
+          "kind": "report",
+          "href": "https://raw.githubusercontent.com/MoonshotAI/Kimi-K3/3cb39dfd32e51c3328e2e4b4af21341247d06c43/k3_tech_report.pdf",
+          "label": "Technical reportRead the original research"
+        },
+        {
+          "kind": "model",
+          "href": "https://huggingface.co/moonshotai/Kimi-K3",
+          "label": "Hugging Facemoonshotai/Kimi-K3"
+        }
+      ],
+      "visibleHashes": [],
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "missingImages": [],
+      "activeNav": [
+        {
+          "label": "Kimi K3",
+          "visible": true
+        }
+      ],
+      "panFrames": [
+        {
+          "tabindex": 0,
+          "scrolls": false,
+          "frame": 648,
+          "image": 648
+        },
+        {
+          "tabindex": 0,
+          "scrolls": false,
+          "frame": 648,
+          "image": 648
+        },
+        {
+          "tabindex": 0,
+          "scrolls": false,
+          "frame": 648,
+          "image": 648
+        }
+      ]
+    },
+    {
+      "slug": "kimi-k3",
+      "width": 390,
+      "mode": "light",
+      "title": "Kimi K3",
+      "titleCount": 1,
+      "overflow": false,
+      "figures": [
+        {
+          "id": "figure-1",
+          "caption": "Figure 1. Token, depth, and expert mixing. Reproduced from the report’s Figure 2, under the Kimi K3 documentation grant.12"
+        },
+        {
+          "id": "figure-2",
+          "caption": "Figure 2. Quantile balancing chooses the next selection bias. Reproduced intact from report Figure 5 under the K3 documentation grant.6"
+        },
+        {
+          "id": "figure-3",
+          "caption": "Figure 3. Reuse requires both memory types at one boundary. Reproduced intact from report Figure 12 under the K3 documentation grant.9"
+        }
+      ],
+      "resources": [
+        {
+          "kind": "report",
+          "href": "https://raw.githubusercontent.com/MoonshotAI/Kimi-K3/3cb39dfd32e51c3328e2e4b4af21341247d06c43/k3_tech_report.pdf",
+          "label": "Technical reportRead the original research"
+        },
+        {
+          "kind": "model",
+          "href": "https://huggingface.co/moonshotai/Kimi-K3",
+          "label": "Hugging Facemoonshotai/Kimi-K3"
+        }
+      ],
+      "visibleHashes": [],
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "missingImages": [],
+      "activeNav": [
+        {
+          "label": "Kimi K3",
+          "visible": false
+        }
+      ],
+      "panFrames": [
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 358,
+          "image": 620
+        },
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 358,
+          "image": 700
+        },
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 358,
+          "image": 650
+        }
+      ]
+    },
+    {
+      "slug": "kimi-k3",
+      "width": 320,
+      "mode": "dark",
+      "title": "Kimi K3",
+      "titleCount": 1,
+      "overflow": false,
+      "figures": [
+        {
+          "id": "figure-1",
+          "caption": "Figure 1. Token, depth, and expert mixing. Reproduced from the report’s Figure 2, under the Kimi K3 documentation grant.12"
+        },
+        {
+          "id": "figure-2",
+          "caption": "Figure 2. Quantile balancing chooses the next selection bias. Reproduced intact from report Figure 5 under the K3 documentation grant.6"
+        },
+        {
+          "id": "figure-3",
+          "caption": "Figure 3. Reuse requires both memory types at one boundary. Reproduced intact from report Figure 12 under the K3 documentation grant.9"
+        }
+      ],
+      "resources": [
+        {
+          "kind": "report",
+          "href": "https://raw.githubusercontent.com/MoonshotAI/Kimi-K3/3cb39dfd32e51c3328e2e4b4af21341247d06c43/k3_tech_report.pdf",
+          "label": "Technical reportRead the original research"
+        },
+        {
+          "kind": "model",
+          "href": "https://huggingface.co/moonshotai/Kimi-K3",
+          "label": "Hugging Facemoonshotai/Kimi-K3"
+        }
+      ],
+      "visibleHashes": [],
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "missingImages": [],
+      "activeNav": [
+        {
+          "label": "Kimi K3",
+          "visible": false
+        }
+      ],
+      "panFrames": [
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 288,
+          "image": 620
+        },
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 288,
+          "image": 700
+        },
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 288,
+          "image": 650
+        }
+      ]
+    }
+  ],
+  "manual_review": {
+    "complete": true,
+    "reviewedFigures": 66,
+    "contactSheets": 6,
+    "newDenseVisuals": true,
+    "fullSizeNativeReview": [
+      "qwen3-vl figure 1: full visual pipeline, side path no longer obscured",
+      "qwen3-vl figure 3: schematic frequency interleaving and timestamp distinction",
+      "llama-3 figure 2: block-diagonal causal packed-document mask",
+      "deepseek-v3 figure 2: routing selection and unmodified mixture weights",
+      "deepseek-r1 figure 2: old, current and reference policies",
+      "qwen3 figure 2: student-generated trajectory and teacher scoring",
+      "kimi-linear figure 3: causal intra-chunk computation and recurrent boundary",
+      "llava figure 2: separate HD extension and 1312-position arithmetic",
+      "qwen2-vl figure 2: visual coordinate example and ordinal tube indices"
+    ],
+    "narrowThemeReview": [
+      "qwen3-vl figure 1 at 390px light",
+      "qwen3-vl figure 3 at 320px dark",
+      "deepseek-v3 figure 2 at 320px dark",
+      "llama-3 figure 2 at 390px light"
+    ],
+    "sourceArtReview": "All current source crops inspected in rendered contact sheets; exact full PDF/page and crop comparisons performed by owning agents, with root direct review for V4 cache layout and V4.1 hierarchical indexer. Artwork labels/axes retained; no AI repainting.",
+    "boundary": "Visual and source verification only. Model checkpoints, benchmarks and training were not executed."
+  }
+}

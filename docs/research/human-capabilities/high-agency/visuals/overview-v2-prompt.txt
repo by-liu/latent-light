@@ -1,0 +1,18 @@
+Use case: text-localization
+Asset type: Figure 1, the opening overview infographic for the Latent Light article "High Agency: Your superpower in the AI era".
+Input images: Image 1 is the edit target, the existing high agency infographic.
+Primary request: Refine this infographic so it clearly presents high agency as your superpower in the AI era. Change the top subtitle and the middle panel's heading and explanation to the exact wording below. Keep the three-part what, why and how overview.
+Preserve: Square composition, warm off-white background, deep navy typography, teal and muted amber accents, rounded horizontal panels, editorial illustration style, compass and traveller in the first panel, the human using a compass with an AI assistant and expanding arrows in the middle panel, and the seedling with helpful speech bubbles and feedback arrows in the last panel. Keep the human choosing direction and the AI supporting their reach. Keep the footer reminder. Preserve the existing clean, readable hierarchy and generous spacing.
+Typography: Very large crisp sans-serif text, readable when the entire image is shown at 320 to 390 pixels wide. The new subtitle must be prominent. Allow natural line breaks within each panel; give the middle copy enough room without shrinking the lettering into small print. Keep the illustrations compact if needed for the larger text.
+Text (verbatim, no additional wording):
+"HIGH AGENCY"
+"Your superpower in the AI era"
+"What it is"
+"Turn intention into useful action."
+"Why it matters with AI"
+"Start easier. Reach further."
+"You choose. Check. Adapt."
+"How to build it"
+"Start small. Ask for help. Use feedback."
+"Agency includes limits, teamwork and rest."
+Constraints: Spell every word exactly. The imagery and copy should express expanded capacity guided by a person's purpose, action and judgment. Keep the conceptual character of the illustration: no statistics, rankings, formulas, guaranteed-success claims, job-security promises, logos, watermarks, citations or extra text. Opaque background.

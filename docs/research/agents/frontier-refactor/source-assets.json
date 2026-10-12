@@ -1,0 +1,50 @@
+[
+  {
+    "name": "pi-interactive",
+    "source": "docs/research/agents/frontier-refactor/visuals/pi-interactive-original.png",
+    "output": "public/figures/agents/pi-interactive.webp",
+    "width": 1500,
+    "height": 1736,
+    "bytes": 144478,
+    "alpha": true,
+    "source_url": "https://github.com/earendil-works/pi/blob/4270522473e677ddba7b093caa0064a3df51d459/packages/coding-agent/docs/images/interactive-mode.png",
+    "source_sha256": "4078001e39978151bd66b1d0a20123e7ca2ec2d1b572dfd70f552be5e88c0692",
+    "output_sha256": "ce44f197698fb5d569220b022312b59ecc306f3c42f2873aa8e8cf71f032621e",
+    "license": "MIT",
+    "modifications": "Sharp WebP quality 94 effort 6; original dimensions/alpha preserved; no crop, resize or content alteration.",
+    "reviewed": "2026-10-11",
+    "public_safe": true
+  },
+  {
+    "name": "opencode-terminal",
+    "source": "docs/research/agents/frontier-refactor/visuals/opencode-terminal-original.png",
+    "output": "public/figures/agents/opencode-terminal.webp",
+    "width": 1824,
+    "height": 1488,
+    "bytes": 154260,
+    "alpha": true,
+    "source_url": "https://github.com/anomalyco/opencode/blob/707de5832656e89cc0f04436aa1cd5f4f91c5763/packages/web/src/assets/lander/screenshot.png",
+    "source_sha256": "14b01372a2589a120ab0d6a0510868e71bceadcbd1f1278fb099d700a03912cb",
+    "output_sha256": "767ac06ded558e87f318ca554b8ce3f074efd066f236fba7f9fdd946c5efddeb",
+    "license": "MIT",
+    "modifications": "Sharp WebP quality 94 effort 6; original dimensions/alpha preserved; no crop, resize or content alteration.",
+    "reviewed": "2026-10-11",
+    "public_safe": true
+  },
+  {
+    "name": "ace-framework-v3",
+    "source": "docs/research/agents/frontier-refactor/visuals/ace-framework-v3-original.png",
+    "output": "public/figures/agents/ace-framework-v3.webp",
+    "width": 1534,
+    "height": 505,
+    "bytes": 51422,
+    "alpha": false,
+    "source_url": "https://arxiv.org/html/2510.04618v3/figure_4_CR.png",
+    "source_sha256": "6c89d29a95d8d33a1a5b82b5ebb2f50c2038c4c9cd8dbbd70311f2bf41ee66a5",
+    "output_sha256": "cc50446ecd63c43f8f0baf9a34502a74acbbc75bc8baba3268d357321203651e",
+    "license": "CC BY 4.0",
+    "modifications": "Sharp WebP quality 94 effort 6; original dimensions/alpha preserved; no crop, resize or content alteration.",
+    "reviewed": "2026-10-11",
+    "public_safe": true
+  }
+]

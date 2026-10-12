@@ -1,0 +1,20 @@
+{
+  "canonical": "https://arxiv.org/abs/2401.04088v1",
+  "version": "v1",
+  "accessed": "2026-10-10",
+  "local_study_copy": "/tmp/latent-mixtral-paper.pdf",
+  "sha256": "f8bbf0e9d979b7a8ce7be65119266545a229a85b57e077d8bd048e458bb642da",
+  "distribution": "Exact study PDFs remain outside public repository; selected figure crops distributed under a verified CC BY 4.0 grant with attribution.",
+  "figure_edition": {
+    "url": "https://arxiv.org/abs/2401.04088v1",
+    "pdf_url": "https://arxiv.org/pdf/2401.04088v1",
+    "local_study_copy": "/tmp/latent-mixtral-paper.pdf",
+    "sha256": "f8bbf0e9d979b7a8ce7be65119266545a229a85b57e077d8bd048e458bb642da",
+    "reuse_grant": {
+      "status": "verified",
+      "value": "CC BY 4.0",
+      "url": "https://creativecommons.org/licenses/by/4.0/"
+    },
+    "grant_evidence": "The version-specific arXiv landing page links Rights to this article to CC BY 4.0."
+  }
+}

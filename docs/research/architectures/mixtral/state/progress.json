@@ -1,0 +1,37 @@
+{
+  "schema_version": 2,
+  "topic_id": "mixtral",
+  "status": "complete",
+  "coverage": {
+    "report": "inspected",
+    "artifacts": "Configuration, card and license inspected; no weights executed",
+    "implementation": "Targeted functions inspected, not a complete runtime trace",
+    "evidence_review": "Separate adversarial source pass complete: checkpoint scope, units, causal attribution, code defaults, access gaps and citation support checked",
+    "presentation": "Revision 3 checked at 1440px light, 390px light, 320px dark and desktop focus. Full desktop art, mobile keyboard pan, full-size access, family navigation, caption order, citations, equations, resources, images, no overflow, search, Markdown/MDX and agent manifests passed. All 66 model figure renders manually inspected. No model execution.",
+    "figure_reuse": "The version-specific arXiv landing page links Rights to this article to CC BY 4.0.",
+    "technical_audit": "Revision 3 mechanism/training/inference/ablations audit in coverage-audit.md; report and targeted code re-inspected."
+  },
+  "open_questions": [
+    "Exact pretraining recipe, useful workload dependent latency, expert balance and memory overhead need further disclosure or controlled experiments."
+  ],
+  "recommended_next_direction": null,
+  "last_seen": "2026-10-10T17:36:51.557Z",
+  "quality_gate": {
+    "evidence_verified": true,
+    "contradictions_reviewed": true,
+    "report_reviewed": true,
+    "visuals_reviewed": true
+  },
+  "coverage_history": [
+    {
+      "revision": 2,
+      "presentation": "Final revision2 checked in Chromium at 1440 px light, 390 px light and 320 px dark plus desktop focus. All report figures fit desktop; mobile pan and full size links, captions, source-resource cards, no displayed hashes, citation/equation anchors, Markdown/MDX, search and agent manifests checked. All 48 collection figures manually reviewed. No checkpoint execution.",
+      "quality_gate": {
+        "evidence_verified": true,
+        "contradictions_reviewed": true,
+        "report_reviewed": true,
+        "visuals_reviewed": false
+      }
+    }
+  ]
+}

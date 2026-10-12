@@ -1,0 +1,445 @@
+---
+title: Physical AI
+description: A global and Chinese landscape of robot models, machines, infrastructure, deployment and dated financing.
+lastUpdated: 2026-10-11
+---
+
+import FocusCanvas from '../../../../components/FocusCanvas.astro';
+import LandscapeOverview from '../../../../components/landscapes/LandscapeOverview.astro';
+import ResearchTable from '../../../../components/landscapes/ResearchTable.astro';
+
+A system that generates a convincing world is not necessarily a system that can
+act in it. Physical AI is easier to understand when we separate representing an
+environment, choosing actions, collecting experience, testing behavior and
+operating the resulting machine.
+
+This landscape connects global platforms with **China’s embodied AI ecosystem**.
+It includes model developers, robot makers, warehouse and service automation,
+and the tools that turn experiments into operating systems. Evidence was
+inspected **October 10–11, 2026**. Research releases, product demonstrations,
+commercial deployments and financing announcements remain distinct.
+
+## Landscape at a glance
+
+<FocusCanvas size="figure" label="Physical AI learning loop: global and Chinese examples">
+<LandscapeOverview id="figure-1" src="/figures/landscapes/physical-ai-overview-v2.webp" alt="Physical AI learning loop: selected global and Chinese providers represent worlds, choose actions, collect experience, organize data and tests, and build and operate machines. Real operation feeds better data, tests and policies. World model ≠ robot policy; demo ≠ deployment; funding ≠ reliability. All examples and roles are detailed in the company explorer." poster minWidth={760}>
+<div slot="image">
+
+![Physical AI learning loop: selected global and Chinese providers represent worlds, choose actions, collect experience, organize data and tests, and build and operate machines. Real operation feeds better data, tests and policies. World model ≠ robot policy; demo ≠ deployment; funding ≠ reliability. All examples and roles are detailed in the company explorer.](/figures/landscapes/physical-ai-overview-v2.webp)
+
+</div>
+
+**Figure 1.** The Physical AI learning loop, with global and Chinese examples. Author’s synthesis; AI-generated illustration.[^worldlabs][^cosmos][^openpi][^xsquare][^agibot-world][^lerobot][^signalflag][^ubtech]
+
+</LandscapeOverview>
+</FocusCanvas>
+
+The image gives the territory at a glance; the explorer and comparisons below
+preserve the detail. Placement shows a product role, not market share, measured
+quality or a partnership. Categories overlap; arrows show conceptual connections,
+not a strict development order or verified integrations between companies.
+
+## Company explorer
+
+**52 companies and platforms, including 25 China-based or China-linked entries.**
+Search a provider, task or funding stage; combine it with the category filter.
+Use **Company base** to find China-based or China-linked entries, including
+Flexiv’s China / U.S. footprint. Base describes the company footprint, not an
+exclusive sales market. Other entries are not individually country-classified;
+Chinese companies can serve global customers.
+
+**Read the funding column as dated evidence, not a guaranteed latest round.**
+USD is shown as `$`; RMB stays in RMB, without currency conversion. Company
+announcements, regulatory filings, media reports and unknown stages are labeled
+differently. Historical disclosures do not rule out later rounds. Corporate
+programs inherit their parent’s status; they are not separately financed
+startups. Funding is not evidence of technical quality, safety, solvency or
+customer returns. No robot trials or ROI measurements were performed here.
+
+<FocusCanvas size="wide" label="Physical AI company explorer">
+<ResearchTable id="company-directory" label="Physical AI company explorer; scroll horizontally to compare" basesJson='[[],[],[],[],[],[],[],[],[],[],[],[],[],[],["China"],["China"],["China"],["China"],["China"],["China"],["China"],["China"],["China"],["China"],["China"],["China"],["China"],["China"],["China"],["China"],["China"],["China","U.S."],["China"],["China"],["China"],["China"],["China"],["China"],["China"],[],[],[],[],[],[],[],[],[],[],[],[],[]]'>
+
+| Company / platform | Category | Role / buyer | Product or research contribution | Funding / ownership (dated) | Evidence boundary / status |
+| --- | --- | --- | --- | --- | --- |
+| **[Google DeepMind / Gemini Robotics](https://deepmind.google/models/gemini-robotics/)** | Robot policies | Model partners and industrial developers | Robotics 2 VLA, embodied reasoning and on-device models; Intrinsic adds industrial software.[^broad-robotics][^intrinsic] | Google / Alphabet programs; not separate startup rounds.[^intrinsic] | Model access, industrial integration and a deployed robot fleet are different offers. |
+| **[Amazon Robotics / DeepFleet](https://www.aboutamazon.com/news/operations/amazon-million-robots-ai-foundation-model)** | Fleet operation | Fulfillment operations | June 2025 million-robot milestone and fleet-routing model.[^broad-amazon-robotics] | Amazon business program; no separate venture stage.[^broad-amazon-robotics] | Dated operator disclosure, not universal robot intelligence or independent ROI evidence. |
+| **[Tesla / Optimus](https://www.tesla.com/AI)** | Robot hardware | Humanoid development and prospective operators | General-purpose humanoid goal with balance, navigation, perception and interaction stacks.[^broad-tesla] | Tesla program; no separate venture stage.[^broad-tesla] | Development direction, not independently audited unattended task success. |
+| **[Boston Dynamics / Atlas](https://bostondynamics.com/products/atlas/)** | Robot hardware | Industrial material handling | Enterprise humanoid, workflow integration and fleet oversight.[^broad-atlas] | Hyundai Motor Group-owned company.[^bd-ownership] | Product and early-adopter claims; site-specific reliability and ROI still need verification. |
+| **[World Labs](https://www.worldlabs.ai/)** | Spatial worlds | Spatial creation and simulation inputs | Marble creates persistent, editable 3D worlds.[^worldlabs] | \$1B announced Feb. 18, 2026; stage unnamed. AMD agreement Sept. 28 remains conditional.[^world-funding][^amd] | Creative geometry does not establish validated contact physics or robot control. |
+| **[Physical Intelligence / openpi](https://www.physicalintelligence.company/)** | Robot policies | Robot-learning researchers and integrators | Public VLA models, checkpoints and adaptation examples.[^openpi] | \$600M reported Nov. 21, 2025; stage unspecified.[^pi-funding] | Repository warns adaptation to a new robot may fail; not turnkey deployment. |
+| **[Skild AI](https://www.skild.ai/)** | Robot policies | Robot operators and hardware partners | Robot models and data flywheel; S1 introduced Aug. 2026. Acquired Zebra’s robotics division, formerly Fetch.[^skild][^skild-current] | \$1.4B Series C, Jan. 14, 2026.[^skild] | Cross-body generality and customer results are company claims; not an independent audit. |
+| **[Scale AI](https://scale.com/)** | Data collection | Physical-interaction dataset teams | Custom collection and annotation for Physical AI.[^scale] | Meta minority investment, June 12, 2025; Scale described as independent.[^scale-ownership] | Not a Meta acquisition; data volume alone does not prove downstream gains. |
+| **[Foxglove](https://foxglove.dev/)** | Data operations | Robot developers and fleet-data teams | Recording, visualization, search and curation across robot data.[^foxglove] | \$40M Series B, Nov. 11, 2025.[^fox-funding] | Data operations are not real-time robot control or release approval. |
+| **[Roboto](https://www.roboto.ai/)** | Data operations | Robotics analytics teams | Log analytics, event search and dataset workflows.[^roboto] | \$4.8M seed, Apr. 5, 2023. Historical; later stage unverified.[^roboto-funding] | An event match is not a causal diagnosis; customer quotes are not comparative tests. |
+| **[NVIDIA / Isaac, GR00T, Cosmos](https://developer.nvidia.com/isaac/sim)** | Development platforms | Robot developers and validation teams | Isaac simulation, GR00T robot models and Cosmos world models form distinct platform layers.[^isaac][^groot][^cosmos] | NVIDIA platforms; not separately financed startups.[^isaac][^cosmos] | Simulation fidelity, model transfer and deployment safety need separate evidence. |
+| **[Runway Robotics](https://runway.com/research/accelerating-robot-policy-evaluation)** | Evaluation | Policy-comparison researchers | Learned world-model evaluation against real robot rollouts.[^runway] | Runway: \$315M Series E, Feb. 10, 2026; company-level funding.[^runway-funding] | Bounded ranking study, not calibrated failure probabilities or a safety certificate. |
+| **[One Robot](https://www.ycombinator.com/companies/one-robot)** | Evaluation | Manipulation training and testing teams | Task-specific simulations for textiles and box folding.[^onerobot] | YC company profile; round amount and stage unverified.[^onerobot] | Company offer, not independent proof of contact fidelity or ranking transfer. |
+| **[Most Robotic / Instance launch](https://www.ycombinator.com/companies/most-robotic)** | Evaluation | Robotics research and test workflows | Current household-robotics profile retains an earlier success-detector and automated-test-rig launch.[^instance] | YC company profile; round amount and stage unverified.[^instance] | Do not assume the original product or entire rollout/reset rig is generally available. |
+| **[Unitree](https://www.unitree.com/)** | Robot hardware | Research platforms and robot integrators | Humanoid and quadruped platforms, including G1 and H-series hardware.[^unitree-product] | Listed on Shanghai STAR Market Aug. 19, 2026.[^unitree-listed] | Hardware sales and athletic demonstrations do not establish autonomous task reliability. |
+| **[AGIBOT](https://www.agibot.com/)** | Robot hardware | Industrial, service and research buyers | A2, X2 and G2 portfolio; AGIBOT World adds data and GO-1 model resources.[^agibot-product][^agibot-world] | Private company; round amount and stage not verified in inspected sources. | Shanghai humanoid company, not the similarly named medical-robotics company. Deployment claims remain attributed. |
+| **[Galbot](https://www.galbot.com/)** | Robot policies | Manipulation and industrial integration | Embodied models, manipulation research and G1 applications connect learning to robot tasks.[^galbot-product][^galbot-funding] | >\$300M new round, Dec. 19, 2025; stage unnamed. Historical disclosure.[^galbot-funding] | Separate from Galaxea. Generalization and deployment scale are company claims. |
+| **[UBTECH](https://www.ubtrobot.com/)** | Robot hardware | Industrial humanoid operators | Walker S-series humanoids; 2025 annual report describes Walker S2 commercialization and delivery.[^ubtech] | Listed HKEX 9880; 2025 annual report published Apr. 14, 2026.[^ubtech] | Issuer disclosure is stronger than a demo, but not an independent task-reliability study. |
+| **[LimX Dynamics](https://www.limxdynamics.com/)** | Robot hardware | Embodied developers and integrators | Oli humanoid, modular TRON2 platform and COSA embodied software stack.[^limx] | \$200M Series B, Feb. 2, 2026.[^limx] | Platform flexibility is not evidence of transfer to every task or embodiment. |
+| **[X Square](https://x2robot.com/)** | Robot policies | Embodied model and robot customers | Full-stack embodied models, robot hardware and proprietary data pipelines.[^xsquare][^xsquare-funding] | Four consecutive rounds culminating in Series C, closed June 29, 2026; single-round amount not stated.[^xsquare-funding] | Use the newer financing release, not the older English timeline; demonstrations are not a fleet audit. |
+| **[Galaxea AI](https://www.galaxea-ai.com/)** | Robot policies | Robot researchers and integrators | G0.5 VLA, open-world data and deployment entrypoints for R1 Lite / Pro.[^galaxea] | Round amount and current stage not verified in inspected primary sources. | Distinct from Galbot. Current community-licensed materials require separate permission for commercial use.[^galaxea] |
+| **[Spirit AI](https://www.spirit-ai.com/)** | Robot policies | Industrial manipulation teams | VLA development using human and robot data, with Moz1 industrial applications.[^spirit] | \$280M funding announced Feb. 25, 2026; stage unnamed.[^spirit] | Factory performance figures are company reports, not cross-task independent validation. |
+| **[Robotera](https://www.robotera.com/)** | Robot hardware | Logistics and humanoid integration | Humanoid systems; funding release describes M7 parcel-handling applications with SF.[^robotera] | >\$200M new round, May 8, 2026; stage unnamed.[^robotera] | Named customer use is not proof of general autonomy or fleet-wide reliability. |
+| **[EngineAI](https://www.engineai.com.cn/)** | Robot hardware | Humanoid developers and operators | PM01, SE01 and T800 hardware; company reports first T800 production in May 2026.[^engine] | \$200M Series B, Apr. 10, 2026.[^engine] | Production capability and locomotion displays are not measured unattended commercial task performance. |
+| **[Fourier](https://www.fftai.com/)** | Robot hardware | Social interaction and embodied research | GR-3 Care-bot humanoid with visual, auditory and tactile interaction systems.[^fourier] | Private company; current round amount and stage unverified. | Care-oriented positioning does not establish clinical efficacy, safe autonomy or deployment scale. |
+| **[Astribot](https://www.astribot.com/en/)** | Robot hardware | Manipulation research and service integration | S1 and T1 robot systems; public research updates include learned manipulation.[^astribot] | Private company; current round amount and stage unverified. | Demonstrated skills need testing on the buyer’s tasks, failure cases and supervision limits. |
+| **[XPENG / IRON](https://www.xpeng.com/technology/ai_robot_iron)** | Robot hardware | Prospective humanoid operators | IRON production line commissioned Sept. 8, 2026; external deliveries described as a 2027 plan.[^xpeng-product] | >\$900M robotics-business share purchase agreements announced Aug. 24, 2026; not a separately verified closing.[^xpeng-funding] | Commissioned production line ≠ completed customer rollout. Parent is listed; subsidiary financing is separate. |
+| **[Pudu Robotics](https://www.pudurobotics.com/)** | Service robotics | Hospitality, cleaning and industrial delivery | Commercial delivery, cleaning, industrial transport and embodied robot product lines.[^pudu] | Nearly \$150M new round, Apr. 23, 2026; stage unnamed.[^pudu] | A useful bounded-workflow comparator, not evidence that all service tasks are automated. |
+| **[KEENON Robotics](https://www.keenon.com/)** | Service robotics | Hospitality, facilities and delivery buyers | DINERBOT delivery, CLEANBOT cleaning and additional robot product lines.[^keenon] | Private company; inspected undated timeline does not establish a dated current round.[^keenon] | Commercial product categories should not be equated with general-purpose humanoid autonomy. |
+| **[Geek+](https://www.geekplus.com/)** | Warehouse automation | Warehouse and supply-chain operators | Mobile robotics for storage, picking and sorting workflows.[^geek-product] | Listed HKEX 2590, July 9, 2025.[^geek-listed] | Compare complete warehouse integration, throughput and support, not a generalist-model leaderboard. |
+| **[Hai Robotics](https://www.hairobotics.com/)** | Warehouse automation | Warehouse storage and fulfillment | HaiPick and Climb systems combine container handling with warehouse workflows.[^hai] | >\$100M Series D+, June 15, 2022. Historical; later financing / listing unverified.[^hai-funding] | Deployment accounts are company disclosures; current IPO completion is not assumed. |
+| **[Flexiv](https://www.flexiv.com/)** | Industrial automation | Industrial manipulation and integration | Force-sensing adaptive robots and AI-enabled industrial applications.[^flexiv] | Invus strategic investment, Mar. 18, 2026; amount and named stage undisclosed.[^flexiv] | China / U.S. footprint. Adaptive industrial arms are not a general-purpose humanoid product. |
+| **[Dobot](https://www.dobot-robots.com/)** | Industrial automation | Collaborative automation buyers | Collaborative robot arms and manufacturing applications; humanoid products are a separate line.[^dobot] | Listed HKEX 2432, Dec. 23, 2024.[^dobot] | An established cobot business does not by itself validate newer humanoid capabilities. |
+| **[Alibaba DAMO / RynnBrain](https://github.com/alibaba-damo-academy/RynnBrain)** | Robot policies | Embodied-model researchers | Released embodied understanding and grounding resources for robot-oriented perception and reasoning.[^rynn] | Alibaba research program; no separate startup round.[^rynn] | Understanding / grounding is not by itself a complete closed-loop control or commercial robot system. |
+| **[Ant Group / Robbyant](https://github.com/RobbyAnt)** | Robot policies | Embodied-model researchers and integrators | LingBot models cover robot action and spatial / world understanding; public code and weights.[^robbyant-owner][^lingbot] | Company under Ant Group; separate round amount and stage not established.[^robbyant-owner] | Model-family breadth and released artifacts are not an independent field-reliability audit. |
+| **[ByteDance Seed / Robotics](https://seed.bytedance.com/en/models)** | Robot policies | Robot-learning researchers | GR-3 and GR-RL robotics research in the Seed model catalog.[^seed] | ByteDance research program; no separate startup round.[^seed] | Research models are not an orderable consumer robot or proven universal task coverage. |
+| **[D-Robotics](https://en.d-robotics.cc/)** | Development platforms | Robot OEMs and developers | Sunrise computing and RDK hardware / software development ecosystem.[^drobotics] | \$400M Series C, Sept. 17, 2026.[^drobotics] | Computing infrastructure, not a humanoid maker; do not substitute Horizon’s listing status. |
+| **[DEEP Robotics](https://www.deeprobotics.cn/)** | Robot hardware | Industrial inspection and embodied developers | Industrial quadrupeds, LYNX systems and DR humanoid development.[^deep-robotics] | >RMB500M Series C, Dec. 9, 2025.[^deep-robotics] | Industrial locomotion / inspection is a different task distribution from household manipulation. |
+| **[Leju / Kuavo](https://www.letools.lejurobot.com/)** | Robot hardware | Humanoid researchers and industrial teams | Kuavo hardware, Kuavo-VLA and LeTools for collection, training and deployment.[^leju] | Round amount and current stage not verified in inspected sources. | Public developer tools and benchmark results do not establish general production reliability. |
+| **[Figure](https://www.figure.ai/)** | Robot hardware | Industrial and prospective home operators | Figure humanoids and Helix model development.[^figure-product] | >\$1B committed capital in Series C, Sept. 16, 2025.[^figure-funding] | Committed capital ≠ received proceeds; demonstrations are not unattended household readiness. |
+| **[1X / NEO](https://www.1x.tech/neo)** | Robot hardware | Early-access household buyers | NEO home robot with basic autonomy and scheduled Expert Mode for unfamiliar chores.[^one-x-product] | \$100M Series B, Jan. 13, 2024. Historical; later stage unverified.[^one-x-funding] | Remote human help is part of the operating model, not evidence of complete autonomous coverage. |
+| **[Apptronik / Apollo](https://apptronik.com/)** | Robot hardware | Manufacturing and logistics integration | Apollo humanoid development with industrial partners.[^apptronik] | \$520M Series A-X extension, Feb. 11, 2026; total Series A >\$935M.[^apptronik] | Partner participation and funding do not independently establish scaled task reliability. |
+| **[Agility Robotics / Digit](https://www.agilityrobotics.com/)** | Robot hardware | Warehouse and logistics operators | Digit 5 robot and Nerve fleet / workflow platform.[^agility-product] | Proposed Churchill Capital XI combination announced June 24, 2026; completion not established here.[^agility-status] | Warehouse workflow evidence is not general household capability; proposed public transaction ≠ listing. |
+| **[Sanctuary AI](https://sanctuary.ai/)** | Industrial automation | Industrial dexterity customers | Robotic hands and Physical AI for industrial manipulation.[^sanctuary-product] | Zeon strategic investment, May 26, 2026; amount and stage undisclosed.[^sanctuary-funding] | Canadian dexterity platform; material and pilot partnerships are not audited operating economics. |
+| **[Dexterity / Mech](https://dexterity.ai/mech)** | Industrial automation | Logistics and manufacturing operators | Purpose-built dual-arm machine for loading, unloading and palletizing.[^dexterity] | \$95M reported Mar. 11, 2025; stage unnamed.[^dexterity-funding] | Judge shift-level throughput, exception handling and support rather than resemblance to a human. |
+| **[FieldAI](https://www.fieldai.com/)** | Robot policies | Industrial autonomous robot operators | Field Foundation Models for risk-aware autonomy across robot platforms.[^fieldai] | \$405M across two rounds, announced Aug. 20, 2025; not a single named round.[^fieldai] | Body-independent autonomy and scale remain company claims within specified deployments. |
+| **[ANYbotics](https://www.anybotics.com/)** | Industrial automation | Asset inspection and facilities | ANYmal inspection robots and related deployment software.[^anybotics][^anybotics-current] | \$60M additional funding, Dec. 12, 2024; historical. Later strategic investment listed; terms not verified.[^anybotics][^anybotics-current] | Inspection deployment is not general manipulation; older disclosed amount is not labeled latest. |
+| **[NEURA Robotics](https://neura-robotics.com/)** | Robot hardware | Cognitive robotics and industrial integration | Cognitive robot portfolio and Neuraverse platform.[^neura] | Up to \$1.4B Series C, June 10, 2026.[^neura] | Retain “up to”; large funding and production ambitions do not establish delivered autonomous capacity. |
+| **[DYNA Robotics](https://www.dyna.co/)** | Robot policies | Repeated commercial manipulation tasks | Robot models and task deployments built around real-world learning loops.[^dyna-product][^dyna-funding] | \$120M Series A, Sept. 2025.[^dyna-funding] | Task-specific operating accounts need independent evidence of supervision, recovery and economics. |
+| **[Generalist](https://generalistai.com/)** | Robot policies | Robot-model partners | Embodied model and data development, rather than manufacturing the robot body.[^generalist] | Aug. 24, 2026 Form D reports about \$198.2M sold; \$208.2M offered. Stage not specified.[^generalist-sec] | Offering target ≠ capital already sold; public demonstrations do not prove universal transfer. |
+| **[Hugging Face / LeRobot](https://huggingface.co/docs/lerobot/index)** | Development platforms | Open robot-learning community | Policies, datasets, hardware integrations and a shared learning toolchain.[^lerobot] | Company-level Series D: \$235M reported Aug. 24, 2023. Historical; later status unverified.[^hf-funding] | A community ecosystem, not a robot fleet; inspect each artifact’s license and safety requirements. |
+| **[SignalFlag / formerly ReSim](https://signalflag.ai/)** | Evaluation | Physical AI testing and release teams | Test orchestration across existing simulation, replay, hardware and field logs.[^signalflag] | Current funding round amount and stage unverified. | ReSim redirects to SignalFlag. It organizes evidence; it does not supply its own simulator.[^signalflag] |
+
+</ResearchTable>
+</FocusCanvas>
+
+## What China adds to the landscape
+
+China is not one humanoid category. The useful picture has **three overlapping
+layers**: learning systems, robot bodies and commercial workflows. That grouping
+is my interpretation of the inspected products, not a market-share estimate.
+
+| Layer | Selected examples | What to compare |
+| --- | --- | --- |
+| **Models, data and developer stacks** | X Square, Spirit AI, Galbot, Galaxea, Robbyant, Alibaba DAMO, ByteDance Seed, AGIBOT World, D-Robotics.[^xsquare][^spirit][^galbot-product][^galaxea][^robbyant-owner][^rynn][^seed][^agibot-world][^drobotics] | Action interface, data coverage, adaptation, license and supported hardware. |
+| **Bodies and integrated systems** | Unitree, AGIBOT, UBTECH, LimX, EngineAI, Robotera, Fourier, Astribot, XPENG, DEEP Robotics and Leju.[^unitree-product][^agibot-product][^ubtech][^limx][^engine][^robotera][^fourier][^astribot][^xpeng-product][^deep-robotics][^leju] | Task success, supervision, recovery, maintenance and integration cost. |
+| **Commercial workflow comparators** | Geek+, Hai Robotics, Pudu, KEENON, Flexiv and Dobot.[^geek-product][^hai][^pudu][^keenon][^flexiv][^dobot] | Completed work per shift, interventions, installed workflow and service support. |
+
+### Models and bodies are becoming more closely connected
+
+AGIBOT publishes model and data resources alongside its robot portfolio.
+Galaxea exposes VLA deployment entrypoints for its R1 hardware. Leju’s LeTools
+connects collection, training and deployment on Kuavo. These are concrete examples
+of a hardware and learning loop, not proof that vertical integration is always
+the better business model.[^agibot-product][^agibot-world][^galaxea][^leju]
+
+**My interpretation:** integration can make data collection and testing easier to
+coordinate, but it can also bind a model to a particular sensor setup, action
+interface or robot body. Ask what transfers without new demonstrations, what
+requires adaptation and who owns the failure when components are combined.
+
+### The established businesses matter as much as the humanoid demos
+
+Warehouse storage, cleaning, delivery and adaptive industrial arms are different
+problems from a general-purpose household robot. Geek+, Hai Robotics, Pudu,
+KEENON, Flexiv and Dobot provide useful comparisons because their products are
+organized around identifiable workflows.[^geek-product][^hai][^pudu][^keenon][^flexiv][^dobot]
+
+That does not independently prove their economics. It does give a more useful
+question than “Which robot looks most capable?”: **What work is completed,
+under what operating constraints, and with how much human help?**
+
+### Open resources do not mean unrestricted deployment
+
+AGIBOT World, GalaxeaVLA, LingBot and LeRobot expose different combinations of
+data, models, code and tools.[^agibot-world][^galaxea][^lingbot][^lerobot]
+Galaxea’s current repository explicitly distinguishes historical Apache-licensed
+materials from newer community-licensed materials requiring separate permission
+for commercial use.[^galaxea] Inspect the actual artifact and intended use,
+not only an “open” label. Availability is also not evidence of safe robot control.
+
+## What the global coverage audit added
+
+The earlier map underrepresented **robot makers and bounded industrial products**.
+Figure, 1X, Apptronik and Agility add humanoid operating models. Sanctuary,
+Dexterity and ANYbotics add dexterity, logistics and inspection. FieldAI,
+Generalist and DYNA broaden the model and commercial-task layer; NEURA adds a
+cognitive robotics platform.[^figure-product][^one-x-product][^apptronik][^agility-product][^sanctuary-product][^dexterity][^anybotics][^fieldai][^generalist][^dyna-product][^neura]
+
+Two infrastructure gaps also matter. **LeRobot** adds the open learning ecosystem.
+**SignalFlag, formerly ReSim**, adds test orchestration across tools a team already
+uses. It is not another simulator. NVIDIA’s entry now separates world models,
+robot policies and simulation rather than treating Isaac Sim as the entire
+platform.[^lerobot][^signalflag][^cosmos][^groot][^isaac]
+
+This remains a selected landscape, not a census. Autonomous-driving fleets,
+drones, surgical robotics, conventional industrial robot catalogs and component-only
+suppliers would each need a separate study. Research institutes may shape the
+ecosystem, but they are not added to the company count.
+
+## How to read financing without reading too much into it
+
+The distinctions below change the meaning of a headline. They are not cosmetic.
+
+| Disclosure | Example | What it does not establish |
+| --- | --- | --- |
+| **Named round** | LimX: Series B; D-Robotics: Series C.[^limx][^drobotics] | No later round, safe autonomy or positive unit economics. |
+| **Committed capital** | Figure’s Series C announcement says committed capital.[^figure-funding] | That every dollar has already been received. |
+| **Agreements signed** | XPENG robotics financing announcement describes share purchase agreements.[^xpeng-funding] | Independently confirmed closing or customer delivery. |
+| **Securities sold** | Generalist’s Form D separates about \$198.2M sold from \$208.2M offered.[^generalist-sec] | A named Series stage or permission to add the offering target to proceeds. |
+| **Public status** | Unitree, UBTECH, Geek+ and Dobot have listing evidence.[^unitree-listed][^ubtech][^geek-listed][^dobot] | General technical leadership or the same maturity across all product lines. |
+| **Proposed transaction** | Agility’s public combination; World Labs’ AMD agreement.[^agility-status][^amd] | A completed listing or acquisition. |
+| **Undisclosed / unverified** | Several private companies do not have a verified dated round in the inspected sources. | Zero funding, poor quality or proof that no round occurred. |
+
+The funding column helps explain ownership and resources. The deployment column
+helps explain what has actually been offered, released or reported. **Neither is
+a substitute for the other.**
+
+## A value chain with a feedback loop
+
+[Figure 1](#figure-1) is a functional map, not a set of isolated markets. A provider
+may span several roles. Deployment produces observations and failures that can
+inform data selection, training and further tests; that feedback is my synthesis
+of the inspected model and data-platform accounts.[^skild][^foxglove][^roboto]
+
+| Lens | What it does | A useful test |
+| --- | --- | --- |
+| **Represent the world** | Construct or predict environments for creation, training and tests. | What geometry, physics and action responses are actually validated? |
+| **Choose actions** | Map observations and goals to robot behavior. | Which robots, tasks and environments does the policy work on? |
+| **Collect experience** | Build and annotate the demonstrations and interactions needed for learning. | Does more data add useful coverage or repeat familiar situations? |
+| **Organize and diagnose** | Find events, investigate behavior and curate datasets across recordings. | Can an observed failure become a reproducible test and useful data? |
+| **Validate and operate** | Combine policy tests, controlled hardware trials and monitored deployment. | What evidence justifies release, and what stops an unsafe run? |
+
+Feedback: operation → recorded behavior → investigation and data selection → updated policy → fresh evaluation. The loop is not a guarantee of improvement.
+
+## Four boundaries worth keeping clear
+
+### A platform, a robot and an operator are different businesses
+
+Google DeepMind’s VLA and embodied-reasoning models supply distinct capabilities.
+NVIDIA supplies simulation infrastructure, robot policies and world models as
+distinct layers.[^groot][^cosmos] Boston Dynamics markets Atlas for
+industrial workflows; Tesla’s page describes the Optimus development goal.
+Amazon’s June 2025 announcement reports its million-robot milestone and a
+fleet-coordination model.[^broad-robotics][^isaac][^broad-atlas][^broad-tesla][^broad-amazon-robotics]
+
+**My interpretation:** these are complementary roles, not interchangeable “robotics
+companies.” Compare integration and model access for a platform, task performance
+and serviceability for hardware, and throughput, intervention and cost for an
+operator. A development goal, an early-adopter invitation and a deployed-fleet
+disclosure are different evidence states.
+
+### A world model and a policy have different jobs
+
+A world model represents or predicts an environment. A policy chooses what the
+robot should do. In Runway’s evaluation experiment, each policy chooses actions
+in response to observations generated by the model. openpi exposes robot
+observations and action outputs rather than only generating a visual scene.[^runway][^openpi]
+
+“World model” therefore does not identify a complete product category. A
+navigable creative scene, a physically based simulator and an action-conditioned
+prediction used in a control loop have different jobs. World Labs’ Marble is
+a spatial creation product; that alone does not establish validated contact
+physics or robot-control performance.[^worldlabs]
+
+The company also announced a definitive agreement to join AMD on September 28,
+2026. The announcement expects closing by the end of 2026, subject to conditions.
+An announced agreement is not a completed transaction.[^amd]
+
+### Generality is conditional
+
+Skild describes learning across robot bodies. Physical Intelligence releases
+models that practitioners can adapt. Compare the supported body, observations,
+action interface, task distribution and adaptation procedure, not only the
+word “generalist.” The openpi warning that adaptation to a new robot may fail
+is useful counterevidence to the assumption that a checkpoint works everywhere.[^skild][^openpi]
+
+For an operator, the practical question is narrower: what does this system do
+reliably on my hardware, in my environment, with my acceptable level of
+supervision? A demonstration on another body is a lead, not the acceptance test.
+
+### A good ranking is not a safety certificate
+
+Runway’s February 2026 study evaluated **eight policies**, using **1,450 simulated
+rollouts**, on RoboArena manipulation tasks with a **Franka Panda arm**. It
+reports **0.95 Pearson correlation** between simulated and real policy scores.
+The authors distinguish relative ranking from predicting absolute success rates.[^runway]
+
+| What the reported result supports | What it does not establish |
+| --- | --- |
+| Comparing candidates within the studied setup | General transfer to every robot or task |
+| A promising way to reduce some hardware evaluation work | Calibrated probabilities of failure |
+| Agreement between simulated and real policy scores | Safe unattended deployment |
+
+This interpretation follows the study’s stated scope and limitations, not a
+claim of independent reproduction.[^runway] Correlation alone also cannot tell
+an operator which rare failure modes were missed.
+
+## Follow one failure through the value chain
+
+Consider a robot that occasionally drops an object. The example below is an
+illustrative workflow, not a reported incident or a guarantee that a provider
+solves it.
+
+| Step | Evidence needed | Role in the landscape |
+| --- | --- | --- |
+| Observe | Synchronized video, state, actions and deployment versions | Recording and data operations |
+| Diagnose | Repeatable conditions and competing explanations | Search, visualization and analytics |
+| Select data | Cases that add coverage, with evaluation held separate | Collection, annotation and curation |
+| Compare policies | Reproducible tasks, interventions and failure severity | Simulation and policy evaluation |
+| Release | Hardware evidence, operating limits and a recovery procedure | Integration and operation |
+
+The product opportunity is to connect these steps. Surfacing an anomaly is
+useful, but the operator still needs a reproducible case, a justified change
+and evidence that it helped without introducing a regression. That connection
+is my synthesis of the data, policy and evaluation roles, not a comparative
+measurement of the listed companies.[^foxglove][^roboto][^openpi][^runway]
+
+More data is not automatically the right next step. The failure could involve
+perception, timing, calibration, grasp selection or changing objects. A useful
+workflow helps choose between explanations before collecting a larger dataset
+or training another model. Those are diagnostic questions, not asserted causes
+of an actual failure.
+
+## Evaluation is becoming a product category
+
+SignalFlag orchestrates tests across existing simulation, replay and hardware
+evidence; it does not create its own simulator.[^signalflag] Runway and One Robot
+approach evaluation through learned environments. One
+Robot describes task-specific simulations for hard manipulation such as
+textiles and box folding. The retained Instance launch starts with detecting
+whether a real rollout succeeded, with a broader automated judgment and reset
+rig as its ambition. These address distinct bottlenecks: candidate comparison,
+task fidelity, human judgment and hardware availability.[^runway][^onerobot][^instance]
+
+| Evaluation product | What a buyer should ask |
+| --- | --- |
+| Learned simulation | Does it preserve the decisions that matter on real hardware? |
+| Success detector | What are false-success rates, uncertain cases and transfer limits? |
+| Test orchestration | Can a failure be reproduced across simulator, logs, software and hardware versions? |
+| Automated test rig | Are resets correct, trials reproducible and failures safely handled? |
+| Release evidence | Which conditions were tested, which remain excluded and who approves operation? |
+
+These are proposed acceptance criteria. A launch description does not establish
+independent performance. Most Robotic’s current YC profile also differs from
+the retained Instance launch, so the table does not assume that the original
+product or full rig is currently generally available.[^instance]
+
+## Compare economics at the operator’s boundary
+
+An API price or training benchmark captures only part of the cost. For a robot
+operator, compare completed work under a stated task distribution, including
+integration, downtime, interventions, resets, recovery and maintenance. A
+successful trial with a nearby researcher is not the same operating model as
+reliable work across a fleet.
+
+For a data platform, measure the time from a recorded failure to a useful
+diagnosis or dataset. For an evaluation tool, measure whether it selects better
+candidates and avoids expensive wrong decisions, not just how many cheap
+simulations it runs. For a collection service, measure useful coverage and
+downstream gains rather than hours of data alone.
+
+The key distinction is **better research throughput versus better operating
+performance**. Faster experiments can be valuable without proving that a robot
+is ready for unattended use. Both outcomes need evidence, but not the same
+evidence. These are proposed product measures, not ROI results collected here.
+
+## Open questions
+
+- How much useful coverage comes from each additional demonstration or deployment?
+- When does simulated evidence change a hardware testing decision correctly?
+- Can a team reproduce a failure across data, policy, hardware and environment versions?
+- Who owns integration, supervision, recovery and the final release decision?
+- Which part of the improvement loop is expensive enough for a customer to pay to shorten it?
+
+Return to [AI Landscapes](/products-markets/landscapes/) for the product view.
+Use [Multimodal integration](/architectures/evolution/multimodal-integration/)
+for the language and vision foundations; it does not replace a robotics study.
+
+[^worldlabs]: World Labs. [Spatial intelligence and Marble](https://www.worldlabs.ai/). Checked October 10, 2026. Used for product descriptions, not undocumented architecture or robot-control claims.
+[^amd]: World Labs. [World Labs is Joining AMD](https://www.worldlabs.ai/blog/amd-announcement), September 28, 2026. Checked October 10, 2026; announced agreement, with closing conditions still stated in the source.
+[^openpi]: Physical Intelligence. [openpi repository](https://github.com/Physical-Intelligence/openpi), README, model types, checkpoints and adaptation caveats. Inspected October 10, 2026; the inspected public repository is not assumed to contain every model the company has developed.
+[^skild]: Skild AI. [Announcing Series C](https://www.skild.ai/blogs/series-c), January 14, 2026, “The Skild Data Flywheel.” Inspected October 10, 2026; company claims remain attributed.
+[^scale]: Ben Levin, Scale AI. [Expanding Our Data Engine for Physical AI](https://scale.com/blog/physical-ai), September 24, 2025. Inspected October 10, 2026; used for collection and annotation offerings, not estimated data requirements.
+[^foxglove]: Foxglove. [Robot data lifecycle and platform](https://foxglove.dev/). Checked October 10, 2026.
+[^roboto]: Roboto. [Robotics analytics platform](https://www.roboto.ai/). Checked October 10, 2026; customer quotes are not independent comparative tests.
+[^isaac]: NVIDIA. [Isaac Sim](https://developer.nvidia.com/isaac/sim). Checked October 10, 2026, simulation, synthetic data and testing descriptions.
+[^runway]: Andy Chen, Lucas Eager Leavitt, Rik Heijdens and Robin Kahlow, Runway Robotics. [Accelerating Robot Policy Evaluation with General World Models](https://runway.com/research/accelerating-robot-policy-evaluation), February 27, 2026, methodology, results and limitations. Inspected October 10, 2026.
+[^onerobot]: One Robot. [Company profile and world-model simulation account](https://www.ycombinator.com/companies/one-robot). Checked October 10, 2026. Company-reported training and evaluation capabilities, not independent benchmarks.
+[^instance]: Most Robotic. [Company profile and retained Instance launch](https://www.ycombinator.com/companies/most-robotic). Checked October 10, 2026. The launch explicitly starts with success detection; the broader automated rig is an ambition, not assumed general availability.
+
+[^broad-robotics]: Google DeepMind. [Gemini Robotics model family](https://deepmind.google/models/gemini-robotics/). Undated living page; inspected October 10, 2026.
+[^broad-amazon-robotics]: Scott Dresser / Amazon. [Millionth robot and DeepFleet announcement](https://www.aboutamazon.com/news/operations/amazon-million-robots-ai-foundation-model). June 30, 2025 announcement; inspected October 10, 2026. Fleet counts and efficiency figures are dated company disclosures.
+[^broad-tesla]: Tesla. [AI and robotics](https://www.tesla.com/AI). Undated company page; inspected October 10, 2026. Optimus is presented as a development goal, not audited commercial autonomy.
+[^broad-atlas]: Boston Dynamics. [Atlas enterprise humanoid](https://bostondynamics.com/products/atlas/). Undated product page; inspected October 10, 2026. Early-adopter language and product claims do not establish fleet scale or customer ROI.
+
+[^world-funding]: World Labs. [Funding announcement](https://www.worldlabs.ai/blog/funding-2026), 2026-02-18.
+[^pi-funding]: Axios. [Physical Intelligence funding](https://www.axios.com/2025/11/21/robots-physical-intelligence-ai), November 21, 2025.
+[^scale-ownership]: Scale AI. [Next phase of company evolution](https://scale.com/blog/scale-ai-announces-next-phase-of-company-evolution), 2025-06-12.
+[^fox-funding]: Foxglove. [Series B announcement](https://foxglove.dev/blog/foxglove-series-b), 2025-11-11.
+[^roboto-funding]: Roboto. [Seed funding announcement](https://www.roboto.ai/blog/roboto-raises-seed-funding-4-8m/), 2023-04-05.
+[^runway-funding]: Runway. [Series E funding](https://runway.com/news/runway-series-e-funding), 2026-02-10.
+[^bd-ownership]: Boston Dynamics. [Funding and ownership FAQ](https://bostondynamics.com/faq/). Inspected October 11, 2026. Majority interest acquired by Hyundai Motor Group in June 2021.
+[^intrinsic]: Google. [Intrinsic joins Google](https://blog.google/alphabet/intrinsic-joins-google/), 2026-02-25.
+[^cosmos]: NVIDIA. [Cosmos world foundation models](https://www.nvidia.com/en-us/ai/cosmos/). Inspected October 11, 2026.
+[^groot]: NVIDIA. [Isaac GR00T repository](https://github.com/NVIDIA/Isaac-GR00T). Inspected October 11, 2026.
+[^skild-current]: Skild AI. [Company research and product updates](https://www.skild.ai/blogs). Inspected October 11, 2026.
+[^unitree-product]: Unitree. [Robot products and news](https://www.unitree.com/news/). Inspected October 11, 2026.
+[^unitree-listed]: Xinhua / Shanghai Stock Exchange. [Unitree listing report](https://english.sse.com.cn/news/newsrelease/voice/c/c_20260827_10830149.shtml), 2026-08-27.
+[^agibot-product]: AGIBOT. [MWC 2026 robot portfolio](https://www.agibot.com/article/231/detail/44.html), 2026-03-02.
+[^agibot-world]: AGIBOT / OpenDriveLab. [AGIBOT World repository](https://github.com/OpenDriveLab/Agibot-World). Inspected October 11, 2026.
+[^galbot-product]: Galbot. [Company and embodied model overview](https://www.galbot.com/about/). Inspected October 11, 2026.
+[^galbot-funding]: Galbot, via PR Newswire. [New funding announcement](https://www.prnewswire.com/news-releases/galbot-secures-over-300-million-in-new-funding-breaking-records-with-3-billion-valuation-in-chinas-humanoid-robot-sector-302647204.html), 2025-12-19.
+[^ubtech]: UBTECH / HKEX. [2025 annual report](https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0414/2026041401168.pdf), 2026-04-14.
+[^limx]: LimX Dynamics. [Series B announcement](https://www.limxdynamics.com/en/news/BK000057), 2026-02-02.
+[^xsquare]: X Square. [Company overview](https://x2robot.com/en/about). Inspected October 11, 2026.
+[^xsquare-funding]: X Square, via PR Newswire. [Four rounds culminating in Series C](https://en.prnasia.com/releases/apac/x-square-robot-secures-four-consecutive-financing-rounds-surpasses-us-2-8-billion-valuation-in-push-for-physical-ai-foundation-models-539059.shtml), 2026-06-29.
+[^galaxea]: Galaxea. [GalaxeaVLA and open-world resources](https://github.com/OpenGalaxea/GalaxeaVLA). Inspected October 11, 2026.
+[^spirit]: Spirit AI. [Funding and embodied learning announcement](https://www.spirit-ai.com/en/news/30), 2026-02-25.
+[^robotera]: Robotera, via PR Newswire. [New funding round](https://www.prnewswire.co.uk/news-releases/robotera-raises-over-usd-200-million-in-new-round-led-by-sf-group-hsg-and-idg-capital-302766758.html), 2026-05-08.
+[^engine]: EngineAI. [Product news and financing timeline](https://www.engineai.com.cn/about-news-media). Inspected October 11, 2026.
+[^fourier]: Fourier. [GR-3 product documentation](https://support-old.fftai.com/docs/GR-X-Humanoid-Robot/GR3/GR-3_Introduction/). Inspected October 11, 2026.
+[^astribot]: Astribot. [Robot products and research](https://www.astribot.com/en/). Inspected October 11, 2026.
+[^xpeng-product]: XPENG. [IRON production line commissioned](https://www.xpeng.com/news/01a080371029a057bc8e8a02a2c6012b), 2026-09-08.
+[^xpeng-funding]: XPENG. [Robotics financing agreements](https://www.xpeng.com/pressroom/news/01a03797fccda01e0de68a02a256006a), 2026-08-24.
+[^pudu]: Pudu Robotics. [New funding and portfolio](https://www.pudurobotics.com/en/news/pudu-robotics-raises-150-million-exceeds-1-5-billion-valuation), 2026-04-23.
+[^keenon]: KEENON. [Company and service robot portfolio](https://www.keenon.com/en/about). Inspected October 11, 2026.
+[^geek-product]: Geek+. [Warehouse robotics platform](https://www.geekplus.com/en). Inspected October 11, 2026.
+[^geek-listed]: Geek+. [HKEX listing announcement](https://www.geekplus.com/resources/news/geekplus-lists-on-hkex-main-board-pioneering-the-global-smart-logistics-transformation-with-robotics), 2025-07-09.
+[^hai]: Hai Robotics. [Warehouse products and news](https://www.hairobotics.com/news). Inspected October 11, 2026.
+[^hai-funding]: Hai Robotics. [Series D+ financing](https://www.hairobotics.com/news/announce-financing-round), 2022-06-15.
+[^flexiv]: Flexiv. [Strategic investment from Invus](https://www.flexiv.com/news/Flexiv_Secures_Capital_from_Leading_Evergreen_Investor), 2026-03-18.
+[^dobot]: Dobot. [HKEX listing and collaborative robot portfolio](https://www.dobot-robots.com/insights/news/dobot-robotics-successfully-listing-hong-kong-stock-exchange.html?lang=en), 2024-12-23.
+[^rynn]: Alibaba DAMO Academy. [RynnBrain repository](https://github.com/alibaba-damo-academy/RynnBrain). Inspected October 11, 2026.
+[^robbyant-owner]: Robbyant. [Official organization profile](https://github.com/RobbyAnt). Inspected October 11, 2026.
+[^lingbot]: Robbyant. [LingBot-VLA repository](https://github.com/Robbyant/lingbot-vla). Inspected October 11, 2026.
+[^seed]: ByteDance Seed. [Model catalog](https://seed.bytedance.com/en/models). Inspected October 11, 2026.
+[^drobotics]: D-Robotics. [Series C and robotics computing stack](https://en.d-robotics.cc/blog/d-robotics-completes-400-million-in-series-c-funding-driving-the-robotics-industry-into-a-boom-in-product-categories), 2026-09-17.
+[^deep-robotics]: DEEP Robotics. [Series C and embodied robotics portfolio](https://www.deeprobotics.cn/en/index/article/id/251.html), 2025-12-09.
+[^leju]: Leju. [LeTools and Kuavo robot learning](https://www.letools.lejurobot.com/). Inspected October 11, 2026.
+[^figure-product]: Figure. [Figure and Helix products](https://www.figure.ai/). Inspected October 11, 2026.
+[^figure-funding]: Figure. [Series C announcement](https://www.figure.ai/news/series-c), 2025-09-16.
+[^one-x-product]: 1X. [NEO early access](https://www.1x.tech/neo). Inspected October 11, 2026.
+[^one-x-funding]: 1X. [Series B announcement](https://www.1x.tech/discover/1x-secures-100m-in-series-b-funding), 2024-01-13.
+[^apptronik]: Apptronik. [Series A extension and Apollo](https://apptronik.com/news-collection/apptronik-closes-over-935-million-series-a), 2026-02-11.
+[^agility-product]: Agility Robotics. [Digit and Nerve](https://www.agilityrobotics.com/). Inspected October 11, 2026.
+[^agility-status]: Agility Robotics. [Investor relations and proposed combination](https://www.agilityrobotics.com/investors). Inspected October 11, 2026.
+[^sanctuary-product]: Sanctuary AI. [Industrial dexterity platform](https://sanctuary.ai/). Inspected October 11, 2026.
+[^sanctuary-funding]: Zeon Ventures. [Investment in Sanctuary AI](https://www.zeon.ventures/news/zeon-invests-in-sanctuary-ai-and-partners-to-advance-specialized-materials-for-dexterous-robotics), 2026-05-26.
+[^dexterity]: Dexterity. [Mech industrial robotics](https://dexterity.ai/mech). Inspected October 11, 2026.
+[^dexterity-funding]: TechCrunch. [Dexterity financing](https://techcrunch.com/2025/03/11/yet-another-ai-robotics-firm-lands-major-funding-as-dexterity-closes-latest-round/), March 11, 2025.
+[^fieldai]: FieldAI. [Funding and autonomy platform](https://www.fieldai.com/news/fieldai-announces-over-400m-in-funds-raised-to-advance-embodied-ai-at-scale), 2025-08-20.
+[^anybotics]: ANYbotics. [Funding and industrial inspection](https://www.anybotics.com/news/anybotics-raises-additional-60-million-to-drive-u-s-expansion/), 2024-12-12.
+[^anybotics-current]: ANYbotics. [Company news and product links](https://www.anybotics.com/news/category/news/). Inspected October 11, 2026.
+[^neura]: NEURA Robotics. [Series C announcement](https://neura-robotics.com/record-series-c/), 2026-06-10.
+[^dyna-product]: DYNA Robotics. [Commercial robot platform](https://www.dyna.co/). Inspected October 11, 2026.
+[^dyna-funding]: DYNA Robotics. [Series A](https://www.dyna.co/news/series-a), 2025-09.
+[^generalist]: Generalist. [Next phase of Physical AI](https://generalistai.com/blog/accelerating-the-next-phase-of-physical-ai), 2026-06-04.
+[^generalist-sec]: Generalist / SEC. [Form D, offering and sales](https://www.sec.gov/Archives/edgar/data/2137708/000213770826000004/xslFormDX01/primary_doc.xml), 2026-08-24.
+[^lerobot]: Hugging Face. [LeRobot documentation](https://huggingface.co/docs/lerobot/index). Inspected October 11, 2026.
+[^hf-funding]: Axios. [Hugging Face financing](https://www.axios.com/2023/08/24/hugging-face-ai-salesforce-billion), August 24, 2023.
+[^signalflag]: SignalFlag. [Physical AI test and evaluation platform](https://signalflag.ai/). Inspected October 11, 2026.

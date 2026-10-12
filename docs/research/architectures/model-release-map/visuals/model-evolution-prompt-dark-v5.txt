@@ -1,0 +1,26 @@
+Use case: infographic-diagram
+Asset type: polished editorial model evolution infographic for a public learning site.
+Input image 1: existing audited version 4, the edit target.
+Primary request: change only model labels, label selection hierarchy and the room needed for the three new 2026 rows. Preserve the distinctive spectral orbital aesthetic, title, ellipse, palettes, two left-to-right timeline bands and their year placements.
+
+Exact content, all 56 names shown ONCE, ordered top to bottom within each year. A leading ★ below is an INSTRUCTION to render bold text and a diamond marker, NOT a literal star. All unstarred names use regular-weight text and small circular markers. There are exactly 22 bold diamond entries. Remove previous bold/diamond styling from any name not starred below.
+
+2017: ★Transformer
+2018: ★GPT; ★BERT
+2019: GPT-2; T5
+2020: ★GPT-3
+2021: CLIP; Switch Transformer; GLM
+2022: ★InstructGPT; Chinchilla; PaLM; Flamingo; BLOOM; ★ChatGPT
+2023: BLIP-2; ★LLaMA; ★GPT-4; ChatGLM-6B; LLaVA; Llama 2; Mistral 7B; Mamba; Gemini 1.0; Mixtral 8x7B; InternVL
+2024: Gemini 1.5 Pro; ★Claude 3; DeepSeek-V2; GPT-4o; Llama 3.1; Qwen2-VL; Qwen2.5; ★OpenAI o1; ★DeepSeek-V3
+2025: ★DeepSeek-R1; Gemma 3; ★Gemini 2.5 Pro; ★Qwen3; ★Claude 4; Grok 4; Kimi K2; GLM-4.5; ★GPT-5; Qwen3-VL
+2026: Qwen3.5; ★GLM-5; ★Claude Mythos Preview; DeepSeek-V4; ★Kimi K3; Qwen3.8; Claude Fable 5.1; ★GPT-6 Astra; DeepSeek-V4.1-Flash; ★Claude Opus 5.5; ★Gemini 4 Argon
+
+Text: Preserve exact title "LLM & VLM evolution"; subtitle "Selected models and research milestones"; "Snapshot: 9 Oct 2026"; top-band label "2017–2021"; bottom-band label "2022–2026"; footer "Chronology, not lineage. Exact dates and sources accompany this figure."; brand "Latent Light"; legend a diamond + "Selected landmarks". No extra text.
+
+Layout refinement: 2026 now has 11 rows, just like 2023. Start lists at the same vertical level around y=640 and use consistent roughly 26px row spacing so all labels end above the footer. Give the last column adequate width: shift its label stem and labels slightly left so "Claude Mythos Preview" and "DeepSeek-V4.1-Flash" fit within the right margin at the same readable type size. Modestly adjust preceding columns if needed but never overlap 2025. Keep every label fully inside the canvas, at least 30px from the right edge. Keep unhighlighted names readable; bold highlights use weight, not giant font size. Do not change year assignment.
+
+Scientific constraints: years connect to years only; no ancestry arrows between models; no rankings, score charts or open-source badges. No new companies, model names, logos or extra symbols. Do not render the instruction stars. Keep all 56 names exactly spelled, no omissions or duplicates. GPT and GPT-2 are separate entries. OpenAI o1 has no "-preview". Claude Mythos Preview DOES include "Preview".
+Output: a crisp landscape 1536x1024 image with clean typography, strong hierarchy and full-size readability.
+
+Theme: preserve version 4’s rich deep navy background, restrained starfield and thin spectral luminous paths. Bright white bold text with colored diamond markers for 22 selected landmarks; high-contrast off-white regular text and circular markers for all other entries. Preserve the refined glowing elliptical aperture. Do not increase haze or text glow.

@@ -1,0 +1,109 @@
+---
+title: A Coding Workflow
+description: A system deep dive from repository evidence to bounded execution and reviewed changes.
+lastUpdated: 2026-10-11
+---
+
+import ModelFlow from '../../../../components/architectures/ModelFlow.astro';
+
+Coding makes agent systems concrete. A repository supplies evidence, a shell
+supplies actions and tests supply partial feedback. The output is a change
+to a working system, not just an explanation of what code could look like.
+
+Claude Code documents a loop of gathering context, taking action and verifying
+results. Its model chooses steps while the harness supplies tools and manages
+the information it sees. That is one useful example of the general agent loop,
+not a definition limited to that product.[^claude]
+
+## Follow one change through the system
+
+[Figure 1](#figure-1) follows a proposed development workflow and the evidence
+that should accompany it.
+
+<ModelFlow id="figure-1" title="From task to reviewed artifact" lanesJson='[{"label":"Development loop","steps":[{"label":"Understand","detail":"Read task, repository guidance and current changes"},{"label":"Locate evidence","detail":"Search definitions, callers and failing behavior"},{"label":"Make a scoped change","detail":"Edit only intended code","accent":true},{"label":"Verify","detail":"Run relevant tests and inspect the actual result"},{"label":"Hand off","detail":"Explain changes, checks and remaining gaps"}],"note":"A failing check feeds back into inspection and revision. Publishing, committing or deploying is not an automatic consequence of completing the patch."},{"label":"Persistent record","steps":[{"label":"Before","detail":"Baseline, constraints and environment"},{"label":"During","detail":"Actions, tool outcomes and artifacts"},{"label":"After","detail":"Diff, test evidence and review status"}]}]'>
+**Figure 1.** Coding task lifecycle. Independent teaching design informed by
+documented coding loops and application evaluation.[^claude][^harness]
+</ModelFlow>
+
+For an illustrative bug fix, a useful first action may be reproducing the
+failure rather than writing code. A failed command can reveal a missing
+dependency instead of a code defect. The harness should preserve that
+distinction instead of turning every nonzero exit into “the patch is wrong.”
+
+## Repository context is selected, not downloaded wholesale
+
+The agent needs the relevant conventions, interfaces and dependencies, not
+necessarily every file. Search tools locate evidence; code intelligence can
+connect definitions and callers; explicit instructions establish task scope.
+Generated plans should point to evidence rather than replace it.
+
+The active context and durable record are different. Claude Code documents
+saved sessions and context compaction; those mechanisms do not mean that
+every earlier detail remains visible to the model.[^claude]
+
+As a proposed handoff contract, retain the current diff, commands actually
+run, unresolved failures and next safe action. Recheck the repository state
+after a pause. Another person may have changed a file while the agent was idle.
+
+## Execution needs several boundaries
+
+| Surface | Useful work | Boundary to inspect |
+| --- | --- | --- |
+| Repository tools | Read, search and edit code | Allowed paths and existing user changes |
+| Terminal | Build, test and run programs | Processes, mounts, dependencies and resource limits |
+| Network tools | Read documentation or use services | Destinations, credentials and data disclosure |
+| Collaboration | Delegate independent investigations | Context scope, ownership and shared files |
+| Publication | Create a commit, pull request or release | Separate authority and final review |
+
+This is our system-review taxonomy. Product implementations differ. Pi's
+current repository explicitly states that it has no built-in permission
+system and runs with the launching process's permissions unless external
+boundaries are added. Do not assume every agent CLI supplies the same
+containment model.[^pi]
+
+## Tests are evidence, not universal proof
+
+A test establishes the behavior it exercises under its environment. It does
+not automatically verify design suitability, visual quality or security.
+A web change can require interaction with the rendered page; Anthropic's
+application-development study illustrates that broader evaluation surface.[^harness]
+
+For a proposed verification sequence, reproduce the target behavior, run
+focused tests, check relevant regressions and inspect the final diff. Keep
+hidden evaluation checks separate when comparing agents. Report commands
+that actually ran, not a checklist the model intended to run.
+
+## Deployment location changes the product contract
+
+A local agent works within a user's active environment. A cloud task can use
+a separate workspace and continue without the user's computer remaining
+awake. GitHub's cloud agent works in an ephemeral development environment;
+Codex Cloud documents isolated task workspaces and reviewable changes.
+These are different workflows, not simply different chat interfaces.[^github][^codex]
+
+An SDK can embed the same style of work inside an application, while a managed
+runtime can take responsibility for the harness. Inspect who owns the loop,
+state, approvals and execution environment before adopting either.
+
+## How to compare a harness feature
+
+An optional study can hold the model and task set fixed while comparing a
+simple loop with one added feature, such as persistent notes or a reviewer.
+Use repeated trials, an explicit total budget and independent outcome checks.
+Inspect changes in failures as well as average success.
+
+That is a proposed experiment, not evidence that any named product has been
+tested here. The [evaluation page](/agents/evaluation-reliability/) explains
+the conditions required for a meaningful comparison. The
+[ecosystem map](/agents/ecosystem/) identifies current implementations worth
+studying without ranking them.
+
+
+To see these ideas in a specific implementation, explore the
+[Agent Deep Dives comparison](/agents/deep-dives/) and its five studies.
+
+[^claude]: Anthropic. [How Claude Code works](https://code.claude.com/docs/en/how-claude-code-works), loop, tools and session behavior. Checked October 10, 2026.
+[^harness]: Prithvi Rajasekaran, Anthropic. [Harness design for long-running application development](https://www.anthropic.com/engineering/harness-design-long-running-apps), March 24, 2026.
+[^pi]: Earendil Works. [Pi repository](https://github.com/earendil-works/pi), Permissions & Containerization. Checked October 10, 2026.
+[^github]: GitHub. [Copilot on GitHub.com](https://docs.github.com/en/copilot/concepts/copilot-surfaces/copilot-on-github), cloud agent environment. Checked October 10, 2026.
+[^codex]: OpenAI. [Codex Cloud](https://learn.chatgpt.com/docs/cloud), workspaces and review. Checked October 10, 2026.

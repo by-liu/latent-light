@@ -1,0 +1,135 @@
+---
+title: "Claude Code: The project-aware agent loop"
+description: How Claude Code connects project context, tools, skills, subagents and control into a steerable workflow.
+lastUpdated: 2026-10-11
+---
+
+import AgentArchitecture from '../../../../components/agents/AgentArchitecture.astro';
+import ModelFlow from '../../../../components/architectures/ModelFlow.astro';
+
+Claude Code is a useful study of a **productized agent harness**: the surrounding
+software makes a model's decisions actionable in a project. Its documented loop
+is to gather context, take action and verify results.[^loop] The interesting
+question is how that loop remains steerable as a task grows.
+
+This study follows the documented responsibilities, not undisclosed internal
+implementation. Sources were checked **October 11, 2026**. The worked example
+below is an original scenario, not a benchmark run.
+
+## The architecture behind the conversation
+
+A prompt starts work, but the model does not execute a shell command by emitting
+text alone. The harness presents tools, routes requests and returns observations.
+That distinction separates reasoning from the mechanism that changes the world.
+[Figure 1](#figure-1) maps the parts a reader can inspect in the documentation.
+
+<AgentArchitecture id="figure-1" title="A project-aware loop with explicit extension points" layersJson='[{"label":"Project and user","detail":"The task enters a configured workspace","parts":[{"title":"Request","body":"A goal, constraints and conversation."},{"title":"Guidance","body":"CLAUDE.md or supported AGENTS.md, scoped rules and memory."},{"title":"Resources","body":"Repository files and configured integrations."}]},{"label":"Claude Code harness","detail":"Manage the interaction around the model","parts":[{"title":"Context assembly","body":"Choose relevant history, guidance and tool results."},{"title":"Claude model","body":"Propose the next action or response."},{"title":"Dispatch and events","body":"Apply permission decisions and hooks; route tool requests."}]},{"label":"Work and review","detail":"Actions create observable evidence","parts":[{"title":"Tools","body":"Search, file edits, shell commands and external capabilities."},{"title":"Workers","body":"Subagents perform scoped work in their own contexts."},{"title":"Verification","body":"Inspect tests, changes and the running result."}]}]'>
+
+**Figure 1.** Latent Light synthesis of documented context, tool, subagent and permission responsibilities.[^loop][^memory][^subagents][^permissions]
+
+</AgentArchitecture>
+
+The tool families cover files, search, execution, web access and configured code
+intelligence. Local, cloud and remote-control execution offer different work
+locations; terminal, desktop and editor interfaces are interaction surfaces.
+An interface is not a sufficient description of where files or commands run.[^loop]
+
+## Guidance, memory and context have different jobs
+
+Project instruction files carry conventions and intended behavior. Auto memory
+records learnings that may help future work. The documentation distinguishes
+human-authored guidance from model-authored memory and says that instruction
+text is context, not enforced configuration. Managed settings provide a separate
+enforcement layer.[^memory]
+
+This distinction matters for a long task. “Preserve the public API” belongs in
+explicit task or project guidance. “This module often needs this fixture” may
+be a useful remembered observation, but should be checked against the current
+repository. A remembered conclusion is not fresh evidence.
+
+The product can compact a growing conversation and save sessions. Compaction
+selects what to retain for the next model request; a saved transcript supports
+continuity. Neither mechanism establishes that every earlier detail is present
+in active context or that the workspace stayed unchanged during a pause.[^loop]
+
+## Choose an extension by its role
+
+| Need | Mechanism | Design question |
+| --- | --- | --- |
+| A reusable procedure | Skill | What instructions should load for this task? |
+| A separate investigation | Subagent | What context, tools and output does this worker need? |
+| A lifecycle check | Hook | Can this event still prevent an action, or only observe it? |
+| A permitted operation | Tool and permission rules | Who enforces the action's actual scope? |
+
+Skills use the Agent Skills structure and can bundle supporting files. Claude
+Code adds invocation controls, dynamic context and subagent execution features.
+A portable SKILL.md format does not make every host-specific field portable.
+Keep the procedure separate from the execution authority it happens to need.[^skills]
+
+A subagent can receive its own system prompt, tool access and permissions. Its
+context is normally separate; the documented fork option can inherit the parent's
+conversation. This makes delegation a context-design decision, not simply a way
+to request extra effort. The worker's requests also consume usage.[^subagents]
+
+Hooks run at named lifecycle points. PreToolUse can intervene before dispatch;
+PostToolUse observes an operation that already ran. Blocking behavior is specific
+to the event and its output contract. A failed hook is not universally a denied
+action, so a check must be placed where its decision can actually take effect.[^hooks]
+
+## Follow a bug fix through the system
+
+Suppose the task is: **fix pagination while preserving the public API and add
+an observable regression check**. The following is a proposed workflow, using
+the documented mechanisms. [Figure 2](#figure-2) shows the evidence handoffs.
+
+<ModelFlow id="figure-2" title="From a reported bug to a reviewed change" lanesJson='[{"steps":[{"label":"Inspect","detail":"Read guidance, reproduce the failure and find relevant callers."},{"label":"Change","detail":"Edit the smallest coherent part of the implementation."},{"label":"Verify","detail":"Run the regression check and inspect the actual behavior."},{"label":"Review","detail":"Explain the diff, evidence and unresolved limitations."}],"note":"Unexpected results return the task to inspection. Publishing the change requires the relevant authority."}]'>
+
+**Figure 2.** An original task scenario informed by the documented loop and extension points; it was not executed as a product benchmark.[^loop][^hooks]
+
+</ModelFlow>
+
+A read-only worker could investigate callers while the main session reproduces
+the failure. The worker should return file locations and uncertainties. Two
+workers editing the same files would instead require explicit ownership and
+integration. Separate context does not make shared filesystem work independent.
+
+A check before a consequential command can inspect its target and arguments.
+After execution, tests and artifact inspection supply a different kind of check:
+whether the requested result was obtained. A permission decision and a passing
+test answer different questions.
+
+## What this design buys, and what it costs
+
+The package of guidance, tools and lifecycle extensions gives teams several
+places to encode a workflow. It also creates configuration to maintain. A skill,
+a rule and a hook can disagree about the same task; treating them as one large
+prompt hides that disagreement. Our design lesson is to give each mechanism one
+clear responsibility and inspect the effective configuration.
+
+| Symptom | What to investigate |
+| --- | --- |
+| A constraint disappears during long work | Its location in guidance, retained context and current task input |
+| A worker returns a confident but unusable result | Its assignment, evidence and access to relevant context |
+| A check reacts after an unwanted operation | The hook's event and decision contract |
+| A request is allowed but the outcome is wrong | Verification of the resulting artifact, rather than permission alone |
+
+These are diagnostic questions, not measured failure rates. Permission rules
+can constrain tool requests, while execution containment addresses reachable
+resources. Defaults and effective modes depend on configuration and product
+edition; inspect them rather than infer them from an “autonomous” label.[^permissions]
+
+## What to carry into another system
+
+The transferable pattern is a loop with inspectable inputs, controlled actions
+and evidence of completion. The product's extensions make that pattern easier
+to package, but they do not replace a good task specification or an outcome
+check. Compare its boundaries with [Codex](/agents/deep-dives/codex/), then study
+[Pi](/agents/deep-dives/pi/) for a different allocation of host responsibility.
+The [comparison overview](/agents/deep-dives/) connects all five studies.
+
+[^loop]: Anthropic. [How Claude Code works](https://code.claude.com/docs/en/how-claude-code-works), agent loop, tools, sessions and execution interfaces. Checked October 11, 2026.
+[^memory]: Anthropic. [How Claude remembers your project](https://code.claude.com/docs/en/memory), instruction files, auto memory and enforcement boundaries. Checked October 11, 2026.
+[^skills]: Anthropic. [Extend Claude with skills](https://code.claude.com/docs/en/skills), Agent Skills format and Claude-specific extensions. Checked October 11, 2026.
+[^subagents]: Anthropic. [Create custom subagents](https://code.claude.com/docs/en/sub-agents), separate context, tool access, permissions and fork behavior. Checked October 11, 2026.
+[^hooks]: Anthropic. [Hooks reference](https://code.claude.com/docs/en/hooks), PreToolUse, PostToolUse and event-specific decision control. Checked October 11, 2026.
+[^permissions]: Anthropic. [Configure permissions](https://code.claude.com/docs/en/permissions), rule matching and permissions. Checked October 11, 2026.

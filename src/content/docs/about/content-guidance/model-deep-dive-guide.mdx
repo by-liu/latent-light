@@ -1,0 +1,402 @@
+---
+title: Model Deep Dive guide
+description: Research, explain, illustrate, and review a model study from reports and released artifacts.
+lastUpdated: 2026-10-10
+---
+
+A Model Deep Dive explains what a model changes, how it works, and what the evidence supports.
+Help readers develop a mental model, not merely read a shorter technical report.
+
+Begin with the defining ideas and useful scale numbers. Connect them to a clear architecture view, then explain the important mechanisms.
+Use original report figures where they help. Review the technical content and rendered presentation before considering the study complete.
+
+This guide defines the model study workflow for [LLM & VLM](/architectures/).
+Use it with the [page template](/about/content-guidance/model-deep-dive-template/) and [Content standards](/about/content-guidance/content-standards/).
+The shared standards govern citations, equations, figure numbering, reuse rights, and public sharing.
+
+## The study workflow
+
+| Step | Required result |
+| --- | --- |
+| Scope | A named generation, representative checkpoint, learning goal, and verification boundary |
+| Inspect | The complete report, relevant appendices, released artifacts, and targeted implementation |
+| Trace | An explanation of inputs, computation, training stages, inference state, and evidence |
+| Illustrate | Purposeful source figures or independent diagrams with clear provenance |
+| Review | A coverage audit, claim checks, and a refined reading experience |
+| Validate | Working navigation, readable layouts, complete exports, and recorded checks |
+
+These are Latent Light's authoring standards. They are not requirements imposed by model publishers.
+
+## Select and scope the model
+
+Prioritize recognized LLM and VLM generations with public weights and substantive technical evidence.
+Choose a model that establishes a baseline, introduces a useful mechanism, or provides a meaningful contrast.
+Recognition is an editorial judgment, not a fact established by a launch announcement.
+
+Use one page per generation. Compare related sizes and training variants within that page when they share the central lesson.
+Create a separate study only when the differences justify one. Do not create a thin page for every checkpoint.
+
+### Identify the kind of report
+
+Record what the linked document actually covers:
+
+- **Full technical report:** architecture, training, and evaluation of the studied generation.
+- **Substantive model card:** sufficient technical disclosure, despite a different document title.
+- **Mechanism or backbone paper:** a specific component or experiment, not necessarily the complete released model.
+
+A partial report can support a useful study. State its boundary near the opening and throughout the relevant claims.
+Do not assign a small experimental model's recipe or results to a larger released checkpoint.
+Identify details supplied by the released configuration or implementation separately.
+
+Record documentation-only candidates in `docs/research/architectures/coverage.md` when the evidence does not support a complete study.
+State which sources were checked and which evidence remains missing. Do not claim that no report exists after a limited search.
+Do not publish an empty placeholder page.
+
+Models available only through APIs or restricted partner access can remain in the [evolution map](/architectures/models/).
+A public report alone does not make them part of this released-artifact collection.
+
+### Describe openness precisely
+
+Check weights, inference code, training code, data information, and licenses separately.
+Do not assume that a public repository makes the complete system open source.
+OSI distinguishes software distribution rights from the data information, code, and parameters required by its AI definition.[^osd][^osaid]
+
+Use **public weights** or **open weights under the stated license** when that is what you verified.
+If classifying a system as open source, identify the definition and check the required artifacts.
+Separate access requirements, usage restrictions, and training disclosure.
+A checkpoint license does not automatically license paper figures.
+
+## Define the study contract
+
+Before drafting, record the exact subject and verification depth.
+
+| Record | Identify |
+| --- | --- |
+| Model | Generation, representative checkpoint, size, and base or post-trained variant |
+| Report | Title, document type, canonical URL, edition, and publication date |
+| Artifacts | Weights, configuration, tokenizer or processor, and separate licenses |
+| Implementation | Repository revision, library version, and inspected functions |
+| Scope | Modalities, mechanisms, exclusions, and any report-to-release mismatch |
+| Verification | Sources read, artifacts inspected, code traced, and experiments actually executed |
+| Dates | Release event, source inspection, page revision, and review dates |
+
+Use immutable source revisions where possible. Hugging Face supports downloads at a specific revision.[^hub-revisions]
+Inspect model cards for intended use and disclosed limitations, then check their consequential claims against the relevant evidence.[^model-cards]
+
+Keep hashes, checksums, and extraction coordinates in research records and immutable link targets.
+Do not display opaque hashes in article text, resource cards, tables, or reference labels.
+Use readable labels such as report v2, the original release, or a named library version.
+
+State the verification boundary near the opening. For example: “Report and configuration inspected. Targeted cache code traced. No checkpoint executed.”
+Do not use a general verified badge when only some layers were checked.
+
+### Keep evidence layers separate
+
+| Evidence | Can support | Does not automatically establish |
+| --- | --- | --- |
+| Family report | Disclosed family methods and recipes | Every size or later release uses the same settings |
+| Released artifact | Its configuration and interface | Its complete training history |
+| Controlled ablation | The tested change under stated controls | The gain on every released checkpoint |
+| Inspected implementation | The traced code path in that version | Successful execution or optimized backend behavior |
+| Runtime measurement | Performance under recorded conditions | Performance on other hardware, loads, or lengths |
+| Our derivation or interpretation | A calculation or explanatory hypothesis | A published finding or measured result |
+
+Record conflicts instead of silently choosing a convenient value. Explain the discrepancy when it affects the reader's conclusion.
+
+## Build a useful opening
+
+Place `ModelResources` before the opening paragraph. Link the original technical document and representative Hugging Face repository directly.
+Name a model card or mechanism paper accurately in the study scope.
+
+Explain the task and central idea before introducing acronyms or tensor notation.
+Give two to four highlights: what differs, which problem it addresses, and why the model matters.
+Support claims of adoption or influence. Label our interpretation of potential value separately.
+
+Keep the opening useful in about a minute. Do not replace it with a launch feature list or a configuration dump.
+
+### Model in numbers
+
+Name the checkpoint before its numbers. Keep a compact table with values, units, scope, and nearby citations.
+
+| Dimension | Important distinctions |
+| --- | --- |
+| Parameters | Rounded model name, stored total, active parameters, and counted components |
+| Pretraining data | Unique examples, processed tokens, repeated exposure, and modalities |
+| Post-training data | Examples, preference pairs, and rollouts by stage |
+| Compute | Hardware count, duration, accelerator hours, FLOPs, and covered stages |
+| Context | Training length, configuration ceiling, accepted input, generation allowance, and evaluated length |
+| Inference footprint | Precision, backend, hardware, batch, load, input length, and output length |
+
+Define “active” when reporting sparse model parameters. Identify whether embeddings, output projections, or other components are counted.
+Do not add stage token budgets unless their definitions make them additive.
+Hardware count without duration does not establish training compute or financial cost.
+Do not present a stage-specific rental estimate as the complete training cost.
+
+Mark important missing information **undisclosed**, not zero. State assumptions beside local derivations.
+Use a simple two-column table when it improves mobile reading. Move secondary configuration details into the technical sections.
+
+## Explain the model, not just its feature names
+
+Use the following structure flexibly. Combine or rename sections when that improves the explanation.
+
+| Section | Reader outcome |
+| --- | --- |
+| What changed | Understand the motivating problem and appropriate predecessor |
+| Architecture | Follow representative inputs through the network to its outputs |
+| Distinctive mechanisms | Understand computation, costs, and evidence for the defining choices |
+| Training | Follow disclosed objectives, data, updated modules, and stage transitions |
+| Inference | Understand preparation, state, decoding, and the external serving boundary |
+| Evaluation | Interpret comparisons and ablations under their actual conditions |
+| Limitations and lessons | Recognize unknowns and transfer useful ideas without overstating them |
+
+For each central mechanism, explain its motivation, intuition, computation, tradeoffs, and supporting evidence.
+Define shapes or notation where useful. Separate the authors' motivation from our interpretation.
+Link shared theory to [Foundations](/architectures/foundations/) or [Architectural Evolution](/architectures/evolution/).
+Do not repeat a generic Transformer tutorial on every model page.
+
+### Architecture and retained state
+
+Trace a representative input through preparation, embeddings, blocks, and output heads.
+Identify the network, tokenizer or processor, generation wrapper, and serving system separately.
+
+<details>
+<summary>Technical coverage checklist</summary>
+
+- Tokenizer, vocabulary, special tokens, embeddings, output heads, and weight tying.
+- Block order, residual branches, normalization, position representation, attention, and FFNs.
+- Query and KV dimensions, projection widths, masks, and output shape.
+- Expert selection, routing scores, normalization, shared experts, gates, biases, and auxiliary losses.
+- Recurrent state, retained KV, sparse reads, windows, compression, and discarded history.
+- Parameter counts and the components included in total or active computation.
+
+Explain which cost a mechanism changes. Sparse reads do not necessarily remove retained history or every quadratic operation.
+Do not confuse an activation's internal skip term with an outer residual branch.
+Distinguish theoretical operation counts from measured latency or memory.
+
+</details>
+
+### Training and post-training
+
+Explain the actual disclosed stages, not a plausible generic recipe.
+For each stage, identify the starting checkpoint, objective, data, updated modules, optimization settings, and output.
+
+<details>
+<summary>Training coverage checklist</summary>
+
+- Data sources, mixtures, filtering, deduplication, synthetic data, and contamination controls.
+- Token budgets, context curriculum, batch definition, optimizer, learning rate, precision, parallelism, and stability measures.
+- SFT targets, loss masks, chat format, response lengths, and token or example weighting.
+- Preference or RL data, rollouts, rewards, reference policy, regularization, and rejection rules.
+- Distillation sources and targets, frozen modules, and transitions between stages.
+
+When an objective is central, inspect its actual computation.
+Check detached weights, clipping, normalization, sampling, curriculum, and selection rules where the source discloses them.
+Distinguish a reward signal from the optimization objective.
+Do not infer PPO, GRPO, or online rollouts from the label “reasoning model.”
+
+Identify human, model, rule, or executable reward sources when disclosed.
+Record selection or judge limitations when they affect the evidence.
+Separate a reported recipe from a proposed reproduction. Mark material missing settings as undisclosed.
+
+</details>
+
+### Inference and interfaces
+
+Trace input preparation, prefill, retained state, decoding, and output handling.
+Use the appropriate stages for nonautoregressive models.
+
+<details>
+<summary>Inference coverage checklist</summary>
+
+- Processor settings, chat templates, role tokens, positions, and masks.
+- State or cache inputs and outputs, history growth, eviction, and recurrent updates.
+- Sampling, reasoning modes, structured output, stopping, and tool handoff delimiters.
+- Precision, quantization, kernels, batching, parallelism, and supported backends.
+- Hardware requirements, supported modalities, and input and generation limits.
+
+Tool calls require an external execution harness. Do not present that harness as part of the network.
+Match reasoning and chat behavior to the documented artifact and source version.
+Separate reference code from optimized serving implementations.
+
+For performance results, retain hardware, software versions, precision, batch, concurrency, and sequence lengths.
+Distinguish first-token latency, decode rate, end-to-end latency, and throughput.
+A kernel timing is not a complete model measurement.
+
+Label examples as conceptual, code-inspected, or executed. A toy implementation is not a checkpoint reproduction.
+
+</details>
+
+### Additional coverage for VLMs
+
+Explain how visual evidence enters the language computation, not merely that a vision encoder exists.
+
+<details>
+<summary>Multimodal coverage checklist</summary>
+
+- Resizing, crops, tiles, resolution settings, patching, and a defined token-count example.
+- Vision encoder, feature levels, merger or projector, and feature injection sites.
+- Image, text, and video ordering, position coordinates, masks, and special tokens.
+- Frame selection, timestamps, temporal sampling, and temporal representation.
+- Alignment stages, multimodal mixtures, frozen modules, objectives, and loss assignment.
+- Relevant evaluation and failures in OCR, documents, charts, spatial reasoning, or video.
+
+Distinguish pixels, encoder patches, merged features, wrapper tokens, and final sequence positions.
+State processor settings and which elements a token count includes.
+Do not assume that feature injection adds sequence positions.
+Separate default configuration values from settings used in a particular example or evaluation.
+
+</details>
+
+## Audit coverage and evaluation
+
+Read the complete report and relevant appendices before declaring coverage complete.
+Maintain `coverage-audit.md` in the study's research directory.
+Map important mechanisms to source locators, page explanations, and any justified omissions.
+Include preprocessing, positions, objectives, curriculum, inference state, ablations, and failure evidence where relevant.
+
+Inventory useful report figures separately. Record each figure's purpose, selected asset, or reason for omission.
+A broad overview does not replace a missing explanation of routing, visual geometry, or training feedback.
+
+Select evaluations that test the central claims. Preserve the checkpoint, benchmark version, metric, baseline, conditions, and source locator.
+Retain prompting, sampling, attempts, reasoning budget, tools, and judge when they affect comparisons.
+Distinguish absolute scores, relative changes, and percentage-point gains.
+
+Label results author-reported, externally reported, or measured here. Code inspection is not independent replication.
+For ablations, identify what changed, what remained fixed, and which model was tested.
+Do not assign an internal ablation gain to every released model.
+Explain confounds and missing evaluation details. Seek failures and counterevidence, not only supporting results.
+
+## Use original figures deliberately
+
+Inspect the original architecture figure first. Prefer it when it teaches the studied generation clearly and has a documented reuse basis.
+Use additional mechanism, training, or evaluation figures only when they teach distinct lessons.
+There is no required figure count.
+
+Follow the [paper figure reuse standard](/about/content-guidance/content-standards/#reuse-original-paper-figures-deliberately).
+Inspect the document's terms, permission, or an applicable exception. Missing Creative Commons terms alone do not require omission.
+If no defensible basis is established, link the original and create an independent mechanism view.
+Record the reason. Do not replace a useful source figure with generic flow cards for convenience.
+
+### Extract, attribute, and render
+
+- Preserve the exact report edition and checksum. Do not change the archived PDF.
+- Extract a high-resolution figure. Crop surrounding whitespace or prose, not labels, arrows, legends, axes, or essential panels.
+- Record the page, original figure number, extraction method, crop, and reuse basis.
+- Save reviewed derivatives under `public/figures/model-studies/<model-slug>/`.
+- Keep public-safe asset records in `SOURCES.md` and applicable notices in `NOTICE.md`.
+- Attribute original artwork beside the figure. Preserve required copyright and license notices.
+
+Use `FocusCanvas` with `SourceFigure` for report artwork. Provide an image slot, meaningful alternative text, and a concise numbered caption.
+Keep the paper's figure number separate from our sequential page numbering.
+Explain what the reader should notice beside the visual, not in an overloaded caption.
+
+Set `minWidth` for dense figures after checking readable labels.
+Show the complete figure on desktop. On smaller screens, contain panning within the figure frame.
+Check keyboard scrolling and the full-size link. Do not let the image widen the entire page.
+A full-size link does not excuse unreadable inline artwork.
+
+Check light, dark, and focus views. Preserve scientific colors and relationships unless documenting an adaptation.
+Original white-background report artwork can remain white in dark mode.
+Review embedded photographs or other third-party elements separately.
+Permission to reproduce a figure does not authorize publishing the complete report.
+
+### Fill a genuine visual gap
+
+Create an independent SVG, HTML diagram, or `ModelFlow` only when it clarifies a missing or unsuitable source view.
+Show execution order, shapes, branches, feature paths, or state boundaries where they prevent confusion.
+Label the visual as our synthesis and cite the sources behind it.
+Use generated illustrations for intuition, not as evidence for tensor contracts or benchmark values.
+Do not add decorative visuals to meet a visual quota.
+
+Use small code excerpts only when they resolve a technical question.
+Identify the source version and function, explain the relevant lines, and retain required notices.
+Link instead when copying provides no additional learning value.
+
+## Keep research records complete
+
+The published MDX page is each new study's canonical explanation. Keep its
+evidence under `docs/research/architectures/<model-slug>/`, with a
+`coverage-audit.md` and source, claim, run, and visual records. Use
+`state/task_spec.md` and `state/progress.json` to record scope, the canonical
+page path, and actual progress. Follow the
+[Research workflow](/about/content-guidance/research-workflow/) and its repo-local
+skill's schema 3 output contract. Do not maintain a duplicate narrative report.
+
+A requested standalone report can use `report.md` as its canonical output.
+Existing schema 2 studies retain their historical report-based contract.
+Preserve those reports and records; do not bulk-migrate them or replace them
+with empty placeholders.
+
+Record exact source revisions, inspected functions, claim locators, conflicts, asset provenance, commands, and real review results.
+Keep every research file safe for a public repository. Internal means outside the site, not private.
+Keep restricted or unclear-rights PDFs outside the public repository. Do not commit weights, datasets, secrets, or unnecessary large media.
+
+Mark a study complete or reviewed only after the recorded checks actually occurred.
+Separate source-inspection dates from later layout or export checks.
+A collection-wide regression check does not mean every technical claim was freshly rechecked.
+Record unavailable reviews as gaps, not successful checks.
+
+Runtime experiments are optional. Do not download large weights, execute untrusted code, provision compute, or spend money without appropriate authorization.
+If testing is requested, record the environment, commands, outputs, and measurement conditions.
+
+## Review and refine before handoff
+
+Review technical claims and presentation in separate passes. Then read the page as one explanation.
+
+- Can a new reader explain the distinctive idea after reading the opening?
+- Are the model numbers useful, correctly scoped, and easy to compare?
+- Do the mechanisms connect naturally to training, inference, and evidence?
+- Does each figure teach something, with readable labels and a short caption?
+- Can repetition, jargon, clutter, or secondary detail be removed without losing meaning?
+- Does the explanation remain complete on mobile and in text exports?
+
+Fix the identified issues and inspect the result again.
+Repeat after material revisions. Do not stop at the first draft or a passing build.
+Consider the study ready only when its explanation is accurate and its presentation is worth sharing.
+
+### Completion checklist
+
+1. Opening resource links, highlights, relevance, checkpoint, and verification scope are clear.
+2. Numbers retain units, stages, parameter definitions, context boundaries, and nearby citations.
+3. Important mechanisms, training disclosures, inference behavior, and unknowns are covered.
+4. Findings, implementation facts, derivations, interpretations, and measurements remain distinct.
+5. Evaluation claims preserve controls and do not overstate causality.
+6. Figures and equations have sequential numbers, stable anchors, accurate provenance, and readable rendering.
+7. Sources and assets satisfy the shared public-sharing standards.
+8. The coverage audit and canonical research records match the completed work.
+9. Desktop and mobile views, both themes, focus, and relevant keyboard behavior were inspected.
+10. Navigation, search, Markdown, MDX, `/llms.txt`, and `/llms-full.txt` include the intended content.
+11. Automated validation passes. Remaining limitations and pre-existing warnings are reported.
+
+Use the [Maintenance checks](/about/maintenance/#validate-a-change) and the template's [rendering recipes](/about/content-guidance/model-deep-dive-template/#rendering-recipes).
+Check actual equation parsing, not only numbering patterns.
+Check that exports retain figure links, captions, references, equations, and diagram text equivalents.
+Raw component markup or diagram JSON must not replace the explanation in Markdown.
+
+## Expand and maintain the collection
+
+Group related generations by family in Model Deep Dives. Keep single-study entries directly in that group.
+Put thematic reading paths on the overview page. A model can belong to several paths without duplicated sidebar entries.
+Preserve established model URLs when reorganizing navigation.
+Keep authoring guides and templates in the collapsed **Content Guidance** group within About.
+
+Complete and review one pilot study before expanding a batch.
+Maintain the coverage register with candidates, report scope, artifacts, status, and the next missing check.
+Choose additions for learning value, not recency alone.
+
+Use parallel agents only when the user authorizes delegation.
+Assign separate model or family files, assets, and research directories.
+Keep shared navigation, components, tests, and integration under one owner's control.
+Use a separate review pass. Preserve other contributors' changes and report unresolved work accurately.
+
+For updates, identify the changed source or artifact. Revise the affected explanation, figures, numbers, and comparisons together.
+Update the page date after a completed material revision. Preserve older evidence dates when that evidence was not rechecked.
+Do not schedule refreshes, commit, push, or deploy without authorization.
+
+[^osd]: Open Source Initiative. [The Open Source Definition](https://opensource.org/osd), version 1.9. Inspected October 10, 2026.
+
+[^osaid]: Open Source Initiative. [The Open Source AI Definition](https://opensource.org/ai/open-source-ai-definition), version 1.0. Inspected October 10, 2026.
+
+[^hub-revisions]: Hugging Face. [Download files from the Hub](https://huggingface.co/docs/huggingface_hub/guides/download), “From specific version.” Inspected October 10, 2026.
+
+[^model-cards]: Hugging Face. [Model Cards](https://huggingface.co/docs/hub/model-cards), intended use, limitations, and licensing metadata. Inspected October 10, 2026.

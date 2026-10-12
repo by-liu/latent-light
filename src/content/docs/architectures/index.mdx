@@ -1,45 +1,65 @@
 ---
-title: LLM & VLM Architectures
-description: Understand the mechanisms, evolving designs, and concrete models behind language and vision language AI.
-lastUpdated: 2026-10-05
+title: LLM & VLM
+description: A visual guide to the shared ideas behind language and vision language models.
+lastUpdated: 2026-10-10
 ---
 
-How does a model turn context into a useful answer? This section builds the
-mental model behind large language models (LLMs) and vision language models
-(VLMs), then follows the design choices that change how they process information.
+import FocusCanvas from '../../../components/FocusCanvas.astro';
+import ArchitectureAtlas from '../../../components/architectures/ArchitectureAtlas.astro';
 
-## Choose a reading path
+A model name tells you what to look up. An architecture tells you how information
+moves. This collection builds that understanding, then uses concrete models to
+examine what changes, why it matters, and where the tradeoffs appear.
 
-| Path | What it gives you | Start here |
-| --- | --- | --- |
-| Foundations | The intuition, mathematics, and data flow of a Transformer | [Transformer foundations](/architectures/foundations/) |
-| Architectural Evolution | The problems behind alternative designs and their tradeoffs | [The design map](/architectures/evolution/) |
-| Model Studies | Concrete examples of how the pieces fit together | [Reading model architectures](/architectures/models/) |
+## Choose your view
 
-Start with Foundations if the mechanisms are unfamiliar. Otherwise, follow a
-question: [what should a model remember](/architectures/evolution/attention-and-memory/),
-[how should it use position](/architectures/evolution/position-and-long-context/),
-[where should it spend computation](/architectures/evolution/ffns-and-experts/),
-or [how should it read visual evidence](/architectures/evolution/multimodal-integration/)?
+<FocusCanvas size="diagram" label="Three reading paths through model architecture">
+<ArchitectureAtlas kind="reading" id="figure-1">
 
-## Depth without an endless catalog
+**Figure 1.** Foundations, shared design choices, and concrete models. A reading map created here, not a model lineage.
 
-Foundations is a complete visual walkthrough of the core Transformer.
-The evolution pages are focused mechanism explanations. Model studies connect
-those ideas in [GPT-2](/architectures/models/gpt-2/) and
-[Qwen3-VL](/architectures/models/qwen3-vl/), with each study stating what its
-sources establish and what remains unverified.
+</ArchitectureAtlas>
+</FocusCanvas>
 
-Training and inference appear where they explain an architectural choice.
-Standalone computer vision, robot policies, agent orchestration, and a full
-post training curriculum are outside this section's current scope.
+| If you want to… | Start here |
+| --- | --- |
+| Understand the original computation | [Transformer foundations](/architectures/foundations/) |
+| Compare the mechanisms behind different models | [Architectural Evolution](/architectures/evolution/) |
+| Inspect a report and released implementation | [Model Deep Dives](/architectures/models/) |
 
-## Built to evolve
+In [Figure 1](#figure-1), Foundations is one complete walkthrough. Evolution connects ideas across
+families. Deep dives provide the report, figures, training recipe, inference
+contract, and evidence for a named release. Move between these views as needed.
 
-This is a learning map, not a ranking or a claim to cover every new release.
-New work belongs here when it changes our understanding of a mechanism,
-reveals a useful combination, or challenges an existing conclusion.
+## The questions beneath the names
 
-Sources sit beside the claims they support. Selected evidence dates describe
-what was checked, not an exhaustive frontier search. For questions worth
-investigating next, see [Emerging directions](/architectures/evolution/emerging-directions/).
+Start with the question that interests you:
+
+- **What should a model remember?** Compare [attention and memory](/architectures/evolution/attention-and-memory/), from KV sharing and latent caches to recurrent state and selected history.
+- **How should it locate evidence?** Separate [position and long context](/architectures/evolution/position-and-long-context/) from a promise of reliable recall.
+- **Where should it spend computation?** Understand [FFNs and experts](/architectures/evolution/ffns-and-experts/), including the difference between feature gates and routing.
+- **How should information travel through layers?** Examine [depth and residual paths](/architectures/evolution/depth-and-residual-paths/).
+- **How should it read an image or video?** Trace [multimodal integration](/architectures/evolution/multimodal-integration/) from pixels to usable visual evidence.
+
+These choices can coexist. DeepSeek-V2 combines latent attention with sparse
+experts; Gemma 3 combines local and global attention with a visual interface;
+Kimi K3 adds selective information flow across depth.[^deepseek][^gemma][^kimi]
+None is adequately described by one label such as “efficient” or “multimodal.”
+
+## Architecture is one part of the explanation
+
+Data, objectives, optimization, and inference budgets can change behavior without
+introducing a new neural block. DeepSeek-R1 is a useful example: its reasoning
+training builds on an already pretrained backbone.[^r1] Keep the computation
+and the learning process separate before attributing a gain.
+
+This is a curated learning map, not a ranking or an exhaustive release tracker.
+The [model catalog](/architectures/models/) covers named releases; the
+[research agenda](/architectures/evolution/emerging-directions/) explains what
+evidence would improve these architectural explanations. Selected mechanisms
+were rechecked October 10, 2026. No model weights or benchmarks were run here.
+
+[^deepseek]: DeepSeek-AI. [DeepSeek-V2](https://arxiv.org/html/2405.04434v1), 2024, section 2: MLA and DeepSeekMoE.
+[^gemma]: Gemma Team. [Gemma 3 Technical Report](https://arxiv.org/html/2503.19786v1), 2025, architecture and visual interface.
+[^kimi]: Kimi Team. [Kimi K3: Open Frontier Intelligence](https://arxiv.org/html/2607.24653v1), 2026, section 2: token, channel and layer mixing.
+[^r1]: DeepSeek-AI. [DeepSeek-R1](https://arxiv.org/html/2501.12948v1), 2025, section 2: reasoning training and distillation.

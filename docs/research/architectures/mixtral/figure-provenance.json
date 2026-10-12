@@ -1,0 +1,78 @@
+{
+  "model": "mixtral",
+  "checked": "2026-10-10",
+  "source": "Albert Q. Jiang et al., Mixtral of Experts, 2024",
+  "source_url": "https://arxiv.org/abs/2401.04088v1",
+  "pdf_url": "https://arxiv.org/pdf/2401.04088v1",
+  "sha256": "f8bbf0e9d979b7a8ce7be65119266545a229a85b57e077d8bd048e458bb642da",
+  "license": {
+    "status": "verified",
+    "value": "CC BY 4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "grant_evidence": "The version-specific arXiv landing page links Rights to this article to CC BY 4.0.",
+  "modifications": "Source figure regions cropped; surrounding paper prose and captions omitted. Figure labels, colors, axes and drawing retained. No AI repainting.",
+  "extraction": "Poppler pdftoppm v26.08.0, page rendered with scale-to 4200; crop coordinates recorded at 1400 pixel page preview and multiplied by 3.",
+  "figures": [
+    {
+      "asset": "public/figures/model-studies/mixtral/expert-routing.png",
+      "source_figure": 1,
+      "pdf_page": 2,
+      "page_preview_crop": [
+        335,
+        113,
+        416,
+        184
+      ],
+      "output_pixels": [
+        1248,
+        552
+      ],
+      "alt": "A router sends one token state to two of eight parallel feedforward experts. Router weights scale the two expert outputs before they are summed.",
+      "caption": "One token, two selected FFN experts. Reproduced from Jiang et al., Figure 1; figure crop, CC BY 4.0.",
+      "purpose": "Follow the two solid branches in Figure 1: the experts receive the same token state and run in parallel, not one after the other. The dotted path supplies mixing weights. Attention and the surrounding decoder remain shared; routing replaces the FFN sublayer.",
+      "asset_sha256": "800e44ad2be62b629df46d96704617341022be5eabbe602d4115e0033b461066"
+    },
+    {
+      "asset": "public/figures/model-studies/mixtral/routing-locality.png",
+      "source_figure": 10,
+      "pdf_page": 13,
+      "page_preview_crop": [
+        190,
+        427,
+        710,
+        500
+      ],
+      "output_pixels": [
+        2130,
+        1500
+      ],
+      "alt": "Across Pile domains and decoder layers, consecutive tokens often reuse the first-choice expert or overlap in either of their top-two experts; dashed lines show uniform independent routing baselines.",
+      "caption": "Consecutive tokens often reuse experts. Reproduced from Jiang et al., Figure 10; figure crop, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).",
+      "purpose": "The upper panel of Figure 2 asks whether the first-choice expert repeats. The lower panel asks whether either expert overlaps between adjacent top-two sets. They have different random baselines, so their heights are not directly comparable. Domain labels describe the sampled texts, not experts with fixed subject assignments.[^report]",
+      "asset_sha256": "0a8a4973075bb8c68b3e1cce1f9459e5a4ff32f1f14695cc02010dedd0ca8ba9"
+    }
+  ],
+  "restricted_candidates": [],
+  "review": {
+    "source_artwork": true,
+    "crop_integrity": true,
+    "license": true,
+    "desktop_mobile_browser": true,
+    "checked": "2026-10-10T17:36:51.557Z",
+    "revision": 3
+  },
+  "revision": 3,
+  "review_history": [
+    {
+      "revision": 2,
+      "review": {
+        "source_artwork": true,
+        "crop_integrity": true,
+        "license": true,
+        "desktop_mobile_browser": false,
+        "checked": "2026-10-10T17:23:12.642Z"
+      }
+    }
+  ]
+}

@@ -1,0 +1,100 @@
+Document AI figure sources and reuse notices
+Checked October 11, 2026
+
+The figures below are third-party material. They are excluded from Latent Light's MIT license. Attribution is also given beside each figure on /document-ai/. Copyright remains with the original rights holders. No author endorsement is implied. Model-weight and repository-code licenses do not replace figure rights.
+
+smoldocling.webp
+Source: https://arxiv.org/abs/2503.11576v1
+Locator: Figure 1, PDF page 2
+Rights: CC BY 4.0
+Changes: Figure excerpt; page prose and caption omitted.
+PDF SHA256: 5dd7968ab48998373efa6de2137a6d5c20e75a3e61d59dd2f183c22e17c4a40e
+Asset SHA256: fb80252097e7ba6ba7da287c6a07bb4aec5a80940167d7e7a9203afa22b3cc39
+
+deepseek-ocr.webp
+Source: https://arxiv.org/abs/2510.18234v1
+Locator: Figure 3, PDF page 5
+Rights: CC BY 4.0
+Changes: Complete figure excerpt; surrounding page prose and blank margins omitted. No figure labels redrawn.
+PDF SHA256: a7297788968f8ad9ed21bcd273110814e4889efbbc99bfea86dca12205797a90
+Asset SHA256: dd6bb64bfc74ff152101e05c99d4c5f78420adce384459ecdb9dcd25844f143f
+
+deepseek-ocr-2.webp
+Source: https://arxiv.org/abs/2601.20552v1
+Locator: Figure 3, PDF page 5
+Rights: CC BY 4.0
+Changes: Figure excerpt; blank margins and page prose omitted.
+PDF SHA256: 7c8aceb1dbe0845b9e1a0c5afd761925913662e2e2c4c79b482198f3e5e1a96b
+Asset SHA256: 8759898f977f58776ba8cd2767a0c5cb3b5d93606b4579df1b57812667fc8490
+
+unlimited-ocr.webp
+Source: https://arxiv.org/abs/2606.23050v1
+Locator: Figure 1, PDF page 1
+Rights: CC BY 4.0
+Changes: Existing figure excerpt copied without further changes.
+PDF SHA256: b2d623ccefe5e13b8aa61ccbcd052a91ae77d129d92aa2e9ff5e2380d80e3f91
+Asset SHA256: 717a55753ec122cb3150c352ff1cba8bef575b3a5eaac846ed6507211f2e3f27
+
+hunyuan-ocr-15.webp
+Source: https://arxiv.org/abs/2607.04884v2
+Locator: Architecture panel of Figure 1, PDF page 4
+Rights: CC BY-SA 4.0
+Changes: Cropped to architecture panel. Task-example photos, extracted examples, page prose and caption omitted. Derivative retains CC BY-SA 4.0.
+PDF SHA256: e4d527593985e48288436303d446b1b4469016c7118df933e504a5d2418a80e4
+Asset SHA256: 2d60f67b2a44ec1906baab7749221b127b231484b0174df41b71706df184e64b
+
+mineru25.webp
+Source: https://arxiv.org/abs/2509.22186v2
+Locator: Figure 2, PDF page 7
+Rights: Copyright authors; criticism/review reuse assessment
+Changes: One figure excerpt reproduced unchanged, excluding page prose and caption. arXiv non-exclusive distribution license does not grant downstream reuse.
+PDF SHA256: e681f945960bb311a3fe6421a2847145528918626096b794c10305e90c95a413
+Asset SHA256: abc34365892b9e8920f6e0eceedfef148fbfe0b57dd4a7c6fa39687edd30bc5b
+
+paddle-ocr-vl-16.webp
+Source: https://arxiv.org/abs/2606.03264v1
+Locator: Figure 2, PDF page 5
+Rights: CC BY 4.0
+Changes: Existing figure excerpt copied without further changes.
+PDF SHA256: 6ad1f09beb9cb3599f70334723348ff5f3dcb6f7f3b5fa2573a6abd85df65a24
+Asset SHA256: f26ea5fa41d20b1ed828eba4e79e80d2282ae6d71a6e4e788d222342ddad76e1
+
+glm-ocr.webp
+Source: https://arxiv.org/abs/2603.10910v2
+Locator: Figure 2, PDF page 4
+Rights: CC BY 4.0
+Changes: Existing figure excerpt copied without further changes.
+PDF SHA256: 58198ceae993a1f6bd7e690d27fc111c3e8146a04db8bb1294a6f4acfcb38e63
+Asset SHA256: 24cd8d6320c067491a979bae0ee90b1737d4833829c1918173c841f2f5f1128c
+
+olmocr2-rewards.webp
+Source: https://arxiv.org/abs/2510.19817v1
+Locator: Figure 4, PDF page 6
+Rights: CC BY 4.0
+Changes: Figure excerpt; page prose and caption omitted.
+PDF SHA256: 00eb8aba59ea9f346776791014c158d97a6b167148c33bdaaa5dec767beca697
+Asset SHA256: b537cbeb615f21758b6af68c7549397bbc2d25e79cb1e5e8a1f342df479c9a38
+
+dots-mocr.webp
+Source: https://arxiv.org/abs/2603.13032v2
+Locator: Figure 1, PDF page 2
+Rights: CC BY-NC-ND 4.0
+Changes: Complete figure artwork preserved; only blank surrounding page margins removed with lossless format conversion. No recoloring, redrawing or modification of the figure content. This use is noncommercial.
+PDF SHA256: b1c0a7395548955a65836534f90cb6fca215e31c4a4a281991b9f3b5ef3d0e93
+Asset SHA256: ab708fe75801055235a271f67a3341c775e94c6add0a3546ca72548ee8113506
+
+License links
+CC BY 4.0: https://creativecommons.org/licenses/by/4.0/
+CC BY-SA 4.0: https://creativecommons.org/licenses/by-sa/4.0/
+CC BY-NC-ND 4.0: https://creativecommons.org/licenses/by-nc-nd/4.0/
+
+MinerU2.5 Figure 2: bounded criticism/review assessment
+Purpose: a noncommercial technical review explaining and critiquing the authors' coarse-to-fine architecture, not illustration sold separately.
+Amount: one necessary architecture figure from a 57-page report; no complete PDF, datasets or surrounding prose are redistributed.
+Character: displayed beside specific analysis with authors, report title, original figure number and source link; the original source remains the primary reading destination.
+Alternatives: linking alone prevents side-by-side inspection of the original layout/crop/merge contract; an invented replacement would not faithfully preserve the primary visual evidence.
+Nature and effect: publicly available research; this limited use is not a substitute for the report and is not used for commercial promotion.
+Assessment reference: Canadian Copyright Act, section 29.1: https://laws-lois.justice.gc.ca/eng/acts/c-42/Section-29.1.html . This provision requires source/author attribution; attribution alone is not a blanket finding of fairness.
+Basis: a scoped criticism/review exception assessment, not a claim that arXiv's distribution license authorizes copying. Rights were reviewed for this use only. Reassess if the use, distribution or commercial context changes; this notice does not grant a license to downstream users.
+
+The four native ModelFlow figures are independent explanatory designs. They do not copy paper artwork and are included under the repository's MIT license.

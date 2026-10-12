@@ -1,0 +1,249 @@
+---
+title: DeepSeek-V4.1-Flash
+description: Follow causal encoding, cross-layer cache sharing, approximate replay and multimodal agent training in DeepSeek-V4.1-Flash.
+lastUpdated: 2026-10-10
+---
+
+import FocusCanvas from '../../../../components/FocusCanvas.astro';
+import ModelFlow from '../../../../components/architectures/ModelFlow.astro';
+import SourceFigure from '../../../../components/architectures/SourceFigure.astro';
+
+<ModelResources reportHref="https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash/blob/2cba9e42aa026125f3ed06c6d98c1db82f7ca027/DeepSeek_V41_Tech_Report.pdf" modelHref="https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash" modelName="deepseek-ai/DeepSeek-V4.1-Flash" />
+
+DeepSeek-V4.1-Flash separates the work of reading a long prompt from the work of generating a response. A causal encoder builds reusable history; a decoder reads that history without fully recomputing every prompt token through its own layers. Cross-layer cache sharing, lower-precision storage and a short replay path then reduce the memory needed for repeated agent interactions.[^report]
+
+Representative checkpoint: **DeepSeek-V4.1-Flash**, the released multimodal instruct model. Report, configuration, license and targeted reference inference code checked October 10, 2026. No weights downloaded, model executed or serving performance measured.[^config][^code][^license]
+
+## Highlights
+
+- **Cheaper reading, full-depth generation.** The advertised active-parameter budget is 8B during prefill and 16B during decoding. This benefits input-heavy workloads; it does not halve every request's latency.[^report]
+- **Reuse has several meanings.** CSA2 separately shares history values, indexer keys and selected positions. Reusing values need not force every layer to make the same selection.[^report]
+- **Memory is part of the model.** Global cache compression, approximate local-state replay and sparse Engram lookups solve different problems. Their sizes cannot be added or compared as if they were one KV cache.[^report]
+
+
+## Model in numbers
+
+| Dimension | Value and scope |
+| --- | --- |
+| Parameter accounting | Reported 552B backbone plus 196B Engram; those named components sum to 748B. The active budgets are 8B prefill and 16B decode, not resident memory requirements. Do not call 552B the complete artifact's tensor count.[^report] |
+| Multimodal training | 45T tokens of training exposure; final corpus text-only to multimodal token ratio 7:1. This ratio is not an image count.[^report] |
+| Vision preparation | Separate ViT training reports about 47B image-text pairs, then 236B autoregressive tokens with a temporary 4B MoE language model. These are separate stage units, not additions to 45T unique language tokens.[^report] |
+| Context | Trained at 64K from scratch, extended to 1M at 34T tokens; released configuration has 1,048,576 positions.[^report][^config] |
+| Global cache | Reported 890 bytes per input position across the shared global cache. Excludes local SWA state, weights, activations and allocator overhead.[^report] |
+| Post training and compute | SFT, RL and full-vocabulary on-policy distillation with over 40 teachers. Complete example/rollout totals, accelerator-hours and total training FLOPs undisclosed.[^report] |
+
+
+## Architecture
+
+The language backbone has 40 causal layers, split into a 20-layer encoder and a 20-layer decoder. Images pass through a separate vision encoder and projector; their embeddings join text at the language input. Each language block combines attention, an expert FFN and four-stream residual mixing.[^report][^config]
+
+<FocusCanvas size="diagram" label="A causal encoder supplies hidden states to decoder global KV; local attention, Engram, a vision encoder and DSpark remain separate paths.">
+  <SourceFigure id="figure-1" src="/figures/model-studies/deepseek-v4-1-flash/architecture.png" alt="A causal encoder supplies hidden states to decoder global KV; local attention, Engram, a vision encoder and DSpark remain separate paths." minWidth={740}>
+    <div slot="image">
+
+    ![A causal encoder supplies hidden states to decoder global KV; local attention, Engram, a vision encoder and DSpark remain separate paths.](/figures/model-studies/deepseek-v4-1-flash/architecture.png)
+
+    </div>
+    **Figure 1.** Causal encoding, shared history and multimodal input. Reproduced from report Figure 3.[^report] [MIT documentation notice](/licenses/deepseek-v41-documentation-MIT.txt).
+  </SourceFigure>
+</FocusCanvas>
+
+Figure 1 shows the network structure, not the optimized execution schedule. The long CED arrow supplies decoder history from encoder output. The lower visual branch joins the input; Engram is learned memory, not conversation KV.
+
+The first two encoder blocks use only sliding-window attention. The next 18 share compressed history in three groups. The decoder shares one global cache source, with layers either refreshing or reusing sparse selections. All attention-bearing layers still compute their own queries and local sliding-window values.[^report][^config]
+
+
+
+## Why separate encoding and decoding?
+
+Tool calls can return far more tokens than the assistant subsequently generates. In a usual decoder-only model, every prompt token traverses every layer to build that layer's cache. Causal Encoder-Decoder, or CED, lets upper layers construct global KV directly from final lower-half hidden states. Prompt processing can therefore stop most full-depth computation at the midpoint.[^report]
+
+The **encoder remains causal**. This is not T5's bidirectional source encoder, and “encoder” does not imply access to future tokens. During generation, each new token goes through both halves. The architecture changes where upper-layer history comes from, not the autoregressive order.[^report]
+
+<FocusCanvas size="wide" label="Encode the long prompt; reuse history while generating">
+  <ModelFlow id="figure-2" title="Encode the long prompt; reuse history while generating" lanesJson='[{"label":"Optimized long-prompt prefill","steps":[{"label":"Image + text","detail":"Visual and text embeddings"},{"label":"Causal encoder","detail":"20 layers; no future access","accent":true},{"label":"Global KV sources","detail":"Project decoder history from encoder output"},{"label":"Local-state replay","detail":"Last 128 tokens through decoder"}],"note":"Most prompt positions skip full decoder computation. Decoder local SWA state is approximate."},{"label":"Generated-token computation","steps":[{"label":"New token","detail":"One embedding"},{"label":"Causal encoder","detail":"Update reusable history"},{"label":"Decoder","detail":"20 layers read global KV + local SWA","accent":true},{"label":"Next-token logits","detail":"Sampling extends the sequence"}],"note":"Generated tokens pass through both halves. Layer queries and SWA remain local even when global KV is shared."}]'>
+    **Figure 2.** Read the prompt once, reuse its history while generating. Original schematic based on the reported optimized CED path, not a measured run.[^report]
+  </ModelFlow>
+</FocusCanvas>
+
+Figure 2 isolates the reported serving schedule. Most prompt positions use the encoder and global projections; only a short recent suffix is replayed through the decoder. Generated tokens still traverse both halves.
+
+For decoder layer `l`, the reported global projection is:
+
+<MathExpression display number="1" tex="C_l=H_{20}W_l^{KV},\qquad Z_l=H_{20}W_l^Z" />
+
+`C` supplies history content and `Z` supplies compression weights. Equation (1) describes a decoder cache-producing layer; CSA2 consumers reuse that source rather than each storing an independent projection. Local SWA KV still comes from each layer's own hidden state.[^report]
+
+For long prompts of length `N` and window `W`, the reported layer-work approximation is `O(20N + 20W)` instead of `O(40N)`, assuming the optimized bounded-replay path. This suppresses mechanism-specific projection, indexing and image costs; it is not a complete FLOP formula. Savings are less compelling when prompts are short or generated output dominates.[^report]
+
+## CSA2: share storage, then decide whether to share selection
+
+CSA2 replaces V4's alternating CSA/HCA design with three statically assigned modes. They are not per-token routing choices:[^report]
+
+| Mode | What the layer constructs or reuses |
+| --- | --- |
+| Full | Constructs main KV and indexer keys; computes fresh top-k positions. |
+| Reindex | Reuses main KV and indexer keys, but rescoring with its own query gives a fresh selection. |
+| Reuse | Reuses main KV and the latest selection for that source; skips new indexing. |
+
+<FocusCanvas size="diagram" label="Full computes main KV, indexer keys and top-k choices; Reindex reuses KV and keys but chooses again; Reuse also reuses the choices. All modes have local queries and SWA KV.">
+  <SourceFigure id="figure-3" src="/figures/model-studies/deepseek-v4-1-flash/csa2-modes.png" alt="Full computes main KV, indexer keys and top-k choices; Reindex reuses KV and keys but chooses again; Reuse also reuses the choices. All modes have local queries and SWA KV." minWidth={760}>
+    <div slot="image">
+
+    ![Full computes main KV, indexer keys and top-k choices; Reindex reuses KV and keys but chooses again; Reuse also reuses the choices. All modes have local queries and SWA KV.](/figures/model-studies/deepseek-v4-1-flash/csa2-modes.png)
+
+    </div>
+    **Figure 3.** CSA2 separates stored evidence from selection decisions. Reproduced from report Figure 4.[^report] [MIT documentation notice](/licenses/deepseek-v41-documentation-MIT.txt).
+  </SourceFigure>
+</FocusCanvas>
+
+Read Figure 3 left to right. The disappearing projection and indexer boxes show what is reused. Main queries and local SWA KV remain in every panel.
+
+Every mode still has its own attention query and local SWA values. Cache ownership and selection ownership are separate contracts. Encoder source layers pool pairs of positions without V4's overlapping compressor; the decoder global source uses ratio one, so it does **not** pool positions at all. Its savings come largely from sharing across layers and precision.[^report][^config]
+
+The decoder's first Full layer searches the whole causally visible history and builds a candidate pool of up to 16,384 positions. Later Reindex layers search within that pool and each select up to 512 entries. This bounds **later** indexer work, not the initial full-history scan. An important fact excluded from the candidate pool cannot be recovered by a deeper reindexer.[^report]
+
+<FocusCanvas size="diagram" label="The first decoder indexer scores full history and selects blocks for a shared pool. Later indexers rescore only pool positions and produce their own top-512 selections.">
+<SourceFigure id="figure-4" src="/figures/model-studies/deepseek-v4-1-flash/hierarchical-indexer.png" alt="The first decoder indexer scores full history and selects blocks for a shared pool. Later indexers rescore only pool positions and produce their own top-512 selections." minWidth={760}>
+<div slot="image">
+
+![The first decoder indexer scores full history and selects blocks for a shared pool. Later indexers rescore only pool positions and produce their own top-512 selections.](/figures/model-studies/deepseek-v4-1-flash/hierarchical-indexer.png)
+
+</div>
+**Figure 4.** A shared search pool need not imply shared final choices. Reproduced from report Figure 5, p. 11.[^report] [MIT documentation notice](/licenses/deepseek-v41-documentation-MIT.txt).
+</SourceFigure>
+</FocusCanvas>
+
+The candidate pool is **not simply the first layer's Top-512**. Block scores
+are the maximum of their position scores; selecting 2,048 blocks of eight
+positions gives 16,384 candidate positions. Later layers choose within that
+wider pool. The hierarchical restriction is introduced during post training
+and is used identically at inference; it is not an untrained serving shortcut.
+[^hierarchical]
+
+## Global KV is not all memory
+
+Main KV uses E2M1 FP4 values with one E4M3 scale per 16 channels, without a second global scale. Quantization-aware training adapts the model to this format; values are dequantized for attention. The indexer uses its own low-precision path. This reduces storage, not automatically every attention operation's arithmetic cost.[^report]
+
+The 890-byte figure counts shared global **main KV plus indexer-key buffers**, not 890 bytes per layer or main KV alone. At one million positions, the derived global portion is about 0.89GB in decimal units before alignment and system overhead. Local SWA caches, incomplete compression state, model weights, Engram tables and activation buffers remain additional costs. Four-bit KV does not mean four-bit everything.[^report]
+
+Engram is a different memory: learned parameter tables addressed by deterministic token n-gram hashes, then gated by context. Its 196B parameters add sparse memorization capacity without dense traversal of the entire table. They do not store the current conversation. The report places two modules at layers 1 and 14, and omits the original Engram convolution.[^report][^config]
+
+## Bounded replay is approximate
+
+Local attention dependencies accumulate through depth. Exact reconstruction of missing SWA state can require replaying a window multiplied by layer count. V4.1 instead replays the most recent 128 tokens, truncating local attention at that replay boundary while retaining available global context.[^report]
+
+This serves two cases: rebuild encoder SWA after a global-cache hit without local state, and initialize decoder SWA without running the entire prompt through the decoder. The reconstructed state is **not mathematically identical** to a full forward pass. The authors report negligible degradation in their tests and simulate decoder replay during post training, but leave untested boundary cases open.[^report]
+
+The reported approximately eightfold persistent-cache reduction versus V4 is workload-dependent: global history remains long-lived, while local SWA moves to short-lived host memory and can be reconstructed on a miss. It does not promise eightfold lower total serving memory.[^report]
+
+## Vision and the rest of the block
+
+DeepSeek-ViT has 32 layers, width 1,024 and 14-pixel patches. Two-dimensional RoPE supports variable resolution. A `3 × 3` pixel-unshuffle reduces the spatial token count by nine while moving information into channels; a two-layer projector maps the resulting features to language width 5,120. It is not simply dropping eight of every nine patches.[^report][^config]
+
+Each FFN activates one shared expert plus six of 384 routed experts. Training maintains separate load-balancing corrections for image and text tokens, because balanced aggregate traffic can conceal modality-specific imbalance.[^report]
+
+Single-Pass mHC shifts input-mixing coefficients by one block to remove a fusion dependency and lower activation traffic. DSpark is trained separately after backbone pretraining and proposes draft blocks for speculative verification. Drafting several tokens does not remove the main model's autoregressive correctness requirement.[^report]
+
+<details>
+<summary>DSpark, Engram and optimizer details</summary>
+
+DSpark uses three drafting blocks with a 128-token local window and proposes
+five positions in parallel. A lightweight Markov head models dependencies
+among drafts; a confidence head estimates conditional acceptance, then prefix
+survival. The scheduler combines these estimates with measured engine
+throughput curves to choose verification length for the current load. It is
+adaptive speculative execution, not five independently accepted next tokens.
+After frozen-backbone preparation, DSpark trains alongside post training,
+but its objective does not backpropagate into the backbone.[^extensions]
+
+Engram uses n-grams of orders 2, 3 and 4, with eight hash heads per order and
+distinct prime-sized tables. Token-ID-based addressing permits host-memory
+prefetch before a layer needs the values; context-aware gating decides their
+contribution. Hash addressing is not semantic retrieval from a document store.
+[^extensions]
+
+Sinkhorn has two roles here. mHC uses it to constrain residual mixing;
+the optimizer uses row/column balancing of momentum-derived updates for large
+embedding tables and the output head. **Balanced updates are not a requirement
+that embedding weights themselves form a doubly stochastic matrix.** Head-wise
+Muon gives attention heads distinct preconditioners; AdamW remains for other
+selected parameters.[^optimization]
+
+</details>
+
+## Training and agent learning
+
+The language model starts with sparse attention at 64K, rather than V4's dense warmup. The 45T-token run extends context at 34T and uses a 100.6M-token batch. Muon updates linear matrices, AdamW handles selected non-matrix parameters, and embeddings and the output head use a momentum update with Sinkhorn balancing.[^report]
+
+The report explicitly attributes its post-training contribution to **data and environments**, not a newly invented RL algorithm. It synthesizes tasks as a problem, environment and verification system; filters correctness and difficulty; and reaudits tasks using new trajectories. SFT and RL develop capabilities before full-vocabulary on-policy distillation consolidates over 40 teachers.[^report]
+
+Vision preparation has a deliberate resolution curriculum. SigLIP-style sigmoid
+contrastive training limits resolution to 224 × 224; the subsequent autoregressive
+stage adapts to higher resolution with a temporary 4B MoE language model,
+which is then discarded. During backbone pretraining the resulting vision encoder
+stays frozen until learning-rate decay, except that its final normalization is
+trainable throughout. These stages are different from a simple joint-from-scratch
+vision-language run.[^vision-training]
+
+Its asynchronous workflow time-shares rollout and learning on the same devices. Sample-level dispatch mitigates long tails, while dataset concurrency controls, early-short-sample handling and stale-token loss masks address length bias and off-policy effects. Asynchrony is an engineering tradeoff, not free additional data.[^report]
+
+<details>
+<summary>Released implementation versus optimized serving</summary>
+
+Cross-layer sharing also creates a distributed-training dependency. A **shadow
+indexer** is an executable replica on another pipeline stage with one logical
+parameter owner. The owner handles optimization and checkpointing; parameter
+synchronization and gradient aggregation keep replicas consistent. Intermediate
+states still cross pipeline boundaries. This supports stage-local execution;
+it is not another inference mode or a removal of communication.[^shadow-indexer]
+
+The pinned Python source allocates shared global buffers only in cache-source layers and retains independent local window buffers. Targeted inspection covers `Attention._compress_kv`, cache/index ownership, `SharedAttention` and `Transformer.forward`.[^code]
+
+Its straightforward main forward loop still runs every backbone layer on the supplied chunk. It does not implement the report's complete skip-most-decoder-prefill and bounded-replay serving path. It also simulates FP4 quantization in ordinary tensors rather than establishing the packed 890-byte physical cache. The reference code is evidence for selected contracts, not a benchmark of the production system.[^code]
+
+The card states MIT for the repository and weights, supported by the inspected license file. Neither this grant nor public artifacts establish a fully released training corpus or a reproduced training run. The original report diagrams above use the release repository's MIT grant for associated documentation, with its notice retained. No substantial code excerpt is copied.[^card][^license]
+
+</details>
+
+
+## Evaluation is a model-and-harness result
+
+The report evaluates instruct results at maximum effort 100. Its code-agent setup uses temperature 1.0, top-p 0.95 and a 1M context; visual agents use a different harness and 512K context. Selected author-reported results are:[^report]
+
+| Evaluation | Reported result and conditions |
+| --- | --- |
+| Terminal-Bench 2.1 | 90.6% pass@1 in DSH Minimal; 84.1% in the Codex scaffold. |
+| DeepSWE v1.1 | 74.2% resolved with mini-SWE; 69.8% with Claude Code. |
+| GPQA Diamond | 90.9% pass@1 at maximum effort. The report uses top-p 1.0 for reasoning; the card states 0.95 for instruct results generally. |
+
+The scaffold comparison holds checkpoint, task set and decoding settings fixed while changing the surrounding framework. It uses eight samples per DeepSWE task and three per Terminal-Bench task, reporting the stated aggregate metrics, not pass@8 or pass@3. The variation is a direct warning against attributing every score to model architecture alone.[^report][^card]
+
+The report does not provide a complete causal decomposition of gains among CED, CSA2, Engram, data and post training. Its cache and replay findings should be stress-tested at retrieval and resumption boundaries. The authors also describe evaluation gaming risks and caution that similar benchmark scores do not imply parity on the hardest tasks.[^report]
+
+## Lessons to carry forward
+
+The central lesson is to separate **building history, storing history and choosing what to read**. Each can be optimized independently, but approximation and sharing create new failure boundaries. Long-context agent quality depends on the model, cache lifecycle, tool harness and training environment together.
+
+Read [DeepSeek-V4](/architectures/models/deepseek-v4/) for sequence compression, [DeepSeek-V2](/architectures/models/deepseek-v2/) for latent attention, and [GLM-5](/architectures/models/glm-5/) for another sparse-memory and asynchronous agent-learning design.
+
+## Open questions
+
+How does bounded replay behave on adversarial cache-hit boundaries? What retrieval failures are introduced by the shared candidate pool? How do latency and total memory change across prompt/output ratios, batches and hardware? The inspected public sources do not establish universal answers or a complete training-cost budget.
+
+
+[^report]: DeepSeek-AI. [DeepSeek-V4.1-Flash: Pushing the Limits of KV Cache Compression](https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash/blob/2cba9e42aa026125f3ed06c6d98c1db82f7ca027/DeepSeek_V41_Tech_Report.pdf). Pinned report; architecture, inference, training, Tables 3–4 and limitations inspected October 10, 2026.
+
+[^config]: DeepSeek-AI. [DeepSeek-V4.1-Flash configuration](https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash/blob/2cba9e42aa026125f3ed06c6d98c1db82f7ca027/config.json). Pinned text and vision configuration.
+
+[^code]: DeepSeek-AI. [V4.1 reference inference model](https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash/blob/2cba9e42aa026125f3ed06c6d98c1db82f7ca027/inference/model.py). Targeted cache ownership, quantization and forward path inspected; no model run.
+
+[^card]: DeepSeek-AI. [DeepSeek-V4.1-Flash model card](https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash/blob/2cba9e42aa026125f3ed06c6d98c1db82f7ca027/README.md). Artifact, evaluation and license statements; report/card sampling discrepancy kept explicit.
+
+[^license]: DeepSeek-AI. [MIT license](https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash/blob/2cba9e42aa026125f3ed06c6d98c1db82f7ca027/LICENSE). Inspected October 10, 2026.
+
+[^hierarchical]: DeepSeek-AI, pinned [V4.1 report](https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash/blob/2cba9e42aa026125f3ed06c6d98c1db82f7ca027/DeepSeek_V41_Tech_Report.pdf), section 2.3.2 and Figure 5, pp. 11–12. Block-max candidate selection, decoder-only scope and post-training introduction.
+[^extensions]: DeepSeek-AI, same report, sections 2.4.2–2.4.3, pp. 13–14: Engram table configuration, DSpark drafting, confidence scheduling and gradient isolation.
+[^optimization]: DeepSeek-AI, same report, section 2.5 and Algorithm 1, pp. 14–16: head-wise Muon and Sinkhorn-balanced momentum updates.
+[^vision-training]: DeepSeek-AI, same report, sections 2.5 and 4.2, pp. 14–15 and 22–23: frozen vision exception, contrastive preparation and autoregressive adaptation.
+[^shadow-indexer]: DeepSeek-AI, same report, section 3.1.2, pp. 17–18: shared memory dependencies across pipeline-parallel stages and executable shadow replicas.

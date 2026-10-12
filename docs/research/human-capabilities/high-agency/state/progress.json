@@ -1,0 +1,52 @@
+{
+  "schema_version": 3,
+  "topic_id": "high-agency",
+  "status": "complete",
+  "coverage": {
+    "meaning": "covered",
+    "importance": "covered",
+    "AI": "covered",
+    "practice": "covered",
+    "constraints": "covered",
+    "autonomous-motivation": "covered",
+    "goal-adjustment": "covered",
+    "worked-example": "covered",
+    "short-video-explanations": "covered",
+    "podcast-and-text-equivalent": "covered"
+  },
+  "open_questions": [],
+  "recommended_next_direction": null,
+  "last_seen": "2026-10-12T18:00:23Z",
+  "output": {
+    "kind": "site-page",
+    "path": "src/content/docs/human-capabilities/high-agency.mdx",
+    "status": "reviewed",
+    "revision": 10,
+    "updated": "2026-10-12",
+    "evidence_cutoff": "2026-10-10",
+    "audience": "Curious adults developing initiative and judgment in work and learning, including AI users."
+  },
+  "quality_gate": {
+    "evidence_verified": true,
+    "contradictions_reviewed": true,
+    "output_reviewed": true,
+    "visuals_reviewed": true
+  },
+  "delivery_checks": {
+    "validation": {
+      "status": "passed",
+      "method": "Node 24 npm run validate: 49 deployment tests, 141 content tests, 161 Astro files with zero errors or warnings, 84-page build and 84-file lint. Existing Vite head-inject module warnings and 25 Pagefind redirect skips remain. No dependency upgrades.",
+      "checked_at": "2026-10-12T18:00:23Z"
+    },
+    "rendering": {
+      "status": "passed",
+      "method": "Podcast heading and accessible audio label renamed to High Agency: Your superpower in the AI era. Chromium checks at desktop 1440, mobile 390 and narrow dark 320 found no overflow or unsolicited playback. Native-heading anchor decoration excluded from text comparison. All media behaviours from the prior reviewed revision remain unchanged. Short videos remain below Figure 1 and the brief introduction.",
+      "checked_at": "2026-10-12T18:00:05.118Z"
+    },
+    "exports": {
+      "status": "passed",
+      "method": "Built Markdown and MDX preserve the descriptive podcast title and its unchanged playback URL; full content validation passed.",
+      "checked_at": "2026-10-12T18:00:23Z"
+    }
+  }
+}

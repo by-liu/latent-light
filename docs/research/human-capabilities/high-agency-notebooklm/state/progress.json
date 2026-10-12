@@ -1,0 +1,50 @@
+{
+  "schema_version": 3,
+  "topic_id": "high-agency-notebooklm",
+  "status": "complete",
+  "coverage": {
+    "meaning": "covered",
+    "psychological-foundations": "covered",
+    "behaviour-development": "covered",
+    "AI-benefits-and-failure": "covered",
+    "practice-and-cases": "covered",
+    "social-context": "covered",
+    "media-guidance": "covered",
+    "self-containment": "covered"
+  },
+  "open_questions": [],
+  "recommended_next_direction": null,
+  "last_seen": "2026-10-11T16:27:59Z",
+  "output": {
+    "kind": "report",
+    "path": "report.md",
+    "status": "reviewed",
+    "revision": 2,
+    "updated": "2026-10-11",
+    "evidence_cutoff": "2026-10-10",
+    "audience": "Curious general readers and NotebookLM generating an accessible, thoughtful podcast or video."
+  },
+  "quality_gate": {
+    "evidence_verified": true,
+    "contradictions_reviewed": true,
+    "output_reviewed": true,
+    "visuals_reviewed": true
+  },
+  "delivery_checks": {
+    "validation": {
+      "status": "passed",
+      "method": "Schema 3 research validator passed, git diff --check passed, and an authored-source scan found no trailing whitespace or research placeholders. No website source, components, navigation or exports changed, so site validation was not required.",
+      "checked_at": "2026-10-11T16:27:59Z"
+    },
+    "rendering": {
+      "status": "passed",
+      "method": "Poppler rendered all 27 final pages at 95 dpi. Visually inspected every page in seven contact sheets, including cover, contents, tables, three figures, study explanations, filled practice record, glossary, production brief and references.",
+      "checked_at": "2026-10-11T16:27:24Z"
+    },
+    "exports": {
+      "status": "passed",
+      "method": "Pypdf checked all 364 substantive canonical segments against extracted PDF text: none missing. Checked 15 bookmarks, 19 unique external links and 118 internal links with valid page targets. Pdfplumber found no text outside page bounds; no blank pages or replacement glyphs.",
+      "checked_at": "2026-10-11T16:27:24Z"
+    }
+  }
+}

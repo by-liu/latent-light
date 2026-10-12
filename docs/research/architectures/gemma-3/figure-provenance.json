@@ -1,0 +1,78 @@
+{
+  "model": "gemma-3",
+  "checked": "2026-10-10",
+  "source": "Gemma Team, Gemma 3 Technical Report, 2025",
+  "source_url": "https://arxiv.org/abs/2503.19786v1",
+  "pdf_url": "https://arxiv.org/pdf/2503.19786v1",
+  "sha256": "b2793d288d6672f8d6a03f65370bb4a48d607f54937a22fc7d9f727435795305",
+  "license": {
+    "status": "verified",
+    "value": "CC BY 4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "grant_evidence": "The version-specific arXiv landing page links Rights to this article to CC BY 4.0.",
+  "modifications": "Source figure regions cropped; surrounding paper prose and captions omitted. Figure labels, colors, axes and drawing retained. No AI repainting.",
+  "extraction": "Poppler pdftoppm v26.08.0, page rendered with scale-to 4200; crop coordinates recorded at 1400 pixel page preview and multiplied by 3.",
+  "figures": [
+    {
+      "asset": "public/figures/model-studies/gemma-3/cache-versus-context.png",
+      "source_figure": 6,
+      "pdf_page": 7,
+      "page_preview_crop": [
+        538,
+        139,
+        309,
+        171
+      ],
+      "output_pixels": [
+        927,
+        513
+      ],
+      "alt": "For the report’s internal 2B text models, the 5 to 1 local to global schedule with a 1024 window uses substantially less KV memory as context grows than global attention at every layer, but its cache still grows.",
+      "caption": "Sparse global layers reduce, not remove, cache growth. Reproduced from Gemma Team, Figure 6; figure crop, CC BY 4.0.",
+      "purpose": "Figure 2 compares internal 2B text models, not measured memory for the released 27B VLM. The mixed schedule keeps a growing global cache, so it is not constant memory. The report labels the horizontal ticks from 1K to 128K at equal spacing; judge the labeled quantities rather than treating the plotted curve as a uniform linear context axis.",
+      "asset_sha256": "4577d0a6db7ef620db116cfcde5c658bc68db0ae9e8633309a98fab9e5924cd7"
+    },
+    {
+      "asset": "public/figures/model-studies/gemma-3/long-context-training.png",
+      "source_figure": 7,
+      "pdf_page": 7,
+      "page_preview_crop": [
+        505,
+        733,
+        390,
+        339
+      ],
+      "output_pixels": [
+        1170,
+        1017
+      ],
+      "alt": "Dashed curves show pretrained Gemma 3 4B, 12B and 27B before long context extension, and solid curves after it. Perplexity beyond the extension can worsen, especially for the smaller models.",
+      "caption": "Position rescaling is part of trained context extension. Reproduced from Gemma Team, Figure 7; figure crop, CC BY 4.0.",
+      "purpose": "Compare solid and dashed lines of the same size in Figure 3, not different sizes. The plot reports average perplexity for pretrained models before and after the extension recipe. It is not an instruction quality or needle retrieval measurement, and favorable points beyond 128K do not establish a supported longer context.",
+      "asset_sha256": "75285f6720810fc5be74218f59de11e60d4c75face0414425b57f047b9003fc5"
+    }
+  ],
+  "restricted_candidates": [],
+  "review": {
+    "source_artwork": true,
+    "crop_integrity": true,
+    "license": true,
+    "desktop_mobile_browser": true,
+    "checked": "2026-10-10T17:36:51.557Z",
+    "revision": 3
+  },
+  "revision": 3,
+  "review_history": [
+    {
+      "revision": 2,
+      "review": {
+        "source_artwork": true,
+        "crop_integrity": true,
+        "license": true,
+        "desktop_mobile_browser": true,
+        "checked": "2026-10-10T15:45:39.761Z"
+      }
+    }
+  ]
+}

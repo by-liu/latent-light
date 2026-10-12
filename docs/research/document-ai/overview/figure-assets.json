@@ -1,0 +1,247 @@
+[
+  {
+    "name": "smoldocling",
+    "pdf": "smoldocling.pdf",
+    "page": 2,
+    "rect": [
+      130,
+      90,
+      593,
+      210
+    ],
+    "license": "CC BY 4.0",
+    "url": "https://arxiv.org/abs/2503.11576v1",
+    "figure": "Figure 1",
+    "changes": "Figure excerpt; page prose and caption omitted.",
+    "pdf_sha256": "5dd7968ab48998373efa6de2137a6d5c20e75a3e61d59dd2f183c22e17c4a40e",
+    "asset_sha256": "fb80252097e7ba6ba7da287c6a07bb4aec5a80940167d7e7a9203afa22b3cc39",
+    "public_path": "/figures/document-ai/smoldocling.webp",
+    "pdf_storage": {
+      "kind": "local-only",
+      "included_in_repository": false,
+      "archive_kind": "Temporary source retrieval used during the figure extraction.",
+      "locator": "smoldocling.pdf",
+      "verification": "Use the canonical report URL and recorded PDF checksum to identify the exact inspected edition."
+    }
+  },
+  {
+    "name": "deepseek-ocr",
+    "pdf": "2510.18234v1.pdf",
+    "page": 5,
+    "asset": "public/figures/document-ai/deepseek-ocr.webp",
+    "license": "CC BY 4.0",
+    "url": "https://arxiv.org/abs/2510.18234v1",
+    "figure": "Figure 3",
+    "changes": "Existing figure excerpt copied without further changes.",
+    "pdf_sha256": "a7297788968f8ad9ed21bcd273110814e4889efbbc99bfea86dca12205797a90",
+    "asset_sha256": "dd6bb64bfc74ff152101e05c99d4c5f78420adce384459ecdb9dcd25844f143f",
+    "public_path": "/figures/document-ai/deepseek-ocr.webp",
+    "pdf_storage": {
+      "kind": "local-only",
+      "included_in_repository": false,
+      "archive_kind": "Original study archive outside this repository.",
+      "locator": "LearningToFly/papers/deepseek-ocr-2025/2510.18234v1.pdf",
+      "verification": "Use the canonical report URL and recorded PDF checksum to identify the exact inspected edition."
+    },
+    "original_asset_locator": "site/src/assets/papers/deepseek-ocr-2025/figure-3-architecture.webp",
+    "asset_storage": "Repository-relative reviewed figure; original excerpt came from the external study workspace."
+  },
+  {
+    "name": "deepseek-ocr-2",
+    "pdf": "2601.20552v1.pdf",
+    "page": 5,
+    "rect": [
+      90,
+      112,
+      595,
+      191
+    ],
+    "license": "CC BY 4.0",
+    "url": "https://arxiv.org/abs/2601.20552v1",
+    "figure": "Figure 3",
+    "changes": "Figure excerpt; blank margins and page prose omitted.",
+    "pdf_sha256": "7c8aceb1dbe0845b9e1a0c5afd761925913662e2e2c4c79b482198f3e5e1a96b",
+    "asset_sha256": "8759898f977f58776ba8cd2767a0c5cb3b5d93606b4579df1b57812667fc8490",
+    "public_path": "/figures/document-ai/deepseek-ocr-2.webp",
+    "pdf_storage": {
+      "kind": "local-only",
+      "included_in_repository": false,
+      "archive_kind": "Original study archive outside this repository.",
+      "locator": "LearningToFly/papers/deepseek-ocr-2-2026/2601.20552v1.pdf",
+      "verification": "Use the canonical report URL and recorded PDF checksum to identify the exact inspected edition."
+    }
+  },
+  {
+    "name": "unlimited-ocr",
+    "pdf": "2606.23050v1.pdf",
+    "page": 1,
+    "asset": "public/figures/document-ai/unlimited-ocr.webp",
+    "license": "CC BY 4.0",
+    "url": "https://arxiv.org/abs/2606.23050v1",
+    "figure": "Figure 1",
+    "changes": "Existing figure excerpt copied without further changes.",
+    "pdf_sha256": "b2d623ccefe5e13b8aa61ccbcd052a91ae77d129d92aa2e9ff5e2380d80e3f91",
+    "asset_sha256": "717a55753ec122cb3150c352ff1cba8bef575b3a5eaac846ed6507211f2e3f27",
+    "public_path": "/figures/document-ai/unlimited-ocr.webp",
+    "pdf_storage": {
+      "kind": "local-only",
+      "included_in_repository": false,
+      "archive_kind": "Original study archive outside this repository.",
+      "locator": "LearningToFly/papers/unlimited-ocr-2026/2606.23050v1.pdf",
+      "verification": "Use the canonical report URL and recorded PDF checksum to identify the exact inspected edition."
+    },
+    "original_asset_locator": "site/src/assets/papers/unlimited-ocr-2026/figure-1-r-swa.webp",
+    "asset_storage": "Repository-relative reviewed figure; original excerpt came from the external study workspace."
+  },
+  {
+    "name": "hunyuan-ocr-15",
+    "pdf": "2607.04884v2.pdf",
+    "page": 4,
+    "rect": [
+      126,
+      100,
+      295,
+      216
+    ],
+    "license": "CC BY-SA 4.0",
+    "url": "https://arxiv.org/abs/2607.04884v2",
+    "figure": "Architecture panel of Figure 1",
+    "changes": "Cropped to architecture panel. Task-example photos, extracted examples, page prose and caption omitted. Derivative retains CC BY-SA 4.0.",
+    "pdf_sha256": "e4d527593985e48288436303d446b1b4469016c7118df933e504a5d2418a80e4",
+    "asset_sha256": "2d60f67b2a44ec1906baab7749221b127b231484b0174df41b71706df184e64b",
+    "public_path": "/figures/document-ai/hunyuan-ocr-15.webp",
+    "pdf_storage": {
+      "kind": "local-only",
+      "included_in_repository": false,
+      "archive_kind": "Original study archive outside this repository.",
+      "locator": "LearningToFly/papers/hunyuanocr-1-5-2026/2607.04884v2.pdf",
+      "verification": "Use the canonical report URL and recorded PDF checksum to identify the exact inspected edition."
+    }
+  },
+  {
+    "name": "mineru25",
+    "pdf": "mineru25.pdf",
+    "page": 7,
+    "rect": [
+      118,
+      121,
+      610,
+      345
+    ],
+    "license": "Copyright authors; criticism/review reuse assessment",
+    "url": "https://arxiv.org/abs/2509.22186v2",
+    "figure": "Figure 2",
+    "changes": "One figure excerpt reproduced unchanged, excluding page prose and caption. arXiv non-exclusive distribution license does not grant downstream reuse.",
+    "pdf_sha256": "e681f945960bb311a3fe6421a2847145528918626096b794c10305e90c95a413",
+    "asset_sha256": "abc34365892b9e8920f6e0eceedfef148fbfe0b57dd4a7c6fa39687edd30bc5b",
+    "public_path": "/figures/document-ai/mineru25.webp",
+    "pdf_storage": {
+      "kind": "local-only",
+      "included_in_repository": false,
+      "archive_kind": "Temporary source retrieval used during the figure extraction.",
+      "locator": "mineru25.pdf",
+      "verification": "Use the canonical report URL and recorded PDF checksum to identify the exact inspected edition."
+    }
+  },
+  {
+    "name": "paddle-ocr-vl-16",
+    "pdf": "2606.03264v1.pdf",
+    "page": 5,
+    "asset": "public/figures/document-ai/paddle-ocr-vl-16.webp",
+    "license": "CC BY 4.0",
+    "url": "https://arxiv.org/abs/2606.03264v1",
+    "figure": "Figure 2",
+    "changes": "Existing figure excerpt copied without further changes.",
+    "pdf_sha256": "6ad1f09beb9cb3599f70334723348ff5f3dcb6f7f3b5fa2573a6abd85df65a24",
+    "asset_sha256": "f26ea5fa41d20b1ed828eba4e79e80d2282ae6d71a6e4e788d222342ddad76e1",
+    "public_path": "/figures/document-ai/paddle-ocr-vl-16.webp",
+    "pdf_storage": {
+      "kind": "local-only",
+      "included_in_repository": false,
+      "archive_kind": "Original study archive outside this repository.",
+      "locator": "LearningToFly/papers/paddleocr-vl-1-6-2026/2606.03264v1.pdf",
+      "verification": "Use the canonical report URL and recorded PDF checksum to identify the exact inspected edition."
+    },
+    "original_asset_locator": "site/src/assets/papers/paddleocr-vl-1-6-2026/figure-2-overview.webp",
+    "asset_storage": "Repository-relative reviewed figure; original excerpt came from the external study workspace."
+  },
+  {
+    "name": "glm-ocr",
+    "pdf": "2603.10910v2.pdf",
+    "page": 4,
+    "asset": "public/figures/document-ai/glm-ocr.webp",
+    "license": "CC BY 4.0",
+    "url": "https://arxiv.org/abs/2603.10910v2",
+    "figure": "Figure 2",
+    "changes": "Complete figure excerpt; surrounding page prose and blank margins omitted. No figure labels redrawn.",
+    "pdf_sha256": "58198ceae993a1f6bd7e690d27fc111c3e8146a04db8bb1294a6f4acfcb38e63",
+    "asset_sha256": "24cd8d6320c067491a979bae0ee90b1737d4833829c1918173c841f2f5f1128c",
+    "public_path": "/figures/document-ai/glm-ocr.webp",
+    "pdf_storage": {
+      "kind": "local-only",
+      "included_in_repository": false,
+      "archive_kind": "Original study archive outside this repository.",
+      "locator": "LearningToFly/papers/glm-ocr-2026/2603.10910v2.pdf",
+      "verification": "Use the canonical report URL and recorded PDF checksum to identify the exact inspected edition."
+    },
+    "original_asset_locator": "site/src/assets/papers/glm-ocr-2026/figure-2-workflow.webp",
+    "asset_storage": "Repository-relative reviewed figure; original excerpt came from the external study workspace.",
+    "original_asset_recheck": {
+      "date": "2026-10-12",
+      "current_sha256": "1836b29e608808c10164c02fe19312d903b6cabab86326079928e70d0ee8d70c",
+      "note": "The external locator now contains different bytes from the recorded extraction. The repository figure still matches its original recorded checksum; its bytes and attribution are unchanged."
+    }
+  },
+  {
+    "name": "olmocr2-rewards",
+    "pdf": "olmocr2.pdf",
+    "page": 6,
+    "rect": [
+      110,
+      95,
+      600,
+      375
+    ],
+    "license": "CC BY 4.0",
+    "url": "https://arxiv.org/abs/2510.19817v1",
+    "figure": "Figure 4",
+    "changes": "Figure excerpt; page prose and caption omitted.",
+    "pdf_sha256": "00eb8aba59ea9f346776791014c158d97a6b167148c33bdaaa5dec767beca697",
+    "asset_sha256": "b537cbeb615f21758b6af68c7549397bbc2d25e79cb1e5e8a1f342df479c9a38",
+    "public_path": "/figures/document-ai/olmocr2-rewards.webp",
+    "pdf_storage": {
+      "kind": "local-only",
+      "included_in_repository": false,
+      "archive_kind": "Temporary source retrieval used during the figure extraction.",
+      "locator": "olmocr2.pdf",
+      "verification": "Use the canonical report URL and recorded PDF checksum to identify the exact inspected edition."
+    }
+  },
+  {
+    "name": "dots-mocr",
+    "pdf": "2603.13032v2.pdf",
+    "page": 2,
+    "asset": "public/figures/document-ai/dots-mocr.webp",
+    "license": "CC BY-NC-ND 4.0",
+    "url": "https://arxiv.org/abs/2603.13032v2",
+    "figure": "Figure 1",
+    "changes": "Complete figure artwork preserved; only blank surrounding page margins removed with lossless format conversion. No recoloring, redrawing or modification of the figure content. This use is noncommercial.",
+    "pdf_sha256": "b1c0a7395548955a65836534f90cb6fca215e31c4a4a281991b9f3b5ef3d0e93",
+    "asset_sha256": "ab708fe75801055235a271f67a3341c775e94c6add0a3546ca72548ee8113506",
+    "public_path": "/figures/document-ai/dots-mocr.webp",
+    "pdf_storage": {
+      "kind": "local-only",
+      "included_in_repository": false,
+      "archive_kind": "Original study archive outside this repository.",
+      "locator": "LearningToFly/papers/dots-mocr-2026/2603.13032v2.pdf",
+      "verification": "Use the canonical report URL and recorded PDF checksum to identify the exact inspected edition."
+    },
+    "original_asset_locator": "site/src/assets/papers/dots-mocr-2026/figure-1-overview.webp",
+    "asset_storage": "Repository-relative reviewed figure; original excerpt came from the external study workspace.",
+    "original_asset_recheck": {
+      "date": "2026-10-12",
+      "current_sha256": "94bb529171ebea8d09530425ff622fc70c08e7372b99b130ab1d3a974f70c6dd",
+      "note": "The external locator now contains different bytes from the recorded extraction. The repository figure still matches its original recorded checksum; its bytes and attribution are unchanged."
+    }
+  }
+]

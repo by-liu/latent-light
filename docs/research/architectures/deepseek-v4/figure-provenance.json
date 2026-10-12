@@ -1,0 +1,101 @@
+{
+  "model": "deepseek-v4",
+  "checked": "2026-10-10",
+  "figures": [
+    {
+      "slug": "deepseek-v4",
+      "asset": "public/figures/model-studies/deepseek-v4/architecture.png",
+      "source": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash/blob/553034d7dd9e06c2eeaee68cf85a17d6d4754cf0/DeepSeek_V4.pdf",
+      "source_page": 6,
+      "source_figure": 2,
+      "crop_points": [
+        164,
+        78,
+        438,
+        381
+      ],
+      "dpi": 300,
+      "pdf_sha256": "8a03dadae71894de1515da33e296f0df1dbeed3e7f4bf0badd087f9af77f29e9",
+      "asset_sha256": "5fe62d83fcfaeed0ac6b99d20808a495d33cfbbd3b1abe8c40b9537d1e96bb16",
+      "license": "MIT associated documentation in the exact official release repository; no separate exclusion in report",
+      "license_url": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash/blob/553034d7dd9e06c2eeaee68cf85a17d6d4754cf0/LICENSE",
+      "modifications": "Whitespace and source prose outside the complete diagram omitted; all diagram labels and arrows retained.",
+      "checked": "2026-10-10"
+    },
+    {
+      "slug": "deepseek-v4",
+      "asset": "public/figures/model-studies/deepseek-v4/compressed-sparse-attention.png",
+      "source": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash/blob/553034d7dd9e06c2eeaee68cf85a17d6d4754cf0/DeepSeek_V4.pdf",
+      "source_page": 9,
+      "source_figure": 3,
+      "crop_points": [
+        76,
+        85,
+        526,
+        310
+      ],
+      "dpi": 300,
+      "pdf_sha256": "8a03dadae71894de1515da33e296f0df1dbeed3e7f4bf0badd087f9af77f29e9",
+      "asset_sha256": "1a135dc80599aca2dd58bb2d1de693ac292cc03c4e8039944b378cd609d103bf",
+      "license": "MIT associated documentation in the exact official release repository; no separate exclusion in report",
+      "license_url": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash/blob/553034d7dd9e06c2eeaee68cf85a17d6d4754cf0/LICENSE",
+      "modifications": "Whitespace and source prose outside the complete diagram omitted; all diagram labels and arrows retained.",
+      "checked": "2026-10-10"
+    },
+    {
+      "slug": "deepseek-v4",
+      "asset": "public/figures/model-studies/deepseek-v4/heavily-compressed-attention.png",
+      "source": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash/blob/553034d7dd9e06c2eeaee68cf85a17d6d4754cf0/DeepSeek_V4.pdf",
+      "source_page": 11,
+      "source_figure": 4,
+      "crop_points": [
+        158,
+        83,
+        438,
+        251
+      ],
+      "dpi": 300,
+      "pdf_sha256": "8a03dadae71894de1515da33e296f0df1dbeed3e7f4bf0badd087f9af77f29e9",
+      "asset_sha256": "0da80e8180c75d4c2acb57a8c0c70e1e63e5f92b6eeb343cba36f6ce37ea4421",
+      "license": "MIT associated documentation in the exact official release repository; no separate exclusion in report",
+      "license_url": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash/blob/553034d7dd9e06c2eeaee68cf85a17d6d4754cf0/LICENSE",
+      "modifications": "Whitespace and source prose outside the complete diagram omitted; all diagram labels and arrows retained.",
+      "checked": "2026-10-10"
+    }
+  ],
+  "review": {
+    "source_artwork": true,
+    "crop_integrity": true,
+    "license": true,
+    "desktop_mobile_browser": true,
+    "checked": "2026-10-10T17:36:51.557Z",
+    "revision": 3
+  },
+  "revision3_additions": [
+    {
+      "asset": "public/figures/model-studies/deepseek-v4/cache-lifetimes.png",
+      "source": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash/blob/553034d7dd9e06c2eeaee68cf85a17d6d4754cf0/DeepSeek_V4.pdf",
+      "source_page": 22,
+      "source_figure": 6,
+      "crop_points": [
+        74.88,
+        84,
+        524.88,
+        234
+      ],
+      "poppler_crop_pixels": [
+        312,
+        350,
+        1875,
+        625
+      ],
+      "dpi": 300,
+      "pdf_sha256": "8a03dadae71894de1515da33e296f0df1dbeed3e7f4bf0badd087f9af77f29e9",
+      "asset_sha256": "aa578070d173915e8895829c0bee00ab9a26b1ee5bc57b7837d05aee78ada55e",
+      "modifications": "Whitespace and source prose outside complete artwork omitted; all labels, keys, panels and arrows retained. No recoloring.",
+      "license": "MIT associated documentation; exact notice retained at public/licenses/deepseek-v4-documentation-MIT.txt",
+      "license_url": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash/blob/553034d7dd9e06c2eeaee68cf85a17d6d4754cf0/LICENSE",
+      "checked": "2026-10-10"
+    }
+  ]
+}

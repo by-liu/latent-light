@@ -1,0 +1,108 @@
+---
+title: Research workflow
+description: How research becomes a clear, grounded and carefully presented Latent Light page.
+lastUpdated: 2026-10-10
+---
+
+Research is complete when it becomes useful understanding. The aim is not to
+collect the most sources or produce the longest report, but to explain a
+worthwhile subject clearly, with enough evidence and depth to trust it.
+
+This workflow applies to AI technology, products and markets, industry
+landscapes, and human capabilities. Use it with the
+[Content standards](/about/content-guidance/content-standards/).
+For a model study, also use the
+[Model Deep Dive guide](/about/content-guidance/model-deep-dive-guide/).
+
+## Define what the reader needs
+
+Begin with a question, topic, field, paper collection or practical decision.
+Identify the reader, purpose and scope before broad research. Decide what
+understanding would make the work useful, and which questions are outside it.
+
+Look for related explanations first. Extend an existing page or connect it to
+a focused companion when that is clearer than adding another isolated entry.
+Organize by the subject's natural domain, not by a fixed technical template.
+
+## Build and challenge the evidence
+
+Map the main dimensions and the evidence that could resolve them. Include a
+credible alternative explanation or skeptical direction. Inspect actual
+sources and preserve the conditions around their findings.
+
+Match the evidence to the claim. A technical mechanism, a company's current
+product, a market estimate and a firsthand account call for different sources.
+Keep published findings, calculations, interpretation and experience distinct.
+
+Review consequential claims separately from drafting. Check source identity,
+scope, freshness, units and comparisons. Seek counterevidence instead of
+building an article from supporting examples alone. Keep missing information
+visible when it could change the conclusion.
+
+## Design the explanation
+
+Give the reader a clear opening: what the subject is, why it matters, and what
+this page helps them understand. Start with intuition before introducing
+specialized vocabulary. Where an answer is established, state it early.
+Where the purpose is exploration, do not manufacture a tidy conclusion.
+
+Let the structure fit the work. A mechanism may need a computation and its
+tradeoffs. A landscape may need comparisons. A study of communication may
+need a concrete situation, research findings and the limits of applying them.
+Not every page needs the same headings, numbers or figures.
+
+Make important detail available without making the main path exhausting.
+Use focused sections, useful links and optional depth. Keep essential caveats
+beside the claims they qualify, even when secondary detail is folded away.
+
+## Give visuals a job
+
+Choose a figure when it makes a mechanism, relationship, comparison or process
+easier to understand. Prefer a useful source figure with a documented reuse
+basis. Create our own explanation when an important view is missing or a
+focused comparison would be clearer.
+
+Use the smallest visual that teaches the idea. Preserve meaningful labels,
+short numbered captions, attribution and text equivalents. Avoid decorative
+complexity, redundant illustrations and unreadable overview posters.
+Follow the [media standards](/about/content-guidance/content-standards/#choose-media-for-the-explanation).
+
+## Keep one canonical explanation
+
+For site work, the Markdown or MDX page is the canonical narrative. The site
+generates its HTML and text exports from that source. Research records support
+the article; they are not a second article to maintain.
+
+Keep sources, claims, source versions, visual provenance and review results in
+`docs/research/<domain>/<topic>/`. Preserve existing reports as research history.
+A standalone report can be the canonical output when that is the requested
+deliverable. Keep every repository record suitable for public sharing.
+
+## Review, refine and verify
+
+Review evidence and presentation in separate passes, then read the page as a
+whole. Check the actual rendering, not only the source or a passing build.
+
+- Can the opening orient a reader without prior knowledge of the topic?
+- Does the explanation flow from motivation to useful understanding?
+- Are important assumptions, disagreements and evidence gaps visible?
+- Does each figure teach something and remain readable on mobile?
+- Do captions, citations, equations and comparisons remain clear?
+- Can repetition or clutter be removed without losing necessary meaning?
+- Do text exports preserve the substance without requiring a visual or media player?
+
+Fix concrete problems and inspect the affected output again. Record checks
+that actually occurred. An unavailable review remains a gap, not a passed
+check. Follow the [validation checklist](/about/maintenance/#validate-a-change).
+
+## The repository skill
+
+The project includes a versioned `latent-light-deep-research` skill under
+`.agents/skills/latent-light-deep-research/`. It coordinates the work described
+here and supplies research record schemas, initialization and validation.
+Its instructions, references, scripts and tests are managed in this repository.
+
+The About source pages remain authoritative for editorial and development
+standards. The skill does not authorize publication, external actions or
+changes outside the requested scope. Its technical files are not published
+as website pages.

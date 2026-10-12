@@ -1,0 +1,174 @@
+---
+title: "Agent Deep Dives"
+description: Compare real agent implementations, understand their boundaries, and follow the research frontier.
+lastUpdated: 2026-10-11
+---
+
+import LandscapeMap from '../../../../components/landscapes/LandscapeMap.astro';
+import AgentCards from '../../../../components/agents/AgentCards.astro';
+import LandscapeOverview from '../../../../components/landscapes/LandscapeOverview.astro';
+import FocusCanvas from '../../../../components/FocusCanvas.astro';
+
+Study an agent by following **one task across its boundaries**: what the model
+sees, how actions run, what persists and who verifies the result. The five
+initial deep dives expose different design choices inside that common problem.
+
+[Explore the studies](#the-five-studies) · [Compare responsibilities](#compare-the-system-boundaries) · [Follow the frontier](#frontier)
+
+## The five studies
+
+<AgentCards cardsJson='[{"eyebrow":"Workflow and extensions","title":"Claude Code","description":"How project context, tools, skills and workers become a steerable coding workflow.","href":"/agents/deep-dives/claude-code/"},{"eyebrow":"Sessions and execution","title":"Codex","description":"How clients, task state, SDK automation and execution boundaries fit together.","href":"/agents/deep-dives/codex/"},{"eyebrow":"Small core, extensible host","title":"Pi","description":"What a reusable loop and session tree provide, and what the host must own.","href":"/agents/deep-dives/pi/"},{"eyebrow":"Client and server","title":"OpenCode","description":"What an API boundary changes about interfaces, roles, plugins and control.","href":"/agents/deep-dives/opencode/"},{"eyebrow":"Composition and lifecycle","title":"DeepSeek Harness","description":"What changes when the agent loop, tools and policies are replaceable plugins.","href":"/agents/deep-dives/deepseek-harness/"}]' />
+
+These are architectural studies of selected systems, not a popularity ranking.
+Current documentation and the three open-source snapshots were inspected
+**October 11, 2026**. Their worked scenarios illustrate mechanisms; they do not
+report an executed head-to-head benchmark.[^claude][^codex][^pi][^opencode][^dsh]
+DeepSeek Harness remains an explicitly unaudited developer preview.[^preview]
+
+## Put each system on the landscape
+
+A coding product, reusable harness, framework and managed runtime can overlap.
+[Figure 1](#figure-1) shows the responsibility emphasized by each category.
+A project can occupy several places on this map.
+
+<LandscapeMap id="figure-1" title="Different layers, different ownership" cardsJson='[{"label":"Coding products","role":"Package a work loop into a user-facing development workflow.","examples":"Claude Code, Codex, OpenCode","question":"Where does work run, and how does the user inspect and steer it?"},{"label":"Extensible harnesses","role":"Assemble reusable context, tool and execution machinery.","examples":"Pi, DeepSeek Harness, Deep Agents","question":"What does the host own, and which components can it replace?"},{"label":"Frameworks and SDKs","role":"Provide primitives for constructing an application-owned system.","examples":"LangGraph, Google ADK, agent SDKs","question":"Which persistence, retry and policy responsibilities remain in the application?"},{"label":"Managed runtimes","role":"Operate parts of the harness and session infrastructure as a service.","examples":"OpenAI Agents API, Anthropic Managed Agents","question":"Which control, storage and execution boundaries does the service actually own?"}]' footer="Placement shows a studied role, not measured quality, market share or an exclusive category.">
+
+**Figure 1.** Latent Light synthesis of product, harness, framework and managed-runtime responsibilities.[^claude][^codex][^pi][^opencode][^dsh][^deepagents][^langgraph][^adk][^managed][^api]
+
+</LandscapeMap>
+
+The [broader ecosystem directory](/agents/ecosystem/) retains additional study
+candidates, including Microsoft Agent Framework, smolagents and Strands. Its
+product details retain the source-check dates stated there. The
+[Personal AI Agents landscape](/products-markets/landscapes/personal-agents/)
+examines consumer delegation and user needs; this collection examines the
+mechanisms and implementation responsibilities.
+
+## Compare the system boundaries
+
+Read across the table to compare responsibilities, then open a study for its
+source details and qualifications. Interface names alone cannot establish
+execution location or isolation.
+
+<FocusCanvas size="wide" label="Compare five agent implementations by runtime ownership, context, extensions and control.">
+
+| Boundary | Claude Code | Codex | Pi | OpenCode | DeepSeek Harness |
+| --- | --- | --- | --- | --- | --- |
+| Study focus | Project-aware coding workflow | Controllable session and execution lifecycle | Reusable loop and extensible host | Client/server coding runtime | Replaceable plugin composition |
+| Integration unit | Product workflow and extensions | Interactive clients, SDK and App Server | In-process SDK or subprocess RPC | Server API and clients | Profile, bundles and service plugins |
+| Context and continuity | Guidance, memory, compaction and saved sessions | Threads, work items and configured context management | Active branch of a persistent session tree | Server-owned sessions and child sessions | Derived history from a durable session log |
+| Extension question | Which skill, hook, tool or worker fits? | Which instructions, integration and client contract fit? | Which executable extension or resource belongs in the host? | Which plugin, skill or configured role fits? | Which service or lifecycle seam should change? |
+| Control question | Inspect permission and execution settings | Separate approval from filesystem/network containment | Supply external containment; no built-in resource permission system | Inspect allow/ask/deny rules and host access | Inspect the mounted guards and preview limitations |
+
+</FocusCanvas>
+
+This table is our comparison lens, informed by the detailed contracts cited in
+the individual studies. It does not score reliability or security. “Supports
+memory” is particularly weak as a comparison: active context, a recoverable
+session record and remembered knowledge solve different problems. LangGraph's
+checkpointer/store distinction offers another concrete example of these scopes.[^langgraph]
+
+A meaningful trial would hold the task, model where possible, environment and
+total budget fixed, then inspect outcomes, recovery and cost. If models or
+scaffolds differ, report that difference instead of attributing the entire
+result to the product name. See [Evaluation](/agents/evaluation-reliability/).
+
+## Frontier
+
+Several active directions are changing what a useful harness needs to provide.
+The evidence below mixes inspected research with labeled vendor engineering
+accounts. Each supplies a bounded lesson.
+
+### Durable sessions beyond one running process
+
+Anthropic's managed architecture separates the session log, harness and sandbox.
+The record can survive a failed harness, while the next harness reconstructs
+work from events. Its account explicitly distinguishes the full session from
+Claude's selected context window.[^managed] OpenAI's Agents API similarly assigns
+managed harness and session responsibilities to the service, with environment
+choices remaining explicit.[^api]
+
+The practical question is what can be recovered after an interruption.
+Persisted text is useful, but an external operation may have committed before
+its response was lost. Durable execution must reconcile effects as well as
+reconstruct a conversation. These vendor designs do not prove that every
+application using them already implements that recovery contract.
+
+### Evolving context with accountable updates
+
+ACE studies context adaptation without changing model weights. It separates
+generation, reflection and curation, then merges incremental context updates.
+[Figure 2](#figure-2) shows the authors' mechanism. The reported evaluations concern
+particular tasks and baselines; they do not establish universal improvement
+from accumulating more memory.[^ace]
+
+<LandscapeOverview id="figure-2" src="/figures/agents/ace-framework-v3.webp" alt="ACE framework: a query and context playbook feed a Generator, whose trajectory reaches a Reflector. The Reflector produces insights for a Curator, which returns delta context items to update the playbook. Reflection can iterate." minWidth={760}>
+<div slot="image">
+
+![ACE framework: a query and context playbook feed a Generator, whose trajectory reaches a Reflector. The Reflector produces insights for a Curator, which returns delta context items to update the playbook. Reflection can iterate.](/figures/agents/ace-framework-v3.webp)
+
+</div>
+
+**Figure 2.** ACE context adaptation, reproduced from Zhang et al., version 3, original Figure 4, under CC BY 4.0. Converted to WebP without changing the diagram.[^ace]
+
+</LandscapeOverview>
+
+The important design question is **who may revise stored guidance, with what
+evidence and rollback**. An incremental memory entry can preserve a useful
+lesson or preserve an error. The paper's mechanism motivates explicit review
+of context changes rather than treating a longer prompt as a guarantee.
+
+### Coordination that fits the task
+
+Kim and colleagues compare agent architectures across multiple benchmark,
+model and configuration settings. Their reported results vary with task
+structure: decomposable work and sequential planning do not benefit equally
+from coordination. The paper identifies overhead and error propagation as
+consequential factors.[^scaling]
+
+That supports a conditional design rule: add workers to resolve a particular
+failure or independent work split, then measure the whole job. It does not
+establish that all multi-agent systems help or fail. The
+[coordination chapter](/agents/orchestration/) explains the contracts and costs.
+
+### Feedback that can actually distinguish improvement
+
+Anthropic's application-development account uses an evaluator that interacts
+with the running application and is calibrated against explicit criteria.
+It also reports much greater cost in one multi-agent comparison and describes
+simplifying the harness as the generator model improved.[^harness]
+
+This is a vendor engineering account with selected examples, not a controlled
+ranking of these five products. Its useful lesson is that a critic needs
+observable evidence and a discriminating rubric. A more capable model can also
+change which scaffolding earns its overhead. Repeated self-approval is not
+verification.
+
+## Choose the next question
+
+| If you want to understand… | Start with… |
+| --- | --- |
+| A packaged development workflow | [Claude Code](/agents/deep-dives/claude-code/) |
+| An application-controlled coding session | [Codex](/agents/deep-dives/codex/) |
+| A host you can adapt through a small core | [Pi](/agents/deep-dives/pi/) |
+| Multiple interfaces around a runtime API | [OpenCode](/agents/deep-dives/opencode/) |
+| Replaceable services and lifecycle composition | [DeepSeek Harness](/agents/deep-dives/deepseek-harness/) |
+
+These are study routes, not adoption recommendations. For design prerequisites,
+return to [How Agents Work](/agents/foundations/); for the practical end-to-end
+example, read [A Coding Workflow](/agents/deep-dives/coding-agents/).
+
+[^claude]: Anthropic. [How Claude Code works](https://code.claude.com/docs/en/how-claude-code-works), documented harness and work loop; checked October 11, 2026.
+[^codex]: OpenAI. [Codex SDK](https://learn.chatgpt.com/docs/codex-sdk), local automation and App Server distinction; checked October 11, 2026.
+[^pi]: Mario Zechner and Earendil Works. [Pi](https://github.com/earendil-works/pi/blob/4270522473e677ddba7b093caa0064a3df51d459/README.md), toolkit and host permission boundary. Snapshot checked October 11, 2026.
+[^opencode]: OpenCode contributors. [Server](https://github.com/anomalyco/opencode/blob/707de5832656e89cc0f04436aa1cd5f4f91c5763/packages/web/src/content/docs/server.mdx), client/server API. Snapshot checked October 11, 2026.
+[^dsh]: DeepSeek AI. [Architecture](https://github.com/deepseek-ai/deepseek-harness/blob/d743267388641bc76f17c45ce8b4c231aed1d32c/docs/architecture.md), plugin composition, profiles and services. Snapshot checked October 11, 2026.
+[^preview]: DeepSeek AI. [Safety](https://github.com/deepseek-ai/deepseek-harness/blob/d743267388641bc76f17c45ce8b4c231aed1d32c/SAFETY.md), experimental status and absence of a security audit. Snapshot checked October 11, 2026.
+[^langgraph]: LangChain. [LangGraph persistence](https://docs.langchain.com/oss/python/langgraph/persistence), checkpointers and stores. Checked October 11, 2026.
+[^deepagents]: LangChain. [Deep Agents overview](https://docs.langchain.com/oss/python/deepagents/overview), reusable harness; checked October 11, 2026.
+[^adk]: Google. [Agent Development Kit](https://adk.dev/), agent-development framework. Checked October 11, 2026.
+[^managed]: Anthropic. [Scaling Managed Agents: Decoupling the brain from the hands](https://www.anthropic.com/engineering/managed-agents), April 8, 2026; session, harness and sandbox separation. Checked October 11, 2026.
+[^api]: OpenAI. [Agents API overview](https://developers.openai.com/api/docs/guides/agents-api/overview), managed Codex harness and environment choices; checked October 11, 2026.
+[^ace]: Qizheng Zhang et al. [Agentic Context Engineering: Evolving Contexts for Self-Improving Language Models](https://arxiv.org/html/2510.04618v3), ICLR 2026; version 3, March 29, 2026, Sections 2–3 and Figure 4. CC BY 4.0.
+[^scaling]: Yubin Kim et al. [Towards a Science of Scaling Agent Systems](https://arxiv.org/abs/2512.08296v3), version 3, April 8, 2026; abstract and reported benchmark scope. Preprint.
+[^harness]: Prithvi Rajasekaran, Anthropic. [Harness design for long-running application development](https://www.anthropic.com/engineering/harness-design-long-running-apps), March 24, 2026; evaluator calibration, cost and model-dependent simplification. Engineering account, checked October 11, 2026.

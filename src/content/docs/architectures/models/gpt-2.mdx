@@ -1,39 +1,99 @@
 ---
 title: GPT-2
-description: Trace a causal language decoder through learned position, pre-normalized residual blocks, vocabulary logits, and cached history.
-lastUpdated: 2026-10-05
+description: Understand task transfer, a released causal decoder, parameter counts, and generation cache ownership.
+lastUpdated: 2026-10-10
 ---
 
 import FocusCanvas from '../../../../components/FocusCanvas.astro';
 import ArchitectureDiagram from '../../../../components/architectures/ArchitectureDiagram.astro';
+import GptCacheFigure from '../../../../components/architectures/GptCacheFigure.astro';
 
-GPT-2 is a useful architectural baseline: one stream reads a text prefix and
-produces scores for what comes next. There is no separate encoder or encoder
-memory connection in its released language decoder.[^code]
+<ModelResources reportHref="https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf" modelHref="https://huggingface.co/openai-community/gpt2" modelName="openai-community/gpt2" />
 
-This study uses the 2019 report and OpenAI's released `src/model.py` at commit
-`9b63575`. It inspects code rather than running a checkpoint. Selected evidence
-checked October 5, 2026.[^report][^code]
+GPT-2 turns a text prefix into predictions for the next token. Its research
+question was more ambitious: could training on varied text also teach a model
+to perform tasks described in that text, without a separate supervised model
+for each task?[^report]
 
-## Follow the prediction contract
+## Highlights
 
-A causal language model factorizes a sequence into next token conditionals:[^report]
+- **Tasks can live in the prefix.** The report studies transfer through textual
+  context without updating the model for each benchmark.[^report]
+- **A compact architectural baseline.** One causal decoder combines learned
+  positions, pre normalization, GELU FFNs, and a tied vocabulary head.[^code]
+- **Generation is more than the network.** The released model produces logits
+  and incremental KV tensors; the caller owns sampling and cache accumulation.[^code][^sample]
 
-<MathExpression display number="1" tex="p(x_{1:T})=\prod_{t=1}^{T}p(x_t\mid x_{\lt t})" />
+For a learner, GPT-2 makes the boundary between representation, prediction, and
+generation unusually easy to inspect. This is its value in this collection,
+not a claim that a 2019 model is a competitive assistant today.
 
-The released code adds token embeddings and learned position embeddings,
-applies repeated blocks, then final LayerNorm and a vocabulary projection
-using the token embedding weights. It returns logits; softmax and token
-selection are not inside this `model` function.[^code]
+Study scope: the report, pinned small checkpoint configuration and tokenizer,
+and original model and sampling code were inspected. No checkpoint was run.
+Evidence checked October 10, 2026.
 
-<FocusCanvas size="diagram" label="GPT-2 architecture and residual block">
+## Model in numbers
+
+Representative artifact: `openai-community/gpt2`, the released small base model.[^card][^config]
+
+| Dimension | Value and scope |
+| --- | --- |
+| Parameters | Approximately 124M in the released card; 124,439,808 from the architecture count below. The report labels its smallest model 117M.[^card][^report][^code] |
+| Decoder | 12 layers, width 768, 12 attention heads, head width 64.[^config] |
+| Input | Vocabulary of 50,257 tokens; 1,024 learned positions.[^config] |
+| Data | Slightly over 8 million cleaned WebText documents, 40 GB of text. This is corpus size, not total token exposure.[^report] |
+| Training budget | Total processed tokens, duration, and compute for this small checkpoint are not disclosed in the inspected report. Do not substitute the largest model's hardware allocation. |
+| Post training | This artifact is a base language model, not an instruction or preference trained assistant.[^card] |
+
+## What changed
+
+The central shift is the task interface. Instead of attaching a supervised head
+for every task, the report asks whether an ordinary continuation objective can
+learn useful input and output patterns from diverse text. A document followed
+by a question, or an article followed by a summary cue, changes what continuation
+is likely. This is evidence of task transfer, not proof of reliable instruction
+following.[^report]
+
+The architecture remains recognizably a Transformer decoder. The report moves
+LayerNorm before each residual branch, adds a final LayerNorm, and describes
+depth dependent residual initialization. Larger capacity and broader data are
+part of the experiment; the results do not isolate normalization as the cause
+of downstream improvements.[^report]
+
+## Model identity
+
+| Item | Studied source |
+| --- | --- |
+| Report | Radford et al., 2019, *Language Models are Unsupervised Multitask Learners*, sections 2 to 4[^report] |
+| Released artifact | Small GPT-2, pinned card, configuration, and tokenizer metadata[^card][^config][^tokenizer] |
+| Code trace | OpenAI repository, `model.py` and `sample.py`[^code][^sample] |
+| Openness | Original repository code uses MIT; the hosted artifact card declares MIT. WebText is not released as a browsable training dataset.[^license][^card] |
+
+The parameter labels need care: the report's Table 2 and the released card use
+different counts. The concrete dimensions here describe the pinned small
+artifact, not a silent substitution into every historical result.
+
+## Architecture
+
+The input contract is a batch of token IDs. Token embeddings and learned
+position embeddings are added. Twelve residual blocks mix the permitted text
+history and transform each token's features. Final normalization and the
+transposed token embedding matrix produce vocabulary logits.[^code]
+
+<FocusCanvas size="diagram" label="GPT-2 decoder and residual block">
   <ArchitectureDiagram kind="gpt2" id="figure-1">
-    **Figure 1.** A causal decoder with two residual bypasses per block. Original schematic based on the pinned released code.[^code]
+    **Figure 1.** Causal decoder and residual paths. Original schematic based on the pinned released code.[^code]
   </ArchitectureDiagram>
 </FocusCanvas>
 
-The block's attention branch reads normalized input, then adds its result
-to the original stream. The FFN does the same with the updated stream:
+The objective factorizes a sequence into next token conditionals:[^report]
+
+<MathExpression display number="1" tex="
+p(x_{1:T})=\prod_{t=1}^{T}p(x_t\mid x_{\lt t})
+" />
+
+For a block input `x`, attention and FFN branches read normalized features,
+but each residual addition retains the unnormalized stream:[^code]
 
 <MathExpression display number="2" tex="
 \begin{aligned}
@@ -42,44 +102,156 @@ h &= u+\operatorname{FFN}(\operatorname{LN}_2(u))
 \end{aligned}
 " />
 
-This is **pre-normalization**, not the original Transformer's Add then Norm
-ordering. The FFN expands width `D` to `4D`, applies the code's GELU
-approximation, and projects back to `D`.[^code] The report also describes
-normalization and residual initialization changes; the inference file alone
-is not a complete training implementation.[^report]
+### Causal attention and learned positions
 
-## Read the tensor contract
+Each head has width `768 / 12 = 64`. The code forms queries, keys, and values,
+scales their dot products, masks disallowed future positions, and normalizes
+with softmax. During cached decoding, the mask is aligned to the end of the
+combined history, not naively to a square current token matrix.[^code]
 
-For batch `B`, current input length `T`, model width `D`, and vocabulary `V`:
+Learned position rows are indexed using the past length plus the current
+offset. The 1,024 row position table is an architectural boundary of this
+artifact; a larger API input allowance would not establish that these learned
+positions support longer context.[^config][^code]
 
-| Value | Shape | Meaning |
-| --- | --- | --- |
-| Token IDs | `B × T` | Current input indices |
-| Hidden stream | `B × T × D` | Token features throughout the blocks |
-| FFN intermediate | `B × T × 4D` | Expanded per position features |
-| Logits | `B × T × V` | Vocabulary scores at each current position |
+### Dense FFNs and a tied output head
 
-These are symbolic shape counts from the code, not dimensions of a selected
-checkpoint.[^code]
+The FFN expands 768 features to 3,072, applies the released GELU approximation,
+and projects back. Attention mixes positions; this FFN transforms the features
+at each position. Its two affine projections include biases. The final head
+reuses token embedding weights rather than storing a second vocabulary matrix.[^code]
 
-## Cached history: check what is returned
+<details>
+<summary>Derive the released small model's parameter count</summary>
 
-The code accepts `past` keys and values and concatenates them with current
-keys and values for attention. Crucially, `present` is formed **before** that
-concatenation: it contains this call's new KV tensors, not automatically the
-entire accumulated history. The caller must manage cache accumulation.
-Position indices are offset by the cached length.[^code]
+Let `V = 50,257`, `C = 1,024`, `D = 768`, and `L = 12`. Counting the
+embedding tables, attention and FFN weights and biases, two LayerNorms per block,
+and the final LayerNorm gives this local derivation from the inspected code:
 
-Caching avoids recomputing previous KV projections; it does not make reading
-the retained context free. The [attention page](/architectures/evolution/attention-and-memory/)
-separates cache storage from attention execution.
+<MathExpression display number="3" tex="
+P=VD+CD+L(12D^2+13D)+2D=124{,}439{,}808
+" />
 
-## The transferable lesson
+The tied vocabulary head contributes no additional `V × D` matrix. This
+explains the released architecture count; it does not establish the reason
+for the paper's earlier 117M label.[^code][^config][^report]
 
-Trace a residual stream, distinguish logits from generation policy, and read
-cache input and output semantics in code rather than assuming an API contract.
-This page makes no current performance ranking, deployment recommendation,
-or claim that GPT-2 is an instruction tuned assistant.
+</details>
 
-[^report]: Alec Radford et al., [Language Models are Unsupervised Multitask Learners](https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf), 2019, section 2 for the autoregressive formulation and section 2.3 for architecture changes.
-[^code]: OpenAI, [`src/model.py`](https://github.com/openai/gpt-2/blob/9b63575ef42771a015060c964af2c3da4cf7c8ab/src/model.py), commit `9b63575ef42771a015060c964af2c3da4cf7c8ab`, functions `attn`, `mlp`, `block`, `past_shape`, and `model`. Inspected October 5, 2026; no copied code excerpt or checkpoint execution.
+<details>
+<summary>Initialization: the report is not a training implementation</summary>
+
+The report scales residual-layer initialization by the inverse square root
+of the number of residual layers. That is an explicit depth-aware training
+choice, separate from moving normalization. The released TensorFlow inference
+definition uses the same default 0.02 initializer for both residual projections;
+it restores learned checkpoint weights and does not document the original
+training initialization. Reinitializing that file is therefore not a faithful
+reproduction of the report's training recipe.[^report][^code]
+
+</details>
+
+## Training
+
+WebText selected linked pages through Reddit voting, then extraction,
+deduplication, and cleaning. The reported corpus excluded Wikipedia and links
+created after December 2017. Removing one source does not guarantee the absence
+of benchmark overlap.[^report]
+
+Training predicts subsequent tokens using text itself as supervision.
+The report gives a batch size of 512 and says learning rates were selected
+against a 5% held out WebText split. It does not provide a complete training
+implementation, total token budget, or all optimizer settings for reproducing
+the released small model.[^report]
+
+There is no chat template, SFT, or RL stage to infer from the presence of a
+question and answer prompt. Those prompts change conditioning, not the
+checkpoint's training history.[^report][^card]
+
+## Inference and cache ownership
+
+The inspected tokenizer metadata uses byte level encoding and decoding with
+50,257 vocabulary entries. Tokenization settings remain part of the interface:
+byte coverage does not mean that every language received comparable training.[^tokenizer][^report]
+
+Byte-level **BPE is not one token per byte**. UTF-8 bytes supply a 256-symbol
+base, then learned merges compact frequent byte sequences. Before merging,
+the tokenizer separates character categories, with special treatment of spaces,
+to avoid spending many vocabulary entries on punctuation variants of the same
+word. This balances open-string coverage with shorter sequences; byte coverage
+alone says nothing about equal multilingual competence.[^report]
+
+The original `model` function returns the current call's new keys and values.
+It constructs `present` before concatenating `past` for attention. In
+`sample_sequence`, the caller concatenates these new tensors onto the retained
+history, applies temperature and truncation to the last position's logits,
+and selects the next token.[^code][^sample]
+
+<FocusCanvas size="diagram" label="GPT-2 generation and cache ownership">
+  <GptCacheFigure id="figure-2">
+    **Figure 2.** Sampling and cache growth belong to the caller. Original diagram from the released model and sampling functions.[^code][^sample]
+  </GptCacheFigure>
+</FocusCanvas>
+
+Figure 2 separates the network's returned tensors from the state retained for
+the next call. The model uses the full history for attention, but returns only
+the new KV positions. The caller appends those positions and samples a token.
+
+For batch `B`, current length `T`, and retained history `N`:
+
+| Tensor | Small checkpoint shape |
+| --- | --- |
+| Current token stream | `B × T × 768` |
+| Vocabulary logits | `B × T × 50,257` |
+| New KV tensors | `B × 12 × 2 × 12 × T × 64` |
+| Accumulated KV history | `B × 12 × 2 × 12 × N × 64` |
+
+These shapes follow the pinned code. Caching avoids recomputing past projections,
+but attention still reads retained keys and values. No latency or memory
+benchmark was performed here.[^code][^sample]
+
+## Evaluation and limits of transfer
+
+The report's task results are not one universal score, and many headline
+results describe its largest model rather than this small artifact.
+
+| Question | Author reported evidence and conditions |
+| --- | --- |
+| Does scale improve language modeling? | Table 3 gives LAMBADA perplexity 35.13 for the paper's 117M row and 8.63 for its 1,542M row. Tokenization and evaluation handling matter.[^report] |
+| Can a task cue alter behavior? | Table 4 reports CNN/Daily Mail ROUGE average 21.40 with a summary cue versus 15.03 without it, using the largest model and the section 3.6 generation setup.[^report] |
+| Does fluent continuation imply a useful system? | The report's discussion describes summarization as rudimentary and notes uneven transfer across tasks. These are limitations of the same study, not a later replication.[^report] |
+
+The scale comparison changes capacity, not just one architectural mechanism.
+The summary cue comparison is a more targeted prompt intervention, but neither
+establishes modern assistant reliability. Section 4 investigates training and
+test overlap; it does not certify every example as uncontaminated.[^report]
+
+The original model card warns about factual unreliability and biases inherited
+from text. Public weights and readable code are useful for study, but do not
+make the model appropriate for every deployment.[^original-card]
+
+## Lessons and related models
+
+Read the objective, network, and generation policy as three connected but
+different contracts. Check parameter definitions and cache ownership in the
+artifacts, rather than infer them from the model name.
+
+Continue with [Transformer Foundations](/architectures/foundations/) for the
+shared attention and FFN mathematics, or
+[attention and memory](/architectures/evolution/attention-and-memory/) for the
+distinction between cache storage and execution cost.
+
+## Open questions
+
+The inspected report and release do not explain the earlier 117M label or
+provide a complete small checkpoint training budget. A reproduction study
+would need additional training records, not an assumed modern recipe.
+
+[^report]: Alec Radford et al., [Language Models are Unsupervised Multitask Learners](https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf), 2019. Sections 2.1 to 2.3, 3, 4, and 6; Tables 2 to 4. Inspected October 10, 2026.
+[^code]: OpenAI, [`src/model.py`](https://github.com/openai/gpt-2/blob/9b63575ef42771a015060c964af2c3da4cf7c8ab/src/model.py). Functions `default_hparams`, `attn`, `mlp`, `block`, `past_shape`, `positions_for`, and `model`.
+[^sample]: OpenAI, [`src/sample.py`](https://github.com/openai/gpt-2/blob/9b63575ef42771a015060c964af2c3da4cf7c8ab/src/sample.py), the same commit. Functions `top_k_logits`, `top_p_logits`, and `sample_sequence`; inspected, not executed.
+[^config]: OpenAI Community, [small GPT-2 configuration](https://huggingface.co/openai-community/gpt2/blob/607a30d783dfa663caf39e06633721c8d4cfcd7e/config.json).
+[^card]: OpenAI Community, [small GPT-2 model card](https://huggingface.co/openai-community/gpt2/blob/607a30d783dfa663caf39e06633721c8d4cfcd7e/README.md), the same release. Model description, training data, and MIT metadata; written by Hugging Face from OpenAI's original material.
+[^tokenizer]: OpenAI Community, [GPT-2 tokenizer metadata](https://huggingface.co/openai-community/gpt2/blob/607a30d783dfa663caf39e06633721c8d4cfcd7e/tokenizer.json), the same release. ByteLevel pre tokenizer and decoder, vocabulary, and added tokens.
+[^license]: OpenAI, [GPT-2 repository license](https://github.com/openai/gpt-2/blob/9b63575ef42771a015060c964af2c3da4cf7c8ab/LICENSE), MIT, copyright 2019 OpenAI.
+[^original-card]: OpenAI, [GPT-2 model card](https://github.com/openai/gpt-2/blob/9b63575ef42771a015060c964af2c3da4cf7c8ab/model_card.md), original pinned repository. Out of scope uses and bias limitations. All linked artifacts inspected October 10, 2026; no weight download or checkpoint execution.

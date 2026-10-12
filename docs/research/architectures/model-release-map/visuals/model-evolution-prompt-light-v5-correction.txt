@@ -1,0 +1,11 @@
+Use case: infographic-diagram.
+Input image 1 is the just-generated light theme infographic. Make ONLY five small hierarchy corrections:
+
+1. In 2018, GPT is highlighted: change its circular marker to a diamond. Keep its bold label.
+2. In 2019, T5 is NOT highlighted: change its diamond marker to a circle and its label to regular weight, matching GPT-2.
+3. In 2021, CLIP is NOT highlighted: keep its circular marker and change the label from bold to regular weight, matching Switch Transformer.
+4. In 2021, GLM is NOT highlighted: keep its circular marker and change the label from bold to regular weight, matching Switch Transformer.
+5. In 2023, Mixtral 8x7B is NOT highlighted: change its diamond marker to a small circle and its label to regular weight, matching Mamba.
+
+Do not alter any other label, marker, year, list order, title, footer, backdrop, line, ellipse or color. Keep all 56 labels exactly as they are. Exactly 22 bold diamond landmarks: Transformer, GPT, BERT, GPT-3, InstructGPT, ChatGPT, LLaMA, GPT-4, Claude 3, OpenAI o1, DeepSeek-V3, DeepSeek-R1, Gemini 2.5 Pro, Qwen3, Claude 4, GPT-5, GLM-5, Claude Mythos Preview, Kimi K3, GPT-6 Astra, Claude Opus 5.5, Gemini 4 Argon.
+Keep light ivory background and crisp navy text. Preserve 1536x1024 landscape layout.

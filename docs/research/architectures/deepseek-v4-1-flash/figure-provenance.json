@@ -1,0 +1,81 @@
+{
+  "model": "deepseek-v4-1-flash",
+  "checked": "2026-10-10",
+  "figures": [
+    {
+      "slug": "deepseek-v4-1-flash",
+      "asset": "public/figures/model-studies/deepseek-v4-1-flash/architecture.png",
+      "source": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash/blob/2cba9e42aa026125f3ed06c6d98c1db82f7ca027/DeepSeek_V41_Tech_Report.pdf",
+      "source_page": 7,
+      "source_figure": 3,
+      "crop_points": [
+        68,
+        80,
+        527,
+        320
+      ],
+      "dpi": 300,
+      "pdf_sha256": "ba68e2e40408125ae6d2f63a9a241b61c73910691c74ec1a2a7023c851eac08d",
+      "asset_sha256": "3a2d35be9c7aa26214d04b25551b09d86ddef26c5c6503243d28955bc97f6194",
+      "license": "MIT associated documentation in the exact official release repository; no separate exclusion in report",
+      "license_url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash/blob/2cba9e42aa026125f3ed06c6d98c1db82f7ca027/LICENSE",
+      "modifications": "Whitespace and source prose outside the complete diagram omitted; all diagram labels and arrows retained.",
+      "checked": "2026-10-10"
+    },
+    {
+      "slug": "deepseek-v4-1-flash",
+      "asset": "public/figures/model-studies/deepseek-v4-1-flash/csa2-modes.png",
+      "source": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash/blob/2cba9e42aa026125f3ed06c6d98c1db82f7ca027/DeepSeek_V41_Tech_Report.pdf",
+      "source_page": 10,
+      "source_figure": 4,
+      "crop_points": [
+        68,
+        82,
+        526,
+        230
+      ],
+      "dpi": 300,
+      "pdf_sha256": "ba68e2e40408125ae6d2f63a9a241b61c73910691c74ec1a2a7023c851eac08d",
+      "asset_sha256": "60004f70be716bce5459adcdba4c632f2c3cb70a65971893a50080ae45b15b3d",
+      "license": "MIT associated documentation in the exact official release repository; no separate exclusion in report",
+      "license_url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash/blob/2cba9e42aa026125f3ed06c6d98c1db82f7ca027/LICENSE",
+      "modifications": "Whitespace and source prose outside the complete diagram omitted; all diagram labels and arrows retained.",
+      "checked": "2026-10-10"
+    }
+  ],
+  "review": {
+    "source_artwork": true,
+    "crop_integrity": true,
+    "license": true,
+    "desktop_mobile_browser": true,
+    "checked": "2026-10-10T17:36:51.557Z",
+    "revision": 3
+  },
+  "revision3_additions": [
+    {
+      "asset": "public/figures/model-studies/deepseek-v4-1-flash/hierarchical-indexer.png",
+      "source": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash/blob/2cba9e42aa026125f3ed06c6d98c1db82f7ca027/DeepSeek_V41_Tech_Report.pdf",
+      "source_page": 11,
+      "source_figure": 5,
+      "crop_points": [
+        67.92,
+        80.88,
+        529.92,
+        291.84
+      ],
+      "poppler_crop_pixels": [
+        283,
+        337,
+        1925,
+        879
+      ],
+      "dpi": 300,
+      "pdf_sha256": "ba68e2e40408125ae6d2f63a9a241b61c73910691c74ec1a2a7023c851eac08d",
+      "asset_sha256": "28298281b5598e9711d5532438c8ad4e2bc8df5e1ad8813da49e4c86f806270d",
+      "modifications": "Whitespace and source prose outside complete artwork omitted; all labels, keys, panels and arrows retained. No recoloring.",
+      "license": "MIT associated documentation; exact notice retained at public/licenses/deepseek-v41-documentation-MIT.txt",
+      "license_url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash/blob/2cba9e42aa026125f3ed06c6d98c1db82f7ca027/LICENSE",
+      "checked": "2026-10-10"
+    }
+  ]
+}

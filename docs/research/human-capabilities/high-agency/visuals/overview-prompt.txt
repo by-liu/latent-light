@@ -1,0 +1,17 @@
+Use case: infographic-diagram
+Asset type: Opening overview infographic for a thoughtful research article about human high agency, displayed in a narrow web reading column.
+Primary request: Create a polished, editorial educational infographic that explains the topic in one glance to a nontechnical adult. This is a conceptual synthesis, not a chart of research results.
+Canvas and composition: Square canvas. A clear title and short subtitle at the top, followed by three generously spaced horizontal sections stacked vertically. Each section combines one simple expressive illustration with very large, legible text. Finish with the concise reminder at the bottom. Use the entire canvas efficiently with moderate margins; do not create a dense poster. Everything must remain recognizable when scaled to a 350px wide phone screen. Body text should be unusually large; use short lines.
+Style/medium: Refined flat editorial illustration, crisp shapes with subtle hand-drawn warmth, clean contemporary sans-serif typography, generous negative space, calm learning-notebook aesthetic. Warm off-white paper background, dark ink text, restrained indigo and teal accents with a little muted amber. Strong contrast.
+Concepts for illustrations: The first section shows a compass and a small purposeful step along a path, to suggest direction plus action. The second section shows a person using a compass to choose among possibilities opened by a simple AI assistant symbol, to suggest human direction and judgment. The third section shows a small seedling, two helpful speech bubbles and a feedback loop, to suggest manageable practice, asking for help and learning. The illustrations support the labels; keep them compact and elegant.
+Text (verbatim, no additional text):
+"HIGH AGENCY"
+"Choose a direction. Make things happen. Learn."
+"What it is"
+"Turn intention into useful action."
+"Why AI makes it matter"
+"More possibilities. Human direction and judgment."
+"How to build it"
+"Start small. Ask for help. Use feedback."
+"Agency includes limits, teamwork and rest."
+Constraints: Render all provided wording exactly with correct spelling. Make each of the three section titles and explanations instantly readable. No small-print citations, logos, statistics, rankings, personality scores, or claims of guaranteed success. Do not depict a heroic lone entrepreneur, robot controlling a person, job security promises, motivational hustle slogans, or technical circuitry wallpaper. No extra writing. Static infographic, opaque background.

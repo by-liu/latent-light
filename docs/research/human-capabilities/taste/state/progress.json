@@ -1,0 +1,48 @@
+{
+  "schema_version": 3,
+  "topic_id": "taste",
+  "status": "complete",
+  "coverage": {
+    "meaning": "covered",
+    "mechanisms": "covered",
+    "context": "covered",
+    "AI": "covered",
+    "development": "covered",
+    "skeptical-review": "covered"
+  },
+  "open_questions": [],
+  "recommended_next_direction": null,
+  "last_seen": "2026-10-12T01:19:15Z",
+  "output": {
+    "kind": "site-page",
+    "path": "src/content/docs/human-capabilities/taste.mdx",
+    "status": "reviewed",
+    "revision": 2,
+    "updated": "2026-10-11",
+    "evidence_cutoff": "2026-10-11",
+    "audience": "Curious adults who create, select or commission writing, design, products and AI-assisted work."
+  },
+  "quality_gate": {
+    "evidence_verified": true,
+    "contradictions_reviewed": true,
+    "output_reviewed": true,
+    "visuals_reviewed": true
+  },
+  "delivery_checks": {
+    "validation": {
+      "status": "passed",
+      "method": "Node 24 npm run validate on the shared workspace: 48 deployment tests, 124 content tests, 145 Astro files (0 errors/warnings), 78-page build and 78-file lint. Existing Vite module-directive warnings and 25 Pagefind redirect skips remain.",
+      "checked_at": "2026-10-12T01:19:15Z"
+    },
+    "rendering": {
+      "status": "passed",
+      "method": "Chromium screenshots inspected at 1440 light/dark, 390 light and 320 dark, with reduced motion. Final 1122x1402 infographic fits with no page/figure overflow. Full-size image opens with keyboard; native overview and both comparison notes work without JavaScript. Focus, sidebar, mobile navigation and citation return checks passed.",
+      "checked_at": "2026-10-12T01:18:02.050Z"
+    },
+    "exports": {
+      "status": "passed",
+      "method": "Markdown and MDX 200; all infographic text, full readable overview, 18 references, 3 captions and stable Markdown figure anchors retained. Both original comparisons and substantive article body preserved. Search and agent discovery/coordinates pass; production source editor 404.",
+      "checked_at": "2026-10-12T01:18:02.050Z"
+    }
+  }
+}

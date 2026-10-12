@@ -1,0 +1,7 @@
+Use case: style-transfer, infographic-diagram.
+Image 1: the FINAL LIGHT v5 timeline is the edit target and exact content/layout authority.
+Image 2: DARK v4 is a color and atmosphere reference ONLY. Do not copy its old model list or highlights.
+
+Convert image 1 into the dark theme of image 2. Change ONLY the background, text colors, line colors and glow treatment. Preserve ALL 56 labels, spelling, marker shapes, bold-versus-regular weights, rows, year placement and margins EXACTLY as in image 1. In particular GPT must have a diamond; T5, CLIP, GLM and Mixtral 8x7B must be regular with circles. Preserve Claude Mythos Preview in bold with a diamond, and Claude Fable 5.1 and DeepSeek-V4.1-Flash regular with circles.
+
+Use rich deep navy background, restrained sparse starfield, delicate orbital contours and thin luminous spectral timeline paths. Bright white bold text and colored diamonds for exactly 22 selected landmarks, high contrast off-white regular text and small circles for all others. Keep crisp typography without blurry text glow. The ellipse can regain the refined luminous dark appearance from image 2. Preserve the exact title, subtitle, snapshot, footer, legend and Latent Light brand from image 1. Keep 1536x1024 landscape framing. Do not add models, logos or decorative clutter. Chronology, not lineage.

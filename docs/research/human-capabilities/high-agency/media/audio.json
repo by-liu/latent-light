@@ -1,0 +1,39 @@
+{
+  "title": "High Agency: Your Superpower in the AI Era",
+  "producer": "Google NotebookLM, as supplied by the user",
+  "input": {
+    "file": "output/High_Agency_Is_Your_AI_Superpower.m4a",
+    "sha256": "2d9c85aef6d3f8ed3fa047441909ad8d0d33d960fc967e78150927542b6e3bc9",
+    "bytes": 48389033,
+    "duration_seconds": 1503.492063
+  },
+  "output": {
+    "file": "high-agency-your-superpower-in-the-ai-era.mp3",
+    "duration_seconds": 1503.492063,
+    "duration_display": "25:03",
+    "bytes": 18043024,
+    "sha256": "35cd32bd0af4de4126310ead99bc7ff9c865e5ae9627fa4d1a34cab715fae8b3",
+    "codec": "MP3 / libmp3lame",
+    "bitrate_kbps": 96,
+    "sample_rate_hz": 44100,
+    "channels": 2,
+    "processing": "Converted the complete original audio to MP3 without trimming, content edits, normalization or transcript alignment. Original M4A retained unchanged.",
+    "checked_at": "2026-10-12T05:58:28Z",
+    "verification": "ffprobe reports the same duration; FFmpeg decoded the complete output without errors."
+  },
+  "rights_basis": "The author supplied the generated podcast and requested MP3 preparation and R2 hosting. This records permission for this supplied media, not a general license for third-party outputs.",
+  "hosting_record": "docs/media/r2-config.json",
+  "transcript_status": "automatic transcript; full text inspected, not certified verbatim or independently checked against every spoken word",
+  "public_url": "https://media.latentlit.com/audio/high-agency/high-agency-your-superpower-in-the-ai-era-v1.mp3",
+  "hosting_status": "active",
+  "verification_record": "docs/media/r2-verification.json",
+  "last_verified": "2026-10-12T06:12:02Z",
+  "transcript_record": "docs/research/human-capabilities/high-agency/media/podcast-transcript.json",
+  "transcript_anchor": "podcast-transcript",
+  "page_integration": {
+    "page": "src/content/docs/human-capabilities/high-agency.mdx",
+    "player_anchor": "agency-podcast",
+    "transcript_anchor": "podcast-transcript",
+    "position": "Immediately below the page title, before the overview figure."
+  }
+}

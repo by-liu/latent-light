@@ -1,0 +1,19 @@
+---
+// Local treatment only: preserve Nimbus CardGrid semantics and Markdown children.
+---
+<div class="landscape-cards"><slot /></div>
+<style>
+  .landscape-cards :global(.grid > article){
+    --landscape-accent:#7063af;
+    background:linear-gradient(120deg,color-mix(in srgb,var(--landscape-accent) 7%,var(--nb-card)),var(--nb-card) 78%);
+    border-inline-start:3px solid color-mix(in srgb,var(--landscape-accent) 65%,var(--nb-border));
+    box-shadow:0 1px 2px color-mix(in srgb,var(--nb-foreground) 3%,transparent);
+  }
+  .landscape-cards :global(.grid > article:nth-child(2)){--landscape-accent:#397f7a;}
+  .landscape-cards :global(.grid > article:nth-child(3)){--landscape-accent:#a27842;}
+  .landscape-cards :global(.grid > article:nth-child(4)){--landscape-accent:#557ca7;}
+  .landscape-cards :global(article a){color:color-mix(in srgb,var(--landscape-accent) 68%,var(--nb-foreground));text-decoration-thickness:1px;}
+  :global(html[data-mode='dark']) .landscape-cards :global(article a){color:color-mix(in srgb,var(--landscape-accent) 38%,var(--nb-foreground));}
+  .landscape-cards :global(article:focus-within){outline:2px solid var(--nb-ring);outline-offset:4px;}
+  @media print{.landscape-cards :global(.grid > article){background:white;box-shadow:none;}}
+</style>

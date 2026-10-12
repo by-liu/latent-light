@@ -1,0 +1,50 @@
+{
+  "schema_version": 3,
+  "topic_id": "agent-systems",
+  "status": "complete",
+  "coverage": {
+    "architecture": "verified",
+    "workflow": "verified",
+    "control": "verified",
+    "extensions": "verified",
+    "tradeoffs": "verified",
+    "skeptical-review": "verified"
+  },
+  "open_questions": [
+    "Comparative task success, cost and adoption have not been independently measured in this study; a controlled trial remains future work."
+  ],
+  "recommended_next_direction": "Refresh affected official contracts and pinned snapshots before mutable comparisons; add studies only when a clear design question and evidence justify them.",
+  "last_seen": "2026-10-12T02:47:04Z",
+  "output": {
+    "kind": "site-page",
+    "path": "src/content/docs/agents/index.mdx",
+    "status": "reviewed",
+    "revision": 2,
+    "updated": "2026-10-11",
+    "evidence_cutoff": "2026-10-11",
+    "audience": "Curious technical readers, builders and authors learning agent mechanisms and implementation choices."
+  },
+  "quality_gate": {
+    "evidence_verified": true,
+    "contradictions_reviewed": true,
+    "output_reviewed": true,
+    "visuals_reviewed": true
+  },
+  "delivery_checks": {
+    "validation": {
+      "status": "passed",
+      "method": "npm run validate: 48 deployment tests, 135 content tests, Astro 0 errors/warnings/hints, 84-page build and docs lint.",
+      "checked_at": "2026-10-12T02:46:39.392Z"
+    },
+    "rendering": {
+      "status": "passed",
+      "method": "Five current overview views: 1440/light+dark, 768/light, 390/light, 320/dark; two Focus views; manual screenshot review; all unique linked routes/anchors, keyboard navigation, reduced motion and no-JS checked.",
+      "checked_at": "2026-10-12T02:46:39.392Z"
+    },
+    "exports": {
+      "status": "passed",
+      "method": "Current overview Markdown/MDX: complete intent, harness, four loop steps, feedback, capabilities, controls, role definitions, all example/frontier links, caveat, figure anchor, caption and five references; no raw map JSON in Markdown.",
+      "checked_at": "2026-10-12T02:46:39.392Z"
+    }
+  }
+}

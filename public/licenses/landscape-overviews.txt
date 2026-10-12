@@ -1,0 +1,26 @@
+Latent Light landscape overview illustrations
+
+Four independently prompted AI-generated editorial infographics, October 2026.
+Generated and refined with the built-in image-generation tool. The analytical
+roles and selected examples are the author's synthesis of cited public sources.
+
+No third-party paper figure, photograph, product screenshot or proprietary logo
+is reproduced. Company and product names appear as descriptive plain text and
+do not imply endorsement, partnership, market share or measured performance.
+
+Prompts and review notes are retained under:
+docs/research/landscapes/{consumer-ai,personal-agents,china-consumer-ai,physical-ai}/overview-image-prompt.md
+
+Canonical public assets:
+public/figures/landscapes/consumer-ai-overview-v1.webp
+public/figures/landscapes/personal-agents-overview-v1.webp
+public/figures/landscapes/china-consumer-ai-overview-v1.webp
+public/figures/landscapes/physical-ai-overview-v2.webp
+
+Physical AI revision 2 prompt: docs/research/landscapes/physical-ai/overview-image-prompt-v2.md.
+The earlier v1 image is retained unchanged outside the deployment at:
+docs/research/landscapes/physical-ai/visuals/archive/physical-ai-overview-v1.webp
+Its former public path and checksum are recorded in docs/release-asset-archive.json.
+
+The diagrams are conceptual maps, not exhaustive company censuses. Complete
+company context, evidence boundaries and references remain in the pages.

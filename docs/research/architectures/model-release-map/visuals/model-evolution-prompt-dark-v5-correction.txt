@@ -1,0 +1,9 @@
+Use case: precise-object-edit, text-localization.
+Input image 1: the generated dark v5 timeline. Make ONLY these four corrections; preserve everything else:
+
+1. The marker left of bold GPT in 2018, centered approximately x=430,y=349, is a circle. Replace it with an angular BLUE DIAMOND identical to the BERT diamond immediately below at x=430,y=377. Keep GPT bold.
+2. Mamba in 2023 (approximately x=432,y=829) is NOT highlighted. Replace its diamond at x=407,y=829 with a small circular marker, and change Mamba to regular weight, matching Gemini 1.0 below it.
+3. Mixtral 8x7B in 2023 (approximately x=432,y=886) is NOT highlighted. Keep its circular marker and change its label to regular weight, matching InternVL below it.
+4. The fifth 2023 row, around x=432,y=748, must read exactly "LLaVA": uppercase L, uppercase L, lowercase a, uppercase V, uppercase A. Replace the current misrendered label with "LLaVA" in regular weight. Keep its circular marker.
+
+Keep every other label and marker, all 56 names and their order/year placements, line, color, year node, title, ellipse, caption and layout unchanged. All 22 bold diamond entries must be exactly Transformer, GPT, BERT, GPT-3, InstructGPT, ChatGPT, LLaMA, GPT-4, Claude 3, OpenAI o1, DeepSeek-V3, DeepSeek-R1, Gemini 2.5 Pro, Qwen3, Claude 4, GPT-5, GLM-5, Claude Mythos Preview, Kimi K3, GPT-6 Astra, Claude Opus 5.5, Gemini 4 Argon. Other entries use regular weight and circles. Preserve navy theme, clean high contrast typography and 1536x1024 framing.

@@ -1,0 +1,73 @@
+{
+  "model": "gemma-4",
+  "source_report": "Gemma 4 Technical Report",
+  "version": "v2",
+  "checked": "2026-10-10",
+  "pdf_sha256": "b20b25f18d76217d0c49c89f9ed1ffe3cf1912cd8ce710e1a325977653c7bfa6",
+  "figures": [
+    {
+      "id": "V001",
+      "asset": "../../../../public/figures/model-studies/gemma-4/architecture.svg",
+      "sha256": "1c389d3e2b44c345b7f02b8baa23098eab2c5cad1a80dbe3221e5e3ff3936f4d",
+      "original_figure": null,
+      "pdf_page": null,
+      "crop_points": null,
+      "raster_dpi": null,
+      "alterations": "Original SVG explanatory synthesis,not a paper-figure reconstruction.",
+      "license": {
+        "status": "verified",
+        "value": "MIT, original explanatory SVG",
+        "url": "https://github.com/by-liu/latent-light/blob/main/LICENSE"
+      },
+      "assessment": "Independently authored vector explanation under repository MIT. No traced author artwork.",
+      "review": "Native SVG raster manually inspected; representation flow, labels, arrow order and variant scope reviewed.",
+      "browser_pending": true
+    },
+    {
+      "id": "V002",
+      "asset": "../../../../public/figures/model-studies/gemma-4/report-resizing.png",
+      "sha256": "9a58cd52b35fd4baa04985d7acd695105c412c24279554b498a7bbc92c434126",
+      "original_figure": 2,
+      "pdf_page": 16,
+      "crop_points": [
+        180,
+        293,
+        244,
+        192
+      ],
+      "raster_dpi": 300,
+      "alterations": "Bounding crop and PDF rasterization only;no recoloring or scientific relabeling.",
+      "license": {
+        "status": "restricted",
+        "value": "CC BY 4.0 report with separately bounded embedded illustration; original illustration origin not verified",
+        "url": "https://creativecommons.org/licenses/by/4.0/"
+      },
+      "assessment": "Whole report is CC BY4.0. No separate origin,exclusion or figure-credit found for the embedded illustration. Treat it only as an integrated bounded scientific excerpt: image and resized grid jointly explain budget quantization; not decoration or separate illustration reuse. If third-party rights fall outside the report grant, limited necessary quotation/criticism is the intended applicable exception assessment,not a claim of unrestricted relicensing.",
+      "review": "300dpi crop manually compared with the full original page; all essential labels, legends, arrowheads and boundaries retained.",
+      "browser_pending": true
+    },
+    {
+      "id": "V003",
+      "asset": "../../../../public/figures/model-studies/gemma-4/report-mtp.png",
+      "sha256": "61c4e118f6c2e65d050336ea1a31817017a97d7e10bb8ec83221ac19dc423516",
+      "original_figure": 1,
+      "pdf_page": 3,
+      "crop_points": [
+        304,
+        83,
+        233,
+        188
+      ],
+      "raster_dpi": 300,
+      "alterations": "Bounding crop and PDF rasterization only;no recoloring or scientific relabeling.",
+      "license": {
+        "status": "verified",
+        "value": "CC BY 4.0",
+        "url": "https://creativecommons.org/licenses/by/4.0/"
+      },
+      "assessment": "Exact version-specific arXivHTML identifies CC BY4.0; author/title/version/locator/link and crop modification credited. No separate exclusions located.",
+      "review": "300dpi crop manually compared with the full original page; all essential labels, legends, arrowheads and boundaries retained.",
+      "browser_pending": true
+    }
+  ]
+}

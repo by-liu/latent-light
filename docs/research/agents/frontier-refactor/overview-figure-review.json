@@ -1,0 +1,103 @@
+{
+  "success": true,
+  "checkedAt": "2026-10-12T02:46:39.392Z",
+  "views": [
+    {
+      "width": 1440,
+      "theme": "light",
+      "overflow": false,
+      "figureOverflow": false,
+      "figureHeight": 970,
+      "steps": [
+        "Context",
+        "Model",
+        "Action",
+        "Evidence"
+      ],
+      "families": 4,
+      "frontier": 4,
+      "links": 34,
+      "reducedMotion": true,
+      "refs": 5
+    },
+    {
+      "width": 1440,
+      "theme": "dark",
+      "overflow": false,
+      "figureOverflow": false,
+      "figureHeight": 970,
+      "steps": [
+        "Context",
+        "Model",
+        "Action",
+        "Evidence"
+      ],
+      "families": 4,
+      "frontier": 4,
+      "links": 34,
+      "reducedMotion": true,
+      "refs": 5
+    },
+    {
+      "width": 768,
+      "theme": "light",
+      "overflow": false,
+      "figureOverflow": false,
+      "figureHeight": 1516,
+      "steps": [
+        "Context",
+        "Model",
+        "Action",
+        "Evidence"
+      ],
+      "families": 4,
+      "frontier": 4,
+      "links": 34,
+      "reducedMotion": true,
+      "refs": 5
+    },
+    {
+      "width": 390,
+      "theme": "light",
+      "overflow": false,
+      "figureOverflow": false,
+      "figureHeight": 1560,
+      "steps": [
+        "Context",
+        "Model",
+        "Action",
+        "Evidence"
+      ],
+      "families": 4,
+      "frontier": 4,
+      "links": 34,
+      "reducedMotion": true,
+      "refs": 5
+    },
+    {
+      "width": 320,
+      "theme": "dark",
+      "overflow": false,
+      "figureOverflow": false,
+      "figureHeight": 1765,
+      "steps": [
+        "Context",
+        "Model",
+        "Action",
+        "Evidence"
+      ],
+      "families": 4,
+      "frontier": 4,
+      "links": 34,
+      "reducedMotion": true,
+      "refs": 5
+    }
+  ],
+  "checks": {
+    "links": 23,
+    "keyboard": "Loop chapter and product example open with Enter; focus styles present; focus mode fits.",
+    "exports": "Markdown and MDX preserve the complete map, links, caption and citations.",
+    "noJavaScript": true
+  },
+  "errors": []
+}

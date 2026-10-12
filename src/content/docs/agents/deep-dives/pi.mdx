@@ -1,0 +1,156 @@
+---
+title: "Pi: A small core with explicit ownership"
+description: Study Pi through its reusable loop, session tree, extensions and host responsibility.
+lastUpdated: 2026-10-11
+---
+
+import AgentArchitecture from '../../../../components/agents/AgentArchitecture.astro';
+import LandscapeOverview from '../../../../components/landscapes/LandscapeOverview.astro';
+
+Pi is a useful study of **a small, extensible coding harness inside a broader
+agent toolkit**. Its coding application deliberately leaves features such as
+built-in planning and subagents to customization rather than requiring one
+opinionated workflow.[^cli][^works] That shifts important design decisions
+to the person or application hosting it.
+
+The study uses a pinned repository snapshot checked **October 11, 2026**.
+The documentation screenshot is an interface example, and the scenario below
+is original teaching material. Neither is a comparative benchmark.
+
+## Follow the layers, not just the terminal
+
+The toolkit separates model access, an agent loop, terminal presentation and
+the coding application. [Figure 1](#figure-1) emphasizes the session machinery
+and host responsibilities that make the CLI more than a text interface.
+
+<AgentArchitecture id="figure-1" title="A reusable loop, an authoritative session tree and an extensible host" layersJson='[{"label":"Host application","detail":"Choose the model, resources and tools","parts":[{"title":"Interface","body":"Interactive terminal, SDK host or RPC client."},{"title":"Resources","body":"Context files, skills, prompt templates and extensions."},{"title":"Host permissions","body":"The operating-system authority of the launching process."}]},{"label":"AgentSession and loop","detail":"Coordinate one conversation","parts":[{"title":"Session manager","body":"Select the active branch and reconstruct model context."},{"title":"Agent loop","body":"Transform context, convert messages and call the provider."},{"title":"Events and tools","body":"Record responses, execute tools and incorporate results."}]},{"label":"Persistence and customization","detail":"Keep history distinct from active context","parts":[{"title":"Entry tree","body":"JSONL entries retain branches and parent relationships."},{"title":"Compaction","body":"Summaries change later requests; original entries remain."},{"title":"Extensions","body":"In-process modules register behavior and manage their lifecycle."}]}]'>
+
+**Figure 1.** Latent Light synthesis of inspected agent-loop code and Pi session, SDK and extension contracts.[^loop][^sessions][^sdk][^extensions]
+
+</AgentArchitecture>
+
+In the inspected loop, context transformation precedes conversion to
+model-compatible messages. Tool results feed later requests, and queued steering
+and follow-up messages enter at different points. A host can therefore control
+what reaches a model without making the model itself responsible for session
+bookkeeping.[^loop]
+
+The coding layer supplies the project resources and user workflow. Keeping the
+loop reusable makes it possible to embed the mechanism, but an embedded loop
+still needs an application to define tools, scope and a completion check.
+
+## A session is a tree; context is a selected path
+
+Pi stores persistent sessions as JSONL entries with parent relationships. The
+active branch supplies history to the next model request. Moving through the
+tree does not erase the branch left behind; forking can make a separate session.
+Compaction inserts a summary for subsequent requests while retaining the original
+entries.[^sessions]
+
+This is a useful distinction for exploratory work. Two attempted fixes can
+remain related history without both being sent wholesale to the next request.
+However, choosing another conversation branch does not roll back files or
+external services. Our design lesson is to reconcile the environment whenever
+an alternative history is selected.
+
+The SDK makes SessionManager authoritative for persisted context. Replacing a
+message array on an agent object is not equivalent to reconstructing the session
+through that manager. Runtime replacement also requires clients to rebind
+subscriptions to the new session.[^sdk] This is an ownership rule, not merely
+a storage format detail.
+
+## See the workflow resources in the interface
+
+[Figure 2](#figure-2) shows the documented terminal interface: loaded context,
+skills and extensions sit alongside a task transcript. These are different
+inputs to the system, even when they share one screen.
+
+<LandscapeOverview id="figure-2" src="/figures/agents/pi-interactive.webp" alt="Pi documentation screenshot: loaded context, skills, prompts, extensions and themes above a greeting-extension task. Tool calls appear in the transcript, with model and context information in the footer. The captured interface shows Pi v0.85.1." minWidth={640}>
+<div slot="image">
+
+![Pi documentation screenshot: loaded context, skills, prompts, extensions and themes above a greeting-extension task. Tool calls appear in the transcript, with model and context information in the footer. The captured interface shows Pi v0.85.1.](/figures/agents/pi-interactive.webp)
+
+</div>
+
+**Figure 2.** Pi interactive interface, reproduced from the repository documentation under MIT. The captured version and usage counters describe this screenshot, not a current release or performance comparison.[^ui]
+
+</LandscapeOverview>
+
+The image shows an extension task reading documentation and inspecting files.
+It helps separate the user's request, the harness resources and the visible
+trajectory. A transcript still needs an artifact check before the task can be
+considered complete.
+
+## Procedures and executable extensions are different
+
+A skill supplies instructions and supporting resources. An extension is a
+TypeScript module executing inside Pi's process. It can register tools, commands,
+providers, event handlers, state and UI behavior. The extension contract also
+includes lifecycle and cleanup expectations.[^extensions]
+
+That is powerful customization, with a concrete trust consequence: an extension
+has the process's operating-system permissions. A module that improves tool
+routing is also executable code with access to that host. An instruction file
+and an in-process extension should not receive the same review treatment.
+
+The repository explicitly says Pi does not include a built-in permission system
+that restricts filesystem, process, network or credential access. External
+containment is therefore a host responsibility.[^project] Project trust and
+resource loading are useful decisions, but they do not turn the process into
+an operating-system sandbox.
+
+## Choose an integration boundary
+
+| Interface | Boundary | What the host must understand |
+| --- | --- | --- |
+| Interactive CLI | User and terminal | Task steering, visible tools and review |
+| TypeScript SDK | Same process | Session ownership, subscriptions and extension lifecycle |
+| RPC | Child process | JSONL framing, responses, events and continued output reading |
+
+The SDK gives direct access to the session objects. RPC runs a long-lived
+subprocess with commands, responses and events on standard streams. These
+interfaces use the same agent and session mechanisms, but differ in language
+coupling and process ownership.[^rpc][^sdk] A subprocess boundary alone is not
+resource isolation.
+
+## An example: make an extension inspectable
+
+Suppose a team wants a **read-only repository review procedure** with a custom
+summary command. The following is a proposed design exercise. It does not claim
+that installing one extension creates an enforced read-only environment.
+
+First, define the output: findings with file locations, reasons and uncertainty.
+Package the procedure as instructions. Give the application an explicit allowed
+tool set, and enforce filesystem access outside the model when needed. Add an
+extension only for behavior that instructions cannot implement, such as a
+command or event integration.
+
+Then inspect what happens when the session resumes or changes branch. Does the
+extension rebuild state from the right entries? Does it release listeners on
+replacement? Does the final review distinguish a missing file from an empty
+search result? These questions follow the session and lifecycle contracts;
+they are our proposed verification criteria.
+
+## What minimalism trades
+
+Pi makes ownership visible: a small core can be easier to adapt, while the host
+must assemble policy, integrations and workflow conventions. That is a design
+tradeoff, not evidence that a smaller harness is always more reliable or cheaper.
+The broader toolkit and installed packages can add substantial behavior.
+
+A useful comparison with [Claude Code](/agents/deep-dives/claude-code/) asks which
+workflow decisions are packaged. A comparison with
+[DeepSeek Harness](/agents/deep-dives/deepseek-harness/) asks where customization
+attaches and how it is disposed. With [Codex](/agents/deep-dives/codex/) and
+[OpenCode](/agents/deep-dives/opencode/), examine the client/runtime boundary.
+
+[^project]: Mario Zechner and Earendil Works. [Pi repository](https://github.com/earendil-works/pi/blob/4270522473e677ddba7b093caa0064a3df51d459/README.md), package roles and Permissions & Containerization. Snapshot checked October 11, 2026.
+[^works]: Pi contributors. [How Pi Works](https://github.com/earendil-works/pi/blob/4270522473e677ddba7b093caa0064a3df51d459/packages/coding-agent/docs/how-pi-works.md), loop, context, sessions and interfaces. Snapshot checked October 11, 2026.
+[^sessions]: Pi contributors. [Sessions and Context](https://github.com/earendil-works/pi/blob/4270522473e677ddba7b093caa0064a3df51d459/packages/coding-agent/docs/sessions.md), active branches, persistence and compaction. Snapshot checked October 11, 2026.
+[^extensions]: Pi contributors. [Extensions](https://github.com/earendil-works/pi/blob/4270522473e677ddba7b093caa0064a3df51d459/packages/coding-agent/docs/extensions.md), in-process execution, registration and lifecycle. Snapshot checked October 11, 2026.
+[^sdk]: Pi contributors. [SDK](https://github.com/earendil-works/pi/blob/4270522473e677ddba7b093caa0064a3df51d459/packages/coding-agent/docs/sdk.md), AgentSession and SessionManager ownership. Snapshot checked October 11, 2026.
+[^rpc]: Pi contributors. [RPC Mode](https://github.com/earendil-works/pi/blob/4270522473e677ddba7b093caa0064a3df51d459/packages/coding-agent/docs/rpc.md), subprocess JSONL transport and interface tradeoffs. Snapshot checked October 11, 2026.
+[^loop]: Pi contributors. [Agent loop implementation](https://github.com/earendil-works/pi/blob/4270522473e677ddba7b093caa0064a3df51d459/packages/agent/src/agent-loop.ts), runLoop, streamAssistantResponse, transformContext and convertToLlm. Inspected snapshot, October 11, 2026.
+[^ui]: Pi contributors. [Interactive usage](https://github.com/earendil-works/pi/blob/4270522473e677ddba7b093caa0064a3df51d459/packages/coding-agent/docs/usage.md), documentation screenshot and visible interface. Image and documentation under the repository MIT license; checked October 11, 2026.
+
+[^cli]: Pi contributors. [Coding application overview](https://github.com/earendil-works/pi/blob/4270522473e677ddba7b093caa0064a3df51d459/packages/coding-agent/README.md), minimal workflow and customization. Snapshot checked October 11, 2026.

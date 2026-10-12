@@ -1,0 +1,25 @@
+{
+  "schema_version": 2,
+  "topic_id": "deepseek-v4",
+  "status": "complete",
+  "coverage": {
+    "identity": "pinned",
+    "architecture": "source checked",
+    "training": "disclosure checked",
+    "evaluation": "conditions checked",
+    "presentation": "Revision 3 checked at 1440px light, 390px light, 320px dark and desktop focus. Full desktop art, mobile keyboard pan, full-size access, family navigation, caption order, citations, equations, resources, images, no overflow, search, Markdown/MDX and agent manifests passed. All 66 model figure renders manually inspected. No model execution.",
+    "coverage_audit": "Mechanism and figure inventory checked; substantive gaps addressed in revision 3."
+  },
+  "open_questions": [
+    "Complete training compute and stage-wise data totals undisclosed.",
+    "Runtime and robustness boundaries require separate experiments."
+  ],
+  "recommended_next_direction": null,
+  "last_seen": "2026-10-10T17:36:51.557Z",
+  "quality_gate": {
+    "evidence_verified": true,
+    "contradictions_reviewed": true,
+    "report_reviewed": true,
+    "visuals_reviewed": true
+  }
+}

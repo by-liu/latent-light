@@ -1,0 +1,62 @@
+---
+import { readModelLanes } from '../../../plugins/model-flow.mjs';
+interface Step {
+  label: string;
+  detail?: string;
+  accent?: boolean;
+}
+interface Lane {
+  label?: string;
+  steps: Step[];
+  note?: string;
+}
+interface Props {
+  id: string;
+  title: string;
+  lanes?: Lane[];
+  lanesJson?: string;
+  footer?: string;
+}
+const { id, title, footer } = Astro.props;
+const lanes: Lane[] = Astro.props.lanesJson !== undefined
+  ? readModelLanes(Astro.props.lanesJson) : (Astro.props.lanes ?? []);
+---
+
+<figure id={id} class="model-flow" aria-labelledby={`${id}-title`}>
+  <strong id={`${id}-title`} class="flow-title">{title}</strong>
+  <div class="flow-lanes">
+    {lanes.map(lane => <section class="flow-lane">
+      {lane.label && <strong class="lane-label">{lane.label}</strong>}
+      <ol class="flow-steps" style={`--flow-steps:${lane.steps.length}`}>
+        {lane.steps.map(step => <li class:list={{ accent: step.accent }}>
+          <strong>{step.label}</strong>
+          {step.detail && <span>{step.detail}</span>}
+        </li>)}
+      </ol>
+      {lane.note && <p class="lane-note">{lane.note}</p>}
+    </section>)}
+  </div>
+  {footer && <p class="flow-footer">{footer}</p>}
+  <figcaption><slot /></figcaption>
+</figure>
+
+<style>
+  .model-flow{container-type:inline-size;container-name:model-flow;min-width:0;margin:1.75rem 0;padding:1.2rem;border:1px solid var(--nb-border);border-radius:.85rem;background:var(--nb-background);color:var(--nb-foreground);line-height:1.5;}
+  .flow-title{display:block;font-size:1.05rem;line-height:1.4;margin-bottom:1.25rem;}
+  .flow-lanes{display:grid;gap:1.25rem;}
+  .flow-lane{min-width:0;}
+  .flow-lane+.flow-lane{border-top:1px solid var(--nb-border);padding-top:1.1rem;}
+  .lane-label{display:block;margin-bottom:.7rem;font-size:.82rem;color:var(--nb-muted-foreground);}
+  .flow-steps{display:grid;grid-template-columns:repeat(var(--flow-steps),minmax(0,1fr));gap:1.5rem;list-style:none!important;padding:0;margin:0;}
+  .flow-steps li{position:relative;min-width:0;margin:0;border:1px solid var(--nb-border);border-radius:.55rem;padding:.8rem .6rem;text-align:center;background:var(--nb-card,var(--nb-background));}
+  .flow-steps li strong{display:block;font-size:.88rem;line-height:1.45;overflow-wrap:anywhere;}
+  .flow-steps li span{display:block;margin-top:.35rem;color:var(--nb-muted-foreground);font-size:.8rem;line-height:1.5;overflow-wrap:anywhere;}
+  .flow-steps li:not(:last-child)::after{content:'→';position:absolute;right:-1.3rem;top:50%;transform:translateY(-50%);font-size:1.1rem;color:var(--nb-muted-foreground);}
+  .flow-steps li.accent{border-color:color-mix(in srgb,var(--nb-primary) 55%,var(--nb-border));background:color-mix(in srgb,var(--nb-primary) 7%,var(--nb-background));}
+  .lane-note,.flow-footer{font-size:.82rem;line-height:1.6;color:var(--nb-muted-foreground);margin:.8rem 0 0;}
+  .flow-footer{padding-top:.8rem;border-top:1px dashed var(--nb-border);}
+  figcaption{margin-top:1.1rem;padding-top:.8rem;border-top:1px solid var(--nb-border);font-size:.8rem;line-height:1.6;color:var(--nb-muted-foreground);}
+  @container model-flow (max-width:520px){.flow-steps{grid-template-columns:1fr;gap:1.5rem;}.flow-steps li:not(:last-child)::after{content:'↓';right:auto;left:50%;top:auto;bottom:-1.35rem;transform:translateX(-50%);}.flow-steps li{padding:.8rem;}.flow-steps li strong{font-size:.92rem;}}
+  @media(max-width:620px){.model-flow{padding:1rem;}.flow-steps{grid-template-columns:1fr;gap:1.5rem;}.flow-steps li:not(:last-child)::after{content:'↓';right:auto;left:50%;top:auto;bottom:-1.35rem;transform:translateX(-50%);}}
+  @media print{.model-flow{break-inside:avoid;}}
+</style>

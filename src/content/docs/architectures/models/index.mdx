@@ -1,44 +1,369 @@
 ---
-title: Reading Model Architectures
-description: Connect model reports, source code, input processing, training, and evaluation without confusing their evidence boundaries.
-lastUpdated: 2026-10-05
+title: Model Deep Dives
+description: A living map of language and vision models, and a starting point for deeper study.
+lastUpdated: 2026-10-10
 ---
 
-A model study turns mechanisms into a concrete system. Follow the input,
-trace the transformations, and ask which evidence supports each detail.
-A model name alone does not identify a checkpoint, an implementation, or an
-evaluation setting.
+import FocusCanvas from '../../../../components/FocusCanvas.astro';
+import SourceFigure from '../../../../components/architectures/SourceFigure.astro';
 
-## Start with two contrasting studies
+From the original Transformer to today's language and vision models, this is
+a living map of the releases worth understanding. Start with the milestones,
+then choose a model to explore in depth.
 
-| Study | What to understand | Evidence boundary |
+The selection covers **56 releases and research milestones**, checked through
+**October 9, 2026**. Selection favors established model families and influential research milestones.
+It is a reading map, not a complete catalog or a popularity ranking.
+
+To compare ideas across releases, use [Architectural Evolution](/architectures/evolution/).
+Its mechanism pages connect memory, position, expert routing, residual paths
+and visual interfaces back to these studies. Read a deep dive for the model's
+full training recipe, implementation choices and evidence.
+
+## Major releases at a glance
+
+Bold names mark selected landmarks in architecture, training, or adoption.
+The 22 highlights are an editorial reading guide, not a ranking.
+
+| Year | Selected models and milestones |
+| --- | --- |
+| 2017 | **Transformer**[^transformer] |
+| 2018 | **GPT**[^gpt] · **BERT**[^bert] |
+| 2019 | GPT-2[^gpt2] · T5[^t5] |
+| 2020 | **GPT-3**[^gpt3] |
+| 2021 | CLIP[^clip] · Switch Transformer[^switchtransformer] · GLM[^glm] |
+| 2022 | **InstructGPT**[^instructgpt] · Chinchilla[^chinchilla] · PaLM[^palm] · Flamingo[^flamingo] · BLOOM[^bloom] · **ChatGPT**[^chatgpt] |
+| 2023 | BLIP-2[^blip2] · **LLaMA**[^llama] · **GPT-4**[^gpt4] · ChatGLM-6B[^chatglm] · LLaVA[^llava] · Llama 2[^llama2] · Mistral 7B[^mistral7b] · Mamba[^mamba] · Gemini 1.0[^gemini10] · Mixtral 8x7B[^mixtral8x7b] · InternVL[^internvl] |
+| 2024 | Gemini 1.5 Pro[^gemini15] · **Claude 3**[^claude3] · DeepSeek-V2[^deepseekv2] · GPT-4o[^gpt4o] · Llama 3.1[^llama31] · Qwen2-VL[^qwen2vl] · Qwen2.5[^qwen25] · **OpenAI o1**[^o1] · **DeepSeek-V3**[^deepseek-releases] |
+| 2025 | **DeepSeek-R1**[^deepseek-releases] · Gemma 3[^gemma3] · **Gemini 2.5 Pro**[^gemini25pro] · **Qwen3**[^qwen3] · **Claude 4**[^claude4] · Grok 4[^grok4] · Kimi K2[^kimik2] · GLM-4.5[^glm45] · **GPT-5**[^gpt5] · Qwen3-VL[^qwen3vl] |
+| 2026 | Qwen3.5[^qwen-releases] · **GLM-5**[^glm5] · **Claude Mythos Preview**[^mythos] · DeepSeek-V4[^deepseek-releases] · **Kimi K3**[^kimik3] · Qwen3.8[^qwen-releases] · Claude Fable 5.1[^fable51] · **GPT-6 Astra**[^gpt6astra] · DeepSeek-V4.1-Flash[^deepseekv41flash] · **Claude Opus 5.5**[^claudeopus55] · **Gemini 4 Argon**[^gemini4argon] |
+
+Dates identify the event in the release log: a paper, an announcement, a
+preview, or a weights release. They do not all mean general availability.
+Transformer is the architecture anchor; CLIP is a contrastive vision and text
+model; Mamba is a selective state space architecture, not a Transformer.
+ChatGPT marks the 2022 research preview.[^transformer][^clip][^mamba][^chatgpt]
+
+OpenAI o1 records the full model’s December 5, 2024 release in ChatGPT,
+not the September 12 o1-preview release. Claude Mythos is represented by its
+April 7, 2026 restricted preview; it is not a general availability event.[^o1][^o1preview][^mythos]
+
+## Model evolution
+
+Read both bands in [Figure 1](#figure-1) from left to right. Year placement
+shows chronology, not lineage. The release log records exact dates and events.
+
+<FocusCanvas size="wide" label="Model evolution timeline">
+  <SourceFigure id="figure-1" poster src="/figures/model-release-map/model-evolution-light-v5.png" darkSrc="/figures/model-release-map/model-evolution-dark-v5.png" alt="Two theme-aware spectral timeline bands group 56 selected language and vision model milestones by year: 2017 through 2021 above and 2022 through 2026 below. Both read left to right. Twenty-two editorial landmarks use bold labels and diamond markers; other releases retain circular markers. OpenAI o1 records the full December 2024 ChatGPT release. Claude Mythos Preview, Claude Fable 5.1 and DeepSeek-V4.1-Flash are included in 2026. Paths connect years, not model ancestry. The cited list and exact event log provide the complete text equivalent.">
+    <div slot="image">
+
+    ![Two theme-aware spectral timeline bands group 56 selected language and vision model milestones by year: 2017 through 2021 above and 2022 through 2026 below. Both read left to right. Twenty-two editorial landmarks use bold labels and diamond markers; other releases retain circular markers. OpenAI o1 records the full December 2024 ChatGPT release. Claude Mythos Preview, Claude Fable 5.1 and DeepSeek-V4.1-Flash are included in 2026. Paths connect years, not model ancestry. The cited list and exact event log provide the complete text equivalent.](/figures/model-release-map/model-evolution-light-v5.png)
+
+    </div>
+    **Figure 1.** Selected model milestones, 2017 to 2026. AI generated from the [cited release list](#major-releases-at-a-glance).
+  </SourceFigure>
+</FocusCanvas>
+
+<details>
+<summary>Release log: exact dates and event types</summary>
+
+| Date | Model | Event recorded |
 | --- | --- | --- |
-| [GPT-2](/architectures/models/gpt-2/) | A causal decoder, two residual branches, learned position, cached history | The 2019 report and a pinned released source file; no checkpoint execution |
-| [Qwen3-VL](/architectures/models/qwen3-vl/) | Visual merging, DeepStack, multimodal position, staged training | Report, official summary, and a targeted pinned code check; no checkpoint tensor trace |
+| 2017-06-12 | Transformer[^transformer] | Architecture paper |
+| 2018-06-11 | GPT[^gpt] | Announcement |
+| 2018-10-11 | BERT[^bert] | Paper |
+| 2019-02-14 | GPT-2[^gpt2] | Staged release |
+| 2019-10-23 | T5[^t5] | Paper |
+| 2020-05-28 | GPT-3[^gpt3] | Paper |
+| 2021-01-05 | CLIP[^clip] | Announcement |
+| 2021-01-11 | Switch Transformer[^switchtransformer] | Paper |
+| 2021-03-18 | GLM[^glm] | Paper |
+| 2022-01-27 | InstructGPT[^instructgpt] | Alignment announcement |
+| 2022-03-29 | Chinchilla[^chinchilla] | Paper |
+| 2022-04-05 | PaLM[^palm] | Paper |
+| 2022-04-29 | Flamingo[^flamingo] | Paper |
+| 2022-07-12 | BLOOM[^bloom] | Weights release |
+| 2022-11-30 | ChatGPT[^chatgpt] | Research preview |
+| 2023-01-30 | BLIP-2[^blip2] | Paper |
+| 2023-02-27 | LLaMA[^llama] | Paper |
+| 2023-03-14 | GPT-4[^gpt4] | Announcement |
+| 2023-03-14 | ChatGLM-6B[^chatglm] | Weights release |
+| 2023-04-17 | LLaVA[^llava] | Paper |
+| 2023-07-18 | Llama 2[^llama2] | Family announcement |
+| 2023-09-27 | Mistral 7B[^mistral7b] | Weights release |
+| 2023-12-01 | Mamba[^mamba] | Paper |
+| 2023-12-06 | Gemini 1.0[^gemini10] | Family announcement |
+| 2023-12-11 | Mixtral 8x7B[^mixtral8x7b] | Release article |
+| 2023-12-21 | InternVL[^internvl] | Paper |
+| 2024-02-15 | Gemini 1.5 Pro[^gemini15] | Limited preview |
+| 2024-03-04 | Claude 3[^claude3] | Family announcement |
+| 2024-05-07 | DeepSeek-V2[^deepseekv2] | Paper |
+| 2024-05-13 | GPT-4o[^gpt4o] | Announcement |
+| 2024-07-23 | Llama 3.1[^llama31] | Weights release |
+| 2024-08-29 | Qwen2-VL[^qwen2vl] | Announcement |
+| 2024-09-19 | Qwen2.5[^qwen25] | Family announcement |
+| 2024-12-05 | OpenAI o1[^o1] | ChatGPT release |
+| 2024-12-26 | DeepSeek-V3[^deepseek-releases] | API release |
+| 2025-01-20 | DeepSeek-R1[^deepseek-releases] | API release |
+| 2025-03-12 | Gemma 3[^gemma3] | Family announcement |
+| 2025-03-25 | Gemini 2.5 Pro[^gemini25pro] | Experimental release |
+| 2025-04-29 | Qwen3[^qwen3] | Family announcement |
+| 2025-05-22 | Claude 4[^claude4] | Family announcement |
+| 2025-07-09 | Grok 4[^grok4] | Announcement |
+| 2025-07-11 | Kimi K2[^kimik2] | Weights release |
+| 2025-07-28 | GLM-4.5[^glm45] | Announcement |
+| 2025-08-07 | GPT-5[^gpt5] | Announcement |
+| 2025-09-23 | Qwen3-VL[^qwen3vl] | First family weights |
+| 2026-02-16 | Qwen3.5[^qwen-releases] | First family weights |
+| 2026-02-17 | GLM-5[^glm5] | Paper |
+| 2026-04-07 | Claude Mythos Preview[^mythos] | Restricted preview |
+| 2026-04-24 | DeepSeek-V4[^deepseek-releases] | API preview |
+| 2026-07-27 | Kimi K3[^kimik3] | Weights and report |
+| 2026-08-12 | Qwen3.8[^qwen-releases] | First family weights |
+| 2026-09-01 | Claude Fable 5.1[^fable51] | Model release |
+| 2026-09-03 | GPT-6 Astra[^gpt6astra] | Initial rollout |
+| 2026-09-10 | DeepSeek-V4.1-Flash[^deepseekv41flash] | API release |
+| 2026-09-22 | Claude Opus 5.5[^claudeopus55] | Announcement |
+| 2026-09-30 | Gemini 4 Argon[^gemini4argon] | Restricted rollout |
 
-These are focused architectural readings, not benchmark reproductions or
-complete training recipes. Use [Foundations](/architectures/foundations/)
-for shared mechanisms and [Architectural Evolution](/architectures/evolution/)
-for alternatives.
+Some families arrived in stages. For example, GPT-2 initially released smaller
+models, Gemini 2.5 Pro began as an experimental release, and Gemini 4 Argon
+initially rolled out to trusted cyber defenders.[^gpt2][^gemini25pro][^gemini4argon]
+Qwen2-VL uses the announcement's August 29 date; its repository records
+August 30 for the initial smaller model release.[^qwen2vl][^qwen3vl]
 
-## Keep the evidence layers separate
+</details>
 
-| Layer | What it can establish | What it cannot establish by itself |
-| --- | --- | --- |
-| Report | The authors' design, motivation, and experiments | Every released checkpoint's execution details |
-| Configuration | Declared widths, head counts, layers, and limits for one checkpoint | Whether those limits are useful on your task |
-| Processor | Resizing, cropping, tokenization, and position metadata | What the decoder preserves or uses |
-| Forward pass | Where tensors move, branch, combine, and return | The effect of the training data or objective |
-| Training disclosure | Which modules and objectives change across stages | A reproducible recipe if crucial details are absent |
-| Evaluation | Results under specified tasks, budgets, and conditions | A universal ranking or guaranteed application quality |
+## Choose a deep dive
 
-This is a study framework, not a claim that every source provides every layer.
-An unverified dimension or unavailable training detail should remain an
-explicit unknown.
+Studies of models with public weights follow the
+[Model Deep Dive guide](/about/content-guidance/model-deep-dive-guide/). It connects technical
+reports to named artifacts and distinguishes reported findings from inspected
+implementation and measured results.
 
-## Read for a transferable lesson
+The first collection contains **41 studies**, selected for distinct technical
+lessons rather than one page per checkpoint. Each starts with the original
+report and Hugging Face links, then highlights and scale. Architecture,
+training, inference and evaluation connect to the
+inspected sources. Original LLaMA is a historical study with restricted release
+terms; public weights elsewhere also have different licenses and access rules.
+Each page states its own verification boundary. These are source studies, not
+locally reproduced model benchmarks.
 
-The useful outcome is not memorizing a block diagram. It is being able to
-explain the model's distinctive combination, trace the evidence through it,
-and identify a comparison that would test whether the choice helps.
-New studies should deepen that understanding rather than repeat the curriculum.
+Browse related generations under GPT, Llama, Mistral, DeepSeek, Qwen, GLM,
+Kimi, Gemma and MiniMax in the sidebar. Single studies stay directly accessible. The reading
+paths below connect models by the ideas they teach, across family boundaries.
+
+### Language foundations
+
+| Study | What to understand |
+| --- | --- |
+| [GPT-2](/architectures/models/gpt-2/) | Causal prediction, residual paths and generation state |
+| [BERT](/architectures/models/bert/) | Bidirectional representations and masked prediction |
+| [T5](/architectures/models/t5/) | One text-to-text interface, encoder-decoder computation |
+| [LLaMA](/architectures/models/llama/) | A practical dense-decoder recipe and its disclosure limits |
+| [Llama 3 / 3.1](/architectures/models/llama-3/) | Scaling the recipe, data and long-context extension |
+| [Mistral 7B](/architectures/models/mistral-7b/) | Sliding-window attention and grouped-query memory |
+| [GLM / GLM-130B](/architectures/models/glm/) | Autoregressive blank filling and stable bilingual scaling |
+| [GLM-4](/architectures/models/glm-4/) | Distinguishing a released 9B model from a wider API family |
+| [Qwen2.5](/architectures/models/qwen2-5/) | Data scaling, staged alignment and explicit generation scope |
+| [Gemma](/architectures/models/gemma/) | Compact dense models and a practical open weight recipe |
+| [Gemma 2](/architectures/models/gemma-2/) | Distillation, attention patterns and training efficiency |
+
+### Experts and reasoning
+
+| Study | What to understand |
+| --- | --- |
+| [Mixtral 8x7B](/architectures/models/mixtral/) | Sparse expert routing and total versus active size |
+| [DeepSeek-V2](/architectures/models/deepseek-v2/) | Latent attention and fine-grained experts |
+| [DeepSeek-V3](/architectures/models/deepseek-v3/) | Load balancing, FP8 training and multi-token prediction |
+| [DeepSeek-R1](/architectures/models/deepseek-r1/) | Reasoning RL, data curation and distillation |
+| [Qwen3](/architectures/models/qwen3/) | Thinking and direct-answer modes in one generation |
+| [GLM-5](/architectures/models/glm-5/) | Sparse history selection and asynchronous agent learning |
+| [Kimi K2](/architectures/models/kimi-k2/) | Large-scale experts, Muon and agent data |
+| [Kimi K3](/architectures/models/kimi-k3/) | Mixing across sequence, depth and expert width |
+| [DeepSeek-V4](/architectures/models/deepseek-v4/) | Sequence compression and constrained residual mixing |
+| [DeepSeek-V4.1-Flash](/architectures/models/deepseek-v4-1-flash/) | Causal encoding, shared caches and approximate replay |
+| [gpt-oss](/architectures/models/gpt-oss/) | Quantized experts, mixed attention and the Harmony agent interface |
+| [GLM-4.5](/architectures/models/glm-4-5/) | Expert capacity, agent tasks and staged reasoning alignment |
+| [MiniMax M1](/architectures/models/minimax-m1/) | CISPO and numerical consistency in long reasoning RL |
+| [MiniMax M2 Series](/architectures/models/minimax-m2/) | Full attention, verifiable environments and asynchronous agent RL |
+
+### Memory architectures
+
+| Study | What to understand |
+| --- | --- |
+| [Mamba](/architectures/models/mamba/) | Input-dependent state updates instead of an attention cache |
+| [Kimi Linear](/architectures/models/kimi-linear/) | Corrective recurrent memory alongside global lookup |
+| [Qwen2.5 1M](/architectures/models/qwen2-5-1m/) | Long context training and sparse serving versus dense checkpoints |
+| [Qwen3.8 Flash Next](/architectures/models/qwen3-8-flash-next/) | Sparse experts and recurrent attention in the released backbone |
+| [MiniMax 01](/architectures/models/minimax-01/) | Lightning attention, exact history and the long context curriculum |
+
+### Vision and language
+
+| Study | What to understand |
+| --- | --- |
+| [CLIP](/architectures/models/clip/) | Contrastive alignment, not visual text generation |
+| [BLIP-2](/architectures/models/blip-2/) | Learned queries connecting frozen encoders and language models |
+| [LLaVA / 1.5](/architectures/models/llava/) | Visual instruction tuning and a simpler connector |
+| [Qwen2-VL](/architectures/models/qwen2-vl/) | Dynamic resolution and multimodal position |
+| [Qwen3-VL](/architectures/models/qwen3-vl/) | Deep visual injection, position and staged training |
+| [Gemma 3](/architectures/models/gemma-3/) | Compact image views and local/global attention |
+| [InternVL 3](/architectures/models/internvl-3/) | Native multimodal pretraining and a changing visual budget |
+| [Qwen2.5-VL](/architectures/models/qwen2-5-vl/) | Resolution, video time and document grounding |
+| [GLM-4V](/architectures/models/glm-4-v/) | Shared vision training ideas across dense and expert backbones |
+| [Gemma 4](/architectures/models/gemma-4/) | Native multimodal interfaces, model variants and prediction modules |
+| [MiniMax M3 / MSA](/architectures/models/minimax-m3/) | Learned block selection and the native VLM release boundary |
+
+### Related releases and study boundaries
+
+This is a curated technical collection, not a page for every checkpoint update.
+Qwen3 Next, Qwen3.5 and Gemma 3n have useful official technical documentation,
+but this expansion did not verify a matching standalone generation report.
+See [Qwen3 Next](https://qwen.ai/blog?id=qwen3-next),
+[Qwen3.5](https://qwen.ai/blog?id=qwen3.5) and
+[Gemma 3n](https://ai.google.dev/gemma/docs/gemma-3n)
+for those documentation boundaries. A backbone paper
+does not establish a later model's entire vision or alignment recipe.
+
+### Pick a reading path
+
+- **Understand the backbone:** [GPT-2](/architectures/models/gpt-2/),
+  [BERT](/architectures/models/bert/), then [T5](/architectures/models/t5/).
+- **Follow efficient memory:** [Mistral](/architectures/models/mistral-7b/),
+  [DeepSeek-V2](/architectures/models/deepseek-v2/),
+  [Mamba](/architectures/models/mamba/), then
+  [V4.1-Flash](/architectures/models/deepseek-v4-1-flash/).
+- **Connect vision to language:** [CLIP](/architectures/models/clip/),
+  [BLIP-2](/architectures/models/blip-2/),
+  [LLaVA](/architectures/models/llava/), then
+  [Qwen3-VL](/architectures/models/qwen3-vl/).
+- **Study reasoning and agents:** [V3](/architectures/models/deepseek-v3/),
+  [R1](/architectures/models/deepseek-r1/),
+  [Qwen3](/architectures/models/qwen3/), then
+  [GLM-5](/architectures/models/glm-5/).
+
+Use [Transformer Foundations](/architectures/foundations/) for the shared
+mechanisms and [Architectural Evolution](/architectures/evolution/) to compare
+design choices. This overview will grow as new releases add useful contrasts.
+
+<details>
+<summary>How we read a model</summary>
+
+Follow the input from its processor through the model to the output. Compare
+the report with the released configuration and source code, then examine the
+training disclosure and evaluation conditions. Keep missing details visible:
+a model name does not establish a checkpoint, a complete recipe, or a
+universal performance ranking.
+
+</details>
+
+
+[^transformer]: Vaswani et al. [Attention Is All You Need](https://arxiv.org/abs/1706.03762). 2017.
+
+[^gpt]: OpenAI. [Improving language understanding with unsupervised learning](https://openai.com/index/language-unsupervised/). 2018.
+
+[^bert]: Devlin et al. [BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding](https://arxiv.org/abs/1810.04805). 2018.
+
+[^gpt2]: OpenAI. [Better language models and their implications](https://openai.com/index/better-language-models/). 2019.
+
+[^t5]: Raffel et al. [Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer](https://arxiv.org/abs/1910.10683). 2019.
+
+[^gpt3]: Brown et al. [Language Models are Few-Shot Learners](https://arxiv.org/abs/2005.14165). 2020.
+
+[^clip]: OpenAI. [CLIP: Connecting text and images](https://openai.com/index/clip/). 2021.
+
+[^switchtransformer]: Fedus et al. [Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity](https://arxiv.org/abs/2101.03961). 2021.
+
+[^instructgpt]: OpenAI. [Aligning language models to follow instructions](https://openai.com/index/instruction-following/). 2022.
+
+[^chinchilla]: Hoffmann et al. [Training Compute-Optimal Large Language Models](https://arxiv.org/abs/2203.15556). 2022.
+
+[^palm]: Chowdhery et al. [PaLM: Scaling Language Modeling with Pathways](https://arxiv.org/abs/2204.02311). 2022.
+
+[^flamingo]: Alayrac et al. [Flamingo: a Visual Language Model for Few-Shot Learning](https://arxiv.org/abs/2204.14198). 2022.
+
+[^bloom]: BigScience / Hugging Face. [Introducing The World's Largest Open Multilingual Language Model: BLOOM](https://huggingface.co/blog/bloom). 2022.
+
+[^chatgpt]: OpenAI. [Introducing ChatGPT](https://openai.com/index/chatgpt/). 2022.
+
+[^blip2]: Li et al. [BLIP-2: Bootstrapping Language-Image Pre-training with Frozen Image Encoders and Large Language Models](https://arxiv.org/abs/2301.12597). 2023.
+
+[^llama]: Touvron et al. [LLaMA: Open and Efficient Foundation Language Models](https://arxiv.org/abs/2302.13971). 2023.
+
+[^gpt4]: OpenAI. [GPT-4](https://openai.com/index/gpt-4-research/). 2023.
+
+[^llava]: Liu et al. [Visual Instruction Tuning](https://arxiv.org/abs/2304.08485). 2023.
+
+[^mistral7b]: Mistral AI. [Mistral 7B](https://mistral.ai/news/announcing-mistral-7b/). 2023.
+
+[^gemini10]: Google / Google DeepMind. [Introducing Gemini: our largest and most capable AI model](https://blog.google/innovation-and-ai/technology/ai/google-gemini-ai/). 2023.
+
+[^mixtral8x7b]: Mistral AI. [Mixtral of experts](https://mistral.ai/news/mixtral-of-experts/). 2023.
+
+[^claude3]: Anthropic. [Introducing the next generation of Claude](https://www.anthropic.com/news/claude-3-family). 2024.
+
+[^gpt4o]: OpenAI. [Hello GPT-4o](https://openai.com/index/hello-gpt-4o/). 2024.
+
+[^llama31]: Meta. [Introducing Llama 3.1: Our most capable models to date](https://ai.meta.com/blog/meta-llama-3-1/). 2024.
+
+[^qwen2vl]: Qwen Team. [Qwen2-VL: To See the World More Clearly](https://qwenlm.github.io/blog/qwen2-vl/). 2024.
+
+[^deepseek-releases]: DeepSeek. [Change Log](https://api-docs.deepseek.com/updates/). Dated release notes, inspected October 9, 2026.
+
+[^gemini25pro]: Google DeepMind. [Gemini 2.5: Our most intelligent AI model](https://blog.google/innovation-and-ai/models-and-research/google-deepmind/gemini-model-thinking-updates-march-2025/). 2025.
+
+[^claude4]: Anthropic. [Introducing Claude 4](https://www.anthropic.com/news/claude-4). 2025.
+
+[^gpt5]: OpenAI. [Introducing GPT-5](https://openai.com/index/introducing-gpt-5/). 2025.
+
+[^qwen3vl]: Qwen Team. [Qwen3-VL repository](https://github.com/QwenLM/Qwen3-VL). Dated release notes, inspected October 9, 2026.
+
+[^qwen-releases]: Qwen Team. [Qwen3.5, Qwen3.6 and Qwen3.8 release notes](https://github.com/QwenLM/Qwen3.8). Dated release notes, inspected October 9, 2026.
+
+[^kimik3]: Moonshot AI. [Kimi K3 Open Day: weights, technical report and infrastructure](https://www.kimi.com/news/kimi-k3-open-source). 2026.
+
+[^gpt6astra]: OpenAI. [Safety overview: GPT-6 Astra](https://openai.com/index/safety-overview-gpt-6-astra/). 2026.
+
+[^claudeopus55]: Anthropic. [Introducing Claude Opus 5.5](https://www.anthropic.com/claude-opus-5-5). 2026.
+
+[^gemini4argon]: Google DeepMind. [Gemini 4 Argon: our next era of frontier intelligence](https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-argon/). 2026.
+
+
+[^glm]: Du et al. [GLM: General Language Model Pretraining with Autoregressive Blank Infilling](https://arxiv.org/abs/2103.10360). 2021.
+
+[^chatglm]: Team GLM. [ChatGLM: A Family of Large Language Models from GLM-130B to GLM-4 All Tools](https://arxiv.org/html/2406.12793v1). 2024, Section 1 and Table 1 record the 2023 release.
+
+[^glm45]: Z.ai. [Z.ai Releases GLM-4.5](https://www.prnewswire.com/news-releases/zai-releases-glm-4-5--setting-new-standards-for-ai-performance-and-accessibility-while-improving-affordability-302514803.html). 2025.
+
+[^glm5]: GLM-5 Team. [GLM-5: from Vibe Coding to Agentic Engineering](https://arxiv.org/abs/2602.15763). 2026.
+
+[^llama2]: Meta. [Meta and Microsoft Introduce the Next Generation of Llama](https://about.fb.com/news/2023/07/llama-2/). 2023.
+
+[^mamba]: Gu and Dao. [Mamba: Linear-Time Sequence Modeling with Selective State Spaces](https://arxiv.org/abs/2312.00752). 2023.
+
+[^internvl]: Chen et al. [InternVL: Scaling up Vision Foundation Models and Aligning for Generic Visual-Linguistic Tasks](https://arxiv.org/abs/2312.14238). 2023.
+
+[^gemini15]: Google / Google DeepMind. [Our next-generation model: Gemini 1.5](https://blog.google/innovation-and-ai/products/google-gemini-next-generation-model-february-2024/). 2024.
+
+[^deepseekv2]: DeepSeek-AI. [DeepSeek-V2: A Strong, Economical, and Efficient Mixture-of-Experts Language Model](https://arxiv.org/abs/2405.04434). 2024.
+
+[^o1preview]: OpenAI. [Introducing OpenAI o1-preview](https://openai.com/index/introducing-openai-o1-preview/). 2024.
+
+[^qwen25]: Qwen Team. [Qwen2.5: A Party of Foundation Models!](https://qwenlm.github.io/blog/qwen2.5/). 2024.
+
+[^gemma3]: Google DeepMind. [Introducing Gemma 3: The most capable model you can run on a single GPU or TPU](https://blog.google/innovation-and-ai/technology/developers-tools/gemma-3/). 2025.
+
+[^qwen3]: Qwen Team. [Qwen3: Think Deeper, Act Faster](https://qwenlm.github.io/blog/qwen3/). 2025.
+
+[^grok4]: xAI. [Grok 4](https://x.ai/news/grok-4). 2025.
+
+[^kimik2]: Moonshot AI. [Kimi K2: Open Agentic Intelligence](https://www.kimi.com/en/blog/kimi-k2) and [dated research index](https://www.kimi.com/en/blog/). 2025.
+
+[^o1]: OpenAI. [Introducing ChatGPT Pro](https://openai.com/index/introducing-chatgpt-pro/). 2024.
+
+[^mythos]: Anthropic. [Project Glasswing](https://www.anthropic.com/project/glasswing). 2026, April 7 launch and early access description.
+
+[^fable51]: Anthropic. [Claude Fable 5.1](https://platform.claude.com/docs/en/models/fable-5-1/overview) and [Claude Fable and Mythos 5.1](https://www.anthropic.com/claude-fable-and-mythos-5-1). 2026.
+
+[^deepseekv41flash]: DeepSeek. [Introducing DeepSeek V4.1 Flash: smarter, faster, more efficient](https://www.deepseek.com/en/news/deepseek-v4-1-flash/). 2026.

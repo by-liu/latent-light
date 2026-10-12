@@ -1,0 +1,38 @@
+---
+interface Props {
+  kind: 'ai' | 'practice';
+  label: string;
+}
+const { kind, label } = Astro.props;
+---
+
+<section class:list={['agency-visual', `agency-visual-${kind}`]} aria-label={label}>
+  <slot />
+</section>
+
+<style>
+  .agency-visual :global(.model-flow) {
+    background: color-mix(in srgb, #0d9488 3%, var(--nb-background));
+    padding: 1.3rem;
+  }
+  .agency-visual :global(.flow-steps li) {
+    --agency-color: #2563eb;
+    border-color: color-mix(in srgb, var(--agency-color) 35%, var(--nb-border));
+    border-top: 4px solid var(--agency-color);
+    background: color-mix(in srgb, var(--agency-color) 8%, var(--nb-background));
+    padding: 1rem .7rem;
+  }
+  .agency-visual :global(.flow-steps li:nth-child(2)) { --agency-color: #0d9488; }
+  .agency-visual :global(.flow-steps li:nth-child(3)) { --agency-color: #b45309; }
+  .agency-visual :global(.flow-steps li:nth-child(4)) { --agency-color: #7c3aed; }
+  .agency-visual :global(.flow-steps li span) {
+    color: var(--nb-foreground);
+    font-size: .84rem;
+  }
+  .agency-visual :global(.flow-steps li strong) { font-size: .94rem; }
+  .agency-visual :global(.flow-footer) { color: var(--nb-foreground); }
+  @media (max-width: 620px) {
+    .agency-visual :global(.model-flow) { padding: 1rem; }
+    .agency-visual :global(.flow-steps li) { padding: .85rem; }
+  }
+</style>

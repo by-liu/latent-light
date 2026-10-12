@@ -1,0 +1,163 @@
+{
+  "revision": 2,
+  "checked": "2026-10-10T15:45:39.761Z",
+  "site_page_sha256": "b7738e464995c8a342cc4636f401aaeb0e4a6e7dff0d63d9c72d9685547fc506",
+  "source_resources": {
+    "report": "https://arxiv.org/pdf/2602.15763v1",
+    "hugging_face": "https://huggingface.co/zai-org/GLM-5",
+    "checkpoint": "zai-org/GLM-5"
+  },
+  "collection_checks": {
+    "site_validation": "106 tests, zero Astro diagnostics, build and all 43 docs lint passed.",
+    "browser_views": 81,
+    "model_benchmarks": "Not executed.",
+    "source_figures": "32 unique report assets; 33 placements; 48 total numbered collection figures. Rights retained per asset."
+  },
+  "viewports": [
+    {
+      "slug": "glm-5",
+      "width": 1440,
+      "mode": "light",
+      "title": "GLM-5",
+      "titleCount": 1,
+      "overflow": false,
+      "figures": [
+        {
+          "id": "figure-1",
+          "caption": "Figure 1. Two separate selection and feedback systems. Original explanatory diagram informed by the report and configuration.12"
+        },
+        {
+          "id": "figure-2",
+          "caption": "Figure 2. Base training and post training. Reproduced from the report’s Figure 5, under CC BY 4.0.1"
+        }
+      ],
+      "resources": [
+        {
+          "kind": "report",
+          "href": "https://arxiv.org/pdf/2602.15763v1",
+          "label": "Technical reportRead the original research"
+        },
+        {
+          "kind": "model",
+          "href": "https://huggingface.co/zai-org/GLM-5",
+          "label": "Hugging Facezai-org/GLM-5"
+        }
+      ],
+      "visibleHashes": [],
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "missingImages": [],
+      "activeNav": [
+        {
+          "label": "GLM-5",
+          "visible": true
+        }
+      ],
+      "panFrames": [
+        {
+          "tabindex": 0,
+          "scrolls": false,
+          "frame": 648,
+          "image": 648
+        }
+      ]
+    },
+    {
+      "slug": "glm-5",
+      "width": 390,
+      "mode": "light",
+      "title": "GLM-5",
+      "titleCount": 1,
+      "overflow": false,
+      "figures": [
+        {
+          "id": "figure-1",
+          "caption": "Figure 1. Two separate selection and feedback systems. Original explanatory diagram informed by the report and configuration.12"
+        },
+        {
+          "id": "figure-2",
+          "caption": "Figure 2. Base training and post training. Reproduced from the report’s Figure 5, under CC BY 4.0.1"
+        }
+      ],
+      "resources": [
+        {
+          "kind": "report",
+          "href": "https://arxiv.org/pdf/2602.15763v1",
+          "label": "Technical reportRead the original research"
+        },
+        {
+          "kind": "model",
+          "href": "https://huggingface.co/zai-org/GLM-5",
+          "label": "Hugging Facezai-org/GLM-5"
+        }
+      ],
+      "visibleHashes": [],
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "missingImages": [],
+      "activeNav": [
+        {
+          "label": "GLM-5",
+          "visible": false
+        }
+      ],
+      "panFrames": [
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 358,
+          "image": 620
+        }
+      ]
+    },
+    {
+      "slug": "glm-5",
+      "width": 320,
+      "mode": "dark",
+      "title": "GLM-5",
+      "titleCount": 1,
+      "overflow": false,
+      "figures": [
+        {
+          "id": "figure-1",
+          "caption": "Figure 1. Two separate selection and feedback systems. Original explanatory diagram informed by the report and configuration.12"
+        },
+        {
+          "id": "figure-2",
+          "caption": "Figure 2. Base training and post training. Reproduced from the report’s Figure 5, under CC BY 4.0.1"
+        }
+      ],
+      "resources": [
+        {
+          "kind": "report",
+          "href": "https://arxiv.org/pdf/2602.15763v1",
+          "label": "Technical reportRead the original research"
+        },
+        {
+          "kind": "model",
+          "href": "https://huggingface.co/zai-org/GLM-5",
+          "label": "Hugging Facezai-org/GLM-5"
+        }
+      ],
+      "visibleHashes": [],
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "missingImages": [],
+      "activeNav": [
+        {
+          "label": "GLM-5",
+          "visible": false
+        }
+      ],
+      "panFrames": [
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 288,
+          "image": 620
+        }
+      ]
+    }
+  ],
+  "manual_review": "All 48 figure renders inspected as contact sheets; source figure completeness, labels and supplemental diagrams reviewed. Dense focus view and native dark diagrams inspected separately."
+}

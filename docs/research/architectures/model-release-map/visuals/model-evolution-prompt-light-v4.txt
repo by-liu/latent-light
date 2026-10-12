@@ -1,0 +1,23 @@
+Use case: style-transfer
+Asset type: light-theme editorial scientific timeline for the Latent Light website.
+Input image: the supplied audited dark timeline is the edit target. Preserve its data, geometry and spectral identity while making a deliberate light-background counterpart, not a color inversion.
+
+Primary request: transform the midnight background into luminous warm ivory, near #faf9f5, with very quiet pale blue orbital contours and ample open space. Keep the sophisticated spectral aperture in the upper-right header, but redraw its light rays as restrained jewel-like cobalt, teal, violet and warm copper strokes against ivory, not washed-out white glow. The chronological ribbon should feel like refracted light drawn in ink: beautiful, precise, saturated, thin, with controlled subtle halos. No photoreal planets, galaxy clouds, starfields, grain, or noisy speckles. Not a space-photo poster. This is a premium scientific editorial atlas.
+Typography: elegant deep ink serif title and year labels, crisp sans-serif model names. Title near #162331, regular model names near #344355. The bold landmark labels are deep navy near #10273f with a small darker jewel-colored diamond marker. Labels are the informational focus, approximately 10 percent larger than the input wherever spacing allows. Retain all content and exact year grouping; preserve enough whitespace that 2023's eleven rows do not collide with the footer. Keep the spectral colors in the paths and nodes, not pale colored text. Strong readable contrast on warm ivory at reduced size.
+Exact text and data invariants:
+Preserve all 53 labels below EXACTLY once, in the same year column and order. Do not add, remove, rename, abbreviate, or merge any model. GPT-4o ends with lowercase letter o. OpenAI o1-preview uses lowercase o then digit 1. Preserve LLaMA and LLaVA capitalization and GLM family hyphens.
+2017: Transformer
+2018: GPT; BERT
+2019: GPT-2; T5
+2020: GPT-3
+2021: CLIP; Switch Transformer; GLM
+2022: InstructGPT; Chinchilla; PaLM; Flamingo; BLOOM; ChatGPT
+2023: BLIP-2; LLaMA; GPT-4; ChatGLM-6B; LLaVA; Llama 2; Mistral 7B; Mamba; Gemini 1.0; Mixtral 8x7B; InternVL
+2024: Gemini 1.5 Pro; Claude 3; DeepSeek-V2; GPT-4o; Llama 3.1; Qwen2-VL; OpenAI o1-preview; Qwen2.5; DeepSeek-V3
+2025: DeepSeek-R1; Gemma 3; Gemini 2.5 Pro; Qwen3; Claude 4; Grok 4; Kimi K2; GLM-4.5; GPT-5; Qwen3-VL
+2026: Qwen3.5; GLM-5; DeepSeek-V4; Kimi K3; Qwen3.8; GPT-6 Astra; Claude Opus 5.5; Gemini 4 Argon
+
+Preserve title "LLM & VLM evolution", subtitle "Selected models and research milestones", "Snapshot: 9 Oct 2026", period labels "2017–2021" and "2022–2026", all ten year headings, footer "Chronology, not lineage. Exact dates and sources accompany this figure.", and the small footer identity "Latent Light". Add a discreet short legend: "◆ Selected landmarks". These are editorial highlights, not a ranking.
+Emphasize ONLY these 16 model labels with clearly bold type and a small solid diamond instead of their circular bullet: Transformer; BERT; T5; GPT-3; CLIP; GLM; InstructGPT; ChatGPT; LLaMA; GPT-4; LLaVA; Mamba; Mixtral 8x7B; GPT-4o; OpenAI o1-preview; DeepSeek-R1.
+All other model names stay regular weight with circular bullets. Do not bold any other model or give one highlight a bigger label than another. Year headings may retain their existing display weight. The highlighted set is identical in both theme versions.
+The flow connects years, never model-to-model ancestry. Keep both bands left to right, aligned columns, clear baseline grid, generous margins, and overall 3:2 landscape aspect ratio. No company logos, performance scores, parameter counts, medals, ranking numbers, or category badges. No artwork behind text. Maintain fully legible labels with no overlap or clipping.

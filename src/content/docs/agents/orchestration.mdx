@@ -1,0 +1,99 @@
+---
+title: Workflows & Coordination
+description: Choose control structures that fit the work, and make delegation earn its complexity.
+lastUpdated: 2026-10-11
+---
+
+import ModelFlow from '../../../components/architectures/ModelFlow.astro';
+
+Orchestration decides who does what, in which order, with which information
+and under which stopping rules. Sometimes the right orchestrator is ordinary
+code. Sometimes a model should choose the next step. Sometimes independent
+pieces of work can be delegated.
+
+The useful question is not “How many agents can we add?” It is “Which control
+structure resolves the task's uncertainty without creating more uncertainty?”
+
+## Match the pattern to the work
+
+The first two columns summarize common control patterns; the last column is
+our engineering interpretation of their main tradeoffs.[^patterns]
+
+| Pattern | Work shape | Main tradeoff |
+| --- | --- | --- |
+| Fixed chain or graph | Steps and dependencies are known | Predictability, but limited adaptation |
+| Routing | Select among specialist paths | An incorrect route can prevent recovery |
+| Parallel workers | Independent subtasks are known | Lower elapsed time can mean more total work |
+| Model orchestrator | Subtasks must be discovered | Flexible decomposition adds coordination risk |
+| Generator and evaluator | A draft can improve against clear criteria | A weak critic can reinforce errors |
+
+These patterns can coexist. An invoice system might use a fixed extraction
+workflow, route exceptional cases to an agent and require approval before
+any account update. That does not require a general planner for every step.
+
+## Delegation is useful when boundaries are clear
+
+[Figure 1](#figure-1) shows the handoff contract and the coordinator's continuing
+responsibility for integration.
+
+<ModelFlow id="figure-1" title="Delegate work, retain responsibility" lanesJson='[{"label":"Coordinator","steps":[{"label":"Define contracts","detail":"Scope, evidence, outputs and budgets"},{"label":"Dispatch independent tasks","detail":"Give each worker only relevant context","accent":true},{"label":"Reconcile results","detail":"Resolve contradictions and verify integration"}],"note":"Workers return findings and evidence. The coordinator owns the final result; worker confidence is not a completion signal."},{"label":"Each worker","steps":[{"label":"Inspect","detail":"Read its assigned evidence"},{"label":"Work within scope","detail":"Use only allowed tools and resources"},{"label":"Return a handoff","detail":"Result, evidence, limits and unresolved questions"}]}]'>
+**Figure 1.** Bounded delegation. Independent teaching design informed by
+orchestrator patterns and explicit handoffs.[^patterns][^harness]
+</ModelFlow>
+
+An invoice review can assign independent document batches to workers, then
+reconcile candidate duplicates across batches. Two workers editing the same
+report are not independent unless ownership and integration are managed. Context isolation reduces what each
+worker needs to read; it can also hide decisions that another worker needs.
+
+As a proposed delegation contract, specify the task, permitted actions,
+output format, source requirements, shared resources, budget and conditions
+for returning to the coordinator. Set limits for the entire job, not just
+each worker, so delegation cannot silently multiply cost.
+
+## Parallelism is not guaranteed speedup
+
+For independent worker tasks, a useful simplified latency model is:
+
+<MathExpression display number="1" tex="T_{\mathrm{parallel}} \approx T_{\mathrm{dispatch}} + \max_i T_i + T_{\mathrm{integration}}" />
+
+Here <MathExpression tex="T_i" /> is each worker's elapsed time. The
+derivation assumes workers can actually run concurrently and do not block
+on shared resources. Serial dependencies, queueing, conflicting edits and
+repeated synthesis can remove the benefit. Total compute is closer to the
+sum of worker effort plus orchestration, not the longest worker alone.
+
+This is a scheduling model, not a benchmark finding. Compare the design
+against a single agent under an explicit total budget before declaring it
+more effective.
+
+## A critic needs evidence, not a role name
+
+Anthropic's application-development study uses explicit planner, generator
+and evaluator roles with structured handoffs. It also documents the need
+to calibrate evaluation and inspect the running application. The study is
+a useful system example, not a controlled demonstration that three agents
+beat one on every task.[^harness]
+
+A separate critic can still share the generator's blind spots. For a proposed
+review loop, give it independent evidence, a specific rubric and access to
+external checks where possible. Bound the number of revisions. If the critic
+cannot distinguish improvement, more iterations mainly buy more text.
+
+## Keep durable execution explicit
+
+A workflow graph can make branching, human pauses and recovery visible.
+LangGraph checkpoints support stateful execution, but application-specific
+side effects still need their own recovery contract.[^persistence]
+
+Before introducing another worker or a new orchestration layer, identify the
+observed failure it should resolve. Evaluate that intervention using
+[Evaluation & Reliability](/agents/evaluation-reliability/).
+
+
+To see these ideas in a specific implementation, explore the
+[Agent Deep Dives comparison](/agents/deep-dives/) and its five studies.
+
+[^patterns]: Anthropic. [Building effective agents](https://www.anthropic.com/engineering/building-effective-agents), 2024; control pattern catalog.
+[^harness]: Prithvi Rajasekaran, Anthropic. [Harness design for long-running application development](https://www.anthropic.com/engineering/harness-design-long-running-apps), March 24, 2026.
+[^persistence]: LangChain. [LangGraph persistence](https://docs.langchain.com/oss/python/langgraph/persistence), checkpointed execution. Checked October 10, 2026.

@@ -1,84 +1,127 @@
 ---
 title: Multimodal Integration
-description: Trace how visual evidence becomes available to language computation through queries, projections, merging, and depth connections.
-lastUpdated: 2026-10-05
+description: Trace visual representations, token budgets and integration depth from pixels to language computation.
+lastUpdated: 2026-10-10
 ---
 
 import FocusCanvas from '../../../../components/FocusCanvas.astro';
-import ArchitectureDiagram from '../../../../components/architectures/ArchitectureDiagram.astro';
+import ArchitectureAtlas from '../../../../components/architectures/ArchitectureAtlas.astro';
+import SourceFigure from '../../../../components/architectures/SourceFigure.astro';
 
-A language model cannot read pixels merely because an image is attached.
-A visual interface must turn image evidence into features the language system
-can consume. Its design determines **what survives**, **how much enters**, and
-**where the decoder can use it**.[^blip][^llava][^qwen]
+Attaching an image does not tell us how a model uses it. Follow the evidence:
+**what the encoder preserves, how many representations reach the language side,
+and where they enter the computation**. A vision encoder, connector, and training
+recipe jointly define that interface.[^clip][^blip][^llava][^qwen]
 
-## Three instructive interfaces
+## Four interfaces, four different jobs
 
-<FocusCanvas size="diagram" label="Vision and language interfaces">
-  <ArchitectureDiagram kind="interfaces" id="figure-1">
-    **Figure 1.** Different bridges between vision and language. Original comparison of the named architectures and training stages.[^blip][^llava][^qwen]
-  </ArchitectureDiagram>
+<FocusCanvas size="diagram" label="Contrastive matching, learned visual queries, projection and depth injection">
+<ArchitectureAtlas kind="vision" id="figure-1">
+
+**Figure 1.** Matching images and text is different from conditioning a language decoder. Independent comparison of the named interfaces; feature counts are illustrative.[^clip][^blip][^llava][^qwen]
+
+</ArchitectureAtlas>
 </FocusCanvas>
 
-BLIP-2 uses learned queries in a Q-Former to read image encoder features.
-In its generative pretraining stage, projected query outputs become soft
-visual prompts for a frozen language model. The image encoder is also
-frozen.[^blip]
+**CLIP** learns comparable image and text representations with contrastive
+supervision. It can provide a visual backbone or retrieval representation;
+CLIP alone does not generate a language response.[^clip]
 
-The original LLaVA instead projects CLIP image features directly into the
-language embedding space. It first trains that projection with both
-backbones frozen, then trains the projection and language model for
-instruction following while keeping the image encoder frozen. These labels
-refer to the original design, not every later LLaVA variant.[^llava]
+**BLIP-2** learns queries that read frozen vision features. In its generative
+stage, projected query outputs condition a frozen language model.[^blip]
 
-Qwen3-VL merges visual features for the decoder input and also uses
-intermediate encoder features at early decoder depths. Its
-[model study](/architectures/models/qwen3-vl/) explains those additional
-DeepStack connections.[^qwen]
+**LLaVA** maps vision features directly into language embedding space.
+The original uses a linear projection; LLaVA-1.5 uses an MLP connector.[^llava][^llava15]
 
-The key difference is not simply connector size: a query bottleneck, direct
-projection, and input plus depth integration give evidence different routes.
+**Qwen3-VL** adds another route: merged input tokens plus intermediate vision
+features injected at early decoder depths through DeepStack.[^qwen]
+That changes where evidence enters, not merely how many input tokens are added.
 
-## Count the evidence before estimating cost
+The interfaces in [Figure 1](#figure-1) are useful comparisons, not a sequence in which each interface makes
+the previous one obsolete. Training data, task, resolution and budget remain
+part of the result.
 
-For an image of height `H` and width `W`, split into square patches of side
-`P`, the basic patch count is:[^vit]
+## A query bottleneck makes the budget explicit
 
-<MathExpression display number="1" tex="N_{\mathrm{patch}}=\frac{H}{P}\frac{W}{P}" />
+<FocusCanvas size="figure" label="Original BLIP-2 generative learning interface">
+<SourceFigure id="figure-2" src="/figures/model-studies/blip-2/generative-bridge.webp" alt="BLIP-2 uses a Q-Former and projection to condition a frozen causal decoder or frozen encoder-decoder language model from frozen image features." minWidth={780}>
+<div slot="image">
 
-This assumes both dimensions are divisible by `P`, with no padding or crops.
-Doubling both dimensions gives four times as many patches, not necessarily
-four times the total latency. These are geometry calculations, not a
-checkpoint's final token count.
+![BLIP-2 learns an interface between frozen visual and language backbones.](/figures/model-studies/blip-2/generative-bridge.webp)
 
-Processing can resize, crop, sample video frames, merge features, and add
-special tokens. Count **encoder patches** separately from **visual tokens
-passed to the language model**. BLIP-2's fixed set of query outputs illustrates
-why those counts need not match.[^blip]
+</div>
 
-## Architecture and training belong together
+**Figure 2.** Learned queries between frozen backbones. Reproduced from Li et al., ICML 2023 Figure 3; unchanged figure crop, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).[^blip]
 
-| Question | Why it matters |
+</SourceFigure>
+</FocusCanvas>
+
+The snowflakes in [Figure 2](#figure-2) mark frozen weights. The upper branch
+conditions a causal decoder; the lower branch shows an encoder and decoder
+variant. The same connector idea can therefore cross different language
+model contracts. The paper uses 32 learned queries: the language input need
+not include every encoder feature.[^blip]
+
+A bottleneck controls computation but can omit detail the question requires.
+That is a design concern to test, not a claim that fewer tokens always cause
+lower accuracy.
+
+## Count patches, merged tokens, and views separately
+
+For image height H, width W and square patch side P:
+
+<MathExpression display number="1" tex="N_{\mathrm{patch}}=\frac{H}{P}\frac{W}{P},\qquad N_{\mathrm{merged}}=\frac{N_{\mathrm{patch}}}{r^2}" />
+
+The first count assumes divisible dimensions with no padding or crops. The
+second assumes every r × r patch neighborhood becomes one output token.
+It is a local geometry calculation, not a complete processor specification.
+Actual models may add class tokens, delimiters, crops, frame grouping or
+different resamplers.[^vit][^qwen2]
+
+<FocusCanvas size="diagram" label="Visual patch grids before and after spatial merging">
+<ArchitectureAtlas kind="budget" id="figure-3">
+
+**Figure 3.** Twice the height and width produces four times the visual budget at the same merge ratio. Original geometry example, not a timing result.[^vit][^qwen2]
+
+</ArchitectureAtlas>
+</FocusCanvas>
+
+[Figure 3](#figure-3) isolates the geometry. Qwen2-VL merges neighboring visual features; Gemma 3 uses a compact fixed
+token budget per encoded view, with extra crops when needed. More views can
+therefore increase the aggregate budget even when the count per view is fixed.[^qwen2][^gemma]
+For video, sampling changes the number and coverage of frames before
+position encoding begins. See [Position and long context](/architectures/evolution/position-and-long-context/#images-and-video-need-coordinates-not-just-indices).
+
+## Architecture and training must agree
+
+| Question | Why it changes the interpretation |
 | --- | --- |
-| Which backbone is frozen? | A connector may need to align features to a fixed language representation |
-| What supervision is used? | Caption alignment and instruction following teach different interfaces |
-| What is compressed? | A shorter visual sequence may omit fine details needed by the task |
-| Where do features enter? | Input embeddings and additional depth connections are different designs |
+| What is frozen, and at which stage? | A small trained interface and joint backbone training have different adaptation budgets |
+| What is supervised? | Matching, captioning, instruction following and grounded coordinates teach different behavior |
+| What is compressed or omitted? | Fine print, small objects or brief events may disappear before language computation |
+| Where do features enter? | Input projection, cross attention and depth additions create different routes |
 
-This is a local comparison framework, not a claim that one interface always
-preserves more information. Its usefulness must be tested.
+This is a comparison framework. The [InternVL 3](/architectures/models/internvl-3/),
+[GLM vision](/architectures/models/glm-4-v/), and
+[Gemma 3](/architectures/models/gemma-3/) studies provide additional training
+and processor contrasts. Do not transfer one checkpoint's frozen stages,
+token count or resolution rules to an entire family.
 
-## Test whether the answer uses the image
+## Check whether the answer depends on the evidence
 
-Proposed evaluations should compare correct, missing, and contradictory visual
-evidence. Include small text, charts, spatial relations, and questions that
-cannot be answered from text alone. Control resolution, visual budget, and
-training conditions before attributing gains to the connector.
+Compare correct, absent, swapped and contradictory images. Include small
+text, chart values, spatial relations, and questions requiring several regions.
+Control resolution, view count, data and training budget when testing an interface.
 
-The cited models are examples of design choices, not recommendations or
-guarantees of visual grounding. Selected mechanisms checked October 5, 2026.
+These are proposed tests, not measurements here. Selected mechanisms
+rechecked October 10, 2026. Continue with [Qwen3-VL](/architectures/models/qwen3-vl/)
+for original framework artwork and a concrete DeepStack implementation trace.
 
-[^blip]: Junnan Li et al., [BLIP-2: Bootstrapping Language-Image Pre-training with Frozen Image Encoders and Large Language Models](https://arxiv.org/html/2301.12597v3), 2023, sections 3.1 to 3.3. The figure shows the generative stage and abstracts over the decoder and encoder decoder language model choices.
-[^llava]: Haotian Liu et al., [Visual Instruction Tuning](https://arxiv.org/html/2304.08485v2), 2023, sections 4.1 and 4.2. The original connector is a linear projection.
-[^qwen]: Qwen Team, [Qwen3-VL Technical Report](https://arxiv.org/html/2511.21631v1), 2025, section 2, especially the vision language merger and DeepStack. This comparison is report level, not a checkpoint execution trace.
-[^vit]: Alexey Dosovitskiy et al., [An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale](https://arxiv.org/html/2010.11929v2), 2021, section 3.1: an image becomes `HW/P²` patches. The scaling example and assumptions here are local calculations, not measured latency.
+[^clip]: Alec Radford et al. [Learning Transferable Visual Models From Natural Language Supervision](https://arxiv.org/html/2103.00020v1), 2021, section 2.
+[^blip]: Junnan Li, Dongxu Li, Silvio Savarese and Steven Hoi. [BLIP-2](https://arxiv.org/html/2301.12597v3), ICML 2023, sections 3.1 to 3.3 and Figure 3. Figure source and crop are retained in the [asset record](/figures/model-studies/blip-2/SOURCES.md).
+[^llava]: Haotian Liu et al. [Visual Instruction Tuning](https://arxiv.org/html/2304.08485v2), 2023, sections 4.1 and 4.2.
+[^llava15]: Haotian Liu et al. [Improved Baselines with Visual Instruction Tuning](https://arxiv.org/abs/2310.03744v2), 2023, connector and training changes.
+[^qwen]: Qwen Team. [Qwen3-VL Technical Report](https://arxiv.org/html/2511.21631v1), 2025, section 2: merger and DeepStack.
+[^vit]: Alexey Dosovitskiy et al. [An Image is Worth 16x16 Words](https://arxiv.org/html/2010.11929v2), 2021 revision, section 3.1.
+[^qwen2]: Qwen Team. [Qwen2-VL](https://arxiv.org/html/2409.12191v1), 2024, visual feature merging and dynamic resolution. Equation (1) and Figure 3 are local geometry examples.
+[^gemma]: Gemma Team. [Gemma 3 Technical Report](https://arxiv.org/html/2503.19786v1), 2025, visual encoder, 256 tokens per view and pan-and-scan.

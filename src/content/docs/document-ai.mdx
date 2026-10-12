@@ -1,0 +1,1255 @@
+---
+title: Document AI
+description: From pixels and page structure to grounded answers, specialist models and reliable document workflows.
+lastUpdated: 2026-10-11
+---
+
+import DocumentSystem from '../../components/DocumentSystem.astro';
+import ComparisonTable from '../../components/ComparisonTable.astro';
+import ModelFlow from '../../components/architectures/ModelFlow.astro';
+import FocusCanvas from '../../components/FocusCanvas.astro';
+import SourceFigure from '../../components/architectures/SourceFigure.astro';
+
+Documents encode meaning in text, geometry and relationships. This guide follows
+that information from the page to a usable result: how the models work, what
+their outputs preserve, and what makes the whole system dependable.
+
+**At a glance:** preserve structure, allocate visual compute deliberately,
+and evaluate the task rather than the fluency of the output.
+
+<FocusCanvas size="diagram" label="Document AI system map">
+<DocumentSystem id="figure-1">
+
+**Figure 1.** Five layers, one evidence trail, and a human review loop.
+
+</DocumentSystem>
+</FocusCanvas>
+
+[Figure 1](#figure-1) separates reading the page from preserving its meaning,
+using its content and accepting a result. Reliability is a cross-cutting loop,
+not a final check. This is a proposed system map, not a fixed execution order.
+
+Read the [system map](#figure-1) first, explore the
+[model mechanisms](#how-to-read-the-current-model-frontier), or jump to
+[evaluation](#evaluation-is-now-a-limiting-layer) and the
+[product landscape](#product-landscape-compare-boundaries-not-demos).
+
+Evidence checked October 11, 2026. This is a curated research review, not an
+independent model or service benchmark. Results belong to the named report,
+checkpoint and evaluator.
+
+## The short answer
+
+**Document AI turns human-oriented documents into machine-usable,
+task-relevant, and auditable information.** OCR is one perception step inside
+that system. A complete application may also recover reading order and layout,
+recognize tables and formulas, split document packets, extract a typed schema,
+retrieve evidence, answer questions, summarize, apply business rules, route
+uncertainty to people, and write accepted results into a downstream system.
+
+The field has moved from engineered OCR pipelines, through learned perception
+and layout-aware pretraining, to OCR-free document models and modern
+vision-language models (VLMs). These are overlapping eras rather than a clean
+replacement sequence. Modular pipelines remain strong where coordinates,
+determinism, latency, or local execution matter. VLMs adapt better to novel
+layouts and flexible questions, but can omit, invent, or reorder content.
+
+A useful production starting point is **adaptive and hybrid**: use native text or compact specialists for easy content, spend
+high-resolution or general-VLM compute on difficult regions, and add source
+grounding, validation, abstention, and risk-based review where errors are
+costly. This is a design recommendation, not a universal benchmark finding.[^pure-doc-bench][^real5]
+
+## What must be understood beyond the text
+
+Two kinds of structure matter: **geometric structure** identifies regions on a page, while **logical structure** assigns
+meaning such as heading, paragraph, table, field, or footnote.[^doclaynet]
+Modern Document AI extends the logical layer into retrieval, reasoning, and
+workflow action.
+
+<FocusCanvas size="wide" label="Document AI tasks, outputs and failure boundaries">
+<ComparisonTable id="task-layers" title="Task layers" label="Document AI tasks, outputs and failure boundaries" itemLabel="layers">
+
+| Layer | Representative tasks | Typical output | Failure that OCR accuracy misses |
+| --- | --- | --- | --- |
+| Capture | decode, deskew, denoise, orient, dewarp | normalized pages | correct text from a wrongly oriented page |
+| Text perception | OCR, handwriting, text spotting | words, lines, boxes, confidence | one wrong digit in an account number |
+| Layout and structure | regions, reading order, tables, formulas, charts | blocks, tree/graph, Markdown, HTML, JSON | two columns interleaved into plausible nonsense |
+| Organization | classification, splitting, page grouping | type labels and page ranges | one packet sent to the wrong extractor |
+| Extraction | fields, entities, line items, clauses, relations | typed schema with evidence | correct value assigned to the wrong field |
+| Retrieval and QA | page/region retrieval, single- and multi-document QA | answer with page or box citations | plausible answer unsupported by the document |
+| Generation | summary, comparison, report, translation | grounded narrative or synthesis | an exception clause silently omitted |
+| Workflow | rules, validation, approval, review, export | accepted result and audit trail | uncertain output enters a system of record |
+
+</ComparisonTable>
+</FocusCanvas>
+
+The evaluation unit changes at every layer. Character error rate does not
+measure table structure; bounding-box accuracy does not measure reading order;
+exact match does not fully measure semantic answers; and fluency does not
+measure summary faithfulness. There is no meaningful “document accuracy” until
+the task, corpus, metric, and cost of each error are specified.
+
+Three input regimes also need different routing:
+
+- **Born-digital documents** may contain cheap text and font information, but
+  PDF object order need not match human reading order.
+- **Scans and photographs** add skew, blur, shadows, warping, compression, and
+  handwriting.
+- **Mixed, visually rich documents** combine prose with tables, formulas,
+  charts, stamps, signatures, and figures whose relationships carry meaning.
+
+## How the technical stack evolved
+
+### 1. OCR and engineered pipelines
+
+Classical systems separated preprocessing, page segmentation, OCR,
+reading-order heuristics, logical labeling, and export. Forms and invoices were
+often handled with templates, anchors, coordinates, regular expressions, and
+dictionaries. The pipeline was inspectable, but brittle when layouts,
+languages, or capture conditions changed.
+
+### 2. Learned perception and task-specific extraction
+
+CNNs, sequence models, and object detectors improved recognition,
+classification, region detection, and key-information extraction. Larger
+datasets expanded layout diversity: DocLayNet provides 80,863 manually
+annotated pages across 11 layout classes, and its baseline models remained
+below inter-annotator agreement in the paper’s baseline experiments.[^doclaynet]
+
+### 3. Layout-aware multimodal pretraining
+
+LayoutLM jointly encoded text, 2-D coordinates, and visual appearance instead
+of treating OCR output as a one-dimensional sentence. LayoutLMv3 later unified
+text and image masking and added word–patch alignment.[^layoutlm][^layoutlmv3]
+This encoder family remains useful for classification and token-level
+extraction when OCR and boxes already exist, though it inherits upstream OCR
+errors and often needs task-specific fine-tuning.
+
+### 4. OCR-free generation
+
+Donut reframed document understanding as image-to-sequence generation and
+argued that an external OCR engine adds cost, rigidity, and error propagation.
+Its synthetic document generator also anticipated the present importance of
+controllable synthetic supervision.[^donut]
+
+“OCR-free” does not mean that reading disappears—the model learns visual text
+recognition internally. It changes the error boundary: instead of inspecting
+OCR tokens and boxes, a decoder can omit, hallucinate, or structurally
+misgenerate content. Later systems expanded image-to-sequence and instruction
+formats across screenshots, documents, tables, charts, and QA.[^pix2struct][^udop]
+
+### 5. Specialists, general VLMs, and hybrids
+
+The current categories are complementary:
+
+<FocusCanvas size="wide" label="Document AI approaches, strengths and weaknesses">
+<ComparisonTable id="approach-comparison" title="Four complementary approaches" label="Document AI approaches, strengths and weaknesses" itemLabel="approaches">
+
+| Approach | Main advantage | Main weakness | Strong fit |
+| --- | --- | --- | --- |
+| Modular pipeline | explicit artifacts, control, cheap native-text paths | brittle boundaries and error propagation | stable schemas, coordinates, local or low-latency systems |
+| Document specialist | dense text and structure per unit of compute | narrower general reasoning | page conversion, tables, formulas, private serving |
+| General VLM | flexible questions and broad language/visual knowledge | cost, hallucination, weaker diagnostics | unusual pages, ad hoc QA, cross-page reasoning |
+| Adaptive hybrid | route each page or region to the right path | orchestration and evaluation complexity | heterogeneous production corpora |
+
+</ComparisonTable>
+</FocusCanvas>
+
+**No universal SOTA.** OCR, layout detection, page conversion, information extraction, document QA,
+and summarization use different datasets and metrics. Even for parsing,
+rankings can change between clean digital pages and degraded scans. “Best”
+only has meaning for a pinned task, corpus, model version, prompt, evaluator,
+and operating constraint.
+
+## The 2026 technical frontier
+
+### Page parsing is becoming structured generation
+
+Modern parsers increasingly output Markdown, HTML-like tokens, bounding boxes,
+or typed document languages rather than plain text. SmolDocling is an especially
+useful result: its 256M-parameter VLM emits DocTags encoding content, structure,
+and location, showing how domain specialization can compensate for raw model
+scale.[^smoldocling]
+
+Several design patterns now matter:
+
+- **Coarse-to-fine visual compute.** MinerU2.5 first performs global layout
+  analysis on a downsampled page and then recognizes selected crops at native
+  resolution. Dense tables and formulas receive compute that blank margins do
+  not.[^mineru]
+- **Verifiable synthetic supervision.** olmOCR 2 renders documents from known
+  source structure and derives executable content and layout tests as
+  reinforcement-learning rewards.[^olmocr2]
+- **Targeted weak-region improvement.** PaddleOCR-VL 1.6 identifies
+  under-covered or unstable regions and applies staged post-training rather
+  than only scaling the dataset.[^paddleocr]
+
+The persistent hard cases are reading order across columns and sidebars,
+hierarchical or multi-page tables, chart geometry, small and multi-line
+formulas, meaning-bearing formatting, and associations among captions,
+footnotes, units, and objects.
+
+In its May 2026 study, PureDocBench evaluated 40 systems on source-traceable clean, digitally
+degraded, and physically degraded variants. Its best overall score was only
+about 74/100; specialists no larger than 4B parameters could rival or exceed
+general VLMs 5–100 times larger, while general VLMs sometimes degraded more
+gracefully. No evaluated model exceeded 67% on the formula metric averaged
+across the three tracks. These are results for that study’s tested models, not a ceiling on later releases.[^pure-doc-bench]
+
+## How to read the current model frontier
+
+There is no useful single ordering of “the best OCR models.” The current
+frontier mixes one-shot VLMs, layout-first systems, document converters,
+reward-optimized parsers, and models that also answer questions or reconstruct
+graphics. The more durable question is: **where does each design allocate
+pixels, tokens, decoding time, and supervision?**
+
+<ModelFlow id="figure-2" title="Six ways to spend the document budget" lanesJson='[{"label":"01 · Pixels","steps":[{"label":"Page detail","detail":"Small text versus image cost"},{"label":"Compact visual tokens","detail":"SmolDocling, DeepSeek-OCR and HunyuanOCR","accent":true}]},{"label":"02 · Reading order","steps":[{"label":"Two dimensional evidence","detail":"Columns, sidebars and connected regions"},{"label":"Organize before decoding","detail":"Layout-first parsing or DeepSeek causal-flow queries","accent":true}]},{"label":"03 · Dense regions","steps":[{"label":"Locate globally","detail":"Low resolution layout"},{"label":"Read locally","detail":"MinerU and PaddleOCR region recognition","accent":true}]},{"label":"04 · Sequential time","steps":[{"label":"Long structured outputs","detail":"Each autoregressive step costs time"},{"label":"Predict or verify blocks","detail":"GLM MTP, Hunyuan DFlash, HPD branches or diffusion","accent":true}]},{"label":"05 · History memory","steps":[{"label":"Keep the source","detail":"All reference tokens remain visible"},{"label":"Bound output history","detail":"Unlimited-OCR R-SWA","accent":true}]},{"label":"06 · Learning signal","steps":[{"label":"Define usable information","detail":"Structure, semantic tests or editable graphics"},{"label":"Train for that contract","detail":"DocTags, olmOCR unit tests and dots.mocr SVG","accent":true}]}]'>
+
+**Figure 2.** A mechanism map synthesized from the model reports discussed below. It is not a ranking.
+
+</ModelFlow>
+
+[Figure 2](#figure-2) organizes the studies by their bottleneck, not their release date or parameter count.
+
+### Architecture primer
+
+As an interface sketch, a document VLM can be written as
+
+<MathExpression display number="1" tex="y = D\big(C(E_{\text{vision}}(I)),\ p\big)," />
+
+where vision encoder <MathExpression tex="E_{\text{vision}}" /> turns page <MathExpression tex="I" /> into visual tokens,
+connector <MathExpression tex="C" /> compresses or projects them into the language-model space,
+prompt <MathExpression tex="p" /> selects the task, and decoder <MathExpression tex="D" /> generates structured output <MathExpression tex="y" />.
+This sketch does not specify attention wiring: visual-prefix decoders and
+cross-attending encoder–decoders implement the interface differently.
+Models differ along four practical axes:
+
+1. **Visual input:** fixed square, native-resolution page, dynamic tiles, or
+   layout-selected crops.
+2. **Token organization:** raster order, explicit layout order, or a learned
+   semantic sequence.
+3. **Generation:** ordinary autoregression, multiple tokens per step, or a
+   draft-and-verify path.
+4. **Output and supervision:** plain text, document markup, JSON, executable
+   tests, or renderable graphics code.
+
+Recurring building blocks include:
+
+- **Native-resolution or NaViT encoding:** patch images at their natural aspect
+  ratios instead of stretching every page into a fixed square.
+- **2-D or multimodal RoPE:** encode row, column, and sometimes modality
+  coordinates rather than only one text position.
+- **Pixel shuffle, patch merger, or convolutional compressor:** merge nearby
+  visual tokens so the decoder sees a shorter sequence.
+- **Connector or projector:** map vision features into the decoder's embedding
+  width, commonly with a small MLP.
+- **MTP or speculative decoding:** advance several output tokens per expensive
+  target-model step.
+- **RL with verifiable rewards (RLVR):** optimize outputs using executable
+  checks or task metrics rather than only next-token likelihood.
+
+### Model map at a glance
+
+The models below are representative, not an exhaustive leaderboard. They were
+selected for distinct mechanisms and inspectable primary evidence. Most have
+released checkpoints; newer report-only entries are marked explicitly. Parameter
+counts describe the named network, not the full serving pipeline.
+
+<FocusCanvas size="wide" label="Document models and their technical mechanisms">
+<ComparisonTable id="model-catalog" title="Model mechanisms at a glance" label="Document models and their technical mechanisms" itemLabel="models" search>
+
+| Model or system | Inference shape | Main technical idea | Primary output |
+| --- | --- | --- | --- |
+| SmolDocling · 256M[^smoldocling] | one-shot converter | extreme token compression plus a document-native vocabulary | DocTags → Markdown/HTML/JSON |
+| DeepSeek-OCR · 3B MoE decoder[^deepseekocr] | one-shot, multi-resolution | optical context compression through a serial local→global encoder | text and structured parse |
+| DeepSeek-OCR 2 · 3B MoE decoder[^deepseekocr2] | one-shot, multi-crop | causal-flow queries reorder compressed visual evidence | text and structured parse |
+| Unlimited-OCR · 3B MoE decoder[^unlimitedocr] | one-shot, single or multi-page | preserve the visual prefix while bounding decode-side KV memory with R-SWA | layout-tagged text and structured parse |
+| HunyuanOCR-1.5 · lightweight[^hunyuanocr15] | one-shot, up to 4K/128K | unified OCR tasks plus DFlash speculative decoding | Markdown, HTML, LaTeX, QA, extraction |
+| MinerU2.5 · 1.2B[^mineru] | two-pass | thumbnail layout followed by native-resolution crops | boxes plus element transcriptions |
+| PaddleOCR-VL 1.6 · 0.9B recognizer[^paddleocr] | detector→parallel regions | targeted weak-region data and progressive post-training | Markdown/JSON plus text spotting |
+| GLM-OCR · 0.9B[^glmocr] | layout→parallel regions, or direct KIE | shared-parameter multi-token prediction | Markdown/JSON or schema JSON |
+| olmOCR 2 · 7B[^olmocr2] | one-shot parser | executable document tests as GRPO rewards | metadata plus ordered document text |
+| dots.mocr · 3B[^dotsmocr] | task-conditioned multi-pass | treat eligible graphics as renderable SVG rather than discarded pixels | ordered text, markup, LaTeX, SVG |
+
+</ComparisonTable>
+</FocusCanvas>
+
+The refresh also adds these complementary studies. A report can establish a
+method without establishing production readiness.
+
+<FocusCanvas size="wide" label="Additional document models, scale and verified availability">
+<ComparisonTable id="model-refresh" title="Additional models and studies" label="Additional document models, scale and verified availability" itemLabel="models" search>
+
+| Model or study | Scale and availability | Why it matters |
+| --- | --- | --- |
+| Granite Docling | 258M; released checkpoint | SigLIP2 and a Granite decoder emitting DocTags.[^granite] |
+| LightOnOCR-2 / 3 | 1B in version 2; 0.8B, 1B and 4B in version 3; released family of checkpoints | Data distillation, bounding-box RL, checkpoint merging and grounded outputs.[^lighton][^lighton3] |
+| Nemotron Parse 2.0 | Under 1B; released checkpoint | C-RADIO encoder with a cross-attending mBART decoder.[^nemotron] |
+| MinerU2.5-Pro | 1.2B; released checkpoint | Scale and curate data without changing the 2.5 architecture.[^mineru-pro] |
+| HPD-Parsing | Released main model and P-MTP weights | Parallel content branches coordinated by layout; custom serving runtime.[^hpd] |
+| TeleOCR | Report inspected; checkpoint not verified | Deformation-aware learning and content/structure decoupling.[^teleocr] |
+| Xiaomi-OCR-0 | Qwen3.5-0.8B base; report and demo inspected | Large curated data engine plus parsing and understanding rewards.[^xiaomi] |
+| MinerU-Diffusion | Report inspected; checkpoint not verified | Replace serial target decoding with parallel block diffusion.[^mineru-diffusion] |
+
+</ComparisonTable>
+</FocusCanvas>
+
+### A. End-to-end compression and visual reading flow
+
+These models feed the page directly into one VLM. Their central problem is how
+to retain small text and two-dimensional structure without flooding the
+decoder with thousands of visual tokens.
+
+#### SmolDocling: make the document language compact
+
+SmolDocling uses a 93M SigLIP patch-16/512 visual backbone, aggressive pixel
+shuffle and projection, and a 135M SmolLM2 decoder. Each 512×512 image becomes
+64 visual tokens—4,096 pixels per token—bringing the total model to 256M
+parameters.[^smoldocling]
+
+It emits **DocTags**, an intermediate language with typed elements, nested
+relationships, location tokens, and a table vocabulary. Docling later converts
+that representation into Markdown, HTML, or JSON. Its design bet is that a
+small model can perform conversion well when both its visual sequence and its
+output language are carefully compressed. The tradeoff is specialization: it
+is a converter, not a broad document-reasoning model.
+
+<FocusCanvas label="SmolDocling converts page images and text prompts through visual projection and a language decoder into DocTags" size="figure">
+<SourceFigure id="figure-3" src="/figures/document-ai/smoldocling.webp" alt="SmolDocling converts page images and text prompts through visual projection and a language decoder into DocTags" minWidth={640}>
+<div slot="image">
+
+![SmolDocling converts page images and text prompts through visual projection and a language decoder into DocTags](/figures/document-ai/smoldocling.webp)
+
+</div>
+
+**Figure 3.** Document conversion into DocTags. Nassar et al., SmolDocling, Figure 1, arXiv v1, page 2; figure excerpt, CC BY 4.0.[^smoldocling][^figure-notice]
+
+</SourceFigure>
+</FocusCanvas>
+
+[Figure 3](#figure-3) shows both visual and prompt embeddings entering one document-language decoder.
+
+#### Granite Docling: the next compact document-native converter
+
+Granite Docling combines a SigLIP2 base patch-16/512 encoder, pixel-shuffle
+projection and a Granite 165M text decoder for 258M parameters. Its training
+first familiarizes the language model with DocTags, then teaches the full VLM
+conversion using public and synthetic document data. It supports full-page
+conversion, bounding-box-guided regions and structural questions. It is not
+intended as a general image-understanding model.[^granite]
+
+[Model and usage](https://huggingface.co/ibm-granite/granite-docling-258M) ·
+[Docling integration](https://github.com/docling-project/docling)
+
+The architectural continuity matters more than a size contest: the output
+language makes location, type and structure explicit. Experimental language
+coverage is not equivalent to validated quality on each language.[^granite]
+
+#### DeepSeek-OCR 1: treat the page as optical context compression
+
+DeepSeek-OCR asks how many visual tokens are needed to reconstruct much longer
+text. Its 380M **DeepEncoder** first applies an 80M SAM-based window-attention
+stage to many local patches, reduces their count 16× with two convolutional
+layers, then applies a 300M CLIP-based global-attention stage. A 3B DeepSeek MoE
+decoder activates roughly 570M parameters per token.[^deepseekocr]
+
+Resolution modes trade fidelity for tokens: 512² and 640² inputs emit 64 and
+100 tokens, while larger native or tiled modes emit hundreds to more than one
+thousand. This is not lossless compression; the paper's own results degrade as
+the text-to-vision-token ratio becomes extreme. Its contribution is a concrete
+local-attention → compression → global-attention recipe for controlling visual
+activation memory.
+
+<FocusCanvas label="DeepSeek-OCR architecture: a SAM window-attention tokenizer feeds a 16-times convolutional compressor, CLIP global-attention encoder, and DeepSeek 3B mixture-of-experts decoder." size="figure">
+<SourceFigure id="figure-4" src="/figures/document-ai/deepseek-ocr.webp" alt="DeepSeek-OCR architecture: a SAM window-attention tokenizer feeds a 16-times convolutional compressor, CLIP global-attention encoder, and DeepSeek 3B mixture-of-experts decoder." minWidth={720}>
+<div slot="image">
+
+![DeepSeek-OCR architecture: a SAM window-attention tokenizer feeds a 16-times convolutional compressor, CLIP global-attention encoder, and DeepSeek 3B mixture-of-experts decoder.](/figures/document-ai/deepseek-ocr.webp)
+
+</div>
+
+**Figure 4.** DeepSeek-OCR, Figure 3, arXiv v1, page 5; figure excerpt, CC BY 4.0.[^deepseekocr][^figure-notice]
+
+</SourceFigure>
+</FocusCanvas>
+
+[Figure 4](#figure-4) places compression before global vision attention, controlling the expensive visual sequence.
+
+#### DeepSeek-OCR 2: learn a causal flow over visual evidence
+
+**Motivation:** learn a useful sequence of visual representations before the
+language decoder generates text. A document is two-dimensional; flattening
+patches row by row need not match its logical reading order.[^deepseekocr2]
+
+For example, imagine a two-column page. A raster sequence moves across both
+columns, whereas a reader might finish the left column first. This is an
+illustration of the ordering problem—not a claim that ordinary vision encoders
+cannot understand columns or model global relationships.
+
+Version 2 preserves the 80M tokenizer, 16× compression, and 3B MoE decoder, but
+replaces CLIP with a Qwen2-0.5B **LM-style vision encoder**. Compressed visual
+tokens attend bidirectionally. An equally large set of learned causal-flow
+queries sees every visual token and only earlier queries; only those query
+outputs are passed to the decoder.[^deepseekocr2]
+
+Think of the queries as **learned reading slots**: each gathers page evidence
+while incorporating earlier slots' representations. This is intuition, not a
+guarantee that an individual slot corresponds to a particular document region.
+The mechanism is not an explicit sorting algorithm or a discrete permutation
+of patches. Query positions are processed in parallel through masked
+transformer layers, rather than generated one at a time.[^deepseekocr2]
+
+The intended effect is semantic ordering before language generation. With a
+global view and zero to six local crops, the encoder sends 256–1,120 query
+tokens to the decoder. “Reordering” is the authors' interpretation of the
+learned query sequence—not a directly observed human reading path—but the
+attention mask is precise:
+
+<MathExpression display number="2" tex="M=
+\begin{bmatrix}
+\mathbf{1}_{m\times m} & \mathbf{0}_{m\times n}\\
+\mathbf{1}_{n\times m} & \operatorname{LowerTri}(n)
+\end{bmatrix},
+\qquad n=m." />
+
+The top-left block gives visual tokens full mutual visibility; the lower-right
+block makes the flow queries causal. The decoder then performs a second causal
+stage over the resulting sequence.
+
+Equation (2) is a **visibility mask**: one means allowed and zero means
+blocked. It is not the additive mask used directly in attention logits;
+the additive equivalent uses zero for allowed entries and negative infinity
+for blocked entries. The diagonal of the query block is allowed, so a query
+can attend to itself as well as earlier queries.
+
+**Takeaway:** the encoder organizes visual evidence into learned sequential
+representations; the decoder turns those representations into text.
+
+<FocusCanvas label="DeepSeek-OCR 2 architecture: the same SAM and convolutional tokenizer feeds an LM-style visual encoder whose bidirectional visual stream and causal query stream precede the MoE decoder." size="figure">
+<SourceFigure id="figure-5" src="/figures/document-ai/deepseek-ocr-2.webp" alt="DeepSeek-OCR 2 architecture: the same SAM and convolutional tokenizer feeds an LM-style visual encoder whose bidirectional visual stream and causal query stream precede the MoE decoder." minWidth={720}>
+<div slot="image">
+
+![DeepSeek-OCR 2 architecture: the same SAM and convolutional tokenizer feeds an LM-style visual encoder whose bidirectional visual stream and causal query stream precede the MoE decoder.](/figures/document-ai/deepseek-ocr-2.webp)
+
+</div>
+
+**Figure 5.** DeepSeek-OCR 2, Figure 3, arXiv v1, page 5; blank margins removed, CC BY 4.0.[^deepseekocr2][^figure-notice]
+
+</SourceFigure>
+</FocusCanvas>
+
+[Figure 5](#figure-5) replaces CLIP with an LM-style encoder; the learned query stream is different from a discrete sort of page regions.
+
+#### Unlimited-OCR: keep the reference, forget old output
+
+Unlimited-OCR starts from DeepSeek-OCR's compressed **DeepEncoder** and 3B MoE
+decoder, with about 500M parameters active during decoding. Its change is in
+every decoder attention layer: standard full attention becomes **Reference
+Sliding Window Attention (R-SWA)**.[^unlimitedocr]
+
+<ModelFlow id="figure-6" title="R-SWA: one step, two kinds of memory" lanesJson='[{"label":"Before generating yₜ · example window n = 4","steps":[{"label":"Permanent reference","detail":"Prompt and all compressed page tokens","accent":true},{"label":"Recent output","detail":"yₜ₋₄, yₜ₋₃, yₜ₋₂, yₜ₋₁"},{"label":"Generate yₜ","detail":"Attend to both caches"}]},{"label":"After the step","steps":[{"label":"Reference unchanged","detail":"Source evidence is not evicted","accent":true},{"label":"Evict oldest output","detail":"Remove yₜ₋₄ from the output cache"},{"label":"Append new output","detail":"Keep yₜ₋₃, yₜ₋₂, yₜ₋₁, yₜ"}],"note":"The paper defaults to a 128-token output window; four is only a readable illustration."}]'>
+
+**Figure 6.** A cache-step illustration based on R-SWA. The reference stays; old output leaves.[^unlimitedocr]
+
+</ModelFlow>
+
+[Figure 6](#figure-6) separates generation from cache maintenance. Eviction removes output history, not source evidence.
+
+Read the example in two phases. While generating <MathExpression tex="y_t" />, the query reads the
+entire permanent reference cache and the four recent output tokens. After <MathExpression tex="y_t" /> is
+generated, the oldest output token is evicted and <MathExpression tex="y_t" /> is appended. The reference
+cache does not move.
+
+For a generated token at step <MathExpression tex="t" />, R-SWA exposes two kinds of memory:
+
+<MathExpression display number="3" tex="\mathcal{N}(t)=\mathcal{P}\cup\mathcal{D}_n(t),
+\qquad
+C_{\text{R-SWA}}(T)=L_m+\min(n,T)\le L_m+n." />
+
+<MathExpression tex="\mathcal{P}" /> is the complete fixed prefix—the prompt and compressed visual
+tokens—and remains visible throughout generation. <MathExpression tex="\mathcal{D}_n(t)" /> contains
+only the most recent <MathExpression tex="n" /> output tokens. Therefore the **decode-side** KV cache
+stops growing after <MathExpression tex="n" /> tokens, while visual evidence is never evicted. Equation (3)
+counts cached positions per attention layer, not memory bytes or model
+weights. It is different from ordinary sliding-window attention, which could also push the
+source image out of view.
+
+This mechanism targets a different latency problem from GLM-OCR's MTP or
+HunyuanOCR's DFlash: those methods try to emit several tokens per target-model
+step, while R-SWA bounds how much past output each step must store and attend
+to. The released model supports a 32K context and single- or multi-page
+parsing through Transformers, vLLM, and SGLang.[^unlimitedocrrepo]
+
+**“Unlimited” is the design direction, not a literal bound.** For a fixed visual prefix, R-SWA bounds cache growth with generated length.
+But total cache is still <MathExpression tex="L_m+n" />, and <MathExpression tex="L_m" /> grows as more page images are
+added. The report's 40+ page results use a small in-house benchmark, while
+the released model remains constrained by its 32K context. Treat the title
+as an aspiration toward long-horizon parsing, not proof of arbitrary-length
+PDF support.[^unlimitedocr]
+
+**How to read the authors' figure below:** each row is a query position and
+each column is a key/value position it could read. Blue cells are the permanent
+reference prefix. Pink cells are generated-output history. In full attention,
+the pink area grows into a triangle; in R-SWA, it becomes a fixed-width
+diagonal band. In the R-SWA panel, white cells between the blue block and that
+pink band are old output that has left the cache—not missing document evidence.
+White cells to the right are future output positions excluded by causal
+decoding.
+
+<FocusCanvas label="Reference Sliding Window Attention compared with full attention: all blue reference tokens remain visible, while only a bounded diagonal window of recent pink output tokens is retained in the KV cache." size="figure">
+<SourceFigure id="figure-7" src="/figures/document-ai/unlimited-ocr.webp" alt="Reference Sliding Window Attention compared with full attention: all blue reference tokens remain visible, while only a bounded diagonal window of recent pink output tokens is retained in the KV cache." minWidth={720}>
+<div slot="image">
+
+![Reference Sliding Window Attention compared with full attention: all blue reference tokens remain visible, while only a bounded diagonal window of recent pink output tokens is retained in the KV cache.](/figures/document-ai/unlimited-ocr.webp)
+
+</div>
+
+**Figure 7.** Unlimited OCR Works, Figure 1, arXiv v1, page 1; figure excerpt, CC BY 4.0.[^unlimitedocr][^figure-notice]
+
+</SourceFigure>
+</FocusCanvas>
+
+[Figure 7](#figure-7) shows the same distinction as an attention matrix: a permanent reference block plus a moving output band.
+
+#### HunyuanOCR-1.5: one model, long context, faster decoding
+
+HunyuanOCR-1.5 retains the family's end-to-end path: native-resolution
+Hunyuan-ViT → adaptive MLP connector → Hunyuan-0.5B decoder. Version 1.5 raises
+the maximum image resolution from 2K to 4K and the context window to 128K so
+the same model can handle document parsing, text spotting, extraction, QA,
+translation, and multiple images.[^hunyuanocr15]
+
+**What “native resolution” means.** The original HunyuanOCR report gives the
+concrete lineage: Hunyuan-ViT is an approximately 0.4B visual encoder built on
+SigLIP-v2-400M. Its adaptive patching preserves the input aspect ratio, and all
+resulting patches pass through global ViT attention.[^hunyuanocr]
+
+This differs from a conventional ViT pipeline that resizes every image to one
+fixed square and therefore produces the same patch grid regardless of source
+shape. Hunyuan-ViT accepts a variable-height, variable-width grid instead: a
+long receipt remains tall and narrow, while a square page remains square.
+Conceptually, for patch size <MathExpression tex="P" />:
+
+Fixed-square ViT:
+
+<MathExpression display number="4" tex="\begin{aligned}
+H\times W &\rightarrow R\times R,\\
+N_{\text{patch}} &= (R/P)^2.
+\end{aligned}" />
+
+Native-resolution ViT:
+
+<MathExpression display number="5" tex="\begin{aligned}
+H\times W &\rightarrow H'\times W',\\
+H'/W' &\approx H/W,\\
+N_{\text{patch}} &= (H'/P)(W'/P).
+\end{aligned}" />
+
+Preserving the page geometry helps retain small-character density, column
+relationships, and table or chart structure. The resulting number of visual
+tokens varies with the image; only **after** global vision attention does the
+adaptive MLP connector pool and project those features into a shorter sequence
+for the language model. The connector therefore reduces decoder-side visual
+tokens, but it does not remove the vision encoder's cost of processing the
+high-resolution patch grid.[^hunyuanocr]
+
+This resembles NaViT's broader variable-resolution, aspect-ratio-preserving
+principle, which HunyuanOCR-1.5 cites. But the original report does not describe
+Hunyuan-ViT as simply NaViT: it specifically describes a SigLIP-v2-based
+encoder with Hunyuan's adaptive patching and training recipe.[^navit][^hunyuanocr]
+
+“Native” does **not** mean that every source pixel passes through unchanged or
+that resolution is unlimited. Images may still be rescaled to a supported
+pixel budget and rounded to patch-compatible dimensions. HunyuanOCR-1.5 raises
+that supported envelope to 4K; the inspected image-processor configuration uses 16-pixel
+patches and a 2× spatial merge. Treat processor pixel limits, vision config
+fields and the paper’s supported envelope as separate contracts. The downstream Hunyuan-0.5B uses XD-RoPE to
+assign text, height, width, and time coordinates to the resulting multimodal
+sequence.[^hunyuanocr15][^hunyuanocr-config]
+
+Its decoding addition is **DFlash**. A separate 90.7M, five-layer
+block-diffusion draft model proposes up to a block of candidate tokens in one
+parallel pass; the frozen target model verifies the block and accepts the
+longest valid prefix. This preserves the target distribution while spending
+otherwise idle compute to reduce sequential steps. The authors report 6.37×
+Transformer and 2.14× vLLM speedups in their setup; gains depend strongly on
+output length, regularity, batching, and serving conditions.[^hunyuanocr15]
+
+<FocusCanvas label="HunyuanOCR-1.5 architecture panel: native-resolution vision encoder, adaptive MLP connector and Hunyuan 0.5B language decoder" size="figure">
+<SourceFigure id="figure-8" src="/figures/document-ai/hunyuan-ocr-15.webp" alt="HunyuanOCR-1.5 architecture panel: native-resolution vision encoder, adaptive MLP connector and Hunyuan 0.5B language decoder" minWidth={440}>
+<div slot="image">
+
+![HunyuanOCR-1.5 architecture panel: native-resolution vision encoder, adaptive MLP connector and Hunyuan 0.5B language decoder](/figures/document-ai/hunyuan-ocr-15.webp)
+
+</div>
+
+**Figure 8.** HunyuanOCR-1.5, architecture panel from Figure 1, arXiv v2, page 4; cropped to omit task examples, CC BY-SA 4.0.[^hunyuanocr15][^figure-notice]
+
+</SourceFigure>
+</FocusCanvas>
+
+[Figure 8](#figure-8) keeps native visual encoding and decoder-token compression separate. The connector cannot erase upstream vision cost.
+
+#### LightOnOCR-2: optimize data and the localization objective
+
+LightOnOCR-2 is a 1B end-to-end specialist built around distilled document
+training data. The revised report expands scans, scientific pages and French
+content; introduces image bounding boxes; and uses reinforcement learning
+with an intersection-over-union reward for localization. Checkpoint averaging
+and task arithmetic produce distinct quality, speed and bounding-box variants.
+Do not treat one variant’s localization behavior as a property of every
+checkpoint.[^lighton]
+
+**Current release check.** The official catalog also lists LightOnOCR-3 in
+0.8B, 1B and 4B variants. The 1B retains the previous architecture; 0.8B and 4B
+use Qwen3.5. Its grounding mode adds typed boxes, image descriptions and
+chart-to-table data; transcription mode remains distinct. The card limits
+usage to the empty prompt or `grounding`, rather than arbitrary instructions.
+This is documented capability, not an independently measured accuracy claim.[^lighton3]
+
+[Current model family](https://huggingface.co/lightonai/LightOnOCR-3-4B) ·
+[Version 2 report](https://arxiv.org/abs/2601.14251v2) ·
+[Model family](https://huggingface.co/lightonai/LightOnOCR-2-1B)
+
+#### Nemotron Parse 2.0: encoder–decoder attention is still useful
+
+NVIDIA’s sub-billion-parameter parser combines a C-RADIO vision encoder,
+convolutional compression and a ten-block mBART decoder that cross-attends to
+visual features. The model emits text, element classes, reading order and
+locations. Its expanded vocabulary and data target multilingual content,
+handwriting and chart-to-table conversion.[^nemotron]
+
+This is a useful counterexample to treating every document VLM as a
+decoder-only model with visual prefix tokens. Its separately archived auxiliary
+prediction head is not loaded by the standard checkpoint or inference examples.
+Do not infer an MTP serving speedup from the existence of that training head.[^nemotron]
+
+[Model and inference contract](https://huggingface.co/nvidia/NVIDIA-Nemotron-Parse-2.0)
+
+### B. Layout-first and region-routed parsers
+
+These systems use explicit page decomposition. The first stage simplifies the
+recognizer's job and enables parallel crops, but it also creates an error
+boundary: content missed, merged, or misordered upstream may be unrecoverable.
+
+#### MinerU2.5: global layout, then native-resolution crops
+
+MinerU2.5 is a 1.2B Qwen2-VL-style model with a 675M NaViT visual encoder, a
+2×2 pixel-unshuffle patch merger, and a 0.5B Qwen2-Instruct decoder. It first
+resizes the whole page to 1036×1036 and predicts layout boxes, then returns to
+the original image and recognizes selected crops at native resolution.[^mineru]
+
+The design separates two different visual needs: layout depends on global
+geometry, while transcription depends on local pixels. It saves high-resolution
+compute on blank margins, but a missed first-pass region cannot be repaired by
+the second pass.
+
+<FocusCanvas label="MinerU2.5 finds layout on a small page image, then recognizes native-resolution crops in parallel and merges them in order" size="figure">
+<SourceFigure id="figure-9" src="/figures/document-ai/mineru25.webp" alt="MinerU2.5 finds layout on a small page image, then recognizes native-resolution crops in parallel and merges them in order" minWidth={880}>
+<div slot="image">
+
+![MinerU2.5 finds layout on a small page image, then recognizes native-resolution crops in parallel and merges them in order](/figures/document-ai/mineru25.webp)
+
+</div>
+
+**Figure 9.** Global layout, local detail. Niu et al., MinerU2.5, Figure 2, arXiv v2, page 7; figure excerpt reproduced for technical review, not MIT licensed.[^mineru][^figure-notice]
+
+</SourceFigure>
+</FocusCanvas>
+
+[Figure 9](#figure-9) shows why layout recall matters: a crop never selected cannot be transcribed in the second stage.
+
+#### MinerU2.5-Pro: improve the data engine, retain the architecture
+
+The Pro report retains the 1.2B architecture but scales its corpus to 65.5M
+samples. Diversity and difficulty sampling, heterogeneous expert consensus,
+and rendering-based verification refine the supervision. Training proceeds
+through pretraining, hard-sample SFT and GRPO. The important contrast is with
+uniform data scaling: target the errors the current model still makes.[^mineru-pro]
+
+[Report](https://arxiv.org/abs/2604.04771v2) ·
+[Checkpoint](https://huggingface.co/opendatalab/MinerU2.5-Pro-2604-1.2B)
+
+The MinerU application has its own version history and now documents a 4.0
+software workflow. That is not evidence of a new “MinerU4” neural architecture.
+Its repository license adds conditions to an Apache-based license; inspect
+software and checkpoint terms separately before adoption.[^mineru-repo]
+
+#### The PaddleOCR family and its current VL model
+
+**Version check · October 11, 2026.** PaddleOCR-VL 1.6 is the flagship VL version shown in the inspected official
+PaddleOCR repository. It belongs to a broader family that also includes
+modular PP-OCR text detection/recognition, PP-Structure document structure,
+PP-ChatOCR document understanding, preprocessing, table, formula, seal, and
+deployment pipelines.[^paddleocrrepo]
+
+PaddleOCR-VL 1.6 is a two-model parsing system. PP-DocLayoutV3 performs layout
+analysis and multi-point localization, then PaddleOCR-VL-1.6-0.9B recognizes
+text, tables, formulas, charts, and seals using a native-resolution visual
+encoder, adaptive MLP connector, and ERNIE-4.5-0.3B decoder. Post-processing
+assembles Markdown or JSON and supports cross-page table and heading
+refinement.[^paddleocr]
+
+The important version detail is that **1.6 retains the 1.5 architecture**. It
+mines three kinds of residual weak regions—checkpoint/perturbation-fragile,
+coverage-sparse, and unreliable-supervision—then retrieves or relabels nearby
+data with expert consensus and judge-and-refine. Training proceeds through
+CPT → hard-sample SFT → selected-data GRPO. In the authors' OmniDocBench v1.6
+ablation, most of the gain comes before RL: 94.93 at the 1.5 checkpoint, 95.62
+after CPT, 96.25 after SFT, and 96.33 after RL.[^paddleocr]
+
+<FocusCanvas label="PaddleOCR-VL-1.6 system overview showing document parsing and spotting tasks, retained detector and recognizer architecture, under-optimized-region data mining, curated data, and CPT to SFT to RL post-training." size="figure">
+<SourceFigure id="figure-10" src="/figures/document-ai/paddle-ocr-vl-16.webp" alt="PaddleOCR-VL-1.6 system overview showing document parsing and spotting tasks, retained detector and recognizer architecture, under-optimized-region data mining, curated data, and CPT to SFT to RL post-training." minWidth={720}>
+<div slot="image">
+
+![PaddleOCR-VL-1.6 system overview showing document parsing and spotting tasks, retained detector and recognizer architecture, under-optimized-region data mining, curated data, and CPT to SFT to RL post-training.](/figures/document-ai/paddle-ocr-vl-16.webp)
+
+</div>
+
+**Figure 10.** PaddleOCR-VL-1.6, Figure 2, arXiv v1, page 5; figure excerpt, CC BY 4.0.[^paddleocr][^figure-notice]
+
+</SourceFigure>
+</FocusCanvas>
+
+[Figure 10](#figure-10) makes the data engine visible alongside the retained architecture. The upgrade is not simply a larger backbone.
+
+#### GLM-OCR: compact region recognition with multi-token heads
+
+GLM-OCR combines a 0.4B CogViT encoder, lightweight connector, and 0.5B GLM
+decoder for 0.9B total parameters. For page parsing, PP-DocLayout-V3 finds and
+crops regions, which the core model recognizes in parallel before merge and
+post-processing restore structured Markdown/JSON. For key information
+extraction, the full page and schema prompt can go directly to the core model
+without explicit region cropping.[^glmocr]
+
+Its distinctive decoding mechanism is shared-parameter **multi-token
+prediction (MTP)**. Auxiliary heads learn different future offsets; the model
+is trained for ten tokens per step and averages 5.2 generated tokens per step
+in the report's inference setup. Unlike Hunyuan's external draft-and-verify
+model, MTP is built into the decoder. The authors report about 50% throughput
+improvement, while also acknowledging detector error propagation and difficult
+cross-page or multi-column reading order.[^glmocr]
+
+<FocusCanvas label="GLM-OCR workflow showing PP-DocLayout-V3 region detection for document parsing, direct visual prompting for key extraction, a CogViT encoder, GLM decoder, shared MTP heads, and structured outputs." size="figure">
+<SourceFigure id="figure-11" src="/figures/document-ai/glm-ocr.webp" alt="GLM-OCR workflow showing PP-DocLayout-V3 region detection for document parsing, direct visual prompting for key extraction, a CogViT encoder, GLM decoder, shared MTP heads, and structured outputs." minWidth={720}>
+<div slot="image">
+
+![GLM-OCR workflow showing PP-DocLayout-V3 region detection for document parsing, direct visual prompting for key extraction, a CogViT encoder, GLM decoder, shared MTP heads, and structured outputs.](/figures/document-ai/glm-ocr.webp)
+
+</div>
+
+**Figure 11.** GLM-OCR, Figure 2, arXiv v2, page 4; figure excerpt, CC BY 4.0.[^glmocr][^figure-notice]
+
+</SourceFigure>
+</FocusCanvas>
+
+[Figure 11](#figure-11) separates layout-routed parsing from direct schema-conditioned extraction.
+
+#### HPD-Parsing: parallelize the output tree
+
+HPD-Parsing attacks the serial generation bottleneck differently. A main
+layout branch establishes global structure and dynamically forks local content
+branches that decode concurrently. Progressive multi-token prediction reduces
+steps inside each branch. Unlike independent crop calls after an external
+detector, the model’s decoding process coordinates the branching.[^hpd]
+
+[Official usage and model link](https://www.paddleocr.ai/latest/en/version3.x/pipeline_usage/HPD-Parsing.html) ·
+[Report](https://arxiv.org/abs/2607.18839)
+
+The documented runtime is a customized vLLM build supporting request forking
+and P-MTP. Parallel decoding is therefore a model-plus-runtime property, not
+something a generic Transformers loader automatically provides. Peak token
+throughput is not document latency at your batch size.[^hpd]
+
+#### MinerU-Diffusion: change the target decoder, not just its draft
+
+The March 2026 report uses parallel block diffusion for document generation,
+with uncertainty-aware curriculum learning and inverse-rendered data. Its
+reported decoding acceleration is conditional on the tested setting; it is not
+a guarantee for end-to-end ingestion.[^mineru-diffusion]
+
+This differs from Hunyuan’s DFlash: DFlash proposes tokens that an
+autoregressive target verifies. MinerU-Diffusion changes the target generation
+method itself. The report is inspected; checkpoint availability was not
+verified in this review.[^mineru-diffusion][^hunyuanocr15]
+
+### C. Change the supervision or the output language
+
+The next frontier is not only a better visual backbone. Some models change
+what counts as a correct parse or expand what a parser is expected to emit.
+
+#### olmOCR 2: executable document tests as rewards
+
+olmOCR 2 starts from Qwen2.5-VL-7B-Instruct, fine-tunes on 267,962 pages, and
+then applies GRPO on 2,186 synthetic pages with 30,381 HTML-derived binary
+tests. Each page produces 28 completions; tests check content presence and
+absence, reading order, table relations, formulas, and repetition.[^olmocr2]
+
+For output <MathExpression tex="y" /> and <MathExpression tex="M" /> tests, the main reward is
+
+<MathExpression display number="6" tex="R_{\text{doc}}(y)
+=
+\frac{1}{M}\sum_{j=1}^{M}\mathbf{1}[T_j(y)\text{ passes}]." />
+
+This is more semantically tolerant than raw edit distance: equivalent table
+serializations can pass while text in the wrong order fails. But tests only
+reward properties they encode, and the paper's benchmark is English-only.
+
+<FocusCanvas label="An HTML-rendered training page defines content and order checks; a generated Markdown page passes four of six binary tests" size="figure">
+<SourceFigure id="figure-12" src="/figures/document-ai/olmocr2-rewards.webp" alt="An HTML-rendered training page defines content and order checks; a generated Markdown page passes four of six binary tests" minWidth={750}>
+<div slot="image">
+
+![An HTML-rendered training page defines content and order checks; a generated Markdown page passes four of six binary tests](/figures/document-ai/olmocr2-rewards.webp)
+
+</div>
+
+**Figure 12.** Executable tests score generated text. Poznanski et al., olmOCR 2, Figure 4, arXiv v1, page 6; figure excerpt, CC BY 4.0.[^olmocr2][^figure-notice]
+
+</SourceFigure>
+</FocusCanvas>
+
+[Figure 12](#figure-12) checks selected document properties, not exact serialization equality. Unspecified properties can still be wrong.
+
+The rendered HTML is the canonical source for each synthetic training image.
+If a teacher changes the original document while rebuilding it as HTML, the
+synthetic image and tests can still be internally consistent. That does not
+prove faithful copying of the original. The reward above is the main test
+component, not the complete GRPO objective or every auxiliary reward.[^olmocr2]
+
+The release also changes the base model, prompts, image settings, retries and
+checkpoint merging. Its overall benchmark gain should not be attributed to RL
+alone without a controlled ablation.[^olmocr2]
+
+#### dots.mocr: treat graphics as programs, not leftover pixels
+
+dots.mocr extends the output boundary beyond text-centric parsing. Its
+scratch-trained 1.2B high-resolution encoder accepts up to roughly 11 million
+pixels; a connector feeds a Qwen2.5-1.5B base decoder. The generated sequence
+contains ordered typed regions <MathExpression tex="(\mathcal{B}_k,c_k,p_k)" />, where payload <MathExpression tex="p_k" />
+can be text, table markup, LaTeX, or renderable SVG for charts, icons, diagrams,
+and UI elements.[^dotsmocr]
+
+The current release is not literally “parse everything in one pass.” Full-page
+text parsing and region-level image-to-SVG decoding are task-conditioned
+separate passes. SVG also introduces a different evaluation problem: many
+programs can render the same picture, so render fidelity and structural checks
+matter more than exact code match.
+
+<FocusCanvas label="MOCR overview in which a document containing text, a table, chart, and formula is converted into typed text, table markup, SVG code, and formula representations and then reconstructed." size="figure">
+<SourceFigure id="figure-13" src="/figures/document-ai/dots-mocr.webp" alt="MOCR overview in which a document containing text, a table, chart, and formula is converted into typed text, table markup, SVG code, and formula representations and then reconstructed." minWidth={720}>
+<div slot="image">
+
+![MOCR overview in which a document containing text, a table, chart, and formula is converted into typed text, table markup, SVG code, and formula representations and then reconstructed.](/figures/document-ai/dots-mocr.webp)
+
+</div>
+
+**Figure 13.** dots.mocr, Figure 1, arXiv v2, page 2; unchanged figure excerpt, CC BY-NC-ND 4.0.[^dotsmocr][^figure-notice]
+
+</SourceFigure>
+</FocusCanvas>
+
+[Figure 13](#figure-13) expands the output contract to graphics code. Photos and graphics with no compact program remain raster content.
+
+#### TeleOCR and Xiaomi-OCR-0: geometry and data remain frontiers
+
+**TeleOCR** adds deformation-aware learning, adaptive sampling for complex
+layouts and content/structure decoupling for formulas and tables. The current
+September revision uses the TeleOCR name; earlier indexing used NaviDC. Its
+reported 78.41 PureDocBench score is a later author result, illustrating why
+the original study’s roughly 74 score is not a current ceiling. Cross-report
+scores still require matching evaluator and dataset versions.[^teleocr]
+
+**Xiaomi-OCR-0**, reported September 28, starts from Qwen3.5-0.8B and describes
+a data engine producing about 170M samples, not 170M text tokens. Expert
+consensus, rendering verification and targeted synthesis support CPT and
+MixRL rewards spanning parsing and understanding. It adds Q-Mask for text
+anchoring. Here the report and public demo are verified; a downloadable
+checkpoint was not verified.[^xiaomi]
+
+[TeleOCR report](https://arxiv.org/abs/2608.12898v3) ·
+[Xiaomi-OCR-0 report](https://arxiv.org/abs/2609.36136v1)
+
+### The architectural lesson
+
+<FocusCanvas size="wide" label="Architecture selection by workload constraint">
+<ComparisonTable id="architecture-selection" title="Choose by the limiting constraint" label="Architecture selection by workload constraint" itemLabel="constraints">
+
+| If the workload is constrained by… | Start by testing… | Inspect this failure boundary |
+| --- | --- | --- |
+| edge memory or conversion throughput | SmolDocling or another compact converter | compression loss and vocabulary/task coverage |
+| dense pages and limited visual-token budget | DeepSeek-OCR family | small text loss, reading order, and compression regime |
+| multi-page transcription whose output KV cache keeps growing | Unlimited-OCR or another reference-preserving local-attention design | prefix length, context ceiling, cross-page continuity, and small-text loss |
+| auditable region boundaries and parallel serving | MinerU2.5, PaddleOCR-VL, or GLM-OCR | detector recall, crop context, and merge order |
+| long structured generation latency | GLM-OCR MTP or HunyuanOCR DFlash | hardware, concurrency, acceptance length, output stability |
+| semantic correctness beyond edit distance | olmOCR 2-style executable tests | untested properties and synthetic-data coverage |
+| diagrams and charts that must remain editable | dots.mocr-style SVG generation | render equivalence, geometry, and code validity |
+
+</ComparisonTable>
+</FocusCanvas>
+
+Across the families, the shared pattern is **capacity allocation rather than
+parameter scaling alone**: decide which pixels become tokens, which tokens
+reach the decoder, how many decoding steps are necessary, what structure the
+output language makes explicit, and which errors the training signal can see.
+
+### Extraction is becoming schema-conditioned generation
+
+A common modern extraction path is:
+
+1. parse the document into text plus structure;
+2. supply a JSON schema, field descriptions, examples, or instructions;
+3. generate typed values;
+4. enforce structural validity;
+5. attach each consequential value to a page or region;
+6. normalize and check it against business rules or external data; and
+7. abstain or route high-risk uncertainty to review.
+
+Valid JSON is not evidence of a correct value. Stable, high-volume schemas can
+still favor discriminative models with better latency and calibration.
+Generative extraction is strongest when layouts and schemas vary or when a
+field requires language understanding. A practical compromise uses a
+generative extractor plus a smaller verifier, deterministic rules, or sampled
+human review.
+
+### QA still needs retrieval and evidence
+
+DocVQA established single-page visual question answering with 50,000 questions
+over more than 12,000 document images.[^docvqa] Real workloads are often
+multi-page. MP-DocVQA therefore used hierarchical page representations—select
+or compress pages before answer generation and identify the supporting
+page.[^mpdocvqa]
+
+The same idea underlies reliable multimodal RAG: parse evidence-bearing blocks,
+retrieve documents then pages or regions, answer from the selected visual and
+textual evidence, return citations, and support “not found.” Long context does
+not remove retrieval; retrieval also allocates visual compute and creates an
+audit interface.
+
+Benchmark versions matter. MMLongBench-Doc-V2 corrected 106 annotations and
+changed the evaluator to semantic equivalence; its authors explicitly state
+that V2 results are not comparable with published V1 scores.[^mmlongbench]
+
+### Retrieve the page image, not only its transcript
+
+ColPali is an important complementary design. It embeds page images as multiple
+vectors and uses late interaction between query-token and page vectors. This
+lets retrieval retain layout and visual evidence that a plain OCR transcript
+can discard.[^colpali]
+
+For query vectors <MathExpression tex="q_i" /> and page vectors
+<MathExpression tex="v_j" />, its MaxSim matching has the form:
+
+<MathExpression display number="7" tex="s(q,p)=\sum_i\max_j q_i^{\top}v_j" />
+
+Each query token finds its strongest page match; those matches are summed.
+This is retrieval, not transcription or answer generation. A practical hybrid
+can retrieve page images, then supply both the relevant image and typed parsed
+blocks to an answer model. Multiple vectors also mean more index storage and
+matching work than one vector per chunk; benchmark retrieval latency, recall
+and downstream answer quality separately.[^colpali]
+
+See [multimodal integration](/architectures/evolution/multimodal-integration/)
+for the underlying vision-language interfaces.
+
+### Summarization is a downstream grounding problem
+
+This review does not establish a standard visual-document summarization
+leaderboard comparable to the parsing benchmarks discussed here. The critical work
+is preserving section and table structure, retrieving complete evidence,
+distinguishing observed facts from synthesis, citing pages, and detecting
+omitted requirements. A good parse does not prove summary coverage, and a
+fluent summary does not prove factuality.
+
+## Evaluation is now a limiting layer
+
+Public leaderboards can mislead through corpus mismatch, page-level metrics
+that hide catastrophic field errors, benchmark corrections, contamination,
+vendor-specific tuning, and a gap between digital pages and real capture.
+PureDocBench reports 2,580 confirmed errors in 21,353 evaluator-scored
+OmniDocBench blocks, or 12.08%; this denominator is not every annotated block
+in the dataset. Real5-OmniDocBench separately reconstructs pages through scanning,
+warping, screen photography, illumination changes, and skew to expose a
+persistent physical-capture gap.[^pure-doc-bench][^real5]
+
+Dr. DocBench adds expert-domain structures such as chemical formulas, music
+notation, difficult tables and cross-page relationships. Its failure-based
+selection is useful as a stress test, but does not estimate your production
+error prevalence. Combine challenge sets with representative workload samples
+instead of averaging them into one undifferentiated score.[^dr-docbench]
+
+A production bake-off should use a rights-cleared, stratified sample of the
+actual workload, including easy pages, rare but expensive layouts, bad scans,
+handwriting, long packets, and “not present” cases. Keep a sealed test split and
+measure the losses that matter:
+
+- exact transcription for critical fields;
+- reading order, table structure, and header–value association;
+- field precision/recall, normalized match, and evidence coverage;
+- document-level perfect-pass rate where every required field must be right;
+- answer accuracy, abstention, and citation correctness for QA;
+- factual consistency and required-fact coverage for summaries;
+- straight-through processing rate and review minutes at a fixed quality bar;
+- p50/p95 latency, throughput, retries, and fully loaded cost; and
+- every metric sliced by document type, language, capture condition, and
+  parser/model version.
+
+Vendor confidence is not automatically a calibrated probability. Estimate
+empirical error by field and slice, and price false values, missing values,
+unnecessary reviews, and delays separately.
+
+### Validating a model-based judge
+
+An LLM judge is not ground truth. Published evaluations identify position,
+verbosity, and self-enhancement biases; agreement on one benchmark does not
+establish reliability for document extraction or figure summaries.[^judge-validation]
+
+**A proposed document-specific checklist:** define correctness, coverage, and conciseness
+separately; build a human-reviewed sample across relevant document slices;
+inspect false accepts and false rejects, not just average agreement. For paired
+comparisons, swap answer order to check sensitivity. Include fluent but wrong
+outputs and terse but correct ones. Fix the judge version and rubric when
+comparing systems, and recheck reliability after either changes.
+
+Separate the measurements: summary rubrics assess the summary; direct QA tests
+answerability from the supplied representation; RAG adds retrieval and context
+selection. A downstream gain does not identify which stage improved without
+additional comparisons. For synthetic training data, judge scores are an
+intermediate check, not a substitute for held-out model evaluation.
+
+<ModelFlow id="figure-14" title="Three evaluations, three different questions" lanesJson='[{"label":"Representation quality","steps":[{"label":"Source figure or page","detail":"Human-reviewed facts and task scope"},{"label":"Summary plus structured data","detail":"Rubric: correctness, coverage and conciseness","accent":true}]},{"label":"Direct QA","steps":[{"label":"Fixed questions and context","detail":"Supply only the summary and chart CSV"},{"label":"Answer correctness","detail":"Test whether the representation preserves needed facts","accent":true}]},{"label":"End-to-end RAG","steps":[{"label":"Index and retrieve","detail":"Include realistic distractors and access rules"},{"label":"Answer with citations","detail":"Measure retrieval, answers and evidence together","accent":true}],"note":"Compare with raw-source and oracle-context baselines to localize regressions."}]'>
+
+**Figure 14.** A proposed evaluation design. Rubric, direct QA and RAG scores are complementary, not interchangeable.
+
+</ModelFlow>
+
+[Figure 14](#figure-14) isolates representation, answerability and retrieval. Run each test before interpreting an end-to-end gain.
+
+## A dependable production architecture
+
+1. **Ingest and route.** Preserve the source, verify file and page metadata,
+   detect native text, classify and split packets, and route by language,
+   quality, complexity, and governance boundary.
+2. **Parse with evidence.** Keep blocks, coordinates, reading order, hierarchy,
+   tables, formulas, figures, source text, and parser version. Flat Markdown is
+   convenient but may discard information needed for review or reprocessing.
+3. **Execute a typed task.** Use a schema for extraction, an evidence plan for
+   QA, or a coverage rubric for summarization. Separate observed values from
+   normalization, inference, and arithmetic.
+4. **Validate and abstain.** Combine schema checks, ranges, totals, cross-field
+   consistency, master data, grounding coverage, capture risk, and calibrated
+   thresholds.
+5. **Review by risk.** Send people the fields where expected error cost exceeds
+   review cost, with the source crop and reason for escalation—not every page.
+6. **Monitor outcomes.** Track input drift, versions, validation failures,
+   corrections, downstream rejection, cost, and latency. Canary changes and
+   keep rollback paths.
+
+Agreement between two models is not proof: they can have correlated failures.
+Grounding is not proof either, but it makes a mistake inspectable. Reliability
+comes from the complete control loop.
+
+### Treat document content as data, not authority
+
+A document can contain instructions aimed at the model, including text hidden
+in a PDF or embedded in retrieved content. Indirect prompt-injection research
+shows why retrieved data must not acquire the privileges of system
+instructions.[^injection]
+
+The following are system-design recommendations:
+
+- Enforce access rules before retrieval and when assembling evidence. Apply
+  the same rules to crops, summaries, extracted fields and indexes.
+- Keep source content separate from tool permissions. A page may suggest an
+  action, but it cannot authorize a write, payment or external message.
+- Validate files and sanitize generated HTML or SVG. Do not execute embedded
+  scripts or fetch arbitrary URLs while rendering a parse.
+- Define retention, deletion, redaction and outbound-service rules for
+  originals and every derived representation.
+
+Grounded output can still disclose restricted information. Accuracy and
+authorization are separate tests. See [Security & Control](/agents/security-control/).
+
+## Product landscape: compare boundaries, not demos
+
+The commercial market separates into three broad classes. Hyperscalers provide
+composable cloud primitives and governance integration. Enterprise intelligent
+document processing (IDP) suites own more of the operator workflow and system
+of record. API-first products emphasize parsing, structured output, citations,
+and developer integration.
+
+<FocusCanvas size="wide" label="Document AI products, strengths and buyer decisions">
+<ComparisonTable id="product-catalog" title="Products and their boundaries" label="Document AI products, strengths and buyer decisions" itemLabel="products" search>
+
+| Product | Product boundary and strength | What the buyer still needs to decide |
+| --- | --- | --- |
+| Google Cloud Document AI[^google] | cloud processors for OCR, layout, extraction, classification/splitting, and pretrained document types | how processors, validation, and business workflow fit together |
+| Azure Document Intelligence + Content Understanding[^azure] | conventional OCR/layout/custom models plus a generative multimodal analyzer layer | which service owns each stage and how model-token cost is controlled |
+| AWS Textract + Bedrock Data Automation[^aws] | OCR/forms/tables primitives plus generative standard or schema-driven outputs | orchestration, review, and the total across multiple AWS services |
+| ABBYY Vantage[^abbyy] | full IDP suite with document skills, manual review, connectors, and private deployment | implementation effort, process design, and contract economics |
+| UiPath Document Understanding[^uipath] | generative classification/extraction, annotation and cross-model validation | fit with the wider UiPath automation operating model |
+| Rossum[^rossum] | transactional document capture with field/document checks, confidence thresholds and configurable validation | fit outside invoice, order, logistics, and finance-heavy operations |
+| Instabase AI Hub[^instabase] | document applications and flows spanning no-code, Python, review, and lifecycle controls | governance and complexity of a broad configurable platform |
+| Mistral Document AI / OCR 4.1[^mistral] | OCR with paragraph boxes, structural block labels, confidence and annotations | validation, review, orchestration, and deployment requirements |
+| LandingAI ADE[^landingai] | developer-facing parsing/extraction; splitting, classification and section features have their own maturity and tier constraints | business workflow and sensitivity to tier/model/output-based metering |
+| Reducto[^reducto] | controllable parsing and extraction with optional source citations | review design, pipeline logic, and multi-operation credit cost |
+| Unstructured[^unstructured] | connectors, partitioning, enrichment, chunking, and destinations for RAG ingestion | transactional field-review workflows and task-specific validation |
+| Docling[^docling] | open local structured conversion, typed document representation and agent integrations | schema extraction and the downstream operational control loop |
+
+</ComparisonTable>
+</FocusCanvas>
+
+This is a fit map, not an accuracy ranking. Product claims are based on
+first-party documentation inspected at the evidence cutoff; they establish
+documented capability, not independent proof of quality or ease of adoption.
+
+### Version stability is a product requirement
+
+Two current examples make the risk concrete. Mistral’s OCR 4.0 card marks that
+version deprecated and recommends OCR 4.1. LandingAI’s September changelog
+documents an October 7 model transition for subscription and enterprise
+organizations, including execution on a newer model even when older snapshot
+names are passed. It also documents a change in Parse confidence output.[^mistral][^landingai]
+
+This review did not run those services. The operational lesson is to record
+provider transitions and test observed outputs, not just store the request’s
+model string. Canary document sets should cover omitted fields, geometry,
+formatting and confidence semantics. A pin is only as strong as its documented
+lifecycle contract.
+
+### Why the price-per-page table is usually misleading
+
+Vendors meter different objects: pages, documents, characters, tokens, fields,
+workflow operations, service tiers, add-ons, or human tasks. A parser API and a
+full IDP suite also deliver different boundaries. Compare instead:
+
+<MathExpression display number="8" tex="\text{accepted cost}
+=
+\frac{\text{parsing + model calls + retries + validation + review + incidents}}
+{\text{documents accepted at the required quality}}." />
+
+Report this by document slice. A small set of difficult pages can dominate both
+cost and risk.
+
+## A practical selection framework
+
+<FocusCanvas size="wide" label="Document AI model and product selection by workload">
+<ComparisonTable id="workload-selection" title="A starting point for each workload" label="Document AI model and product selection by workload" itemLabel="workloads">
+
+| Workload | Sensible starting class | Why |
+| --- | --- | --- |
+| Clean digital files for search or RAG | Docling or Unstructured; add a specialist on hard pages | native/local conversion and structured chunks may be enough |
+| Visually complex PDFs feeding an AI app | API-first specialist or self-hosted document VLM | strong page structure and developer integration |
+| Stable high-volume forms with strict fields | hyperscaler custom/prebuilt model or enterprise IDP | repeatability, calibration, validation, and review dominate novelty |
+| Invoices, orders, and shipping workflows | enterprise IDP; include relevant cloud processors in the bake-off | operator process and ERP validation are central |
+| Mixed packets in an existing cloud estate | corresponding hyperscaler, benchmarked against specialists on hard slices | identity, storage, region, and procurement integration reduce complexity |
+| Strict private or on-premises boundary | open specialist stack or explicitly private enterprise offering | deployment and outbound dependency evidence becomes a hard constraint |
+| Ad hoc multi-document QA or summarization | general VLM plus grounded parser and retriever | broad reasoning helps, but evidence fidelity remains a separate control |
+
+</ComparisonTable>
+</FocusCanvas>
+
+Run at least one cheap baseline, one document specialist, one general-VLM path,
+and—when operator workflow matters—one full IDP suite. Hold corpus, schemas,
+prompts, page ranges, output normalization, versioning, and review policy
+constant. Test “field absent,” damaged pages, retries, rollbacks, data retention,
+review correction, concurrency, and p95 latency—not only the happy-path demo.
+
+## What comes next
+
+### High-confidence directions already visible
+
+- **Compact specialist VLMs** make private and economical serving credible.
+- **Coarse-to-fine and adaptive compute** concentrate visual tokens on useful
+  pages and regions.
+- **Verifiable synthetic supervision** turns source HTML, tables, and reading
+  order into executable rewards and regression tests.
+- **Document-native representations** retain typed blocks, graphs, spatial
+  provenance, and cross-page relationships beyond flat Markdown.
+- **Grounding as a first-class output** makes page and bounding-box citations
+  useful to reviewers, validators, and audit trails.
+
+### Plausible, but dependent on disciplined execution
+
+- Agentic workflows can choose parsers, refine schemas, query systems, and
+  reconcile discrepancies—but only bounded tools, typed state, evidence, and
+  acceptance tests make those loops safer.
+- Multimodal retrieval will increasingly retain page images, structure,
+  tables, and multiple representations rather than only text chunks.
+- Evaluation will become continuous and slice-aware, with regression tests
+  generated from corrections.
+- Selective specialist/general-model ensembles may help, but their correlated
+  failures and added cost must be measured.
+
+More uncertain are one universal document foundation model replacing most
+pipelines, self-improving agents without governed test gates, and a confidence
+score that transfers reliably across corpora and tasks.
+
+## Working conclusion
+
+The important shift is not “OCR has become a VLM.” It is that document
+understanding has become a **systems problem spanning perception,
+representation, reasoning, evidence, and operations**. Small specialists can
+beat much larger general models on important slices; general models can be more
+robust or flexible elsewhere; and neither removes the need for local
+evaluation.
+
+Start with the decision and its error cost. Preserve evidence from the first
+parse. Establish a cheap baseline. Benchmark specialists and general VLMs on
+the hard slices. Then optimize the complete loop for accepted documents—not
+plausible text or a single leaderboard score.
+
+[^judge-validation]: Lianmin Zheng et al., [Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena](https://arxiv.org/abs/2306.05685), 2023. The document-specific checklist above is a proposed application, not an experiment reported by this paper.
+[^doclaynet]: Birgit Pfitzmann et al., [“DocLayNet: A Large Human-Annotated Dataset for Document-Layout Analysis”](https://arxiv.org/abs/2206.01062), KDD 2022.
+[^layoutlm]: Yiheng Xu et al., [“LayoutLM: Pre-training of Text and Layout for Document Image Understanding”](https://arxiv.org/abs/1912.13318), KDD 2020.
+[^layoutlmv3]: Yupan Huang et al., [“LayoutLMv3: Pre-training for Document AI with Unified Text and Image Masking”](https://arxiv.org/abs/2204.08387), ACM Multimedia 2022.
+[^donut]: Geewook Kim et al., [“OCR-free Document Understanding Transformer”](https://arxiv.org/abs/2111.15664), ECCV 2022.
+[^pix2struct]: Kenton Lee et al., [“Pix2Struct: Screenshot Parsing as Pretraining for Visual Language Understanding”](https://arxiv.org/abs/2210.03347), ICML 2023.
+[^udop]: Zineng Tang et al., [“Unifying Vision, Text, and Layout for Universal Document Processing”](https://arxiv.org/abs/2212.02623), CVPR 2023.
+[^smoldocling]: Ahmed Nassar et al., [SmolDocling](https://arxiv.org/abs/2503.11576v1), 2025, Sections 2–4 and Figure 1.
+[^mineru]: Junbo Niu et al., [MinerU2.5](https://arxiv.org/abs/2509.22186v2), 2025, Section 3 and Figure 2.
+[^olmocr2]: Jake Poznanski, Luca Soldaini, and Kyle Lo, [“olmOCR 2: Unit Test Rewards for Document OCR”](https://arxiv.org/abs/2510.19817), arXiv, 2025.
+[^paddleocr]: Zelun Zhang et al., [“PaddleOCR-VL-1.6: Expanding the Frontier of Document Parsing with Under-Optimized Region Refinement and Progressive Post-Training”](https://arxiv.org/abs/2606.03264), arXiv, 2026.
+[^paddleocrrepo]: PaddlePaddle, [PaddleOCR](https://github.com/PaddlePaddle/PaddleOCR), flagship VL 1.6, PP-OCRv6 and HPD-Parsing release documentation.
+[^deepseekocr]: Haoran Wei, Yaofeng Sun, and Yukun Li, [“DeepSeek-OCR: Contexts Optical Compression”](https://arxiv.org/abs/2510.18234), arXiv, 2025.
+[^deepseekocr2]: Haoran Wei, Yaofeng Sun, and Yukun Li, [“DeepSeek-OCR 2: Visual Causal Flow”](https://arxiv.org/abs/2601.20552), arXiv, 2026.
+[^unlimitedocr]: Youyang Yin et al., [“Unlimited OCR Works”](https://arxiv.org/abs/2606.23050), Baidu technical report, arXiv v1, June 2026.
+[^unlimitedocrrepo]: Baidu, [Unlimited-OCR repository](https://github.com/baidu/Unlimited-OCR) and [model card](https://huggingface.co/baidu/Unlimited-OCR).
+[^glmocr]: Shuaiqi Duan et al., [“GLM-OCR Technical Report”](https://arxiv.org/abs/2603.10910), 2026; Zhipu AI, [GLM-OCR repository](https://github.com/zai-org/GLM-OCR).
+[^hunyuanocr]: Hunyuan Vision Team et al., [“HunyuanOCR Technical Report”](https://arxiv.org/abs/2511.19575), arXiv v2, December 2025.
+[^hunyuanocr15]: Gengluo Li et al., [“HunyuanOCR-1.5: Making Lightweight OCR VLMs Faster and Better”](https://arxiv.org/abs/2607.04884), arXiv v2, August 2026.
+[^navit]: Mostafa Dehghani et al., [“Patch n’ Pack: NaViT, a Vision Transformer for Any Aspect Ratio and Resolution”](https://arxiv.org/abs/2307.06304), NeurIPS 2023.
+[^hunyuanocr-config]: Tencent Hunyuan, [image-processor configuration](https://huggingface.co/tencent/HunyuanOCR/blob/main/preprocessor_config.json) and [model configuration](https://huggingface.co/tencent/HunyuanOCR/blob/main/config.json). Processor limits and vision config fields are not interchangeable.
+[^dotsmocr]: Handong Zheng et al., [“Multimodal OCR: Parse Anything from Documents”](https://arxiv.org/abs/2603.13032), arXiv v2, 2026.
+[^pure-doc-bench]: Zhiheng Li et al., [“How Far Is Document Parsing from Solved? PureDocBench”](https://arxiv.org/abs/2605.07492), arXiv, 2026.
+[^real5]: Cheng Cui et al., [Real5-OmniDocBench](https://arxiv.org/abs/2603.04205v2), June 2026 revision.
+[^docvqa]: Minesh Mathew, Dimosthenis Karatzas, and C. V. Jawahar, [“DocVQA: A Dataset for VQA on Document Images”](https://arxiv.org/abs/2007.00398), WACV 2021.
+[^mpdocvqa]: Ruben Tito, Dimosthenis Karatzas, and Ernest Valveny, [“Hierarchical Multimodal Transformers for Multi-Page DocVQA”](https://arxiv.org/abs/2212.05935), *Pattern Recognition*, 2023.
+[^mmlongbench]: Mingtian Zhang, [“MMLongBench-Doc-V2: A Corrected-Annotation, Semantics-Aware Revision of MMLongBench-Doc”](https://arxiv.org/abs/2608.03397), arXiv, 2026.
+[^google]: Google Cloud, [Document AI overview](https://docs.cloud.google.com/document-ai/docs/overview).
+[^azure]: Microsoft, [Document Intelligence overview](https://learn.microsoft.com/en-us/azure/ai-services/document-intelligence/overview?view=doc-intel-4.0.0).
+[^aws]: Amazon Web Services, [“Analyzing Documents”](https://docs.aws.amazon.com/textract/latest/dg/how-it-works-analyzing.html) and [“Bedrock Data Automation”](https://docs.aws.amazon.com/bedrock/latest/userguide/bda.html).
+[^abbyy]: ABBYY, [“Vantage introduction”](https://docs.abbyy.com/vantage/introduction).
+[^uipath]: UiPath, [“Document Understanding: Generative Features”](https://docs.uipath.com/document-understanding/automation-cloud/latest/user-guide/generative-features).
+[^rossum]: Rossum, [“Data Capture Automation with Rossum”](https://knowledge-base.rossum.ai/help/docs/data-capture-automation-with-rossum).
+[^instabase]: Instabase, [AI Hub overview](https://docs.instabase.com/overview/getting-started).
+[^mistral]: Mistral AI, [OCR 4.1](https://docs.mistral.ai/models/ocr-4-1) and [OCR 4.0 lifecycle status](https://docs.mistral.ai/models/ocr-4-0).
+[^landingai]: LandingAI, [“Agentic Document Extraction changelog”](https://docs.landing.ai/ade/ade-changelog).
+[^reducto]: Reducto, [Extract overview](https://docs.reducto.ai/extract/overview).
+[^unstructured]: Unstructured, [“Welcome to Unstructured”](https://docs.unstructured.io/welcome).
+[^docling]: Docling contributors, [Docling](https://github.com/docling-project/docling), features, document representation and model-license boundary.
+[^granite]: IBM Granite, [Granite Docling 258M model card](https://huggingface.co/ibm-granite/granite-docling-258M), architecture, curriculum and intended use.
+[^nemotron]: NVIDIA, [Nemotron Parse 2.0 model card](https://huggingface.co/nvidia/NVIDIA-Nemotron-Parse-2.0), architecture, auxiliary-head boundary and output contract.
+[^lighton]: LightOn, [LightOnOCR](https://arxiv.org/abs/2601.14251v2), June 2026 revision; [LightOnOCR-2-1B](https://huggingface.co/lightonai/LightOnOCR-2-1B).
+[^mineru-pro]: Bin Wang et al., [MinerU2.5-Pro](https://arxiv.org/abs/2604.04771v2), April 2026 revision, data engine and progressive training; [checkpoint](https://huggingface.co/opendatalab/MinerU2.5-Pro-2604-1.2B).
+[^mineru-repo]: OpenDataLab, [MinerU repository](https://github.com/opendatalab/MinerU), current software workflow and license information.
+[^hpd]: PaddlePaddle, [HPD-Parsing usage tutorial](https://www.paddleocr.ai/latest/en/version3.x/pipeline_usage/HPD-Parsing.html), hierarchical branching, P-MTP and custom-runtime requirements; [report](https://arxiv.org/abs/2607.18839).
+[^mineru-diffusion]: [MinerU-Diffusion](https://arxiv.org/abs/2603.22458v1), March 2026, block diffusion, curriculum and inverse rendering.
+[^teleocr]: [TeleOCR](https://arxiv.org/abs/2608.12898v3), September 2026 revision, deformation and structured-content methods. Earlier indexing used NaviDC.
+[^xiaomi]: [Xiaomi-OCR-0](https://arxiv.org/abs/2609.36136v1), September 28, 2026, data engine, Q-Mask and MixRL; [public demo](https://huggingface.co/spaces/SeerRay-Lab/Xiaomi-OCR-0). A demo is not a verified checkpoint release.
+[^colpali]: Manuel Faysse et al., [ColPali](https://arxiv.org/abs/2407.01449v6), ICLR 2025, page-image multi-vector retrieval and late interaction.
+[^injection]: Kai Greshake et al., [Not what you’ve signed up for](https://arxiv.org/abs/2302.12173v2), 2023, indirect prompt injection through retrieved content.
+[^dr-docbench]: Minglai Yang et al., [Dr. DocBench](https://arxiv.org/abs/2606.01393v1), 2026, expert-domain and parser-failure-based evaluation.
+[^figure-notice]: [Figure sources, licenses and reuse notices](/licenses/document-ai-figures.txt). Third-party figures are excluded from the repository’s MIT license.
+
+[^lighton3]: LightOn, [LightOnOCR-3-4B model card](https://huggingface.co/lightonai/LightOnOCR-3-4B), family architectures, grounding output and supported prompt modes.

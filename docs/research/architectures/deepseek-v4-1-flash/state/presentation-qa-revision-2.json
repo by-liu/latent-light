@@ -1,0 +1,193 @@
+{
+  "revision": 2,
+  "checked": "2026-10-10T15:45:39.761Z",
+  "site_page_sha256": "850ee86a5a9958a9d005187c53059b805af25a9047f7bdd3861a956ee58aeb9e",
+  "source_resources": {
+    "report": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash/blob/2cba9e42aa026125f3ed06c6d98c1db82f7ca027/DeepSeek_V41_Tech_Report.pdf",
+    "hugging_face": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash",
+    "checkpoint": "deepseek-ai/DeepSeek-V4.1-Flash"
+  },
+  "collection_checks": {
+    "site_validation": "106 tests, zero Astro diagnostics, build and all 43 docs lint passed.",
+    "browser_views": 81,
+    "model_benchmarks": "Not executed.",
+    "source_figures": "32 unique report assets; 33 placements; 48 total numbered collection figures. Rights retained per asset."
+  },
+  "viewports": [
+    {
+      "slug": "deepseek-v4-1-flash",
+      "width": 1440,
+      "mode": "light",
+      "title": "DeepSeek-V4.1-Flash",
+      "titleCount": 1,
+      "overflow": false,
+      "figures": [
+        {
+          "id": "figure-1",
+          "caption": "Figure 1. Causal encoding, shared history and multimodal input. Reproduced from report Figure 3.1 MIT documentation notice."
+        },
+        {
+          "id": "figure-2",
+          "caption": "Figure 2. Read the prompt once, reuse its history while generating. Original schematic based on the reported optimized CED path, not a measured run.1"
+        },
+        {
+          "id": "figure-3",
+          "caption": "Figure 3. CSA2 separates stored evidence from selection decisions. Reproduced from report Figure 4.1 MIT documentation notice."
+        }
+      ],
+      "resources": [
+        {
+          "kind": "report",
+          "href": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash/blob/2cba9e42aa026125f3ed06c6d98c1db82f7ca027/DeepSeek_V41_Tech_Report.pdf",
+          "label": "Technical reportRead the original research"
+        },
+        {
+          "kind": "model",
+          "href": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash",
+          "label": "Hugging Facedeepseek-ai/DeepSeek-V4.1-Flash"
+        }
+      ],
+      "visibleHashes": [],
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "missingImages": [],
+      "activeNav": [
+        {
+          "label": "DeepSeek-V4.1-Flash",
+          "visible": true
+        }
+      ],
+      "panFrames": [
+        {
+          "tabindex": 0,
+          "scrolls": false,
+          "frame": 648,
+          "image": 648
+        },
+        {
+          "tabindex": 0,
+          "scrolls": false,
+          "frame": 648,
+          "image": 648
+        }
+      ]
+    },
+    {
+      "slug": "deepseek-v4-1-flash",
+      "width": 390,
+      "mode": "light",
+      "title": "DeepSeek-V4.1-Flash",
+      "titleCount": 1,
+      "overflow": false,
+      "figures": [
+        {
+          "id": "figure-1",
+          "caption": "Figure 1. Causal encoding, shared history and multimodal input. Reproduced from report Figure 3.1 MIT documentation notice."
+        },
+        {
+          "id": "figure-2",
+          "caption": "Figure 2. Read the prompt once, reuse its history while generating. Original schematic based on the reported optimized CED path, not a measured run.1"
+        },
+        {
+          "id": "figure-3",
+          "caption": "Figure 3. CSA2 separates stored evidence from selection decisions. Reproduced from report Figure 4.1 MIT documentation notice."
+        }
+      ],
+      "resources": [
+        {
+          "kind": "report",
+          "href": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash/blob/2cba9e42aa026125f3ed06c6d98c1db82f7ca027/DeepSeek_V41_Tech_Report.pdf",
+          "label": "Technical reportRead the original research"
+        },
+        {
+          "kind": "model",
+          "href": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash",
+          "label": "Hugging Facedeepseek-ai/DeepSeek-V4.1-Flash"
+        }
+      ],
+      "visibleHashes": [],
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "missingImages": [],
+      "activeNav": [
+        {
+          "label": "DeepSeek-V4.1-Flash",
+          "visible": false
+        }
+      ],
+      "panFrames": [
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 358,
+          "image": 740
+        },
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 358,
+          "image": 760
+        }
+      ]
+    },
+    {
+      "slug": "deepseek-v4-1-flash",
+      "width": 320,
+      "mode": "dark",
+      "title": "DeepSeek-V4.1-Flash",
+      "titleCount": 1,
+      "overflow": false,
+      "figures": [
+        {
+          "id": "figure-1",
+          "caption": "Figure 1. Causal encoding, shared history and multimodal input. Reproduced from report Figure 3.1 MIT documentation notice."
+        },
+        {
+          "id": "figure-2",
+          "caption": "Figure 2. Read the prompt once, reuse its history while generating. Original schematic based on the reported optimized CED path, not a measured run.1"
+        },
+        {
+          "id": "figure-3",
+          "caption": "Figure 3. CSA2 separates stored evidence from selection decisions. Reproduced from report Figure 4.1 MIT documentation notice."
+        }
+      ],
+      "resources": [
+        {
+          "kind": "report",
+          "href": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash/blob/2cba9e42aa026125f3ed06c6d98c1db82f7ca027/DeepSeek_V41_Tech_Report.pdf",
+          "label": "Technical reportRead the original research"
+        },
+        {
+          "kind": "model",
+          "href": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash",
+          "label": "Hugging Facedeepseek-ai/DeepSeek-V4.1-Flash"
+        }
+      ],
+      "visibleHashes": [],
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "missingImages": [],
+      "activeNav": [
+        {
+          "label": "DeepSeek-V4.1-Flash",
+          "visible": false
+        }
+      ],
+      "panFrames": [
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 288,
+          "image": 740
+        },
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 288,
+          "image": 760
+        }
+      ]
+    }
+  ],
+  "manual_review": "All 48 figure renders inspected as contact sheets; source figure completeness, labels and supplemental diagrams reviewed. Dense focus view and native dark diagrams inspected separately."
+}

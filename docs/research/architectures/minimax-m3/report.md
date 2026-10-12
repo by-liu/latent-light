@@ -1,0 +1,169 @@
+---
+title: "MiniMax M3 and Sparse Attention"
+topic_id: "minimax-m3-technical-deep-dive"
+status: reviewed
+revision: 1
+updated: "2026-10-10"
+evidence_cutoff: "2026-10-10"
+audience: "Readers studying model mechanisms"
+canonical_format: markdown
+---
+
+# MiniMax M3 and Sparse Attention
+
+## Executive answer
+
+MiniMax M3 restores an efficient attention path without compressing history into a single recurrent state. Its MiniMax Sparse Attention (MSA) first learns which historical blocks to inspect, then performs ordinary softmax attention only inside those selected blocks.[^report][^card]
+
+[Technical report](https://arxiv.org/pdf/2606.13392v2) · [Hugging Face: MiniMaxAI/MiniMax-M3](https://huggingface.co/MiniMaxAI/MiniMax-M3)
+
+## Visual overview
+
+<!-- visual-id: V001 -->
+![A lightweight index projection scores causal keys, max pools into blocks and selects a different top K mask for each GQA group; the main QKV branch attends exactly within selected blocks](../../../../public/figures/model-studies/minimax-m3/sparse-attention.png)
+
+## Key findings
+
+- **Choose blocks, then read exact values.** A lightweight index branch selects history separately for each GQA group; the main branch retains exact attention on the selection.[^report]
+- **Learn the selector without destabilizing the backbone.** Detached KL alignment, warmup and a reserved local block make sparse training practical.[^report]
+- **Native vision changes the input contract.** The released checkpoint supports text, images and video, with dynamic visual tokenization and spatial merging.[^card][^config][^processor]
+- **Keep the experiment and release separate.** The MSA report studies 109B models; released M3 is about 428B total and 23B active.[^report][^card]
+
+## Detailed analysis
+
+MiniMax M3 restores an efficient attention path without compressing history into a single recurrent state. Its MiniMax Sparse Attention (MSA) first learns which historical blocks to inspect, then performs ordinary softmax attention only inside those selected blocks.[^report][^card]
+
+### Highlights
+
+- **Choose blocks, then read exact values.** A lightweight index branch selects history separately for each GQA group; the main branch retains exact attention on the selection.[^report]
+- **Learn the selector without destabilizing the backbone.** Detached KL alignment, warmup and a reserved local block make sparse training practical.[^report]
+- **Native vision changes the input contract.** The released checkpoint supports text, images and video, with dynamic visual tokenization and spatial merging.[^card][^config][^processor]
+- **Keep the experiment and release separate.** The MSA report studies 109B models; released M3 is about 428B total and 23B active.[^report][^card]
+
+Study scope: the June 12, 2026 MSA report revision, public M3 card, configuration, image preprocessing and license. This is **not a complete M3 training report**: the linked paper establishes its attention mechanism through smaller controlled models. Evidence checked October 10, 2026. No custom code or inference kernels executed.
+
+### Model in numbers
+
+| Dimension | Released M3 | Controlled MSA study |
+| --- | --- | --- |
+| Parameters | About 428B total / 23B active | About 109B / 6B active |
+| Text backbone | 60 layers, width 6,144 | 41 layers, width 3,072 |
+| Experts | 128 routed, top four, plus one shared; first three layers dense | Same routing pattern, first three layers dense |
+| Attention | 64 query / four KV heads, width 128; first three full layers, then MSA | Report experiments' MSA settings |
+| Context | Released ceiling 1,048,576 | Evaluations include 128K and extended 1M |
+| Token budget | Complete release training budget undisclosed | 3T matched pretraining budget; separate 140B long context extension |
+| Run compute | Full release accelerator hours / FLOPs undisclosed | Relative attention FLOPs and H800 kernel timing, not full run cost |
+
+Release values come from the card and exact configuration; experimental values come from Section 5 and long context setup. **Do not assign the 3T budget or controlled benchmark scores to the 428B checkpoint.**[^report][^card][^config]
+
+### The original attention diagram
+
+
+
+
+
+<!-- visual-id: V001 -->
+![MSA index and main branches with group specific block masks](../../../../public/figures/model-studies/minimax-m3/sparse-attention.png)
+
+
+
+**Figure 1.** Learned block selection followed by exact sparse attention. Original MSA report Figure 1.[^report][^figure]
+
+
+
+The index branch has one query head per KV group and a shared index key head. It scores every causally visible key, takes the maximum score within each block, and selects the top blocks independently for each group. All query heads within that GQA group share the selection but retain their own main attention queries.[^report]
+
+The local block containing the current token is always selected. It **reserves one of the K slots**, not an extra slot added after selection. At block size 128 and K = 16, the selected main attention budget is at most 2,048 tokens per query and group, with fewer causally visible tokens near the beginning.[^report]
+
+The main branch applies normal scaled softmax attention to the selected original keys and values. Its computation is exact **for that sparse mask**, not identical to attending to the whole history. An omitted block cannot contribute its value at that layer.[^report]
+
+### Training a nondifferentiable selection
+
+Top K does not give the selector a useful direct language model gradient. MSA aligns index probabilities with the average main attention probabilities of the query heads in each group, evaluated over selected visible tokens:[^report]
+
+
+
+$$
+\mathcal L_{\mathrm{KL}}=\frac{1}{NH_{kv}}\sum_{i,r}D_{\mathrm{KL}}\!\left(\operatorname{sg}(P_i^{(r)})\,\|\,P_i^{\mathrm{idx},(r)}\right)
+\tag{1}
+$$
+
+
+
+The teacher probability is detached. The index branch input hidden states are also detached, so this auxiliary objective updates its index projections rather than the backbone. The language modeling objective still trains the main network. Warmup runs full attention while the new selector learns, then switches to sparse lookup.[^report]
+
+The controlled native sparse model uses 40B warmup tokens within a 3T budget. The conversion experiment starts from a 2.6T full attention model and spends 400B more tokens, including 40B warmup, after adding MSA. These are two distinct paths to the **same total experimental budget**, not 3T plus all the listed stages.[^report]
+
+### Why this is not fully linear attention
+
+The selected main attention cost stays bounded per query when K and block size B are fixed. However, the index still scores the full causal history. The report gives the attention FLOP model:[^report]
+
+
+
+$$
+F_{\mathrm{MSA}}=H_{kv}d_{\mathrm{idx}}N^2+4H_qd_hNKB,\qquad F_{\mathrm{GQA}}=2H_qd_hN^2
+\tag{2}
+$$
+
+
+
+Equation (2) excludes projections, experts and the vision path. The index coefficient is much smaller, but its $N^2$ term remains. Unlike M1's recurrent layers, MSA also retains history needed for future content dependent retrieval. A fixed selected read budget is **not** a fixed size full history cache.[^report]
+
+The kernels avoid a needless softmax before top K because it preserves score ordering, and arrange sparse attention around KV blocks to improve reuse. They still incur indexing, gather, materialization and load balancing overhead. The report's 28.4 times attention FLOP reduction at 1M becomes 14.2 times prefill and 7.6 times decode attention kernel speedup on H800, under that experiment's head configuration. Neither is a whole model or application speed guarantee.[^report]
+
+Appendix C tests the efficiency tradeoffs in smaller pilot settings. Larger 128 token blocks provide coarser selection but more efficient kernels, with limited quality loss in those tests. The final design does not force a sink block or a large local window: it reserves only the incomplete self block. After indexer warmup, an extra index value head adds cost without consistent quality gains and is removed. These are scoped ablation lessons, not guarantees at every scale.[^report]
+
+### The released native vision language interface
+
+The M3 card states mixed text, image and video training from the beginning. Its artifact pairs the text decoder with a 32 layer, width 1,280 vision encoder, patch size 14, spatial merging by two and temporal patches of two frames. The visual projection connects to width 6,144. The text configuration also declares seven MTP modules. This establishes an artifact setting, not verified speculative decoding support in every backend. These are released configuration facts, not the complete disclosed vision training recipe.[^card][^config]
+
+The image processor preserves aspect ratio through smart resize, aligns spatial dimensions to patch times merge size, and returns temporal, height and width grid metadata. The inspected processing wrapper expands image placeholders from this grid. After a two by two spatial merge, a grid contributes $THW/4$ visual tokens, before any relevant wrapper tokens. A still image is temporally padded for the two frame patch operation.[^processor]
+
+For example, a 672 by 672 image under that resize budget has a 48 by 48 spatial patch grid and 576 merged tokens. Dynamic dimensions change that count. The processor exposes a default 672 squared pixel budget while the preprocessing metadata separately lists compression controls and a 1,008 resolution limit. A serving wrapper must resolve its actual settings: neither the config's nominal 576 image sequence length nor its larger image grid possibilities makes every input exactly 576 tokens.[^processor][^config]
+
+The public card offers enabled, adaptive and disabled thinking modes. These are model/API behavior controls; they do not by themselves establish a released adaptive compute training algorithm. The report also does not disclose the production model's full post training data and reward recipe.[^card][^report]
+
+### What the controlled evidence shows
+
+At matched budgets, native MSA and full attention training loss curves remain close. Broad text, image and video metrics generally remain competitive, but not every long context subtask improves. In the continued pretraining comparison, HELMET 128K rerank/RAG falls from 34.6 to 32.5 while in context learning rises from 70.4 to 72.8. Overall averages can hide this tradeoff.[^report]
+
+Those results support the mechanism's feasibility at the tested scale. They do not establish that the released M3 inherits every controlled result, or that sparse lookup always preserves a document's small but decisive detail. Applications should test long evidence combination, image text alignment and retrieval failures, not only needle recall.[^report]
+
+### Terms and reusable lessons
+
+The selected M3 weights use the MiniMax Community License, not Apache 2.0. Its inspected terms have commercial attribution and notice requirements, with separate authorization above a stated revenue threshold. Review the actual terms for an intended deployment; this study is not legal advice. Report artwork is treated separately.[^license][^figure]
+
+M3's useful pattern is **learn a cheap search path, preserve an exact read path, and isolate the search training signal**. Compare [MiniMax 01](/architectures/models/minimax-01/) for recurrent compression and [DeepSeek V4](/architectures/models/deepseek-v4/) for another approach to reducing long context attention work.
+
+[^report]: Lai et al., MiniMax. [MiniMax Sparse Attention](https://arxiv.org/pdf/2606.13392v2), June 12, 2026 revision. Sections 3 to 5, Equations 5 to 12, Figure 1 and experimental appendices inspected. The v2 change expands author attribution; method text compared with v1.
+[^card]: MiniMax. [Official M3 model card](https://huggingface.co/MiniMaxAI/MiniMax-M3/blob/f0e1c1e04d40177e4673a22097036854f536e9c0/README.md), release scope, native multimodality and reasoning modes.
+[^config]: MiniMax. [M3 released configuration](https://huggingface.co/MiniMaxAI/MiniMax-M3/blob/f0e1c1e04d40177e4673a22097036854f536e9c0/config.json), text/vision structure and context inspected October 10, 2026.
+[^processor]: MiniMax. [Image processor](https://huggingface.co/MiniMaxAI/MiniMax-M3/blob/f0e1c1e04d40177e4673a22097036854f536e9c0/image_processor.py), [processing wrapper](https://huggingface.co/MiniMaxAI/MiniMax-M3/blob/f0e1c1e04d40177e4673a22097036854f536e9c0/processing_minimax.py) and [preprocessing metadata](https://huggingface.co/MiniMaxAI/MiniMax-M3/blob/f0e1c1e04d40177e4673a22097036854f536e9c0/preprocessor_config.json). Source inspected, not executed; wrapper specific compression behavior remains untested.
+[^license]: MiniMax. [M3 Community License](https://huggingface.co/MiniMaxAI/MiniMax-M3/blob/f0e1c1e04d40177e4673a22097036854f536e9c0/LICENSE), inspected for the selected snapshot.
+[^figure]: [Original figure crop, attribution and specific reuse assessment](/figures/model-studies/minimax-m3/SOURCES.md). Copyright remains with MiniMax; no permissive report artwork grant is inferred.
+
+## Counterevidence and uncertainty
+
+109B/6B controlled3T experiment differs from428B/23B release. Local block reserves one of16slots, not an extra slot. Detached teacher/hidden input and warmup. Quadratic index remains; sparse read is not fixed-size history.14.2x/7.6x kernel not whole-model latency. Processor resize/merge and nominal576 remain distinct. No complete released vision/posttraining recipe.
+
+## Implications
+
+Separate mechanism, selected artifact, experiment and system; missing recipes and unexecuted runtime remain explicit.
+
+## Open questions and future research
+
+Application robustness, unreleased data/rewards and runtime reproduction require separate work.
+
+## Sources
+
+Full claim-local references above; exact report and immutable artifacts in state/sources.jsonl.
+
+## What changed in this revision
+
+New full study and original excerpts. Technical and rights review complete; integrated presentation QA passed.
+
+## Completed integration review
+
+122 site tests pass, zero Astro diagnostics, 59-page static build and 59-doc lint clean. Fresh browser regression checks cover all 41 model pages plus the catalog and Foundations at 1440 px light, 390 px light and 320 px dark (129 views), reduced motion, desktop focus, active family navigation, figure order, loaded images and local anchors; narrow figures remain keyboard-pannable and link to full-size originals. All 41 Markdown/MDX exports and both agent manifests checked; representative search queries resolve. All 35 new desktop figure renders received manual contact-sheet review; dense focus/mobile views and resource-card/catalog layout received additional manual inspection. Existing bundler directive and philosophy-redirect indexing warnings remain. No model execution or benchmark reproduction.
+
+Cross-review checked detached KL, local-block slot budget,109B experiment versus428B release, quadratic index cost and kernel-only speedups. Actual processing wrapper confirms visual token counts. Added seven configured MTP modules and smaller-pilot block-size/sink/value-head ablations without backend claims.

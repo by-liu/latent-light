@@ -1,0 +1,149 @@
+---
+title: "OpenCode: The client and the coding runtime"
+description: Understand OpenCode through its server API, configurable agents, permissions, skills and plugins.
+lastUpdated: 2026-10-11
+---
+
+import AgentArchitecture from '../../../../components/agents/AgentArchitecture.astro';
+import LandscapeOverview from '../../../../components/landscapes/LandscapeOverview.astro';
+
+OpenCode is a useful study of **a coding product with a client/server architecture**.[^project]
+The terminal interface is a client of the server, and the server exposes an
+OpenAPI contract that also supports SDK integration.[^server] This makes the
+runtime boundary an important part of the product, not an implementation detail
+that can be inferred from a terminal screenshot.
+
+This study uses a pinned repository and documentation snapshot checked
+**October 11, 2026**. The screenshot is a captured public demo. The review
+scenario below is illustrative and was not run as a benchmark.
+
+## The visible interface is one layer
+
+[Figure 1](#figure-1) shows a request becoming search and file inspection.
+The captured agent asks for clarification when several candidate buttons are
+found. That makes the interaction visible without establishing the quality
+of a completed code change.
+
+<LandscapeOverview id="figure-1" src="/figures/agents/opencode-terminal.webp" alt="OpenCode repository demo screenshot: a request to make a homepage button blue leads to searches, file reads and a clarification question. The captured Build session shows a model label and usage counters." minWidth={680}>
+<div slot="image">
+
+![OpenCode repository demo screenshot: a request to make a homepage button blue leads to searches, file reads and a clarification question. The captured Build session shows a model label and usage counters.](/figures/agents/opencode-terminal.webp)
+
+</div>
+
+**Figure 1.** OpenCode terminal demo, reproduced from the repository under MIT. Model labels and counters belong to the captured demo; they are not current product defaults or benchmark results.[^ui]
+
+</LandscapeOverview>
+
+## What sits behind the client
+
+Running the terminal application starts both a TUI and a server. A separately
+started server can expose the same API contract to another client. The
+architecture documentation includes session endpoints for creation, inspection,
+forking, interruption and summarization.[^server]
+[Figure 2](#figure-2) maps those responsibilities.
+
+<AgentArchitecture id="figure-2" title="A client-facing API around a configurable coding runtime" layersJson='[{"label":"Clients","detail":"Presentation can be separate from execution","parts":[{"title":"Terminal UI","body":"Display conversations, tools and user input."},{"title":"Other interfaces","body":"A client can interact with the server API."},{"title":"SDK client","body":"Use the generated API contract from another application."}]},{"label":"OpenCode server","detail":"Own sessions and request routing","parts":[{"title":"Session APIs","body":"Create, fork, inspect, summarize or abort a session."},{"title":"Agent configuration","body":"Choose primary or delegated roles and their models."},{"title":"Tool pipeline","body":"Apply configured permission decisions and plugin hooks."}]},{"label":"Providers and workspace","detail":"Keep access and output explicit","parts":[{"title":"Model provider","body":"A configured model supplies reasoning and tool requests."},{"title":"Workspace tools","body":"Files, commands and configured external integrations."},{"title":"Evidence","body":"Messages, tool results, changes and review."}]}]'>
+
+**Figure 2.** Latent Light synthesis of the documented server, agent, permission and plugin boundaries.[^server][^agents][^permissions][^plugins]
+
+</AgentArchitecture>
+
+The architectural opportunity is to change presentation without reimplementing
+the entire work loop. The tradeoff is a service boundary to operate: request
+state, streamed progress, authentication and access to the workspace need
+consistent ownership. A UI disconnect and a stopped agent are different events.
+
+The server documentation provides optional HTTP basic authentication through
+configured credentials. Protecting that endpoint is separate from restricting
+what its tools can do on the server's host.[^server] Moving a client does not
+move the workspace automatically.
+
+## Agent roles are configurations of work
+
+The inspected documentation distinguishes primary agents from subagents. Build
+is the default primary coding role; Plan uses more restrictive tool permissions.
+Workers such as General, Explore and Scout address delegated tasks in child
+sessions.[^agents]
+
+The exact permission behavior matters. A mode intended for planning is not a
+universal proof that no edits can happen. The documented Plan defaults ask for
+approval for edits and shell commands. A client or user decision can change
+what proceeds. Read the configured rules, not only the role's name.
+
+In a review task, the main role can retain requirements while a worker explores
+specific callers. The worker should return evidence and uncertainty. If it
+changes shared files, the coordinator still needs to reconcile those effects.
+This is a general design lesson, not a measured advantage of delegation.
+
+## Permissions use explicit rule resolution
+
+OpenCode permissions can allow, ask or deny an operation. Granular rules match
+inputs such as commands or paths, with the last matching rule taking precedence.
+The inspected default is broadly permissive, with additional ask behavior for
+external directories and repeated identical calls, and read restrictions for
+certain environment files.[^permissions]
+
+That makes rule order consequential. A broad later allowance can change the
+meaning of an earlier restriction. Our suggested review is to test representative
+allowed and denied operations and inspect the effective result, especially
+when project and role configuration combine.
+
+These are application policy controls. A process capable of running broad
+commands still needs appropriate host access and containment. Source availability
+makes the implementation inspectable; it does not itself certify isolation.
+
+## Plugins, skills and instructions form different layers
+
+Plugins add executable behavior through lifecycle hooks, including events
+before and after tool execution. They can use application context and SDK
+access. Local modules and packaged plugins therefore belong in the host's
+code-review and dependency policy.[^plugins]
+
+Skills provide on-demand instructions in SKILL.md directories. The documented
+discovery locations include OpenCode and compatible agent/Claude layouts, with
+permissions controlling which skills may load. Discovering the same file format
+does not establish identical semantics for every extension feature.[^skills]
+
+AGENTS.md and configured instruction files supply project guidance. The rules
+documentation describes precedence and compatibility fallbacks. A team using
+several coding clients should inspect which guidance each actually loads;
+keeping two contradictory files creates ambiguity rather than portability.[^rules]
+
+## A task scenario: inspect before changing
+
+Consider the screenshot's general problem: **a requested interface change has
+several possible targets**. A useful workflow first identifies the intended
+screen and component. Clarification is justified when repository evidence cannot
+resolve the ambiguity; it should not become a substitute for inspecting files.
+
+Once the target is clear, record the desired behavior, make the change, run
+appropriate checks and inspect the rendered interface. The API and transcript
+can expose the trajectory, but a completed tool call is not evidence that the
+visual result meets the request. These are original review criteria.
+
+For an embedded client, preserve enough state to reconnect and inspect the
+session. Do not create a second task merely because a stream was interrupted.
+The same task also needs a permission contract suited to the server's workspace,
+not just the client application's notion of what the user clicked.
+
+## What to learn from the boundary
+
+OpenCode makes the separation between client, session service and provider
+explicit. It is a useful design to study when an application needs more than
+one interface around a work loop. Configuration and plugins provide flexibility,
+while introducing policy, dependency and service-state responsibilities.
+
+Compare the service boundary with [Codex App Server](/agents/deep-dives/codex/),
+and the integration choices with [Pi's SDK and RPC](/agents/deep-dives/pi/).
+The [comparison overview](/agents/deep-dives/) keeps these distinctions visible
+without treating every product as an interchangeable framework.
+
+[^project]: OpenCode contributors. [OpenCode repository](https://github.com/anomalyco/opencode/blob/707de5832656e89cc0f04436aa1cd5f4f91c5763/README.md), product surfaces and design. Snapshot checked October 11, 2026.
+[^server]: OpenCode contributors. [Server documentation](https://github.com/anomalyco/opencode/blob/707de5832656e89cc0f04436aa1cd5f4f91c5763/packages/web/src/content/docs/server.mdx), client/server architecture, OpenAPI and session endpoints. Snapshot checked October 11, 2026.
+[^agents]: OpenCode contributors. [Agents](https://github.com/anomalyco/opencode/blob/707de5832656e89cc0f04436aa1cd5f4f91c5763/packages/web/src/content/docs/agents.mdx), primary agents, workers and permission configuration. Snapshot checked October 11, 2026.
+[^permissions]: OpenCode contributors. [Permissions](https://github.com/anomalyco/opencode/blob/707de5832656e89cc0f04436aa1cd5f4f91c5763/packages/web/src/content/docs/permissions.mdx), allow/ask/deny, last-match precedence and defaults. Snapshot checked October 11, 2026.
+[^plugins]: OpenCode contributors. [Plugins](https://github.com/anomalyco/opencode/blob/707de5832656e89cc0f04436aa1cd5f4f91c5763/packages/web/src/content/docs/plugins.mdx), loading, hooks and tool events. Snapshot checked October 11, 2026.
+[^skills]: OpenCode contributors. [Agent Skills](https://github.com/anomalyco/opencode/blob/707de5832656e89cc0f04436aa1cd5f4f91c5763/packages/web/src/content/docs/skills.mdx), discovery, on-demand loading and skill permissions. Snapshot checked October 11, 2026.
+[^rules]: OpenCode contributors. [Rules](https://github.com/anomalyco/opencode/blob/707de5832656e89cc0f04436aa1cd5f4f91c5763/packages/web/src/content/docs/rules.mdx), instruction-file discovery and compatibility. Snapshot checked October 11, 2026.
+[^ui]: OpenCode contributors. [Repository interface screenshot](https://github.com/anomalyco/opencode/blob/707de5832656e89cc0f04436aa1cd5f4f91c5763/packages/web/src/assets/lander/screenshot.png), reproduced under the repository MIT license. Captured demo, checked October 11, 2026.

@@ -1,0 +1,50 @@
+{
+  "schema_version": 3,
+  "topic_id": "pi",
+  "status": "complete",
+  "coverage": {
+    "architecture": "verified",
+    "workflow": "verified",
+    "control": "verified",
+    "extensions": "verified",
+    "tradeoffs": "verified",
+    "skeptical-review": "verified"
+  },
+  "open_questions": [
+    "Comparative task success, cost and adoption have not been independently measured in this study; a controlled trial remains future work."
+  ],
+  "recommended_next_direction": "Refresh affected official contracts and pinned snapshots before mutable comparisons; add studies only when a clear design question and evidence justify them.",
+  "last_seen": "2026-10-12T02:25:10Z",
+  "output": {
+    "kind": "site-page",
+    "path": "src/content/docs/agents/deep-dives/pi.mdx",
+    "status": "reviewed",
+    "revision": 1,
+    "updated": "2026-10-11",
+    "evidence_cutoff": "2026-10-11",
+    "audience": "Curious technical readers, builders and authors learning agent mechanisms and implementation choices."
+  },
+  "quality_gate": {
+    "evidence_verified": true,
+    "contradictions_reviewed": true,
+    "output_reviewed": true,
+    "visuals_reviewed": true
+  },
+  "delivery_checks": {
+    "validation": {
+      "status": "passed",
+      "method": "npm run validate: 48 deployment tests, 135 content tests, Astro check 0 errors/warnings/hints, 84-page build and docs lint.",
+      "checked_at": "2026-10-12T02:22:11.248Z"
+    },
+    "rendering": {
+      "status": "passed",
+      "method": "Chromium: all 15 pages at 1440/light+dark, 390/light and 320/dark, reduced motion; keyboard/nav/focus/panning/citation/full-size image checks; representative manual screenshot review; search and discovery.",
+      "checked_at": "2026-10-12T02:22:11.248Z"
+    },
+    "exports": {
+      "status": "passed",
+      "method": "30 Markdown/MDX endpoint checks; all footnotes, numbered captions and anchors retained; native diagram/card text exported, no raw presentation JSON; math regression checks pass.",
+      "checked_at": "2026-10-12T02:22:11.248Z"
+    }
+  }
+}

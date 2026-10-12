@@ -1,0 +1,123 @@
+---
+title: The Broader Agent Ecosystem
+description: A dated architectural map of coding products, reusable harnesses, frameworks and managed runtimes.
+lastUpdated: 2026-10-11
+---
+
+For the five implementation studies and frontier research, start with the
+[Agent Deep Dives overview](/agents/deep-dives/). This directory preserves the
+broader set of products, harnesses and development frameworks.
+
+Agent products can look similar while owning very different parts of the
+system. A coding application, an SDK and a protocol are not interchangeable
+alternatives. Compare the responsibility you need to keep or delegate before
+comparing names.
+
+**Directory source check: October 10, 2026.** The five linked deep dives
+have their own October 11 checks. This is a selected architectural map, not
+an exhaustive catalog or performance ranking. Official descriptions establish
+documented behavior, not independent evidence of reliability. Features and
+availability can vary by edition, configuration and account.
+
+## First identify the layer
+
+| Layer | Main responsibility | Example question |
+| --- | --- | --- |
+| Model | Interpret context and propose decisions | Which capabilities does this task require? |
+| Harness | Run the loop, tools, context and stopping rules | Who owns recovery and policy enforcement? |
+| Product | Provide an end-user workflow | Is work interactive, delegated or embedded? |
+| Framework or SDK | Supply reusable implementation primitives | Which runtime responsibilities remain ours? |
+| Protocol | Connect components through a shared contract | Which endpoints and extensions interoperate? |
+
+This is our comparison taxonomy. A project can span multiple rows, and a
+managed product may contain several of these layers internally.
+
+## Coding products and toolkits
+
+The architecture descriptions below summarize inspected official sources.
+The questions in the final column are our suggested review criteria.
+
+| Project | Documented work shape | Inspect before adoption |
+| --- | --- | --- |
+| [Claude Code](/agents/deep-dives/claude-code/) | Coding harness with context gathering, actions, verification and multiple execution interfaces.[^claude] | Execution location, tool access and review boundaries |
+| [Codex](/agents/deep-dives/codex/) | Local integration through the SDK and separate cloud task workflows with reviewable changes.[^codex-sdk][^codex-cloud] | Which interface owns the session, environment and approvals |
+| GitHub Copilot cloud agent | Repository work in an ephemeral cloud development environment.[^github] | Repository access, workflow integration and review requirements |
+| [OpenCode](/agents/deep-dives/opencode/) | Coding application with terminal, desktop and editor surfaces and configurable providers.[^opencode] | Provider setup, permissions and actual runtime configuration |
+| [Pi](/agents/deep-dives/pi/) | Modular toolkit containing model APIs, agent runtime and coding CLI.[^pi] | External containment: the repository states there is no built-in permission system |
+
+A terminal interface does not prove that all execution is local. A cloud
+interface does not establish that your data and credentials have appropriate
+boundaries. Read the execution and security contracts, not only the screenshot.
+
+## Reusable harnesses and frameworks
+
+| Project | Documented design focus | Important distinction |
+| --- | --- | --- |
+| Deep Agents | Reusable harness with filesystem, context management, delegation and optional task planning.[^deepagents] | Built on LangChain primitives and the LangGraph runtime, not a separate model |
+| [DeepSeek Harness](/agents/deep-dives/deepseek-harness/) | Plugin-oriented agent harness.[^deepseek] | Still a developer preview with explicit compatibility-breaking warnings |
+| smolagents | Python agents whose actions can be expressed as code, plus conventional tool-calling agents.[^smolagents] | Code actions are not limited to writing software; execution still needs containment |
+| LangGraph | Stateful execution with thread checkpoints and separate cross-thread stores.[^langgraph] | Persistence primitives do not automatically make external effects safe to replay |
+| OpenAI Agents SDK | Application-owned agent harness with sandbox integration.[^openai-sdk] | Different ownership from the managed Agents API |
+| Microsoft Agent Framework | Agents, state, middleware and graph-based workflows; successor direction for AutoGen and Semantic Kernel.[^microsoft] | Check feature support for the language and package edition you use |
+| Google ADK | Tools for agent development, graph and collaborative workflows, evaluation and deployment.[^adk] | Inspect the chosen language and deployment path rather than infer support from the umbrella name |
+| Strands Harness SDK | Agent loop, providers, tools and orchestration primitives in a Python and TypeScript monorepo, alongside an assembled harness.[^strands] | Distinguish the assembled harness from the SDK used to construct one |
+
+These are useful study candidates, not recommendations to adopt every
+framework. A small explicit loop can be easier to inspect than an abstraction
+whose persistence, retry or approval semantics you do not understand.
+
+## Managed runtime ownership
+
+OpenAI's Agents API hosts the Codex harness while the application submits work
+and handles its integration. It can use hosted compute, connected compute or
+no execution environment. Anthropic's managed architecture separates the
+session, harness and sandbox so their lifecycles can differ.[^openai-api][^managed]
+
+The key distinction is **who owns each responsibility**, not whether a service
+is marketed as an agent platform. Compare context handling, persistent state,
+tool execution, cancellation, approvals, observability and cleanup. Managed
+does not mean that the application has no security or correctness work left.
+
+## Community developments worth understanding
+
+The following are themes supported by the selected sources, not a claim that
+each was invented recently:
+
+- **Procedure packaging:** interoperable skills separate reusable instructions
+  from callable tools. See [Tools, Skills & Protocols](/agents/tools-skills-protocols/).
+- **Selective context:** tool discovery and programmatic processing reduce what
+  must enter each model call. The tradeoffs depend on the workload.
+- **Durable execution:** sessions, checkpoints and artifacts support work beyond
+  one process. See [Context, Memory & State](/agents/context-memory-state/).
+- **Explicit boundaries:** managed control and execution environments can have
+  separate ownership and lifecycles.
+- **Repeatable evaluation:** task and grader editions, repeated trials and
+  budgets belong beside results. See [Evaluation & Reliability](/agents/evaluation-reliability/).
+
+## How this map should evolve
+
+For future revisions, recheck the underlying official source before updating
+a product claim. Record meaningful renames, deprecations, ownership changes
+and security defaults. Advance the source-check date only after the mutable
+comparisons have been rechecked.
+
+A reasonable editorial practice is to review this map monthly or before a
+technology decision, while revising the foundations when understanding changes.
+This is a suggested cadence, not an automated monitoring service.
+
+[^claude]: Anthropic. [How Claude Code works](https://code.claude.com/docs/en/how-claude-code-works). Checked October 10, 2026.
+[^codex-sdk]: OpenAI. [Codex SDK](https://learn.chatgpt.com/docs/codex-sdk). Checked October 10, 2026.
+[^codex-cloud]: OpenAI. [Codex Cloud](https://learn.chatgpt.com/docs/cloud). Checked October 10, 2026.
+[^github]: GitHub. [Copilot on GitHub.com](https://docs.github.com/en/copilot/concepts/copilot-surfaces/copilot-on-github). Checked October 10, 2026.
+[^opencode]: OpenCode. [Documentation introduction](https://opencode.ai/docs/). Checked October 10, 2026.
+[^pi]: Earendil Works. [Pi repository](https://github.com/earendil-works/pi), packages and Permissions & Containerization. Checked October 10, 2026.
+[^deepagents]: LangChain. [Deep Agents overview](https://docs.langchain.com/oss/python/deepagents/overview), capabilities and optional planning. Checked October 10, 2026.
+[^deepseek]: DeepSeek AI. [DeepSeek Harness repository](https://github.com/deepseek-ai/deepseek-harness), developer preview notice. Checked October 10, 2026.
+[^smolagents]: Hugging Face. [smolagents introduction](https://huggingface.co/docs/smolagents/index), CodeAgent and ToolCallingAgent. Checked October 10, 2026.
+[^langgraph]: LangChain. [LangGraph persistence](https://docs.langchain.com/oss/python/langgraph/persistence). Checked October 10, 2026.
+[^openai-sdk]: OpenAI. [Sandbox Agents](https://developers.openai.com/api/docs/guides/agents/sandboxes), application-owned SDK harness. Checked October 10, 2026.
+[^microsoft]: Microsoft. [Agent Framework overview](https://learn.microsoft.com/en-us/agent-framework/overview/), workflows and relationship to AutoGen and Semantic Kernel. Checked October 10, 2026.
+[^adk]: Google. [Agent Development Kit](https://adk.dev/). Checked October 10, 2026.
+[^strands]: Strands Agents. [Harness SDK monorepo](https://github.com/strands-agents/harness-sdk), current destination of the earlier Python SDK repository. Checked October 10, 2026.
+[^openai-api]: OpenAI. [Agents API architecture](https://developers.openai.com/api/docs/guides/agents-api/architecture). Checked October 10, 2026.
+[^managed]: Anthropic. [Scaling Managed Agents: Decoupling the brain from the hands](https://www.anthropic.com/engineering/managed-agents), April 8, 2026.

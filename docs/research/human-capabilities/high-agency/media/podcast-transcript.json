@@ -1,0 +1,212 @@
+{
+  "model": "Systran/faster-whisper-base.en",
+  "processing": "All audio processed locally from the unchanged MP3 using faster-whisper, CPU int8, English, beam size 5 and VAD. No external audio upload.",
+  "status": "automatic transcript; full text inspected, not certified verbatim or independently checked against every spoken word",
+  "normalized_names": {
+    "Albert Bandera": "Albert Bandura",
+    "Bandera broke": "Bandura broke",
+    "Vandura": "Bandura",
+    "Desi and Ryan": "Deci and Ryan",
+    "by compost": "by Campos",
+    "Brynjolfsen": "Brynjolfsson",
+    "by Delacroix": "by Dell’Acqua",
+    "by Del Aqua": "by Dell’Acqua",
+    "Proctor & Gamble": "Procter & Gamble",
+    "Harken and colleagues": "Harkin and colleagues",
+    "Kate\nHall": "Cate Hall",
+    "Kate Hall": "Cate Hall",
+    "Hall about how": "Hall about how"
+  },
+  "normalization_note": "Proper-name spellings aligned to the already inspected source bibliography for transcription accuracy. No argument, statistic or framework was revised to align the podcast with the article. No audio editing.",
+  "paragraphs": [
+    {
+      "start": 0.0,
+      "end": 52.24,
+      "text": "You know, there's this, it's a very specific modern feeling. Oh, I think I know where you're going with this. Yeah, like you sit down at your computer, you open up your favorite AI tool and suddenly you have the power to do almost anything so much faster. Right. The velocity is just incredible now. Exactly. You can spin up a 60 page strategic proposal in seconds. You can analyze a massive spreadsheet that, I mean, that would have taken a whole a team of analysts a week to get through. Yeah, we're playing an entire event itinerary before you even finish your coffee. Right, but then, you know, an hour goes by and you look at the screen and realize you haven't actually accomplished anything real. Yes, that exact feeling. It feels like you're sitting in a car with this massive, incredibly powerful engine, but your tires are just stuck deep in the mud.",
+      "timestamp": "00:00"
+    },
+    {
+      "start": 52.24,
+      "end": 97.7,
+      "text": "You hit the gas and just spin. Exactly, you're just spinning your wheels, spraying dirt everywhere, just at lightning speed. It's arguably the defining frustration of modern knowledge work, honestly. The velocity is absolutely there, but the traction is just completely missing. We have access to this limitless generation of text and ideas and data. But we often lack the psychological mechanism to actually grip the road and move forward. And that missing grip is exactly what we are focusing on today. Welcome to the deep dive. Glad to be here for this one. So we're diving into a recently expanded guide. This was updated October 11th, 2026, and it's titled High Agency, Your Superpower in the AI Era. It's a fantastic source document. It really is.",
+      "timestamp": "00:52"
+    },
+    {
+      "start": 97.7,
+      "end": 144.54,
+      "text": "And our mission in this deep dive is to unpack what high agency actually means, look at the hard data on how AI fundamentally alters our cognitive capabilities, and most importantly, give you a practical toolkit. Because the core premise here is simple, but really profound. AI can expand your options. it can extend your reach infinitely. But human agency is the only thing that actually turns that reach into useful real-world action. That is the fundamental dynamic we're navigating here. If you hand a generative AI toolkit to someone who lacks agency, you don't necessarily get better results. No, you just get a higher volume of unresolved options. Exactly, you end up with like 10 perfectly drafted versions of a difficult email that you're just, you're too anxious to actually send.",
+      "timestamp": "01:37"
+    },
+    {
+      "start": 144.54,
+      "end": 192.38,
+      "text": "the AI can't hit send for you to make this technology work for you. We have to look past the software and understand the human side of the equation. Okay, so let's unpack this. Okay. Because before we can even talk about combining your own agency with AI, we have to strip away all the Silicon Valley buzzwords. Oh, absolutely. Right. There are so many of them. Right. High agency is a phrase that gets thrown around a lot on social media, usually accompanied by like a picture of a tech founder, waking up at 4am to sit in a cold plunge pool. Yeah, it's treated like this aggressive personality trait. Exactly. And it really gained major popular attraction around 2016. That was when Eric Weinstein discussed it on Tim Ferriss's Show, I believe. All right. He described it as this almost heroic reality-bending refusal to accept impossibility.",
+      "timestamp": "02:24"
+    },
+    {
+      "start": 192.38,
+      "end": 238.04,
+      "text": "Which sounds cool. It does. And while that's very compelling narrative for a biography, we need a much more functional, working definition for everyday life. Right, because we're not all trying to bend reality before breakfast. Exactly. High agency isn't a personality type. It's a process. Okay. Specifically, it's the process of choosing a worthwhile direction, looking for ways to actually influence what happens, taking a bounded next step, and then learning from the result. So it's important to differentiate that from just being relentlessly busy, right? Very important. Because productivity and agency are not the same thing. I like to think of productivity as your engine. It dictates how efficiently you produce output relative to time. But agency is the steering wheel.",
+      "timestamp": "03:12"
+    },
+    {
+      "start": 238.04,
+      "end": 284.34,
+      "text": "If you have a massive engine but no agency, you're just going to crash into the rocks much faster. That's a great analogy. But I have to push back a little on this standard definition. When people hear high agency, they still picture someone who is this loud, extroverted disrupter. The guy who breaks all the rules. Yeah, the person who ignores their boss and kicks down the door to get what they want, is that really what this requires? Not at all. That is a massive misconception. Agency can be and often is incredibly quiet. Really? Oh yeah. Let's say you're working on a project and you realize you need a colleague's explicit consent before moving forward because it impacts their department. Okay. Deliberately pausing your work, setting up a meeting and actively securing that consent. That is a high agency move.",
+      "timestamp": "03:58"
+    },
+    {
+      "start": 284.34,
+      "end": 331.62,
+      "text": "you are influencing the outcome by managing the constraints. That makes total sense. It's about moving the reality of a situation forward, not just making noise. Exactly. There's this great running example in our source material about wanting to organize a community workshop for beginners. I love this example. Right. So let's say you want to host this local class, but you have no venue, no budget, and no teaching experience. So let's look at the failure modes there. Low agency in that scenario usually takes one of two forms. Okay, what's the first? The first is passive. You endlessly read articles about event planning, or you just wait around hoping someone will magically hand you the keys to a community center. Just hoping the universe provides. Exactly. And the second form of low agency looks like frantic action.",
+      "timestamp": "04:44"
+    },
+    {
+      "start": 331.62,
+      "end": 380.74,
+      "text": "The spinning wheels. Right. You blast out 50 fake invitations to a non-existent event on social media, just to feel like you're doing something. Oh, wow. Yeah. It happens a lot. high agency look like then. High agency is completely different. It's measured. It looks like asking three of your neighbors what they actually wanna learn and then testing a 10 minute sample lesson with just one of them in your living room. It's about forcing contact with reality. Yes, exactly. But that brings us to the underlying psychology, which is where things get really fascinating. We know what agency looks like on the outside, talking to the neighbors, testing the lesson. Right. But we need to look under them hood, why do some people take that deliberate, scary step to talk to their neighbors while others just freeze and spend five hours refining an imaginary syllabus?",
+      "timestamp": "05:31"
+    },
+    {
+      "start": 381.66,
+      "end": 428.8,
+      "text": "Well, to understand the internal engine of agency, we have to look at Albert Bandura's foundational work on intentional action. Okay. Bandura broke this down into four crucial functions. First, there is forming an intention, deciding to do something. Makes sense. Second is forethought, which is anticipating the consequences of your action. Third is self-reactiveness. Meaning what exactly? Meaning you can actually regulate your own behavior in the moment to stay on track. And fourth is self-reflectiveness. That last one, reflection seems to be where a lot of people stumble. A highly agentic person doesn't just blindly act on every impulse, do they? No, they actively examine whether their chosen project is actually worthwhile. Right, and if it's not, they pivot or quit.",
+      "timestamp": "06:21"
+    },
+    {
+      "start": 428.8,
+      "end": 474.76,
+      "text": "Which is why agency isn't just endless persistence. If the situation changes, quitting can absolutely be a high agency choice. Precisely. And woven into all of this is the concept of self-efficacy, which the American Psychological Association defines quite specifically. Right, it's not just a general feeling. Exactly. The key takeaway here is that self-efficacy is not this global mystical feeling of I am a capable person. It doesn't work like that. Right, it's highly localized. You shouldn't be asking yourself, am I a capable person who can organize massive events? That is way too broad and overwhelming. It paralyzes you. Yeah. You ask, can I explain this one single concept to one beginner for 10 minutes?",
+      "timestamp": "07:08"
+    },
+    {
+      "start": 474.76,
+      "end": 522.92,
+      "text": "And here is the secret to building that specific self-efficacy. It is generated by actual experience. Which brings up a very relatable question for you listening. What if you just don't feel confident? Yeah, that's a huge hurdle for a lot of people. What if you are utterly terrified to knock on that first neighbor's door to ask what they want to learn? The revelation from this psychology here is that confidence is not a prerequisite for action. We tend to get that backward. Oh, totally. We think we need to feel confident before we can take the step. In reality, taking an action, making a bounded attempt, is the very mechanism that creates the the information you need to update your belief in your own capabilities. So you don't wait for confidence to strike so you can act. No, you act so you can gather evidence about what you're actually capable of.",
+      "timestamp": "07:54"
+    },
+    {
+      "start": 523.36,
+      "end": 572.88,
+      "text": "Let's talk about the motivation behind that action, though, because knocking on doors or doing administrative work isn't always fun. It rarely is. I was looking at Deci and Ryan's self-determination theory in the source, specifically this idea of autonomous motivation. I always assumed that that meant independence, doing whatever you want, whenever you want, like a freelancer setting their own hours. It's a bit more nuanced than just independence. Autonomous action doesn't have to be intrinsically fun, and it doesn't mean you're free from obligations. It just means the action is personally endorsed by you. Let's use an analogy here. Okay. Think about paying a toll on a highway. You don't intrinsically enjoy handing over five dollars and slowing down to stop at the booth is annoying friction. Right, nobody likes that. But you do it willingly, autonomously, because you deeply value getting to the destination that the highway leads to.",
+      "timestamp": "08:43"
+    },
+    {
+      "start": 572.88,
+      "end": 633.44,
+      "text": "That's a perfect way to look at it. Think back to our workshop organizer. They might absolutely hate filling out the tedious administrative forms required to reserve a room at the local library. It's boring work. Really boring. But they do it willingly, because they own the reason for doing it. They value the community outcome. That is autonomous motivation in practice. Okay, here's where it gets really interesting. We've laid out this psychological foundation. You have your intention, your localized self-efficacy, and your autonomous motivation. Now what happens when you hand that human psychological engine a generative AI toolkit? To really measure the multiplier effect of AI, we first have to establish the baseline value of agency without AI. Let's look at a fascinating study by Campos and colleagues. This is the one conducted in Togo, right? Yes. They took about 1500 small business owners and randomly assign them to different training programs. One group got traditional business training, accounting, basic marketing, tracking inventory, and standard stuff.",
+      "timestamp": "09:32"
+    },
+    {
+      "start": 633.44,
+      "end": 678.84,
+      "text": "But another group got personal initiative training. Meaning they were specifically taught how to exercise agency? Exactly. They were taught to proactively identify opportunities, set goals, seek feedback, and creatively navigate obstacles. And the results were staggering. What happened? Over roughly two years, the group that received the initiative training saw their profits increased by 30% relative to a control group. And the group that learned traditional accounting? Their results weren't statistically significant. The traditional training didn't reliably move the needle. Wow. So why did that happen? What was the mechanism there? It's because the initiative training changed their day-to-day behavior. Right.",
+      "timestamp": "10:33"
+    },
+    {
+      "start": 678.84,
+      "end": 725.42,
+      "text": "Instead of just passively logging that a product was out of stock, they were actively anticipating supply chain issues. Yes. Seeking out new vendors, asking customers what else they needed. That proactive friction that agency is what generated the profit. So agency is incredibly valuable on its own. Now enter large language models. What AI fundamentally does is massively lower the friction and cost of certain tasks, drafting, explaining, exploring alternatives. Many things that took hours take seconds. We have robust workplace studies showing how this accelerates productivity. Take the Brynjolfsson study on customer support. Right. They looked at over 5,000 support agents who had an AI assistant staggered into their workflow. Yep. The AI would suggest replies to customer issues.",
+      "timestamp": "11:18"
+    },
+    {
+      "start": 725.42,
+      "end": 770.98,
+      "text": "And the agents who used it saw roughly 15% more issues resolved per hour. And it was particularly effective at helping less experienced workers get up to speed faster. But, and this is a massive point for you to keep in mind, AI doesn't solve the core agency problem of choice. Let's look at this incredible study by Dell’Acqua and colleagues at Procter & Gamble. This one is so revealing. They had nearly 800 professionals in an innovation workshop. Some individuals were given AI, while others were put in traditional teams without AI. And what they found was that the individuals equipped with AI were able to generate product ideas is that we're entirely on par with the ideas generated by the human teams. So the AI leveled the playing field for idea generation. Exactly.",
+      "timestamp": "12:05"
+    },
+    {
+      "start": 770.98,
+      "end": 821.38,
+      "text": "It helped individuals balance commercial and technical perspectives beautifully. But here is the kicker. Having access to AI did not improve their ability to select the best idea from the ones they generated. No, it didn't. AI can generate 100 beautifully polished product ideas in a minute. But generating ideas is completely useless if you don't use your human agency to pick the one that actually solves the problem in reality. AI expands your menu of options, but human agency is required to order the meal. I love that. Which brings us to the dark side of this multiplayer effect. Because AI removes friction, because it makes it so effortlessly easy to produce polished authoritative sounding output. You can also accidentally remove the cognitive friction that we actually need for learning and critical thinking.",
+      "timestamp": "12:50"
+    },
+    {
+      "start": 821.38,
+      "end": 869.82,
+      "text": "We fall into what we call the traps of assisted agency. Yeah, this is where things get a bit scary. Let's talk about another experiment by Dell’Acqua, this time looking at 758 consultants. The study perfectly illustrates a concept researchers called the jagged frontier of AI capabilities. The jagged frontier. Imagine a boundary line. Inside the line are tasks AI is currently very good at. Outside the line are tasks it struggles with, but crucially, it doesn't tell you it's struggling. Right. So when these consultants were given a task that felt inside the AI's capabilities, they were superstars. They finished 12.2% more tasks and were over 25% faster than the consultants working without AI. But then the researchers gave them a task that felt just outside the AI's current capabilities.",
+      "timestamp": "13:41"
+    },
+    {
+      "start": 869.82,
+      "end": 916.04,
+      "text": "Blind spot. Yes. A blind spot where the AI sounds highly confident, but is factually wrong. And the results completely flipped. The consultants using AI were about 19 percentage points less likely to get the correct answer compared to the consultants doing it on their own without tech. The AI fed them a highly persuasive, beautifully formatted, completely incorrect answer. And they just blindly accepted it. But wait, I have to challenge this. Isn't this jagged frontier just a temporary tech flaw? Like open AI or anthropic will release a new model next year. The AI won't hallucinate as much. And this whole problem goes away. Why is this a crisis of human agency? Because the core issue isn't just the software's hallucination. It's the human habit of cognitive offloading.",
+      "timestamp": "14:29"
+    },
+    {
+      "start": 916.04,
+      "end": 964.8,
+      "text": "Cognitive offloading. Right. Even as the models get better, the psychological trap remains. We confuse fluency with correctness. Ah, I see. Just because a paragraph is grammatically perfect and structured beautifully doesn't mean the underlying logic is sound. When we offload the friction of drafting to a machine, we often forget to apply the friction of verifying. We outsource our critical thinking to the tool. Exactly. And it gets even more concerning when we look at how this mechanism affects learning. Let's look at a study by Bastani involving nearly a thousand high school math students in Turkey. This is a crucial study. The students practiced math problems using a standard general purpose AI chatbot. And during the practice sessions, they did exceptionally well. The AI was walking them through the problems, practically doing the heavy lifting for them.",
+      "timestamp": "15:16"
+    },
+    {
+      "start": 964.8,
+      "end": 1010.96,
+      "text": "But then the researchers took the AI away and gave them a standard, unassisted exam. And the results were alarming. The students who practiced with the AI scored 17% lower on the exam relative to the control group. 17% lower. Why? Because of that cognitive offloading. By making the practice completely frictionless, the AI robbed the students of the productive of struggle required to actually build neural pathways, their skills atrophied. Now it is worth noting that when the researchers used to customize GPT tutor with strict guardrails, meaning the AI was explicitly instructed to only give hints and refuse to give the final answer, it prevented this harm. Yes, guardrails help. But it highlights the core risk.",
+      "timestamp": "16:04"
+    },
+    {
+      "start": 1010.96,
+      "end": 1058.36,
+      "text": "If you offload the cognitive effort, your capacity diminishes. Yeah, a survey by Lee of over 300 knowledge workers back this up. They found that higher confidence in AI tools was directly associated with less reported effort in human critical thinking. It's a direct trade off for a lot of people. So what does this all mean? If the danger is thoughtless velocity, just blindly hitting the gas and accepting whatever the AI spits out, how do you actually practice deliberate high agency thought? Well, source material provides a very concrete five step framework. It's an action loop designed build this muscle. Let's go through it. Step one. Step one is to choose a recognizable outcome. You have to be specific. Don't make your goal. I want to be a high agency person. Too vague.",
+      "timestamp": "16:50"
+    },
+    {
+      "start": 1058.36,
+      "end": 1114.2,
+      "text": "Way too big. Make it. I want to find out if five neighbors actually want to attend my class. It has to be an observable event in the real world. Got it. Step two, map what you control, what you influence and what constraints exist so you control writing the invitation you can influence a neighbor by handing it to them and smiling but the constraint is that you don't control the community center schedule or your neighbor's free time exactly you have to map that out then step three is a psychological technique called mental contrasting with implementation intentions okay let's break that down because it sounds like academic jargon what is the actual mechanism happening in the brain there. A meta-analysis by Wang of 21 different studies shows this is highly effective. Essentially, you are vividly imagining your desired future and then immediately contrasting it with the present obstacle standing in your way.",
+      "timestamp": "17:38"
+    },
+    {
+      "start": 1114.2,
+      "end": 1160.4,
+      "text": "Creating a mental link. Exactly. This mental link creates a subconscious trigger. You formulate an if-then plan. So instead of just hoping you don't get distracted, you say, If I find myself obsessively rewriting this invitation for the third time, then I will immediately stop and ask a real person if it makes sense. Oh, I like that. By doing that in advance, your brain is primed to act the moment the obstacle appears. Precisely. And then step four is where the tech finally comes in. Give the AI a specific bounded job. Right. You don't tell the AI do my project. You maintain the agency. Yes. You tell it, draft three distinct questions I can ask my neighbors to figure out what they want to learn.",
+      "timestamp": "18:34"
+    },
+    {
+      "start": 1160.4,
+      "end": 1234.0,
+      "text": "You are assigning it a task, not delegating your responsibility. And finally, step five, record and adjust. This is crucial. Harkin and colleagues conducted a massive meta-analysis of over 19,000 participants across 138 studies. That's a lot of data. It is. And they found that simply monitoring your goal progress objectively improves your chances of attaining it. So you look at the result of your bounded step, say, the neighbor's reaction to your questions, and you decide, do I revise my approach, continue, seek help, or stop entirely? That's the loop. If you want to try this yourself, the material suggests running a two-week experiment. It's incredibly practical. It really is. Pick a small goal you've been putting off, spend a few days making a bounded attempt, prep your if-then plans for the inevitable obstacles, seek actual human feedback, and of you. And speaking of feedback, there's a brilliant practitioner tip in here from Cate Hall about how to ask for help. Yes. She says, to make help easy to give. Don't go to a colleague and ask, can you look at my project? That is a massive exhausting request. Right. Asking an open ended question places the entire cognitive burden on the person you're asking for help.",
+      "timestamp": "19:20"
+    },
+    {
+      "start": 1234.0,
+      "end": 1281.4,
+      "text": "They have to figure out what you want. Instead, Hall suggests bounding the request. Ask, can you take exactly 10 minutes to read this one paragraph and tell me what's confusing about it? You've lowered the friction for them to assist you, which is a masterful exercise of agency in itself. Absolutely. Now, we've talked a lot about the individual, you and your goals, you and your AI, but there is a much broader context here that we can't ignore. Definitely. Because all of this can sound highly individualistic, like you're a lone wolf hacking your way to to success through sheer willpower, but we don't live in a vacuum. Sometimes the smartest, most agentic thing you can do is realize you can't or shouldn't do it alone. That's a crucial distinction. We return to Bandura's psychological framework here.",
+      "timestamp": "20:34"
+    },
+    {
+      "start": 1281.4,
+      "end": 1327.02,
+      "text": "He distinguishes between personal agency, which is what we've been primarily discussing, and proxy agency, as well as collective agency. Well, let's define those real quick. Proxy agency is recognizing that you don't have the authority or leverage to fix a problem. So you actively ask someone who does have authority to act on your behalf. And collective agency? Collective agency is joining forces with others to overcome a barrier that none of you could clear individually. And the organizational environment you're operating in matters immensely here. When you look at Amy Edmondson's research on 51 manufacturing teams, she focused heavily on this concept of psychological safety. Yes, Edmondson found that teams absolutely need psychological safety to surface uncertainty. Right.",
+      "timestamp": "21:21"
+    },
+    {
+      "start": 1327.02,
+      "end": 1375.38,
+      "text": "If you were in a workplace where you will be humiliated, mocked, or punished for asking a question or admitting a mistake, you cannot easily exercise agency. Telling employees to take more initiative in a toxic environment is a conflicting, impossible instruction. Agency requires a space where learning and vulnerability are actually safe. And let's talk about the real world for a second outside of the office. Structural barriers matter. time, money, systemic discrimination, sudden caregiving responsibilities at home, these are very real constraints. Very real. High agency is not a weapon to be used to blame people for structural barriers. That is a vital point to emphasize. The vocabulary of high agency should never be used to demand endless, impossible escalation from yourself or from others, when the constraints are rigid.",
+      "timestamp": "22:07"
+    },
+    {
+      "start": 1375.5,
+      "end": 1440.88,
+      "text": "Exactly. Let's say you planned a massive volunteer project, but Suddenly, a family member gets sick, and your caregiving duties at home drastically increase. You have to scale back that project. Right. That is not a moral failure or a lack of persistence. Deliberately reshaping your goal to fit your new reality is a high agency move. Honest, realistic planning is high agency. It all comes back to making contact with reality. Recognizing a hard limit and adapting to it gracefully requires just as much agency as pushing past block. So to bring this all together for you listening, AI is fundamentally changing the landscape of how we work and think. It expands our reach, it gives us a massive, almost overwhelming menu of options, and it utterly removes the friction of generation. It really does. But human agency, the ability to deliberately choose a worthwhile direction to bound your attempts, to meticulously verify the actual truth of an AI output, and to learn from the real world, that is your superpower.",
+      "timestamp": "22:55"
+    },
+    {
+      "start": 1440.88,
+      "end": 1487.04,
+      "text": "That is the only mechanism that turns endless options into real world impact. Without human agency, AI just makes you faster at making mistakes. Exactly. But with agency, AI becomes a powerful lever to move the world in the direction you deliberately choose. But I want to leave you with a final, slightly provocative thought to ponder. As these AI models inevitably get better, as they cross that jagged frontier we talked about to the point where they rarely make factual mistakes, and maybe they even get incredibly good at selecting the best ideas for us. What happens to the human muscle of agency? If the car gets so smart that it perfectly grips the mud and just drives itself out of the ditch every single time, does our internal ability to steer begin to permanently atrophy?",
+      "timestamp": "24:00"
+    },
+    {
+      "start": 1487.04,
+      "end": 1503.26,
+      "text": "That's a big question. Will we eventually reach a point where we have to artificially manufacture friction and difficulty in our daily lives, just to keep our psychological capacity for choice, reflection, and agency from wasting away entirely, something to think about the next time you hit generate.",
+      "timestamp": "24:47"
+    }
+  ],
+  "word_count": 4210,
+  "coverage_seconds": 1503.4920625,
+  "generated_at": "2026-10-12T06:24:23Z"
+}

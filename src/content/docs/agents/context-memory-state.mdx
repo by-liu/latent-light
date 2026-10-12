@@ -1,0 +1,103 @@
+---
+title: Context, Memory & Execution State
+description: What the model sees, what the system remembers and what survives a failure.
+lastUpdated: 2026-10-11
+---
+
+import ModelFlow from '../../../components/architectures/ModelFlow.astro';
+
+Three different questions hide behind “the agent remembers.” What information
+is visible to the model now? What can the system retrieve later? What work
+can it recover after an interruption? Context, memory and execution state
+answer different parts of that problem.
+
+## Separate the stores
+
+| Layer | What it contains | What it does not guarantee |
+| --- | --- | --- |
+| Active context | Instructions, selected evidence, recent observations and tool definitions | Persistence beyond this interaction |
+| Retrieved memory | Stored facts, preferences, procedures or earlier experiences | Truth, freshness or relevance to this task |
+| Execution state | Current step, pending actions, approvals and checkpoints | That an external action can safely be repeated |
+| Artifacts and environment | Files, generated outputs and changes in external services | That a transcript accurately reflects current reality |
+
+This is a teaching taxonomy, not a required storage schema. MemGPT supplies
+the useful distinction between active context and external memory. LangGraph
+distinguishes thread-scoped checkpoints from a store usable across threads;
+its documentation also distinguishes transient in-memory storage from
+persistence that survives a process restart.[^memgpt][^persistence]
+
+## Context is a selection problem
+
+A larger window does not remove the need to select relevant information.
+Compaction summarizes earlier interactions; retrieval brings selected evidence
+back; persistent notes preserve decisions and unfinished work. Each method
+can lose or introduce information, so important constraints need explicit
+preservation rather than an assumption that the model still remembers them.[^context]
+
+For the invoice-review example, keep the current question, supported
+findings, unresolved currency mismatches and exact document locations. Store a long
+source separately and retrieve the relevant passage when needed. Do not turn
+a generated summary into the primary evidence for its own claims.
+
+## Preserve continuity outside the prompt
+
+[Figure 1](#figure-1) separates the persistent record from the selected context
+that reaches a particular model call.
+
+<ModelFlow id="figure-1" title="Persistent work, selective context" lanesJson='[{"label":"Before each model call","steps":[{"label":"Read saved work","detail":"Events, checkpoints and artifact locations"},{"label":"Select relevant evidence","detail":"Retrieve sources and preserve constraints","accent":true},{"label":"Assemble context","detail":"Only the information needed for this decision"}]},{"label":"After execution","steps":[{"label":"Record what happened","detail":"Inputs, outcomes and external action identifiers"},{"label":"Update progress","detail":"Completed work, uncertainty and pending effects"},{"label":"Resume or stop","detail":"Reconcile the environment before continuing"}],"note":"The next model call is reconstructed from persisted work. A summary supports continuity; it does not replace original evidence or verify external state."}]'>
+**Figure 1.** State and context lifecycle. Independent synthesis informed by
+memory tiers, persistence and managed session design.[^memgpt][^persistence][^managed]
+</ModelFlow>
+
+Anthropic's managed architecture separates the session history, harness and
+execution sandbox. This lets the system preserve continuity without relying
+on the same running container. That is one implementation, not a requirement
+to buy a managed platform.[^managed]
+
+## Recovery is not blind replay
+
+Suppose the invoice agent submits a request to publish its reviewed report. The service accepts
+it, but the response is lost. Repeating the request could publish twice.
+Restoring a checkpoint alone cannot tell the agent whether the first request
+committed.
+
+A proposed recovery design records an operation identifier before the request,
+uses an idempotency mechanism where the service supports it, and checks the
+external result before retrying. Stripe's API illustrates an explicit
+idempotency-key contract. That contract is service-specific, not a universal
+property of agent tools.[^idempotency]
+
+The same distinction applies to payments, emails and database updates.
+A replayed model call may also choose a different action. Preserve enough
+evidence to reconcile completed effects, not just enough text to restart
+the conversation.
+
+## Memory needs governance
+
+As a proposed memory policy, retain provenance, scope, freshness and a way to
+correct or delete stored information. Separate a user's preferences from
+facts about a document and from uncertain model interpretations. Retrieve
+only information the current user is allowed to access.
+
+Persistent memory can carry an error or injected instruction into later
+sessions. It therefore belongs inside the security review, not merely the
+personalization feature list. See [Security & Control](/agents/security-control/).
+
+## What to retain in a handoff
+
+For work that crosses sessions, a compact handoff should explain the goal and
+constraints, what was actually completed, where the evidence and artifacts
+live, which effects remain pending and what the next safe step is. This is a
+proposed engineering contract, not a claim that longer notes are always better.
+
+Continue with [Orchestration](/agents/orchestration/).
+
+
+To see these ideas in a specific implementation, explore the
+[Agent Deep Dives comparison](/agents/deep-dives/) and its five studies.
+
+[^memgpt]: Charles Packer et al. [MemGPT: Towards LLMs as Operating Systems](https://arxiv.org/abs/2310.08560v2), 2024 revision.
+[^persistence]: LangChain. [LangGraph persistence](https://docs.langchain.com/oss/python/langgraph/persistence), checkpoints, threads and stores. Checked October 10, 2026.
+[^context]: Anthropic. [Effective context engineering for AI agents](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents), 2025; compaction and structured notes.
+[^managed]: Anthropic. [Scaling Managed Agents: Decoupling the brain from the hands](https://www.anthropic.com/engineering/managed-agents), 2026.
+[^idempotency]: Stripe. [Idempotent requests](https://docs.stripe.com/api/idempotent_requests), request keys and retry semantics. Checked October 10, 2026.

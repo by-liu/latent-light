@@ -1,0 +1,181 @@
+{
+  "revision": 2,
+  "checked": "2026-10-10T15:45:39.761Z",
+  "site_page_sha256": "bcd42c480410f03ad2507f47ad407b704f3b77c7a5c7cfd7f73899d5c1f09e2f",
+  "source_resources": {
+    "report": "https://arxiv.org/abs/2301.12597v3",
+    "hugging_face": "https://huggingface.co/Salesforce/blip2-opt-2.7b",
+    "checkpoint": "Salesforce/blip2-opt-2.7b"
+  },
+  "collection_checks": {
+    "site_validation": "106 tests, zero Astro diagnostics, build and all 43 docs lint passed.",
+    "browser_views": 81,
+    "model_benchmarks": "Not executed.",
+    "source_figures": "32 unique report assets; 33 placements; 48 total numbered collection figures. Rights retained per asset."
+  },
+  "viewports": [
+    {
+      "slug": "blip-2",
+      "width": 1440,
+      "mode": "light",
+      "title": "BLIP-2",
+      "titleCount": 1,
+      "overflow": false,
+      "figures": [
+        {
+          "id": "figure-1",
+          "caption": "Figure 1. Generative learning through visual queries. Li et al., ICML 2023, Figure 3; cropped, CC BY 4.0.7"
+        },
+        {
+          "id": "figure-2",
+          "caption": "Figure 2. One Q-Former, three interaction patterns. Li et al., ICML 2023, Figure 2; cropped, CC BY 4.0.7"
+        }
+      ],
+      "resources": [
+        {
+          "kind": "report",
+          "href": "https://arxiv.org/abs/2301.12597v3",
+          "label": "Technical reportRead the original research"
+        },
+        {
+          "kind": "model",
+          "href": "https://huggingface.co/Salesforce/blip2-opt-2.7b",
+          "label": "Hugging FaceSalesforce/blip2-opt-2.7b"
+        }
+      ],
+      "visibleHashes": [],
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "missingImages": [],
+      "activeNav": [
+        {
+          "label": "BLIP-2",
+          "visible": true
+        }
+      ],
+      "panFrames": [
+        {
+          "tabindex": 0,
+          "scrolls": false,
+          "frame": 648,
+          "image": 648
+        },
+        {
+          "tabindex": 0,
+          "scrolls": false,
+          "frame": 648,
+          "image": 648
+        }
+      ]
+    },
+    {
+      "slug": "blip-2",
+      "width": 390,
+      "mode": "light",
+      "title": "BLIP-2",
+      "titleCount": 1,
+      "overflow": false,
+      "figures": [
+        {
+          "id": "figure-1",
+          "caption": "Figure 1. Generative learning through visual queries. Li et al., ICML 2023, Figure 3; cropped, CC BY 4.0.7"
+        },
+        {
+          "id": "figure-2",
+          "caption": "Figure 2. One Q-Former, three interaction patterns. Li et al., ICML 2023, Figure 2; cropped, CC BY 4.0.7"
+        }
+      ],
+      "resources": [
+        {
+          "kind": "report",
+          "href": "https://arxiv.org/abs/2301.12597v3",
+          "label": "Technical reportRead the original research"
+        },
+        {
+          "kind": "model",
+          "href": "https://huggingface.co/Salesforce/blip2-opt-2.7b",
+          "label": "Hugging FaceSalesforce/blip2-opt-2.7b"
+        }
+      ],
+      "visibleHashes": [],
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "missingImages": [],
+      "activeNav": [
+        {
+          "label": "BLIP-2",
+          "visible": false
+        }
+      ],
+      "panFrames": [
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 358,
+          "image": 780
+        },
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 358,
+          "image": 900
+        }
+      ]
+    },
+    {
+      "slug": "blip-2",
+      "width": 320,
+      "mode": "dark",
+      "title": "BLIP-2",
+      "titleCount": 1,
+      "overflow": false,
+      "figures": [
+        {
+          "id": "figure-1",
+          "caption": "Figure 1. Generative learning through visual queries. Li et al., ICML 2023, Figure 3; cropped, CC BY 4.0.7"
+        },
+        {
+          "id": "figure-2",
+          "caption": "Figure 2. One Q-Former, three interaction patterns. Li et al., ICML 2023, Figure 2; cropped, CC BY 4.0.7"
+        }
+      ],
+      "resources": [
+        {
+          "kind": "report",
+          "href": "https://arxiv.org/abs/2301.12597v3",
+          "label": "Technical reportRead the original research"
+        },
+        {
+          "kind": "model",
+          "href": "https://huggingface.co/Salesforce/blip2-opt-2.7b",
+          "label": "Hugging FaceSalesforce/blip2-opt-2.7b"
+        }
+      ],
+      "visibleHashes": [],
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "missingImages": [],
+      "activeNav": [
+        {
+          "label": "BLIP-2",
+          "visible": false
+        }
+      ],
+      "panFrames": [
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 288,
+          "image": 780
+        },
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 288,
+          "image": 900
+        }
+      ]
+    }
+  ],
+  "manual_review": "All 48 figure renders inspected as contact sheets; source figure completeness, labels and supplemental diagrams reviewed. Dense focus view and native dark diagrams inspected separately."
+}

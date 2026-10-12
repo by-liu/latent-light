@@ -1,0 +1,33 @@
+{
+  "schema_version": 2,
+  "topic_id": "minimax-m1-technical-deep-dive",
+  "status": "complete",
+  "coverage": {
+    "eligibility": "Official report and public artifact inspected",
+    "mechanisms": "Sections 1 to 5, Equations 1 to 7, Figures 1 to 3",
+    "adversarial_review": "RL-only rental cost versus foundation and7.5T continued training; capped detached ratio log-gradient versus PPO flat region; Figure2 Qwen2.5-32B AIME avg@32 not finalM1/pass@1/walltime. Numerical rollout/training mismatch and FP32 fix. Synthetic exclusion applies to continued pretraining, not RL.",
+    "runtime": "Not executed",
+    "presentation": "122 site tests pass, zero Astro diagnostics, 59-page static build and 59-doc lint clean. Fresh browser regression checks cover all 41 model pages plus the catalog and Foundations at 1440 px light, 390 px light and 320 px dark (129 views), reduced motion, desktop focus, active family navigation, figure order, loaded images and local anchors; narrow figures remain keyboard-pannable and link to full-size originals. All 41 Markdown/MDX exports and both agent manifests checked; representative search queries resolve. All 35 new desktop figure renders received manual contact-sheet review; dense focus/mobile views and resource-card/catalog layout received additional manual inspection. Existing bundler directive and philosophy-redirect indexing warnings remain. No model execution or benchmark reproduction.",
+    "figure_rights": "Specific excerpt assessment, not inferred permissive terms",
+    "integrated_browser_qa": "122 site tests pass, zero Astro diagnostics, 59-page static build and 59-doc lint clean. Fresh browser regression checks cover all 41 model pages plus the catalog and Foundations at 1440 px light, 390 px light and 320 px dark (129 views), reduced motion, desktop focus, active family navigation, figure order, loaded images and local anchors; narrow figures remain keyboard-pannable and link to full-size originals. All 41 Markdown/MDX exports and both agent manifests checked; representative search queries resolve. All 35 new desktop figure renders received manual contact-sheet review; dense focus/mobile views and resource-card/catalog layout received additional manual inspection. Existing bundler directive and philosophy-redirect indexing warnings remain. No model execution or benchmark reproduction.",
+    "final_report_review": "Source-scoped report and public MDX reviewed; no placeholder conclusions, undisclosed recipe invention or benchmark reproduction claim.",
+    "peer_review": "Cross-review added16 off-policy update rounds,40K-to80K staged curriculum, difficulty filtering, synthetic-reasoning downsampling, longer negative-sample imbalance and combined sample/token normalization. Core CISPO equation is explicitly not the entire80K recipe. Online GenRM length-bias recalibration and rule-first task curriculum added after direct section inspection."
+  },
+  "open_questions": [
+    "Unreleased recipe and application robustness require separate research."
+  ],
+  "recommended_next_direction": "Refresh on substantive report/artifact evidence; runtime and benchmark reproduction remain separate future work.",
+  "last_seen": "2026-10-10T18:52:33.833Z",
+  "quality_gate": {
+    "evidence_verified": true,
+    "contradictions_reviewed": true,
+    "report_reviewed": true,
+    "visuals_reviewed": true
+  },
+  "artifact_record": {
+    "huggingface": "8d1494b1a260e22040d5b9b2eb332eb44500b34d",
+    "report_url": "https://arxiv.org/pdf/2506.13585v1",
+    "pdf_sha256": "d355a6a41a26b85ca145aec5154650f4d39733c92f54775ae7f5851ecbedf600",
+    "archive": "Unmodified PDF in /tmp only; publication contains bounded figure excerpts."
+  }
+}

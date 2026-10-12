@@ -12,6 +12,7 @@ import { PackageManagers } from "./components/ui/package-managers";
 import { Step, Steps } from "./components/ui/steps";
 import { Tabs, TabItem } from "./components/ui/tabs";
 import MathExpression from './components/MathExpression.astro';
+import ModelResources from './components/architectures/ModelResources.astro';
 
 export const components = {
   Aside,
@@ -20,6 +21,7 @@ export const components = {
   PackageManagers,
   Render,
   MathExpression,
+  ModelResources,
   Step,
   Steps,
   TabItem,

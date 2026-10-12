@@ -1,0 +1,871 @@
+{
+  "checked_at": "2026-10-12T02:22:11.248Z",
+  "success": true,
+  "views": [
+    {
+      "slug": "",
+      "width": 1440,
+      "mode": "light",
+      "overflow": false,
+      "refs": 4,
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "reducedMotion": true,
+      "editor": 0
+    },
+    {
+      "slug": "foundations",
+      "width": 1440,
+      "mode": "light",
+      "overflow": false,
+      "refs": 6,
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "reducedMotion": true,
+      "editor": 0
+    },
+    {
+      "slug": "tools-skills-protocols",
+      "width": 1440,
+      "mode": "light",
+      "overflow": false,
+      "refs": 6,
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "reducedMotion": true,
+      "editor": 0
+    },
+    {
+      "slug": "context-memory-state",
+      "width": 1440,
+      "mode": "light",
+      "overflow": false,
+      "refs": 5,
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "reducedMotion": true,
+      "editor": 0
+    },
+    {
+      "slug": "orchestration",
+      "width": 1440,
+      "mode": "light",
+      "overflow": false,
+      "refs": 3,
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "reducedMotion": true,
+      "editor": 0
+    },
+    {
+      "slug": "evaluation-reliability",
+      "width": 1440,
+      "mode": "light",
+      "overflow": false,
+      "refs": 5,
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "reducedMotion": true,
+      "editor": 0
+    },
+    {
+      "slug": "security-control",
+      "width": 1440,
+      "mode": "light",
+      "overflow": false,
+      "refs": 3,
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "reducedMotion": true,
+      "editor": 0
+    },
+    {
+      "slug": "deep-dives/coding-agents",
+      "width": 1440,
+      "mode": "light",
+      "overflow": false,
+      "refs": 5,
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "reducedMotion": true,
+      "editor": 0
+    },
+    {
+      "slug": "ecosystem",
+      "width": 1440,
+      "mode": "light",
+      "overflow": false,
+      "refs": 16,
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "reducedMotion": true,
+      "editor": 0
+    },
+    {
+      "slug": "deep-dives",
+      "width": 1440,
+      "mode": "light",
+      "overflow": false,
+      "refs": 14,
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "reducedMotion": true,
+      "editor": 0
+    },
+    {
+      "slug": "deep-dives/claude-code",
+      "width": 1440,
+      "mode": "light",
+      "overflow": false,
+      "refs": 6,
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "reducedMotion": true,
+      "editor": 0
+    },
+    {
+      "slug": "deep-dives/codex",
+      "width": 1440,
+      "mode": "light",
+      "overflow": false,
+      "refs": 8,
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "reducedMotion": true,
+      "editor": 0
+    },
+    {
+      "slug": "deep-dives/pi",
+      "width": 1440,
+      "mode": "light",
+      "overflow": false,
+      "refs": 9,
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "reducedMotion": true,
+      "editor": 0
+    },
+    {
+      "slug": "deep-dives/opencode",
+      "width": 1440,
+      "mode": "light",
+      "overflow": false,
+      "refs": 8,
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "reducedMotion": true,
+      "editor": 0
+    },
+    {
+      "slug": "deep-dives/deepseek-harness",
+      "width": 1440,
+      "mode": "light",
+      "overflow": false,
+      "refs": 6,
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "reducedMotion": true,
+      "editor": 0
+    },
+    {
+      "slug": "",
+      "width": 1440,
+      "mode": "dark",
+      "overflow": false,
+      "refs": 4,
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "reducedMotion": true,
+      "editor": 0
+    },
+    {
+      "slug": "foundations",
+      "width": 1440,
+      "mode": "dark",
+      "overflow": false,
+      "refs": 6,
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "reducedMotion": true,
+      "editor": 0
+    },
+    {
+      "slug": "tools-skills-protocols",
+      "width": 1440,
+      "mode": "dark",
+      "overflow": false,
+      "refs": 6,
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "reducedMotion": true,
+      "editor": 0
+    },
+    {
+      "slug": "context-memory-state",
+      "width": 1440,
+      "mode": "dark",
+      "overflow": false,
+      "refs": 5,
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "reducedMotion": true,
+      "editor": 0
+    },
+    {
+      "slug": "orchestration",
+      "width": 1440,
+      "mode": "dark",
+      "overflow": false,
+      "refs": 3,
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "reducedMotion": true,
+      "editor": 0
+    },
+    {
+      "slug": "evaluation-reliability",
+      "width": 1440,
+      "mode": "dark",
+      "overflow": false,
+      "refs": 5,
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "reducedMotion": true,
+      "editor": 0
+    },
+    {
+      "slug": "security-control",
+      "width": 1440,
+      "mode": "dark",
+      "overflow": false,
+      "refs": 3,
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "reducedMotion": true,
+      "editor": 0
+    },
+    {
+      "slug": "deep-dives/coding-agents",
+      "width": 1440,
+      "mode": "dark",
+      "overflow": false,
+      "refs": 5,
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "reducedMotion": true,
+      "editor": 0
+    },
+    {
+      "slug": "ecosystem",
+      "width": 1440,
+      "mode": "dark",
+      "overflow": false,
+      "refs": 16,
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "reducedMotion": true,
+      "editor": 0
+    },
+    {
+      "slug": "deep-dives",
+      "width": 1440,
+      "mode": "dark",
+      "overflow": false,
+      "refs": 14,
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "reducedMotion": true,
+      "editor": 0
+    },
+    {
+      "slug": "deep-dives/claude-code",
+      "width": 1440,
+      "mode": "dark",
+      "overflow": false,
+      "refs": 6,
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "reducedMotion": true,
+      "editor": 0
+    },
+    {
+      "slug": "deep-dives/codex",
+      "width": 1440,
+      "mode": "dark",
+      "overflow": false,
+      "refs": 8,
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "reducedMotion": true,
+      "editor": 0
+    },
+    {
+      "slug": "deep-dives/pi",
+      "width": 1440,
+      "mode": "dark",
+      "overflow": false,
+      "refs": 9,
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "reducedMotion": true,
+      "editor": 0
+    },
+    {
+      "slug": "deep-dives/opencode",
+      "width": 1440,
+      "mode": "dark",
+      "overflow": false,
+      "refs": 8,
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "reducedMotion": true,
+      "editor": 0
+    },
+    {
+      "slug": "deep-dives/deepseek-harness",
+      "width": 1440,
+      "mode": "dark",
+      "overflow": false,
+      "refs": 6,
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "reducedMotion": true,
+      "editor": 0
+    },
+    {
+      "slug": "",
+      "width": 390,
+      "mode": "light",
+      "overflow": false,
+      "refs": 4,
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "reducedMotion": true,
+      "editor": 0
+    },
+    {
+      "slug": "foundations",
+      "width": 390,
+      "mode": "light",
+      "overflow": false,
+      "refs": 6,
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "reducedMotion": true,
+      "editor": 0
+    },
+    {
+      "slug": "tools-skills-protocols",
+      "width": 390,
+      "mode": "light",
+      "overflow": false,
+      "refs": 6,
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "reducedMotion": true,
+      "editor": 0
+    },
+    {
+      "slug": "context-memory-state",
+      "width": 390,
+      "mode": "light",
+      "overflow": false,
+      "refs": 5,
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "reducedMotion": true,
+      "editor": 0
+    },
+    {
+      "slug": "orchestration",
+      "width": 390,
+      "mode": "light",
+      "overflow": false,
+      "refs": 3,
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "reducedMotion": true,
+      "editor": 0
+    },
+    {
+      "slug": "evaluation-reliability",
+      "width": 390,
+      "mode": "light",
+      "overflow": false,
+      "refs": 5,
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "reducedMotion": true,
+      "editor": 0
+    },
+    {
+      "slug": "security-control",
+      "width": 390,
+      "mode": "light",
+      "overflow": false,
+      "refs": 3,
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "reducedMotion": true,
+      "editor": 0
+    },
+    {
+      "slug": "deep-dives/coding-agents",
+      "width": 390,
+      "mode": "light",
+      "overflow": false,
+      "refs": 5,
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "reducedMotion": true,
+      "editor": 0
+    },
+    {
+      "slug": "ecosystem",
+      "width": 390,
+      "mode": "light",
+      "overflow": false,
+      "refs": 16,
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "reducedMotion": true,
+      "editor": 0
+    },
+    {
+      "slug": "deep-dives",
+      "width": 390,
+      "mode": "light",
+      "overflow": false,
+      "refs": 14,
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "reducedMotion": true,
+      "editor": 0
+    },
+    {
+      "slug": "deep-dives/claude-code",
+      "width": 390,
+      "mode": "light",
+      "overflow": false,
+      "refs": 6,
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "reducedMotion": true,
+      "editor": 0
+    },
+    {
+      "slug": "deep-dives/codex",
+      "width": 390,
+      "mode": "light",
+      "overflow": false,
+      "refs": 8,
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "reducedMotion": true,
+      "editor": 0
+    },
+    {
+      "slug": "deep-dives/pi",
+      "width": 390,
+      "mode": "light",
+      "overflow": false,
+      "refs": 9,
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "reducedMotion": true,
+      "editor": 0
+    },
+    {
+      "slug": "deep-dives/opencode",
+      "width": 390,
+      "mode": "light",
+      "overflow": false,
+      "refs": 8,
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "reducedMotion": true,
+      "editor": 0
+    },
+    {
+      "slug": "deep-dives/deepseek-harness",
+      "width": 390,
+      "mode": "light",
+      "overflow": false,
+      "refs": 6,
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "reducedMotion": true,
+      "editor": 0
+    },
+    {
+      "slug": "",
+      "width": 320,
+      "mode": "dark",
+      "overflow": false,
+      "refs": 4,
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "reducedMotion": true,
+      "editor": 0
+    },
+    {
+      "slug": "foundations",
+      "width": 320,
+      "mode": "dark",
+      "overflow": false,
+      "refs": 6,
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "reducedMotion": true,
+      "editor": 0
+    },
+    {
+      "slug": "tools-skills-protocols",
+      "width": 320,
+      "mode": "dark",
+      "overflow": false,
+      "refs": 6,
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "reducedMotion": true,
+      "editor": 0
+    },
+    {
+      "slug": "context-memory-state",
+      "width": 320,
+      "mode": "dark",
+      "overflow": false,
+      "refs": 5,
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "reducedMotion": true,
+      "editor": 0
+    },
+    {
+      "slug": "orchestration",
+      "width": 320,
+      "mode": "dark",
+      "overflow": false,
+      "refs": 3,
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "reducedMotion": true,
+      "editor": 0
+    },
+    {
+      "slug": "evaluation-reliability",
+      "width": 320,
+      "mode": "dark",
+      "overflow": false,
+      "refs": 5,
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "reducedMotion": true,
+      "editor": 0
+    },
+    {
+      "slug": "security-control",
+      "width": 320,
+      "mode": "dark",
+      "overflow": false,
+      "refs": 3,
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "reducedMotion": true,
+      "editor": 0
+    },
+    {
+      "slug": "deep-dives/coding-agents",
+      "width": 320,
+      "mode": "dark",
+      "overflow": false,
+      "refs": 5,
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "reducedMotion": true,
+      "editor": 0
+    },
+    {
+      "slug": "ecosystem",
+      "width": 320,
+      "mode": "dark",
+      "overflow": false,
+      "refs": 16,
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "reducedMotion": true,
+      "editor": 0
+    },
+    {
+      "slug": "deep-dives",
+      "width": 320,
+      "mode": "dark",
+      "overflow": false,
+      "refs": 14,
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "reducedMotion": true,
+      "editor": 0
+    },
+    {
+      "slug": "deep-dives/claude-code",
+      "width": 320,
+      "mode": "dark",
+      "overflow": false,
+      "refs": 6,
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "reducedMotion": true,
+      "editor": 0
+    },
+    {
+      "slug": "deep-dives/codex",
+      "width": 320,
+      "mode": "dark",
+      "overflow": false,
+      "refs": 8,
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "reducedMotion": true,
+      "editor": 0
+    },
+    {
+      "slug": "deep-dives/pi",
+      "width": 320,
+      "mode": "dark",
+      "overflow": false,
+      "refs": 9,
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "reducedMotion": true,
+      "editor": 0
+    },
+    {
+      "slug": "deep-dives/opencode",
+      "width": 320,
+      "mode": "dark",
+      "overflow": false,
+      "refs": 8,
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "reducedMotion": true,
+      "editor": 0
+    },
+    {
+      "slug": "deep-dives/deepseek-harness",
+      "width": 320,
+      "mode": "dark",
+      "overflow": false,
+      "refs": 6,
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "reducedMotion": true,
+      "editor": 0
+    }
+  ],
+  "checks": {
+    "overview": "Three reading routes appear early; keyboard route opens the correct chapter; native formal detail opens and closes.",
+    "desktopKeyboard": "Focus, both sidebars, citation return and full-size paper image passed.",
+    "mobileNav-overview": "Current route is visible when the drawer opens; keyboard and Escape passed.",
+    "mobileNav-deep-dives-deepseek-harness": "Current route is visible when the drawer opens; keyboard and Escape passed.",
+    "exports": [
+      {
+        "slug": "",
+        "ext": "md",
+        "bytes": 6385
+      },
+      {
+        "slug": "",
+        "ext": "mdx",
+        "bytes": 6534
+      },
+      {
+        "slug": "foundations",
+        "ext": "md",
+        "bytes": 7637
+      },
+      {
+        "slug": "foundations",
+        "ext": "mdx",
+        "bytes": 7736
+      },
+      {
+        "slug": "tools-skills-protocols",
+        "ext": "md",
+        "bytes": 7019
+      },
+      {
+        "slug": "tools-skills-protocols",
+        "ext": "mdx",
+        "bytes": 6938
+      },
+      {
+        "slug": "context-memory-state",
+        "ext": "md",
+        "bytes": 6524
+      },
+      {
+        "slug": "context-memory-state",
+        "ext": "mdx",
+        "bytes": 6422
+      },
+      {
+        "slug": "orchestration",
+        "ext": "md",
+        "bytes": 5900
+      },
+      {
+        "slug": "orchestration",
+        "ext": "mdx",
+        "bytes": 5867
+      },
+      {
+        "slug": "evaluation-reliability",
+        "ext": "md",
+        "bytes": 7455
+      },
+      {
+        "slug": "evaluation-reliability",
+        "ext": "mdx",
+        "bytes": 7396
+      },
+      {
+        "slug": "security-control",
+        "ext": "md",
+        "bytes": 5718
+      },
+      {
+        "slug": "security-control",
+        "ext": "mdx",
+        "bytes": 5458
+      },
+      {
+        "slug": "deep-dives/coding-agents",
+        "ext": "md",
+        "bytes": 6885
+      },
+      {
+        "slug": "deep-dives/coding-agents",
+        "ext": "mdx",
+        "bytes": 6825
+      },
+      {
+        "slug": "ecosystem",
+        "ext": "md",
+        "bytes": 9813
+      },
+      {
+        "slug": "ecosystem",
+        "ext": "mdx",
+        "bytes": 9550
+      },
+      {
+        "slug": "deep-dives",
+        "ext": "md",
+        "bytes": 13510
+      },
+      {
+        "slug": "deep-dives",
+        "ext": "mdx",
+        "bytes": 14062
+      },
+      {
+        "slug": "deep-dives/claude-code",
+        "ext": "md",
+        "bytes": 9561
+      },
+      {
+        "slug": "deep-dives/claude-code",
+        "ext": "mdx",
+        "bytes": 9641
+      },
+      {
+        "slug": "deep-dives/codex",
+        "ext": "md",
+        "bytes": 10115
+      },
+      {
+        "slug": "deep-dives/codex",
+        "ext": "mdx",
+        "bytes": 10205
+      },
+      {
+        "slug": "deep-dives/pi",
+        "ext": "md",
+        "bytes": 10932
+      },
+      {
+        "slug": "deep-dives/pi",
+        "ext": "mdx",
+        "bytes": 11277
+      },
+      {
+        "slug": "deep-dives/opencode",
+        "ext": "md",
+        "bytes": 10447
+      },
+      {
+        "slug": "deep-dives/opencode",
+        "ext": "mdx",
+        "bytes": 10746
+      },
+      {
+        "slug": "deep-dives/deepseek-harness",
+        "ext": "md",
+        "bytes": 9988
+      },
+      {
+        "slug": "deep-dives/deepseek-harness",
+        "ext": "mdx",
+        "bytes": 9953
+      }
+    ],
+    "search": [
+      {
+        "q": "Claude Code",
+        "found": true
+      },
+      {
+        "q": "DeepSeek Harness",
+        "found": true
+      },
+      {
+        "q": "SessionManager",
+        "found": true
+      },
+      {
+        "q": "context adaptation",
+        "found": true
+      }
+    ],
+    "/llms.txt": 200,
+    "/llms-full.txt": 200,
+    "/agents/llms.txt": 200,
+    "coordinates": 200,
+    "editor": 404,
+    "noJavaScript": "Reading routes, five study links, native formal detail, source images and tables remain available."
+  },
+  "manual_review": {
+    "status": "completed",
+    "scope": "Representative desktop/mobile, light/dark, native diagrams and original source figures; source artifacts visually inspected."
+  },
+  "validation": {
+    "deployment_tests": 48,
+    "content_tests": 135,
+    "astro_errors": 0,
+    "astro_warnings": 0,
+    "pages_built": 84,
+    "docs_lint": 84,
+    "existing_notices": [
+      "Vite head-inject directive notices",
+      "Pagefind skipped 25 non-HTML redirect outputs"
+    ]
+  },
+  "development_server": {
+    "status": "refreshed",
+    "url": "http://localhost:4327/agents/",
+    "reason": "Existing project background server retained an earlier content collection; restarted only the confirmed Latent Light process using astro dev stop and background --force.",
+    "routes": "Overview, comparison, all five studies and comparison Markdown export returned HTTP 200 after restart.",
+    "checked_at": "2026-10-12T02:28:23Z"
+  }
+}

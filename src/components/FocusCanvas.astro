@@ -6,7 +6,7 @@ const { size = 'diagram', label } = Astro.props;
 <style>
   .focus-canvas { min-width:0; }
   @media(min-width:768px) {
-    :global(html[data-ll-focus]) .focus-canvas { width:min(var(--canvas-width),calc(100vw - 4rem)); max-width:none; margin-left:50%; transform:translateX(-50%); }
+    :global(html[data-ll-focus]) .focus-canvas { --focus-width:min(var(--canvas-width),calc(100vw - 4rem)); width:var(--focus-width); max-width:none; margin-left:calc((100% - var(--focus-width))/2); }
     .focus-canvas-figure {--canvas-width:64rem;}.focus-canvas-diagram {--canvas-width:72rem;}.focus-canvas-wide {--canvas-width:76rem;}
   }
   @media print { .focus-canvas {width:auto!important;margin-left:0!important;transform:none!important;} }

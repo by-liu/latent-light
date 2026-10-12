@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 690" role="img" aria-labelledby="title desc"><title id="title">Qwen3-VL: from pixels to a mixed sequence</title><desc id="desc">Images or sampled frame pairs become 16 pixel patches. A dynamic-resolution SigLIP2 encoder produces final features and three intermediate feature levels. The main 2 by 2 merger inserts visual embeddings into the language sequence. Text and video timestamps occupy ordinary text positions. Dedicated DeepStack mergers add intermediate features at visual positions after the first three decoder layers. This is an independently authored mechanism map, not the report artwork.</desc><style>text{font-family:Arial,sans-serif;fill:#213047} .title{font-size:29px;font-weight:700}.label{font-size:22px;font-weight:700}.body{font-size:19px}.small{font-size:17px}.muted{fill:#55677d}.box{fill:#f2f6fb;stroke:#c4d1e1;stroke-width:1.5}.vision{fill:#eef4ff;stroke:#6a8ce2;stroke-width:1.5}.time{fill:#fff3e9;stroke:#d59360;stroke-width:1.5}.depth{fill:#f3efff;stroke:#9780ce;stroke-width:1.5}.line{fill:none;stroke:#536880;stroke-width:2.3;marker-end:url(#arrow)}.side{fill:none;stroke:#8a6ac2;stroke-width:2.5;stroke-dasharray:7 4;marker-end:url(#side-arrow)}</style><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#536880"/></marker><marker id="side-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#8a6ac2"/></marker></defs><rect width="1120" height="690" rx="16" fill="#fff"/>
+<text class="title" x="36" y="52">Pixels become tokens. Depth carries extra evidence.</text>
+<text class="body muted" x="36" y="85">Selected dense 8B interface · separate vision geometry from language positions</text>
+<rect class="box" x="30" y="124" width="200" height="210" rx="12"/>
+<text class="label" x="48" y="159">Image / video</text><text class="body" x="48" y="192">Resize to 32-pixel</text><text class="body" x="48" y="218">multiples; normalize</text>
+<rect class="vision" x="50" y="242" width="66" height="55" rx="6"/><rect class="vision" x="139" y="242" width="66" height="55" rx="6"/>
+<text class="small" x="61" y="275">frame</text><text class="small" x="150" y="275">frame</text><text class="small muted" x="48" y="320">2 frames per temporal patch</text>
+<path class="line" d="M230 229H265"/>
+<rect class="vision" x="270" y="124" width="260" height="210" rx="12"/>
+<text class="label" x="288" y="159">Adapted SigLIP2</text><text class="body" x="288" y="193">16 × 16 patch stride</text><text class="body" x="288" y="220">27 vision blocks</text><text class="body" x="288" y="247">2D rotary positions +</text><text class="body" x="288" y="274">interpolated positions</text><text class="small muted" x="288" y="314">Variable patch-grid length</text>
+<path class="line" d="M530 229H563"/>
+<rect class="vision" x="568" y="124" width="200" height="210" rx="12"/>
+<text class="label" x="587" y="159">Main merger</text><text class="body" x="587" y="193">Group 2 × 2</text><text class="body" x="587" y="220">MLP → width 4,096</text><text class="body" x="587" y="247">4 patches → 1 token</text><text class="small muted" x="587" y="314">Final encoder features</text>
+<path class="line" d="M768 229H802"/>
+<rect class="box" x="808" y="124" width="280" height="210" rx="12"/>
+<text class="label" x="827" y="159">Language input</text><text class="body" x="827" y="193">Visual placeholders replaced</text><text class="body" x="827" y="220">Text + image/video features</text><text class="body" x="827" y="247">Interleaved M-RoPE</text><text class="small muted" x="827" y="314">One causal mixed sequence</text>
+<path class="line" d="M948 334V470"/>
+<rect class="depth" x="808" y="477" width="280" height="132" rx="12"/><text class="label" x="827" y="513">36-layer decoder</text><text class="body" x="827" y="545">Add only at visual positions</text><text class="small" x="827" y="576">after layers 1, 2 and 3</text>
+<path class="side" d="M400 334V426H565"/>
+<rect class="depth" x="568" y="376" width="200" height="103" rx="12"/><text class="label" x="586" y="409">DeepStack</text><text class="small" x="586" y="438">3 dedicated mergers</text><text class="small" x="586" y="462">vision blocks 8, 16, 24</text>
+<path class="side" d="M668 479V539H801"/>
+<text class="small muted" x="309" y="454">intermediate features</text>
+<rect class="time" x="30" y="377" width="230" height="232" rx="12"/><text class="label" x="48" y="414">Sequence content</text><text class="small" x="48" y="448">Text → time → visuals → …</text><text class="small" x="48" y="486">Markers + visual tokens</text><text class="small" x="48" y="514">Time text uses positions</text><text class="small" x="48" y="552">DeepStack adds features,</text><text class="small" x="48" y="578">not context positions.</text>
+<text class="small muted" x="36" y="655">Schematic, not to scale. Vision indices are zero-based; decoder layers are numbered from 1.</text></svg>
+

@@ -1,0 +1,73 @@
+---
+import {readTasteCards} from '../../../plugins/taste-visual.mjs';
+interface Card {
+  label: string;
+  headline: string;
+  body: string;
+  facts?: string[];
+}
+interface Props {
+  id: string;
+  title: string;
+  kind: 'overview' | 'design' | 'writing';
+  cardsJson: string;
+  footer?: string;
+}
+const {id, title, kind, cardsJson, footer} = Astro.props;
+const cards: Card[] = readTasteCards(cardsJson);
+---
+
+<figure id={id} class:list={['taste-visual', `taste-${kind}`]} aria-labelledby={`${id}-title`}>
+  <header><strong id={`${id}-title`}>{title}</strong></header>
+  <div class="taste-cards">
+    {cards.map((card, index) => <section class:list={['taste-card', {expressive: kind === 'design' && index === 1}]}>
+      <span class="taste-label">{card.label}</span>
+      <div class="taste-content">
+        {kind === 'design' && <span class="poster-mark" aria-hidden="true"></span>}
+        <strong class="taste-headline">{card.headline}</strong>
+        <p>{card.body}</p>
+        {card.facts && <ul class="taste-facts" role="list">
+          {card.facts.map(fact => <li>{fact}</li>)}
+        </ul>}
+      </div>
+    </section>)}
+  </div>
+  {footer && <p class="taste-footer">{footer}</p>}
+  <figcaption><slot /></figcaption>
+</figure>
+
+<style>
+  .taste-visual{--taste-blue:#245a9b;--taste-teal:#21776e;--taste-violet:#77529f;--taste-amber:#9a5b22;container-type:inline-size;min-width:0;margin:1.75rem 0;border:1px solid var(--nb-border);border-radius:1rem;overflow:hidden;background:var(--nb-background);color:var(--nb-foreground);line-height:1.55;}
+  :global([data-mode="dark"]) .taste-visual{--taste-blue:#9fc6ff;--taste-teal:#9adccd;--taste-violet:#d0b7f4;--taste-amber:#e7ba89;}
+  header{padding:1.15rem 1.25rem;background:linear-gradient(110deg,color-mix(in srgb,var(--taste-blue) 7%,var(--nb-background)),color-mix(in srgb,var(--taste-teal) 4%,var(--nb-background)));}
+  header strong{display:block;font-size:1.12rem;line-height:1.4;letter-spacing:-.02em;}
+  .taste-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.85rem;padding:1rem;}
+  .taste-card{--taste-tone:var(--taste-blue);min-width:0;margin:0;}
+  .taste-card:nth-child(2){--taste-tone:var(--taste-teal);}
+  .taste-card:nth-child(3){--taste-tone:var(--taste-violet);}
+  .taste-card:nth-child(4){--taste-tone:var(--taste-amber);}
+  .taste-label{display:block;font-size:.7rem;font-weight:650;line-height:1.5;letter-spacing:.065em;text-transform:uppercase;margin-bottom:.55rem;color:var(--taste-tone);}
+  .taste-content{position:relative;min-width:0;border:1px solid var(--nb-border);border-top:3px solid var(--taste-tone);border-radius:.65rem;padding:1rem;background:color-mix(in srgb,var(--taste-tone) 4%,var(--nb-background));}
+  .taste-headline{display:block;white-space:pre-line;font-size:1rem;line-height:1.4;letter-spacing:-.015em;}
+  .taste-content p{margin:.65rem 0 0!important;font-size:.86rem;line-height:1.6;}
+  .taste-overview .taste-label{margin:0 0 .45rem;}
+  .taste-overview .taste-content{border-top-width:1px;}
+  .taste-facts{list-style:none!important;margin:1.35rem 0 0!important;padding:0!important;border-top:1px solid var(--nb-border);}
+  .taste-facts li{margin:.55rem 0 0!important;padding:0;font-size:.8rem;font-weight:550;}
+  .taste-design .taste-card{display:flex;flex-direction:column;}
+  .taste-design .taste-content{display:flex;flex-direction:column;flex:1;min-height:19rem;padding:1.2rem;border-top-width:1px;}
+  .taste-design .taste-headline{font-size:1.55rem;line-height:1.25;}
+  .taste-design .taste-content p{margin-bottom:1rem!important;}
+  .taste-design .taste-facts{margin-top:auto!important;padding-top:.5rem!important;}
+  .poster-mark{display:block;width:2.75rem;height:.3rem;border-radius:1rem;background:var(--taste-tone);margin:.4rem 0 1.7rem;}
+  .expressive .taste-content{background:linear-gradient(145deg,color-mix(in srgb,var(--taste-teal) 12%,var(--nb-background)),color-mix(in srgb,var(--taste-violet) 8%,var(--nb-background)));}
+  .expressive .poster-mark{width:3.4rem;height:3.4rem;border-radius:50%;background:transparent;border:2px solid var(--taste-teal);box-shadow:.6rem .4rem 0 color-mix(in srgb,var(--taste-violet) 20%,transparent);margin:.2rem 0 1.2rem;}
+  .expressive .taste-headline{text-transform:uppercase;letter-spacing:-.055em;font-size:2rem;line-height:1.05;}
+  .taste-writing .taste-headline{font-size:.82rem;color:var(--taste-tone);}
+  .taste-writing .taste-content p{font-size:.94rem;}
+  .taste-footer{margin:0!important;padding:.85rem 1.25rem;border-top:1px solid var(--nb-border);font-size:.83rem;}
+  figcaption{padding:1rem 1.25rem;border-top:1px solid var(--nb-border);font-size:.8rem;line-height:1.6;color:var(--nb-muted-foreground);}
+  @container(max-width:480px){.taste-cards{grid-template-columns:1fr;}.taste-design .taste-content{min-height:18rem;}}
+  @media(max-width:620px){.taste-cards{grid-template-columns:1fr;}header{padding:1rem;}figcaption{padding:1rem;}.taste-footer{padding:.85rem 1rem;}}
+  @media print{.taste-card{break-inside:avoid;}}
+</style>

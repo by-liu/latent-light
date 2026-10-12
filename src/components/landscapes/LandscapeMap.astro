@@ -1,0 +1,53 @@
+---
+import {readLandscapeCards} from '../../../plugins/landscape-map.mjs';
+interface Props {
+  id: string;
+  title: string;
+  subtitle?: string;
+  cardsJson: string;
+  footer?: string;
+}
+const {id, title, subtitle, cardsJson, footer} = Astro.props;
+const cards = readLandscapeCards(cardsJson);
+---
+<figure id={id} class="landscape-map" aria-labelledby={`${id}-title`}>
+  <header>
+    <span class="map-eyebrow">A map, not a ranking</span>
+    <strong id={`${id}-title`} class="map-title">{title}</strong>
+    {subtitle && <p>{subtitle}</p>}
+  </header>
+  <ul class="map-cards" role="list">
+    {cards.map((card, i) => <li style={`--map-tone: ${i % 3 === 0 ? 'var(--map-blue)' : i % 3 === 1 ? 'var(--map-violet)' : 'var(--map-teal)'}`}>
+      <div class="card-top"><span class="map-mark" aria-hidden="true"><svg viewBox="0 0 40 40" fill="none"><ellipse cx="20" cy="20" rx="15" ry="11" stroke="currentColor" stroke-width="1.5" transform={`rotate(${i * 30} 20 20)`}/><path d="M5 20h30M20 5v30" stroke="currentColor" stroke-width="1"/><circle cx="20" cy="20" r="3" fill="currentColor"/></svg></span><strong>{card.label}</strong></div>
+      <p class="card-role">{card.role}</p>
+      <p class="card-examples"><span>Examples</span>{card.examples}</p>
+      <p class="card-question"><span>Question to test</span>{card.question}</p>
+    </li>)}
+  </ul>
+  {footer && <p class="map-footer">{footer}</p>}
+  <figcaption><slot /></figcaption>
+</figure>
+<style>
+  .landscape-map{--map-blue:#2563a6;--map-violet:#7150a7;--map-teal:#19756a;container-type:inline-size;min-width:0;margin:1.75rem 0;border:1px solid var(--nb-border);border-radius:1rem;overflow:hidden;background:var(--nb-background);color:var(--nb-foreground);line-height:1.5;}
+  :global([data-mode="dark"]) .landscape-map{--map-blue:#94bdfc;--map-violet:#c3aff4;--map-teal:#87d4c6;}
+  header{padding:1.4rem 1.4rem 1.1rem;background:linear-gradient(110deg,color-mix(in srgb,var(--map-blue) 7%,var(--nb-background)),color-mix(in srgb,var(--map-violet) 5%,var(--nb-background)));}
+  .map-eyebrow{display:block;font-size:.68rem;font-weight:650;letter-spacing:.12em;text-transform:uppercase;color:var(--nb-muted-foreground);margin-bottom:.5rem;}
+  .map-title{display:block;font-size:1.2rem;line-height:1.35;letter-spacing:-.02em;}
+  header p{margin:.5rem 0 0;color:var(--nb-muted-foreground);font-size:.85rem;}
+  .map-cards{list-style:none!important;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.9rem;padding:1.1rem!important;margin:0!important;}
+  .map-cards li{margin:0;border:1px solid var(--nb-border);border-top:3px solid var(--map-tone);border-radius:.65rem;padding:1rem;min-width:0;background:color-mix(in srgb,var(--map-tone) 3%,var(--nb-background));}
+  .map-cards li:last-child:nth-child(odd){grid-column:1 / -1;}
+  .card-top{display:flex;align-items:center;gap:.65rem;}
+  .card-top strong{font-size:1rem;line-height:1.35;}
+  .map-mark{display:block;width:2rem;height:2rem;flex-shrink:0;color:var(--map-tone);}
+  .map-mark svg{display:block;width:100%;height:100%;}
+  .card-role{font-size:.88rem;margin:.65rem 0!important;}
+  .card-examples,.card-question{font-size:.8rem;margin:.65rem 0 0!important;line-height:1.55;}
+  .card-examples span,.card-question span{display:block;color:var(--nb-muted-foreground);font-size:.65rem;font-weight:650;letter-spacing:.07em;text-transform:uppercase;margin-bottom:.15rem;}
+  .card-question{padding-top:.65rem;border-top:1px solid var(--nb-border);}
+  .map-footer{padding:.9rem 1.4rem;margin:0!important;border-top:1px solid var(--nb-border);font-size:.82rem;color:var(--nb-muted-foreground);}
+  figcaption{margin:0;padding:1rem 1.4rem;border-top:1px solid var(--nb-border);font-size:.8rem;color:var(--nb-muted-foreground);}
+  @container(max-width:480px){.map-cards{grid-template-columns:1fr;}.map-title{font-size:1.08rem;}}
+  @media(max-width:620px){.map-cards{grid-template-columns:1fr;}header{padding:1.1rem;}figcaption{padding:1rem;}}
+  @media print{.map-cards li{break-inside:avoid;}}
+</style>

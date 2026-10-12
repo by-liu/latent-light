@@ -1,0 +1,286 @@
+---
+title: "Qwen2-VL: adaptive visual budgets and multimodal positions"
+description: "How Qwen2-VL preserves resolution, compresses visual patches and gives a decoder spatial and temporal coordinates."
+lastUpdated: 2026-10-10
+---
+
+import FocusCanvas from '../../../../components/FocusCanvas.astro';
+import SourceFigure from '../../../../components/architectures/SourceFigure.astro';
+import MathExpression from '../../../../components/MathExpression.astro';
+
+
+<ModelResources reportHref="https://arxiv.org/abs/2409.12191v2" modelHref="https://huggingface.co/Qwen/Qwen2-VL-7B-Instruct" modelName="Qwen/Qwen2-VL-7B-Instruct" />
+
+Qwen2-VL makes a useful shift: an image need not become the same number of
+tokens every time. It retains more visual evidence when needed, compresses local
+patches before the language model, and encodes where that evidence sits in an
+image or video.[^report]
+
+Three ideas distinguish it:
+
+- **Adaptive resolution.** The processor preserves aspect ratio within a pixel
+  budget rather than forcing every image into one square crop.
+- **Local compression.** A learned merger turns each group of four visual
+  features into one language model input vector.
+- **Multimodal positions.** Temporal, height and width coordinates let the
+  decoder distinguish text order from spatial and video structure.[^report]
+
+This study selects **Qwen2-VL-7B-Instruct**. Its public weights, processor and
+configuration make these interfaces inspectable. It is an instruct model, not
+the base pretrained model or the larger 72B checkpoint.[^artifact]
+
+## The model in numbers
+
+| Quantity | Scope and meaning |
+| --- | --- |
+| Language model: 7.6B parameters; vision model: 675M | Components reported for the 7B family. The name is not an exact total parameter count. |
+| Pretraining: 1.4T tokens | Combined image and text tokens across the first two stages, not 1.4T text tokens or unique examples. |
+| Image patches: 14 × 14 pixels | The vision encoder receives patches; its merger combines 2 × 2 spatial neighbors. |
+| Default image budget: 4 to 16,384 merged visual tokens | Bounds in the selected processor. Overrides and resizing affect the actual count. |
+| Context: 32,768 positions | Selected language configuration, including text and expanded visual inputs. |
+| Video training budget: at most 16,384 visual tokens | A training policy, not the entire text and video context limit. |
+| Hardware hours and full optimizer recipe: not disclosed | No training or serving measurement was performed for this study. |
+
+Parameter and training counts come from the report. Context and image bounds
+come from the pinned artifact. These are different kinds of evidence and should
+not be treated as one benchmarked operating point.[^report][^artifact]
+
+## From pixels to a shared sequence
+
+The original framework makes the central choice visible: a tall document,
+a narrow image, a photograph and sampled video can occupy very different
+numbers of visual positions in the same language sequence.[^report]
+
+<FocusCanvas size="diagram" label="Original Qwen2-VL framework: native-resolution images and video produce unequal visual token groups interleaved with text in one language decoder.">
+<SourceFigure id="figure-1" src="/figures/model-studies/qwen2-vl/report-architecture.png" alt="Original Qwen2-VL framework: native-resolution images and video produce unequal visual token groups interleaved with text in one language decoder." minWidth={860}>
+<div slot="image">
+
+![Original Qwen2-VL framework: native-resolution images and video produce unequal visual token groups interleaved with text in one language decoder.](/figures/model-studies/qwen2-vl/report-architecture.png)
+
+</div>
+
+**Figure 1.** Qwen2-VL’s dynamic visual interface. Reproduced from Peng Wang et al., report Figure 2.[^figure-source]
+</SourceFigure>
+</FocusCanvas>
+
+Read [Figure 1](#figure-1) from the input examples to the token groups above
+the vision encoder. The counts belong to those illustrated examples, not a
+constant token allowance. [Figure 2](#figure-2) works through the selected
+checkpoint's patch and merger accounting rather than repeating that overview.
+
+<FocusCanvas size="diagram" label="Qwen2-VL patch-grid compression and decoder sequence accounting for a 448 by 672 image.">
+<SourceFigure id="figure-2" src="/figures/model-studies/qwen2-vl/visual-interface.svg" alt="Qwen2-VL patch-grid compression and decoder sequence accounting for a 448 by 672 image." minWidth={680}>
+  <div slot="image">
+
+![Qwen2-VL patch-grid compression and decoder sequence accounting for a 448 by 672 image.](/figures/model-studies/qwen2-vl/visual-interface.svg)
+
+  </div>
+
+**Figure 2.** The patch grid is larger than the language sequence. Original worked diagram based on the selected processor and merger.[^artifact][^processor][^code]
+</SourceFigure>
+</FocusCanvas>
+
+Figure 2 follows a worked still-image input. The 1,536 contextual patch
+features are grouped four at a time before becoming 384 decoder vectors.
+The enlarged 2 × 2 group illustrates feature concatenation, not an average
+of raw pixels. The processor rounds image dimensions to multiples of 28, rescales when its pixel
+bounds require it, and normalizes RGB pixels. The selected implementation rejects
+an aspect ratio above 200. Its temporal convolution has kernel and stride
+2 × 14 × 14. A still image is duplicated to fill that temporal dimension, rather
+than treated as two independent photographs.[^processor][^code]
+
+The vision transformer uses height and width rotary positions, repeated for
+each temporal tube. In the inspected implementation, vision attention is
+**full spatial attention within each tube**, not attention across all tubes
+of a video. The initial two frame convolution mixes each local frame pair;
+the language decoder connects the resulting temporal sequence. Variable
+length packing avoids padding separate images or tubes to one common length,
+but does not make their spatial attention linear in patch count.[^code][^report]
+
+Its features have
+width 1,280. After normalization, the merger concatenates four spatial neighbors
+into 5,120 dimensions, applies an MLP, and returns one vector of width 3,584,
+matching the language model. Image placeholders are expanded to exactly this
+many vectors before generation.[^report][^code]
+
+### A token budget you can calculate
+
+For a processed image of **448 × 672 pixels**, the patch grid is 32 × 48.
+It contains 1,536 visual encoder positions and produces **384 merged visual
+tokens**. The image start and end markers add two more sequence positions.
+Thus this image uses 386 decoder positions before counting any text or chat
+formatting. This is a derivation for one image within the configured pixel
+bounds, not a measured memory result.[^artifact][^processor][^code]
+
+
+<MathExpression display number="1" tex="N_{\mathrm{visual}} = T_g\frac{H_gW_g}{4},\qquad H_g=H/14,\quad W_g=W/14" />
+
+Here, <MathExpression tex="T_g" /> is the temporal patch grid, not the number of input frames. Eight
+sampled frames at 448 × 448 become four temporal tubes. They produce
+<MathExpression tex="4 \times 32 \times 32 / 4 = 1,024" /> merged visual tokens. Actual video cost also
+depends on frame sampling, resizing, markers and text. Training uses two frames
+per second and adjusts frame resolution to fit its video budget; inference
+helpers can choose other sampling policies. If a video has an odd number of
+processed frames, the processor repeats its last frame to complete a two frame
+tube; the temporal grid is not always exactly half the original sample count.[^report][^processor]
+
+## Why three positional coordinates?
+
+Ordinary language tokens have an order. Image tokens also have a row and column;
+video tokens additionally have time. **Multimodal RoPE, or M-RoPE, splits rotary
+channels across temporal, height and width coordinates.** For text, the three
+coordinates are equal, recovering ordinary one dimensional positions. For an
+image, time stays fixed while rows and columns vary. For video, time advances
+across the temporal patch grid. Rotary transforms apply to attention queries
+and keys, not values; the three coordinate channels are not three separate
+attention heads.[^report][^code]
+
+The selected decoder has 28 layers, width 3,584, 28 query heads and four key and
+value heads. This is grouped query attention. Its configured rotary sections
+are 16, 24 and 24, repeated across the two halves of the 128 dimensional head.
+The implementation resumes text numbering after the maximum multimodal
+coordinate and carries an offset into cached decoding.[^artifact][^code]
+
+<FocusCanvas size="diagram" label="Qwen2-VL multimodal rotary coordinates on a small merged grid, with following text and video tube ordering.">
+<SourceFigure id="figure-3" src="/figures/model-studies/qwen2-vl/mrope-coordinates.svg" alt="Six merged image features use temporal, height and width coordinates starting at five. Following text resumes at eight, not at sequence slot eleven. Video time counts temporal tubes, not seconds." minWidth={680}>
+  <div slot="image">
+
+![Six merged image features use temporal, height and width coordinates starting at five. Following text resumes at eight, not at sequence slot eleven. Video time counts temporal tubes, not seconds.](/figures/model-studies/qwen2-vl/mrope-coordinates.svg)
+
+  </div>
+
+**Figure 3.** Geometry is not sequence length. Original coordinate example derived from the inspected position builder.[^code]
+</SourceFigure>
+</FocusCanvas>
+
+Figure 3 assumes the next visual coordinate starts at five and a toy **2 × 3
+merged grid**. Its first row uses (5,5,5), (5,5,6), (5,5,7); the second uses
+(5,6,5), (5,6,6), (5,6,7). After all six features, the image end marker
+resumes at coordinate (8,8,8), followed by text at (9,9,9). These are
+coordinates attached to physical sequence positions, not six new vocabulary
+token IDs or a reduction in retained history.[^code]
+
+For a video with two such tubes, the temporal coordinate changes from five
+to six while the spatial coordinates repeat. There are **12 visual sequence
+positions**, not six. Qwen2-VL's inspected builder uses tube ordinals: a
+temporal index does **not** represent elapsed seconds. Training's two frames
+per second and a different inference sampling rate can map the same ordinal
+gap to different physical durations. Do not import later Qwen families'
+timestamp or temporal scaling contracts into this version.[^report][^code]
+
+An important distinction: **smaller coordinate values do not shorten the
+sequence**. Every visual vector still occupies a decoder position and needs
+attention and cache resources. M-RoPE supplies geometry; merging supplies
+compression. Read [Transformer foundations](/architectures/foundations/) for
+attention, rotary positions and the difference between prefill and decoding.
+
+## What is trained?
+
+| Stage | Reported update scope and purpose |
+| --- | --- |
+| Vision pretraining: 600B mixed tokens | Update the vision transformer while freezing the language model, aligning the visual representation with language supervision. |
+| Multimodal pretraining: another 800B mixed tokens | Update all parameters on images, text, video and interleaved content. |
+| Instruction tuning | Freeze the vision transformer; adapt the language model to instruction and dialogue data in ChatML format. |
+
+The report initializes the language model from Qwen2 and the visual backbone
+from DFN. Its pretraining examples include captions, OCR, document content,
+visual questions, interleaved articles and pure text. The 1.4T count combines the
+first two stages. The report states supervision is on text tokens. Visual inputs
+are evidence for the conditional text prediction, not pixel reconstruction
+targets.[^report]
+
+The stage descriptions identify vision and language update policies. They do
+not fully enumerate the merger's separate optimizer groups in every stage.
+Learning rates, complete data proportions and per checkpoint compute are not
+published as a reproducible full recipe. Do not infer these from later Qwen
+families or from a BF16 checkpoint file.[^report][^artifact]
+
+<details>
+<summary>Infrastructure is part of the training method</summary>
+
+The authors combine data, tensor and pipeline parallelism, ZeRO 1, sequence
+parallelism, checkpointing and FlashAttention. Variable visual lengths require
+shape aware batching. Video decoding is a separate throughput bottleneck, for
+which they use cached data and optimized loading. These techniques support the
+training scale but do not disclose its total hardware cost.[^report]
+
+</details>
+
+## The inference contract
+
+The processor and prompt template are part of the model. They expand image or
+video special tokens according to the processed grids. The model computes visual
+features, scatters them into those positions, constructs multimodal positions,
+and runs causal text generation. Cached decoding then generates new text without
+encoding the same visual input again.[^code][^processor]
+
+Choose the visual budget deliberately. A lower maximum can improve latency and
+context capacity but remove small text or chart details. A higher budget costs
+more, and cannot restore information absent from the source. The card's example
+of 256 to 1,280 visual tokens is an override, not its default 4 to 16,384 range.
+Context capacity is also a bound on the **combined** sequence.[^artifact]
+
+<details>
+<summary>Text formats do not create external tools</summary>
+
+ChatML separates role messages, and supervised assistant text supplies training
+targets. The report represents visual grounding boxes with coordinates in
+**[0,1000)**, using its documented textual markers. These coordinates describe
+a normalized output convention, not a second visual patch grid. Tool calls
+and navigation commands are also generated text; an external orchestrator
+must validate and execute them.[^report]
+
+</details>
+
+Video understanding does not establish reliable physical reasoning or continuous
+tracking. Frame sampling can miss events. Tool or navigation outputs are text
+that an external system must interpret and execute; the model itself does not
+directly control devices.[^report]
+
+## What the evaluations show
+
+| Evidence | Result and boundary |
+| --- | --- |
+| Selected 7B instruct model | Reported scores: MMMU validation 54.1; DocVQA test 94.5; TextVQA validation 84.3. These are different benchmarks, not one pooled accuracy. |
+| Video-MME, selected 7B | 63.3 without subtitles; 69.0 with subtitles. Extra text evidence changes the task. |
+| Resolution study, 7B | Dynamic resolution averages 1,924 visual tokens and gives InfoVQA validation 75.89. Fixed 576 tokens gives 65.72; fixed 3,136 gives 77.27. |
+
+The resolution ablation tests a tradeoff, not a universal victory for fewer
+tokens. Its dynamic setting uses a minimum of 100 visual tokens, unlike the
+selected processor's default minimum of four. OCR performance is not monotonic
+with resolution; the report notes that excessive enlargement of small images
+can hurt.[^report]
+
+The reported Video-MME evaluation permits up to **768 sampled frames**. That
+benchmark policy is not the eight frame token example above, nor a guarantee
+that every video fits the selected checkpoint's 32K combined context.[^report]
+
+The positional ablation uses an internal Qwen2-1.5B plus ViT-L system, **not this
+released 7B model**. M-RoPE improves MathVista from 39.2 to 43.4 and NextQA from
+43.9 to 46.0, but RealWorldQA falls from 54.5 to 53.7. It supports the utility of
+structured positions in that experiment, not a claim that every task improves.
+The 72B long video experiments also do not establish an 80K token operating
+contract for this 32K configured checkpoint.[^report]
+
+## Limitations and reusable lessons
+
+The selected artifact has Apache 2.0 terms, while training sources have their
+own licenses and availability. Public inference artifacts do not amount to
+public access to all training data or the complete optimization recipe.
+Model card and report scores can also differ by revision; the table above uses
+the report's stated results rather than mixing versions.[^artifact][^license]
+
+The practical lesson is to separate three budgets: **source evidence,
+visual encoder work and language context**. Adaptive resolution allocates the
+first two; the merger reduces the third; multimodal positions preserve some
+structure after serialization. None replaces careful task evaluation. Continue
+with [Qwen3-VL](/architectures/models/qwen3-vl/) for deeper visual injection and
+revised video and positional handling.
+
+[^report]: Qwen Team. [Qwen2-VL: Enhancing Vision Language Model's Perception of the World at Any Resolution](https://arxiv.org/html/2409.12191v2), 2024, sections 2 and 3, Tables 1, 2, 4, 7 and 8. Stage scopes, video policy, resolution and positional ablations are report evidence.
+[^artifact]: Qwen Team. [Qwen2-VL-7B-Instruct artifact](https://huggingface.co/Qwen/Qwen2-VL-7B-Instruct/tree/eed13092ef92e448dd6875b2a00151bd3f7db0ac), config.json, preprocessor_config.json and README inspected October 10, 2026. The card's example pixel limits are overrides.
+[^code]: Hugging Face contributors. [Pinned Qwen2-VL implementation](https://github.com/huggingface/transformers/tree/8cb5963cc22174954e7dca2c0a3320b7dc2f4edc/src/transformers/models/qwen2_vl), Transformers 4.57.1. PatchEmbed, PatchMerger, get_rope_index, feature scattering and cached decoding inspected without executing the model.
+[^processor]: Hugging Face contributors. [Pinned image processor](https://github.com/huggingface/transformers/blob/8cb5963cc22174954e7dca2c0a3320b7dc2f4edc/src/transformers/models/qwen2_vl/image_processing_qwen2_vl.py) and [multimodal processor](https://github.com/huggingface/transformers/blob/8cb5963cc22174954e7dca2c0a3320b7dc2f4edc/src/transformers/models/qwen2_vl/processing_qwen2_vl.py), smart_resize, temporal padding, grid construction and placeholder expansion inspected October 10, 2026.
+[^license]: Qwen Team. [Selected checkpoint license](https://huggingface.co/Qwen/Qwen2-VL-7B-Instruct/blob/eed13092ef92e448dd6875b2a00151bd3f7db0ac/LICENSE), Apache 2.0, inspected October 10, 2026. This is not a separate grant for all training data.
+
+[^figure-source]: Peng Wang et al. [Qwen2-VL report](https://arxiv.org/pdf/2409.12191v2#page=4), arXiv v2, Figure 2, p. 4. Artwork retained; surrounding prose and caption omitted. Original copyright retained; [source and reuse record](/figures/model-studies/qwen2-vl/SOURCES.md).

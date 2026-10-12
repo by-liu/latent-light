@@ -1,0 +1,9 @@
+---
+import SourceFigure from '../architectures/SourceFigure.astro';
+interface Props { src:string; alt:string; id:string; minWidth?:number; poster?:boolean; }
+const {src,alt,id,minWidth}=Astro.props;
+---
+<SourceFigure {src} {alt} {id} {minWidth} poster>
+  <div slot="image"><slot name="image" /></div>
+  <slot />
+</SourceFigure>

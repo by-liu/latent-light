@@ -1,0 +1,394 @@
+---
+title: "Qwen3-VL"
+topic_id: "qwen3-vl"
+status: reviewed
+revision: 4
+updated: "2026-10-10"
+evidence_cutoff: "2026-10-10"
+audience: "Readers studying model mechanisms"
+canonical_format: markdown
+---
+
+# Qwen3-VL
+
+## Executive answer
+
+The original framework now establishes variable-length images, timestamped video and DeepStack together. Independent residual-addition and position/time diagrams retain the precise selected-checkpoint contracts.
+
+[Technical report](https://arxiv.org/abs/2511.21631v1) · [Hugging Face: Qwen/Qwen3-VL-8B-Instruct](https://huggingface.co/Qwen/Qwen3-VL-8B-Instruct)
+
+## Visual overview
+
+<!-- visual-id: V005 -->
+![Original Qwen3-VL framework: variable image and video token groups enter a shared language decoder, while intermediate vision features connect to early decoder layers.](../../../../public/figures/model-studies/qwen3-vl/report-architecture.png)
+
+<!-- visual-id: V002 -->
+![Independent DeepStack residual-addition schematic.](visuals/revision-4-figure-2.png)
+
+<!-- visual-id: V004 -->
+![Interleaved rotary frequencies and timestamp text are separate signals](../../../../public/figures/model-studies/qwen3-vl/positions-and-time.svg)
+
+## Key findings
+
+- **Depth as an interface.** Intermediate vision features supplement the main
+  visual input at the first three language layers.
+- **Better positional allocation.** Interleaved M-RoPE distributes spatial and
+  temporal rotary components across frequencies, rather than separate bands.
+- **Explicit video time.** Timestamp text precedes each temporal visual group,
+  giving the model a readable time signal.
+- **A broader training recipe.** Long context pretraining, distillation and
+  task specific rewards accompany the architecture changes.[^report]
+
+## Detailed analysis
+
+Qwen3-VL asks a useful question: can a language model receive richer visual
+evidence without making the input sequence longer? **DeepStack answers by
+adding visual features at multiple decoder depths**, rather than serializing
+each feature level as more tokens.[^report][^code]
+
+Its distinguishing changes are:
+
+- **Depth as an interface.** Intermediate vision features supplement the main
+  visual input at the first three language layers.
+- **Better positional allocation.** Interleaved M-RoPE distributes spatial and
+  temporal rotary components across frequencies, rather than separate bands.
+- **Explicit video time.** Timestamp text precedes each temporal visual group,
+  giving the model a readable time signal.
+- **A broader training recipe.** Long context pretraining, distillation and
+  task specific rewards accompany the architecture changes.[^report]
+
+The public dense and expert families make this an instructive system to study,
+not just a leaderboard entry. This page selects the dense
+**Qwen3-VL-8B-Instruct** checkpoint and pinned Transformers implementation.
+It does not substitute the Thinking variant, a larger MoE model, or an
+unverified runtime trace. Sources checked October 10, 2026.[^artifact][^code]
+
+### The model in numbers
+
+| Quantity | Scope and meaning |
+| --- | --- |
+| Dense 8B family | Qwen3 language backbone plus a visual encoder and mergers. The family label is not an independently measured total parameter count. |
+| Vision initialization: SigLIP2-SO-400M | Reported backbone for this family size; adapted for dynamic resolution. The smaller 2B and 4B variants use another vision backbone. |
+| Decoder: 36 layers, width 4,096 | Selected artifact, with 32 query heads and eight key and value heads. |
+| Context: 262,144 positions | Selected configuration; shared by text, visual tokens, timestamps and formatting. |
+| Patches: 16 × 16 pixels; 2 × 2 spatial merge | Distinct from Qwen2-VL's 14 pixel patches. Temporal patches still combine two frames. |
+| Default image budget: 64 to 16,384 merged visual tokens | Derived from this artifact's pixel bounds and 32 pixel merged stride. |
+| Pretraining stages: 67B, about 1T, about 1T, 100B tokens | Stage budgets, not unique examples or a disclosed per checkpoint compute measurement. |
+| Standard SFT data: about 1.2M samples | One third text only, two thirds image or video paired with text. This is not the count of all pretraining or RL data. |
+| Training FLOPs and checkpoint accelerator hours | Not disclosed in the inspected report. |
+
+Report level scale and checkpoint configuration are kept separate here.
+Neither the report's infrastructure reaching 10,000 GPUs nor a model card
+context extension claim supplies an 8B hardware cost or deployment guarantee.
+[^report][^artifact][^processor]
+
+### One input path, additional depth connections
+
+The main path dynamically resizes and normalizes images, groups pixels into
+patches, encodes them, and compresses each 2 × 2 feature group. The resulting
+vectors replace visual placeholders beside text. DeepStack has a second path:
+three intermediate encoder levels have dedicated mergers, whose outputs are
+added to the corresponding visual positions after the first three decoder
+layers.[^report][^code]
+
+
+
+
+
+<!-- visual-id: V005 -->
+![Original Qwen3-VL framework: variable image and video token groups enter a shared language decoder, while intermediate vision features connect to early decoder layers.](../../../../public/figures/model-studies/qwen3-vl/report-architecture.png)
+
+
+
+**Figure 1.** Qwen3-VL’s multimodal framework. Reproduced from Qwen Team, report Figure 1.[^figure-source]
+
+
+
+The vision encoder also adapts its geometry: **2D rotary positions and
+interpolated learned absolute positions** let a pretrained SigLIP2 encoder
+handle variable patch grids. These vision-side positions are distinct from
+the language decoder's interleaved M-RoPE. In the pinned implementation,
+vision attention is full spatial attention within each temporal tube, not
+causal attention over the complete video; the language decoder integrates
+the ordered groups. Dynamic resolution is not a fixed 448-pixel resize, and
+it does not mean an unlimited pixel budget.[^report][^code][^processor]
+
+
+
+
+<!-- visual-id: V002 -->
+![Independent DeepStack residual-addition schematic.](visuals/revision-4-figure-2.png)
+
+
+**Figure 2.** Visual input plus early depth connections. Original schematic,
+with residual additions checked in the pinned implementation.[^report][^code]
+
+
+
+
+Read [Figure 1](#figure-1) from the inputs upward: different images produce
+different sequence lengths, video groups carry timestamp text, and DeepStack
+has a separate route into decoder depth. Its token counts illustrate the
+report's example inputs, not a fixed budget for the selected 8B checkpoint.
+[Figure 2](#figure-2) isolates the residual addition contract that the family
+overview leaves implicit.[^report][^code]
+
+Figure 2's side path is **addition, not concatenation**. The selected visual
+encoder has 27 blocks at width 1,152. Zero based block indices 8, 16 and 24
+produce the three supplementary features. Their dedicated mergers reduce
+spatial length fourfold and project to width 4,096. The implementation adds
+these vectors only where the visual position mask is true. Text positions do
+not receive direct additions, and the stream continues through subsequent
+decoder blocks.[^artifact][^code]
+
+The final feature merger normalizes before grouping, while the dedicated
+DeepStack mergers use normalization after grouping. All use an MLP with a
+GELU activation. This detail matters when reproducing the interface: identical
+shapes do not imply identical learned transformations.[^code]
+
+#### A concrete visual token calculation
+
+A **512 × 768 pixel** image is already divisible by the processor's 32 pixel
+factor and falls within the selected pixel bounds. It yields a 32 × 48 patch
+grid, or 1,536 visual encoder features, and **384 main visual tokens** after
+merging. Image boundary markers add two more positions, before text and chat
+formatting. A still image is repeated to fill the two frame temporal kernel.
+[^artifact][^processor]
+
+
+
+
+$$
+N_{\mathrm{main}}=T_g\frac{H_gW_g}{4},\qquad H_g=H/16,\quad W_g=W/16
+\tag{1}
+$$
+
+
+
+For this image, the side path supplies three additional arrays, each with
+384 feature vectors. **It does not create 1,152 extra context positions.** It
+does add projections, feature storage and residual operations. A shorter input
+than feature concatenation is not a claim of zero overhead.[^code]
+
+For a video with four sampled frames at 512 × 512 pixels, two temporal tubes
+produce 512 merged visual tokens. The processor also inserts two timestamp
+strings and two pairs of boundary markers. Their text token count depends on
+the tokenizer and timestamps, so 512 is not the whole sequence length.
+This is an architecture derivation, not a processor execution or benchmark.
+[^processor]
+
+### Positions and timestamps are different signals
+
+Qwen2-VL groups temporal, height and width rotary channels into separate
+frequency bands. Qwen3-VL interleaves these components, so the axes are less
+segregated by rotary frequency. The selected configuration uses sections
+24, 20 and 20 within each half head, with an interleaving flag and a rotary
+base of 5,000,000.[^report][^artifact][^code]
+
+Video time now appears as ordinary text, such as a formatted seconds string,
+before each temporal group. In the inspected code, the video grid is split into
+those groups; the group's local temporal coordinate is zero, while its spatial
+coordinates and sequence offset still matter. **Timestamps carry elapsed time;
+rotary positions still locate features in the mixed sequence.** These are not
+interchangeable signals.[^report][^code][^processor]
+
+
+
+
+
+<!-- visual-id: V004 -->
+![Interleaved rotary frequencies and timestamp text are separate signals](../../../../public/figures/model-studies/qwen3-vl/positions-and-time.svg)
+
+
+**Figure 3.** Position channels and timestamp text solve different problems. Original schematic; the 24/20/20 allocation is checkpoint specific.[^report][^artifact][^code]
+
+
+
+The code uses height frequencies at slots 1, 4, …, 58, width at 2, 5, …, 59,
+and temporal frequencies elsewhere. Thus the first 60 slots follow a T/H/W
+pattern and the last four are temporal. “Balanced” describes spreading axes
+across the spectrum, **not assigning exactly one third of channels to each**.
+For ordinary text, all three coordinate streams are equal, so the axis choice
+does not introduce three different text positions.[^code]
+
+Correct metadata matters. The pinned processor calculates timestamps from
+sampled frame indices and source frame rate; if frame rate is missing, it
+warns and defaults to 24. Pre sampled frames without accurate metadata can
+therefore acquire misleading timestamps. Its video processor defaults to
+two samples per second, with a frame count bound of 4 to 768, subject to
+available frames. Video resizing uses a total spatiotemporal pixel budget,
+not an independent maximum for every frame.[^processor]
+
+### Training: architecture and curriculum together
+
+| Pretraining stage | Updated components and sequence budget |
+| --- | --- |
+| S0: alignment, 67B tokens | Merger layers only; vision and language backbones frozen; 8,192 positions. |
+| S1: multimodal pretraining, about 1T | All components; 8,192 positions; visual and text only data. |
+| S2: long context, about 1T | All components; 32,768 positions; more video, agent and long text content. |
+| S3: long context adaptation, 100B | All components; 262,144 positions; long videos and documents emphasized. |
+
+The report describes a move from per sample loss to a square root normalized
+per token loss to balance text and multimodal contributions. It does not give
+a complete operational formula or all optimizer settings in the inspected
+passage, so this page does not invent a weighting implementation.[^report]
+
+Data engineering is equally important. The authors recaption web images,
+augment sparse visual clusters, combine synthetic and pseudo labeled document
+parsing, and synthesize grounded STEM examples. Long document data preserve
+page order and include questions requiring multiple pages and layout elements.
+These procedures shape what the model can learn; architectural changes alone
+do not explain the final model's gains.[^report]
+
+<details>
+<summary>Document and agent data: the output contract matters</summary>
+
+Document supervision is not generic captioning. A layout model establishes
+regions and reading order; Qwen2.5-VL-72B recognizes those regions; the outputs
+are assembled into position-aware parsing targets. Synthetic HTML provides
+precise labels, while real-document pseudo-labels are quality filtered.
+QwenVL-HTML localizes individual elements; QwenVL-Markdown localizes images
+and tables and represents tables in LaTeX. Long-document training combines
+page images and parsing targets in order, plus questions that require evidence
+across pages and layout types.[^report-data]
+
+Grounding uses coordinates normalized to **0–1000**, rather than raw source
+pixels. Recovering pixel coordinates requires the relevant image dimensions;
+that convention must not be confused with rotary position IDs. The 3D corpus
+uses a unified virtual-camera frame and structured 9-DoF boxes, not direct
+physical measurements produced by the model.[^report-data]
+
+General function-call trajectories can contain **synthesized tool responses**:
+the report explicitly says the functions need not be executable. GUI trajectories
+and online-search data are separate sources. Valid-looking synthetic calls are
+therefore not proof of success in a real tool environment.[^report-data]
+
+</details>
+
+#### Post-training and its feedback
+
+Standard Instruct SFT and Thinking cold start are different branches. The
+Thinking data use an approximately 1:1 vision-language to text-only ratio;
+the standard SFT set uses a different 2:1 ratio. The reported three-stage
+post-training recipe is a family-level account, not evidence that every
+checkpoint used an identical teacher or rollout budget.[^report-post]
+
+The family separates Instruct and Thinking outputs through their SFT data.
+Standard SFT starts with one epoch at 32K context, followed by a second epoch
+mixing 256K and 32K inputs. Thinking cold start data include long reasoning
+traces; some visual mathematics examples are removed if a text only model can
+solve them without seeing the image.[^report]
+
+Distillation then uses text only data to adapt the language backbone. Its
+off policy phase learns teacher generated answers; its on policy phase learns
+on student generated sequences with KL divergence between teacher and student
+token distributions, computed from their logits.
+This is not simply another name for SFT on fixed teacher answers.[^report]
+
+The reported reasoning RL uses **SAPO**, task specific rule or executable
+verification, approximately 30K queries, and 16 candidate responses for
+difficulty filtering. Filtering first removes queries with no successful
+flagship-model response, then excludes queries above a 90% pass rate for
+the model being trained. These are different difficulty checks. The report
+uses task format prompts rather than a separate format reward for this
+reasoning phase, plus a response-language penalty.[^report-post] General RL combines rule based and model based rewards,
+including Qwen2.5-VL-72B-Instruct or Qwen3 judges. The family also describes
+tool integrated training with answer, intermediate reasoning and tool usage
+rewards. Exact data and optimization details for every selected checkpoint
+remain incomplete; the family recipe is not a fully reproducible 8B training
+run.[^report]
+
+<details>
+<summary>Why rewards need behavioral checks</summary>
+
+The authors observed agents reducing tool use to one call to exploit answer
+and reasoning rewards. They added a reward relative to an offline estimated
+appropriate tool count. This is a concrete example of a reward proxy shaping
+behavior, not evidence that the resulting policy always uses tools safely or
+optimally. Likewise, judge feedback can assess open responses but inherit
+the judge's biases and failure modes.[^report]
+
+</details>
+
+### Inference and evaluation boundaries
+
+The selected Instruct artifact generates text, not a Thinking artifact whose
+reasoning mode can simply be switched on. Use its chat template, visual
+processor and timestamps together. Cache backed generation follows the mixed
+prefill; the supplementary visual features are injected at visual positions,
+not newly recomputed for each ordinary generated text token.[^artifact][^code]
+
+| Evidence | Selected result and condition |
+| --- | --- |
+| 8B Instruct, report Table 4 | MMMU 69.6; DocVQA test 96.1; Video-MME without subtitles 71.4. Different benchmark metrics and inputs, not a pooled accuracy. |
+| 8B Thinking, same table | MMMU 74.1, but DocVQA 95.3. Reasoning output does not improve every task and is a separate checkpoint. |
+| DeepStack ablation, Table 12 | Average 74.7 to 76.0; InfoVQA 71.9 to 74.2; DocVQA 89.5 to 91.1; TextVQA 80.6 to 80.5. |
+
+The DeepStack ablation uses an **internal 15B-A2B model pretrained on 200B
+tokens, with no post-training**, evaluated on validation sets. It isolates a
+design in that experiment; it does not measure the released 8B model's gain.
+[^report]
+
+The vision-encoder comparison is also separate: report Table 11 pairs each
+encoder with the **same 1.7B language model and 1.5T training tokens**. For
+example, RLWDQA rises from 58.7 to 66.1, while some zero-shot image benchmarks
+fall. Neither this experiment nor the DeepStack ablation establishes the
+isolated contribution of interleaved positions or timestamps in the released
+8B checkpoint.[^report-ablation]
+
+Long video needle retrieval uses **235B-A22B-Instruct**, one frame per second
+and dynamically controlled frame resolution. Its reported 1M context result
+uses YaRN extension beyond native training context. A salient inserted frame
+retrieval task is not proof of complete understanding of two hours of video,
+and cannot be transferred to this 8B checkpoint.[^report]
+
+### Limitations and reusable lessons
+
+The checkpoint card and report identify Apache 2.0 release terms, supported by
+the official repository license. That grant does not provide the unreleased
+data mixtures, all filtering models, or a license for every source document.
+No weights or benchmarks were executed in this study.[^artifact][^license]
+
+The core lesson is **keep token length, representation depth and feedback
+quality separate**. DeepStack enriches existing visual positions. Interleaved
+positions and timestamps improve the representation of geometry and time.
+Training data and rewards teach how to use those signals. Larger context still
+costs memory and prefill work, and reliable applications still need evidence
+checks and task specific evaluation.
+
+Continue with [InternVL 3](/architectures/models/internvl-3/) for a contrasting
+tiling, mixed preference and multimodal position recipe, or revisit
+[Transformer foundations](/architectures/foundations/) for residual connections,
+rotary positions and grouped query attention.
+
+[^report]: Qwen Team. [Qwen3-VL Technical Report](https://arxiv.org/html/2511.21631v1), 2025, sections 2 to 5. Architecture and training inspected in HTML; evaluation Tables 4 and 12 and appendix conditions checked in the [versioned PDF](https://arxiv.org/pdf/2511.21631v1).
+[^artifact]: Qwen Team. [Qwen3-VL-8B-Instruct artifact](https://huggingface.co/Qwen/Qwen3-VL-8B-Instruct/tree/0c351dd01ed87e9c1b53cbc748cba10e6187ff3b), configuration, processor settings and card inspected October 10, 2026. Selected model has 16 pixel patches, 27 vision blocks and DeepStack indices 8, 16, 24.
+[^code]: Hugging Face contributors. [Pinned Qwen3-VL model implementation](https://github.com/huggingface/transformers/blob/8cb5963cc22174954e7dca2c0a3320b7dc2f4edc/src/transformers/models/qwen3_vl/modeling_qwen3_vl.py), Transformers 4.57.1. Vision mergers, feature extraction, residual injection, interleaved RoPE, placeholder checks, coordinates and cache path inspected; no model execution.
+[^processor]: Hugging Face contributors. [Qwen3-VL multimodal processor](https://github.com/huggingface/transformers/blob/8cb5963cc22174954e7dca2c0a3320b7dc2f4edc/src/transformers/models/qwen3_vl/processing_qwen3_vl.py), [video processor](https://github.com/huggingface/transformers/blob/8cb5963cc22174954e7dca2c0a3320b7dc2f4edc/src/transformers/models/qwen3_vl/video_processing_qwen3_vl.py) and [image processor](https://github.com/huggingface/transformers/blob/8cb5963cc22174954e7dca2c0a3320b7dc2f4edc/src/transformers/models/qwen2_vl/image_processing_qwen2_vl_fast.py), pinned to 8cb5963. Artifact pixel bounds override class defaults.
+[^license]: Qwen Team. [Official Apache 2.0 license](https://github.com/QwenLM/Qwen3-VL/blob/96588727e44c78b25ba03ea03b8e12f7e64fd0da/LICENSE), inspected October 10, 2026; selected card and report independently identify the checkpoint release terms.
+
+[^figure-source]: Qwen Team. [Qwen3-VL Technical Report](https://arxiv.org/pdf/2511.21631v1#page=3), arXiv v1, Figure 1, p. 3. Artwork retained; surrounding prose and caption omitted. Original copyright retained; [source and reuse record](/figures/model-studies/qwen3-vl/SOURCES.md).
+
+[^report-data]: Qwen Team. [Qwen3-VL data construction](https://arxiv.org/html/2511.21631v1#S3.SS2), report sections 3.2.3–3.2.9, pp. 6–9. Document formats, normalized coordinates, 3D labels and synthesized function responses checked.
+[^report-post]: Qwen Team. [Qwen3-VL post-training](https://arxiv.org/html/2511.21631v1#S4), sections 4.2–4.5, pp. 10–13. Distinct SFT mixtures, difficulty filters, reward construction and tool training checked.
+[^report-ablation]: Qwen Team. [Qwen3-VL ablations](https://arxiv.org/html/2511.21631v1#S5.SS12), Tables 11–12, p. 24. Encoder comparison and internal 15B-A2B DeepStack experiment are not released-8B causal attribution.
+
+## Counterevidence and uncertainty
+
+Family recipes, selected artifacts, controlled ablations and optimized serving results remain distinct. Undisclosed training details and unexecuted runtime assumptions remain explicit in the analysis. Figure reuse is supported by a specific editorial assessment, not a newly verified artwork license or universal legal conclusion.
+
+## Implications
+
+Original report figures preserve the authors' structure; focused independent diagrams add exact contracts and calculations rather than redraw the same overview.
+
+## Open questions and future research
+
+Undisclosed mixtures and compute, runtime/application validation and future reuse or distribution changes require separate work. No model benchmark was replicated.
+
+## Sources
+
+Complete claim-local references are retained above. Exact source editions, crop geometry, checksums and exception assessments are in state/sources.jsonl and the per-model public SOURCES.md.
+
+## What changed in this revision
+
+1 original figure excerpts added or substituted. Prior figure choices are preserved in coverage-audit-revision-3.md and state/presentation-qa-revision-3.json. Revised guidance recognizes licenses, permission or assessed applicable exceptions without relabeling source artwork MIT. Full validation, fresh responsive/focus browser checks, manual figure review and complete exports passed.

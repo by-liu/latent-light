@@ -1,0 +1,239 @@
+{
+  "revision": 3,
+  "checked": "2026-10-10T17:36:51.557Z",
+  "site_page_sha256": "439a26ebfa18a4610e2cd545993d211946dfa7bdb3ace5be3ed1683149a3b7f8",
+  "source_resources": {
+    "report": "https://arxiv.org/abs/2312.00752v2",
+    "hugging_face": "https://huggingface.co/state-spaces/mamba-2.8b",
+    "checkpoint": "state-spaces/mamba-2.8b"
+  },
+  "prior_review_record": null,
+  "collection_checks": {
+    "site_validation": "106 tests, zero Astro diagnostics, static build and all 43 docs lint passed.",
+    "browser_views": 81,
+    "renewed_views_after_final_locator_corrections": 6,
+    "numbered_model_figures": 66,
+    "source_figure_assets": 42,
+    "source_figure_placements": 43,
+    "model_benchmarks": "Not executed."
+  },
+  "viewports": [
+    {
+      "slug": "mamba",
+      "width": 1440,
+      "mode": "light",
+      "title": "Mamba",
+      "titleCount": 1,
+      "overflow": false,
+      "figures": [
+        {
+          "id": "figure-1",
+          "caption": "Figure 1. Content changes what should be remembered. Reproduced from Gu and Dao, Figure 2; figure crop, CC BY 4.0.1"
+        },
+        {
+          "id": "figure-2",
+          "caption": "Figure 2. Mamba combines sequence mixing with a parallel gate. Reproduced from Gu and Dao, Figure 3; figure crop, CC BY 4.0.1"
+        },
+        {
+          "id": "figure-3",
+          "caption": "Figure 3. The input controls writing, updating and reading state. Reproduced from Gu and Dao, Figure 1; figure crop, CC BY 4.0.1"
+        }
+      ],
+      "resources": [
+        {
+          "kind": "report",
+          "href": "https://arxiv.org/abs/2312.00752v2",
+          "label": "Technical reportRead the original research"
+        },
+        {
+          "kind": "model",
+          "href": "https://huggingface.co/state-spaces/mamba-2.8b",
+          "label": "Hugging Facestate-spaces/mamba-2.8b"
+        }
+      ],
+      "visibleHashes": [],
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "missingImages": [],
+      "activeNav": [
+        {
+          "label": "Mamba",
+          "visible": true
+        }
+      ],
+      "panFrames": [
+        {
+          "tabindex": 0,
+          "scrolls": false,
+          "frame": 648,
+          "image": 648
+        },
+        {
+          "tabindex": 0,
+          "scrolls": false,
+          "frame": 648,
+          "image": 648
+        },
+        {
+          "tabindex": 0,
+          "scrolls": false,
+          "frame": 648,
+          "image": 648
+        }
+      ]
+    },
+    {
+      "slug": "mamba",
+      "width": 390,
+      "mode": "light",
+      "title": "Mamba",
+      "titleCount": 1,
+      "overflow": false,
+      "figures": [
+        {
+          "id": "figure-1",
+          "caption": "Figure 1. Content changes what should be remembered. Reproduced from Gu and Dao, Figure 2; figure crop, CC BY 4.0.1"
+        },
+        {
+          "id": "figure-2",
+          "caption": "Figure 2. Mamba combines sequence mixing with a parallel gate. Reproduced from Gu and Dao, Figure 3; figure crop, CC BY 4.0.1"
+        },
+        {
+          "id": "figure-3",
+          "caption": "Figure 3. The input controls writing, updating and reading state. Reproduced from Gu and Dao, Figure 1; figure crop, CC BY 4.0.1"
+        }
+      ],
+      "resources": [
+        {
+          "kind": "report",
+          "href": "https://arxiv.org/abs/2312.00752v2",
+          "label": "Technical reportRead the original research"
+        },
+        {
+          "kind": "model",
+          "href": "https://huggingface.co/state-spaces/mamba-2.8b",
+          "label": "Hugging Facestate-spaces/mamba-2.8b"
+        }
+      ],
+      "visibleHashes": [],
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "missingImages": [],
+      "activeNav": [
+        {
+          "label": "Mamba",
+          "visible": false
+        }
+      ],
+      "panFrames": [
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 358,
+          "image": 720
+        },
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 358,
+          "image": 720
+        },
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 358,
+          "image": 720
+        }
+      ]
+    },
+    {
+      "slug": "mamba",
+      "width": 320,
+      "mode": "dark",
+      "title": "Mamba",
+      "titleCount": 1,
+      "overflow": false,
+      "figures": [
+        {
+          "id": "figure-1",
+          "caption": "Figure 1. Content changes what should be remembered. Reproduced from Gu and Dao, Figure 2; figure crop, CC BY 4.0.1"
+        },
+        {
+          "id": "figure-2",
+          "caption": "Figure 2. Mamba combines sequence mixing with a parallel gate. Reproduced from Gu and Dao, Figure 3; figure crop, CC BY 4.0.1"
+        },
+        {
+          "id": "figure-3",
+          "caption": "Figure 3. The input controls writing, updating and reading state. Reproduced from Gu and Dao, Figure 1; figure crop, CC BY 4.0.1"
+        }
+      ],
+      "resources": [
+        {
+          "kind": "report",
+          "href": "https://arxiv.org/abs/2312.00752v2",
+          "label": "Technical reportRead the original research"
+        },
+        {
+          "kind": "model",
+          "href": "https://huggingface.co/state-spaces/mamba-2.8b",
+          "label": "Hugging Facestate-spaces/mamba-2.8b"
+        }
+      ],
+      "visibleHashes": [],
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "missingImages": [],
+      "activeNav": [
+        {
+          "label": "Mamba",
+          "visible": false
+        }
+      ],
+      "panFrames": [
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 288,
+          "image": 720
+        },
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 288,
+          "image": 720
+        },
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 288,
+          "image": 720
+        }
+      ]
+    }
+  ],
+  "manual_review": {
+    "complete": true,
+    "reviewedFigures": 66,
+    "contactSheets": 6,
+    "newDenseVisuals": true,
+    "fullSizeNativeReview": [
+      "qwen3-vl figure 1: full visual pipeline, side path no longer obscured",
+      "qwen3-vl figure 3: schematic frequency interleaving and timestamp distinction",
+      "llama-3 figure 2: block-diagonal causal packed-document mask",
+      "deepseek-v3 figure 2: routing selection and unmodified mixture weights",
+      "deepseek-r1 figure 2: old, current and reference policies",
+      "qwen3 figure 2: student-generated trajectory and teacher scoring",
+      "kimi-linear figure 3: causal intra-chunk computation and recurrent boundary",
+      "llava figure 2: separate HD extension and 1312-position arithmetic",
+      "qwen2-vl figure 2: visual coordinate example and ordinal tube indices"
+    ],
+    "narrowThemeReview": [
+      "qwen3-vl figure 1 at 390px light",
+      "qwen3-vl figure 3 at 320px dark",
+      "deepseek-v3 figure 2 at 320px dark",
+      "llama-3 figure 2 at 390px light"
+    ],
+    "sourceArtReview": "All current source crops inspected in rendered contact sheets; exact full PDF/page and crop comparisons performed by owning agents, with root direct review for V4 cache layout and V4.1 hierarchical indexer. Artwork labels/axes retained; no AI repainting.",
+    "boundary": "Visual and source verification only. Model checkpoints, benchmarks and training were not executed."
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "schema_version": 2,
+  "topic_id": "qwen2-5-technical-deep-dive",
+  "status": "complete",
+  "coverage": {
+    "eligibility": "Matching first-party report and public checkpoint inspected.",
+    "mechanisms": "A dense baseline whose improvements combine data curation, SFT, fixed-pair DPO and sampled online GRPO.",
+    "artifacts": "Pinned configuration/card and targeted implementation read; no model/weights run.",
+    "adversarial_review": "Complete compute and recipe not disclosed. Figure 1 is a 72B historical illustration, not a 7B controlled scaling experiment. 32K config versus card 128K requires YaRN/runtime configuration.",
+    "presentation": "122 site tests pass, zero Astro diagnostics, 59-page static build and 59-doc lint clean. Fresh browser regression checks cover all 41 model pages plus the catalog and Foundations at 1440 px light, 390 px light and 320 px dark (129 views), reduced motion, desktop focus, active family navigation, figure order, loaded images and local anchors; narrow figures remain keyboard-pannable and link to full-size originals. All 41 Markdown/MDX exports and both agent manifests checked; representative search queries resolve. All 35 new desktop figure renders received manual contact-sheet review; dense focus/mobile views and resource-card/catalog layout received additional manual inspection. Existing bundler directive and philosophy-redirect indexing warnings remain. No model execution or benchmark reproduction.",
+    "licensing": "Nonexclusive arXiv rights metadata; per-figure Canadian fair-dealing case assessment in public asset notice. No MIT/report-artwork grant claimed.",
+    "integrated_browser_qa": "122 site tests pass, zero Astro diagnostics, 59-page static build and 59-doc lint clean. Fresh browser regression checks cover all 41 model pages plus the catalog and Foundations at 1440 px light, 390 px light and 320 px dark (129 views), reduced motion, desktop focus, active family navigation, figure order, loaded images and local anchors; narrow figures remain keyboard-pannable and link to full-size originals. All 41 Markdown/MDX exports and both agent manifests checked; representative search queries resolve. All 35 new desktop figure renders received manual contact-sheet review; dense focus/mobile views and resource-card/catalog layout received additional manual inspection. Existing bundler directive and philosophy-redirect indexing warnings remain. No model execution or benchmark reproduction.",
+    "final_report_review": "Source-scoped report and public MDX reviewed; no placeholder conclusions, undisclosed recipe invention or benchmark reproduction claim."
+  },
+  "open_questions": [
+    "Full undisclosed training recipe and independent model reproduction remain outside this source-based study."
+  ],
+  "recommended_next_direction": "Refresh on substantive report/artifact evidence; runtime and benchmark reproduction remain separate future work.",
+  "last_seen": "2026-10-10T18:52:33.833Z",
+  "quality_gate": {
+    "evidence_verified": true,
+    "contradictions_reviewed": true,
+    "report_reviewed": true,
+    "visuals_reviewed": true
+  },
+  "artifact_record": {
+    "huggingface": "a09a35458c702b33eeacc393d103063234e8bc28",
+    "report_url": "https://arxiv.org/pdf/2412.15115v2",
+    "pdf_sha256": "73b3292bead3ac8896679d3ac8be87439756faf356566cbda3ccc8a3dc7d79d3",
+    "archive": "/tmp/qwen-expansion/qwen2-5.pdf (unchanged, outside public repository)",
+    "runtime": "Not executed",
+    "figures": [
+      {
+        "original_figure": 1,
+        "page": 1,
+        "asset": "report-data-scale.png"
+      }
+    ]
+  }
+}

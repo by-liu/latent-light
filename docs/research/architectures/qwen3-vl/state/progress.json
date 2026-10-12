@@ -1,0 +1,28 @@
+{
+  "schema_version": 2,
+  "topic_id": "qwen3-vl",
+  "status": "complete",
+  "coverage": {
+    "identity": "reviewed",
+    "architecture": "reviewed",
+    "training": "reviewed with disclosed limits",
+    "inference": "source-only review",
+    "evaluation": "author results with conditions",
+    "licensing": "Original figure copyright retained. Selected excerpts have documented case-specific exception assessments, distinct from code/weight licenses; no new artwork grant claimed.",
+    "presentation": "Revision 4 desktop/mobile/theme/focus and export checks passed. All 18 revised-page figures and eight source crops manually reviewed; no model execution.",
+    "coverage_audit": "Original-figure selection revisited under updated guidance; selected source artwork added without removing distinct worked examples."
+  },
+  "open_questions": [
+    "Exact lossreweightingoperationalformula andcompleteoptimizer notdisclosed.",
+    "No8Bservingbenchmarkorloadedparametercountperformed.",
+    "Publicrecipecontainsunreleaseddataandteachercomponents."
+  ],
+  "recommended_next_direction": null,
+  "last_seen": "2026-10-10T18:07:46.764Z",
+  "quality_gate": {
+    "evidence_verified": true,
+    "contradictions_reviewed": true,
+    "report_reviewed": true,
+    "visuals_reviewed": true
+  }
+}

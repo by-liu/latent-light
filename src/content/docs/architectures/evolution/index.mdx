@@ -1,51 +1,90 @@
 ---
 title: Architectural Evolution
-description: Follow the design problems behind changes in language and vision language models.
-lastUpdated: 2026-10-05
+description: Follow the information routes, budgets and evidence behind architectural changes.
+lastUpdated: 2026-10-10
 ---
 
-Architectures evolve because useful capabilities meet practical limits.
-Rather than follow release names, ask what changes in the computation,
-what problem that change addresses, and what it costs.
+import FocusCanvas from '../../../../components/FocusCanvas.astro';
+import ArchitectureAtlas from '../../../../components/architectures/ArchitectureAtlas.astro';
 
-## The design map
+Architectural evolution is not a ladder of increasingly superior models.
+It is a set of choices about what information to preserve, where to move it,
+and how much computation to spend. A useful comparison names the operation
+that changes and the budget it affects.
 
-| Design question | What to trace | Reading page |
+## A map of the design space
+
+<FocusCanvas size="diagram" label="Four directions of information flow in model architectures">
+<ArchitectureAtlas kind="design" id="figure-1">
+
+**Figure 1.** Information across tokens, features, depth and modalities. Original synthesis of the cited mechanisms, not a literal stack shared by every model.[^transformer][^deepseek][^kimi][^qwen]
+
+</ArchitectureAtlas>
+</FocusCanvas>
+
+[Figure 1](#figure-1) provides four views of information flow. Position changes
+the geometry of matching; training teaches the routes what to carry.
+An encoder such as BERT, an encoder and decoder such as T5, and a causal language
+decoder have different visibility and output contracts. Do not silently
+assign the decoder schematic to every model.[^bert][^t5]
+
+The original [GLM](/architectures/models/glm/) adds another instructive contract:
+observed context is bidirectional, while missing spans are generated
+autoregressively. Its mask, target order and positional representation must
+be read together. A family name is not proof that later checkpoints retain
+that exact computation.[^glm-original]
+
+## Follow a mechanism into a model
+
+| Design question | Mechanisms to compare | Instructive studies |
 | --- | --- | --- |
-| What should a token read and retain? | Attention execution, shared KV heads, recurrent state | [Attention and memory](/architectures/evolution/attention-and-memory/) |
-| How does position affect matching? | Absolute position, rotary features, useful context | [Position and long context](/architectures/evolution/position-and-long-context/) |
-| Where should computation go? | Feature gates, FFN width, sparse expert routing | [FFNs and experts](/architectures/evolution/ffns-and-experts/) |
-| How does visual evidence reach language computation? | Queries, projections, merging, feature injection | [Multimodal integration](/architectures/evolution/multimodal-integration/) |
-| What deserves another experiment? | Hypotheses, controlled comparisons, missing evidence | [Emerging directions](/architectures/evolution/emerging-directions/) |
+| [What can be read and retained?](/architectures/evolution/attention-and-memory/) | Exact execution, KV sharing, latent compression, selected reads, recurrence | [Llama 3.1](/architectures/models/llama-3/), [DeepSeek-V2](/architectures/models/deepseek-v2/), [Mamba](/architectures/models/mamba/), [GLM-5](/architectures/models/glm-5/) |
+| [What does position mean?](/architectures/evolution/position-and-long-context/) | RoPE, context extension, local and global reach, visual coordinates | [Mistral 7B](/architectures/models/mistral-7b/), [Qwen2.5 1M](/architectures/models/qwen2-5-1m/), [Qwen2.5-VL](/architectures/models/qwen2-5-vl/) |
+| [Where does computation go?](/architectures/evolution/ffns-and-experts/) | Gated features, selected experts, shared experts, balancing | [Mixtral](/architectures/models/mixtral/), [DeepSeek-V3](/architectures/models/deepseek-v3/), [Qwen3](/architectures/models/qwen3/) |
+| [How does depth carry information?](/architectures/evolution/depth-and-residual-paths/) | Residual bypasses, multiple streams, depth attention, gated reads and writes | [GPT-2](/architectures/models/gpt-2/), [DeepSeek-V4](/architectures/models/deepseek-v4/), [Kimi K3](/architectures/models/kimi-k3/), [Qwen3.8-Next](/architectures/models/qwen3-8-flash-next/) |
+| [How does visual evidence enter?](/architectures/evolution/multimodal-integration/) | Contrastive encoders, queries, projection, feature merging, depth injection | [CLIP](/architectures/models/clip/), [BLIP-2](/architectures/models/blip-2/), [LLaVA](/architectures/models/llava/), [Qwen3-VL](/architectures/models/qwen3-vl/) |
+| [What would make a conclusion convincing?](/architectures/evolution/emerging-directions/) | Matched budgets, ablations, negative results, implementation checks | [Gemma 3](/architectures/models/gemma-3/), [MiniMax M3](/architectures/models/minimax-m3/), [GLM-4.5](/architectures/models/glm-4-5/) |
 
-This is an editorial reading map, not an exhaustive taxonomy or a ladder from
-obsolete to superior designs. Several choices can coexist in one model.
+This is an editorial reading map. The linked studies define exact model
+versions and evidence boundaries; the table is not a claim that every family
+uses the same mechanism.
 
-## Read a change in five steps
+## Separate four kinds of change
 
-1. Name the problem and the baseline.
-2. Locate the operation or stored representation that changes.
+| Layer of explanation | Example | Do not confuse it with |
+| --- | --- | --- |
+| Mathematical computation | GQA shares KV heads; MLA compresses KV content.[^gqa][^deepseek] | A faster kernel for an unchanged operator |
+| Learned behavior | Reasoning RL changes a policy on a pretrained backbone.[^r1] | A new attention block |
+| Execution | FlashAttention tiles exact attention and reduces memory traffic.[^flash] | Removal of dense pairwise arithmetic |
+| Application system | Tools, retrieval and context management around a model | Capabilities supplied by weights alone |
+
+The last row is a system boundary used here, not a specific product claim.
+Model reports can change several rows at once. That makes a stronger final
+model possible, but makes attribution to one ingredient harder.
+
+## Read any change in five steps
+
+1. Name the problem and baseline.
+2. Locate the operation, route, or stored representation that changes.
 3. Identify what stays the same.
-4. Compare quality, computation, memory, and implementation cost.
-5. Check the experiment's conditions before generalizing its result.
+4. Compare quality, active computation, retained state, total weights, and communication.
+5. Inspect the experiment and implementation before generalizing.
 
-For example, FlashAttention changes how attention is executed; GQA changes
-how heads share keys and values; causal linear attention changes the memory
-operator.[^flash][^gqa][^linear] Calling all three “efficient attention” hides the distinction.
-The [attention page](/architectures/evolution/attention-and-memory/) explains
-each mechanism and its source evidence.
+For the original computation and tensor shapes, return to
+[Foundations](/architectures/foundations/). For chronology, use the
+[release map](/architectures/models/#model-evolution). For testable next
+questions, use [Emerging directions](/architectures/evolution/emerging-directions/).
 
-## Connect mechanisms to models
+Selected mechanisms rechecked October 10, 2026. These pages synthesize the
+available studies; they do not establish a universal winning architecture.
 
-Use [GPT-2](/architectures/models/gpt-2/) to trace a language decoder and
-[Qwen3-VL](/architectures/models/qwen3-vl/) to examine a visual interface
-that also reaches inside the decoder. Neither is presented as the endpoint
-of architectural progress.
-
-The collection grows through deliberate research and review. A page's
-`lastUpdated` date records an edit; its evidence note records the sources
-checked. Neither implies automatic monitoring of every new publication.
-
-[^flash]: Tri Dao et al., [FlashAttention](https://arxiv.org/html/2205.14135v2), 2022, section 3: exact attention with tiling and recomputation.
-[^gqa]: Joshua Ainslie et al., [GQA](https://arxiv.org/html/2305.13245v3), 2023, section 2: KV head sharing within query groups.
-[^linear]: Angelos Katharopoulos et al., [Transformers are RNNs](https://arxiv.org/html/2006.16236v3), 2020, section 3: kernel attention and causal recurrent accumulation. Selected sources checked October 5, 2026.
+[^transformer]: Ashish Vaswani et al. [Attention Is All You Need](https://arxiv.org/html/1706.03762v7), 2017, section 3.
+[^deepseek]: DeepSeek-AI. [DeepSeek-V2](https://arxiv.org/html/2405.04434v1), 2024, section 2.
+[^kimi]: Kimi Team. [Kimi K3](https://arxiv.org/html/2607.24653v1), 2026, section 2.
+[^qwen]: Qwen Team. [Qwen3-VL Technical Report](https://arxiv.org/html/2511.21631v1), 2025, section 2.
+[^bert]: Jacob Devlin et al. [BERT](https://arxiv.org/abs/1810.04805v2), 2019 revision, section 3.
+[^t5]: Colin Raffel et al. [Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer](https://arxiv.org/abs/1910.10683v4), 2020, architecture and objectives.
+[^gqa]: Joshua Ainslie et al. [GQA](https://arxiv.org/html/2305.13245v3), 2023, section 2.
+[^r1]: DeepSeek-AI. [DeepSeek-R1](https://arxiv.org/html/2501.12948v1), 2025, section 2.
+[^flash]: Tri Dao et al. [FlashAttention](https://arxiv.org/html/2205.14135v2), 2022, section 3.
+[^glm-original]: Zhengxiao Du et al. [GLM: General Language Model Pretraining with Autoregressive Blank Infilling](https://arxiv.org/html/2103.10360v2), 2022 revision, sections 2.1 and 2.2.

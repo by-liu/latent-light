@@ -1,0 +1,20 @@
+{
+  "canonical": "https://arxiv.org/abs/1810.04805v2",
+  "version": "v2",
+  "accessed": "2026-10-10",
+  "local_study_copy": "/tmp/latent-bert-paper.pdf",
+  "sha256": "5692a5514787a8c6727b4ff3b726a3385798bc68e12138d1d4af83947e2acf6e",
+  "distribution": "Exact study PDFs remain outside public repository; selected figure crops distributed under a verified CC BY 4.0 grant with attribution.",
+  "figure_edition": {
+    "url": "https://aclanthology.org/N19-1423/",
+    "pdf_url": "https://aclanthology.org/N19-1423.pdf",
+    "local_study_copy": "/tmp/latent-bert-acl.pdf",
+    "sha256": "987545ffb087f1ece898142c403a516baeabeb70ce19089397fac6f7db12c3d4",
+    "reuse_grant": {
+      "status": "verified",
+      "value": "CC BY 4.0",
+      "url": "https://creativecommons.org/licenses/by/4.0/"
+    },
+    "grant_evidence": "ACL Anthology footer grants CC BY 4.0 to material published from 2016 onward; this exact paper is published by ACL in 2019."
+  }
+}

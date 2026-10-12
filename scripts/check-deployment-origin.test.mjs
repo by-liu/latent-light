@@ -1,5 +1,7 @@
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { readFileSync, mkdtempSync, writeFileSync, rmSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { test } from 'node:test';
 import { fileURLToPath } from 'node:url';
@@ -76,7 +78,7 @@ test('deployment lifecycle requires the origin check and complete validation', (
   const { scripts } = JSON.parse(readFileSync(packageFile, 'utf8'));
   assert.equal(scripts.predeploy, 'npm run check:deploy-origin && npm run validate');
   assert.equal(scripts.deploy, 'wrangler deploy');
-  assert.equal(scripts.validate, 'npm run test:deployment && npm run test:content && npm run typecheck && npm run lint:docs && npm run build');
+  assert.equal(scripts.validate, 'npm run test:deployment && npm run test:content && npm run typecheck && npm run build && npm run lint:docs');
   assert.equal(scripts.postdeploy, 'npm run verify:deployment');
 });
 
@@ -88,4 +90,21 @@ test('predeploy stops before validation when SITE_URL is missing', () => {
   assert.equal(result.status, 1);
   assert.match(result.stderr, /Deployment blocked:/);
   assert.ok(!/(?:^|\n)> latent-light@[^ \n]+ (?:validate|typecheck|build|deploy)(?:\s|$)/.test(result.stdout));
+});
+
+test('Git excludes local AWS files and directories without ignoring the shared skill', () => {
+  // Inspect only ignore rules in an isolated fixture, never actual credentials.
+  const fixture = mkdtempSync(join(tmpdir(), 'latent-ignore-test-'));
+  try {
+    assert.equal(spawnSync('git', ['init', '--quiet'], {cwd:fixture}).status, 0);
+    writeFileSync(join(fixture, '.gitignore'), readFileSync(new URL('../.gitignore', import.meta.url)));
+    for (const path of ['.aws', '.aws/config', '.aws/credentials']) {
+      const result = spawnSync('git', ['check-ignore', '--no-index', '--', path], {cwd:fixture,encoding:'utf8'});
+      assert.equal(result.status, 0, 'Local AWS path must be ignored: ' + path);
+    }
+    const skill = '.agents/skills/latent-light-deep-research/SKILL.md';
+    assert.equal(spawnSync('git', ['check-ignore', '--no-index', '--', skill], {cwd:fixture}).status, 1);
+  } finally {
+    rmSync(fixture, {recursive:true,force:true});
+  }
 });

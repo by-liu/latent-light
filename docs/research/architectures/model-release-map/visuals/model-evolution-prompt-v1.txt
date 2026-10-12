@@ -1,0 +1,77 @@
+Create a publication-quality editorial infographic for Latent Light, a calm public learning notebook. Subject: selected milestones in the evolution of large language and vision-language models from 2017 through 2026.
+
+This is an original timeline, NOT a reproduction of any existing timeline. Use no company logos, no borrowed artwork, and no imitation corporate badges.
+
+Canvas: high-resolution landscape, approximately 16:10. Design it as a beautifully typeset, precise scientific magazine spread. Warm near-white paper background, dark navy text, generous margins, extremely crisp large sans-serif labels. Restrained cyan, indigo and lavender accents with a very subtle spectral line. Flat clean design, not a 3D render or a glowing sci-fi poster. The visual interest should come from elegant typography, pacing, geometry and a carefully balanced timeline. It should be cool, sophisticated and immediately readable.
+
+Layout: two clearly separated horizontal chronological bands, each with FIVE equal-width year columns. TOP BAND: 2017, 2018, 2019, 2020, 2021 from LEFT TO RIGHT. BOTTOM BAND: 2022, 2023, 2024, 2025, 2026 from LEFT TO RIGHT. Both bands read LEFT TO RIGHT, not serpentine. A simple fine timeline rail in each band with circular year markers connects YEARS ONLY; no edges or branches between named models. A slim divider and small labels “2017–2021” and “2022–2026” make the reading order clear. Sparse top band, denser bottom band; use different band heights to give the bottom band enough space. Each year column lists its models vertically in the exact order supplied. Avoid bulky rounded cards around every name; use subtle alignment and small colored dots if helpful. No crossed lines, no decorative networks, no icons that imply model types or licensing. Keep all text well away from the edges.
+
+Title, verbatim: “LLM & VLM evolution”
+Subtitle, verbatim: “Selected releases and research milestones”
+A small top-right dateline, verbatim: “Snapshot: 9 Oct 2026”
+
+Use EXACTLY the following 38 model labels, once each, in their specified year columns. Do not add, omit, duplicate, rename, or move any model. All model names should be the same legible font size; wrap a long model name onto two lines rather than shrinking it. Year labels should be larger. No extra technical claims, parameter counts, or performance rankings.
+
+2017:
+Transformer
+Under Transformer only, add the smaller note “Architecture anchor”.
+
+2018:
+GPT
+BERT
+
+2019:
+GPT-2
+T5
+
+2020:
+GPT-3
+
+2021:
+CLIP
+Switch Transformer
+
+2022:
+InstructGPT
+Chinchilla
+PaLM
+Flamingo
+BLOOM
+ChatGPT
+
+2023:
+BLIP-2
+LLaMA
+GPT-4
+LLaVA
+Mistral 7B
+Gemini 1.0
+Mixtral 8x7B
+
+2024:
+Claude 3
+GPT-4o
+Llama 3.1
+Qwen2-VL
+DeepSeek-V3
+
+2025:
+DeepSeek-R1
+Gemini 2.5 Pro
+Claude 4
+GPT-5
+Qwen3-VL
+
+2026:
+Qwen3.5
+DeepSeek-V4
+Kimi K3
+Qwen3.8
+GPT-6 Astra
+Claude Opus 5.5
+Gemini 4 Argon
+
+Footer, verbatim: “Chronology, not lineage. A curated map, not a complete catalog.”
+Secondary small footer, verbatim: “Exact dates, event types and primary sources accompany this figure.”
+
+Prioritize accurate spelling, correct year placement and very readable hierarchy over decoration. Especially check GPT-4o (letter o), LLaMA versus Llama 3.1, BLIP-2, Mixtral 8x7B, Qwen2-VL, Qwen3-VL, Qwen3.5, Qwen3.8, DeepSeek-V3, DeepSeek-V4, DeepSeek-R1, Claude Opus 5.5, and Gemini 4 Argon. Every label must be readable at full size. The overall composition must feel meticulously designed, with strong whitespace, quiet visual rhythm, and no crowding in 2023 or 2026.

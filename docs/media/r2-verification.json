@@ -1,0 +1,70 @@
+{
+  "success": true,
+  "checked_at": "2026-10-12T06:12:02Z",
+  "public_url": "https://media.latentlit.com/audio/high-agency/high-agency-your-superpower-in-the-ai-era-v1.mp3",
+  "configuration": {
+    "bucket": "latent-light-media",
+    "default_storage_class": "Standard",
+    "location": "WNAM",
+    "custom_domain": "media.latentlit.com",
+    "ownership_status": "active",
+    "ssl_status": "active",
+    "minimum_tls": "1.2",
+    "r2_dev_public_access": false,
+    "cors_readback": "Matches docs/media/r2-cors.json: intended site/local origins, GET/HEAD, Range, exposed metadata headers and 3600-second preflight age."
+  },
+  "http": {
+    "status": 200,
+    "headers": {
+      "content-type": "audio/mpeg",
+      "content-length": "18043024",
+      "content-disposition": "inline; filename=\"high-agency-your-superpower-in-the-ai-era.mp3\"",
+      "cache-control": "public, max-age=31536000, immutable",
+      "accept-ranges": "bytes",
+      "access-control-allow-origin": "https://latentlit.com",
+      "access-control-expose-headers": "Accept-Ranges,Content-Range,Content-Length,ETag",
+      "etag": "\"ecbc9ff62db2c647b2ead94468ee9e35\""
+    },
+    "byte_range": {
+      "status": 206,
+      "content_range": "bytes 0-1023/18043024",
+      "bytes": 1024,
+      "allow_origin": "https://latentlit.com"
+    },
+    "cors_preflight": {
+      "status": 204,
+      "allow_origin": "https://latentlit.com",
+      "allow_methods": "GET, HEAD",
+      "allow_headers": "Range"
+    },
+    "download_sha256": "35cd32bd0af4de4126310ead99bc7ff9c865e5ae9627fa4d1a34cab715fae8b3",
+    "download_bytes": 18043024,
+    "client_note": "Verified with curl. Python urllib requests received Cloudflare browser-integrity code 1010; existing zone security was preserved. Standard browser playback was tested separately."
+  },
+  "browser": {
+    "success": true,
+    "checked_at": "2026-10-12T06:10:22.042Z",
+    "method": "Chromium playback from the current local project origin at desktop and mobile viewport widths; complete remote MP3 metadata, user-triggered play, seeking to 20 minutes and 1.5x playback verified.",
+    "checks": [
+      {
+        "viewport": 1440,
+        "duration": 1503.492063,
+        "currentTime": 1200.112261,
+        "paused": false,
+        "readyState": 4,
+        "playbackRate": 1.5,
+        "error": null
+      },
+      {
+        "viewport": 390,
+        "duration": 1503.492063,
+        "currentTime": 1200.11363,
+        "paused": false,
+        "readyState": 4,
+        "playbackRate": 1.5,
+        "error": null
+      }
+    ]
+  },
+  "website_change": "No Worker configuration, page source, production deployment or existing site routes were changed. The media custom domain and bucket were the authorized external setup."
+}

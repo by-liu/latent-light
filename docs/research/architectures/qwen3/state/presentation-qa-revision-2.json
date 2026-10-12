@@ -1,0 +1,130 @@
+{
+  "revision": 2,
+  "checked": "2026-10-10T15:45:39.761Z",
+  "site_page_sha256": "bda43cc0883987fb792a5640af9916bd7152e5d12d9ad948a7967460ba5fa736",
+  "source_resources": {
+    "report": "https://arxiv.org/pdf/2505.09388v1",
+    "hugging_face": "https://huggingface.co/Qwen/Qwen3-235B-A22B",
+    "checkpoint": "Qwen/Qwen3-235B-A22B"
+  },
+  "collection_checks": {
+    "site_validation": "106 tests, zero Astro diagnostics, build and all 43 docs lint passed.",
+    "browser_views": 81,
+    "model_benchmarks": "Not executed.",
+    "source_figures": "32 unique report assets; 33 placements; 48 total numbered collection figures. Rights retained per asset."
+  },
+  "viewports": [
+    {
+      "slug": "qwen3",
+      "width": 1440,
+      "mode": "light",
+      "title": "Qwen3",
+      "titleCount": 1,
+      "overflow": false,
+      "figures": [
+        {
+          "id": "figure-1",
+          "caption": "Figure 1. Shared computation, response mode training, and a distinct distillation path. Original explanatory diagram informed by the report and released artifacts.124"
+        }
+      ],
+      "resources": [
+        {
+          "kind": "report",
+          "href": "https://arxiv.org/pdf/2505.09388v1",
+          "label": "Technical reportRead the original research"
+        },
+        {
+          "kind": "model",
+          "href": "https://huggingface.co/Qwen/Qwen3-235B-A22B",
+          "label": "Hugging FaceQwen/Qwen3-235B-A22B"
+        }
+      ],
+      "visibleHashes": [],
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "missingImages": [],
+      "activeNav": [
+        {
+          "label": "Qwen3",
+          "visible": true
+        }
+      ],
+      "panFrames": []
+    },
+    {
+      "slug": "qwen3",
+      "width": 390,
+      "mode": "light",
+      "title": "Qwen3",
+      "titleCount": 1,
+      "overflow": false,
+      "figures": [
+        {
+          "id": "figure-1",
+          "caption": "Figure 1. Shared computation, response mode training, and a distinct distillation path. Original explanatory diagram informed by the report and released artifacts.124"
+        }
+      ],
+      "resources": [
+        {
+          "kind": "report",
+          "href": "https://arxiv.org/pdf/2505.09388v1",
+          "label": "Technical reportRead the original research"
+        },
+        {
+          "kind": "model",
+          "href": "https://huggingface.co/Qwen/Qwen3-235B-A22B",
+          "label": "Hugging FaceQwen/Qwen3-235B-A22B"
+        }
+      ],
+      "visibleHashes": [],
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "missingImages": [],
+      "activeNav": [
+        {
+          "label": "Qwen3",
+          "visible": false
+        }
+      ],
+      "panFrames": []
+    },
+    {
+      "slug": "qwen3",
+      "width": 320,
+      "mode": "dark",
+      "title": "Qwen3",
+      "titleCount": 1,
+      "overflow": false,
+      "figures": [
+        {
+          "id": "figure-1",
+          "caption": "Figure 1. Shared computation, response mode training, and a distinct distillation path. Original explanatory diagram informed by the report and released artifacts.124"
+        }
+      ],
+      "resources": [
+        {
+          "kind": "report",
+          "href": "https://arxiv.org/pdf/2505.09388v1",
+          "label": "Technical reportRead the original research"
+        },
+        {
+          "kind": "model",
+          "href": "https://huggingface.co/Qwen/Qwen3-235B-A22B",
+          "label": "Hugging FaceQwen/Qwen3-235B-A22B"
+        }
+      ],
+      "visibleHashes": [],
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "missingImages": [],
+      "activeNav": [
+        {
+          "label": "Qwen3",
+          "visible": false
+        }
+      ],
+      "panFrames": []
+    }
+  ],
+  "manual_review": "All 48 figure renders inspected as contact sheets; source figure completeness, labels and supplemental diagrams reviewed. Dense focus view and native dark diagrams inspected separately."
+}

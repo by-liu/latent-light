@@ -1,0 +1,27 @@
+{
+  "rules": [
+    {
+      "allowed": {
+        "origins": [
+          "https://latentlit.com",
+          "http://localhost:4327",
+          "http://127.0.0.1:4327"
+        ],
+        "methods": [
+          "GET",
+          "HEAD"
+        ],
+        "headers": [
+          "Range"
+        ]
+      },
+      "exposeHeaders": [
+        "Accept-Ranges",
+        "Content-Range",
+        "Content-Length",
+        "ETag"
+      ],
+      "maxAgeSeconds": 3600
+    }
+  ]
+}

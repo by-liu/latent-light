@@ -1,0 +1,78 @@
+{
+  "model": "bert",
+  "checked": "2026-10-10",
+  "source": "Jacob Devlin et al., BERT, NAACL 2019",
+  "source_url": "https://aclanthology.org/N19-1423/",
+  "pdf_url": "https://aclanthology.org/N19-1423.pdf",
+  "sha256": "987545ffb087f1ece898142c403a516baeabeb70ce19089397fac6f7db12c3d4",
+  "license": {
+    "status": "verified",
+    "value": "CC BY 4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "grant_evidence": "ACL Anthology footer grants CC BY 4.0 to material published from 2016 onward; this exact paper is published by ACL in 2019.",
+  "modifications": "Source figure regions cropped; surrounding paper prose and captions omitted. Figure labels, colors, axes and drawing retained. No AI repainting.",
+  "extraction": "Poppler pdftoppm v26.08.0, page rendered with scale-to 4200; crop coordinates recorded at 1400 pixel page preview and multiplied by 3.",
+  "figures": [
+    {
+      "asset": "public/figures/model-studies/bert/pretraining-and-adaptation.png",
+      "source_figure": 1,
+      "pdf_page": 3,
+      "page_preview_crop": [
+        117,
+        102,
+        758,
+        305
+      ],
+      "output_pixels": [
+        2274,
+        915
+      ],
+      "alt": "BERT pretraining predicts masked tokens and sentence relationships; separate downstream models reuse its encoder with classification, token labeling or answer span heads.",
+      "caption": "BERT pretraining and task adaptation. Reproduced from Devlin et al., Figure 1, NAACL 2019; figure crop, CC BY 4.0.",
+      "purpose": "The dotted arrows in Figure 1 transfer pretrained parameters, not predictions. The downstream panels share the encoder design but attach different task heads; fine tuning updates the encoder as well as the selected head.",
+      "asset_sha256": "df631b8fcaf0c0d42854caafcc7664b08bc0552ab59628d5008bbb8a188fd80c"
+    },
+    {
+      "asset": "public/figures/model-studies/bert/input-embeddings.png",
+      "source_figure": 2,
+      "pdf_page": 5,
+      "page_preview_crop": [
+        188,
+        102,
+        605,
+        182
+      ],
+      "output_pixels": [
+        1815,
+        546
+      ],
+      "alt": "At every packed WordPiece position, BERT adds token, sentence segment and learned absolute position embeddings. Both boundary tokens also receive these embeddings.",
+      "caption": "Three embeddings form each input vector. Reproduced from Devlin et al., Figure 2, NAACL 2019; figure crop, CC BY 4.0.",
+      "purpose": "Figure 2 shows addition, not concatenation. Segment A and B identify the two packed spans, while position indices continue across their separator; both spans still inhabit one sequence.",
+      "asset_sha256": "f4559c43e97335016f85cca56968d4fedbc4bea48e3957a4b41dcf4358edabbc"
+    }
+  ],
+  "restricted_candidates": [],
+  "review": {
+    "source_artwork": true,
+    "crop_integrity": true,
+    "license": true,
+    "desktop_mobile_browser": true,
+    "checked": "2026-10-10T17:36:51.557Z",
+    "revision": 3
+  },
+  "revision": 3,
+  "review_history": [
+    {
+      "revision": 2,
+      "review": {
+        "source_artwork": true,
+        "crop_integrity": true,
+        "license": true,
+        "desktop_mobile_browser": true,
+        "checked": "2026-10-10T15:45:39.761Z"
+      }
+    }
+  ]
+}

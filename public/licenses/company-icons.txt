@@ -1,0 +1,638 @@
+Company and product icons in the landscape explorers
+
+These third party marks identify subjects discussed in the adjacent independent
+landscape comparisons. Copyright and trademarks remain with their respective
+rights holders. No affiliation, endorsement or trademark license is implied.
+They are not covered by Latent Light’s MIT grant.
+
+Source URLs, retrieval dates, checksums, identity checks and the bounded editorial
+reuse assessment for each local asset are in docs/branding/company-icons.json.
+The basis is contextual identification within substantive research and criticism,
+not an inferred artwork license from public availability. Each icon is limited
+to 24 px in a company table; names and official-site links remain visible.
+This assessment is not a legal assurance for every jurisdiction or future use.
+Review the rights again for advertising, merchandising, sponsorship or a material
+change of distribution. Do not reuse these assets as Latent Light branding.
+
+Only the website-declared identification mark is retained; no unrelated images,
+page screenshots, photographs, badges or company design systems are reproduced.
+PNG conversion preserves the mark’s proportions and colors. Initials are used
+where a reliable matching official icon was not obtained.
+
+amazon: Amazon
+  Source: https://www.amazon.com/favicon.ico
+  Official page: https://www.amazon.com/
+  Retrieved: 2026-10-11T16:11:15.401Z
+  Local asset: public/company-icons/amazon.png
+  SHA-256: 44e05d4178ed6201c7ab8498852c6f194d394f2e6e3d032908fdb3e7b03d91c8
+anthropic: Anthropic
+  Source: https://cdn.prod.website-files.com/67ce28cfec624e2b733f8a52/67d31dd7aa394792257596c5_webclip.png
+  Official page: https://www.anthropic.com/
+  Retrieved: 2026-10-11T16:11:12.368Z
+  Local asset: public/company-icons/anthropic.png
+  SHA-256: dcf9cf2eb97d5985b28470d60e37ae70ba02fc35f665e8c4dddf25a11b07fdf0
+apple: Apple
+  Source: https://www.apple.com/favicon.ico
+  Official page: https://www.apple.com/
+  Retrieved: 2026-10-11T16:11:14.898Z
+  Local asset: public/company-icons/apple.png
+  SHA-256: b22bd5813efd5bae00c39de347f9c2594f1f27f01bcedbc5d92bed8ba5c976e2
+baidu: Baidu
+  Source: https://www.baidu.com/favicon.ico
+  Official page: https://www.baidu.com/
+  Retrieved: 2026-10-11T16:11:58.427Z
+  Local asset: public/company-icons/baidu.png
+  SHA-256: 97d755ab259978baaf695d47b20efa7d0caff5e62ad9ef492d8b82aabcb3551f
+bostondynamics: Boston Dynamics
+  Source: https://bostondynamics.com/wp-content/uploads/2023/06/cropped-Boston-Dynamic_favicon-180x180.jpg
+  Official page: https://bostondynamics.com/
+  Retrieved: 2026-10-11T16:12:39.505Z
+  Local asset: public/company-icons/bostondynamics.png
+  SHA-256: a774b51d5bc3a220997e4a9f166f1ff56290fe785b879898e52d2c3d9ca5f843
+bytedance: ByteDance
+  Source: https://www.bytedance.com/en/#declared-favicon
+  Official page: https://www.bytedance.com/en/
+  Retrieved: 2026-10-11T16:11:49.364Z
+  Local asset: public/company-icons/bytedance.png
+  SHA-256: 5f24279b0c5b70f80e240fca02e4cca6278452b80849ccb45f8af1938df87799
+character: Character.AI
+  Source: https://character.ai/favicon.ico
+  Official page: https://character.ai/
+  Retrieved: 2026-10-11T16:11:28.243Z
+  Local asset: public/company-icons/character.png
+  SHA-256: 62593f3359d331eb419157197463a0a8061471830012bd922a4f4f5ac65b696e
+daydream: Daydream
+  Source: https://daydream.ing/apple-touch-icon.png
+  Official page: https://daydream.ing/
+  Retrieved: 2026-10-11T16:11:36.720Z
+  Local asset: public/company-icons/daydream.png
+  SHA-256: 3ab88f5170778d4b45f22d36f9e805c442b5ad2975dc7f10e3c8c00343a09413
+deepseek: 深度求索 DeepSeek
+  Source: https://deepseek.com/favicon.ico
+  Official page: https://deepseek.com/
+  Retrieved: 2026-10-11T16:12:02.361Z
+  Local asset: public/company-icons/deepseek.png
+  SHA-256: 4b0ca92ecc56edf008dcb940dd534896c3a6269a80ad1c645053dbc92be3813a
+elevenlabs: ElevenLabs
+  Source: https://elevenlabs.io/apple-icon.png?6592732ab34b1d42
+  Official page: https://elevenlabs.io/
+  Retrieved: 2026-10-11T16:11:22.816Z
+  Local asset: public/company-icons/elevenlabs.png
+  SHA-256: a59bf4dc510dc0a09b14202ecc15733d5c814d8f19928390c32c206bfac33d84
+endel: Endel
+  Source: https://endel.io/favs/apple-touch-icon.png
+  Official page: https://endel.io/
+  Retrieved: 2026-10-11T16:11:33.243Z
+  Local asset: public/company-icons/endel.png
+  SHA-256: 2eb28d744cfc10ef93c1ae4c6ea787110967c805a6c9cae00d145b76ce2cbe18
+flowith: Flowith
+  Source: https://flowith.io/apple-touch-icon.png
+  Official page: https://flowith.io/blank
+  Retrieved: 2026-10-11T16:11:38.484Z
+  Local asset: public/company-icons/flowith.png
+  SHA-256: 952073be04a1cadfd50fc288dac9cdf07304ba4d7534ec43d638efbee4530196
+folotoy: FoloToy
+  Source: https://folotoy.com/favicon.svg
+  Official page: https://folotoy.com/
+  Retrieved: 2026-10-11T16:12:34.846Z
+  Local asset: public/company-icons/folotoy.png
+  SHA-256: 852117ae667068d2a8f645035d9db1d88dd40cba42de395e234238aef3340df1
+foxglove: Foxglove
+  Source: https://foxglove.dev/apple-touch-icon.png
+  Official page: https://foxglove.dev/
+  Retrieved: 2026-10-11T16:12:41.805Z
+  Local asset: public/company-icons/foxglove.png
+  SHA-256: 49d5a0ad69eba9cac4b80b3baa6a3fd0f2fd4df0132a6c8f72ff2bd21e2e8e86
+getduckbill: Duckbill
+  Source: https://getduckbill.com/apple-icon.png
+  Official page: https://getduckbill.com/
+  Retrieved: 2026-10-11T16:11:40.649Z
+  Local asset: public/company-icons/getduckbill.png
+  SHA-256: 767409ca950115fb4cc6bbb21f122755a1430638022003416213385eb78eecbe
+google: Google
+  Source: https://www.google.com/favicon.ico
+  Official page: https://www.google.com/
+  Retrieved: 2026-10-11T16:11:11.789Z
+  Local asset: public/company-icons/google.png
+  SHA-256: 465ad9e6824fd7155a5a261c5eb6e6424ecdb952bd39e4d57c9bd5f063d85bbe
+haivivi: 跃然创新
+  Source: https://haivivi-next-uat.tos-cn-shanghai.volces.com/assets/v2.0/cn/icon.svg
+  Official page: https://www.haivivi.cn/
+  Retrieved: 2026-10-11T16:12:29.714Z
+  Local asset: public/company-icons/haivivi.png
+  SHA-256: a3adaae38eccba85000d4b48f8328724f0ac598a4078baeba4d082a3b197ebd6
+kimi: 月之暗面 Moonshot AI
+  Source: https://www.kimi.com/pwa-192.png
+  Official page: https://www.kimi.com/
+  Retrieved: 2026-10-11T16:12:02.907Z
+  Local asset: public/company-icons/kimi.png
+  SHA-256: 21a11ed71892dd174e977c6538508b64f9516621a2f997dc030339c7742288db
+krea: Krea
+  Source: https://www.krea.ai/favicon/favicon-32.png
+  Official page: https://www.krea.ai/
+  Retrieved: 2026-10-11T16:11:26.080Z
+  Local asset: public/company-icons/krea.png
+  SHA-256: 21636adcd0bd26c2a29bb89cd11c3b4e0cde0c83c585aaf4a57017cfb41dbc51
+liblib: 演语科技 Evoken
+  Source: https://www.liblib.art/favicon.ico
+  Official page: https://www.liblib.art/
+  Retrieved: 2026-10-11T16:12:09.564Z
+  Local asset: public/company-icons/liblib.png
+  SHA-256: 8f1400015b0c63e9e34ef9ede039e9d5e7e1192b30a0d6863e8e5861e53a380a
+listenhub: MarsWave
+  Source: https://listenhub.ai/favicon-180.png
+  Official page: https://listenhub.ai/
+  Retrieved: 2026-10-11T16:11:23.572Z
+  Local asset: public/company-icons/listenhub.png
+  SHA-256: 2c47c0166f7d286fea5971938e65fe8c314702dfcc2a5a3da5c1a767d032bf65
+littlebird: Littlebird
+  Source: https://cdn.prod.website-files.com/694043d273dceabab479f631/6a55a1a906eabfade48dce1e_69603245cff328dc64a18f61_Base%20Icon%20%5BDO%20NOT%20EDIT%5D%206.png
+  Official page: https://littlebird.ai/
+  Retrieved: 2026-10-11T16:11:47.425Z
+  Local asset: public/company-icons/littlebird.png
+  SHA-256: 9212d13ad758932666bc8e3b98ffca288f4dd280cb9891e3afa9cd90b46f67b6
+loopit-com: 涌跃智能
+  Source: https://loopit.com.cn/icon.png?icon.d289fa64.png
+  Official page: https://loopit.com.cn/
+  Retrieved: 2026-10-11T16:12:13.889Z
+  Local asset: public/company-icons/loopit-com.png
+  SHA-256: 4d38ea8b31e022483b4c95e01af75242fe207bc2204cb82d3c19df2ea94a1694
+macaron: Macaron
+  Source: https://macaron.im/apple-touch-icon.png
+  Official page: https://macaron.im/
+  Retrieved: 2026-10-11T16:11:37.666Z
+  Local asset: public/company-icons/macaron.png
+  SHA-256: 1d33264ac2f1558543a2270fab7ed06f48f5ce9bd26fdd2b75c2c74cfeff337d
+meta: Meta
+  Source: https://static.xx.fbcdn.net/rsrc.php/yQ/r/0eWKxz9kEoF.webp
+  Official page: https://www.meta.com/ca/
+  Retrieved: 2026-10-11T16:11:13.286Z
+  Local asset: public/company-icons/meta.png
+  SHA-256: 1cc253cb7c9f3059f9e1580e0cb4a157f00c9c266b9cdad27d81d7a307ba045b
+metaso: 秘塔科技
+  Source: https://metaso.cn/apple-touch-icon.png
+  Official page: https://metaso.cn/
+  Retrieved: 2026-10-11T16:12:19.829Z
+  Local asset: public/company-icons/metaso.png
+  SHA-256: 0e73dc14d365038c37cfc6c2a4a8550e79a5a742150964549d1eecb5f04cd5d0
+microsoft: Microsoft
+  Source: https://www.microsoft.com/favicon.ico?v2
+  Official page: https://www.microsoft.com/
+  Retrieved: 2026-10-11T16:11:12.768Z
+  Local asset: public/company-icons/microsoft.png
+  SHA-256: 15714bb33a84a4fbe0c306ed477411bf31adbb4af62ca81394dff589d62ea12c
+mindtrip: Mindtrip
+  Source: https://mindtrip.ai/favicon.ico
+  Official page: https://mindtrip.ai/
+  Retrieved: 2026-10-11T16:11:34.769Z
+  Local asset: public/company-icons/mindtrip.png
+  SHA-256: ed717071b74152e95e4131f6abf5ee4d1840f9d0935400a675af6c9694efff02
+minimax: MiniMax
+  Source: https://www.minimax.io/favicon.ico
+  Official page: https://www.minimax.io/
+  Retrieved: 2026-10-11T16:12:04.761Z
+  Local asset: public/company-icons/minimax.png
+  SHA-256: 032dc95f94c601d127e4b1f1f1c0fbaff107944a718ad06b5606a3b9c0e68733
+nomi: Nomi
+  Source: https://i0.wp.com/nomi.ai/wp-content/uploads/2024/03/nomi-transparent-logo-3.png?fit=180%2C180&#038;ssl=1
+  Official page: https://nomi.ai/
+  Retrieved: 2026-10-11T16:11:29.163Z
+  Local asset: public/company-icons/nomi.png
+  SHA-256: 69ee41e4ab25faa8efd40924664793f822233af11790073aa381590a9ccb14a5
+nvidia: NVIDIA
+  Source: https://www.nvidia.com/favicon.ico
+  Official page: https://www.nvidia.com/en-us/location-selector/
+  Retrieved: 2026-10-11T16:12:42.884Z
+  Local asset: public/company-icons/nvidia.png
+  SHA-256: aa73374607c1c57e20dbf7cddf5b969425d9b43b17a02100a4774745b341e8fb
+ohai: Ohai
+  Source: https://www.ohai.ai/images/favicon.ico
+  Official page: https://www.ohai.ai/
+  Retrieved: 2026-10-11T16:11:33.748Z
+  Local asset: public/company-icons/ohai.png
+  SHA-256: facd606cda07d664e15d0ba0127cd31829f1f4e7c02da2d3abe955675911d1a1
+openai: OpenAI
+  Source: https://developers.openai.com/favicon.png
+  Official page: https://developers.openai.com/
+  Retrieved: 2026-10-11T16:14:34.129Z
+  Local asset: public/company-icons/openai.png
+  SHA-256: 66a3ba0e8c2b7bee2090388d6df025aa7555a5be197a31e32dff2def8c04427b
+oral-craft: 可栗口语
+  Source: https://oral-craft.com/apple-touch-icon.png
+  Official page: https://oral-craft.com/
+  Retrieved: 2026-10-11T16:12:16.692Z
+  Local asset: public/company-icons/oral-craft.png
+  SHA-256: 6873af165b5172d7de2906517faa85a941bb84cc68ad6a363f5b1a1c23d47758
+phia: Phia
+  Source: https://phia.me/icon.svg?icon.73a56f71.svg
+  Official page: https://phia.me/
+  Retrieved: 2026-10-11T16:11:37.205Z
+  Local asset: public/company-icons/phia.png
+  SHA-256: 11b52109d157bb407edbd38b45639b64c4cd7852aa8e02b928a85836ecdcb830
+pika: Pika
+  Source: https://pika.art/apple-icon.png?apple-icon.1pc-f1mhs57mu.png
+  Official page: https://pika.art/
+  Retrieved: 2026-10-11T16:11:25.078Z
+  Local asset: public/company-icons/pika.png
+  SHA-256: 33f2f8383bced6c8a8e2db85424978c2cd8415de93d546a8a974b5e5649077e6
+pilotplans: Pilot
+  Source: https://cdn.prod.website-files.com/67a6ba056d889c1e78426c35/67b7bf5f7a4f2aac53802118_256x256.png
+  Official page: https://www.pilotplans.com/
+  Retrieved: 2026-10-11T16:11:36.254Z
+  Local asset: public/company-icons/pilotplans.png
+  SHA-256: 60a509dc06c4b0254f75924fda4e65e8bfee69060a66d010155e535e112adb9f
+pixverse: PixVerse
+  Source: https://cdn.pixverse.ai/media/pixverse/favicon.png
+  Official page: https://pixverse.ai/en
+  Retrieved: 2026-10-11T16:11:25.749Z
+  Local asset: public/company-icons/pixverse.png
+  SHA-256: e9cf4809b19b7ae4a73384dda15abca7c7b27a7e34b5adc45f3cb2cad436692d
+praktika: Praktika
+  Source: https://praktika.ai/apple-touch-icon.png
+  Official page: https://praktika.ai/
+  Retrieved: 2026-10-11T16:11:20.636Z
+  Local asset: public/company-icons/praktika.png
+  SHA-256: 93b965da250e80ad7d4bac683fbc87ea021e9d7ff74670e2ea8eee641bccbb2a
+replika: Replika
+  Source: https://replika.com/apple-icon.png?58c5aabf1e3f85c0
+  Official page: https://replika.com/
+  Retrieved: 2026-10-11T16:11:29.614Z
+  Local asset: public/company-icons/replika.png
+  SHA-256: 16fe3f98cbbb6110df64ee663c7d9455094e58e653352142a271897a167ea94d
+roboto: Roboto
+  Source: https://www.roboto.ai/assets/favicons/apple-touch-icon.png
+  Official page: https://www.roboto.ai/
+  Retrieved: 2026-10-11T16:12:42.163Z
+  Local asset: public/company-icons/roboto.png
+  SHA-256: 6759f8a66bb1cce39f3a9d6b7f84d755254903f482c3bb56cc691f82d73753e6
+ropetai: 萌友智能
+  Source: https://ropetai.cn/images/logo_icon.png
+  Official page: https://ropetai.cn/
+  Retrieved: 2026-10-11T16:12:35.303Z
+  Local asset: public/company-icons/ropetai.png
+  SHA-256: e72ce8093a8f43fda4839e9ad0b03706ff739138255433675420f153285c303e
+rosebud: Rosebud
+  Source: https://www.rosebud.app/apple-icon.png
+  Official page: https://www.rosebud.app/
+  Retrieved: 2026-10-11T16:11:31.402Z
+  Local asset: public/company-icons/rosebud.png
+  SHA-256: c6447889d4f2d81300906156a8ce55476c2ff4c01023fe50105803c071be9318
+runway: Runway Robotics
+  Source: https://runway.com/icon.png?icon.35ps9bmugbe1e.png
+  Official page: https://runway.com/
+  Retrieved: 2026-10-11T16:12:44.983Z
+  Local asset: public/company-icons/runway.png
+  SHA-256: 680a96f718ead0581c2f5e6874631cc3ca48ef716e5c496170422709fa8ec6db
+scale: Scale AI
+  Source: https://scale.com/static/global/favicon/v3/apple-touch-icon.png
+  Official page: https://scale.com/
+  Retrieved: 2026-10-11T16:12:41.400Z
+  Local asset: public/company-icons/scale.png
+  SHA-256: 3e65dfd94d17640a32360c495eb57328d74d73dc5d547bb042350f5fdb847cb8
+seaart: 海艺智创
+  Source: https://www.seaart.ai/apple-touch-icon.png
+  Official page: https://www.seaart.ai/
+  Retrieved: 2026-10-11T16:12:12.929Z
+  Local asset: public/company-icons/seaart.png
+  SHA-256: 39772a80c5db48be924000c71d3f5868d768602ceffb8b229c77fe5bc6357b7d
+second: Second Me
+  Source: https://mindverseglobal.mindverse.com/front-img/crm/1753175020618/og-logo.png
+  Official page: https://second.me/
+  Retrieved: 2026-10-11T16:11:42.266Z
+  Local asset: public/company-icons/second.png
+  SHA-256: 006f35a1269d27061000e66f2e6d1f5811118a74ee2d566eb85e5c4c58548c7c
+seeles: SEELE 全灵
+  Source: https://static.seeles.ai/p/code4agent-site/favicon.ico?v=20250706
+  Official page: https://www.seeles.ai/
+  Retrieved: 2026-10-11T16:11:48.756Z
+  Local asset: public/company-icons/seeles.png
+  SHA-256: 9359699deda343062fb13f4a5ebf64999246b5e07ff48d16429733054950f3a7
+sekaiapp: Sekai
+  Source: https://sekai.ai/favicon.ico
+  Official page: https://sekai.ai/
+  Retrieved: 2026-10-11T16:11:30.609Z
+  Local asset: public/company-icons/sekaiapp.png
+  SHA-256: 71d4dbca138d14f280ebd3d2d5b13712ef1669773e4312f712f3792af0f1e02f
+skild: Skild AI
+  Source: https://skild.ai/favicon.ico
+  Official page: https://skild.ai/
+  Retrieved: 2026-10-11T16:12:40.863Z
+  Local asset: public/company-icons/skild.png
+  SHA-256: 8a877dc084e8f921994e54dff8bc03313c6fade5dcd873856f8b079721071045
+speak: Speak
+  Source: https://www.speak.com/cdn.prod.website-files.com/61a88c135006e8345b005efd/686a5c29b8678b5802ceb837_WebIcon.png
+  Official page: https://www.speak.com/
+  Retrieved: 2026-10-11T16:11:19.785Z
+  Local asset: public/company-icons/speak.png
+  SHA-256: a63facffe8bc40115077b739e7e85db4a25088256f16e8f6d563a6deef1e2789
+studyfetch: StudyFetch
+  Source: https://www.studyfetch.com/seo/apple-touch-icon.png?v=4
+  Official page: https://www.studyfetch.com/
+  Retrieved: 2026-10-11T16:11:21.575Z
+  Local asset: public/company-icons/studyfetch.png
+  SHA-256: 6ccef5ffd5eb13d7f7ac2a39d47e73dc2096bf407b343fb46790c4d240ab6864
+suno: Suno
+  Source: https://cdn-o.suno.com/apple-touch-icon.png
+  Official page: https://suno.com/
+  Retrieved: 2026-10-11T16:11:24.428Z
+  Local asset: public/company-icons/suno.png
+  SHA-256: 3661a627e323c1e05702fca43cf4d842bd98bc569874e06f9e203328b6508ca0
+synthesis: Synthesis Tutor
+  Source: https://www.synthesis.com/_www/media/647931b3f766baddaeae67a6_dark-webclip.png
+  Official page: https://www.synthesis.com/tutor
+  Retrieved: 2026-10-11T16:11:21.140Z
+  Local asset: public/company-icons/synthesis.png
+  SHA-256: d84217bc47cc0a48c5b0ceeb872d96670aac250893cdb65c57e5a762b3fda022
+tencent: Tencent
+  Source: https://www.tencent.com/wp-content/themes/tencent-web/assets/favicon/apple-touch-icon.png
+  Official page: https://www.tencent.com/en-us/
+  Retrieved: 2026-10-11T16:14:34.494Z
+  Local asset: public/company-icons/tencent.png
+  SHA-256: 830e51a0f447e4ecc3f3d16c24ad489321c28fca14a115fbfbc6185fd94b6827
+tolans: Tolan
+  Source: https://cdn.prod.website-files.com/668499ce7cef6042b2f1a2bc/67abc28e98e86bb683ed1ff9_icon%20-%20edid%20this%20(1).png
+  Official page: https://www.tolans.com/
+  Retrieved: 2026-10-11T16:11:28.491Z
+  Local asset: public/company-icons/tolans.png
+  SHA-256: 24cfdb75d8d1b6d4b5974e198630b1645d9e0b9464f69808a01d24bf001a4fa2
+town: Town
+  Source: https://www.town.com/favicon.png
+  Official page: https://www.town.com/
+  Retrieved: 2026-10-11T16:11:47.759Z
+  Local asset: public/company-icons/town.png
+  SHA-256: 8ca8c42d08264866af55601b84ebf92c333577cf5f504dfd2994b8a249b2e180
+tripo3d: VAST
+  Source: https://www.tripo3d.ai/favicon.ico
+  Official page: https://www.tripo3d.ai/
+  Retrieved: 2026-10-11T16:11:27.018Z
+  Local asset: public/company-icons/tripo3d.png
+  SHA-256: df5b44d785ca58535b1016bf14842e933a1da348f01b618bc6b12bf7cb2b58b1
+useorigin: Origin
+  Source: https://cdn.prod.website-files.com/68acbc076b672f730e0c77b9/68da67a91d421250bd53d4f1_useorigin_icon_256.png
+  Official page: https://useorigin.com/
+  Retrieved: 2026-10-11T16:11:46.678Z
+  Local asset: public/company-icons/useorigin.png
+  SHA-256: 0a6ad735ec7a797a87b0cfe89f2cfaac29bd79d6947a307aa1d84f9f203af603
+vidu: 生数科技
+  Source: https://www.vidu.com/apple-touch-icon.png
+  Official page: https://www.vidu.com/
+  Retrieved: 2026-10-11T16:12:06.443Z
+  Local asset: public/company-icons/vidu.png
+  SHA-256: a931f48f1db2bc4e3c6150c0cd5c7e637771f14b761c70795e6629fa69dbb33f
+viggle: Viggle
+  Source: https://viggle.ai/apple-touch-icon.png
+  Official page: https://viggle.ai/
+  Retrieved: 2026-10-11T16:11:25.438Z
+  Local asset: public/company-icons/viggle.png
+  SHA-256: 4915b0b3f52cad594d75380f4a3c498db5e2b3927df227211994f9316f8ba268
+worldlabs: World Labs
+  Source: https://www.worldlabs.ai/favicon.ico
+  Official page: https://www.worldlabs.ai/
+  Retrieved: 2026-10-11T16:12:39.942Z
+  Local asset: public/company-icons/worldlabs.png
+  SHA-256: ae40bc99cb4e05a38cd7d4c6791c9cacaef99a19afc59b59e2fa12768d8afb6a
+youmind: YouMind
+  Source: https://marketing-assets.youmind.com/logo-128.png
+  Official page: https://youmind.com/
+  Retrieved: 2026-10-11T16:11:38.958Z
+  Local asset: public/company-icons/youmind.png
+  SHA-256: 2be0ee6fb31dae91ffb98d02a0a9f03a822a841602a201f9feb16e0ef5623573
+yutori: Yutori
+  Source: https://yutori.com/icon-512.png
+  Official page: https://yutori.com/
+  Retrieved: 2026-10-11T16:11:41.784Z
+  Local asset: public/company-icons/yutori.png
+  SHA-256: e8e8d273271862adb0464ddcde1f6d808dbcd26cb72d65c11849ae61a99ac456
+
+Physical AI expansion, October 11, 2026
+
+1X
+Local asset: public/company-icons/1x.png
+Official identification asset: https://www.1x.tech/favicon/favicon-32x32.png
+Source page: https://www.1x.tech/
+Checked October 11, 2026. Copyright and trademark remain with their owners.
+Contextual editorial identification only; no endorsement or permissive license claimed.
+
+AGIBOT
+Local asset: public/company-icons/agibot.png
+Official identification asset: https://www.agibot.com/favicon.ico
+Source page: https://www.agibot.com/
+Checked October 11, 2026. Copyright and trademark remain with their owners.
+Contextual editorial identification only; no endorsement or permissive license claimed.
+
+Agility Robotics
+Local asset: public/company-icons/agilityrobotics.png
+Official identification asset: https://cdn.prod.website-files.com/68d6ca150ffa11fdc25d7575/699377a93878add673aad03e_Favicon.png
+Source page: https://www.agilityrobotics.com/
+Checked October 11, 2026. Copyright and trademark remain with their owners.
+Contextual editorial identification only; no endorsement or permissive license claimed.
+
+Apptronik
+Local asset: public/company-icons/apptronik.png
+Official identification asset: https://cdn.prod.website-files.com/6a0dd86942776facbc2f6ba4/6a0dd86942776facbc2f6e8e_apptronik-favicon.png
+Source page: https://apptronik.com/
+Checked October 11, 2026. Copyright and trademark remain with their owners.
+Contextual editorial identification only; no endorsement or permissive license claimed.
+
+Astribot
+Local asset: public/company-icons/astribot.png
+Official identification asset: https://www.astribot.com/favicon-256.png
+Source page: https://www.astribot.com/
+Checked October 11, 2026. Copyright and trademark remain with their owners.
+Contextual editorial identification only; no endorsement or permissive license claimed.
+
+D-Robotics
+Local asset: public/company-icons/d-robotics.png
+Official identification asset: https://en.d-robotics.cc/favicon.ico
+Source page: https://en.d-robotics.cc/
+Checked October 11, 2026. Copyright and trademark remain with their owners.
+Contextual editorial identification only; no endorsement or permissive license claimed.
+
+DEEP Robotics
+Local asset: public/company-icons/deeprobotics.png
+Official identification asset: https://www.deeprobotics.cn/favicon.ico
+Source page: https://www.deeprobotics.cn/
+Checked October 11, 2026. Copyright and trademark remain with their owners.
+Contextual editorial identification only; no endorsement or permissive license claimed.
+
+Dexterity
+Local asset: public/company-icons/dexterity.png
+Official identification asset: https://dexterity.ai/icon.png?icon.72c05717.png
+Source page: https://dexterity.ai/
+Checked October 11, 2026. Copyright and trademark remain with their owners.
+Contextual editorial identification only; no endorsement or permissive license claimed.
+
+Dobot
+Local asset: public/company-icons/dobot-robots.png
+Official identification asset: https://www.dobot-robots.com/themes/en/default/assets/images/favicon.png
+Source page: https://www.dobot-robots.com/
+Checked October 11, 2026. Copyright and trademark remain with their owners.
+Contextual editorial identification only; no endorsement or permissive license claimed.
+
+DYNA Robotics
+Local asset: public/company-icons/dyna.png
+Official identification asset: https://www.dyna.co/favicon.ico?favicon.12yy1.goim0rm.ico?dpl=dpl_C4CAnwpY6XkgSjo7edLmkR8BGyPQ
+Source page: https://www.dyna.co/
+Checked October 11, 2026. Copyright and trademark remain with their owners.
+Contextual editorial identification only; no endorsement or permissive license claimed.
+
+EngineAI
+Local asset: public/company-icons/engineai-com.png
+Official identification asset: https://www.engineai.com.cn/favicon.ico
+Source page: https://www.engineai.com.cn/
+Checked October 11, 2026. Copyright and trademark remain with their owners.
+Contextual editorial identification only; no endorsement or permissive license claimed.
+
+Fourier
+Local asset: public/company-icons/fftai.png
+Official identification asset: https://www.fftai.com/favicon.svg
+Source page: https://www.fftai.com/
+Checked October 11, 2026. Copyright and trademark remain with their owners.
+Contextual editorial identification only; no endorsement or permissive license claimed.
+
+FieldAI
+Local asset: public/company-icons/fieldai.png
+Official identification asset: https://cdn.prod.website-files.com/66f60ba0b55a2bf61129d179/69b5f7fffa0d757b41948b51_FAI_favicon.png
+Source page: https://www.fieldai.com/
+Checked October 11, 2026. Copyright and trademark remain with their owners.
+Contextual editorial identification only; no endorsement or permissive license claimed.
+
+Figure
+Local asset: public/company-icons/figure.png
+Official identification asset: https://www.figure.ai/favicon.png
+Source page: https://www.figure.ai/
+Checked October 11, 2026. Copyright and trademark remain with their owners.
+Contextual editorial identification only; no endorsement or permissive license claimed.
+
+Flexiv
+Local asset: public/company-icons/flexiv.png
+Official identification asset: https://www.flexiv.com/favicon/favicon.ico
+Source page: https://www.flexiv.com/
+Checked October 11, 2026. Copyright and trademark remain with their owners.
+Contextual editorial identification only; no endorsement or permissive license claimed.
+
+Galaxea AI
+Local asset: public/company-icons/galaxea-ai.png
+Official identification asset: https://www.galaxea-ai.com/favicon.ico
+Source page: https://www.galaxea-ai.com/cn
+Checked October 11, 2026. Copyright and trademark remain with their owners.
+Contextual editorial identification only; no endorsement or permissive license claimed.
+
+Galbot
+Local asset: public/company-icons/galbot.png
+Official identification asset: https://www.galbot.com/favicon.ico
+Source page: https://www.galbot.com/
+Checked October 11, 2026. Copyright and trademark remain with their owners.
+Contextual editorial identification only; no endorsement or permissive license claimed.
+
+Geek+
+Local asset: public/company-icons/geekplus.png
+Official identification asset: https://www.geekplus.com/hubfs/raw_assets/public/Geek%20Plus%202025/images/module-icons/favicon.png
+Source page: https://www.geekplus.com/en
+Checked October 11, 2026. Copyright and trademark remain with their owners.
+Contextual editorial identification only; no endorsement or permissive license claimed.
+
+Generalist
+Local asset: public/company-icons/generalistai.png
+Official identification asset: https://generalistai.com/assets/favicon/favicon-black.svg
+Source page: https://generalistai.com/
+Checked October 11, 2026. Copyright and trademark remain with their owners.
+Contextual editorial identification only; no endorsement or permissive license claimed.
+
+Hai Robotics
+Local asset: public/company-icons/hairobotics.png
+Official identification asset: https://www.hairobotics.com/themes/custom/hairobotics/favicon.ico
+Source page: https://www.hairobotics.com/
+Checked October 11, 2026. Copyright and trademark remain with their owners.
+Contextual editorial identification only; no endorsement or permissive license claimed.
+
+Hugging Face
+Local asset: public/company-icons/huggingface.png
+Official identification asset: https://huggingface.co/favicon.ico
+Source page: https://huggingface.co/
+Checked October 11, 2026. Copyright and trademark remain with their owners.
+Contextual editorial identification only; no endorsement or permissive license claimed.
+
+KEENON Robotics
+Local asset: public/company-icons/keenon.png
+Official identification asset: https://storage.keenon.cn/assets/site/keenon-static/static.keenon.com/assets/images/common/favicon.ico
+Source page: https://www.keenon.com/en
+Checked October 11, 2026. Copyright and trademark remain with their owners.
+Contextual editorial identification only; no endorsement or permissive license claimed.
+
+LimX Dynamics
+Local asset: public/company-icons/limxdynamics.png
+Official identification asset: https://www.limxdynamics.com/favicon.ico?favicon.41f4bc48.ico
+Source page: https://www.limxdynamics.com/zh
+Checked October 11, 2026. Copyright and trademark remain with their owners.
+Contextual editorial identification only; no endorsement or permissive license claimed.
+
+NEURA Robotics
+Local asset: public/company-icons/neura-robotics.png
+Official identification asset: https://neura-robotics.com/apple-touch-icon.png
+Source page: https://neura-robotics.com/
+Checked October 11, 2026. Copyright and trademark remain with their owners.
+Contextual editorial identification only; no endorsement or permissive license claimed.
+
+Pudu Robotics
+Local asset: public/company-icons/pudurobotics.png
+Official identification asset: https://www.pudurobotics.com/favicon.ico?v=20260831
+Source page: https://www.pudurobotics.com/en
+Checked October 11, 2026. Copyright and trademark remain with their owners.
+Contextual editorial identification only; no endorsement or permissive license claimed.
+
+Ant Group
+Local asset: public/company-icons/robbyant.png
+Official identification asset: https://avatars.githubusercontent.com/u/212647524?s=200&v=4
+Source page: https://www.robbyant.com/
+Checked October 11, 2026. Copyright and trademark remain with their owners.
+Contextual editorial identification only; no endorsement or permissive license claimed.
+
+Robotera
+Local asset: public/company-icons/robotera.png
+Official identification asset: https://www.robotera.com/icon.png
+Source page: https://www.robotera.com/
+Checked October 11, 2026. Copyright and trademark remain with their owners.
+Contextual editorial identification only; no endorsement or permissive license claimed.
+
+Sanctuary AI
+Local asset: public/company-icons/sanctuary.png
+Official identification asset: https://sanctuary.ai/wp-content/uploads/2026/03/cropped-sanctuary-emblem-favicon-dark-32x32.png
+Source page: https://sanctuary.ai/
+Checked October 11, 2026. Copyright and trademark remain with their owners.
+Contextual editorial identification only; no endorsement or permissive license claimed.
+
+SignalFlag
+Local asset: public/company-icons/signalflag.png
+Official identification asset: https://signalflag.ai/favicon.ico
+Source page: https://signalflag.ai/
+Checked October 11, 2026. Copyright and trademark remain with their owners.
+Contextual editorial identification only; no endorsement or permissive license claimed.
+
+Spirit AI
+Local asset: public/company-icons/spirit-ai.png
+Official identification asset: https://www.spirit-ai.com/templates/dist/images/favicon.ico
+Source page: https://www.spirit-ai.com/
+Checked October 11, 2026. Copyright and trademark remain with their owners.
+Contextual editorial identification only; no endorsement or permissive license claimed.
+
+Unitree
+Local asset: public/company-icons/unitree.png
+Official identification asset: https://www.unitree.com/unitree-favicon.svg
+Source page: https://www.unitree.com/
+Checked October 11, 2026. Copyright and trademark remain with their owners.
+Contextual editorial identification only; no endorsement or permissive license claimed.
+
+X Square
+Local asset: public/company-icons/x2robot.png
+Official identification asset: https://x2robot.com/api/images/file/logo.svg
+Source page: https://x2robot.com/
+Checked October 11, 2026. Copyright and trademark remain with their owners.
+Contextual editorial identification only; no endorsement or permissive license claimed.
+
+XPENG
+Local asset: public/company-icons/xpeng.png
+Official identification asset: https://a-cdn.xpeng.com/mall/public/favicon.svg
+Source page: https://www.xpeng.com/
+Checked October 11, 2026. Copyright and trademark remain with their owners.
+Contextual editorial identification only; no endorsement or permissive license claimed.

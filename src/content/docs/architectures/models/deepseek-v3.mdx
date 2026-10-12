@@ -1,0 +1,191 @@
+---
+title: DeepSeek-V3
+description: How expert routing, multi token prediction, and numerical engineering combine at large scale.
+lastUpdated: 2026-10-10
+---
+
+import FocusCanvas from '../../../../components/FocusCanvas.astro';
+import SourceFigure from '../../../../components/architectures/SourceFigure.astro';
+
+<ModelResources reportHref="https://arxiv.org/pdf/2412.19437v1" modelHref="https://huggingface.co/deepseek-ai/DeepSeek-V3" modelName="deepseek-ai/DeepSeek-V3" />
+
+DeepSeek-V3 scales the latent attention and sparse experts of [DeepSeek-V2](/architectures/models/deepseek-v2/), then improves the machinery that makes that scale affordable. Its distinctive contribution is a coordinated design: routing, training signals, precision, and communication are optimized together.[^report]
+
+## Highlights
+
+- **Balance routing without the main balancing loss.** Expert specific biases change which experts are selected without changing the weights used to combine their outputs. A small sequence balancing loss still remains.[^report]
+- **Learn one more future token.** A sequential prediction module supplies an additional training objective while preserving causal conditioning. It can be discarded for ordinary inference.[^report]
+- **Make low precision training selective.** FP8 matrix operations use carefully chosen scaling and accumulation, rather than converting the entire training computation blindly to eight bits.[^report]
+
+Its research value is the connection between architectural ideas and executable systems constraints. The release provides inspectable weights and inference code, but its complete training infrastructure and data are not a turnkey reproduction.[^repo]
+
+Study scope: original December 2024 report, relevant precision and routing appendices, original V3 configuration, official inference paths, and licenses. No checkpoint executed. Evidence checked October 10, 2026.
+
+## Model in numbers
+
+Representative checkpoint: **DeepSeek-V3**, the original post trained release, not V3-0324 or later V3.x.
+
+| Dimension | Value and scope |
+| --- | --- |
+| Parameters | 671B in the main model, 37B active per token. Released files additionally contain approximately 14B of MTP module weights: 685B is not the main network count.[^report][^repo] |
+| Pretraining | 14.8T processed training tokens; unique source volume and the full mixture are not disclosed.[^report] |
+| SFT | 1.5M instances spanning reasoning and other domains; RL rollout count undisclosed.[^report] |
+| Compute | 2.788M H800 GPU hours for the reported official training stages; includes 2.664M for pretraining. Experiments, earlier research and project overhead are excluded.[^report] |
+| Context | Pretraining at 4K; extension stages at 32K then 128K; reported retrieval tests to 128K. Config capacity is 163,840 positions.[^report][^config] |
+
+## Architecture and routing
+
+The released main model has 61 layers and a 7,168 wide residual stream. The first three FFNs are dense. Other layers run one shared expert and eight selected experts from 256, each with intermediate width 2,048. MLA uses 128 query heads, a 512 dimensional KV content latent, and a 64 dimensional positional key.[^config]
+
+<FocusCanvas label="Inherited DeepSeek MLA and expert residual block with separate compressed content and position paths" size="figure">
+<SourceFigure id="figure-1" src="/figures/model-studies/deepseek-v3/report-architecture.png" alt="Inherited DeepSeek MLA and expert residual block with separate compressed content and position paths" minWidth={620}>
+<div slot="image">
+
+![Inherited DeepSeek MLA and expert residual block with separate compressed content and position paths](/figures/model-studies/deepseek-v3/report-architecture.png)
+
+</div>
+
+**Figure 1.** MLA and the shared and routed expert branches. Reproduced from DeepSeek-AI, V3 report Figure 2.[^architecture]
+</SourceFigure>
+</FocusCanvas>
+
+[Figure 1](#figure-1) shows V3's block structure, inherited from V2, rather than a table of model dimensions. Its always active shared branch, selected routed branches, and latent attention path remain, while V3 changes their dimensions and routing control.[^report]
+
+For routing, let <MathExpression tex="s_i" /> be a sigmoid affinity score and <MathExpression tex="b_i" /> the balancing bias for expert <MathExpression tex="i" />. Selection and weighting deliberately use different values:[^report]
+
+<MathExpression display number="1" tex="\mathcal{E}_t=\operatorname{TopK}_i(s_{i,t}+b_i),\qquad g_{i,t}=\frac{s_{i,t}}{\sum_{j\in\mathcal{E}_t}s_{j,t}},\quad i\in\mathcal{E}_t" />
+
+An overloaded expert receives a lower bias; an underused expert receives a higher bias. This controller updates from load statistics rather than gradients from the main balancing loss. The selected outputs retain their original affinity based weights. Equation (1) shows normalization before the release code multiplies routed weights by its 2.5 scale factor. The bias changes selection, not that scale or the underlying affinities.[^code][^config] Calling this “no auxiliary losses anywhere” would be wrong: V3 retains a small sequence level term to prevent extreme imbalance within a sequence. Routing is also limited to four nodes per token.[^report]
+
+The tradeoff is operational complexity. Balance depends on monitoring and update rules, placement, and dispatch. Lower active parameters do not remove all to all communication or the need to store expert weights. Unlike V2's capacity policy, the reported V3 training and inference do not drop expert assignments.[^report]
+
+<FocusCanvas label="V3 routing splits affinity scores into biased selection and unbiased mixture weights, with batch loads updating the next selection bias" size="figure">
+<SourceFigure id="figure-2" src="/figures/model-studies/deepseek-v3/routing-controller.svg" alt="V3 routing splits affinity scores into biased selection and unbiased mixture weights, with batch loads updating the next selection bias" minWidth={650}>
+<div slot="image">
+
+![V3 routing splits affinity scores into biased selection and unbiased mixture weights, with batch loads updating the next selection bias](/figures/model-studies/deepseek-v3/routing-controller.svg)
+
+</div>
+
+**Figure 2.** Routing control and mixture weights are separate. Independent mechanism diagram based on Section 2.1.2 and the inspected gate code.[^routing][^code]
+</SourceFigure>
+</FocusCanvas>
+
+[Figure 2](#figure-2) follows two paths from the same affinities. Biased scores determine eligible nodes and the selected expert IDs. Original scores determine their mixture weights. Batch load feedback changes only the next step's selection bias; the shared expert bypasses this selection.[^routing][^code]
+
+<details>
+<summary>Controller schedule and what the ablation actually isolates</summary>
+
+The bias update rate is 0.001 for the first 14.3T tokens, then zero for the final 500B. The retained sequence balancing coefficient is 0.0001. Node limited routing selects at most four nodes; the released gate computes group scores from the two largest biased scores, masks other groups, then selects the token's experts. This placement constraint does not turn the sigmoid affinities into probabilities over all experts.[^routing][^code]
+
+Importantly, Section 4.5.3 finds that a **batch level auxiliary loss** can match bias based balancing. Its 1B model validation losses are 2.258 with sequence balancing, 2.253 with the controller, and 2.253 with batch balancing. This supports the value of a more flexible batch constraint, not a claim that every auxiliary gradient is inherently harmful. Batch balance also does not guarantee balance for a smaller domain specific inference batch.[^balance]
+
+</details>
+
+## Multi token prediction
+
+<FocusCanvas size="diagram" label="Original DeepSeek-V3 multi-token prediction diagram: each later causal prediction depth receives a shifted token embedding and the preceding representation, with embeddings and output heads shared.">
+<SourceFigure id="figure-3" src="/figures/model-studies/deepseek-v3/report-mtp.png" alt="Original DeepSeek-V3 multi-token prediction diagram: each later causal prediction depth receives a shifted token embedding and the preceding representation, with embeddings and output heads shared." minWidth={860}>
+<div slot="image">
+
+![Original DeepSeek-V3 multi-token prediction diagram: each later causal prediction depth receives a shifted token embedding and the preceding representation, with embeddings and output heads shared.](/figures/model-studies/deepseek-v3/report-mtp.png)
+
+</div>
+
+**Figure 3.** Sequential prediction depths preserve the causal chain. Reproduced from DeepSeek-AI, report Figure 3.[^mtp-figure]
+</SourceFigure>
+</FocusCanvas>
+
+The report draws two possible extra depths in [Figure 3](#figure-3); the
+reported V3 run uses **one**. Follow the shifted input and target tokens: each
+extra depth extends its valid prefix before predicting a later token. This
+is sequential prediction, not parallel heads independently predicting every
+future token.[^report]
+
+The extra module combines the preceding depth's hidden representation with the embedding of the next ground truth token, using normalization, concatenation, and a projection. A causal Transformer block then predicts the following token. Embeddings and the output head are shared with the main model.[^report]
+
+<MathExpression display number="2" tex="\mathcal{L}=\mathcal{L}_{\mathrm{next}}+\lambda\mathcal{L}_{\mathrm{extra}}" />
+
+Equation (2) is the one extra depth case used by V3. The additional teacher forced token belongs only to the extra target's valid prefix, not to the main next token predictor. The authors interpret denser supervision and future planning as motivations; benchmark ablations provide the evidence, rather than those interpretations proving the benefit.[^report]
+
+At inference the main model works without MTP. A supporting backend may instead use the module as a speculative proposer and verify its proposals. Section 5.4.3 reports 85–90% second token acceptance and approximately 1.8 times tokens per second in its deployment experiment, without a complete hardware and workload protocol for that figure. These are backend results, not a guarantee that ordinary Transformers generation automatically invokes MTP.[^mtp][^repo]
+
+## Training precision and systems
+
+FP8 is used selectively for linear matrix operations in forward, activation gradient, and weight gradient computation. The crucial choices are **where to scale, where to accumulate, and what not to quantize**.[^precision]
+
+| Numerical path | Reported choice and reason |
+| --- | --- |
+| Input activations | 1 × 128 tiles; local scales limit outlier contamination across tokens. |
+| Weights | 128 × 128 blocks; all FP8 tensors use E4M3. |
+| Partial sums | Promote partial accumulation to FP32 every 128 inner dimension elements to limit H800 accumulation error. |
+| Sensitive network operations | Embeddings, output head, gates, normalization and attention remain higher precision. |
+| Optimizer state | FP32 master parameters and gradients; BF16 first and second Adam moments. |
+
+These choices come from Section 3.3, not the checkpoint's storage tag. Appendix B reports less than 0.25% relative loss differences versus BF16 for approximately 16B and 230B internal models. Quantizing activation gradients with a coarser block scheme instead diverged in a separate 16B, 300B token experiment. Low precision success is conditional on those protection paths.[^precision]
+
+DualPipe feeds microbatches from both pipeline ends and overlaps attention, expert dispatch, expert computation, combination, and forward/backward work. The reported setup uses 16 way pipeline and 64 way expert parallelism with ZeRO-1, without tensor parallelism for training. Reduced bubbles trade against retaining two parameter copies. Those training choices differ from the tensor parallel inference layouts below and are not all present in the lightweight release.[^systems][^repo]
+
+<details>
+<summary>Disclosed training stages and accounting</summary>
+
+Pretraining uses a 128K BBPE vocabulary and fills in the middle on 10% of the data. Packed pretraining examples are not separated by cross sample attention masks; packed SFT examples are. AdamW peaks at 0.00022. MTP has one extra depth, weighted 0.3 for the first 10T tokens and 0.1 for the final 4.8T. YaRN extension uses two 1,000 step stages at 32K and 128K.[^training]
+
+SFT trains for two epochs. Reasoning examples include outputs shaped using an internal R1 model and expert generators; nonreasoning examples include V2.5 generations checked by humans. GRPO then uses rule based verification where possible and model based rewards for less directly verifiable responses.[^report]
+
+The often cited financial number is an estimate using a stipulated two dollars per H800 hour. It covers the reported official training run, not the cost of inventing the method, collecting data, failed experiments, hardware acquisition, or all staffing. Accelerator hours, FLOPs, and total project cost are different quantities.[^report]
+
+</details>
+
+## Inference and evaluation
+
+The official inference implementation has separate absorbed latent attention and ordinary expanded attention paths. In the absorbed path, cached content latents and positional keys are used directly; selected expert outputs and shared outputs are combined before returning to the residual stream. Quantized checkpoint storage and actual runtime precision are separate choices. The absorbed path projects queries into the 512 dimensional cached latent, mixes that latent history, and applies the value projection afterward; it does not reconstruct full old KV states before cache lookup.[^code][^config]
+
+The report separates prompt processing from generation in its production deployment:[^systems]
+
+| Serving stage | Example reported deployment |
+| --- | --- |
+| Prefill | 32 H800 GPUs, TP4, DP8 and EP32; two attention/MLP microbatches overlap work. |
+| Decode | 320 H800 GPUs, TP4, DP80 and EP320; placement replicates hot experts to reduce imbalance. |
+
+These are system configurations for the authors’ workloads, **not minimum hardware requirements to load the weights**. Batch composition, expert replication, shared expert placement and attention cache traffic affect achieved throughput.[^systems]
+
+Targeted ablations are more informative than the headline final scores. Table 4 tests MTP on internal 15.7B and 228.7B models while retaining the same data and other architecture, and discards MTP for inference. Table 5 tests bias based routing on 15.7B and 228.7B models. Large model HumanEval improves from 40.2 to 46.3 under that comparison, but MMLU falls from 68.3 to 67.2. “Better on most tested tasks” is not “uniformly better.”[^report]
+
+Post trained scores also include data curation, distillation, and alignment. They do not isolate routing, FP8, or MLA. The final comparisons have benchmark specific prompts and budgets in Section 5.3, rather than one universal sampling setup.[^report]
+
+## Limits and lessons
+
+V3 still needs substantial hardware to hold hundreds of billions of stored parameters. Compressed cache grows with sequence length; efficient serving additionally depends on expert placement, batching and communication. The report's original license is the DeepSeek Model License for weights, with use restrictions, and MIT for code. Later model releases must be assessed separately.[^license][^repo]
+
+Study V3 as a system of interacting choices. Better routing supplies capacity without the same gradient constraint; MTP changes learning signals; selective precision and pipeline scheduling make the computation practical. Continue to [DeepSeek-R1](/architectures/models/deepseek-r1/) to see what changes when reasoning behavior becomes the main post training target.
+
+[^report]: DeepSeek-AI. [DeepSeek-V3 Technical Report](https://arxiv.org/pdf/2412.19437v1), December 27, 2024. Sections 2 to 5, Table 1, Tables 4 and 5, and Appendix B. Original version inspected October 10, 2026.
+
+[^config]: DeepSeek-AI. [Original DeepSeek-V3 configuration](https://huggingface.co/deepseek-ai/DeepSeek-V3/blob/e815299b0bcbac849fa540c768ef21845365c9eb/config.json), inspected October 10, 2026.
+
+[^repo]: DeepSeek-AI. [DeepSeek-V3 release repository](https://github.com/deepseek-ai/DeepSeek-V3/tree/9b4e9788e4a3a731f7567338ed15d3ec549ce03b); model summary, weight accounting and deployment guidance.
+
+[^code]: DeepSeek-AI. [Official inference model](https://github.com/deepseek-ai/DeepSeek-V3/blob/9b4e9788e4a3a731f7567338ed15d3ec549ce03b/inference/model.py), `MLA.forward`, `Gate.forward`, and `MoE.forward`; inspected without execution.
+
+[^license]: DeepSeek-AI. [Original V3 Model License](https://github.com/deepseek-ai/DeepSeek-V3/blob/9b4e9788e4a3a731f7567338ed15d3ec549ce03b/LICENSE-MODEL), Section III and Attachment A; code terms are in LICENSE-CODE.
+
+
+[^architecture]: DeepSeek-AI. [DeepSeek-V3 Technical Report](https://arxiv.org/pdf/2412.19437v1#page=7), arXiv v1, Figure 2, p. 7. Artwork retained; surrounding prose and caption omitted. Original copyright retained; [source and reuse record](/figures/model-studies/deepseek-v3/SOURCES.md).
+
+
+[^routing]: DeepSeek-AI. [V3 report](https://arxiv.org/pdf/2412.19437v1), Section 2.1.2 and Section 4.2: bias based selection, sequence auxiliary term, node constraints and bias schedule.
+
+[^balance]: DeepSeek-AI. [V3 report](https://arxiv.org/pdf/2412.19437v1), Section 4.5.3 and Figure 9: batch versus sequence balancing and the 1B/3B validation loss comparison.
+
+[^mtp]: DeepSeek-AI. [V3 report](https://arxiv.org/pdf/2412.19437v1), Sections 2.2, 4.2, 4.5.1 and 5.4.3: one depth training, loss weights, matched comparisons and deployment acceptance claim.
+
+[^precision]: DeepSeek-AI. [V3 report](https://arxiv.org/pdf/2412.19437v1), Sections 3.3.1–3.3.3 and Appendix B, Figure 10: scaling granularity, accumulation promotion, protected paths and failure ablation.
+
+[^systems]: DeepSeek-AI. [V3 report](https://arxiv.org/pdf/2412.19437v1), Sections 3.1–3.2 and 3.4: training layout, DualPipe tradeoff, prefill/decode deployment and redundant experts.
+
+[^training]: DeepSeek-AI. [V3 report](https://arxiv.org/pdf/2412.19437v1), Sections 4.1–4.3 and 5.1–5.2: vocabulary, packing, FIM, schedules, SFT masks and reward construction.
+
+
+
+[^mtp-figure]: DeepSeek-AI. [DeepSeek-V3 Technical Report](https://arxiv.org/pdf/2412.19437v1#page=10), arXiv v1, Figure 3, p. 10. The figure illustrates multiple possible MTP depths; the reported V3 run uses one additional depth. Artwork retained; [source and reuse record](/figures/model-studies/deepseek-v3/SOURCES.md).

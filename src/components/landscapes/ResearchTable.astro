@@ -1,0 +1,128 @@
+---
+import { readCompanyBases } from '../../../plugins/research-table.mjs';
+import { decorateCompanyCells } from '../../../plugins/company-icons.mjs';
+interface Props { id?: string; label: string; categoryColumn?: number; basesJson?: string; }
+const { id, label, categoryColumn = 1, basesJson } = Astro.props;
+let tableHtml = decorateCompanyCells(await Astro.slots.render('default'));
+const tbody = tableHtml.match(/<tbody[^>]*>([\s\S]*?)<\/tbody>/)?.[1] ?? '';
+const bases = readCompanyBases(basesJson, (tbody.match(/<tr(?=\s|>)/g) ?? []).length);
+if (bases.length) {
+  let index = 0;
+  tableHtml = tableHtml.replace(/(<tbody[^>]*>)([\s\S]*?)(<\/tbody>)/,
+    (_: string, start: string, rows: string, end: string) => start + rows.replace(/<tr(?=\s|>)/g,
+      () => '<tr data-company-bases="' + bases[index++].join(';') + '"') + end);
+}
+---
+
+<research-table id={id} data-category-column={categoryColumn}>
+	<div class="tools not-content" hidden>
+		<label>Search companies<input type="search" placeholder="Company, product, or keyword" /></label>
+		<label>Category<select data-filter="category"><option value="">All categories</option></select></label>
+		{bases.length > 0 && <label>Company base<select data-filter="base"><option value="">All bases</option></select></label>}
+		<button type="button">Reset</button>
+		<p role="status" aria-live="polite" aria-atomic="true"></p>
+	</div>
+	<p class="scroll-hint not-content">Scroll the table sideways on smaller screens. Focus view gives the comparison more room on desktop.</p>
+	<div class="table-scroll" tabindex="0" role="region" aria-label={label}>
+		<Fragment set:html={tableHtml} />
+	</div>
+	<p class="empty not-content" hidden>No companies match. Try another search or reset the filters.</p>
+</research-table>
+
+<script>
+	class ResearchTable extends HTMLElement {
+		connectedCallback() {
+			if (this.dataset.ready) return;
+			const input = this.querySelector('input');
+			const select = this.querySelector<HTMLSelectElement>('[data-filter="category"]');
+			const baseSelect = this.querySelector<HTMLSelectElement>('[data-filter="base"]');
+			const reset = this.querySelector('button');
+			const status = this.querySelector('[role="status"]');
+			const tools = this.querySelector<HTMLElement>('.tools');
+			const empty = this.querySelector<HTMLElement>('.empty');
+			const rows = Array.from(this.querySelectorAll<HTMLTableRowElement>('tbody tr'));
+			if (!input || !select || !reset || !status || !tools || !empty || !rows.length) return;
+			this.dataset.ready = 'true';
+			// Local assets normally load; retain a legible fallback after an image failure.
+			this.querySelectorAll<HTMLImageElement>('.company-mark img').forEach(image => {
+				const fallback = () => { image.hidden = true; };
+				image.addEventListener('error', fallback, {once:true});
+				if(image.complete && image.naturalWidth === 0) fallback();
+			});
+			const column = Number(this.dataset.categoryColumn ?? 1);
+			const category = (row: HTMLTableRowElement) => row.cells[column]?.textContent?.trim() ?? '';
+			[...new Set(rows.map(category))].sort().forEach(value => select.add(new Option(value, value)));
+			const companyBases = (row: HTMLTableRowElement) => (row.dataset.companyBases ?? '').split(';').filter(Boolean);
+			if (baseSelect) [...new Set(rows.flatMap(companyBases))].sort().forEach(value => baseSelect.add(new Option(value, value)));
+			const searchable = (row: HTMLTableRowElement) => [row.cells[0]?.querySelector('.company-copy')?.textContent ?? row.cells[0]?.textContent ?? '', ...Array.from(row.cells).slice(1).map(cell => cell.textContent ?? '')].join(' ').toLocaleLowerCase();
+			const filter = () => {
+				const query = input.value.trim().toLocaleLowerCase();
+				let count = 0;
+				rows.forEach(row => {
+					row.hidden = !(searchable(row).includes(query) && (!select.value || category(row) === select.value) && (!baseSelect?.value || companyBases(row).includes(baseSelect.value)));
+					if (!row.hidden) count++;
+				});
+				status.textContent = `${count} of ${rows.length} companies`;
+				empty.hidden = count > 0;
+			};
+			input.addEventListener('input', filter);
+			select.addEventListener('change', filter);
+			baseSelect?.addEventListener('change', filter);
+			reset.addEventListener('click', () => { input.value = ''; select.value = ''; if (baseSelect) baseSelect.value = ''; filter(); input.focus(); });
+			tools.hidden = false;
+			filter();
+		}
+	}
+	if (!customElements.get('research-table')) customElements.define('research-table', ResearchTable);
+</script>
+
+<style>
+	research-table { display: block; min-width: 0; margin-block: 1.5rem; }
+	.tools { display: flex; align-items: end; flex-wrap: wrap; gap: .8rem; padding: 1rem; border: 1px solid var(--nb-border); border-radius: .6rem .6rem 0 0; background: color-mix(in srgb, var(--nb-muted-foreground) 5%, var(--nb-background)); }
+	.tools[hidden], .empty[hidden] { display: none; }
+	label { display: grid; gap: .35rem; font-size: .8rem; font-weight: 600; }
+	label:first-child { flex: 1 1 14rem; }
+	input, select, button { font: inherit; font-weight: 400; color: var(--nb-foreground); background: var(--nb-background); border: 1px solid var(--nb-border); border-radius: .3rem; padding: .6rem; min-height: 2.7rem; }
+	select { max-width: 100%; min-width: 0; }
+	input { min-width: 0; width: 100%; }
+	button { cursor: pointer; }
+	.tools p { width: 100%; margin: 0; color: var(--nb-muted-foreground); font-size: .8rem; }
+	.table-scroll { isolation: isolate; overscroll-behavior-inline: contain; overflow-x: auto; border: 1px solid var(--nb-border); border-radius: 0 0 .6rem .6rem; }
+	.table-scroll:focus-visible, input:focus-visible, select:focus-visible, button:focus-visible { outline: 2px solid var(--nb-primary); outline-offset: 3px; }
+	.table-scroll :global(table) { display: table; width: 100%; min-width: 64rem; margin: 0; font-size: .85rem; }
+	.table-scroll :global(th), .table-scroll :global(td) { padding: .85rem; vertical-align: top; }
+	.table-scroll :global(th:first-child), .table-scroll :global(td:first-child) { position: sticky; left: 0; min-width: 11rem; width: 13rem; background: var(--nb-background); z-index: 1; }
+	.table-scroll :global(td:nth-child(2)) { min-width: 8rem; }
+	.table-scroll :global(td:nth-child(3)) { min-width: 11rem; }
+	.table-scroll :global(td:nth-child(4)) { min-width: 21rem; }
+	.table-scroll :global(td:nth-child(5)) { min-width: 17rem; }
+	.table-scroll :global(td:nth-child(6)) { min-width: 17rem; }
+	.table-scroll :global(th) { text-align: left; font-size: .75rem; letter-spacing: .015em; }
+	.table-scroll :global(td) { line-height: 1.65; }
+	.table-scroll :global(.company-identity) { display: flex; align-items: flex-start; gap: .6rem; }
+	.table-scroll :global(.company-copy) { display: block; min-width: 0; flex: 1; overflow-wrap: anywhere; }
+	.table-scroll :global(.company-mark) { display: inline-grid; position: relative; flex: 0 0 24px; width: 24px; height: 24px; margin-top: .15rem; place-items: center; }
+	.table-scroll :global(.company-initials) { font-size: .62rem; line-height: 1; font-weight: 600; color: var(--nb-muted-foreground); }
+	.table-scroll :global(.company-mark img) { position: absolute; inset: 0; width: 24px; height: 24px; margin: 0; object-fit: contain; border-radius: 3px; background: #fff; }
+	.table-scroll :global(.company-mark img[hidden]) { display: none; }
+	.table-scroll :global(td:first-child a) { font-weight: 600; }
+	.table-scroll :global(tbody tr:nth-child(even) td) { background: color-mix(in srgb, var(--nb-muted-foreground) 3%, var(--nb-background)); }
+	.table-scroll :global(th:first-child), .table-scroll :global(td:first-child) { box-shadow: 1px 0 var(--nb-border); }
+	.table-scroll :global(.nb-table-scroll) { overflow: visible; max-width: none; margin: 0; }
+	@media(max-width:620px) {
+		.tools { padding: .8rem; gap: .65rem; }
+		label:first-child { flex-basis: 100%; }
+		.table-scroll :global(table) { min-width: 0; }
+		.table-scroll :global(th) { white-space: normal; }
+		.table-scroll :global(th:first-child), .table-scroll :global(td:first-child) { min-width: 9rem; width: 9rem; }
+		/* Leave room for the pinned identity and one readable data column. */
+		.table-scroll :global(td:nth-child(3)) { min-width: min(11rem, calc(100vw - 11.25rem)); }
+		.table-scroll :global(td:nth-child(n+4)) { min-width: min(17rem, calc(100vw - 11.25rem)); width: min(17rem, calc(100vw - 11.25rem)); }
+	}
+	.table-scroll :global(tr[hidden]) { display: none; }
+	.empty { font-size: .9rem; }
+	.scroll-hint { font-size: .78rem; color: var(--nb-muted-foreground); margin-block: .65rem; }
+	@media print { .tools, .empty, .scroll-hint { display: none; } .table-scroll { overflow: visible; } .table-scroll :global(table) { min-width: 0; }  }
+	/* Match the preflight layer: layered !important beats unlayered !important. */
+	@layer base { @media print { .table-scroll :global(tr[hidden]) { display: table-row !important; } } }
+</style>

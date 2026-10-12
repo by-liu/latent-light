@@ -1,0 +1,23 @@
+{
+  "title": "Gemma 2: Improving Open Language Models at a Practical Size",
+  "authors": [
+    "Gemma Team, Google DeepMind"
+  ],
+  "year": 2024,
+  "arxiv_id": "2408.00118",
+  "version": "v3",
+  "version_date": "2024-10-02",
+  "report_url": "https://arxiv.org/abs/2408.00118v3",
+  "pdf_url": "https://arxiv.org/pdf/2408.00118v3",
+  "inspected_pdf_archive": "/tmp/gemma-expansion/gemma-2.pdf",
+  "archive_boundary": "Outside public repository;temporary session archive. Canonical version URL and checksum retained for exact refetch.",
+  "pdf_sha256": "e81333353e58a01cbca0b6d5aec28caa5a7c6d26b52d227844bcce1bd87dc557",
+  "inspection_scope": "Main architecture/training/post-training §§2–4; ablations Tables6–11; academic evaluation and memorization §7,Figure1",
+  "accessed": "2026-10-10",
+  "license": {
+    "status": "verified",
+    "value": "CC BY 4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "license_evidence": "Version-specific arXivHTML top-level Creative Commons CC BY4.0 link inspected; CC deed inspected; distinct model/software terms retained."
+}

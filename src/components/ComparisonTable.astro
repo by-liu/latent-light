@@ -1,0 +1,82 @@
+---
+import {prepareComparisonTable} from '../../plugins/comparison-table.mjs';
+interface Props {id:string;title:string;label:string;search?:boolean;itemLabel?:string;}
+const {id,title,label,search=false,itemLabel='rows'}=Astro.props;
+const source=await Astro.slots.render('default');
+const {content,rowCount,columns}=prepareComparisonTable(source);
+---
+<comparison-table id={id} class="comparison" data-item-label={itemLabel} data-columns={columns}>
+ <header class="comparison-header"><p class="comparison-title">{title}</p><span class="comparison-count">{rowCount} {itemLabel}</span></header>
+ {search&&<div class="comparison-tools not-content" hidden>
+  <label for={id+'-search'} class="search-label">Search {itemLabel}<input type="search" id={id+'-search'} placeholder="Name, technique or keyword" autocomplete="off" /></label>
+  <button type="button" class="reset" aria-label={'Clear '+title+' search'}>Reset</button>
+  <span class="search-status" role="status" aria-live="polite" aria-atomic="true"></span>
+ </div>}
+ <div class="comparison-scroll" tabindex="0" role="region" aria-label={label} set:html={content}/>
+ <p class="comparison-empty not-content" hidden>No matching {itemLabel}. Try another term or reset the search.</p>
+ <p class="comparison-hint not-content">Scroll to compare. Focus view gives the table more room.</p>
+</comparison-table>
+<script>
+ class ComparisonTable extends HTMLElement {
+  connectedCallback() {
+   if(this.dataset.ready)return;
+   const tools=this.querySelector<HTMLElement>('.comparison-tools');
+   const input=this.querySelector<HTMLInputElement>('input[type="search"]');
+   const reset=this.querySelector<HTMLButtonElement>('.reset');
+   const status=this.querySelector<HTMLElement>('.search-status');
+   const empty=this.querySelector<HTMLElement>('.comparison-empty');
+   const rows=Array.from(this.querySelectorAll<HTMLTableRowElement>('tbody tr'));
+   if(!tools||!input||!reset||!status||!empty)return;
+   this.dataset.ready='true';
+   const index=rows.map(row=>({row,text:(row.textContent||'').toLocaleLowerCase()}));
+   const filter=()=>{
+    const terms=input.value.trim().toLocaleLowerCase().split(/\s+/).filter(Boolean);
+    let count=0;for(const entry of index){entry.row.hidden=!terms.every(term=>entry.text.includes(term));if(!entry.row.hidden)count++;}
+    status.textContent=count+' of '+rows.length+' '+this.dataset.itemLabel;
+    empty.hidden=count!==0;
+   };
+   input.addEventListener('input',filter);
+   reset.addEventListener('click',()=>{input.value='';filter();input.focus();});
+   tools.hidden=false;filter();
+  }
+ }
+ if(!customElements.get('comparison-table'))customElements.define('comparison-table',ComparisonTable);
+</script>
+<style>
+ .comparison{display:block;min-width:0;margin:1.6rem 0 2rem;border:1px solid var(--nb-border);border-radius:.85rem;background:var(--nb-background);overflow:hidden;scroll-margin-top:5rem;}
+ .comparison-header{display:flex;align-items:center;gap:1rem;justify-content:space-between;padding:.95rem 1rem;background:color-mix(in srgb,var(--nb-muted) 45%,var(--nb-background));border-bottom:1px solid var(--nb-border);}
+ .comparison-title{font-size:.86rem;line-height:1.4;font-weight:650;letter-spacing:-.015em;margin:0;}
+ .comparison-count{font-size:.68rem;color:var(--nb-muted-foreground);white-space:nowrap;font-variant-numeric:tabular-nums;}
+ .comparison-tools{display:flex;align-items:end;gap:.65rem;flex-wrap:wrap;padding:.8rem 1rem;border-bottom:1px solid var(--nb-border);}
+ .comparison-tools[hidden],.comparison-empty[hidden]{display:none;}
+ .search-label{display:flex;flex-direction:column;gap:.3rem;flex:1 1 15rem;font-size:.65rem;font-weight:600;color:var(--nb-muted-foreground);}
+ .search-label input{width:100%;min-width:0;border:1px solid var(--nb-border-strong);border-radius:.4rem;background:var(--nb-background);color:var(--nb-foreground);padding:.45rem .65rem;font-family:inherit;font-size:.8rem;line-height:1.5;}
+ .search-label input::placeholder{color:var(--nb-muted-foreground);font-weight:400;}
+ .reset{border:1px solid var(--nb-border);border-radius:.4rem;padding:.45rem .7rem;font-size:.75rem;line-height:1.6;color:var(--nb-foreground);background:var(--nb-muted);cursor:pointer;}
+ .reset:hover{background:color-mix(in srgb,var(--nb-muted) 70%,var(--nb-border));}
+ .search-status{font-size:.65rem;line-height:1.5;padding-bottom:.55rem;color:var(--nb-muted-foreground);white-space:nowrap;font-variant-numeric:tabular-nums;}
+ .comparison-scroll{overflow-x:auto;overflow-y:hidden;max-width:100%;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;}
+ .comparison-scroll:focus-visible,.search-label input:focus-visible,.reset:focus-visible{outline:2px solid var(--nb-foreground);outline-offset:-2px;}
+ .comparison-scroll :global(.nb-table-scroll){overflow:visible;max-width:none;}
+ .comparison-scroll :global(table){width:100%;min-width:52rem;table-layout:fixed;border:0;border-radius:0;margin:0;max-width:none;border-collapse:separate;border-spacing:0;}
+ .comparison[data-columns="4"] :global(table){min-width:61rem;}
+ .comparison-scroll :global(th),.comparison-scroll :global(td){padding:.85rem 1rem;vertical-align:top;text-align:left;font-size:.8rem;line-height:1.65;border-bottom:1px solid var(--nb-border);overflow-wrap:anywhere;}
+ .comparison-scroll :global(thead th){background:var(--nb-muted);font-size:.68rem;font-weight:650;line-height:1.5;white-space:normal;color:var(--nb-muted-foreground);}
+ .comparison-scroll :global(thead th:first-child){width:10rem;}
+ .comparison-scroll :global(tbody th){font-weight:600;font-size:.8rem;white-space:normal;}
+ .comparison-scroll :global(tbody tr){--row-background:var(--nb-background);}
+ .comparison-scroll :global(tbody tr:nth-child(even)){--row-background:color-mix(in srgb,var(--nb-muted) 30%,var(--nb-background));}
+ .comparison-scroll :global(tbody th),.comparison-scroll :global(tbody td){background:var(--row-background);}
+ .comparison-scroll :global(tbody tr:hover){--row-background:color-mix(in srgb,var(--nb-muted) 65%,var(--nb-background));}
+ .comparison-scroll :global(th:first-child){position:sticky;left:0;z-index:1;border-right:1px solid var(--nb-border);}
+ .comparison-scroll :global(thead th:first-child){z-index:2;}
+ .comparison-scroll :global(thead th){border-radius:0!important;}
+ .comparison-scroll :global(tbody tr:last-child th),.comparison-scroll :global(tbody tr:last-child td){border-bottom:0;}
+ .comparison-scroll :global(sup){font-size:.68em;}
+ .comparison-scroll :global(a[data-footnote-ref]){font-weight:500;}
+ .comparison-empty{margin:0;padding:1rem;font-size:.8rem;color:var(--nb-muted-foreground);border-bottom:1px solid var(--nb-border);}
+ .comparison-hint{margin:0;padding:.55rem 1rem;border-top:1px solid var(--nb-border);font-size:.62rem;line-height:1.5;color:var(--nb-muted-foreground);}
+ @media(max-width:520px){.comparison-header{padding:.8rem}.comparison-title{font-size:.8rem}.comparison-tools{padding:.7rem .8rem}.search-label{flex-basis:calc(100% - 4.5rem)}.search-status{flex-basis:100%;padding-bottom:0}.comparison-scroll :global(thead th:first-child){width:7.5rem}.comparison-scroll :global(table){min-width:calc(7.5rem + (100vw - 10rem)*2)}.comparison[data-columns="4"] :global(table){min-width:calc(7.5rem + (100vw - 10rem)*3)}.comparison-scroll :global(th),.comparison-scroll :global(td){padding:.7rem .75rem;font-size:.76rem}.comparison-scroll :global(thead th){font-size:.65rem}.comparison-scroll :global(tbody th){font-size:.75rem}.comparison-hint{padding:.5rem .8rem;}}
+ @media print{.comparison-tools,.comparison-empty,.comparison-hint{display:none!important}.comparison{overflow:visible;border-color:#bbb}.comparison-scroll{overflow:visible}.comparison-scroll :global(table){min-width:0!important}.comparison-scroll :global(th:first-child){position:static}.comparison-scroll :global(th),.comparison-scroll :global(td){padding:.4rem;font-size:.65rem}.comparison-scroll :global(thead th:first-child){width:18%}.comparison-scroll :global(tbody tr){break-inside:avoid}}
+ @layer base{@media print{.comparison-scroll :global(tr[hidden]){display:table-row!important}}}
+</style>

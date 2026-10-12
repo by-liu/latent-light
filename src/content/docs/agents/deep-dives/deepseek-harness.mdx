@@ -1,0 +1,140 @@
+---
+title: "DeepSeek Harness: Composition as architecture"
+description: Study a plugin-first harness through Cordis services, durable turns, lifecycle control and explicit preview limits.
+lastUpdated: 2026-10-11
+---
+
+import AgentArchitecture from '../../../../components/agents/AgentArchitecture.astro';
+
+DeepSeek Harness is a study of **composition as the main extension mechanism**.
+Its stated design is that every part is a plugin, including model adapters,
+tools, session storage and the agent loop. Cordis supplies the service and
+lifecycle framework underneath.[^project][^architecture]
+
+The inspected repository is explicitly a **developer preview** with
+compatibility-breaking changes expected. Its safety notice says it has not
+undergone a security audit and should not be treated as secure or production-ready.[^safety]
+This study examines a pinned snapshot checked **October 11, 2026**, rather than
+promising a stable deployment contract.
+
+## The architecture begins with composition
+
+A plugin can attach new behavior, but here it can also replace a major part of
+the runtime. [Figure 1](#figure-1) shows the responsibilities that the selected
+composition must supply. It is our simplified map, not the complete package tree.
+
+<AgentArchitecture id="figure-1" title="A harness assembled from services, events and lifecycle effects" layersJson='[{"label":"Composition","detail":"A profile assembles the running system","parts":[{"title":"Profile","body":"Select a web, headless, SDK or ACP composition."},{"title":"Bundles and patches","body":"Mount distribution layers and apply ordered overrides."},{"title":"Cordis context","body":"Resolve services and manage plugin lifecycles."}]},{"label":"Replaceable agent machinery","detail":"The work loop is also a plugin","parts":[{"title":"Model adapter","body":"Supply the configured inference connection."},{"title":"Agent driver","body":"Derive requests and advance turns from session history."},{"title":"Tool registry","body":"Expose capabilities and route calls through guards."}]},{"label":"Supporting services","detail":"Policy and continuity are composed responsibilities","parts":[{"title":"Session log","body":"Append facts and derive the history used by later steps."},{"title":"Execution policy","body":"Resolve filesystem and shell behavior for each call."},{"title":"Lifecycle","body":"Dispose registrations and resources when a plugin unloads."}]}]' footer="A different composition can change tools, persistence and policy. The product name alone does not establish the effective runtime.">
+
+**Figure 1.** Latent Light synthesis of the inspected composition, Cordis and loop contracts.[^architecture][^cordis][^loop]
+
+</AgentArchitecture>
+
+The architecture defines profiles and bundles. A profile chooses an ordered
+composition; bundles contribute patchable configuration and code. User and
+command-line patches layer over the bundle configuration. The standard profiles
+share a base, while sdk-minimal is a documented exception with its own tree.[^architecture]
+
+This makes “what is installed?” less informative than “what is mounted?”.
+Two installations can contain the same packages while booting different model
+adapters, tools or policies. Our design lesson is to preserve the effective
+composition alongside the session and its evaluated result.
+
+## Why services, events and disposal matter
+
+Cordis contexts expose services under stable keys. Plugins declare dependencies,
+contribute typed events and register reversible effects. A listener or tool
+registration should have a corresponding disposer so unloading does not leave
+old behavior attached.[^cordis]
+
+That lifecycle is important when configuration changes. A plugin which merely
+adds a callback can accidentally accumulate callbacks on reload. A plugin which
+starts a worker or acquires a resource needs to release it at the right time.
+Reversibility of registrations does not undo an external action already taken.
+
+Events can have different dispatch modes: observation, ordered transformation,
+parallel work or early termination have different contracts. Our interpretation
+is that a policy decision should use an event or service seam that actually
+owns that decision. Attaching a function somewhere in the tree does not make
+its result authoritative.[^cordis]
+
+## The loop derives work from durable history
+
+The agent-loop package creates or resumes agents, calls the model, routes tools
+and records facts into session history. The next step derives its request from
+that history. Its tool scheduler can overlap calls declared parallel-safe while
+exclusive calls act as ordering barriers. Cancellation is cooperative and
+preserves text already streamed to the user.[^loop]
+
+This is more precise than describing the runtime as “a planner plus tools.”
+The history, scheduling metadata and cancellation state all affect what happens
+next. Declaring a tool parallel-safe is itself a contract that needs review;
+it is not proof that the tool has no shared-state effects.
+
+For example, two independent document reads may overlap. A tool changing a
+configuration that a later tool reads creates an ordering dependency. A cancelled
+run may still have completed an external change. Those are original examples
+of the scheduling and recovery questions a host must resolve.
+
+## A sandbox label needs a concrete contract
+
+The filesystem sandbox backend in the inspected snapshot fences mutations.
+Its documentation explicitly leaves reads unconfined. Workspace-write mode
+checks mutation targets against the configured writable set; the backend's
+trusted-code path check is distinct from kernel isolation for generated commands.[^fs]
+
+This is a consequential boundary. “Cannot write outside the workspace” does
+not mean “cannot read outside it,” and neither statement establishes which
+network services a process or plugin can reach. Evaluate file, process,
+credential and network access separately.
+
+The safety notice reinforces this scope: plugins and generated execution can
+reach the resources exposed to them, and controls cannot protect resources
+already granted to the runtime.[^safety] These limits belong beside the
+architecture, not hidden behind the word sandbox.
+
+## An example: replace a tool without losing the system
+
+Consider a proposed document agent that starts with local file inspection and
+later needs a remote retrieval service. The aim is to **replace one capability
+while preserving its observable contract**. This scenario has not been run as
+a product benchmark.
+
+First identify the service seam: inputs, result shape, error states and allowed
+effects. Mount the new implementation in the intended profile and check the
+resolved composition. Keep retrieved documents distinguishable from trusted
+instructions, and preserve source locations in results.
+
+Next inspect lifecycle behavior. Does unloading remove registrations and close
+connections? If a dependency is missing, does the composition fail clearly or
+continue with a different capability? Finally, compare the workflow under the
+same task and budget, including denied, timed-out and interrupted operations.
+
+The benefit under investigation is replaceability. A larger plugin tree is not
+itself evidence of improved correctness, speed or maintainability. The relevant
+outcome is whether the changed capability resolves the observed task problem.
+
+## What the plugin-first design trades
+
+| Design choice | Opportunity | Responsibility |
+| --- | --- | --- |
+| Replaceable loop and services | Change major runtime behavior | Preserve contracts between components |
+| Ordered configuration layers | Adapt a composition for a use case | Inspect precedence and effective settings |
+| Reversible registrations | Support unloading and reconfiguration | Manage cleanup and external effects |
+| Durable history | Reconstruct later decisions | Reconcile side effects and schema changes |
+
+These are our engineering interpretations of the inspected design. The preview
+status means plugin authors must expect changes in those interfaces. No
+performance ranking or independent security validation is claimed here.
+
+Compare its composition model with [Pi's host and extension model](/agents/deep-dives/pi/).
+Compare the client-facing surfaces with [OpenCode](/agents/deep-dives/opencode/)
+and [Codex](/agents/deep-dives/codex/). The
+[deep-dive overview](/agents/deep-dives/) connects the design choices to the
+wider landscape and research frontier.
+
+[^project]: DeepSeek AI. [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness/blob/d743267388641bc76f17c45ce8b4c231aed1d32c/README.md), project purpose, Cordis and developer-preview status. Snapshot checked October 11, 2026.
+[^architecture]: DeepSeek AI. [Architecture](https://github.com/deepseek-ai/deepseek-harness/blob/d743267388641bc76f17c45ce8b4c231aed1d32c/docs/architecture.md), profiles, bundles, turn flow and capability seams. Snapshot checked October 11, 2026.
+[^cordis]: DeepSeek AI. [Cordis primer](https://github.com/deepseek-ai/deepseek-harness/blob/d743267388641bc76f17c45ce8b4c231aed1d32c/docs/cordis-primer.md), services, injection, typed events and reversible effects. Snapshot checked October 11, 2026.
+[^loop]: DeepSeek AI. [Agent loop package](https://github.com/deepseek-ai/deepseek-harness/blob/d743267388641bc76f17c45ce8b4c231aed1d32c/packages/core/agent-loop/README.md), durable history, guarded tools, scheduling and cancellation. Snapshot checked October 11, 2026.
+[^fs]: DeepSeek AI. [Filesystem sandbox backend](https://github.com/deepseek-ai/deepseek-harness/blob/d743267388641bc76f17c45ce8b4c231aed1d32c/packages/fs/fs-sandbox/README.md), mutation fence, unconfined reads and threat model. Snapshot checked October 11, 2026.
+[^safety]: DeepSeek AI. [Safety notice](https://github.com/deepseek-ai/deepseek-harness/blob/d743267388641bc76f17c45ce8b4c231aed1d32c/SAFETY.md), experimental status, absence of a security audit and sandbox limitations. Snapshot checked October 11, 2026.

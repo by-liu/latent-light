@@ -1,84 +1,124 @@
 ---
 title: FFNs and Experts
-description: Separate nonlinear feature transformations, multiplicative gates, and sparse expert routing.
-lastUpdated: 2026-10-05
+description: Understand feature gates, sparse routing and the gap between active compute and stored capacity.
+lastUpdated: 2026-10-10
 ---
 
 import FocusCanvas from '../../../../components/FocusCanvas.astro';
-import ArchitectureDiagram from '../../../../components/architectures/ArchitectureDiagram.astro';
+import ArchitectureAtlas from '../../../../components/architectures/ArchitectureAtlas.astro';
+import SourceFigure from '../../../../components/architectures/SourceFigure.astro';
 
-Attention exchanges information across positions; an FFN transforms each
-position's features. A richer activation, a feature gate, and an expert router
-change different parts of that transformation.[^transformer][^glu][^switch]
+Attention moves information between positions. A feed forward network, or
+FFN, transforms the features at each position. A **feature gate** changes
+that transformation; an **expert router** chooses which transformations run.
+The two can coexist, but they are not the same mechanism.[^transformer][^glu][^mixtral]
 
-## A feature gate is not an expert router
+## A feature gate modulates, rather than selects
 
-In SwiGLU, two projections of the same token are multiplied. One branch uses
-SiLU, which is Swish with parameter 1. Omitting biases:[^glu]
+SwiGLU makes two projections of the same input and multiplies their outputs
+before a final projection. Omitting biases:[^glu]
 
-<MathExpression display number="1" tex="\operatorname{SiLU}(a)=a\,\sigma(a),\qquad \sigma(a)=\frac{1}{1+e^{-a}}" />
+<MathExpression display number="1" tex="\operatorname{SwiGLU}(x)=\bigl(\operatorname{SiLU}(xW_g)\odot xW_u\bigr)W_d,\qquad \operatorname{SiLU}(a)=a\,\sigma(a)" />
 
-<MathExpression display number="2" tex="\operatorname{SwiGLU}(x)=\bigl(\operatorname{SiLU}(xW_g)\odot xW_u\bigr)W_d" />
+x is a row vector of width D. W<sub>g</sub> and W<sub>u</sub> map D to hidden
+width F; W<sub>d</sub> maps F back to D. The symbol ⊙ means elementwise
+multiplication, and σ is the logistic sigmoid.
 
-`x` is a row vector of width `D`; `W_g` and `W_u` map to hidden width `F`;
-`W_d` maps back to `D`. The symbol `⊙` means elementwise multiplication.
+<FocusCanvas size="diagram" label="SwiGLU projections and multiplicative feature gate">
+<ArchitectureAtlas kind="gate" id="figure-1">
 
-<FocusCanvas size="diagram" label="SwiGLU feature computation">
-  <ArchitectureDiagram kind="gate" id="figure-1">
-    **Figure 1.** Two computed branches, one gated feature transformation. Original schematic of the bias omitted SwiGLU FFN.[^glu]
-  </ArchitectureDiagram>
+**Figure 1.** Two computed branches, one multiplicative transformation. Independent schematic of the bias omitted SwiGLU FFN.[^glu]
+
+</ArchitectureAtlas>
 </FocusCanvas>
 
-Both branches are computed for every token. SiLU can be negative and is
-unbounded above, so this gate is neither a probability distribution nor a
-mask restricted to `[0, 1]`. The multiplication makes one learned feature
-branch modulate the other; it does not skip an expert.[^glu]
+Both branches in [Figure 1](#figure-1) run for every token. SiLU is smooth,
+can be negative, and is unbounded above. The branch is therefore not a
+probability in the range zero to one. Its learned multiplication can modulate
+features without being an expert selection rule.[^glu]
 
-## Compare widths at a comparable budget
+### Compare gates at a comparable budget
 
-A two projection dense FFN has about `2DF_dense` weights. A gated FFN has
-about `3DF_gate`. Ignoring biases, matching those counts gives a local
-calculation:
+A conventional two projection FFN has about 2DF<sub>dense</sub> weights;
+a gated FFN has about 3DF<sub>gate</sub>. Ignoring biases, equalizing those
+counts gives a local calculation:
 
-<MathExpression display number="3" tex="F_{\mathrm{gate}}\approx\frac{2}{3}F_{\mathrm{dense}}" />
+<MathExpression display number="2" tex="F_{\mathrm{gate}}\approx\frac{2}{3}F_{\mathrm{dense}}" />
 
-The GLU variants paper uses this width adjustment in its T5 experiments.
-Its results support gated variants in that tested setting, not universal
-superiority at arbitrary widths or training budgets.[^glu]
+The GLU paper uses this width adjustment. Its controlled T5 results support
+gated variants in that setting, not a guarantee that the same activation
+always wins at arbitrary width or training budget.[^glu]
 
-## Route a token to selected experts
+## A router chooses separate FFNs
 
-Switch Transformer replaces a dense FFN with several FFN experts and a
-router. Its top 1 rule selects one expert and weights its output by the
-router probability:[^switch]
+An MoE sublayer holds several experts, each with separate weights. A router
+scores the current token representation and dispatches it to selected experts.
+The weighted result returns to the usual residual width. Routing can change
+with token and layer; an expert ID is not automatically a fixed subject label.[^mixtral]
 
-<MathExpression display number="4" tex="j=\arg\max_i p_i(x),\qquad y=p_j(x)E_j(x)" />
+<FocusCanvas size="figure" label="Original Mixtral expert routing figure">
+<SourceFigure id="figure-2" src="/figures/model-studies/mixtral/expert-routing.png" alt="The Mixtral router selects two of eight experts, which process the same token in parallel before their weighted outputs are combined." minWidth={560}>
+<div slot="image">
 
-<FocusCanvas size="diagram" label="Switch expert routing">
-  <ArchitectureDiagram kind="routing" id="figure-2">
-    **Figure 2.** One selected expert, not three evaluated FFNs. Original Switch routing example with illustrative probabilities.[^switch]
-  </ArchitectureDiagram>
+![Mixtral selects two parallel experts for a token.](/figures/model-studies/mixtral/expert-routing.png)
+
+</div>
+
+**Figure 2.** Selected experts run in parallel, not in a chain. Reproduced from Jiang et al., Mixtral Figure 1; unchanged figure crop, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).[^mixtral]
+
+</SourceFigure>
 </FocusCanvas>
 
-The example routes `x` to expert 1 and returns `0.7 E₁(x)`.
-Experts 2 and 3 are not dispatched for that token. This assumes capacity is
-available: the paper's bounded expert capacity can cause overflow. Load
-balancing and distributed communication also matter.[^switch]
+In Mixtral, each expert is itself a SwiGLU FFN. Thus the router in
+[Figure 2](#figure-2) selects entire transformations, while the gate in
+[Figure 1](#figure-1) operates inside each selected transformation.[^mixtral]
 
-## Capacity, compute, and serving are different budgets
+For token x, let S(x) be the selected set and g its router logits. A compact
+form of Mixtral's top two normalized mixture is:[^mixtral]
 
-More total expert weights does not mean every weight is used for every token.
-It also does not make those weights free to store or distribute. A proposed
-comparison should report total parameters, active computation, training
-budget, routing balance, memory, and communication separately.
+<MathExpression display number="3" tex="y=\sum_{i\in S(x)}\frac{e^{g_i}}{\sum_{j\in S(x)}e^{g_j}}E_i(x),\qquad |S(x)|=2" />
 
-Feature gates and expert routing can coexist; neither replaces attention's
-role in communication. Return to [Foundations](/architectures/foundations/#components-and-full-model)
-for the residual block around these sublayers.
+E<sub>i</sub> is expert i. The weights in this equation sum to one over the
+selected set. Do not assume every other MoE normalizes or selects identically.
 
-Selected mechanisms checked October 5, 2026. No FFN or routing experiments
-were performed here.
+## Routing designs differ in meaningful ways
 
-[^transformer]: Ashish Vaswani et al., [Attention Is All You Need](https://arxiv.org/html/1706.03762v7), 2017, section 3.3: positionwise feed forward networks.
-[^glu]: Noam Shazeer, [GLU Variants Improve Transformer](https://arxiv.org/html/2002.05202v1), 2020, sections 1 to 3, equations 5 and 6, and the matched width experiment. Equation (3) is a local parameter count under the stated assumptions.
-[^switch]: William Fedus, Barret Zoph, and Noam Shazeer, [Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity](https://arxiv.org/html/2101.03961v3), 2022 revision, sections 2.1 to 2.3. Top 1 routing, output weighting, capacity, and load balancing refer to this design, not all MoE variants.
+| Design | What changes | Concrete study |
+| --- | --- | --- |
+| Top two from eight experts | A simple sparse replacement for the dense FFN | [Mixtral](/architectures/models/mixtral/)[^mixtral] |
+| Shared plus routed experts | Shared computation runs alongside a selected subset | [DeepSeek-V2](/architectures/models/deepseek-v2/)[^v2] |
+| Bias controlled selection | Balancing biases affect selection, not the output mixing weights | [DeepSeek-V3](/architectures/models/deepseek-v3/)[^v3] |
+| Routed experts without shared experts | Different family members have dense or sparse capacity | [Qwen3](/architectures/models/qwen3/)[^qwen] |
+
+This is a mechanism comparison, not a quality ranking. V3's “auxiliary loss free”
+balancing refers to its main batch balancing method; a small sequence balancing
+loss remains.[^v3] Likewise, GLM-4.5's separately trained reasoning, agentic and
+chat specialists are policies, not its routed FFN experts.[^glm]
+
+For additional released designs, compare [gpt-oss](/architectures/models/gpt-oss/)
+and the [MiniMax family](/architectures/models/minimax-01/).
+Keep each study's exact version and counting convention.
+
+## Sparse computation still needs a system
+
+Selected expert weights reduce active computation relative to evaluating every
+expert. Total weights still need storage somewhere. Dispatch, gathering,
+communication, load imbalance, precision, and batch size affect whether the
+design is efficient in practice.
+
+Compare total parameters, active parameters, actual FLOPs, weight residency,
+communication, and latency separately. “Active parameters” is a useful
+summary, not a complete FLOP or VRAM measurement. Nor is a sparse FFN the
+same thing as sparse attention.
+
+Selected mechanisms rechecked October 10, 2026. No routing or serving
+experiments were run here. For the surrounding residual block, continue with
+[Depth and residual paths](/architectures/evolution/depth-and-residual-paths/).
+
+[^transformer]: Ashish Vaswani et al. [Attention Is All You Need](https://arxiv.org/html/1706.03762v7), 2017, section 3.3.
+[^glu]: Noam Shazeer. [GLU Variants Improve Transformer](https://arxiv.org/html/2002.05202v1), 2020, equations 5 and 6 and the matched width experiments. Equation (2) is a local parameter count.
+[^mixtral]: Albert Q. Jiang et al. [Mixtral of Experts](https://arxiv.org/html/2401.04088v1), 2024, section 2, Figure 1 and routing analysis. Equation (3) restates its selected softmax mixture.
+[^v2]: DeepSeek-AI. [DeepSeek-V2](https://arxiv.org/html/2405.04434v1), 2024, section 2.2.
+[^v3]: DeepSeek-AI. [DeepSeek-V3 Technical Report](https://arxiv.org/html/2412.19437v1), 2024, section 2.1.2.
+[^qwen]: Qwen Team. [Qwen3 Technical Report](https://arxiv.org/html/2505.09388v1), 2025, architecture: dense and expert variants.
+[^glm]: Zhipu AI. [GLM-4.5](https://arxiv.org/html/2508.06471v1), 2025, post training specialists and unified ARC policy.

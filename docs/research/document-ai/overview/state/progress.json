@@ -1,0 +1,49 @@
+{
+  "schema_version": 3,
+  "topic_id": "document-ai-from-pages-to-reliable-information",
+  "status": "complete",
+  "coverage": {
+    "source inventory": "All 942 lines read; substantive layers, model mechanisms, evaluation and selection retained.",
+    "fresh primary evidence": "56 inspected primary source records including scoped reuse-context evidence; released checkpoint cards distinguished from report-only studies.",
+    "technical audit": "Masks, pixel/token budgets, cache bounds, decoding paths, synthetic consistency and causal attribution checked.",
+    "product evidence": "12 product boundaries retained; Mistral4.1 lifecycle and LandingAI transition updated."
+  },
+  "open_questions": [
+    "TeleOCR, Xiaomi-OCR0 and MinerU-Diffusion checkpoint availability is not verified.",
+    "No independent model/API benchmark was executed; local workload and judge validation remain application-specific."
+  ],
+  "recommended_next_direction": "User review of the page. Later refresh model artifacts and workload-specific evaluation if requested. No commit/push/deploy authorized.",
+  "last_seen": "2026-10-12T01:50:34.707Z",
+  "output": {
+    "kind": "site-page",
+    "path": "src/content/docs/document-ai.mdx",
+    "status": "reviewed",
+    "revision": 3,
+    "updated": "2026-10-11",
+    "evidence_cutoff": "2026-10-11",
+    "audience": "Readers with basic ML knowledge seeking intuition, technical depth and practical system design."
+  },
+  "quality_gate": {
+    "evidence_verified": true,
+    "contradictions_reviewed": true,
+    "output_reviewed": true,
+    "visuals_reviewed": true
+  },
+  "delivery_checks": {
+    "validation": {
+      "status": "passed",
+      "method": "npm run validate: deployment/content checks, Astro check, static build and Nimbus lint; git diff --check; schema3 research validator.",
+      "checked_at": "2026-10-12T01:50:34.707Z"
+    },
+    "rendering": {
+      "status": "passed",
+      "method": "Chromium1440 light/dark,390light,320dark; responsive five-layer figure and horizontal Focus;7 tables and3 catalog search controls; pinned semantic headers; actual keyboard pan; filter/reset/empty states; print restores filtered rows; complete no-JavaScript fallback; reduced-motion mode. Previous14figures/53footnotes/8equations and source-artwork checks retained; no overflow/errors.",
+      "checked_at": "2026-10-12T01:50:34.707Z"
+    },
+    "exports": {
+      "status": "passed",
+      "method": "All5system layers, artifact contracts, feedback/evaluation notes, all7unchanged native Markdown tables,14caption numbers and53reference definitions survive complete exports without component syntax. Table-semantic unit test preserves cell markup, links and citations.",
+      "checked_at": "2026-10-12T01:50:34.707Z"
+    }
+  }
+}

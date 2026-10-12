@@ -1,0 +1,27 @@
+{
+  "schema_version": 2,
+  "topic_id": "report-backed-family-coverage-expansion",
+  "status": "complete",
+  "coverage": {
+    "selection": "16 full report-backed studies;41 total",
+    "source_inspection": "Three explicitly authorized parallel family agents plus main OpenAI/MiniMax research; no search snippet as evidence",
+    "mechanisms": "Report/config/processor/code scope reviewed; unavailable full recipes stated",
+    "figures": "35 new numbered figures;28 original crops,7 independent explanations; precise editions/locators and separate reuse assessments",
+    "presentation": "122 site tests pass, zero Astro diagnostics, 59-page static build and 59-doc lint clean. Fresh browser regression checks cover all 41 model pages plus the catalog and Foundations at 1440 px light, 390 px light and 320 px dark (129 views), reduced motion, desktop focus, active family navigation, figure order, loaded images and local anchors; narrow figures remain keyboard-pannable and link to full-size originals. All 41 Markdown/MDX exports and both agent manifests checked; representative search queries resolve. All 35 new desktop figure renders received manual contact-sheet review; dense focus/mobile views and resource-card/catalog layout received additional manual inspection. Existing bundler directive and philosophy-redirect indexing warnings remain. No model execution or benchmark reproduction.",
+    "boundaries": "No commit,push,deployment,model execution or benchmark reproduction"
+  },
+  "open_questions": [
+    "Qwen2,Llama2,OLMo andBLOOM remain editorial candidates.",
+    "Qwen3-Next,Qwen3.5 andGemma3n documentation merits later study, but a matching generation-wide formal report was not established in this bounded audit; this is not a claim none exists.",
+    "GLM4.6Vadded in laterGLM-Vreport editions is outside the selectedv3study.",
+    "Native multimodal release recipes and independent runtime results remain incomplete for several studied models."
+  ],
+  "recommended_next_direction": "Refresh model eligibility and primary evidence when new substantive reports appear; no recurrence configured.",
+  "last_seen": "2026-10-10T18:52:33.833Z",
+  "quality_gate": {
+    "evidence_verified": true,
+    "contradictions_reviewed": true,
+    "report_reviewed": true,
+    "visuals_reviewed": true
+  }
+}

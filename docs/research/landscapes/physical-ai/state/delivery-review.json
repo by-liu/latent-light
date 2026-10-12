@@ -1,0 +1,264 @@
+{
+  "revision": 4,
+  "checkedAt": "2026-10-11T16:53:14.043Z",
+  "focused": {
+    "success": true,
+    "checkedAt": "2026-10-11T16:48:10.063Z",
+    "views": [
+      {
+        "width": 1440,
+        "mode": "light",
+        "rows": 52,
+        "officialMarks": 44,
+        "initials": 8,
+        "chinaFilter": 25,
+        "chinaPolicies": 7
+      },
+      {
+        "width": 1440,
+        "mode": "dark",
+        "rows": 52,
+        "officialMarks": 44,
+        "initials": 8,
+        "chinaFilter": 25,
+        "chinaPolicies": 7
+      },
+      {
+        "width": 390,
+        "mode": "light",
+        "rows": 52,
+        "officialMarks": 44,
+        "initials": 8,
+        "chinaFilter": 25,
+        "chinaPolicies": 7
+      },
+      {
+        "width": 390,
+        "mode": "dark",
+        "rows": 52,
+        "officialMarks": 44,
+        "initials": 8,
+        "chinaFilter": 25,
+        "chinaPolicies": 7
+      },
+      {
+        "width": 320,
+        "mode": "dark",
+        "rows": 52,
+        "officialMarks": 44,
+        "initials": 8,
+        "chinaFilter": 25,
+        "chinaPolicies": 7
+      }
+    ],
+    "focusViews": 2,
+    "citationTargets": "passed",
+    "filtersPrintKeyboard": "passed",
+    "unfilteredExports": "passed",
+    "noJavaScript": "passed",
+    "search": [
+      {
+        "term": "Unitree",
+        "count": 1
+      },
+      {
+        "term": "Robbyant",
+        "count": 1
+      },
+      {
+        "term": "SignalFlag",
+        "count": 1
+      }
+    ],
+    "privacy": "passed",
+    "local4327": "passed",
+    "consoleErrors": [],
+    "remoteImages": []
+  },
+  "regression": {
+    "views": [
+      {
+        "slug": "consumer-ai",
+        "width": 1440,
+        "mode": "light",
+        "marks": 36,
+        "logos": 34,
+        "fallbacks": 2
+      },
+      {
+        "slug": "consumer-ai",
+        "width": 1440,
+        "mode": "dark",
+        "marks": 36,
+        "logos": 34,
+        "fallbacks": 2
+      },
+      {
+        "slug": "consumer-ai",
+        "width": 390,
+        "mode": "light",
+        "marks": 36,
+        "logos": 34,
+        "fallbacks": 2
+      },
+      {
+        "slug": "consumer-ai",
+        "width": 390,
+        "mode": "dark",
+        "marks": 36,
+        "logos": 34,
+        "fallbacks": 2
+      },
+      {
+        "slug": "consumer-ai",
+        "width": 320,
+        "mode": "dark",
+        "marks": 36,
+        "logos": 34,
+        "fallbacks": 2
+      },
+      {
+        "slug": "personal-agents",
+        "width": 1440,
+        "mode": "light",
+        "marks": 23,
+        "logos": 21,
+        "fallbacks": 2
+      },
+      {
+        "slug": "personal-agents",
+        "width": 1440,
+        "mode": "dark",
+        "marks": 23,
+        "logos": 21,
+        "fallbacks": 2
+      },
+      {
+        "slug": "personal-agents",
+        "width": 390,
+        "mode": "light",
+        "marks": 23,
+        "logos": 21,
+        "fallbacks": 2
+      },
+      {
+        "slug": "personal-agents",
+        "width": 390,
+        "mode": "dark",
+        "marks": 23,
+        "logos": 21,
+        "fallbacks": 2
+      },
+      {
+        "slug": "personal-agents",
+        "width": 320,
+        "mode": "dark",
+        "marks": 23,
+        "logos": 21,
+        "fallbacks": 2
+      },
+      {
+        "slug": "china-consumer-ai",
+        "width": 1440,
+        "mode": "light",
+        "marks": 26,
+        "logos": 23,
+        "fallbacks": 3
+      },
+      {
+        "slug": "china-consumer-ai",
+        "width": 1440,
+        "mode": "dark",
+        "marks": 26,
+        "logos": 23,
+        "fallbacks": 3
+      },
+      {
+        "slug": "china-consumer-ai",
+        "width": 390,
+        "mode": "light",
+        "marks": 26,
+        "logos": 23,
+        "fallbacks": 3
+      },
+      {
+        "slug": "china-consumer-ai",
+        "width": 390,
+        "mode": "dark",
+        "marks": 26,
+        "logos": 23,
+        "fallbacks": 3
+      },
+      {
+        "slug": "china-consumer-ai",
+        "width": 320,
+        "mode": "dark",
+        "marks": 26,
+        "logos": 23,
+        "fallbacks": 3
+      },
+      {
+        "slug": "physical-ai",
+        "width": 1440,
+        "mode": "light",
+        "marks": 52,
+        "logos": 44,
+        "fallbacks": 8
+      },
+      {
+        "slug": "physical-ai",
+        "width": 1440,
+        "mode": "dark",
+        "marks": 52,
+        "logos": 44,
+        "fallbacks": 8
+      },
+      {
+        "slug": "physical-ai",
+        "width": 390,
+        "mode": "light",
+        "marks": 52,
+        "logos": 44,
+        "fallbacks": 8
+      },
+      {
+        "slug": "physical-ai",
+        "width": 390,
+        "mode": "dark",
+        "marks": 52,
+        "logos": 44,
+        "fallbacks": 8
+      },
+      {
+        "slug": "physical-ai",
+        "width": 320,
+        "mode": "dark",
+        "marks": 52,
+        "logos": 44,
+        "fallbacks": 8
+      }
+    ],
+    "checkedAt": "2026-10-11T16:48:41.470Z",
+    "success": true,
+    "desktopMobileThemes": "passed",
+    "focusViews": 8,
+    "filtersKeyboardPrint": "passed",
+    "noJavaScript": "passed",
+    "failedImage": "passed",
+    "exports": "passed",
+    "search": "passed",
+    "remoteImages": "none",
+    "consoleErrors": "none"
+  },
+  "manualReview": [
+    "Generated image labels and conceptual boundaries",
+    "Official mark contact sheet",
+    "Desktop/mobile light/dark overview and explorer",
+    "China-only Focus explorer and financing view on port 4327"
+  ],
+  "authorization": {
+    "commit": false,
+    "push": false,
+    "deploy": false
+  }
+}

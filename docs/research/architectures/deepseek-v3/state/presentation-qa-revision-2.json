@@ -1,0 +1,163 @@
+{
+  "revision": 2,
+  "checked": "2026-10-10T15:45:39.761Z",
+  "site_page_sha256": "6ad507e01965a47c119b595a11445ea44422618ec1f26a024e2cf4b3fe7d825e",
+  "source_resources": {
+    "report": "https://arxiv.org/pdf/2412.19437v1",
+    "hugging_face": "https://huggingface.co/deepseek-ai/DeepSeek-V3",
+    "checkpoint": "deepseek-ai/DeepSeek-V3"
+  },
+  "collection_checks": {
+    "site_validation": "106 tests, zero Astro diagnostics, build and all 43 docs lint passed.",
+    "browser_views": 81,
+    "model_benchmarks": "Not executed.",
+    "source_figures": "32 unique report assets; 33 placements; 48 total numbered collection figures. Rights retained per asset."
+  },
+  "viewports": [
+    {
+      "slug": "deepseek-v3",
+      "width": 1440,
+      "mode": "light",
+      "title": "DeepSeek-V3",
+      "titleCount": 1,
+      "overflow": false,
+      "figures": [
+        {
+          "id": "figure-1",
+          "caption": "Figure 1. Inherited MLA and expert block. Reproduced from V2 release documentation, Figure 2, under MIT terms; V3’s dimensions differ.41"
+        },
+        {
+          "id": "figure-2",
+          "caption": "Figure 2. The extra prediction branch, not the full decoder. Original explanatory diagram informed by the report.1"
+        }
+      ],
+      "resources": [
+        {
+          "kind": "report",
+          "href": "https://arxiv.org/pdf/2412.19437v1",
+          "label": "Technical reportRead the original research"
+        },
+        {
+          "kind": "model",
+          "href": "https://huggingface.co/deepseek-ai/DeepSeek-V3",
+          "label": "Hugging Facedeepseek-ai/DeepSeek-V3"
+        }
+      ],
+      "visibleHashes": [],
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "missingImages": [],
+      "activeNav": [
+        {
+          "label": "DeepSeek-V3",
+          "visible": true
+        }
+      ],
+      "panFrames": [
+        {
+          "tabindex": 0,
+          "scrolls": false,
+          "frame": 648,
+          "image": 648
+        }
+      ]
+    },
+    {
+      "slug": "deepseek-v3",
+      "width": 390,
+      "mode": "light",
+      "title": "DeepSeek-V3",
+      "titleCount": 1,
+      "overflow": false,
+      "figures": [
+        {
+          "id": "figure-1",
+          "caption": "Figure 1. Inherited MLA and expert block. Reproduced from V2 release documentation, Figure 2, under MIT terms; V3’s dimensions differ.41"
+        },
+        {
+          "id": "figure-2",
+          "caption": "Figure 2. The extra prediction branch, not the full decoder. Original explanatory diagram informed by the report.1"
+        }
+      ],
+      "resources": [
+        {
+          "kind": "report",
+          "href": "https://arxiv.org/pdf/2412.19437v1",
+          "label": "Technical reportRead the original research"
+        },
+        {
+          "kind": "model",
+          "href": "https://huggingface.co/deepseek-ai/DeepSeek-V3",
+          "label": "Hugging Facedeepseek-ai/DeepSeek-V3"
+        }
+      ],
+      "visibleHashes": [],
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "missingImages": [],
+      "activeNav": [
+        {
+          "label": "DeepSeek-V3",
+          "visible": false
+        }
+      ],
+      "panFrames": [
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 358,
+          "image": 620
+        }
+      ]
+    },
+    {
+      "slug": "deepseek-v3",
+      "width": 320,
+      "mode": "dark",
+      "title": "DeepSeek-V3",
+      "titleCount": 1,
+      "overflow": false,
+      "figures": [
+        {
+          "id": "figure-1",
+          "caption": "Figure 1. Inherited MLA and expert block. Reproduced from V2 release documentation, Figure 2, under MIT terms; V3’s dimensions differ.41"
+        },
+        {
+          "id": "figure-2",
+          "caption": "Figure 2. The extra prediction branch, not the full decoder. Original explanatory diagram informed by the report.1"
+        }
+      ],
+      "resources": [
+        {
+          "kind": "report",
+          "href": "https://arxiv.org/pdf/2412.19437v1",
+          "label": "Technical reportRead the original research"
+        },
+        {
+          "kind": "model",
+          "href": "https://huggingface.co/deepseek-ai/DeepSeek-V3",
+          "label": "Hugging Facedeepseek-ai/DeepSeek-V3"
+        }
+      ],
+      "visibleHashes": [],
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "missingImages": [],
+      "activeNav": [
+        {
+          "label": "DeepSeek-V3",
+          "visible": false
+        }
+      ],
+      "panFrames": [
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 288,
+          "image": 620
+        }
+      ]
+    }
+  ],
+  "manual_review": "All 48 figure renders inspected as contact sheets; source figure completeness, labels and supplemental diagrams reviewed. Dense focus view and native dark diagrams inspected separately."
+}

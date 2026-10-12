@@ -1,0 +1,11 @@
+Use case: style-transfer
+Asset type: final editorial model evolution infographic for Latent Light.
+Input image: the supplied image is the edit target, an already audited 53-model timeline.
+
+Refine the decorative layer and readability of this exact poster. Keep the beautiful white serif title, the elliptical spectral aperture in the header, the cyan/blue/violet/amber light ribbons, year halos, all year columns, two chronological bands, and the overall composition. The goal is a sophisticated spectral atlas, not a literal astronomy illustration.
+
+Remove the large realistic planet horizon along the bottom and all small realistic planets floating between columns. Replace them with sparse, extremely faint orbital contour lines and restrained fine starlight on uninterrupted midnight navy. Keep the bottom open and quiet. Remove the duplicate spaced-out LATENT LIGHT branding in the upper-right header; retain only the small Latent Light footer identity. Give the model names a modest increase in readability, approximately 10 percent larger, maintaining clear spacing and avoiding overlap. Keep the title and year labels elegantly dominant without squeezing any model column.
+
+Critical invariants: preserve all 53 model names EXACTLY once, with the same spelling, same order, and same year placement. Do not invent any new text or merge labels. In 2021 keep CLIP, Switch Transformer, GLM. In 2023 keep ChatGLM-6B and InternVL. In 2025 keep GLM-4.5. In 2026 keep GLM-5. GPT-4o ends in the letter o; OpenAI o1-preview is the letter o followed by digit 1. All other labels are equally inviolable.
+Keep the title "LLM & VLM evolution", subtitle "Selected models and research milestones", "Snapshot: 9 Oct 2026", band ranges "2017–2021" and "2022–2026", all 10 year headings, and the footer "Chronology, not lineage. Exact dates and sources accompany this figure."
+Only year nodes connect along the timeline ribbons. No new model-to-model arrows. Maintain crisp text, high contrast, no company logos, no performance rankings, no bright star points behind text, no excessive bloom. Retain the landscape aspect ratio and all content inside generous margins.

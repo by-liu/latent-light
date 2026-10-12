@@ -1,0 +1,31 @@
+Use case: infographic-diagram
+Asset type: original model evolution poster for Latent Light's Model Deep Dives overview.
+Primary request: Design an exceptionally polished, memorable scientific editorial timeline. It must feel like a spectral atlas of a decade of AI, not a spreadsheet placed on a dark background. Preserve rigorous data but make the visual emotionally compelling. Original cosmic minimalism and spectral light are part of this site's identity.
+
+Composition: a generous wide landscape poster, approximately 3:2. Two clearly separated chronological bands, both read LEFT TO RIGHT. The upper band contains 2017, 2018, 2019, 2020, 2021. The lower band contains 2022, 2023, 2024, 2025, 2026. Give the much denser lower band substantially more vertical room. All labels must remain comfortably readable at full size. No dense explanatory prose.
+
+Art direction: midnight ink/navy paper, subtly luminous spectral ribbons, fine orbital contour lines and tiny restrained star points. Sophisticated flat editorial graphic design, not glossy game UI, not a fantasy space painting. A continuous elegant path of light passes through five date nodes per band. Year nodes have delicate concentric halos and small clean index markings. Cyan, ice blue, violet and a restrained warm amber edge, with generous negative space. Add a striking, spare abstract elliptical spectral aperture in the header area, inspired by light being revealed, not a literal existing logo. Keep background lines faint and never crossing text. No table borders, no boxes around every model, no giant empty headings. Careful typography with white model names, quieter blue-grey auxiliary copy, clear large years. Title has refined modern typography and a beautiful compact composition.
+
+Information structure: each year node anchors exactly one clearly aligned model list beneath it. Lists follow date order. Only the chronological ribbons connect YEAR NODES; NEVER draw edges between MODEL NAMES. The ribbons are chronology, not model lineage. All 53 names below must appear EXACTLY ONCE, correctly spelled, entirely within the appropriate year column. No models may be invented, renamed, omitted or moved. Do not add benchmarks, rankings, percentages, parameter counts, open/closed licensing badges or organization logos. Uniform text weight for model names: do not imply a performance ranking. Names must not overlap ribbons, halos, other names or column boundaries. Short colored ticks can anchor labels without suggesting model-to-model inheritance.
+
+Literal text, and no extra slogans:
+Main title: "LLM & VLM evolution"
+Subtitle: "Selected models and research milestones"
+Small corner label: "Snapshot: 9 Oct 2026"
+Upper band: "2017–2021"
+Lower band: "2022–2026"
+Exact year groups:
+2017: Transformer
+2018: GPT | BERT
+2019: GPT-2 | T5
+2020: GPT-3
+2021: CLIP | Switch Transformer | GLM
+2022: InstructGPT | Chinchilla | PaLM | Flamingo | BLOOM | ChatGPT
+2023: BLIP-2 | LLaMA | GPT-4 | ChatGLM-6B | LLaVA | Llama 2 | Mistral 7B | Mamba | Gemini 1.0 | Mixtral 8x7B | InternVL
+2024: Gemini 1.5 Pro | Claude 3 | DeepSeek-V2 | GPT-4o | Llama 3.1 | Qwen2-VL | OpenAI o1-preview | Qwen2.5 | DeepSeek-V3
+2025: DeepSeek-R1 | Gemma 3 | Gemini 2.5 Pro | Qwen3 | Claude 4 | Grok 4 | Kimi K2 | GLM-4.5 | GPT-5 | Qwen3-VL
+2026: Qwen3.5 | GLM-5 | DeepSeek-V4 | Kimi K3 | Qwen3.8 | GPT-6 Astra | Claude Opus 5.5 | Gemini 4 Argon
+Footer: "Chronology, not lineage. Exact dates and sources accompany this figure."
+Small footer identity: "Latent Light"
+
+Proofread every label. GPT-4o ends in the letter o. OpenAI o1-preview uses the letter o followed by the digit 1. Preserve LLaMA versus Llama 2 / Llama 3.1. Preserve Qwen2-VL versus Qwen2.5 and Qwen3-VL versus Qwen3. GLM, ChatGLM-6B, GLM-4.5 and GLM-5 are four distinct names in four different year columns. Thin lines and text should be crisp, not fuzzy. The poster must be useful as an infographic, not just atmospheric artwork.

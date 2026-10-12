@@ -1,0 +1,251 @@
+{
+  "revision": 3,
+  "checked": "2026-10-10T17:36:51.557Z",
+  "site_page_sha256": "255ccaa58c2449d7e0025da1a5d26953701d5ce7fd51720fe943a94085219715",
+  "source_resources": {
+    "report": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash/blob/2cba9e42aa026125f3ed06c6d98c1db82f7ca027/DeepSeek_V41_Tech_Report.pdf",
+    "hugging_face": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash",
+    "checkpoint": "deepseek-ai/DeepSeek-V4.1-Flash"
+  },
+  "prior_review_record": "state/presentation-qa-revision-2.json",
+  "collection_checks": {
+    "site_validation": "106 tests, zero Astro diagnostics, static build and all 43 docs lint passed.",
+    "browser_views": 81,
+    "renewed_views_after_final_locator_corrections": 6,
+    "numbered_model_figures": 66,
+    "source_figure_assets": 42,
+    "source_figure_placements": 43,
+    "model_benchmarks": "Not executed."
+  },
+  "viewports": [
+    {
+      "slug": "deepseek-v4-1-flash",
+      "width": 1440,
+      "mode": "light",
+      "title": "DeepSeek-V4.1-Flash",
+      "titleCount": 1,
+      "overflow": false,
+      "figures": [
+        {
+          "id": "figure-1",
+          "caption": "Figure 1. Causal encoding, shared history and multimodal input. Reproduced from report Figure 3.1 MIT documentation notice."
+        },
+        {
+          "id": "figure-2",
+          "caption": "Figure 2. Read the prompt once, reuse its history while generating. Original schematic based on the reported optimized CED path, not a measured run.1"
+        },
+        {
+          "id": "figure-3",
+          "caption": "Figure 3. CSA2 separates stored evidence from selection decisions. Reproduced from report Figure 4.1 MIT documentation notice."
+        },
+        {
+          "id": "figure-4",
+          "caption": "Figure 4. A shared search pool need not imply shared final choices. Reproduced from report Figure 5, p. 11.1 MIT documentation notice."
+        }
+      ],
+      "resources": [
+        {
+          "kind": "report",
+          "href": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash/blob/2cba9e42aa026125f3ed06c6d98c1db82f7ca027/DeepSeek_V41_Tech_Report.pdf",
+          "label": "Technical reportRead the original research"
+        },
+        {
+          "kind": "model",
+          "href": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash",
+          "label": "Hugging Facedeepseek-ai/DeepSeek-V4.1-Flash"
+        }
+      ],
+      "visibleHashes": [],
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "missingImages": [],
+      "activeNav": [
+        {
+          "label": "DeepSeek-V4.1-Flash",
+          "visible": true
+        }
+      ],
+      "panFrames": [
+        {
+          "tabindex": 0,
+          "scrolls": false,
+          "frame": 648,
+          "image": 648
+        },
+        {
+          "tabindex": 0,
+          "scrolls": false,
+          "frame": 648,
+          "image": 648
+        },
+        {
+          "tabindex": 0,
+          "scrolls": false,
+          "frame": 648,
+          "image": 648
+        }
+      ]
+    },
+    {
+      "slug": "deepseek-v4-1-flash",
+      "width": 390,
+      "mode": "light",
+      "title": "DeepSeek-V4.1-Flash",
+      "titleCount": 1,
+      "overflow": false,
+      "figures": [
+        {
+          "id": "figure-1",
+          "caption": "Figure 1. Causal encoding, shared history and multimodal input. Reproduced from report Figure 3.1 MIT documentation notice."
+        },
+        {
+          "id": "figure-2",
+          "caption": "Figure 2. Read the prompt once, reuse its history while generating. Original schematic based on the reported optimized CED path, not a measured run.1"
+        },
+        {
+          "id": "figure-3",
+          "caption": "Figure 3. CSA2 separates stored evidence from selection decisions. Reproduced from report Figure 4.1 MIT documentation notice."
+        },
+        {
+          "id": "figure-4",
+          "caption": "Figure 4. A shared search pool need not imply shared final choices. Reproduced from report Figure 5, p. 11.1 MIT documentation notice."
+        }
+      ],
+      "resources": [
+        {
+          "kind": "report",
+          "href": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash/blob/2cba9e42aa026125f3ed06c6d98c1db82f7ca027/DeepSeek_V41_Tech_Report.pdf",
+          "label": "Technical reportRead the original research"
+        },
+        {
+          "kind": "model",
+          "href": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash",
+          "label": "Hugging Facedeepseek-ai/DeepSeek-V4.1-Flash"
+        }
+      ],
+      "visibleHashes": [],
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "missingImages": [],
+      "activeNav": [
+        {
+          "label": "DeepSeek-V4.1-Flash",
+          "visible": false
+        }
+      ],
+      "panFrames": [
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 358,
+          "image": 740
+        },
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 358,
+          "image": 760
+        },
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 358,
+          "image": 760
+        }
+      ]
+    },
+    {
+      "slug": "deepseek-v4-1-flash",
+      "width": 320,
+      "mode": "dark",
+      "title": "DeepSeek-V4.1-Flash",
+      "titleCount": 1,
+      "overflow": false,
+      "figures": [
+        {
+          "id": "figure-1",
+          "caption": "Figure 1. Causal encoding, shared history and multimodal input. Reproduced from report Figure 3.1 MIT documentation notice."
+        },
+        {
+          "id": "figure-2",
+          "caption": "Figure 2. Read the prompt once, reuse its history while generating. Original schematic based on the reported optimized CED path, not a measured run.1"
+        },
+        {
+          "id": "figure-3",
+          "caption": "Figure 3. CSA2 separates stored evidence from selection decisions. Reproduced from report Figure 4.1 MIT documentation notice."
+        },
+        {
+          "id": "figure-4",
+          "caption": "Figure 4. A shared search pool need not imply shared final choices. Reproduced from report Figure 5, p. 11.1 MIT documentation notice."
+        }
+      ],
+      "resources": [
+        {
+          "kind": "report",
+          "href": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash/blob/2cba9e42aa026125f3ed06c6d98c1db82f7ca027/DeepSeek_V41_Tech_Report.pdf",
+          "label": "Technical reportRead the original research"
+        },
+        {
+          "kind": "model",
+          "href": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash",
+          "label": "Hugging Facedeepseek-ai/DeepSeek-V4.1-Flash"
+        }
+      ],
+      "visibleHashes": [],
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "missingImages": [],
+      "activeNav": [
+        {
+          "label": "DeepSeek-V4.1-Flash",
+          "visible": false
+        }
+      ],
+      "panFrames": [
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 288,
+          "image": 740
+        },
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 288,
+          "image": 760
+        },
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 288,
+          "image": 760
+        }
+      ]
+    }
+  ],
+  "manual_review": {
+    "complete": true,
+    "reviewedFigures": 66,
+    "contactSheets": 6,
+    "newDenseVisuals": true,
+    "fullSizeNativeReview": [
+      "qwen3-vl figure 1: full visual pipeline, side path no longer obscured",
+      "qwen3-vl figure 3: schematic frequency interleaving and timestamp distinction",
+      "llama-3 figure 2: block-diagonal causal packed-document mask",
+      "deepseek-v3 figure 2: routing selection and unmodified mixture weights",
+      "deepseek-r1 figure 2: old, current and reference policies",
+      "qwen3 figure 2: student-generated trajectory and teacher scoring",
+      "kimi-linear figure 3: causal intra-chunk computation and recurrent boundary",
+      "llava figure 2: separate HD extension and 1312-position arithmetic",
+      "qwen2-vl figure 2: visual coordinate example and ordinal tube indices"
+    ],
+    "narrowThemeReview": [
+      "qwen3-vl figure 1 at 390px light",
+      "qwen3-vl figure 3 at 320px dark",
+      "deepseek-v3 figure 2 at 320px dark",
+      "llama-3 figure 2 at 390px light"
+    ],
+    "sourceArtReview": "All current source crops inspected in rendered contact sheets; exact full PDF/page and crop comparisons performed by owning agents, with root direct review for V4 cache layout and V4.1 hierarchical indexer. Artwork labels/axes retained; no AI repainting.",
+    "boundary": "Visual and source verification only. Model checkpoints, benchmarks and training were not executed."
+  }
+}

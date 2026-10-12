@@ -235,3 +235,159 @@ The next authorized push produced the successful Cloudflare build and new active
 Branch protection remains unconfigured; the GitHub branch protection API returned HTTP 404.
 Requiring validation before pull request merges is a recommendation, not an enforced rule.
 The existing dependency advisory and build warnings remain unchanged.
+
+## Dependency security cleanup (October 12, 2026)
+
+Status: local cleanup and validation complete. No files were staged, committed,
+pushed or deployed in this task. The earlier sections record historical releases;
+their dependency counts are not the current audit result.
+
+### Reviewed changes
+
+The initial audit reported four high severity package entries, representing two
+underlying advisories. Wrangler and Miniflare inherited the Sharp finding; those
+entries were not four independent vulnerabilities.
+
+| Component | Before | After | Scope |
+| --- | --- | --- | --- |
+| Wrangler | 4.146.0 | 4.149.0 | Direct development tool, now pinned to the reviewed exact version |
+| Miniflare | 5.20261001.0-alpha | 5.20261006.1-alpha | Version selected by Wrangler |
+| Sharp under Miniflare | 0.35.4 | 0.35.5 | Deduplicated with Astro's existing 0.35.5 copy |
+| http-cache-semantics | 4.2.0 | 4.3.0 | Compatible with Astro's declared ^4.2.0 constraint; lockfile update only |
+| Nimbus | 0.15.2 | 0.15.2 | Exact pin unchanged |
+| Astro | 7.3.1 | 7.3.1 | Exact pin unchanged |
+
+The Sharp advisory lists 0.35.5 as patched. Cloudflare's 4.149.0 release explicitly
+updates Sharp from 0.35.4 to 0.35.5. The accompanying Workerd platform packages
+changed to 1.20261006.1. Duplicate older Sharp and esbuild packages were removed
+by dependency resolution.[^security-sharp][^security-wrangler]
+
+The candidate was prepared in a temporary directory from the current manifests.
+Every version change was checked against the Wrangler dependency group and the
+cache package. No unrelated package versions changed. The project manifests were
+updated with a reviewed patch after their original checksums were confirmed.
+The installed lockfile still matches the candidate. No blanket audit fix,
+major downgrade, dependency override or upstream source edit was used.
+
+### Cache advisory: reported range versus disputed interpretation
+
+The advisory database still lists versions through 4.2.0 as affected and names
+no patched version. The maintainer disputes the report and closed the issue as
+not planned, arguing that the reported reuse follows HTTP caching rules.
+These positions disagree and should not be silently conflated.[^security-cache-advisory][^security-cache-dispute]
+
+Version 4.3.0 is a published upstream release within Astro's dependency range.
+Updating the lockfile moves the installed version outside the advisory's listed
+range. It is not described here as a maintainer-confirmed security patch for
+that disputed report.[^security-cache-source]
+
+The current deployment remains static assets, without an Astro request server
+or a shared application cache accepting visitor request headers. Inspection of
+the installed `astro/dist/assets/build/remote.js` found cache metadata used for
+remote-image freshness, with `storable()` checked when deriving the lifetime.
+The previously documented static-site exposure assessment still applies. It is
+not a blanket assurance about other uses of the package. Reassess before adding
+request rendering, authenticated remote images, a shared application cache or a
+public development server.
+
+### Actual validation results
+
+- `npm audit --json`: zero reported vulnerabilities, exit code 0, in both the
+  candidate and the installed project. This is the registry's current result,
+  not proof that the software has no vulnerabilities.
+- Clean `npm ci` in the temporary candidate: passed, 417 packages installed.
+- Cache API smoke checks: passed for fresh public reuse, serialization,
+  no-cache revalidation and private/no-store storage rejection.
+- Production-origin validation with `SITE_URL=https://latentlit.com`: passed.
+  All 49 deployment tests and 141 content tests passed. Astro checked 161 files
+  with zero errors, warnings or hints. The build produced 84 pages, indexed 83
+  content pages and linted 84 source files successfully.
+- Research-skill validation: all 27 tests passed.
+- Updated Wrangler version and production-origin guard: passed.
+- Wrangler `deploy --dry-run`: passed against the production-origin build.
+  The CLI explicitly exited in dry-run mode. No upload or external change occurred.
+- Browser checks: home page at 1440, 390 and 320 pixels in both themes; Human
+  Capabilities pages at desktop and mobile widths. No page overflow, broken
+  reviewed images or JavaScript errors. Home navigation, keyboard links,
+  no-JavaScript reading, Markdown and MDX exports passed. Built files were served
+  through browser request interception; no additional preview server was started.
+
+Existing Vite module-directive warnings and Pagefind skips for 25 generated
+redirect documents remain. The content pages were indexed. npm also warned that
+esbuild and Workerd install scripts were not covered by the current allowScripts
+policy. No script approval or global npm policy was changed. Installation, the
+production build and the updated deployment dry run passed under that policy.
+
+### Remaining release work
+
+Review the intended commit file list and exclude local outputs that are not part
+of the release. The payment-planning note and AWS state remain ignored and
+untracked. Podcast narration and its transcript were left unchanged; the obsolete
+hosting note was corrected separately. No additional podcast changes are implied
+by this dependency review. Commit, push and production publication still require
+explicit user authorization.
+
+## Release file cleanup (October 12, 2026)
+
+The user authorized this local cleanup, not staging, committing, pushing or
+deployment. Existing work from other sessions remains intact.
+
+- Removed trailing whitespace in 31 new research and notice files. Nonwhitespace
+  content and license wording are unchanged; no meaningful Markdown hard breaks
+  were removed.
+- Moved ten superseded figures from `public/` into the relevant research archives.
+  All bytes and SHA256 checksums match the reviewed originals. The next build
+  excludes 8,819,606 bytes of unused artwork; no historical image was deleted.
+  [Archive map](release-asset-archive.json) records former public paths, current
+  repository paths, sizes and checksums. Dated history ledgers retain their paths;
+  current provenance locators and notice records identify the archives.
+- Made machine-specific paths in eight research records portable. Existing image
+  copies were checked for identical bytes. Local-only PDFs retain their exact
+  editions, filenames, canonical source URLs and checksums without publishing the
+  full downloaded papers. The external GLM OCR and dots.mocr excerpt locators
+  now contain different bytes; their reviewed repository figures still match the
+  originally recorded hashes. This discrepancy is recorded, not silently changed.
+- Excluded generated `output/` deliverables and the family-expansion validation
+  log. Files remain locally available. The historical validation summary and log
+  checksum remain versioned without a broken link to an excluded log.
+- Confirmed that the local payment context note and AWS state remain ignored and
+  untracked. No payment interface or external-service setting was changed.
+
+Completed checks:
+
+- Production-origin `npm run validate`: 49 deployment tests, 141 content tests,
+  Astro check of 161 files with no diagnostics, 84 pages built and 84 content
+  files lint clean.
+- `npm run test:research`: 27 isolated tests passed.
+- Git-eligible release copy: clean `npm ci` and full production-origin validation
+  passed without ignored local files, cached dependencies or retired public assets.
+- Desktop and mobile checks passed for the home page, Human Capabilities, model
+  overview, Qwen3-VL, Physical AI and Document AI. Current images loaded; no page
+  overflow or browser script errors were observed. Markdown exports retained the
+  substantive text, figure captions and references. Home keyboard links and the
+  no-JavaScript baseline passed.
+- Archive bytes, current provenance paths and exclusions passed independent checks.
+  Tracked changes and all new text files pass Git whitespace checks. Nothing is staged.
+
+Existing warnings remain: npm reports two install scripts not covered by its
+current approval policy; Vite reports ignored MDX module directives; Pagefind
+skips 25 generated redirect documents without an outer HTML element. They do not
+prevent the validated static build. No script-approval policy was changed.
+
+Precommit correction: the authoritative staged Git check also found 110 files
+with extra blank EOF lines or CRLF license text that the earlier untracked-file
+check missed. Those line endings were normalized without changing wording or
+license terms; current SVG checksums retain their prior values as history.
+[Normalization record](release-text-normalization.json) preserves before/after
+hashes. The archived Qwen3-VL SVG retains its exact original bytes under a
+single-file blank-at-EOF attribute. No other whitespace rule was weakened.
+The corrected staged check must pass before commit.
+
+These are engineering and release-file checks, not a new claim-by-claim scientific
+or legal audit of all accumulated content. Publication remains unauthorized.
+
+[^security-sharp]: Sharp maintainers. [Sharp / librsvg advisory](https://github.com/advisories/GHSA-wq5f-xc86-pv6w), affected versions below 0.35.5 and patched version 0.35.5. Inspected October 12, 2026.
+[^security-wrangler]: Cloudflare. [Wrangler 4.149.0 release](https://github.com/cloudflare/workers-sdk/releases/tag/wrangler%404.149.0), October 8, 2026; Sharp update and Miniflare dependency. Inspected October 12, 2026.
+[^security-cache-advisory]: GitHub Advisory Database. [http-cache-semantics max-stale advisory](https://github.com/advisories/GHSA-ch52-4w7c-c8xp), affected range through 4.2.0; no patched version named. Inspected October 12, 2026.
+[^security-cache-dispute]: http-cache-semantics maintainer. [Response in issue 56](https://github.com/kornelski/http-cache-semantics/issues/56), October 4, 2026. The response disputes the report; it does not erase the advisory database entry. Inspected October 12, 2026.
+[^security-cache-source]: http-cache-semantics maintainers. [Published 4.3.0 source](https://github.com/kornelski/http-cache-semantics/tree/b1d4bd682fbab0252985de45219f4e7497c0067c) and [documented API](https://raw.githubusercontent.com/kornelski/http-cache-semantics/b1d4bd682fbab0252985de45219f4e7497c0067c/README.md). Official npm metadata and source inspected October 12, 2026.

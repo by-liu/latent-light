@@ -1,0 +1,127 @@
+---
+title: Gemma
+description: The original dense baseline, multi-query versus multi-head state, and what a small-model release actually discloses.
+lastUpdated: 2026-10-10
+---
+
+import FocusCanvas from '../../../../components/FocusCanvas.astro';
+import SourceFigure from '../../../../components/architectures/SourceFigure.astro';
+
+<ModelResources reportHref="https://arxiv.org/abs/2403.08295v4" modelHref="https://huggingface.co/google/gemma-7b" modelName="google/gemma-7b" />
+
+The first Gemma generation is a useful baseline for understanding what sits behind a familiar parameter label. It combines a conventional causal decoder with a large vocabulary, a gated feed-forward path and size-specific attention choices. Its practical lesson is that parameter count, attention width and cached state are different budgets.[^report][^config]
+
+## Highlights
+
+- **Two sizes, different attention.** Original 2B uses one KV head; 7B uses sixteen, matching its sixteen query heads. Do not transfer the small model's cache saving to the larger one.[^config]
+- **A model name is not an exact weight count.** The report separately counts embeddings and decoder parameters. Together they exceed the rounded 2B and 7B labels.[^report]
+- **An instruct checkpoint is a distinct training product.** Pretraining, supervised instruction tuning and human-preference optimization have different targets and formatting contracts.[^card][^report]
+
+Scope: original text-only 7B pretrained architecture, with 2B as a concrete attention contrast. Report v4 also includes revised **Gemma 1.1** preference results; those are not silently assigned to the original instruction checkpoint. Report, official configuration and targeted Transformers v4.57.1 code inspected October 10, 2026; no weights executed. The gated checkpoint configuration was not accessed.[^report][^card][^config][^code]
+
+## Model in numbers
+
+Representative checkpoint: **google/gemma-7b**, pretrained.
+
+| Dimension | Value and scope |
+| --- | --- |
+| Weight count | 7.751B non-embedding plus 0.787B tied embedding parameters; **8.538B** total, derived by addition from report Table 2[^report] |
+| Pretraining exposure | 6T tokens; primarily English text, mathematics and code; not a released corpus[^report] |
+| Training hardware | 4,096 TPUv5e chips for 7B; duration and total FLOPs undisclosed[^report] |
+| Context | 8,192 trained tokens; not a claim of useful extrapolation[^report] |
+| Concrete decoder | 28 layers; residual width 3,072; sixteen query and KV heads of width 256; 256,128 vocabulary entries[^config] |
+| Access and terms | Gated public weights under Gemma Terms; reference inference software is separately Apache 2.0[^card][^terms][^config] |
+
+## Architecture: follow the dimensions, not the family name
+
+Text becomes token IDs, then scaled embeddings. Each layer reads earlier positions through causal attention and transforms each position through a GELU-gated FFN. Residual additions keep a shared 3,072-wide stream. A final normalization and tied vocabulary head predict the next token.[^code]
+
+<FocusCanvas size="figure" label="Gemma 7B has two pre-normalized residual sublayers; attention projects a 3072-wide stream to sixteen 256-wide heads and then back. The 2B contrast shares one KV head across eight query heads.">
+  <SourceFigure id="figure-1" src="/figures/model-studies/gemma/architecture.svg" alt="Gemma 7B has two pre-normalized residual sublayers; attention projects a 3072-wide stream to sixteen 256-wide heads and then back. The 2B contrast shares one KV head across eight query heads." minWidth={760}>
+    <div slot="image">
+
+![Gemma 7B has two pre-normalized residual sublayers; attention projects a 3072-wide stream to sixteen 256-wide heads and then back. The 2B contrast shares one KV head across eight query heads.](/figures/model-studies/gemma/architecture.svg)
+
+    </div>
+
+**Figure 1.** Original architecture trace from the inspected reference configuration and implementation. The inset separates query heads from stored KV heads.[^config][^code]
+
+  </SourceFigure>
+</FocusCanvas>
+
+In Figure 1, the attention projection is **4,096 wide**, not 3,072: sixteen heads times 256. The output projection maps it back to the residual width. Many introductions assume that head count times head width must equal model width; this released design is a counterexample. That equality is a design convention, not a Transformer law.[^config][^code]
+
+The inspected RMSNorm evaluates the normalization in float32 and applies a one-centered learned scale before casting back. Input embeddings are multiplied by the square root of the residual width. These details matter when translating weights or implementing a numerical comparison; a generic pre-norm decoder is not automatically weight-compatible.[^code]
+
+### Read the gated FFN width carefully
+
+The FFN has separate gate and value projections, multiplies their outputs, and projects back. A useful expression is:[^code]
+
+<MathExpression display number="1" tex="\operatorname{FFN}(x)=W_{\mathrm{down}}\bigl(\operatorname{GELU}(W_{\mathrm{gate}}x)\odot W_{\mathrm{up}}x\bigr)" />
+
+Here x is a residual vector and both expanded branches have width 24,576 in Google's 7B reference configuration. The product is elementwise; it is not attention over other positions. The gate can amplify, suppress or change the sign of intermediate features before the down projection mixes them.[^config][^code]
+
+The report's Table 1 lists a feed-forward hidden dimension of 49,152, twice the reference branch width. For this code trace, **24,576 means one branch**. Doubling it when constructing both gate and up matrices would incorrectly inflate the model. The paired widths explain the numerical correspondence, but the report does not explicitly define that counting convention; the official configuration establishes the executable branch size.[^report][^config]
+
+### MQA changes state, not the number of questions
+
+Original 2B has eight query heads but only one KV head. Each query head can ask a different question of the same stored key/value representations. In 7B, all sixteen query heads have distinct KV heads. For an unquantized cache, a basic storage estimate is:[^config][^code]
+
+<MathExpression display number="2" tex="M_{\mathrm{KV}}=2BLTH_{\mathrm{KV}}d_hb" />
+
+B is batch size, L layers, T cached positions, H_KV KV heads, d_h head width and b bytes per element. The factor two counts keys and values. This counts state only, not weights, activations or allocator overhead.
+
+For B = 1, T = 8,192 and two-byte elements, the derived 7B cache is **3.5 GiB**. Original 2B's eighteen layers and one KV head give **144 MiB** under the same assumptions. These are arithmetic storage budgets, not measured resident memory or latency. Model-weight quantization alone does not guarantee either cache is quantized.[^config]
+
+## Training: language, dialogue, preferences
+
+The public model card identifies web text, code and mathematics as the data domains. It describes filtering and benchmark decontamination rather than releasing a complete data manifest. A corpus description is not a reproducible dataset.[^card]
+
+| Stage | What the target teaches | Disclosure boundary |
+| --- | --- | --- |
+| Pretraining | Next-token language prediction on the text mixture | Token budgets and infrastructure disclosed; exact mixture and full optimizer schedule not released[^report] |
+| Supervised tuning | Responses to synthetic and human-created English prompts | Filtering, attribution and refusal goals described; complete example set absent[^report] |
+| Human-preference optimization | Prefer outputs judged helpful and safe | Report names a Bradley-Terry reward model and an unspecified novel RL algorithm; do not relabel it PPO or GRPO[^report] |
+
+The distinction is useful for reproduction. Matching the decoder gives a weight-compatible forward path. Matching the assistant additionally requires the tokenizer, dialogue formatting, data and alignment process. An architecture diagram cannot substitute for those missing ingredients.
+
+## Inference: the prompt is part of the contract
+
+The base checkpoint predicts text continuations. For an instruction-tuned checkpoint, use its tokenizer's conversation template, including role and turn delimiters; the original report warns that an unformatted prompt is out of distribution for that training.[^report][^card]
+
+Prefill processes the prompt and stores each layer's keys and values. Decode adds new token states and advances positions without recomputing the whole prefix. RoPE is applied to queries and keys; the cached history and causal mask must agree about positions. The selected implementation uses the cache object's update path, while generation and sampling sit outside the core decoder.[^code]
+
+A model can therefore load successfully yet behave badly if the application changes its template, stop tokens or padding convention. This is an interface failure, not evidence that the architecture is incapable of conversation. No serving throughput was measured here.
+
+## Evidence: compare tasks, not a composite headline
+
+<FocusCanvas size="figure" label="The original report groups academic benchmark scores into question answering, reasoning, mathematics and science, and coding. Gemma 7B does not lead every grouped category.">
+  <SourceFigure id="figure-2" src="/figures/model-studies/gemma/report-capabilities.png" alt="The original report groups academic benchmark scores into question answering, reasoning, mathematics and science, and coding. Gemma 7B does not lead every grouped category." minWidth={640}>
+    <div slot="image">
+
+![The original report groups academic benchmark scores into question answering, reasoning, mathematics and science, and coding. Gemma 7B does not lead every grouped category.](/figures/model-studies/gemma/report-capabilities.png)
+
+    </div>
+
+**Figure 2.** Grouped benchmark averages, not an architecture ablation. Reproduced from Gemma Team, report v4 Figure 1, p. 2; figure crop, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).[^report]
+
+  </SourceFigure>
+</FocusCanvas>
+
+Read Figure 2 by category. Averaging different benchmarks hides prompting and metric differences; it cannot identify whether vocabulary, FFN width or training data caused a gain. The report's Table 6 also mixes rerun and previously published baselines, and its later preference table describes Gemma 1.1. Those boundaries matter more than a single “better than 7B peers” summary.[^report]
+
+The model card likewise cautions about bias, inaccurate answers and task-dependent performance. A favorable benchmark does not remove the need to test the exact checkpoint in the intended application.[^card]
+
+## Limitations and lessons
+
+Training data and alignment are not fully reproducible from public artifacts. The gated checkpoint metadata was not inspected, so public reference configuration and runtime code are identified separately. Report v4 contains more than one instruction-release generation. The model is text-only; multimodal capabilities in later Gemma generations are not inherited backwards.[^report][^card]
+
+**Keep three counts separate:** rounded family label, total weights and per-request KV state. **Trace actual dimensions:** attention width need not equal residual width. **Treat the template as a learned interface:** assistant formatting is not decorative.
+
+Continue with [Gemma 2](/architectures/models/gemma-2/) for distillation and hybrid attention, and [Gemma 3](/architectures/models/gemma-3/) for a compact visual interface. Shared attention and FFN intuition is in [Transformer Foundations](/architectures/foundations/).
+
+[^report]: Gemma Team, Google DeepMind. [Gemma: Open Models Based on Gemini Research and Technology](https://arxiv.org/abs/2403.08295v4), 2024, report v4. Architecture Tables 1–2, training and instruction tuning, evaluation Figure 1 and Tables 5–7. Paper artwork CC BY 4.0; copyright Google DeepMind.
+[^card]: Google. [Gemma 7B model card](https://huggingface.co/google/gemma-7b), original pretrained checkpoint; inputs, training, evaluation and gated access inspected October 10, 2026.
+[^config]: Google. [Gemma PyTorch reference configuration](https://github.com/google/gemma_pytorch/blob/014acb7ac4563a5f77c76d7ff98f31b568c16508/gemma/config.py), inspected October 10, 2026. GemmaConfig, get_config_for_7b and get_config_for_2b. Apache 2.0 software, not the model-weight license.
+[^code]: Hugging Face. [Gemma implementation](https://github.com/huggingface/transformers/blob/v4.57.1/src/transformers/models/gemma/modeling_gemma.py), Transformers v4.57.1. GemmaRMSNorm, GemmaMLP, GemmaAttention, GemmaDecoderLayer and GemmaModel; forward and cache paths inspected, not executed.
+[^terms]: Google. [Gemma Terms of Use](https://ai.google.dev/gemma/terms), model and redistribution terms inspected October 10, 2026. These apply separately from software and paper-artwork terms.

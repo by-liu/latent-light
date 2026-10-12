@@ -1,0 +1,116 @@
+{
+  "model": "t5",
+  "checked": "2026-10-10",
+  "source": "Colin Raffel et al., T5, JMLR 21(140), 2020",
+  "source_url": "https://www.jmlr.org/papers/v21/20-074.html",
+  "pdf_url": "https://www.jmlr.org/papers/volume21/20-074/20-074.pdf",
+  "sha256": "66cf9f77e46691853703eb6982dea337a53361d509fb99be719b5410c5467e41",
+  "license": {
+    "status": "verified",
+    "value": "CC BY 4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "grant_evidence": "JMLR PDF page 1 explicitly states License: CC-BY 4.0 and lists the authors as copyright holders.",
+  "modifications": "Source figure regions cropped; surrounding paper prose and captions omitted. Figure labels, colors, axes and drawing retained. No AI repainting.",
+  "extraction": "Poppler pdftoppm v26.08.0, page rendered with scale-to 4200; crop coordinates recorded at 1400 pixel page preview and multiplied by 3.",
+  "figures": [
+    {
+      "asset": "public/figures/model-studies/t5/text-to-text-interface.png",
+      "source_figure": 1,
+      "pdf_page": 3,
+      "page_preview_crop": [
+        155,
+        156,
+        770,
+        266
+      ],
+      "output_pixels": [
+        2310,
+        798
+      ],
+      "alt": "Translation, sentence acceptability, similarity scoring and summarization use task prefixed text inputs and text targets through T5.",
+      "caption": "Many tasks, one text interface. Reproduced from Raffel et al., Figure 1, JMLR 2020; figure crop, CC BY 4.0.",
+      "purpose": "In Figure 1, a class label and a numeric score are written as text just like a translation or summary. The interface is shared, not the meaning of correctness or the required training data.",
+      "asset_sha256": "e57081773a6c0d0de006f75c4a3620ce9cbc1f95be4db7d55742ba91fb2dc3f8"
+    },
+    {
+      "asset": "public/figures/model-studies/t5/architecture-contracts.png",
+      "source_figure": 4,
+      "pdf_page": 16,
+      "page_preview_crop": [
+        230,
+        133,
+        651,
+        302
+      ],
+      "output_pixels": [
+        1953,
+        906
+      ],
+      "alt": "The T5 report compares a bidirectional encoder with a causal cross attending decoder, a fully causal language model, and a prefix language model whose source prefix is bidirectional.",
+      "caption": "Three attention contracts compared. Reproduced from Raffel et al., Figure 4, JMLR 2020; figure crop, CC BY 4.0.",
+      "purpose": "Read the left panel of Figure 2 as T5: source states communicate in both directions, target states see earlier targets, and every target can consult source memory. The middle and right panels are comparison architectures in the report, not extra modules inside T5. Dark lines indicate full visibility; lighter lines indicate causal visibility.",
+      "asset_sha256": "1088aeaf807b06394359a4730cc4f9646e9b61784cbdae36a56b2f42f5ab1cb6"
+    },
+    {
+      "asset": "public/figures/model-studies/t5/span-corruption.png",
+      "source_figure": 2,
+      "pdf_page": 13,
+      "page_preview_crop": [
+        306,
+        157,
+        469,
+        180
+      ],
+      "output_pixels": [
+        1407,
+        540
+      ],
+      "alt": "Two missing spans are replaced by distinct X and Y sentinels in the input. The target emits X for inviting, Y last, and a final Z sentinel instead of reconstructing the whole sentence.",
+      "caption": "Generate removed spans, not the full passage. Reproduced from Raffel et al., Figure 2, JMLR 2020; figure crop, CC BY 4.0.",
+      "purpose": "Figure 3 replaces the adjacent words “for inviting” with one sentinel and “last” with another. The target emits those spans in order, each after its matching sentinel, then a final marker. The visible words remain context, not reconstruction targets.",
+      "asset_sha256": "423e7d33239d387e1b121d88b386555bea94c3cb41d33f5b8b868e89655cca4a"
+    },
+    {
+      "asset": "public/figures/model-studies/t5/repetition-and-loss.png",
+      "source_figure": 6,
+      "pdf_page": 29,
+      "page_preview_crop": [
+        301,
+        154,
+        477,
+        289
+      ],
+      "output_pixels": [
+        1431,
+        867
+      ],
+      "alt": "At the same training exposure, heavily repeated small C4 subsets reach lower training loss than the full corpus; downstream transfer results must be read separately.",
+      "caption": "Lower training loss can conceal worse transfer. Reproduced from Raffel et al., Figure 6, JMLR 2020; figure crop, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).",
+      "purpose": "Read Figure 4 together with Table 9, not as a transfer score. The smallest repeated subsets reach the lowest training loss but substantially worse downstream scores. Some repetition is harmless in this experiment: a 2²⁹-token subset repeated 64 times scores 72.03 on SuperGLUE versus 71.36 for the full-corpus baseline. The failure is excessive repetition under these conditions, not repetition itself.[^report]",
+      "asset_sha256": "b86980b571b7328b104af3bb2fba08eaa469817913ed41d504cfd429a2341a1a"
+    }
+  ],
+  "restricted_candidates": [],
+  "review": {
+    "source_artwork": true,
+    "crop_integrity": true,
+    "license": true,
+    "desktop_mobile_browser": true,
+    "checked": "2026-10-10T17:36:51.557Z",
+    "revision": 3
+  },
+  "revision": 3,
+  "review_history": [
+    {
+      "revision": 2,
+      "review": {
+        "source_artwork": true,
+        "crop_integrity": true,
+        "license": true,
+        "desktop_mobile_browser": false,
+        "checked": "2026-10-10T17:23:12.642Z"
+      }
+    }
+  ]
+}

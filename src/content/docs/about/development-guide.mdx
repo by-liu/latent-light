@@ -1,7 +1,7 @@
 ---
 title: Development guide
 description: Where source files live and how to develop pages, components, and exports.
-lastUpdated: 2026-10-04
+lastUpdated: 2026-10-11
 ---
 
 Develop the site from its source files. Preserve the calm reading experience.
@@ -9,14 +9,18 @@ Keep the content equally usable for people and agents. This guide defines
 development practices. It does not authorize deployment or changes to external services.
 
 Read the repository files `AGENTS.md` and `README.md` first. Use
-[Content standards](/about/content-standards/) for writing. Use
+[Content standards](/about/content-guidance/content-standards/) for writing. Use
 [Maintenance and upgrades](/about/maintenance/) for checks and updates.
+For technical model pages, also read the [Model Deep Dive guide](/about/content-guidance/model-deep-dive-guide/)
+and adapt its [starter template](/about/content-guidance/model-deep-dive-template/).
 
 ## Source map
 
 | Location | Purpose |
 | --- | --- |
-| `src/content/docs/` | Pages, including the authoritative About guides |
+| `src/content/docs/` | Published learning pages and guidance |
+| `src/content/docs/about/content-guidance/` | Writing standards, study guides, and templates |
+| `src/content/docs/about/` | Site purpose, framework, development, and maintenance |
 | `src/content/partials/` | Reusable Markdown or MDX content |
 | `src/content.config.ts` | Content collections and schemas |
 | `src/components.ts` | Components available globally in MDX |
@@ -33,6 +37,8 @@ Read the repository files `AGENTS.md` and `README.md` first. Use
 | `scripts/verify-deployment.mjs` | Public checks after deployment |
 | `public/` | Assets included in the published build |
 | `docs/branding/` | Asset references and generation records |
+| `docs/research/` | Public-safe evidence, provenance, and review records |
+| `.agents/skills/latent-light-deep-research/` | Versioned research skill, schemas, tools, and tests |
 
 Do not edit files in these directories:
 
@@ -52,6 +58,12 @@ the page heading.
 
 Add each new page to the explicit sidebar in `astro.config.ts`. Link related
 explanations. Preserve established URLs. Use a redirect when replacing a route.
+
+Organize learning collections under broader domains.
+AI Technology contains LLM & VLM, Document AI and Agents.
+Products & Markets contains AI Landscapes. Human Capabilities contains High agency and Taste.
+Do not add empty navigation groups.
+A sidebar grouping change does not require moving source files or changing page URLs.
 
 Use `<Render file="partial-name" />` for reusable content from
 `src/content/partials/`. Do not import MDX files directly into other pages.
@@ -96,9 +108,24 @@ Use its `label` and `size` props. Available sizes are `figure`, `diagram`,
 and `wide`. Only the visual should expand in focus view, not the reading column.
 Keep a meaningful text equivalent in the exported content.
 
-Follow the [figure numbering and caption standards](/about/content-standards/#figure-numbering-and-captions).
+Follow the [figure numbering and caption standards](/about/content-guidance/content-standards/#figure-numbering-and-captions).
 `SourceFigure` and `FoundationDiagram` accept an `id` for figure anchors.
 Keep caption labels in the page source so the text export retains them.
+
+For dense report figures, set `SourceFigure`'s optional `minWidth` to a readable
+width in pixels. Desktop shows the complete image; smaller screens preserve
+that readable width and pan within the figure frame. The frame supports keyboard scrolling and has a
+full size link. Check both normal and focus view; do not let a wide image
+expand the whole page. Extract a high resolution source crop that retains
+every label, legend, axis and arrow. Record its page, figure number, crop,
+source version and reuse basis in the research records. Follow the
+[paper figure reuse standard](/about/content-guidance/content-standards/#reuse-original-paper-figures-deliberately).
+
+For generated figures with light and dark artwork, keep the primary image in
+the Markdown image slot of `SourceFigure` and pass the matching asset as
+`darkSrc`. The figure and full size link follow the page theme without a
+client script. Print uses the light version. Keep the same content and text
+equivalent in both images; do not convey meaning through color alone.
 
 The local source editor exists only in development mode. The Edit source button
 opens a full height pane below the header while keeping desktop navigation
@@ -139,16 +166,156 @@ citations, captions, assumptions, and media explanations. Extend Markdown
 processing through the Nimbus plugin configuration. Review compatibility before
 replacing the processor.
 
+For model flow diagrams, use `ModelFlow.astro` with a static `lanesJson`
+attribute containing JSON. Use a single quoted attribute; encode apostrophes
+and angle brackets inside JSON strings as Unicode escapes. Do not use nested
+JavaScript expressions for exported diagram data. The `modelFlowAsMarkdown`
+transform emits ordered steps, lane notes, feedback descriptions, and the
+cited caption. Its regression tests run with `npm run test:content`. Desktop
+flows read left to right; narrow reading widths stack the same steps vertically.
+
+For company explorers, import ResearchTable from
+`src/components/landscapes/ResearchTable.astro` and place a native Markdown
+table inside it. Wrap the component in FocusCanvas when the comparison is wide.
+The category column is zero-indexed and defaults to the second column. Search,
+filter and reset enhance reading only; the table stays visible without JavaScript.
+The `researchTableAsMarkdown` transform in `plugins/research-table.mjs` preserves
+all rows and citations without the controls. Test filters, keyboard scrolling,
+print output and full text exports when changing the component.
+
+Company explorer icons are an HTML reading aid. `plugins/company-icons.mjs`
+adds a reviewed local 24 px mark beside the first company link, without changing
+the native table source or Markdown export. The shared registry is
+`src/data/company-icons.json`; sources, checksums and reuse assessments are in
+`docs/branding/company-icons.json`. Match the company or product actually named
+in the row, never an accelerator, hosting provider or unrelated namesake.
+Use initials when identity or reuse is unresolved. Keep marks unchanged in color,
+preserve text names and links, hide redundant images from assistive reading,
+and check both themes, mobile panning, no JavaScript and failed-image fallback.
+Use local files, not a third party logo service or runtime hotlinks.
+
+For product and industry maps, use `LandscapeMap.astro` with a static `cardsJson`
+attribute. Each card has `label`, `role`, `examples`, and `question` text.
+Its Markdown exporter retains every field, the figure anchor, notes and cited
+caption. The responsive cards use words as well as color to identify their
+roles. Keep ranking, measured outcomes and proposed questions distinct.
+Regression tests run with `npm run test:content`.
+
+For shared architecture mechanisms, use `ArchitectureAtlas.astro`. Supply a
+static `kind` from `plugins/architecture-atlas.mjs` and a stable figure `id`.
+Each panel has a native SVG and a complete visible text explanation. Keep the
+explanation, assumptions and figure caption meaningful without the SVG.
+The `architectureAtlasAsMarkdown` transform exports that same text. Add tests
+when you add a mechanism. Check small reading widths, dark mode and focus view;
+do not make labels readable only in an expanded view.
+
+Model studies begin with `ModelResources` cards. Use static `reportHref`,
+`modelHref`, and `modelName` attributes. `modelHref` points to the Hugging Face
+repository root, not a file or revision. The resource exporter preserves both
+links and their labels in Markdown. Keep exact artifact versions in research
+records and immutable reference URLs rather than displayed hashes.
+
 Use native Markdown footnotes as specified in the
-[citation standards](/about/content-standards/#citation-format). The local plugin
+[citation standards](/about/content-guidance/content-standards/#citation-format). The local plugin
 `plugins/reference-heading.mjs` makes the generated References heading visible
 without replacing Nimbus's processor. It preserves citation anchors and return
 links. Renderer regression tests run through `npm run test:content` and are part
 of `npm run validate`.
 
+### Comparison tables
+
+Use `src/components/ComparisonTable.astro` for general comparisons.
+Keep the content in a native Markdown table inside the component.
+Set `id`, `title` and an accessible `label`.
+Use `itemLabel` for the row count, such as `models` or `products`.
+Add the optional `search` attribute only when a catalog benefits from search.
+
+The component adds column headers and pinned row headers without changing cell content.
+It supports keyboard scrolling, result counts, reset and an empty state.
+All rows remain available without JavaScript, in print and in Markdown exports.
+Use `ResearchTable` for company directories that need category or base filters.
+
+Wrap wide comparisons in `FocusCanvas` with `size="wide"`.
+Keep `comparisonTableAsMarkdown` registered in `astro.config.ts`.
+Its implementation lives in `plugins/comparison-table.mjs`.
+Check search, pinned labels, keyboard scrolling, print and complete exports after changes.
+
+### The Document AI system map
+
+`src/components/DocumentSystem.astro` renders the fixed overview on the [Document AI page](/document-ai/).
+Its five functional layers are Documents, Perception, Representation, Understanding and Action.
+The figure also shows preserved artifacts, reliability checks and reviewed feedback.
+It describes a proposed system, not five required model calls.
+
+Edit the shared `documentSystem` data in `plugins/document-system.mjs` when the figure's meaning changes.
+The component and `documentSystemAsMarkdown` use that same data.
+Keep its numbered caption in the page source.
+Use `FocusCanvas` with `size="diagram"` for the complete horizontal view.
+Narrow layouts must retain the path through all five layers and readable text.
+Use `ModelFlow` for other flows rather than copying this fixed system map.
+
+### Agent maps and navigation cards
+
+Use the components in `src/components/agents/` for the [Agents collection](/agents/).
+Their shared data parsers and Markdown renderers live in `plugins/agent-presentation.mjs`.
+Supply static JSON text rather than JavaScript expressions.
+
+- `AgentCards.astro` provides navigation cards.
+  Give `cardsJson` an array with `title`, `description` and an Agents page `href`.
+  An optional `eyebrow` adds a short label.
+- `AgentArchitecture.astro` presents system layers.
+  Give `layersJson` an array with `label`, `detail` and `parts`.
+  Each part contains a `title` and `body`.
+  Optional `subtitle` and `footer` text must survive the export.
+- `AgentLandscape.astro` presents the collection overview.
+  Its `mapJson` includes human intent, the work loop, capabilities, controls, system families and frontier questions.
+  Follow the schema that `readAgentLandscape` checks rather than inventing new fields.
+
+The two figure components require a numbered `figure-N` anchor and an authored caption.
+Wrap wide figures in `FocusCanvas`.
+Preserve all descriptions, assumptions, feedback, links and citations in Markdown.
+Keep `agentCardsAsMarkdown`, `agentArchitectureAsMarkdown` and `agentLandscapeAsMarkdown` registered in `astro.config.ts`.
+The regression checks run in `scripts/agents-content.test.mjs`.
+
+## Present short videos
+
+Use `src/components/media/VideoGallery.astro` for a small collection of related
+clips. It presents one large portrait player and a list of clips beside it,
+with a stacked layout on narrow screens. Import it explicitly in the page.
+Provide stable IDs, YouTube IDs, titles, durations, descriptions, local WebP
+posters and transcript anchors in a static `videosJson` attribute.
+
+Keep the AI generation disclosure, attribution and complete transcripts in the
+component's content slot. Native `details` elements can keep transcripts compact.
+The player loads after a reader selects Play or a clip; switching or closing
+removes the previous iframe. Links to YouTube remain usable without JavaScript.
+The iframe uses the Nimbus registry `Embed` component.
+
+Keep `videoGalleryAsMarkdown` from `plugins/video-gallery.mjs` registered in
+`astro.config.ts`. Check that exports retain every clip's link, duration,
+description and transcript. Store media provenance with the topic's research
+records and keep full audio and video files outside the public source assets.
+
+## Present a podcast
+
+Import `src/components/media/PodcastPlayer.astro` for hosted audio. Supply a
+stable ID, title, published MP3 URL, duration and transcript anchor. Keep the
+generation disclosure and attribution in its content slot. Use native audio
+controls; playback starts on the reader's choice. JavaScript adds speed selection
+and pauses overlapping media. Native controls and source links work without it.
+
+Keep the full transcript in authored content. Label automatic transcriptions
+accurately and record their method with the media provenance. Hosting settings
+and delivery checks live in `docs/media/`; recording originals stay outside Git.
+
+Register `podcastPlayerAsMarkdown` from `plugins/podcast-player.mjs` in
+`astro.config.ts`. Exports must retain the source link, duration, disclosure
+and transcript. Verify real playback, seeking and speed controls, along with
+keyboard use and narrow-screen rendering.
+
 ## Render mathematics
 
-Author math using the [equation standards](/about/content-standards/#write-equations-as-mathematics).
+Author math using the [equation standards](/about/content-guidance/content-standards/#write-equations-as-mathematics).
 `astro.config.ts` selects Astro's native Sätteri processor with `math: true`.
 Nimbus still supplies its admonitions and normal Astro rendering passes.
 The existing table and reference plugins remain in the same pipeline.
@@ -182,12 +349,30 @@ Neither export should contain rendered spans or stripped equations. KaTeX docume
 If replacing Sätteri, set `admonitions: false`. Preserve the existing callout
 behavior. See the [Nimbus endpoint documentation](https://nimbus-docs.com/ai/publish-markdown/).
 
+## Research workflow and tools
+
+Use the [Research workflow](/about/content-guidance/research-workflow/) for
+substantial investigations. The repo-local `latent-light-deep-research` skill
+coordinates that workflow. Read its `SKILL.md` and applicable references before
+using its tools. It needs Python 3.10 or newer and no third-party Python packages.
+
+For new site research, the MD or MDX page is the canonical narrative. Keep
+evidence and actual review results in `docs/research/<domain>/<topic>/`; do not
+maintain a second article in `report.md`. A requested standalone report can
+be the canonical output instead. Preserve existing schema 2 reports and
+records without automatic migration.
+
+The skill initializer creates records, not page content. Its validator reads
+records without modifying them. Neither tool establishes scientific truth,
+visual quality, or reuse rights. When changing the tools, run
+`npm run test:research` as well as the relevant site checks.
+
 ## Retain source and asset records
 
 A canonical link is enough for an ordinary citation. Keep a concise record in
 `docs/research/<topic>/` for a closely studied paper or a source that supplies
 a visual. Use `docs/branding/` for identity assets. These records support the
-[Content standards](/about/content-standards/). They do not duplicate the editorial guidance.
+[Content standards](/about/content-guidance/content-standards/). They do not duplicate the editorial guidance.
 
 Record these details for each source:
 
@@ -202,7 +387,10 @@ the claim.
 For a reproduced or adapted visual, also record these details:
 
 - Figure number or location in the source
-- Usage terms
+- Copyright holder and applicable usage terms, including third party exclusions
+- Reuse basis: license, direct permission, or a documented applicable exception
+- For an exception: purpose, distribution, amount, alternatives, nature, likely
+  effect and remaining uncertainty; do not label it as a license grant
 - Extraction or adaptation method
 - Resulting asset path
 
@@ -211,8 +399,9 @@ caption and source link on the page, not only in the repository record.
 
 If a local paper copy helps study, preserve the original version unchanged.
 Record its filename and checksum to distinguish it from later versions.
-Do not commit downloaded papers or excerpts unless their usage terms permit the intended distribution.
-Do not deploy those files unless their usage terms permit the intended distribution.
+Do not commit or deploy complete downloaded papers merely because selected
+figures can be reused. Assess each excerpt for its intended public distribution
+under the [reuse standard](/about/content-guidance/content-standards/#reuse-original-paper-figures-deliberately).
 Local study archives can remain outside the public repository.
 
 Use `src/assets/` for page visuals that Astro processes. Use `public/` for assets
@@ -222,8 +411,9 @@ narrow widths and in text exports. Keep large media outside the source repositor
 
 Repository records are also intended for public sharing. Do not place private
 research notes, confidential sources, or restricted files in these records.
-If usage rights are unclear, link to the source instead of copying its material
-into the site.
+The absence of a permissive artwork license is not an automatic rejection.
+If neither a license, permission nor a defensible exception supports the
+intended use, link to the source or write an independent explanation.
 
 ## Visual identity and provenance
 
@@ -248,3 +438,17 @@ Its source link and generation prompt remain in `docs/branding/avatar-cartoon.md
 Keep license records in `THIRD_PARTY_NOTICES.md` and `public/licenses/`.
 
 Before completing a change, follow the [validation checklist](/about/maintenance/#validate-a-change).
+
+
+### Landscape overviews and collection accents
+
+Use `LandscapeOverview.astro` for a numbered opening overview image. It reuses
+`SourceFigure` for full-resolution access and mobile panning. Register its Markdown
+renderer so the figure anchor, image, alt text and cited caption survive exports.
+Keep an equivalent explanation or comparison table in the page; the image must not
+be the only source of essential information. Save generation prompts and review
+notes with the research records.
+
+`LandscapeCards.astro` adds local, restrained accents to the landscape hub’s Nimbus
+cards. Keep the change scoped to that collection and preserve semantic links,
+keyboard focus, theme contrast, responsive layout and text exports.

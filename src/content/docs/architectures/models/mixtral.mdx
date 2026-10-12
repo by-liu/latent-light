@@ -1,0 +1,142 @@
+---
+title: Mixtral 8x7B
+description: Trace token level expert routing and separate active computation from the memory needed to hold all expert weights.
+lastUpdated: 2026-10-10
+---
+
+import FocusCanvas from '../../../../components/FocusCanvas.astro';
+import SourceFigure from '../../../../components/architectures/SourceFigure.astro';
+
+<ModelResources reportHref="https://arxiv.org/abs/2401.04088v1" modelHref="https://huggingface.co/mistralai/Mixtral-8x7B-v0.1" modelName="mistralai/Mixtral-8x7B-v0.1" />
+
+Mixtral increases model capacity without evaluating every feedforward weight for every token. In each decoder layer, a router sends the token to two of eight FFN experts and combines their results. Attention and the residual stream remain shared. This is conditional computation inside one model, not eight complete chatbots voting on an answer.[^report]
+
+## Highlights
+
+- **More capacity than per token arithmetic.** The report gives about 47B total parameters and 13B active per token. Memory still needs the total weights.[^report]
+- **Routing happens per token and per layer.** Selected experts can change as the token's hidden state changes; expert IDs are not reliable subject labels.[^report][^code]
+- **A practical released MoE baseline.** Base and Instruct variants are Apache 2.0. Their report exposes enough architecture to study routing and serving tradeoffs, while important training details remain undisclosed.[^report][^card]
+
+Representative checkpoint: **Mixtral-8x7B-v0.1 base**. Report v1, configuration, license metadata and targeted Transformers router/expert functions checked October 10, 2026. The Instruct training path is discussed separately; no checkpoint executed.[^config][^code]
+
+## Model in numbers
+
+| Dimension | Value and scope |
+| --- | --- |
+| Model size | About 47 billion total and 13 billion active parameters per token, counting shared components plus selected experts. It is not eight full 7B models.[^report] |
+| Expert structure | 32 layers, eight FFN experts per layer, two selected per token; hidden width 4,096 and expert intermediate width 14,336.[^report][^config] |
+| Attention | 32 query heads and eight KV heads, with full causal attention over a 32,768 token context.[^report][^config] |
+| Pretraining data | Multilingual data with more non English exposure than Mistral 7B; exact token count and mixture are undisclosed.[^report] |
+| Post training data | Instruct uses SFT then DPO on paired feedback; example and pair counts are undisclosed.[^report] |
+| Training compute | FLOP and accelerator hour totals are undisclosed in the inspected report.[^report] |
+
+## What changed
+
+Mistral 7B has one FFN per layer. Mixtral replaces that part with an expert pool and a small learned router. Embeddings, attention, normalization and the output head are not independently duplicated eight times. It also uses full causal context rather than the original Mistral 7B sliding window. The “8x7B” name is not a multiplication formula for its total parameter count.[^report][^config]
+
+## Architecture and routing
+
+Within each decoder block, normalized states enter shared attention and a residual update. The next normalized states enter a router and the selected expert FFNs; a weighted sum returns to the residual stream. Every token in a batch can take a different expert pair.[^code]
+
+<FocusCanvas size="figure" label="A router sends one token state to two of eight parallel feedforward experts. Router weights scale the two expert outputs before they are summed.">
+  <SourceFigure id="figure-1" minWidth={560} src="/figures/model-studies/mixtral/expert-routing.png" alt="A router sends one token state to two of eight parallel feedforward experts. Router weights scale the two expert outputs before they are summed.">
+    <div slot="image">
+
+![A router sends one token state to two of eight parallel feedforward experts. Router weights scale the two expert outputs before they are summed.](/figures/model-studies/mixtral/expert-routing.png)
+
+    </div>
+
+**Figure 1.** One token, two selected FFN experts. Reproduced from Jiang et al., Figure 1; figure crop, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).[^report]
+
+  </SourceFigure>
+</FocusCanvas>
+
+Follow the two solid branches in Figure 1: the experts receive the same token state and run in parallel, not one after the other. The dotted path supplies mixing weights. Attention and the surrounding decoder remain shared; routing replaces the FFN sublayer.
+
+Let x be one token state, g its eight router logits and S(x) the two selected indices. Normalize those selected scores and sum the expert results:
+
+<MathExpression display number="1" tex="y=\sum_{i\in S(x)}\frac{e^{g_i}}{\sum_{j\in S(x)}e^{g_j}}E_i(x),\qquad g=W_gx" />
+
+Equation (1) summarizes the report's sparse top two softmax. Each E is a separate SwiGLU FFN with its own weights. The inspected code computes softmax over all router logits, selects the top two and renormalizes them; this gives the same selected weights mathematically, apart from implementation precision.[^report][^code]
+
+For N token states, router logits have shape N × 8. Each chosen expert returns a 4,096 wide vector. The implementation gathers token states by expert, applies the expert, weights its result and adds it back at the original token indices. “Top two” does not imply a single pair selected for the entire sequence.[^code]
+
+## Capacity is not memory savings
+
+Holding more experts can increase representational capacity while keeping the number evaluated per token fixed. But all experts must remain accessible to the serving system. A batch may touch every expert even though each individual token touches only two.[^report]
+
+The costs move rather than disappear: routing, uneven token assignments, gathering and scattering, memory loads and interdevice communication can matter. Expert parallelism places experts on different devices and sends token states to them; poorly balanced workloads can overload one device while others wait. Active parameters are an arithmetic scale indicator, not measured latency or required VRAM.[^report]
+
+## Training and alignment
+
+The report describes multilingual pretraining with a 32K context and increased multilingual sampling relative to Mistral 7B. It does not disclose a complete data mixture, exposure budget or optimizer schedule. Do not infer those from another Mistral model.[^report]
+
+For Mixtral Instruct, SFT on instruction data is followed by Direct Preference Optimization on paired feedback. A preference pair provides a chosen and rejected response for a prompt; it is not evidence of an online rollout based RL algorithm. The paper does not identify enough dataset or hyperparameter detail for exact reproduction.[^report]
+
+The hosted configuration includes router auxiliary loss settings. Those fields describe a supported implementation interface, not independent proof that an exact coefficient was used in the original pretraining run. Architecture, training disclosure and library defaults should remain separate.[^config]
+
+<details>
+<summary>Artifact and implementation identity</summary>
+
+The selected base artifact sets sliding_window to null, num_local_experts to eight and num_experts_per_tok to two. Rotary base is 1,000,000; this differs from the original dense Mistral v0.1 configuration.[^config]
+
+Targeted code inspection uses Transformers v4.57.1, MixtralSparseMoeBlock.forward and MixtralBlockSparseTop2MLP.forward. The code path avoids dropping tokens by gathering actual assignments. This observation is not a claim that every other serving backend has identical scheduling or capacity behavior.[^code]
+
+The paper and hosted card state Apache 2.0 for the released weights. The official current inference repository has its own inspected Apache 2.0 software license. No source code excerpt is copied. The report diagram uses its separate CC BY 4.0 grant.[^report][^card][^release]
+
+</details>
+
+## Inference
+
+Prefill processes the prompt with full causal attention and token level routing. Decode appends one token at a time, using shared KV caches and selecting experts from each layer's current hidden state. KV sharing and expert sparsity are independent: the experts do not each keep a separate attention cache.[^config][^code]
+
+For a useful serving comparison, specify hardware, quantization, backend, batch, prompt/output lengths and expert placement. A 13B active count does not establish the throughput of a dense 13B model. Larger batches can improve expert arithmetic utilization but also change routing balance and communication costs.[^report]
+
+## Evaluation and counterevidence
+
+The report's Table 2 gives MMLU five shot accuracy 70.6% for Mixtral versus 69.9% for Llama 2 70B. HumanEval zero shot is 40.2% versus 29.3%. These are the authors' rerun checkpoint comparisons, not matched data/compute experiments isolating expert routing.[^report]
+
+Evaluation settings materially change conclusions. Table 2's GSM8K score of 74.4% uses eight shots and majority over eight attempts. Table 3's 58.4% uses five shots. Neither should be presented as an unconditional “GSM8K score.”[^report]
+
+The routing analysis is particularly useful counterevidence to a popular intuition. Across several Pile domains, expert assignment does not show obvious topic specialization. Syntax and local token patterns show stronger structure. “Expert” means a learned FFN branch, not automatically a mathematics or biology specialist.[^report]
+
+### Routing locality creates a systems opportunity and a burden
+
+For ArXiv samples at layer 15, Table 5 reports the same first-choice expert for 27.9% of consecutive token pairs, versus 12.5% for independent uniform choices among eight experts. At least one expert overlaps between the top-two sets for 62.3% of pairs. Its independent-uniform baseline is about 46.4%, not 12.5%, because each set has two chances to overlap.[^report]
+
+<FocusCanvas size="figure" label="Across Pile domains and decoder layers, consecutive tokens often reuse the first-choice expert or overlap in either of their top-two experts; dashed lines show uniform independent routing baselines.">
+  <SourceFigure id="figure-2" minWidth={640} src="/figures/model-studies/mixtral/routing-locality.png" alt="Across Pile domains and decoder layers, consecutive tokens often reuse the first-choice expert or overlap in either of their top-two experts; dashed lines show uniform independent routing baselines.">
+    <div slot="image">
+
+![Across Pile domains and decoder layers, consecutive tokens often reuse the first-choice expert or overlap in either of their top-two experts; dashed lines show uniform independent routing baselines.](/figures/model-studies/mixtral/routing-locality.png)
+
+    </div>
+
+**Figure 2.** Consecutive tokens often reuse experts. Reproduced from Jiang et al., Figure 10; figure crop, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).[^report]
+
+  </SourceFigure>
+</FocusCanvas>
+
+The upper panel of Figure 2 asks whether the first-choice expert repeats. The lower panel asks whether either expert overlaps between adjacent top-two sets. They have different random baselines, so their heights are not directly comparable. Domain labels describe the sampled texts, not experts with fixed subject assignments.[^report]
+
+Local reuse suggests opportunities to organize dispatch and memory access. It can also create bursts of load on particular experts even when aggregate utilization looks balanced. The plot measures assignment structure, not an achieved serving speedup. The report discusses block-sparse computation for variable expert loads; efficient placement, scheduling and communication still belong to the implementation.[^report]
+
+## Limitations and open questions
+
+Public weights and inference code do not reveal the full training process. Missing token, data and compute disclosures limit causal comparisons and reproduction. The base model is not instruction aligned, and instruction benchmarks belong to the separate Instruct checkpoint.[^report]
+
+The passkey experiment reports perfect retrieval within its tested lengths, but a synthetic inserted key is not a complete test of document understanding or multi step reasoning. Sparse arithmetic also does not guarantee efficient use of the target hardware.[^report]
+
+## Lessons and related models
+
+Separate total capacity, active arithmetic and stored state. Then inspect actual routing rather than assign human specialties to experts. Compare [Mistral 7B](/architectures/models/mistral-7b/) for a dense bounded attention design, and [FFNs and experts](/architectures/evolution/ffns-and-experts/) for the broader conditional computation idea.
+
+[^report]: Albert Q. Jiang et al. [Mixtral of Experts](https://arxiv.org/abs/2401.04088v1), 2024 version 1, sections 2 to 5; Tables 1 to 5; routing analysis and Figure 10.
+
+[^config]: Mistral AI. [Mixtral-8x7B-v0.1 configuration](https://huggingface.co/mistralai/Mixtral-8x7B-v0.1/blob/fc7ac94680e38d7348cfa806e51218e6273104b0/config.json).
+
+[^card]: Mistral AI. [Mixtral-8x7B-v0.1 model card](https://huggingface.co/mistralai/Mixtral-8x7B-v0.1/blob/fc7ac94680e38d7348cfa806e51218e6273104b0/README.md), base model and Apache 2.0 metadata.
+
+[^code]: Hugging Face. [Mixtral implementation](https://github.com/huggingface/transformers/blob/8cb5963cc22174954e7dca2c0a3320b7dc2f4edc/src/transformers/models/mixtral/modeling_mixtral.py), Transformers v4.57.1, targeted router, expert and decoder functions.
+
+[^release]: Mistral AI. [Inference software license](https://github.com/mistralai/mistral-inference/blob/9eaeb91c17450e09021b6065a1d5cc69876507c8/LICENSE), Apache 2.0. Inspected October 10, 2026.

@@ -1,7 +1,7 @@
 ---
 title: Transformer Foundations
 description: Build the intuition and technical foundations to understand the Transformer, modern LLMs and VLMs, and their evolving architectures.
-lastUpdated: 2026-10-04
+lastUpdated: 2026-10-10
 ---
 
 import FocusCanvas from '../../../components/FocusCanvas.astro';
@@ -877,6 +877,14 @@ More total parameters do not imply that all parameters are active for every
 token, nor that device communication becomes free.[^switch]
 Sparse expert activation is not the same as sparse attention.[^switch]
 
+### Information across depth
+
+Attention and FFNs describe computation within a layer. Residual paths describe
+how representations reach later layers. Start with the original single-stream
+residual, then compare multiple streams, attention across earlier layers and
+gated reads and writes in [Depth and residual paths](/architectures/evolution/depth-and-residual-paths/).
+That companion page supplies the equations, source reports and their limits.
+
 ### Read a model as a set of contracts
 
 For any model report or implementation, record:
@@ -889,13 +897,14 @@ For any model report or implementation, record:
 6. FFN: activation, intermediate width, dense or routed?
 7. Context: trained length, served length, and any extension method?
 8. Runtime: cache, kernel, precision, and parallelism?
-9. Evidence: exact checkpoint, pinned code, and supporting ablations?
+9. Depth: one residual stream, multiple streams, or selective depth reads?
+10. Evidence: exact checkpoint, pinned code, and supporting ablations?
 
 This is a local reading checklist. It helps separate the mathematical model
 from the strategy used to execute it. For VLMs, add how image features enter
 the model and how their positions and token budget are defined.
 Continue with [Multimodal integration](/architectures/evolution/multimodal-integration/)
-and [Model Studies](/architectures/models/).
+and [Model Deep Dives](/architectures/models/).
 
 ## Check your understanding
 

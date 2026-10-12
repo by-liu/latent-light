@@ -1,0 +1,151 @@
+{
+  "revision": 2,
+  "checked": "2026-10-10T15:45:39.761Z",
+  "site_page_sha256": "786d898062f99c6ca02a4a2fe426b5f214249e9330409f044e805f6144282ecc",
+  "source_resources": {
+    "report": "https://raw.githubusercontent.com/MoonshotAI/Kimi-K3/3cb39dfd32e51c3328e2e4b4af21341247d06c43/k3_tech_report.pdf",
+    "hugging_face": "https://huggingface.co/moonshotai/Kimi-K3",
+    "checkpoint": "moonshotai/Kimi-K3"
+  },
+  "collection_checks": {
+    "site_validation": "106 tests, zero Astro diagnostics, build and all 43 docs lint passed.",
+    "browser_views": 81,
+    "model_benchmarks": "Not executed.",
+    "source_figures": "32 unique report assets; 33 placements; 48 total numbered collection figures. Rights retained per asset."
+  },
+  "viewports": [
+    {
+      "slug": "kimi-k3",
+      "width": 1440,
+      "mode": "light",
+      "title": "Kimi K3",
+      "titleCount": 1,
+      "overflow": false,
+      "figures": [
+        {
+          "id": "figure-1",
+          "caption": "Figure 1. Token, depth, and expert mixing. Reproduced from the report’s Figure 2, under the Kimi K3 documentation grant.12"
+        }
+      ],
+      "resources": [
+        {
+          "kind": "report",
+          "href": "https://raw.githubusercontent.com/MoonshotAI/Kimi-K3/3cb39dfd32e51c3328e2e4b4af21341247d06c43/k3_tech_report.pdf",
+          "label": "Technical reportRead the original research"
+        },
+        {
+          "kind": "model",
+          "href": "https://huggingface.co/moonshotai/Kimi-K3",
+          "label": "Hugging Facemoonshotai/Kimi-K3"
+        }
+      ],
+      "visibleHashes": [],
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "missingImages": [],
+      "activeNav": [
+        {
+          "label": "Kimi K3",
+          "visible": true
+        }
+      ],
+      "panFrames": [
+        {
+          "tabindex": 0,
+          "scrolls": false,
+          "frame": 648,
+          "image": 648
+        }
+      ]
+    },
+    {
+      "slug": "kimi-k3",
+      "width": 390,
+      "mode": "light",
+      "title": "Kimi K3",
+      "titleCount": 1,
+      "overflow": false,
+      "figures": [
+        {
+          "id": "figure-1",
+          "caption": "Figure 1. Token, depth, and expert mixing. Reproduced from the report’s Figure 2, under the Kimi K3 documentation grant.12"
+        }
+      ],
+      "resources": [
+        {
+          "kind": "report",
+          "href": "https://raw.githubusercontent.com/MoonshotAI/Kimi-K3/3cb39dfd32e51c3328e2e4b4af21341247d06c43/k3_tech_report.pdf",
+          "label": "Technical reportRead the original research"
+        },
+        {
+          "kind": "model",
+          "href": "https://huggingface.co/moonshotai/Kimi-K3",
+          "label": "Hugging Facemoonshotai/Kimi-K3"
+        }
+      ],
+      "visibleHashes": [],
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "missingImages": [],
+      "activeNav": [
+        {
+          "label": "Kimi K3",
+          "visible": false
+        }
+      ],
+      "panFrames": [
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 358,
+          "image": 620
+        }
+      ]
+    },
+    {
+      "slug": "kimi-k3",
+      "width": 320,
+      "mode": "dark",
+      "title": "Kimi K3",
+      "titleCount": 1,
+      "overflow": false,
+      "figures": [
+        {
+          "id": "figure-1",
+          "caption": "Figure 1. Token, depth, and expert mixing. Reproduced from the report’s Figure 2, under the Kimi K3 documentation grant.12"
+        }
+      ],
+      "resources": [
+        {
+          "kind": "report",
+          "href": "https://raw.githubusercontent.com/MoonshotAI/Kimi-K3/3cb39dfd32e51c3328e2e4b4af21341247d06c43/k3_tech_report.pdf",
+          "label": "Technical reportRead the original research"
+        },
+        {
+          "kind": "model",
+          "href": "https://huggingface.co/moonshotai/Kimi-K3",
+          "label": "Hugging Facemoonshotai/Kimi-K3"
+        }
+      ],
+      "visibleHashes": [],
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "missingImages": [],
+      "activeNav": [
+        {
+          "label": "Kimi K3",
+          "visible": false
+        }
+      ],
+      "panFrames": [
+        {
+          "tabindex": 0,
+          "scrolls": true,
+          "frame": 288,
+          "image": 620
+        }
+      ]
+    }
+  ],
+  "manual_review": "All 48 figure renders inspected as contact sheets; source figure completeness, labels and supplemental diagrams reviewed. Dense focus view and native dark diagrams inspected separately."
+}

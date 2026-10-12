@@ -1,0 +1,114 @@
+---
+title: "GLM-4"
+description: "The original GLM-4-9B-Chat architecture, grouped-query cache, long-context training and tool-system boundaries."
+lastUpdated: 2026-10-10
+---
+
+import FocusCanvas from '../../../../components/FocusCanvas.astro';
+import SourceFigure from '../../../../components/architectures/SourceFigure.astro';
+import ModelFlow from '../../../../components/architectures/ModelFlow.astro';
+
+<ModelResources reportHref="https://arxiv.org/pdf/2406.12793v2" modelHref="https://huggingface.co/zai-org/glm-4-9b-chat" modelName="zai-org/glm-4-9b-chat" />
+
+GLM-4 is worth studying as a transition from a language model to a tool-capable assistant family. The open 9B checkpoint makes its **attention and cache contract** inspectable; the family report describes how pretraining, alignment, longer context and external tools build on that network.[^report][^config]
+
+The representative artifact here is the **original GLM-4-9B-Chat**, not the closed GLM-4 API model, the separate one-million-context release, or the later GLM-4-0414 generation. Keeping those identities separate prevents a useful family report from becoming a misleading checkpoint specification.[^report][^card]
+
+Study scope: July 2024 report revision, original 9B-Chat configuration, tokenizer, targeted inference code and license. No checkpoint executed. Evidence checked October 10, 2026.
+
+## Highlights
+
+- **Much smaller persistent attention state.** Thirty-two query heads share two KV groups; attention capacity and cached history are different dimensions.[^config][^code]
+- **A broader training recipe than chat fine-tuning.** The report adds large multilingual pretraining, supervised alignment, preference-based alignment and long-context adaptation.[^report]
+- **Tool capability is a system capability.** The model emits a request; a runtime executes it and returns an observation. The report's All Tools system is not bundled inside a 9B weight file.[^report]
+- **The release can correct an architectural assumption.** The selected code uses causal attention and one-dimensional partial RoPE, despite the report's broader discussion of two-dimensional positions.[^report][^code]
+
+## Model in numbers
+
+| Dimension | Value and scope |
+| --- | --- |
+| Parameters | Approximately 9B; artifact metadata counts 9.400B stored parameters. This is the selected 9B-Chat release, not the API model's undisclosed size.[^config][^card] |
+| Decoder | 40 layers; residual width 4,096; FFN inner width 13,696; SwiGLU and RMSNorm.[^config][^code] |
+| Attention | 32 query heads, two KV groups, width 128 per head; query/key/value projections include biases.[^config][^code] |
+| Base data | Report explicitly states approximately 10T multilingual pretraining tokens for GLM-4-9B. The broader GLM-4 corpus is mostly Chinese/English plus 24 other languages; a complete mixture ledger is not public.[^report] |
+| Context | Selected chat config: 131,072 positions. The report describes 8K base training and later context extension; the 1M variant is a different release.[^report][^config] |
+| Compute | Accelerator count, complete useful GPU hours, training FLOPs and project cost undisclosed for this selected artifact in the inspected sources.[^report][^card] |
+
+## Trace the actual network
+
+The input is a tokenized chat sequence, including any serialized tool definitions and observations. Embeddings enter repeated causal attention and gated FFN blocks. Normalization precedes each sublayer, and a residual connection retains the incoming stream. The final projection produces next-token logits, not a browser operation or database query.[^code]
+
+<FocusCanvas label="GLM-4-9B separates query capacity and stored history" size="diagram">
+<ModelFlow id="figure-1" title="GLM-4-9B separates query capacity and stored history" lanesJson='[{"label":"Decoder path","steps":[{"label":"Chat tokens","detail":"Text, tool definitions and observations"},{"label":"Causal GQA","detail":"32 query heads share 2 KV groups","accent":true},{"label":"SwiGLU FFN","detail":"RMSNorm and residual stream"},{"label":"Next-token logits","detail":"Text or serialized tool request"}],"note":"Forty decoder layers. A tool runtime is outside these neural operations."},{"label":"Persistent state","steps":[{"label":"Previous keys / values","detail":"2 groups per layer, not 32"},{"label":"New token projections","detail":"Append current K and V"},{"label":"Attention backend","detail":"Reuse or expand shared groups"}],"note":"Persistent KV savings do not guarantee the same reduction in compute or temporary buffers."}]'>
+**Figure 1.** Query heads are not cache heads. Original explanatory diagram based on the released configuration and targeted code.[^config][^code]
+</ModelFlow>
+</FocusCanvas>
+
+**Grouped-query attention is the main serving lesson.** For each layer, the model computes 32 query heads but only two key and two value heads. Each KV head serves 16 query heads. Cached K/V are stored before the selected implementation expands them for attention; a backend can still incur temporary expansion or other overhead.[^code]
+
+Holding head width, layer count, sequence length and precision fixed, the persistent KV payload is 16 times smaller than a corresponding 32-KV-head design. This is not a claim of 16 times faster end-to-end inference.[^config][^code]
+
+<MathExpression display number="1" tex="M_{\mathrm{KV}}=2Lnh_{\mathrm{KV}}d_hb" />
+
+This is a derived payload model: K and V, layers <MathExpression tex="L" />, cached tokens <MathExpression tex="n" />, KV heads <MathExpression tex="h_{\mathrm{KV}}" />, head width <MathExpression tex="d_h" />, and bytes per element <MathExpression tex="b" />. For BF16/FP16 storage in this checkpoint, it gives **40KiB per cached token per sequence**, or **5GiB at 131,072 tokens**. Weights, activations, allocator overhead, batching and temporary buffers are excluded.[^config][^code]
+
+### Position and attention-mask boundaries
+
+The family report describes a two-dimensional RoPE design. The inspected original 9B implementation instead takes a one-dimensional position sequence, applies rotary positions to half the head dimension, and uses a larger rotary scale for long context. This page follows that released artifact when explaining its inference contract.[^report][^config][^code]
+
+For a full prefill without a supplied mask, the targeted code constructs a triangular causal mask or asks the attention backend to apply causal attention. During cached decoding, previously stored keys/values supply history. None of this is the original GLM's bidirectional visible-context blank-infilling mask merely because the family name is the same.[^code]
+
+The approximately 150K tokenizer vocabulary and 151,552 padded model vocabulary are different scopes, not necessarily inconsistent counts. The released embedding/output tensors use the padded value.[^report][^config]
+
+## The training recipe and what it discloses
+
+The report's pretraining pipeline combines multilingual web, books, code and instruction-related content, with filtering and deduplication. It explicitly states approximately 10T pretraining tokens for GLM-4-9B and says its post-training pipeline/data follow GLM-4-0520. That connects the recipes without making the open and API models identical. A complete, independently reproducible checkpoint data manifest is not supplied.[^report]
+
+Post-training uses authentic prompts and human interactions for supervised alignment. Preference/reinforcement learning addresses factuality, relevance and safety. The report does not fully identify every algorithm, reward model and hyperparameter for this artifact, so listing PPO or DPO as its exact pipeline would exceed the evidence.[^report]
+
+Long context is adapted after the 8K base stage. The report references its LongAlign work and discusses position adaptation and training on long inputs. The selected 128K config establishes an input-length contract, not equal retrieval accuracy throughout that entire window. The separately released 1M checkpoint and its needle tests are not evidence that this original 9B-Chat artifact accepts one million tokens.[^report][^card][^config]
+
+## From function calling to All Tools
+
+<FocusCanvas label="The GLM-4 All Tools system plans, calls Python, a browser or CogView, receives feedback and maintains external memory." size="figure">
+<SourceFigure id="figure-2" src="/figures/model-studies/glm-4/report-all-tools.png" alt="The GLM-4 All Tools system plans, calls Python, a browser or CogView, receives feedback and maintains external memory." minWidth={700}>
+<div slot="image">
+
+![The GLM-4 All Tools system plans, calls Python, a browser or CogView, receives feedback and maintains external memory.](/figures/model-studies/glm-4/report-all-tools.png)
+
+</div>
+
+**Figure 2.** Tool requests need an executing system. Team GLM, report Figure 4, July 2024 revision; figure-only crop under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).[^report]
+</SourceFigure>
+</FocusCanvas>
+
+[Figure 2](#figure-2) is a **family-level All Tools architecture**, not a network diagram of the selected open 9B model. It includes external knowledge, customized assistants, Python, a browser, CogView image generation, execution and memory. The neural model proposes actions; the surrounding services carry them out and provide feedback.[^report]
+
+This distinction matters in deployment. A function-call string does not validate arguments, authorize an action, recover from a failed service or provide persistent memory by itself. Those are application responsibilities. This is a systems interpretation of the report's separation between generation and execution, not a claim that the report evaluates every security requirement.[^report]
+
+## Read checkpoint-specific evidence
+
+| Reported result | Selected 9B-Chat result | Important boundary |
+| --- | --- | --- |
+| MMLU | 72.4 | Table 2 chat model; not the base model's 74.7 in Table 1.[^report] |
+| MATH | 50.6 | Table 2 evaluation protocol, not current production reliability.[^report] |
+| HumanEval | 71.8 | Table 2 code benchmark; not tool-assisted software maintenance.[^report] |
+| IFEval English strict prompt | 69.0 | Table 3; the closed GLM-4-0520 result is 79.1 and belongs to another model.[^report] |
+
+These selected metrics show that alignment and practical capability matter, but they do not isolate the contribution of GQA, data filtering or a particular preference algorithm. The report's long-context and agent demonstrations also depend on evaluation and runtime choices. Benchmarks should not be silently merged across base/chat/API variants.[^report]
+
+## What remains undisclosed
+
+The complete selected-checkpoint training token ledger, compute budget, preference-data composition and exact RL implementation remain unavailable in the inspected material. No independent benchmark reproduction is claimed here. Cache arithmetic is derived from the public dimensions, not measured process memory.
+
+The weight license is a **custom GLM-4 agreement**, with academic-use terms and commercial-registration requirements. The official code repository uses Apache 2.0. Neither scope should be inferred from the report's CC BY figure license or from the phrase “open-source model.”[^license]
+
+## Lessons
+
+GLM-4 makes three boundaries concrete: **query capacity versus cached state, configured length versus usable long-context quality, and model output versus tool execution**. They are useful when evaluating any assistant deployment. Continue to [GLM-4.5](/architectures/models/glm-4-5/) for the later MoE and hybrid-reasoning recipe, or [GLM-4.1V and GLM-4.5V](/architectures/models/glm-4-v/) for its multimodal branch.
+
+[^report]: Team GLM. [ChatGLM: A Family of Large Language Models from GLM-130B to GLM-4 All Tools](https://arxiv.org/pdf/2406.12793v2), July 30, 2024 revision. Sections 2 to 3, Figure 4, Tables 1 to 3 and 5.
+[^config]: Z.ai / THUDM. [Original GLM-4-9B-Chat configuration](https://huggingface.co/zai-org/glm-4-9b-chat/blob/bd8234fe5e0c09c48637a92abb0c797cb5fa0e73/config.json), inspected October 10, 2026. Layer, query/KV, width, sequence and vocabulary contract.
+[^card]: Z.ai / THUDM. [GLM-4-9B-Chat model card](https://huggingface.co/zai-org/glm-4-9b-chat), [artifact metadata](https://huggingface.co/api/models/zai-org/glm-4-9b-chat) and [tokenizer configuration](https://huggingface.co/zai-org/glm-4-9b-chat/blob/bd8234fe5e0c09c48637a92abb0c797cb5fa0e73/tokenizer_config.json), inspected October 10, 2026. The separate 1M release is not this resource.
+[^code]: Z.ai / THUDM. [Released modeling implementation](https://huggingface.co/zai-org/glm-4-9b-chat/blob/bd8234fe5e0c09c48637a92abb0c797cb5fa0e73/modeling_chatglm.py), inspected October 10, 2026. Targeted RotaryEmbedding, CoreAttention, SelfAttention, MLP and GLMBlock operations; code not executed.
+[^license]: Z.ai / THUDM. [Selected weight license](https://huggingface.co/zai-org/glm-4-9b-chat/blob/bd8234fe5e0c09c48637a92abb0c797cb5fa0e73/LICENSE) and [official code license](https://github.com/zai-org/GLM-4/blob/024d8fd48e62cf53785b68d657f1e018f87b5674/LICENSE), inspected October 10, 2026. Custom weight agreement and Apache 2.0 code grant have different scopes.

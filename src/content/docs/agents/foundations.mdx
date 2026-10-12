@@ -1,0 +1,137 @@
+---
+title: How Agents Work
+description: From a model response to actions, observations, feedback and bounded execution.
+lastUpdated: 2026-10-11
+---
+
+import ModelFlow from '../../../components/architectures/ModelFlow.astro';
+
+A model does not perform an action merely by describing it. If it proposes a
+search, some software must execute the search and return the result. If that
+result changes what the model does next, we have the beginning of an agent loop.
+For the model itself, see [Transformer foundations](/architectures/foundations/).
+
+The central idea is **closed feedback**: decisions affect an environment, and
+observations from that environment affect later decisions. ReAct made this
+relationship explicit by interleaving language reasoning with external
+actions.[^react]
+
+A **fixed workflow** follows a path encoded in advance. An **agent** delegates
+more path selection to the model. Useful systems can combine both.[^patterns]
+The harness is the software that assembles context, routes actions, records
+progress and enforces the work loop's stopping rules. The execution environment
+is where the tools act.[^architecture]
+
+## A concrete example
+
+Consider an illustrative document investigation: “Do these invoices contain
+duplicate charges?” A single response might explain a procedure. A fixed
+workflow might extract every invoice and compare predetermined fields. An
+agent might notice inconsistent currency labels, choose an additional
+inspection tool and revise its comparison.
+
+The model chooses within the options exposed by the application. It does not
+gain a filesystem, a database connection or payment authority simply because
+it can generate the relevant words. Tool execution and access are runtime
+responsibilities.[^architecture]
+
+[Figure 1](#figure-1) separates the decision from execution and its feedback.
+
+<ModelFlow id="figure-1" title="The next decision depends on observed work" lanesJson='[{"steps":[{"label":"Assemble context","detail":"Goal, relevant evidence, instructions and current state."},{"label":"Choose","detail":"The model proposes an action or an answer."},{"label":"Execute within scope","detail":"The runtime checks authority and runs the allowed operation."},{"label":"Observe and verify","detail":"Record results, check completion, then continue or stop."}],"note":"A denied action produces a denial observation. It does not produce the requested change."}]'>
+
+**Figure 1.** Latent Light synthesis of feedback and harness/environment responsibilities.[^react][^architecture]
+
+</ModelFlow>
+
+## Make the loop precise
+
+<details>
+<summary>A formal view of context, action and observation</summary>
+
+The following is a teaching formulation, not an equation reproduced from
+ReAct. It separates the model's decision from context assembly and execution:
+
+<MathExpression display number="1" tex="\begin{aligned} c_t &= C(g,h_t,s_t) \\ a_t &\sim \pi_\theta(\cdot\mid c_t) \\ (o_{t+1},s_{t+1}) &= E(a_t,s_t) \end{aligned}" />
+
+Here <MathExpression tex="g" /> is the goal,
+<MathExpression tex="h_t" /> the recorded interaction history and
+<MathExpression tex="s_t" /> relevant environment state.
+<MathExpression tex="C" /> assembles the context;
+<MathExpression tex="\pi_\theta" /> is the model's decision policy;
+<MathExpression tex="a_t" /> is a proposed action; and
+<MathExpression tex="E" /> executes it and returns an observation
+<MathExpression tex="o_{t+1}" />. This abstraction combines the feedback idea
+with the documented separation of harness and environment.[^react][^architecture]
+
+In a real implementation, the harness must check authority **before** applying
+<MathExpression tex="E" />. A rejected action produces a denial observation,
+not the requested change. The next step may be a different allowed action,
+a request for direction or termination.
+
+The distinction matters when diagnosing failure. Was the model wrong, was
+important evidence missing from context, was a tool ambiguous, or was the
+environment unavailable? These are different interventions.
+
+</details>
+
+## Four foundational ideas
+
+| Work | Contribution | Important boundary |
+| --- | --- | --- |
+| ReAct | Interleave reasoning and action with observations.[^react] | A prompting and interaction pattern, not a complete runtime |
+| Toolformer | Train a model to select API calls and incorporate results.[^toolformer] | Learned tool use does not establish authorization |
+| Reflexion | Carry linguistic feedback into later trials through episodic memory.[^reflexion] | The method does not update model weights |
+| MemGPT | Move information between limited active context and external memory.[^memgpt] | External storage is not automatically available to each model call |
+
+These are complementary ideas, not stages that every system must implement.
+A useful agent need not have an explicit planner or reflection module.
+
+## Planning is a control choice
+
+A plan can live in the model's current context, an explicit checklist or a
+code-defined workflow. The important question is what happens when evidence
+contradicts it. A checklist helps only if the system can revise it and verify
+its completed steps. More elaborate control patterns belong in
+[Orchestration](/agents/orchestration/).
+
+One useful engineering rule is to keep deterministic work deterministic.
+Parsing an exact identifier, applying a known validation rule or adding
+numbers usually does not require another model decision. Reserve flexible
+control for uncertainty that the task actually contains.
+
+## Adaptation is not necessarily training
+
+An agent can improve its next attempt because it receives an error message,
+retrieves a relevant procedure or remembers earlier feedback. That changes
+its input, not necessarily its parameters. Reflexion is a concrete example
+of adaptation through recorded feedback without weight updates.[^reflexion]
+
+Model training is a separate intervention. Toolformer changes the model
+through training; adding a skill file does not do that. Do not infer that a
+product trains on every session merely because it can resume or remember it.
+
+## The smallest useful implementation
+
+As a proposed starting design, use a loop that assembles relevant context,
+accepts structured actions, validates them, executes allowed actions, records
+observations and checks completion. Set explicit budgets for time, calls and
+cost. Stop when the task is verified, the budget ends or further work needs
+new authority.
+
+This is an architectural checklist, not a claim that one short loop guarantees
+reliability. The next pages explain its most consequential parts:
+[tools and skills](/agents/tools-skills-protocols/),
+[persistent state](/agents/context-memory-state/) and
+[evaluation](/agents/evaluation-reliability/).
+
+
+To see these ideas in a specific implementation, explore the
+[Agent Deep Dives comparison](/agents/deep-dives/) and its five studies.
+
+[^react]: Shunyu Yao et al. [ReAct: Synergizing Reasoning and Acting in Language Models](https://arxiv.org/abs/2210.03629v3), ICLR 2023.
+[^architecture]: OpenAI. [Agents API architecture](https://developers.openai.com/api/docs/guides/agents-api/architecture), harness, environment and application server. Checked October 10, 2026.
+[^toolformer]: Timo Schick et al. [Toolformer: Language Models Can Teach Themselves to Use Tools](https://arxiv.org/abs/2302.04761v1), 2023.
+[^reflexion]: Noah Shinn et al. [Reflexion: Language Agents with Verbal Reinforcement Learning](https://arxiv.org/abs/2303.11366v4), 2023.
+[^memgpt]: Charles Packer et al. [MemGPT: Towards LLMs as Operating Systems](https://arxiv.org/abs/2310.08560v2), 2024 revision.
+
+[^patterns]: Anthropic. [Building effective agents](https://www.anthropic.com/engineering/building-effective-agents), 2024; workflow and agent distinction.

@@ -1,0 +1,74 @@
+---
+import {documentSystem as system} from '../../plugins/document-system.mjs';
+interface Props { id:string; }
+const {id}=Astro.props;
+---
+<figure id={id} class="document-system" aria-label="Five Document AI layers with an evidence and review loop">
+ <div class="system-art">
+  <header class="system-heading">
+   <span class="system-eyebrow">The whole system</span>
+   <p class="system-title">{system.title}</p>
+   <p class="system-subtitle">{system.subtitle}</p>
+  </header>
+  <ol class="system-path" aria-label="Document path">
+   {system.stages.map((stage,i)=><li class:list={['path-node',stage.tone]}><span class="path-dot">{String(i+1).padStart(2,'0')}</span><span>{stage.short}</span></li>)}
+  </ol>
+  <div class="system-stages">
+   {system.stages.map((stage,i)=><section class:list={['stage',stage.tone]} aria-label={stage.phase+': '+stage.label}>
+    <div class="stage-top"><svg class="stage-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={stage.icon}/></svg><span class="stage-number">{String(i+1).padStart(2,'0')} · {stage.phase}</span></div>
+    <p class="stage-title">{stage.label}</p>
+    <ul class="stage-items">{stage.items.map(item=><li>{item}</li>)}</ul>
+    <div class="stage-output"><span>Keep</span><strong>{stage.output}</strong></div>
+   </section>)}
+  </div>
+  <section class="reliability" aria-label="Reliability across every layer">
+   <div class="reliability-heading"><span class="loop-symbol" aria-hidden="true">↺</span><strong>Reliability across every layer</strong><span class="review-chip">Human in the loop</span></div>
+   <ul class="reliability-checks">{system.checks.map(item=><li><span aria-hidden="true">✓</span>{item}</li>)}</ul>
+   <div class="feedback"><svg class="feedback-line" viewBox="0 0 1000 20" preserveAspectRatio="none" aria-hidden="true"><path d="M990 5v7H12V2m-5 5 5-5 5 5" fill="none" stroke="currentColor" stroke-width="1.5" vector-effect="non-scaling-stroke"/></svg><p>{system.feedback}</p></div>
+  </section>
+  <p class="system-note">{system.note}</p>
+ </div>
+ <figcaption><slot /></figcaption>
+</figure>
+<style>
+ .document-system{margin:2rem 0;scroll-margin-top:5rem;container-type:inline-size;min-width:0;}
+ .system-art{border:1px solid var(--nb-border);border-radius:1.15rem;background:var(--nb-background);padding:1.4rem;overflow:hidden;}
+ .system-heading{margin-bottom:1.5rem;}
+ .system-eyebrow{font-size:.64rem;font-weight:650;text-transform:uppercase;letter-spacing:.16em;color:var(--nb-muted-foreground);}
+ .system-title{font-size:clamp(1.2rem,3cqi,1.8rem);font-weight:650;letter-spacing:-.035em;line-height:1.2;margin:.4rem 0 .45rem;color:var(--nb-foreground);}
+ .system-subtitle{margin:0;font-size:.84rem;color:var(--nb-muted-foreground);line-height:1.5;}
+ .teal{--stage-color:#16746b}.blue{--stage-color:#286992}.indigo{--stage-color:#5e62ae}.violet{--stage-color:#875394}.amber{--stage-color:#95681c}
+ :global(html[data-mode="dark"]) .teal{--stage-color:#69cbb6}:global(html[data-mode="dark"]) .blue{--stage-color:#7fb8df}:global(html[data-mode="dark"]) .indigo{--stage-color:#a3a1ea}:global(html[data-mode="dark"]) .violet{--stage-color:#c397d0}:global(html[data-mode="dark"]) .amber{--stage-color:#d5b178}
+ .system-path{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:.6rem;list-style:none;padding:0;margin:0 0 1.15rem;}
+ .path-node{display:flex;flex-direction:column;align-items:center;gap:.35rem;position:relative;list-style:none;min-width:0;font-size:.72rem;font-weight:600;text-align:center;color:var(--nb-foreground);}
+ .path-dot{display:grid;place-items:center;width:2rem;height:2rem;border:1px solid color-mix(in srgb,var(--stage-color) 35%,var(--nb-border));background:color-mix(in srgb,var(--stage-color) 10%,var(--nb-background));color:var(--stage-color);border-radius:50%;font-size:.65rem;font-variant-numeric:tabular-nums;}
+ .path-node:not(:last-child)::after{content:'→';position:absolute;top:.2rem;left:calc(100% - .2rem);color:var(--nb-muted-foreground);font-weight:400;font-size:1rem;}
+ .system-stages{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:.75rem;}
+ .stage{grid-column:span 2;display:flex;flex-direction:column;min-width:0;background:color-mix(in srgb,var(--stage-color) 4%,var(--nb-background));border:1px solid color-mix(in srgb,var(--stage-color) 23%,var(--nb-border));border-top:3px solid var(--stage-color);border-radius:.65rem;padding:.85rem;}
+ .stage:nth-child(n+4){grid-column:span 3;}
+ .stage-top{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;color:var(--stage-color);}
+ .stage-icon{flex-shrink:0;width:1.1rem;height:1.1rem;}
+ .stage-number{font-size:.6rem;font-weight:650;text-transform:uppercase;letter-spacing:.07em;}
+ .stage-title{margin:.65rem 0 .6rem;font-size:.93rem;font-weight:650;line-height:1.25;letter-spacing:-.02em;}
+ .stage-items{margin:0 0 .8rem;padding:0;list-style:none;font-size:.75rem;line-height:1.55;color:var(--nb-muted-foreground);}
+ .stage-items li{padding:0;margin:.35rem 0;list-style:none;}
+ .stage-output{display:flex;flex-direction:column;gap:.15rem;border-top:1px solid color-mix(in srgb,var(--stage-color) 20%,var(--nb-border));padding-top:.6rem;margin-top:auto;font-size:.72rem;line-height:1.4;}
+ .stage-output span{font-size:.57rem;letter-spacing:.12em;text-transform:uppercase;color:var(--nb-muted-foreground);}
+ .stage-output strong{font-weight:600;}
+ .reliability{margin-top:1rem;padding:1rem;border:1px solid color-mix(in srgb,#168478 25%,var(--nb-border));border-radius:.65rem;background:color-mix(in srgb,#168478 5%,var(--nb-background));}
+ .reliability-heading{display:flex;align-items:center;flex-wrap:wrap;gap:.4rem .65rem;font-size:.8rem;}
+ .reliability-heading strong{font-weight:650;}.loop-symbol{font-size:1.3rem;color:var(--nb-muted-foreground);line-height:1;}
+ .review-chip{margin-left:auto;font-size:.6rem;font-weight:600;border:1px solid var(--nb-border);background:var(--nb-background);border-radius:1rem;padding:.25rem .5rem;color:var(--nb-muted-foreground);}
+ .reliability-checks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.55rem 1rem;padding:0;margin:.85rem 0 .65rem;list-style:none;}
+ .reliability-checks li{display:flex;gap:.4rem;font-size:.72rem;line-height:1.5;list-style:none;margin:0;}
+ .reliability-checks li span{color:var(--nb-muted-foreground);}
+ .feedback-line{display:block;width:100%;height:1.1rem;color:var(--nb-muted-foreground);opacity:.6;}
+ .feedback p{font-size:.7rem;line-height:1.6;color:var(--nb-muted-foreground);margin:.35rem 0 0;}
+ .system-note{font-size:.67rem;line-height:1.6;margin:.9rem 0 0;color:var(--nb-muted-foreground);}
+ figcaption{font-size:.78rem;line-height:1.6;color:var(--nb-muted-foreground);margin:.7rem .15rem 0;}
+ figcaption :global(p){margin:0;}figcaption :global(strong){font-weight:600;color:var(--nb-foreground);}
+ @container(min-width:900px){.system-stages{grid-template-columns:repeat(5,minmax(0,1fr));gap:.85rem}.stage,.stage:nth-child(n+4){grid-column:auto;padding:1rem}.stage-title{font-size:1.06rem}.stage-items{font-size:.82rem}.stage-number{font-size:.64rem}.reliability-checks{grid-template-columns:repeat(4,minmax(0,1fr));}.system-art{padding:1.6rem}.system-path{margin-bottom:1.4rem}}
+ @container(max-width:520px){.system-art{padding:1rem}.system-stages{grid-template-columns:repeat(2,minmax(0,1fr));gap:.6rem}.stage,.stage:nth-child(n+4){grid-column:auto;padding:.7rem}.stage:last-child{grid-column:1/-1}.stage-top{gap:.3rem}.stage-icon{width:.95rem;height:.95rem}.stage-number{font-size:.54rem;letter-spacing:.03em}.stage-title{font-size:.85rem}.stage-items{font-size:.73rem}.path-node{font-size:.59rem}.system-path{gap:.4rem}.path-dot{width:1.65rem;height:1.65rem}.path-node:not(:last-child)::after{top:.1rem;left:calc(100% - .2rem);font-size:.8rem}.system-subtitle{font-size:.77rem}.reliability{padding:.8rem}.review-chip{margin-left:0}.reliability-checks{grid-template-columns:1fr}.system-note{font-size:.65rem}}
+ @container(max-width:300px){.system-stages{grid-template-columns:1fr}.stage:last-child{grid-column:auto}.path-node{font-size:.54rem}.system-art{padding:.8rem}}
+ @media print{.system-art{break-inside:avoid}.system-stages{grid-template-columns:repeat(6,minmax(0,1fr))}.stage{grid-column:span 2}.stage:nth-child(n+4){grid-column:span 3}}
+</style>

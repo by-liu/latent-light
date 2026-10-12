@@ -1,0 +1,113 @@
+---
+title: Tools, Skills & Integrations
+description: Capabilities, reusable procedures and the interfaces that connect agent systems.
+lastUpdated: 2026-10-11
+---
+
+import ModelFlow from '../../../components/architectures/ModelFlow.astro';
+
+A tool gives an agent something it can do. A skill supplies a reusable way
+to approach work. A protocol defines how components communicate. Keeping
+these roles separate makes an agent easier to design and debug.
+
+For an illustrative document agent, reading a file is a tool, an invoice
+review procedure is a skill, and MCP may connect the application to a document
+service. None of these establishes permission to disclose a document.
+
+## Tools are contracts, not names
+
+A useful tool contract specifies its inputs, output shape, failure behavior
+and side effects. A schema can reject malformed arguments; it cannot establish
+that a valid request is appropriate for this user or task. Authorization must
+also be checked by the application or service.
+
+As a proposed design checklist, make these distinctions explicit:
+
+| Contract | Example | Why it matters |
+| --- | --- | --- |
+| Scope | Search only this workspace | Prevents an ambiguous global search |
+| Result | Identifiers, source locations and a continuation token | Lets later steps recover exact evidence |
+| Failure | Denied, unavailable, empty or timed out | An empty result is not the same as a failed search |
+| Side effect | Read, update or publish | Determines required controls and retry handling |
+| Limit | Maximum results, bytes and runtime | Bounds work and context consumption |
+
+Prefer explicit operations when a broad shell or general API would grant more
+authority than the task needs. Broad tools can be useful, but their flexibility
+also moves responsibility into execution controls. See
+[Security & Control](/agents/security-control/).
+
+## Skills package procedures
+
+The Agent Skills specification packages metadata and instructions in a
+`SKILL.md` file, with optional scripts, references and assets. Its progressive
+disclosure pattern exposes identifying metadata first and loads detailed
+instructions when relevant. A skill is not a new model weight or a security
+boundary.[^skills]
+
+For example, a review skill could explain which invoice fields to compare,
+where to record uncertainty and how to present evidence. A supporting script
+might implement exact arithmetic. The host still decides whether scripts may
+run and which files they may read.
+
+Descriptions need clear applicability. Loading many overlapping procedures
+can introduce conflicting instructions and context overhead. Current OpenAI
+guidance recommends reconsidering excessive prompting and skill scaffolding
+as model capabilities improve; this is advice to test, not a guarantee that
+all shorter instructions are better.[^prompting]
+
+## Protocols connect different boundaries
+
+[Figure 1](#figure-1) compares the endpoints rather than treating every protocol
+as a general agent integration layer.
+
+<ModelFlow id="figure-1" title="Three interfaces, three different relationships" lanesJson='[{"label":"MCP","steps":[{"label":"Agent application","detail":"Hosts a client"},{"label":"Tool or context server","detail":"Exposes supported capabilities"}],"note":"Connect a model application to tools, resources and prompts."},{"label":"A2A","steps":[{"label":"Client agent","detail":"Requests a task"},{"label":"Independent agent","detail":"Runs work and returns status or artifacts"}],"note":"Coordinate across agent implementations and services."},{"label":"ACP","steps":[{"label":"Editor or UI client","detail":"Displays progress and requests permission"},{"label":"Coding agent","detail":"Runs the session"}],"note":"Connect an editor interface with a coding agent. These standards do not share one interchangeable wire contract."}]'>
+**Figure 1.** Protocol boundaries. Independent comparison of the official MCP,
+A2A and Agent Client Protocol descriptions.[^mcp][^a2a][^acp]
+</ModelFlow>
+
+**MCP** standardizes access to tools and contextual information. It does not
+make a server trustworthy or decide whether an action is authorized.
+**A2A** supports communication with independent agents; it complements MCP
+rather than replacing it. **ACP**, here meaning Agent Client Protocol, connects
+coding agents to editor clients through session, progress and permission
+interactions.[^mcp][^a2a][^acp]
+
+The July 28, 2026 MCP specification lists optional extensions for asynchronous
+tasks, skills and interactive applications. Support must be negotiated;
+do not assume that a client implements every extension or that an older
+tutorial matches the edition in use.[^mcp]
+
+## Avoid making every tool result a model round trip
+
+With ordinary tool calling, a model requests an operation and consumes its
+result before deciding again. Programmatic tool calling allows generated code
+to invoke tools, filter or aggregate intermediate data and return only the
+information needed for the next model decision. Tool discovery similarly
+loads relevant definitions on demand rather than inserting a large catalog
+into every prompt.[^advanced]
+
+An illustrative invoice check can compare thousands of line items in code
+and return the few unresolved matches. It need not place every record into
+the model's context. The tradeoff is an additional code execution surface,
+which still needs authorization, resource limits and inspectable errors.
+Small tool sets and small results may not justify this extra machinery.
+
+## Choose the boundary before the technology
+
+Ask whether the immediate need is a new capability, a repeatable procedure,
+a connection to a service or communication with another agent. Then choose
+the interface. Adding all four at once makes it harder to discover which
+change actually improved the system.
+
+Continue with [Context, Memory & State](/agents/context-memory-state/).
+
+
+To see these ideas in a specific implementation, explore the
+[Agent Deep Dives comparison](/agents/deep-dives/) and its five studies.
+
+[^skills]: Agent Skills. [Specification](https://agentskills.io/specification), file structure and progressive disclosure. Checked October 10, 2026.
+[^prompting]: Eric Provencher, OpenAI. [Rethinking skills and prompts for GPT-6 Astra](https://developers.openai.com/blog/rethinking-skills-and-prompts-for-gpt-6-astra), September 11, 2026.
+[^mcp]: Model Context Protocol. [Specification, July 28, 2026](https://modelcontextprotocol.io/specification/2026-07-28), core features and optional extensions. Checked October 10, 2026.
+[^a2a]: A2A Protocol. [A2A and MCP](https://a2a-protocol.org/latest/topics/a2a-and-mcp/), complementary relationships. Checked October 10, 2026.
+[^acp]: Agent Client Protocol. [Protocol v1 overview](https://agentclientprotocol.com/protocol/v1/overview). Checked October 10, 2026.
+[^advanced]: Anthropic. [Introducing advanced tool use](https://www.anthropic.com/engineering/advanced-tool-use), 2025; tool search and programmatic calling.

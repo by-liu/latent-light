@@ -1,0 +1,2577 @@
+{
+  "model": "Systran/faster-whisper-base.en",
+  "language": "en",
+  "duration": 1503.4920625,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 4.68,
+      "text": "You know, there's this, it's a very specific modern feeling."
+    },
+    {
+      "start": 5.08,
+      "end": 6.6,
+      "text": "Oh, I think I know where you're going with this."
+    },
+    {
+      "start": 6.6,
+      "end": 10.48,
+      "text": "Yeah, like you sit down at your computer, you open up your favorite AI tool and"
+    },
+    {
+      "start": 10.48,
+      "end": 15.08,
+      "text": "suddenly you have the power to do almost anything so much faster."
+    },
+    {
+      "start": 15.32,
+      "end": 15.56,
+      "text": "Right."
+    },
+    {
+      "start": 15.84,
+      "end": 17.76,
+      "text": "The velocity is just incredible now."
+    },
+    {
+      "start": 17.84,
+      "end": 18.52,
+      "text": "Exactly."
+    },
+    {
+      "start": 18.68,
+      "end": 24.2,
+      "text": "You can spin up a 60 page strategic proposal in seconds."
+    },
+    {
+      "start": 24.64,
+      "end": 27.92,
+      "text": "You can analyze a massive spreadsheet that, I mean, that would have taken a whole"
+    },
+    {
+      "start": 27.92,
+      "end": 30.48,
+      "text": "a team of analysts a week to get through."
+    },
+    {
+      "start": 30.48,
+      "end": 32.12,
+      "text": "Yeah, we're playing an entire event itinerary"
+    },
+    {
+      "start": 32.12,
+      "end": 33.64,
+      "text": "before you even finish your coffee."
+    },
+    {
+      "start": 33.64,
+      "end": 36.68,
+      "text": "Right, but then, you know, an hour goes by"
+    },
+    {
+      "start": 36.68,
+      "end": 38.52,
+      "text": "and you look at the screen and realize"
+    },
+    {
+      "start": 38.52,
+      "end": 41.88,
+      "text": "you haven't actually accomplished anything real."
+    },
+    {
+      "start": 41.88,
+      "end": 44.76,
+      "text": "Yes, that exact feeling."
+    },
+    {
+      "start": 44.76,
+      "end": 46.2,
+      "text": "It feels like you're sitting in a car"
+    },
+    {
+      "start": 46.2,
+      "end": 48.88,
+      "text": "with this massive, incredibly powerful engine,"
+    },
+    {
+      "start": 48.88,
+      "end": 52.24,
+      "text": "but your tires are just stuck deep in the mud."
+    },
+    {
+      "start": 52.24,
+      "end": 53.96,
+      "text": "You hit the gas and just spin."
+    },
+    {
+      "start": 53.96,
+      "end": 57.0,
+      "text": "Exactly, you're just spinning your wheels,"
+    },
+    {
+      "start": 57.0,
+      "end": 59.86,
+      "text": "spraying dirt everywhere, just at lightning speed."
+    },
+    {
+      "start": 59.86,
+      "end": 61.7,
+      "text": "It's arguably the defining frustration"
+    },
+    {
+      "start": 61.7,
+      "end": 63.78,
+      "text": "of modern knowledge work, honestly."
+    },
+    {
+      "start": 63.78,
+      "end": 65.86,
+      "text": "The velocity is absolutely there,"
+    },
+    {
+      "start": 65.86,
+      "end": 68.02,
+      "text": "but the traction is just completely missing."
+    },
+    {
+      "start": 68.02,
+      "end": 71.76,
+      "text": "We have access to this limitless generation of text"
+    },
+    {
+      "start": 71.76,
+      "end": 73.42,
+      "text": "and ideas and data."
+    },
+    {
+      "start": 73.42,
+      "end": 76.1,
+      "text": "But we often lack the psychological mechanism"
+    },
+    {
+      "start": 76.1,
+      "end": 79.14,
+      "text": "to actually grip the road and move forward."
+    },
+    {
+      "start": 79.14,
+      "end": 80.5,
+      "text": "And that missing grip is exactly"
+    },
+    {
+      "start": 80.5,
+      "end": 82.7,
+      "text": "what we are focusing on today."
+    },
+    {
+      "start": 82.7,
+      "end": 84.38,
+      "text": "Welcome to the deep dive."
+    },
+    {
+      "start": 84.38,
+      "end": 85.58,
+      "text": "Glad to be here for this one."
+    },
+    {
+      "start": 85.58,
+      "end": 87.9,
+      "text": "So we're diving into a recently expanded guide."
+    },
+    {
+      "start": 87.9,
+      "end": 90.98,
+      "text": "This was updated October 11th, 2026,"
+    },
+    {
+      "start": 90.98,
+      "end": 93.1,
+      "text": "and it's titled High Agency,"
+    },
+    {
+      "start": 93.1,
+      "end": 95.38,
+      "text": "Your Superpower in the AI Era."
+    },
+    {
+      "start": 95.38,
+      "end": 96.86,
+      "text": "It's a fantastic source document."
+    },
+    {
+      "start": 96.86,
+      "end": 97.7,
+      "text": "It really is."
+    },
+    {
+      "start": 97.7,
+      "end": 99.42,
+      "text": "And our mission in this deep dive"
+    },
+    {
+      "start": 99.42,
+      "end": 102.62,
+      "text": "is to unpack what high agency actually means,"
+    },
+    {
+      "start": 102.62,
+      "end": 105.38,
+      "text": "look at the hard data on how AI fundamentally alters"
+    },
+    {
+      "start": 105.38,
+      "end": 106.74,
+      "text": "our cognitive capabilities,"
+    },
+    {
+      "start": 106.74,
+      "end": 109.34,
+      "text": "and most importantly, give you a practical toolkit."
+    },
+    {
+      "start": 109.34,
+      "end": 111.46,
+      "text": "Because the core premise here is simple,"
+    },
+    {
+      "start": 111.46,
+      "end": 113.22,
+      "text": "but really profound."
+    },
+    {
+      "start": 113.22,
+      "end": 115.3,
+      "text": "AI can expand your options."
+    },
+    {
+      "start": 115.3,
+      "end": 118.3,
+      "text": "it can extend your reach infinitely."
+    },
+    {
+      "start": 118.3,
+      "end": 119.86,
+      "text": "But human agency is the only thing"
+    },
+    {
+      "start": 119.86,
+      "end": 121.54,
+      "text": "that actually turns that reach"
+    },
+    {
+      "start": 121.54,
+      "end": 123.7,
+      "text": "into useful real-world action."
+    },
+    {
+      "start": 123.7,
+      "end": 127.18,
+      "text": "That is the fundamental dynamic we're navigating here."
+    },
+    {
+      "start": 127.18,
+      "end": 129.26,
+      "text": "If you hand a generative AI toolkit"
+    },
+    {
+      "start": 129.26,
+      "end": 131.46,
+      "text": "to someone who lacks agency,"
+    },
+    {
+      "start": 131.46,
+      "end": 134.26,
+      "text": "you don't necessarily get better results."
+    },
+    {
+      "start": 134.26,
+      "end": 137.7,
+      "text": "No, you just get a higher volume of unresolved options."
+    },
+    {
+      "start": 137.7,
+      "end": 141.22,
+      "text": "Exactly, you end up with like 10 perfectly drafted versions"
+    },
+    {
+      "start": 141.22,
+      "end": 142.7,
+      "text": "of a difficult email that you're just,"
+    },
+    {
+      "start": 142.7,
+      "end": 144.54,
+      "text": "you're too anxious to actually send."
+    },
+    {
+      "start": 144.54,
+      "end": 150.78,
+      "text": "the AI can't hit send for you to make this technology work for you. We have to look past the software"
+    },
+    {
+      "start": 150.78,
+      "end": 156.06,
+      "text": "and understand the human side of the equation. Okay, so let's unpack this. Okay. Because before"
+    },
+    {
+      "start": 156.06,
+      "end": 161.1,
+      "text": "we can even talk about combining your own agency with AI, we have to strip away all the Silicon"
+    },
+    {
+      "start": 161.1,
+      "end": 166.38,
+      "text": "Valley buzzwords. Oh, absolutely. Right. There are so many of them. Right. High agency is a phrase"
+    },
+    {
+      "start": 166.38,
+      "end": 171.66,
+      "text": "that gets thrown around a lot on social media, usually accompanied by like a picture of a tech"
+    },
+    {
+      "start": 171.66,
+      "end": 174.58,
+      "text": "founder, waking up at 4am to sit in a cold plunge pool."
+    },
+    {
+      "start": 174.58,
+      "end": 177.98,
+      "text": "Yeah, it's treated like this aggressive personality trait."
+    },
+    {
+      "start": 177.98,
+      "end": 178.98,
+      "text": "Exactly."
+    },
+    {
+      "start": 178.98,
+      "end": 182.42,
+      "text": "And it really gained major popular attraction around 2016."
+    },
+    {
+      "start": 182.42,
+      "end": 185.98,
+      "text": "That was when Eric Weinstein discussed it on Tim Ferriss's Show, I believe."
+    },
+    {
+      "start": 185.98,
+      "end": 186.98,
+      "text": "All right."
+    },
+    {
+      "start": 186.98,
+      "end": 192.38,
+      "text": "He described it as this almost heroic reality-bending refusal to accept impossibility."
+    },
+    {
+      "start": 192.38,
+      "end": 193.54,
+      "text": "Which sounds cool."
+    },
+    {
+      "start": 193.54,
+      "end": 194.54,
+      "text": "It does."
+    },
+    {
+      "start": 194.54,
+      "end": 199.38,
+      "text": "And while that's very compelling narrative for a biography, we need a much more functional,"
+    },
+    {
+      "start": 199.38,
+      "end": 203.14,
+      "text": "working definition for everyday life. Right, because we're not all trying to bend"
+    },
+    {
+      "start": 203.14,
+      "end": 209.02,
+      "text": "reality before breakfast. Exactly. High agency isn't a personality type. It's a"
+    },
+    {
+      "start": 209.02,
+      "end": 214.3,
+      "text": "process. Okay. Specifically, it's the process of choosing a worthwhile direction,"
+    },
+    {
+      "start": 214.3,
+      "end": 219.34,
+      "text": "looking for ways to actually influence what happens, taking a bounded next step,"
+    },
+    {
+      "start": 219.34,
+      "end": 223.62,
+      "text": "and then learning from the result. So it's important to differentiate that from"
+    },
+    {
+      "start": 223.62,
+      "end": 227.7,
+      "text": "just being relentlessly busy, right? Very important. Because productivity and"
+    },
+    {
+      "start": 227.7,
+      "end": 232.32,
+      "text": "agency are not the same thing. I like to think of productivity as your engine. It dictates"
+    },
+    {
+      "start": 232.32,
+      "end": 238.04,
+      "text": "how efficiently you produce output relative to time. But agency is the steering wheel."
+    },
+    {
+      "start": 238.04,
+      "end": 241.6,
+      "text": "If you have a massive engine but no agency, you're just going to crash into the rocks"
+    },
+    {
+      "start": 241.6,
+      "end": 242.6,
+      "text": "much faster."
+    },
+    {
+      "start": 242.6,
+      "end": 244.32,
+      "text": "That's a great analogy."
+    },
+    {
+      "start": 244.32,
+      "end": 248.8,
+      "text": "But I have to push back a little on this standard definition. When people hear high agency,"
+    },
+    {
+      "start": 248.8,
+      "end": 253.56,
+      "text": "they still picture someone who is this loud, extroverted disrupter."
+    },
+    {
+      "start": 253.56,
+      "end": 255.0,
+      "text": "The guy who breaks all the rules."
+    },
+    {
+      "start": 255.0,
+      "end": 257.1,
+      "text": "Yeah, the person who ignores their boss"
+    },
+    {
+      "start": 257.1,
+      "end": 258.98,
+      "text": "and kicks down the door to get what they want,"
+    },
+    {
+      "start": 258.98,
+      "end": 261.38,
+      "text": "is that really what this requires?"
+    },
+    {
+      "start": 261.38,
+      "end": 262.54,
+      "text": "Not at all."
+    },
+    {
+      "start": 262.54,
+      "end": 264.78,
+      "text": "That is a massive misconception."
+    },
+    {
+      "start": 264.78,
+      "end": 267.9,
+      "text": "Agency can be and often is incredibly quiet."
+    },
+    {
+      "start": 267.9,
+      "end": 268.74,
+      "text": "Really?"
+    },
+    {
+      "start": 268.74,
+      "end": 269.58,
+      "text": "Oh yeah."
+    },
+    {
+      "start": 269.58,
+      "end": 270.9,
+      "text": "Let's say you're working on a project"
+    },
+    {
+      "start": 270.9,
+      "end": 273.94,
+      "text": "and you realize you need a colleague's explicit consent"
+    },
+    {
+      "start": 273.94,
+      "end": 275.22,
+      "text": "before moving forward"
+    },
+    {
+      "start": 275.22,
+      "end": 276.7,
+      "text": "because it impacts their department."
+    },
+    {
+      "start": 276.7,
+      "end": 277.54,
+      "text": "Okay."
+    },
+    {
+      "start": 277.54,
+      "end": 279.06,
+      "text": "Deliberately pausing your work,"
+    },
+    {
+      "start": 279.06,
+      "end": 280.18,
+      "text": "setting up a meeting"
+    },
+    {
+      "start": 280.18,
+      "end": 282.1,
+      "text": "and actively securing that consent."
+    },
+    {
+      "start": 282.1,
+      "end": 284.34,
+      "text": "That is a high agency move."
+    },
+    {
+      "start": 284.34,
+      "end": 288.1,
+      "text": "you are influencing the outcome by managing the constraints."
+    },
+    {
+      "start": 288.1,
+      "end": 289.74,
+      "text": "That makes total sense."
+    },
+    {
+      "start": 289.74,
+      "end": 292.3,
+      "text": "It's about moving the reality of a situation forward,"
+    },
+    {
+      "start": 292.3,
+      "end": 293.62,
+      "text": "not just making noise."
+    },
+    {
+      "start": 293.62,
+      "end": 294.66,
+      "text": "Exactly."
+    },
+    {
+      "start": 294.66,
+      "end": 296.82,
+      "text": "There's this great running example in our source material"
+    },
+    {
+      "start": 296.82,
+      "end": 300.1,
+      "text": "about wanting to organize a community workshop for beginners."
+    },
+    {
+      "start": 300.1,
+      "end": 301.02,
+      "text": "I love this example."
+    },
+    {
+      "start": 301.02,
+      "end": 301.86,
+      "text": "Right."
+    },
+    {
+      "start": 301.86,
+      "end": 304.54,
+      "text": "So let's say you want to host this local class,"
+    },
+    {
+      "start": 304.54,
+      "end": 306.74,
+      "text": "but you have no venue, no budget,"
+    },
+    {
+      "start": 306.74,
+      "end": 308.5,
+      "text": "and no teaching experience."
+    },
+    {
+      "start": 308.5,
+      "end": 310.9,
+      "text": "So let's look at the failure modes there."
+    },
+    {
+      "start": 310.9,
+      "end": 314.3,
+      "text": "Low agency in that scenario usually takes one of two forms."
+    },
+    {
+      "start": 314.34,
+      "end": 316.1,
+      "text": "Okay, what's the first?"
+    },
+    {
+      "start": 316.1,
+      "end": 317.58,
+      "text": "The first is passive."
+    },
+    {
+      "start": 317.58,
+      "end": 322.1,
+      "text": "You endlessly read articles about event planning, or you just wait around hoping someone will"
+    },
+    {
+      "start": 322.1,
+      "end": 325.0,
+      "text": "magically hand you the keys to a community center."
+    },
+    {
+      "start": 325.0,
+      "end": 327.1,
+      "text": "Just hoping the universe provides."
+    },
+    {
+      "start": 327.1,
+      "end": 328.1,
+      "text": "Exactly."
+    },
+    {
+      "start": 328.1,
+      "end": 331.62,
+      "text": "And the second form of low agency looks like frantic action."
+    },
+    {
+      "start": 331.62,
+      "end": 332.62,
+      "text": "The spinning wheels."
+    },
+    {
+      "start": 332.62,
+      "end": 333.62,
+      "text": "Right."
+    },
+    {
+      "start": 333.62,
+      "end": 338.5,
+      "text": "You blast out 50 fake invitations to a non-existent event on social media, just to feel like you're"
+    },
+    {
+      "start": 338.5,
+      "end": 339.5,
+      "text": "doing something."
+    },
+    {
+      "start": 339.5,
+      "end": 340.5,
+      "text": "Oh, wow."
+    },
+    {
+      "start": 340.5,
+      "end": 341.5,
+      "text": "Yeah."
+    },
+    {
+      "start": 341.5,
+      "end": 342.5,
+      "text": "It happens a lot."
+    },
+    {
+      "start": 342.5,
+      "end": 344.38,
+      "text": "high agency look like then."
+    },
+    {
+      "start": 344.38,
+      "end": 346.26,
+      "text": "High agency is completely different."
+    },
+    {
+      "start": 346.26,
+      "end": 347.82,
+      "text": "It's measured."
+    },
+    {
+      "start": 347.82,
+      "end": 350.18,
+      "text": "It looks like asking three of your neighbors"
+    },
+    {
+      "start": 350.18,
+      "end": 351.94,
+      "text": "what they actually wanna learn"
+    },
+    {
+      "start": 351.94,
+      "end": 354.66,
+      "text": "and then testing a 10 minute sample lesson"
+    },
+    {
+      "start": 354.66,
+      "end": 356.54,
+      "text": "with just one of them in your living room."
+    },
+    {
+      "start": 356.54,
+      "end": 358.58,
+      "text": "It's about forcing contact with reality."
+    },
+    {
+      "start": 358.58,
+      "end": 360.34,
+      "text": "Yes, exactly."
+    },
+    {
+      "start": 360.34,
+      "end": 362.7,
+      "text": "But that brings us to the underlying psychology,"
+    },
+    {
+      "start": 362.7,
+      "end": 365.1,
+      "text": "which is where things get really fascinating."
+    },
+    {
+      "start": 365.1,
+      "end": 367.26,
+      "text": "We know what agency looks like on the outside,"
+    },
+    {
+      "start": 367.26,
+      "end": 369.42,
+      "text": "talking to the neighbors, testing the lesson."
+    },
+    {
+      "start": 369.42,
+      "end": 370.58,
+      "text": "Right."
+    },
+    {
+      "start": 370.58,
+      "end": 372.38,
+      "text": "But we need to look under them hood,"
+    },
+    {
+      "start": 372.38,
+      "end": 375.46,
+      "text": "why do some people take that deliberate, scary step"
+    },
+    {
+      "start": 375.46,
+      "end": 378.02,
+      "text": "to talk to their neighbors while others just freeze"
+    },
+    {
+      "start": 378.02,
+      "end": 380.74,
+      "text": "and spend five hours refining an imaginary syllabus?"
+    },
+    {
+      "start": 381.66,
+      "end": 385.18,
+      "text": "Well, to understand the internal engine of agency,"
+    },
+    {
+      "start": 385.18,
+      "end": 387.54,
+      "text": "we have to look at Albert Bandera's foundational work"
+    },
+    {
+      "start": 387.54,
+      "end": 389.22,
+      "text": "on intentional action."
+    },
+    {
+      "start": 389.22,
+      "end": 390.06,
+      "text": "Okay."
+    },
+    {
+      "start": 390.06,
+      "end": 393.26,
+      "text": "Bandera broke this down into four crucial functions."
+    },
+    {
+      "start": 393.26,
+      "end": 395.22,
+      "text": "First, there is forming an intention,"
+    },
+    {
+      "start": 395.22,
+      "end": 396.38,
+      "text": "deciding to do something."
+    },
+    {
+      "start": 396.38,
+      "end": 397.5,
+      "text": "Makes sense."
+    },
+    {
+      "start": 397.5,
+      "end": 398.86,
+      "text": "Second is forethought,"
+    },
+    {
+      "start": 398.86,
+      "end": 402.18,
+      "text": "which is anticipating the consequences of your action."
+    },
+    {
+      "start": 402.18,
+      "end": 404.32,
+      "text": "Third is self-reactiveness."
+    },
+    {
+      "start": 404.32,
+      "end": 405.84,
+      "text": "Meaning what exactly?"
+    },
+    {
+      "start": 405.84,
+      "end": 408.6,
+      "text": "Meaning you can actually regulate your own behavior"
+    },
+    {
+      "start": 408.6,
+      "end": 411.08,
+      "text": "in the moment to stay on track."
+    },
+    {
+      "start": 411.08,
+      "end": 414.12,
+      "text": "And fourth is self-reflectiveness."
+    },
+    {
+      "start": 414.12,
+      "end": 415.8,
+      "text": "That last one, reflection seems to be"
+    },
+    {
+      "start": 415.8,
+      "end": 417.56,
+      "text": "where a lot of people stumble."
+    },
+    {
+      "start": 417.56,
+      "end": 420.48,
+      "text": "A highly agentic person doesn't just blindly act"
+    },
+    {
+      "start": 420.48,
+      "end": 422.0,
+      "text": "on every impulse, do they?"
+    },
+    {
+      "start": 422.0,
+      "end": 423.68,
+      "text": "No, they actively examine whether"
+    },
+    {
+      "start": 423.68,
+      "end": 425.96,
+      "text": "their chosen project is actually worthwhile."
+    },
+    {
+      "start": 425.96,
+      "end": 428.8,
+      "text": "Right, and if it's not, they pivot or quit."
+    },
+    {
+      "start": 428.8,
+      "end": 432.2,
+      "text": "Which is why agency isn't just endless persistence."
+    },
+    {
+      "start": 432.2,
+      "end": 435.6,
+      "text": "If the situation changes, quitting can absolutely"
+    },
+    {
+      "start": 435.6,
+      "end": 437.28,
+      "text": "be a high agency choice."
+    },
+    {
+      "start": 437.28,
+      "end": 438.64,
+      "text": "Precisely."
+    },
+    {
+      "start": 438.64,
+      "end": 442.68,
+      "text": "And woven into all of this is the concept of self-efficacy,"
+    },
+    {
+      "start": 442.68,
+      "end": 444.6,
+      "text": "which the American Psychological Association"
+    },
+    {
+      "start": 444.6,
+      "end": 446.8,
+      "text": "defines quite specifically."
+    },
+    {
+      "start": 446.8,
+      "end": 448.96,
+      "text": "Right, it's not just a general feeling."
+    },
+    {
+      "start": 448.96,
+      "end": 450.0,
+      "text": "Exactly."
+    },
+    {
+      "start": 450.0,
+      "end": 452.84,
+      "text": "The key takeaway here is that self-efficacy"
+    },
+    {
+      "start": 452.84,
+      "end": 455.28,
+      "text": "is not this global mystical feeling"
+    },
+    {
+      "start": 455.28,
+      "end": 457.44,
+      "text": "of I am a capable person."
+    },
+    {
+      "start": 457.44,
+      "end": 458.76,
+      "text": "It doesn't work like that."
+    },
+    {
+      "start": 458.76,
+      "end": 461.12,
+      "text": "Right, it's highly localized."
+    },
+    {
+      "start": 461.12,
+      "end": 462.76,
+      "text": "You shouldn't be asking yourself,"
+    },
+    {
+      "start": 462.76,
+      "end": 465.32,
+      "text": "am I a capable person who can organize massive events?"
+    },
+    {
+      "start": 465.32,
+      "end": 467.68,
+      "text": "That is way too broad and overwhelming."
+    },
+    {
+      "start": 467.68,
+      "end": 468.6,
+      "text": "It paralyzes you."
+    },
+    {
+      "start": 468.6,
+      "end": 469.4,
+      "text": "Yeah."
+    },
+    {
+      "start": 469.4,
+      "end": 472.36,
+      "text": "You ask, can I explain this one single concept"
+    },
+    {
+      "start": 472.36,
+      "end": 474.76,
+      "text": "to one beginner for 10 minutes?"
+    },
+    {
+      "start": 474.76,
+      "end": 478.68,
+      "text": "And here is the secret to building that specific self-efficacy."
+    },
+    {
+      "start": 478.68,
+      "end": 482.2,
+      "text": "It is generated by actual experience."
+    },
+    {
+      "start": 482.2,
+      "end": 485.24,
+      "text": "Which brings up a very relatable question for you listening."
+    },
+    {
+      "start": 485.24,
+      "end": 487.4,
+      "text": "What if you just don't feel confident?"
+    },
+    {
+      "start": 487.4,
+      "end": 489.64,
+      "text": "Yeah, that's a huge hurdle for a lot of people."
+    },
+    {
+      "start": 489.64,
+      "end": 494.76,
+      "text": "What if you are utterly terrified to knock on that first neighbor's door to ask what they want to learn?"
+    },
+    {
+      "start": 495.48,
+      "end": 501.0,
+      "text": "The revelation from this psychology here is that confidence is not a prerequisite for action."
+    },
+    {
+      "start": 501.0,
+      "end": 502.2,
+      "text": "We tend to get that backward."
+    },
+    {
+      "start": 502.2,
+      "end": 503.16,
+      "text": "Oh, totally."
+    },
+    {
+      "start": 503.16,
+      "end": 506.68,
+      "text": "We think we need to feel confident before we can take the step."
+    },
+    {
+      "start": 506.68,
+      "end": 512.6,
+      "text": "In reality, taking an action, making a bounded attempt, is the very mechanism that creates the"
+    },
+    {
+      "start": 512.6,
+      "end": 516.36,
+      "text": "the information you need to update your belief in your own capabilities."
+    },
+    {
+      "start": 516.72,
+      "end": 519.04,
+      "text": "So you don't wait for confidence to strike so you can act."
+    },
+    {
+      "start": 519.16,
+      "end": 522.24,
+      "text": "No, you act so you can gather evidence about what you're actually"
+    },
+    {
+      "start": 522.24,
+      "end": 522.92,
+      "text": "capable of."
+    },
+    {
+      "start": 523.36,
+      "end": 526.96,
+      "text": "Let's talk about the motivation behind that action, though, because knocking"
+    },
+    {
+      "start": 526.96,
+      "end": 529.68,
+      "text": "on doors or doing administrative work isn't always fun."
+    },
+    {
+      "start": 529.88,
+      "end": 530.68,
+      "text": "It rarely is."
+    },
+    {
+      "start": 531.24,
+      "end": 534.44,
+      "text": "I was looking at Desi and Ryan's self-determination theory in the source,"
+    },
+    {
+      "start": 534.88,
+      "end": 537.68,
+      "text": "specifically this idea of autonomous motivation."
+    },
+    {
+      "start": 538.2,
+      "end": 541.28,
+      "text": "I always assumed that that meant independence, doing whatever you want,"
+    },
+    {
+      "start": 541.28,
+      "end": 545.2,
+      "text": "whenever you want, like a freelancer setting their own hours. It's a bit more nuanced than just"
+    },
+    {
+      "start": 545.2,
+      "end": 551.36,
+      "text": "independence. Autonomous action doesn't have to be intrinsically fun, and it doesn't mean you're free"
+    },
+    {
+      "start": 551.36,
+      "end": 557.76,
+      "text": "from obligations. It just means the action is personally endorsed by you. Let's use an analogy"
+    },
+    {
+      "start": 557.76,
+      "end": 562.64,
+      "text": "here. Okay. Think about paying a toll on a highway. You don't intrinsically enjoy handing over five"
+    },
+    {
+      "start": 562.64,
+      "end": 567.12,
+      "text": "dollars and slowing down to stop at the booth is annoying friction. Right, nobody likes that."
+    },
+    {
+      "start": 567.12,
+      "end": 572.88,
+      "text": "But you do it willingly, autonomously, because you deeply value getting to the destination that the highway leads to."
+    },
+    {
+      "start": 572.88,
+      "end": 577.44,
+      "text": "That's a perfect way to look at it. Think back to our workshop organizer. They might"
+    },
+    {
+      "start": 577.44,
+      "end": 580.88,
+      "text": "absolutely hate filling out the tedious administrative forms required to"
+    },
+    {
+      "start": 580.88,
+      "end": 586.4,
+      "text": "reserve a room at the local library. It's boring work. Really boring. But they do it willingly,"
+    },
+    {
+      "start": 586.4,
+      "end": 590.56,
+      "text": "because they own the reason for doing it. They value the community outcome."
+    },
+    {
+      "start": 590.56,
+      "end": 595.76,
+      "text": "That is autonomous motivation in practice. Okay, here's where it gets really interesting."
+    },
+    {
+      "start": 595.76,
+      "end": 600.64,
+      "text": "We've laid out this psychological foundation. You have your intention, your localized self-efficacy,"
+    },
+    {
+      "start": 600.64,
+      "end": 606.16,
+      "text": "and your autonomous motivation. Now what happens when you hand that human psychological engine"
+    },
+    {
+      "start": 606.16,
+      "end": 611.68,
+      "text": "a generative AI toolkit? To really measure the multiplier effect of AI, we first have to"
+    },
+    {
+      "start": 611.68,
+      "end": 617.44,
+      "text": "establish the baseline value of agency without AI. Let's look at a fascinating study by compost"
+    },
+    {
+      "start": 617.44,
+      "end": 622.56,
+      "text": "and colleagues. This is the one conducted in Togo, right? Yes. They took about 1500 small"
+    },
+    {
+      "start": 622.56,
+      "end": 627.2,
+      "text": "business owners and randomly assign them to different training programs. One group got"
+    },
+    {
+      "start": 627.2,
+      "end": 633.44,
+      "text": "traditional business training, accounting, basic marketing, tracking inventory, and standard stuff."
+    },
+    {
+      "start": 633.44,
+      "end": 638.48,
+      "text": "But another group got personal initiative training. Meaning they were specifically taught"
+    },
+    {
+      "start": 638.48,
+      "end": 644.16,
+      "text": "how to exercise agency? Exactly. They were taught to proactively identify opportunities,"
+    },
+    {
+      "start": 644.72,
+      "end": 652.32,
+      "text": "set goals, seek feedback, and creatively navigate obstacles. And the results were staggering."
+    },
+    {
+      "start": 652.56,
+      "end": 653.56,
+      "text": "What happened?"
+    },
+    {
+      "start": 653.56,
+      "end": 658.36,
+      "text": "Over roughly two years, the group that received the initiative training saw their profits"
+    },
+    {
+      "start": 658.36,
+      "end": 661.96,
+      "text": "increased by 30% relative to a control group."
+    },
+    {
+      "start": 661.96,
+      "end": 664.44,
+      "text": "And the group that learned traditional accounting?"
+    },
+    {
+      "start": 664.44,
+      "end": 667.66,
+      "text": "Their results weren't statistically significant."
+    },
+    {
+      "start": 667.66,
+      "end": 670.72,
+      "text": "The traditional training didn't reliably move the needle."
+    },
+    {
+      "start": 670.72,
+      "end": 671.72,
+      "text": "Wow."
+    },
+    {
+      "start": 671.72,
+      "end": 672.72,
+      "text": "So why did that happen?"
+    },
+    {
+      "start": 672.72,
+      "end": 674.24,
+      "text": "What was the mechanism there?"
+    },
+    {
+      "start": 674.24,
+      "end": 677.84,
+      "text": "It's because the initiative training changed their day-to-day behavior."
+    },
+    {
+      "start": 677.84,
+      "end": 678.84,
+      "text": "Right."
+    },
+    {
+      "start": 678.84,
+      "end": 683.5,
+      "text": "Instead of just passively logging that a product was out of stock, they were actively anticipating"
+    },
+    {
+      "start": 683.5,
+      "end": 684.7,
+      "text": "supply chain issues."
+    },
+    {
+      "start": 684.7,
+      "end": 685.7,
+      "text": "Yes."
+    },
+    {
+      "start": 685.7,
+      "end": 688.46,
+      "text": "Seeking out new vendors, asking customers what else they needed."
+    },
+    {
+      "start": 688.46,
+      "end": 693.42,
+      "text": "That proactive friction that agency is what generated the profit."
+    },
+    {
+      "start": 693.42,
+      "end": 696.94,
+      "text": "So agency is incredibly valuable on its own."
+    },
+    {
+      "start": 696.94,
+      "end": 699.18,
+      "text": "Now enter large language models."
+    },
+    {
+      "start": 699.18,
+      "end": 704.7,
+      "text": "What AI fundamentally does is massively lower the friction and cost of certain tasks, drafting,"
+    },
+    {
+      "start": 704.7,
+      "end": 706.78,
+      "text": "explaining, exploring alternatives."
+    },
+    {
+      "start": 706.78,
+      "end": 708.98,
+      "text": "Many things that took hours take seconds."
+    },
+    {
+      "start": 708.98,
+      "end": 713.62,
+      "text": "We have robust workplace studies showing how this accelerates productivity."
+    },
+    {
+      "start": 713.62,
+      "end": 715.82,
+      "text": "Take the Brynjolfsen study on customer support."
+    },
+    {
+      "start": 715.82,
+      "end": 716.82,
+      "text": "Right."
+    },
+    {
+      "start": 716.82,
+      "end": 720.94,
+      "text": "They looked at over 5,000 support agents who had an AI assistant staggered into their"
+    },
+    {
+      "start": 720.94,
+      "end": 721.94,
+      "text": "workflow."
+    },
+    {
+      "start": 721.94,
+      "end": 722.94,
+      "text": "Yep."
+    },
+    {
+      "start": 722.94,
+      "end": 725.42,
+      "text": "The AI would suggest replies to customer issues."
+    },
+    {
+      "start": 725.42,
+      "end": 730.3,
+      "text": "And the agents who used it saw roughly 15% more issues resolved per hour."
+    },
+    {
+      "start": 730.3,
+      "end": 734.74,
+      "text": "And it was particularly effective at helping less experienced workers get up to speed faster."
+    },
+    {
+      "start": 734.74,
+      "end": 740.5,
+      "text": "But, and this is a massive point for you to keep in mind, AI doesn't solve the core agency problem"
+    },
+    {
+      "start": 740.5,
+      "end": 746.34,
+      "text": "of choice. Let's look at this incredible study by Delacroix and colleagues at Proctor & Gamble."
+    },
+    {
+      "start": 746.34,
+      "end": 751.86,
+      "text": "This one is so revealing. They had nearly 800 professionals in an innovation workshop."
+    },
+    {
+      "start": 751.86,
+      "end": 756.5,
+      "text": "Some individuals were given AI, while others were put in traditional teams without AI."
+    },
+    {
+      "start": 756.5,
+      "end": 761.86,
+      "text": "And what they found was that the individuals equipped with AI were able to generate product ideas"
+    },
+    {
+      "start": 761.86,
+      "end": 764.42,
+      "text": "is that we're entirely on par with the ideas generated"
+    },
+    {
+      "start": 764.42,
+      "end": 766.26,
+      "text": "by the human teams."
+    },
+    {
+      "start": 766.26,
+      "end": 769.9,
+      "text": "So the AI leveled the playing field for idea generation."
+    },
+    {
+      "start": 769.9,
+      "end": 770.98,
+      "text": "Exactly."
+    },
+    {
+      "start": 770.98,
+      "end": 773.62,
+      "text": "It helped individuals balance commercial and technical"
+    },
+    {
+      "start": 773.62,
+      "end": 775.58,
+      "text": "perspectives beautifully."
+    },
+    {
+      "start": 775.58,
+      "end": 777.86,
+      "text": "But here is the kicker."
+    },
+    {
+      "start": 777.86,
+      "end": 780.86,
+      "text": "Having access to AI did not improve their ability"
+    },
+    {
+      "start": 780.86,
+      "end": 784.14,
+      "text": "to select the best idea from the ones they generated."
+    },
+    {
+      "start": 784.14,
+      "end": 785.46,
+      "text": "No, it didn't."
+    },
+    {
+      "start": 785.46,
+      "end": 788.58,
+      "text": "AI can generate 100 beautifully polished product ideas"
+    },
+    {
+      "start": 788.58,
+      "end": 789.7,
+      "text": "in a minute."
+    },
+    {
+      "start": 789.7,
+      "end": 792.18,
+      "text": "But generating ideas is completely useless"
+    },
+    {
+      "start": 792.18,
+      "end": 793.94,
+      "text": "if you don't use your human agency"
+    },
+    {
+      "start": 793.94,
+      "end": 797.7,
+      "text": "to pick the one that actually solves the problem in reality."
+    },
+    {
+      "start": 797.7,
+      "end": 800.3,
+      "text": "AI expands your menu of options,"
+    },
+    {
+      "start": 800.3,
+      "end": 803.3,
+      "text": "but human agency is required to order the meal."
+    },
+    {
+      "start": 803.3,
+      "end": 804.62,
+      "text": "I love that."
+    },
+    {
+      "start": 804.62,
+      "end": 807.7,
+      "text": "Which brings us to the dark side of this multiplayer effect."
+    },
+    {
+      "start": 807.7,
+      "end": 810.22,
+      "text": "Because AI removes friction,"
+    },
+    {
+      "start": 810.22,
+      "end": 812.54,
+      "text": "because it makes it so effortlessly easy"
+    },
+    {
+      "start": 812.54,
+      "end": 815.54,
+      "text": "to produce polished authoritative sounding output."
+    },
+    {
+      "start": 815.54,
+      "end": 818.26,
+      "text": "You can also accidentally remove the cognitive friction"
+    },
+    {
+      "start": 818.26,
+      "end": 821.38,
+      "text": "that we actually need for learning and critical thinking."
+    },
+    {
+      "start": 821.38,
+      "end": 824.86,
+      "text": "We fall into what we call the traps of assisted agency."
+    },
+    {
+      "start": 824.86,
+      "end": 827.18,
+      "text": "Yeah, this is where things get a bit scary."
+    },
+    {
+      "start": 827.18,
+      "end": 829.3,
+      "text": "Let's talk about another experiment by Del Aqua,"
+    },
+    {
+      "start": 829.3,
+      "end": 832.34,
+      "text": "this time looking at 758 consultants."
+    },
+    {
+      "start": 832.34,
+      "end": 834.3,
+      "text": "The study perfectly illustrates a concept"
+    },
+    {
+      "start": 834.3,
+      "end": 838.38,
+      "text": "researchers called the jagged frontier of AI capabilities."
+    },
+    {
+      "start": 838.38,
+      "end": 840.02,
+      "text": "The jagged frontier."
+    },
+    {
+      "start": 840.02,
+      "end": 841.66,
+      "text": "Imagine a boundary line."
+    },
+    {
+      "start": 841.66,
+      "end": 845.18,
+      "text": "Inside the line are tasks AI is currently very good at."
+    },
+    {
+      "start": 845.18,
+      "end": 847.38,
+      "text": "Outside the line are tasks it struggles with,"
+    },
+    {
+      "start": 847.38,
+      "end": 850.68,
+      "text": "but crucially, it doesn't tell you it's struggling."
+    },
+    {
+      "start": 850.68,
+      "end": 852.24,
+      "text": "Right."
+    },
+    {
+      "start": 852.24,
+      "end": 854.22,
+      "text": "So when these consultants were given a task"
+    },
+    {
+      "start": 854.22,
+      "end": 856.82,
+      "text": "that felt inside the AI's capabilities,"
+    },
+    {
+      "start": 856.82,
+      "end": 857.74,
+      "text": "they were superstars."
+    },
+    {
+      "start": 857.74,
+      "end": 860.7,
+      "text": "They finished 12.2% more tasks"
+    },
+    {
+      "start": 860.7,
+      "end": 863.78,
+      "text": "and were over 25% faster than the consultants"
+    },
+    {
+      "start": 863.78,
+      "end": 865.06,
+      "text": "working without AI."
+    },
+    {
+      "start": 865.06,
+      "end": 867.02,
+      "text": "But then the researchers gave them a task"
+    },
+    {
+      "start": 867.02,
+      "end": 869.82,
+      "text": "that felt just outside the AI's current capabilities."
+    },
+    {
+      "start": 869.82,
+      "end": 870.66,
+      "text": "Blind spot."
+    },
+    {
+      "start": 870.66,
+      "end": 871.82,
+      "text": "Yes."
+    },
+    {
+      "start": 871.82,
+      "end": 874.54,
+      "text": "A blind spot where the AI sounds highly confident,"
+    },
+    {
+      "start": 874.54,
+      "end": 876.3,
+      "text": "but is factually wrong."
+    },
+    {
+      "start": 876.3,
+      "end": 878.28,
+      "text": "And the results completely flipped."
+    },
+    {
+      "start": 878.28,
+      "end": 881.4,
+      "text": "The consultants using AI were about 19 percentage points"
+    },
+    {
+      "start": 881.4,
+      "end": 883.28,
+      "text": "less likely to get the correct answer"
+    },
+    {
+      "start": 883.28,
+      "end": 885.64,
+      "text": "compared to the consultants doing it on their own"
+    },
+    {
+      "start": 885.64,
+      "end": 886.68,
+      "text": "without tech."
+    },
+    {
+      "start": 886.68,
+      "end": 889.84,
+      "text": "The AI fed them a highly persuasive, beautifully formatted,"
+    },
+    {
+      "start": 889.84,
+      "end": 892.0,
+      "text": "completely incorrect answer."
+    },
+    {
+      "start": 892.0,
+      "end": 894.12,
+      "text": "And they just blindly accepted it."
+    },
+    {
+      "start": 894.12,
+      "end": 895.92,
+      "text": "But wait, I have to challenge this."
+    },
+    {
+      "start": 895.92,
+      "end": 899.8,
+      "text": "Isn't this jagged frontier just a temporary tech flaw?"
+    },
+    {
+      "start": 899.8,
+      "end": 903.36,
+      "text": "Like open AI or anthropic will release a new model next year."
+    },
+    {
+      "start": 903.36,
+      "end": 905.36,
+      "text": "The AI won't hallucinate as much."
+    },
+    {
+      "start": 905.36,
+      "end": 906.8,
+      "text": "And this whole problem goes away."
+    },
+    {
+      "start": 906.8,
+      "end": 909.56,
+      "text": "Why is this a crisis of human agency?"
+    },
+    {
+      "start": 909.56,
+      "end": 912.84,
+      "text": "Because the core issue isn't just the software's hallucination."
+    },
+    {
+      "start": 912.84,
+      "end": 916.04,
+      "text": "It's the human habit of cognitive offloading."
+    },
+    {
+      "start": 916.04,
+      "end": 917.04,
+      "text": "Cognitive offloading."
+    },
+    {
+      "start": 917.04,
+      "end": 918.04,
+      "text": "Right."
+    },
+    {
+      "start": 918.04,
+      "end": 921.52,
+      "text": "Even as the models get better, the psychological trap remains."
+    },
+    {
+      "start": 921.52,
+      "end": 924.16,
+      "text": "We confuse fluency with correctness."
+    },
+    {
+      "start": 924.16,
+      "end": 925.56,
+      "text": "Ah, I see."
+    },
+    {
+      "start": 925.56,
+      "end": 929.68,
+      "text": "Just because a paragraph is grammatically perfect and structured beautifully doesn't"
+    },
+    {
+      "start": 929.68,
+      "end": 932.52,
+      "text": "mean the underlying logic is sound."
+    },
+    {
+      "start": 932.52,
+      "end": 936.56,
+      "text": "When we offload the friction of drafting to a machine, we often forget to apply the friction"
+    },
+    {
+      "start": 936.56,
+      "end": 937.84,
+      "text": "of verifying."
+    },
+    {
+      "start": 937.84,
+      "end": 940.0,
+      "text": "We outsource our critical thinking to the tool."
+    },
+    {
+      "start": 940.0,
+      "end": 941.0,
+      "text": "Exactly."
+    },
+    {
+      "start": 941.0,
+      "end": 945.2,
+      "text": "And it gets even more concerning when we look at how this mechanism affects learning."
+    },
+    {
+      "start": 945.2,
+      "end": 949.56,
+      "text": "Let's look at a study by Bastani involving nearly a thousand high school math students"
+    },
+    {
+      "start": 949.56,
+      "end": 950.56,
+      "text": "in Turkey."
+    },
+    {
+      "start": 950.56,
+      "end": 951.8,
+      "text": "This is a crucial study."
+    },
+    {
+      "start": 951.8,
+      "end": 956.56,
+      "text": "The students practiced math problems using a standard general purpose AI chatbot."
+    },
+    {
+      "start": 956.56,
+      "end": 959.96,
+      "text": "And during the practice sessions, they did exceptionally well."
+    },
+    {
+      "start": 959.96,
+      "end": 964.8,
+      "text": "The AI was walking them through the problems, practically doing the heavy lifting for them."
+    },
+    {
+      "start": 964.8,
+      "end": 970.28,
+      "text": "But then the researchers took the AI away and gave them a standard, unassisted exam."
+    },
+    {
+      "start": 970.28,
+      "end": 972.38,
+      "text": "And the results were alarming."
+    },
+    {
+      "start": 972.38,
+      "end": 978.18,
+      "text": "The students who practiced with the AI scored 17% lower on the exam relative to the control"
+    },
+    {
+      "start": 978.18,
+      "end": 979.18,
+      "text": "group."
+    },
+    {
+      "start": 979.18,
+      "end": 980.88,
+      "text": "17% lower."
+    },
+    {
+      "start": 980.88,
+      "end": 981.88,
+      "text": "Why?"
+    },
+    {
+      "start": 981.88,
+      "end": 984.48,
+      "text": "Because of that cognitive offloading."
+    },
+    {
+      "start": 984.48,
+      "end": 988.6,
+      "text": "By making the practice completely frictionless, the AI robbed the students of the productive"
+    },
+    {
+      "start": 988.6,
+      "end": 992.32,
+      "text": "of struggle required to actually build neural pathways,"
+    },
+    {
+      "start": 992.32,
+      "end": 993.92,
+      "text": "their skills atrophied."
+    },
+    {
+      "start": 993.92,
+      "end": 996.4,
+      "text": "Now it is worth noting that when the researchers used"
+    },
+    {
+      "start": 996.4,
+      "end": 999.96,
+      "text": "to customize GPT tutor with strict guardrails,"
+    },
+    {
+      "start": 999.96,
+      "end": 1003.48,
+      "text": "meaning the AI was explicitly instructed to only give hints"
+    },
+    {
+      "start": 1003.48,
+      "end": 1005.36,
+      "text": "and refuse to give the final answer,"
+    },
+    {
+      "start": 1005.36,
+      "end": 1007.16,
+      "text": "it prevented this harm."
+    },
+    {
+      "start": 1007.16,
+      "end": 1009.16,
+      "text": "Yes, guardrails help."
+    },
+    {
+      "start": 1009.16,
+      "end": 1010.96,
+      "text": "But it highlights the core risk."
+    },
+    {
+      "start": 1010.96,
+      "end": 1013.24,
+      "text": "If you offload the cognitive effort,"
+    },
+    {
+      "start": 1013.24,
+      "end": 1015.24,
+      "text": "your capacity diminishes."
+    },
+    {
+      "start": 1015.24,
+      "end": 1018.0,
+      "text": "Yeah, a survey by Lee of over 300 knowledge workers"
+    },
+    {
+      "start": 1018.0,
+      "end": 1023.24,
+      "text": "back this up. They found that higher confidence in AI tools was directly associated with"
+    },
+    {
+      "start": 1023.24,
+      "end": 1026.24,
+      "text": "less reported effort in human critical thinking."
+    },
+    {
+      "start": 1026.24,
+      "end": 1028.72,
+      "text": "It's a direct trade off for a lot of people."
+    },
+    {
+      "start": 1028.72,
+      "end": 1033.48,
+      "text": "So what does this all mean? If the danger is thoughtless velocity, just blindly hitting"
+    },
+    {
+      "start": 1033.48,
+      "end": 1038.8,
+      "text": "the gas and accepting whatever the AI spits out, how do you actually practice deliberate"
+    },
+    {
+      "start": 1038.8,
+      "end": 1040.16,
+      "text": "high agency thought?"
+    },
+    {
+      "start": 1040.16,
+      "end": 1046.36,
+      "text": "Well, source material provides a very concrete five step framework. It's an action loop designed"
+    },
+    {
+      "start": 1046.36,
+      "end": 1052.84,
+      "text": "build this muscle. Let's go through it. Step one. Step one is to choose a recognizable outcome."
+    },
+    {
+      "start": 1053.4,
+      "end": 1058.36,
+      "text": "You have to be specific. Don't make your goal. I want to be a high agency person. Too vague."
+    },
+    {
+      "start": 1058.36,
+      "end": 1063.64,
+      "text": "Way too big. Make it. I want to find out if five neighbors actually want to attend my class."
+    },
+    {
+      "start": 1064.6,
+      "end": 1071.88,
+      "text": "It has to be an observable event in the real world. Got it. Step two, map what you control,"
+    },
+    {
+      "start": 1071.88,
+      "end": 1077.72,
+      "text": "what you influence and what constraints exist so you control writing the invitation you can influence"
+    },
+    {
+      "start": 1077.72,
+      "end": 1082.28,
+      "text": "a neighbor by handing it to them and smiling but the constraint is that you don't control the"
+    },
+    {
+      "start": 1082.28,
+      "end": 1087.96,
+      "text": "community center schedule or your neighbor's free time exactly you have to map that out then step"
+    },
+    {
+      "start": 1087.96,
+      "end": 1094.2,
+      "text": "three is a psychological technique called mental contrasting with implementation intentions okay"
+    },
+    {
+      "start": 1094.2,
+      "end": 1098.6,
+      "text": "let's break that down because it sounds like academic jargon what is the actual mechanism"
+    },
+    {
+      "start": 1098.6,
+      "end": 1100.12,
+      "text": "happening in the brain there."
+    },
+    {
+      "start": 1100.12,
+      "end": 1104.84,
+      "text": "A meta-analysis by Wang of 21 different studies shows this is highly"
+    },
+    {
+      "start": 1104.84,
+      "end": 1109.32,
+      "text": "effective. Essentially, you are vividly imagining your desired future"
+    },
+    {
+      "start": 1109.32,
+      "end": 1114.2,
+      "text": "and then immediately contrasting it with the present obstacle standing in your way."
+    },
+    {
+      "start": 1114.2,
+      "end": 1115.72,
+      "text": "Creating a mental link."
+    },
+    {
+      "start": 1115.72,
+      "end": 1120.12,
+      "text": "Exactly. This mental link creates a subconscious trigger. You formulate an"
+    },
+    {
+      "start": 1120.12,
+      "end": 1125.64,
+      "text": "if-then plan. So instead of just hoping you don't get distracted, you say,"
+    },
+    {
+      "start": 1125.64,
+      "end": 1131.08,
+      "text": "If I find myself obsessively rewriting this invitation for the third time, then I will immediately"
+    },
+    {
+      "start": 1131.08,
+      "end": 1136.52,
+      "text": "stop and ask a real person if it makes sense. Oh, I like that. By doing that in advance,"
+    },
+    {
+      "start": 1137.08,
+      "end": 1140.68,
+      "text": "your brain is primed to act the moment the obstacle appears."
+    },
+    {
+      "start": 1140.68,
+      "end": 1146.6,
+      "text": "Precisely. And then step four is where the tech finally comes in. Give the AI a specific"
+    },
+    {
+      "start": 1146.6,
+      "end": 1153.32,
+      "text": "bounded job. Right. You don't tell the AI do my project. You maintain the agency. Yes."
+    },
+    {
+      "start": 1153.32,
+      "end": 1158.6,
+      "text": "You tell it, draft three distinct questions I can ask my neighbors to figure out what"
+    },
+    {
+      "start": 1158.6,
+      "end": 1160.4,
+      "text": "they want to learn."
+    },
+    {
+      "start": 1160.4,
+      "end": 1164.6,
+      "text": "You are assigning it a task, not delegating your responsibility."
+    },
+    {
+      "start": 1164.6,
+      "end": 1168.2,
+      "text": "And finally, step five, record and adjust."
+    },
+    {
+      "start": 1168.2,
+      "end": 1169.2,
+      "text": "This is crucial."
+    },
+    {
+      "start": 1169.2,
+      "end": 1175.6,
+      "text": "Harken and colleagues conducted a massive meta-analysis of over 19,000 participants across 138 studies."
+    },
+    {
+      "start": 1175.6,
+      "end": 1176.6,
+      "text": "That's a lot of data."
+    },
+    {
+      "start": 1176.6,
+      "end": 1177.6,
+      "text": "It is."
+    },
+    {
+      "start": 1177.6,
+      "end": 1181.24,
+      "text": "And they found that simply monitoring your goal progress objectively improves your"
+    },
+    {
+      "start": 1181.24,
+      "end": 1182.68,
+      "text": "chances of attaining it."
+    },
+    {
+      "start": 1182.68,
+      "end": 1186.54,
+      "text": "So you look at the result of your bounded step, say, the neighbor's reaction to your"
+    },
+    {
+      "start": 1186.54,
+      "end": 1193.12,
+      "text": "questions, and you decide, do I revise my approach, continue, seek help, or stop entirely?"
+    },
+    {
+      "start": 1193.12,
+      "end": 1194.48,
+      "text": "That's the loop."
+    },
+    {
+      "start": 1194.48,
+      "end": 1199.12,
+      "text": "If you want to try this yourself, the material suggests running a two-week experiment."
+    },
+    {
+      "start": 1199.12,
+      "end": 1200.68,
+      "text": "It's incredibly practical."
+    },
+    {
+      "start": 1200.68,
+      "end": 1201.68,
+      "text": "It really is."
+    },
+    {
+      "start": 1201.68,
+      "end": 1206.4,
+      "text": "Pick a small goal you've been putting off, spend a few days making a bounded attempt,"
+    },
+    {
+      "start": 1206.4,
+      "end": 1211.76,
+      "text": "prep your if-then plans for the inevitable obstacles, seek actual human feedback, and"
+    },
+    {
+      "start": 1211.76,
+      "end": 1216.24,
+      "text": "of you. And speaking of feedback, there's a brilliant practitioner tip in here from Kate"
+    },
+    {
+      "start": 1216.24,
+      "end": 1223.52,
+      "text": "Hall about how to ask for help. Yes. She says, to make help easy to give. Don't go to a colleague"
+    },
+    {
+      "start": 1223.52,
+      "end": 1229.36,
+      "text": "and ask, can you look at my project? That is a massive exhausting request. Right. Asking an open"
+    },
+    {
+      "start": 1229.36,
+      "end": 1234.0,
+      "text": "ended question places the entire cognitive burden on the person you're asking for help."
+    },
+    {
+      "start": 1234.0,
+      "end": 1238.4,
+      "text": "They have to figure out what you want. Instead, Hall suggests bounding the request."
+    },
+    {
+      "start": 1238.4,
+      "end": 1244.68,
+      "text": "Ask, can you take exactly 10 minutes to read this one paragraph and tell me what's confusing"
+    },
+    {
+      "start": 1244.68,
+      "end": 1245.68,
+      "text": "about it?"
+    },
+    {
+      "start": 1245.68,
+      "end": 1250.52,
+      "text": "You've lowered the friction for them to assist you, which is a masterful exercise of agency"
+    },
+    {
+      "start": 1250.52,
+      "end": 1251.52,
+      "text": "in itself."
+    },
+    {
+      "start": 1251.52,
+      "end": 1252.52,
+      "text": "Absolutely."
+    },
+    {
+      "start": 1252.52,
+      "end": 1257.16,
+      "text": "Now, we've talked a lot about the individual, you and your goals, you and your AI, but there"
+    },
+    {
+      "start": 1257.16,
+      "end": 1260.36,
+      "text": "is a much broader context here that we can't ignore."
+    },
+    {
+      "start": 1260.36,
+      "end": 1261.36,
+      "text": "Definitely."
+    },
+    {
+      "start": 1261.36,
+      "end": 1266.0,
+      "text": "Because all of this can sound highly individualistic, like you're a lone wolf hacking your way to"
+    },
+    {
+      "start": 1266.0,
+      "end": 1268.62,
+      "text": "to success through sheer willpower,"
+    },
+    {
+      "start": 1268.62,
+      "end": 1270.12,
+      "text": "but we don't live in a vacuum."
+    },
+    {
+      "start": 1270.12,
+      "end": 1273.16,
+      "text": "Sometimes the smartest, most agentic thing you can do"
+    },
+    {
+      "start": 1273.16,
+      "end": 1276.64,
+      "text": "is realize you can't or shouldn't do it alone."
+    },
+    {
+      "start": 1276.64,
+      "end": 1278.36,
+      "text": "That's a crucial distinction."
+    },
+    {
+      "start": 1278.36,
+      "end": 1281.4,
+      "text": "We return to Vandura's psychological framework here."
+    },
+    {
+      "start": 1281.4,
+      "end": 1283.76,
+      "text": "He distinguishes between personal agency,"
+    },
+    {
+      "start": 1283.76,
+      "end": 1286.16,
+      "text": "which is what we've been primarily discussing,"
+    },
+    {
+      "start": 1286.16,
+      "end": 1289.8,
+      "text": "and proxy agency, as well as collective agency."
+    },
+    {
+      "start": 1289.8,
+      "end": 1291.36,
+      "text": "Well, let's define those real quick."
+    },
+    {
+      "start": 1291.36,
+      "end": 1294.48,
+      "text": "Proxy agency is recognizing that you don't have the authority"
+    },
+    {
+      "start": 1294.48,
+      "end": 1296.46,
+      "text": "or leverage to fix a problem."
+    },
+    {
+      "start": 1296.46,
+      "end": 1299.5,
+      "text": "So you actively ask someone who does have authority"
+    },
+    {
+      "start": 1299.5,
+      "end": 1301.02,
+      "text": "to act on your behalf."
+    },
+    {
+      "start": 1301.02,
+      "end": 1302.7,
+      "text": "And collective agency?"
+    },
+    {
+      "start": 1302.7,
+      "end": 1305.7,
+      "text": "Collective agency is joining forces with others"
+    },
+    {
+      "start": 1305.7,
+      "end": 1309.02,
+      "text": "to overcome a barrier that none of you could clear individually."
+    },
+    {
+      "start": 1309.02,
+      "end": 1311.38,
+      "text": "And the organizational environment you're operating in"
+    },
+    {
+      "start": 1311.38,
+      "end": 1313.06,
+      "text": "matters immensely here."
+    },
+    {
+      "start": 1313.06,
+      "end": 1314.94,
+      "text": "When you look at Amy Edmondson's research"
+    },
+    {
+      "start": 1314.94,
+      "end": 1316.86,
+      "text": "on 51 manufacturing teams,"
+    },
+    {
+      "start": 1316.86,
+      "end": 1320.66,
+      "text": "she focused heavily on this concept of psychological safety."
+    },
+    {
+      "start": 1320.66,
+      "end": 1322.38,
+      "text": "Yes, Edmondson found that teams"
+    },
+    {
+      "start": 1322.38,
+      "end": 1326.18,
+      "text": "absolutely need psychological safety to surface uncertainty."
+    },
+    {
+      "start": 1326.18,
+      "end": 1327.02,
+      "text": "Right."
+    },
+    {
+      "start": 1327.02,
+      "end": 1330.12,
+      "text": "If you were in a workplace where you will be humiliated, mocked,"
+    },
+    {
+      "start": 1330.12,
+      "end": 1333.42,
+      "text": "or punished for asking a question or admitting a mistake,"
+    },
+    {
+      "start": 1333.42,
+      "end": 1335.54,
+      "text": "you cannot easily exercise agency."
+    },
+    {
+      "start": 1335.54,
+      "end": 1338.46,
+      "text": "Telling employees to take more initiative in a toxic environment"
+    },
+    {
+      "start": 1338.46,
+      "end": 1341.54,
+      "text": "is a conflicting, impossible instruction."
+    },
+    {
+      "start": 1341.54,
+      "end": 1344.42,
+      "text": "Agency requires a space where learning and vulnerability"
+    },
+    {
+      "start": 1344.42,
+      "end": 1346.38,
+      "text": "are actually safe."
+    },
+    {
+      "start": 1346.38,
+      "end": 1348.9,
+      "text": "And let's talk about the real world for a second outside"
+    },
+    {
+      "start": 1348.9,
+      "end": 1350.1,
+      "text": "of the office."
+    },
+    {
+      "start": 1350.1,
+      "end": 1351.9,
+      "text": "Structural barriers matter."
+    },
+    {
+      "start": 1351.9,
+      "end": 1355.78,
+      "text": "time, money, systemic discrimination, sudden caregiving"
+    },
+    {
+      "start": 1355.78,
+      "end": 1358.9,
+      "text": "responsibilities at home, these are very real constraints."
+    },
+    {
+      "start": 1359.02,
+      "end": 1359.74,
+      "text": "Very real."
+    },
+    {
+      "start": 1360.06,
+      "end": 1363.7,
+      "text": "High agency is not a weapon to be used to blame people for"
+    },
+    {
+      "start": 1363.7,
+      "end": 1364.86,
+      "text": "structural barriers."
+    },
+    {
+      "start": 1364.98,
+      "end": 1366.58,
+      "text": "That is a vital point to emphasize."
+    },
+    {
+      "start": 1366.58,
+      "end": 1369.78,
+      "text": "The vocabulary of high agency should never be used to demand"
+    },
+    {
+      "start": 1369.78,
+      "end": 1373.46,
+      "text": "endless, impossible escalation from yourself or from others,"
+    },
+    {
+      "start": 1373.82,
+      "end": 1375.38,
+      "text": "when the constraints are rigid."
+    },
+    {
+      "start": 1375.5,
+      "end": 1376.18,
+      "text": "Exactly."
+    },
+    {
+      "start": 1376.82,
+      "end": 1379.98,
+      "text": "Let's say you planned a massive volunteer project, but"
+    },
+    {
+      "start": 1379.98,
+      "end": 1382.24,
+      "text": "Suddenly, a family member gets sick,"
+    },
+    {
+      "start": 1382.24,
+      "end": 1386.12,
+      "text": "and your caregiving duties at home drastically increase."
+    },
+    {
+      "start": 1386.12,
+      "end": 1388.08,
+      "text": "You have to scale back that project."
+    },
+    {
+      "start": 1388.08,
+      "end": 1388.92,
+      "text": "Right."
+    },
+    {
+      "start": 1388.92,
+      "end": 1392.84,
+      "text": "That is not a moral failure or a lack of persistence."
+    },
+    {
+      "start": 1392.84,
+      "end": 1395.4,
+      "text": "Deliberately reshaping your goal to fit your new reality"
+    },
+    {
+      "start": 1395.4,
+      "end": 1397.56,
+      "text": "is a high agency move."
+    },
+    {
+      "start": 1397.56,
+      "end": 1401.16,
+      "text": "Honest, realistic planning is high agency."
+    },
+    {
+      "start": 1401.16,
+      "end": 1403.96,
+      "text": "It all comes back to making contact with reality."
+    },
+    {
+      "start": 1403.96,
+      "end": 1406.76,
+      "text": "Recognizing a hard limit and adapting to it gracefully"
+    },
+    {
+      "start": 1406.76,
+      "end": 1409.76,
+      "text": "requires just as much agency as pushing past"
+    },
+    {
+      "start": 1409.76,
+      "end": 1414.92,
+      "text": "block. So to bring this all together for you listening, AI is fundamentally"
+    },
+    {
+      "start": 1414.92,
+      "end": 1419.28,
+      "text": "changing the landscape of how we work and think. It expands our reach, it gives"
+    },
+    {
+      "start": 1419.28,
+      "end": 1424.08,
+      "text": "us a massive, almost overwhelming menu of options, and it utterly removes the"
+    },
+    {
+      "start": 1424.08,
+      "end": 1428.68,
+      "text": "friction of generation. It really does. But human agency, the ability to"
+    },
+    {
+      "start": 1428.68,
+      "end": 1433.2,
+      "text": "deliberately choose a worthwhile direction to bound your attempts, to"
+    },
+    {
+      "start": 1433.2,
+      "end": 1438.32,
+      "text": "meticulously verify the actual truth of an AI output, and to learn from the real"
+    },
+    {
+      "start": 1438.32,
+      "end": 1440.88,
+      "text": "world, that is your superpower."
+    },
+    {
+      "start": 1440.88,
+      "end": 1445.96,
+      "text": "That is the only mechanism that turns endless options into real world impact."
+    },
+    {
+      "start": 1445.96,
+      "end": 1450.16,
+      "text": "Without human agency, AI just makes you faster at making mistakes."
+    },
+    {
+      "start": 1450.16,
+      "end": 1451.16,
+      "text": "Exactly."
+    },
+    {
+      "start": 1451.16,
+      "end": 1456.08,
+      "text": "But with agency, AI becomes a powerful lever to move the world in the direction you deliberately"
+    },
+    {
+      "start": 1456.08,
+      "end": 1457.08,
+      "text": "choose."
+    },
+    {
+      "start": 1457.08,
+      "end": 1461.28,
+      "text": "But I want to leave you with a final, slightly provocative thought to ponder."
+    },
+    {
+      "start": 1461.28,
+      "end": 1465.96,
+      "text": "As these AI models inevitably get better, as they cross that jagged frontier we talked"
+    },
+    {
+      "start": 1465.96,
+      "end": 1470.72,
+      "text": "about to the point where they rarely make factual mistakes, and maybe they even get"
+    },
+    {
+      "start": 1470.72,
+      "end": 1474.16,
+      "text": "incredibly good at selecting the best ideas for us."
+    },
+    {
+      "start": 1474.16,
+      "end": 1477.16,
+      "text": "What happens to the human muscle of agency?"
+    },
+    {
+      "start": 1477.16,
+      "end": 1481.28,
+      "text": "If the car gets so smart that it perfectly grips the mud and just drives itself out of"
+    },
+    {
+      "start": 1481.28,
+      "end": 1487.04,
+      "text": "the ditch every single time, does our internal ability to steer begin to permanently atrophy?"
+    },
+    {
+      "start": 1487.04,
+      "end": 1488.8,
+      "text": "That's a big question."
+    },
+    {
+      "start": 1488.8,
+      "end": 1493.64,
+      "text": "Will we eventually reach a point where we have to artificially manufacture friction and difficulty"
+    },
+    {
+      "start": 1493.64,
+      "end": 1498.7,
+      "text": "in our daily lives, just to keep our psychological capacity for choice, reflection, and agency"
+    },
+    {
+      "start": 1498.7,
+      "end": 1503.26,
+      "text": "from wasting away entirely, something to think about the next time you hit generate."
+    }
+  ]
+}

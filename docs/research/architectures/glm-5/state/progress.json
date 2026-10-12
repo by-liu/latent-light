@@ -1,0 +1,44 @@
+{
+  "schema_version": 2,
+  "topic_id": "glm-5-technical-deep-dive",
+  "status": "complete",
+  "coverage": {
+    "eligibility": "official technical report and public artifact confirmed",
+    "mechanisms": "Revision3: complete report and relevant appendices compared to study; targeted artifact paths checked; coverage-audit.md records mechanisms/training/inference/ablations and omissions.",
+    "artifacts": "pinned config, tokenizer metadata where relevant and license inspected",
+    "runtime": "not executed",
+    "adversarial_review": "Distinct revision3 check: source section/equation locators, count and cost units, causal ordering, input-prefix/reward/policy distinctions, source-art grants, future-versus-implemented systems and diagram text/arrow boundaries. Corrections documented in coverage-audit.md.",
+    "presentation": "Revision 3 checked at 1440px light, 390px light, 320px dark and desktop focus. Full desktop art, mobile keyboard pan, full-size access, family navigation, caption order, citations, equations, resources, images, no overflow, search, Markdown/MDX and agent manifests passed. All 66 model figure renders manually inspected. No model execution.",
+    "figure_rights": "Exact arXiv v1 metadata links CC BY 4.0. Full Figure5 p.4 extracted unchanged; no third party exclusion identified in figure/caption. Caption, source and license retained. Not based on weight MIT or code Apache2 licenses."
+  },
+  "open_questions": [
+    "Which undisclosed recipe details materially affect reproduction? Runtime measurements and independent benchmark reproduction remain outside this source-based study."
+  ],
+  "recommended_next_direction": null,
+  "last_seen": "2026-10-10T17:36:51.557Z",
+  "quality_gate": {
+    "evidence_verified": true,
+    "contradictions_reviewed": true,
+    "report_reviewed": true,
+    "visuals_reviewed": true
+  },
+  "artifact_record": {
+    "github": {
+      "sha": "c8ad661c6cf4cb0a78064987bc42f97e14355929",
+      "date": "2026-09-24T10:28:33Z"
+    },
+    "huggingface": "c183ef8c61faee82855eca1ed9bb3a9a7ce3b0b2",
+    "report_url": "https://arxiv.org/pdf/2602.15763v1",
+    "pdf_sha256": "4a97eab759d4576b8a93cac0cdf8e25b8fc4c01d71c61f759548eab6796e6ac7",
+    "archive": "Exact source PDFs retained unchanged under /tmp only; publication includes only inspected figure excerpts under their individual grants.",
+    "figure_editions": [
+      {
+        "url": "https://arxiv.org/pdf/2602.15763v1",
+        "locator": "Figure 5, PDF page 4",
+        "license": "CC BY 4.0",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "pdf_sha256": "4a97eab759d4576b8a93cac0cdf8e25b8fc4c01d71c61f759548eab6796e6ac7"
+      }
+    ]
+  }
+}

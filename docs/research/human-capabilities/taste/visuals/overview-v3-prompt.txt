@@ -1,0 +1,45 @@
+Use case: infographic-diagram
+Asset type: opening editorial infographic for a researched website article.
+Primary request: Make the supplied Taste infographic cleaner and more elegant while keeping ALL of its substantive information. Preserve the warm ivory, ink blue, restrained teal and muted gold palette, the thoughtful human creator, diverse original design alternatives and subtle futuristic studio atmosphere.
+
+This is a focused visual-design refinement. Keep the four topics and all supplied copy, but remove repeated illustrations, decorative plants in the teaching panels, busy stacks of art, speech bubbles, large colorful icon discs, heavy card backgrounds and oversized all-caps section headings.
+
+Art direction: a refined magazine infographic with generous whitespace, a disciplined grid and restrained typography. One beautifully composed studio illustration in the top portion, with the creator, three distinct drafts and a quiet futuristic window. Simplify the surrounding props and foliage. All remaining teaching content is typographic, with at most a small thin-line symbol per section. No repeated scenes below the hero. Solid warm ivory background. High-contrast deep ink body text. A graceful serif title and section headings; clean, highly readable sans-serif body text. Calm title-case headings, not compressed or stretched all caps. Keep all text comfortably large.
+
+Composition: portrait, approximately 4:5. The title, subtitle, message and ONE studio illustration occupy roughly the upper third. Below, use four spacious sections on a two-column grid, aligned consistently. Separate them with very thin quiet rules and whitespace rather than filled boxes. Give the teaching text more space than ornament. Use the freed illustration space to increase body type size and line spacing. Finish with a simple understated three-step row and a quiet closing line. Clear margins, balanced vertical rhythm, no text crowding or awkward line breaks. Make the last two sections as readable and prominent as the first two.
+
+Render this text accurately, with no additional text:
+
+"TASTE"
+"Knowing what’s good in the AI era"
+"AI expands the possibilities."
+"Taste gives them direction."
+
+Section 1:
+"What is taste?"
+"Developed discernment: notice, choose and shape quality for a purpose, audience and point of view."
+
+Section 2:
+"Why it matters with AI"
+"More options do not automatically mean better selection. Decide what to keep and improve."
+
+Section 3:
+"How to develop it"
+"Compare work in one domain. Explain your choices. Make, critique and revise. Seek informed feedback."
+
+Section 4:
+"Keep perspective"
+"Preference, expertise and status affect judgment. Context matters. Good choices can differ."
+
+Bottom row, connected by subtle arrows:
+"Notice"
+"Recognize differences"
+"Choose"
+"Judge fit"
+"Refine"
+"Improve through feedback"
+
+Closing line:
+"Develop reasons for your choices. Stay open to revision."
+
+Constraints: keep the same meaning and information; no missing section; no fake statistics, charts, ranking, logos, watermark, decorative gibberish, universal taste score or claim of permanent human superiority. The different drafts remain legitimate possibilities. This is original conceptual editorial artwork, not research data. Opaque background.

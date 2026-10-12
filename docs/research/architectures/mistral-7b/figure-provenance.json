@@ -1,0 +1,97 @@
+{
+  "model": "mistral-7b",
+  "checked": "2026-10-10",
+  "source": "Albert Q. Jiang et al., Mistral 7B, 2023",
+  "source_url": "https://arxiv.org/abs/2310.06825v1",
+  "pdf_url": "https://arxiv.org/pdf/2310.06825v1",
+  "sha256": "dfbac4e7035344b305c947481f2e7e8a02f7a24a563917eb6e47f6591d14c5ae",
+  "license": {
+    "status": "verified",
+    "value": "CC BY 4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "grant_evidence": "The version-specific arXiv landing page links Rights to this article to CC BY 4.0.",
+  "modifications": "Source figure regions cropped; surrounding paper prose and captions omitted. Figure labels, colors, axes and drawing retained. No AI repainting.",
+  "extraction": "Poppler pdftoppm v26.08.0, page rendered with scale-to 4200; crop coordinates recorded at 1400 pixel page preview and multiplied by 3.",
+  "figures": [
+    {
+      "asset": "public/figures/model-studies/mistral-7b/sliding-attention.png",
+      "source_figure": 1,
+      "pdf_page": 2,
+      "page_preview_crop": [
+        188,
+        407,
+        706,
+        275
+      ],
+      "output_pixels": [
+        2118,
+        825
+      ],
+      "alt": "Full causal attention reads the entire earlier prefix; sliding causal attention reads a recent band. Stacked layers can carry earlier information farther through hidden states.",
+      "caption": "A local window, a wider dependency path through depth. Reproduced from Jiang et al., Figure 1; figure crop, CC BY 4.0.",
+      "purpose": "The middle mask in Figure 1 keeps causality but removes direct access to sufficiently old keys. The right panel shows how information may travel through successive layers. Its illustrative window is three positions, not the checkpoint’s 4,096 token setting.",
+      "asset_sha256": "c44f85d6db12e0510a1b235c1aa314360732126093b7ab2732cd55e8a314b7d7"
+    },
+    {
+      "asset": "public/figures/model-studies/mistral-7b/rolling-cache.png",
+      "source_figure": 2,
+      "pdf_page": 3,
+      "page_preview_crop": [
+        188,
+        127,
+        708,
+        114
+      ],
+      "output_pixels": [
+        2124,
+        342
+      ],
+      "alt": "Three example sequences reuse a four slot KV cache over successive decoding steps. Once full, each new token overwrites the oldest slot while sequence positions keep increasing.",
+      "caption": "Storage slots wrap; sequence positions do not. Reproduced from Jiang et al., Figure 2; figure crop, CC BY 4.0.",
+      "purpose": "Figure 2 uses a four slot toy buffer. A key at position i is stored in slot i mod W; once full, the buffer overwrites old state. Slot reuse must not reset RoPE positions. This is the paper’s cache design, not proof that every backend implements that design.",
+      "asset_sha256": "f9bd58d6f0621aecf3cced865881db739082405c997341a687cdc7d156269010"
+    },
+    {
+      "asset": "public/figures/model-studies/mistral-7b/chunked-prefill.png",
+      "source_figure": 3,
+      "pdf_page": 3,
+      "page_preview_crop": [
+        290,
+        475,
+        510,
+        200
+      ],
+      "output_pixels": [
+        1530,
+        600
+      ],
+      "alt": "For a current prompt chunk, each token reads the permitted part of the preceding cache and the causal prefix of its own chunk; older past and future current chunk positions are masked.",
+      "caption": "Prefill combines cached history with a causal current chunk. Reproduced from Jiang et al., Figure 3; figure crop, CC BY 4.0.",
+      "purpose": "In Figure 3, the current chunk remains causal even though all its tokens are already known to the server. The cache contributes only keys inside the moving window; the older past contributes none. A prefill kernel must implement both restrictions together.",
+      "asset_sha256": "064b36ebb8fced7eb223bdf124a321efeb246c8796d3f7f9a98d8c378c52d228"
+    }
+  ],
+  "restricted_candidates": [],
+  "review": {
+    "source_artwork": true,
+    "crop_integrity": true,
+    "license": true,
+    "desktop_mobile_browser": true,
+    "checked": "2026-10-10T17:36:51.557Z",
+    "revision": 3
+  },
+  "revision": 3,
+  "review_history": [
+    {
+      "revision": 2,
+      "review": {
+        "source_artwork": true,
+        "crop_integrity": true,
+        "license": true,
+        "desktop_mobile_browser": true,
+        "checked": "2026-10-10T15:45:39.761Z"
+      }
+    }
+  ]
+}

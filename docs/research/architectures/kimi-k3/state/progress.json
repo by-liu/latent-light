@@ -1,0 +1,44 @@
+{
+  "schema_version": 2,
+  "topic_id": "kimi-k3-technical-deep-dive",
+  "status": "complete",
+  "coverage": {
+    "eligibility": "official technical report and public artifact confirmed",
+    "mechanisms": "Revision3: complete report and relevant appendices compared to study; targeted artifact paths checked; coverage-audit.md records mechanisms/training/inference/ablations and omissions.",
+    "artifacts": "pinned config, tokenizer metadata where relevant and license inspected",
+    "runtime": "not executed",
+    "adversarial_review": "Distinct revision3 check: source section/equation locators, count and cost units, causal ordering, input-prefix/reward/policy distinctions, source-art grants, future-versus-implemented systems and diagram text/arrow boundaries. Corrections documented in coverage-audit.md.",
+    "presentation": "Revision 3 checked at 1440px light, 390px light, 320px dark and desktop focus. Full desktop art, mobile keyboard pan, full-size access, family navigation, caption order, citations, equations, resources, images, no overflow, search, Markdown/MDX and agent manifests passed. All 66 model figure renders manually inspected. No model execution.",
+    "figure_rights": "Exact report is associated documentation distributed in MoonshotAI/Kimi-K3 repository. Custom K3 LICENSE explicitly includes associated documentation and grants copy/modify/publish/distribute subject to retained notice and commercial conditions. No report or Figure2-specific exclusion found. Entire notice retained beside asset; not a generic MIT classification."
+  },
+  "open_questions": [
+    "Which undisclosed recipe details materially affect reproduction? Runtime measurements and independent benchmark reproduction remain outside this source-based study."
+  ],
+  "recommended_next_direction": null,
+  "last_seen": "2026-10-10T17:36:51.557Z",
+  "quality_gate": {
+    "evidence_verified": true,
+    "contradictions_reviewed": true,
+    "report_reviewed": true,
+    "visuals_reviewed": true
+  },
+  "artifact_record": {
+    "github": {
+      "sha": "3cb39dfd32e51c3328e2e4b4af21341247d06c43",
+      "date": "2026-08-06T10:17:21Z"
+    },
+    "huggingface": "f831ab66814297da540d832a5235f8e904f29d06",
+    "report_url": "https://raw.githubusercontent.com/MoonshotAI/Kimi-K3/3cb39dfd32e51c3328e2e4b4af21341247d06c43/k3_tech_report.pdf",
+    "pdf_sha256": "86fb82a63ced501f0c3f4f404c0c6fa88a7a6cfac17aae81fd1a8f455998067c",
+    "archive": "Exact source PDFs retained unchanged under /tmp only; publication includes only inspected figure excerpts under their individual grants.",
+    "figure_editions": [
+      {
+        "url": "https://raw.githubusercontent.com/MoonshotAI/Kimi-K3/3cb39dfd32e51c3328e2e4b4af21341247d06c43/k3_tech_report.pdf",
+        "locator": "Figure 2, PDF page 3",
+        "license": "Kimi K3 License (associated documentation)",
+        "license_url": "https://github.com/MoonshotAI/Kimi-K3/blob/3cb39dfd32e51c3328e2e4b4af21341247d06c43/LICENSE",
+        "pdf_sha256": "86fb82a63ced501f0c3f4f404c0c6fa88a7a6cfac17aae81fd1a8f455998067c"
+      }
+    ]
+  }
+}

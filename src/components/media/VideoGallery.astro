@@ -1,0 +1,133 @@
+---
+import Icon from '@cloudflare/nimbus-docs/components/Icon.astro';
+import {Embed} from '../ui/embed';
+import {readGalleryVideos,videoWatchUrl} from '../../../plugins/video-gallery.mjs';
+interface Video {id:string;youtubeId:string;title:string;duration:string;description:string;poster:string;transcriptId:string;}
+interface Props {id:string;videosJson:string;label?:string;}
+const {id,videosJson,label='Short videos'}=Astro.props;
+const videos:Video[]=readGalleryVideos(videosJson);
+---
+<section {id} class="video-gallery" data-video-gallery aria-label={label}>
+  <div class="video-layout">
+  <div class="video-stages">
+    {videos.map((video,i)=><article id={`video-${video.id}`} class="video-stage" hidden={i!==0}>
+      <div class="video-frame">
+        <a class="video-poster" data-video-play href={videoWatchUrl(video)} target="_blank" rel="noopener" aria-label={`Play ${video.title}, ${video.duration}`}>
+          <img src={video.poster} alt="" width="480" height="853" loading={i===0?'eager':'lazy'} decoding="async" />
+          <span class="video-duration" aria-hidden="true">{video.duration}</span>
+          <span class="video-play"><Icon name="ph:play-fill" size={20} aria-hidden="true" /><span>Play video</span></span>
+        </a>
+        <div class="video-host" hidden></div>
+        <template data-video-template>
+          <Embed src={`https://www.youtube-nocookie.com/embed/${video.youtubeId}?autoplay=1&playsinline=1&rel=0&cc_load_policy=1&cc_lang_pref=en`} title={video.title} ratio="9/16" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" />
+        </template>
+      </div>
+      <div class="video-copy">
+        <span class="video-eyebrow">Video {i+1} of {videos.length} · {video.duration}</span>
+        <h3>{video.title}</h3>
+        <p>{video.description}</p>
+        <div class="video-links"><a href={`#${video.transcriptId}`}>Read transcript</a><a href={videoWatchUrl(video)} target="_blank" rel="noopener" aria-label={`Watch ${video.title} on YouTube`}>YouTube <Icon name="ph:arrow-up-right" size={13} aria-hidden="true" /></a></div>
+        <button class="video-close" data-video-close type="button" hidden><Icon name="ph:x" size={14} aria-hidden="true" />Close player</button>
+      </div>
+    </article>)}
+  </div>
+  <div class="video-choices">
+    <p class="choices-heading" id={`${id}-choices`}>Choose a short video</p>
+    <ol class="video-list" aria-labelledby={`${id}-choices`}>
+      {videos.map((video,i)=><li>
+        <a class="video-choice" data-video-select={video.id} href={videoWatchUrl(video)} target="_blank" rel="noopener" aria-current={i===0?'true':undefined} aria-label={`Play ${video.title}, ${video.duration}`}>
+          <img src={video.poster} alt="" width="480" height="853" loading="eager" decoding="async" />
+          <span class="choice-copy"><span class="choice-number">0{i+1} · {video.duration}</span><span class="choice-title">{video.title}</span></span>
+          <Icon name="ph:play-fill" size={16} aria-hidden="true" />
+        </a>
+      </li>)}
+    </ol>
+    <p class="gallery-hint">Select Play or a clip to load YouTube.</p>
+    <p class="sr-only" data-video-status aria-live="polite"></p>
+  </div>
+  </div>
+  <div class="gallery-reading"><slot /></div>
+</section>
+<script>
+  import {mount} from '@cloudflare/nimbus-docs/client';
+  mount('[data-video-gallery]',root=>{
+    const controller=new AbortController();
+    const close=(card:HTMLElement)=>{
+      const host=card.querySelector<HTMLElement>('.video-host');
+      if(host){host.replaceChildren();host.hidden=true;}
+      const poster=card.querySelector<HTMLElement>('[data-video-play]');
+      if(poster)poster.hidden=false;
+      const button=card.querySelector<HTMLButtonElement>('[data-video-close]');
+      if(button)button.hidden=true;
+    };
+    document.addEventListener('play',event=>{
+      if(event.target instanceof HTMLAudioElement&&event.target.closest('[data-podcast-player]'))root.querySelectorAll<HTMLElement>('.video-stage').forEach(close);
+    },{signal:controller.signal,capture:true});
+    root.addEventListener('click',event=>{
+      if(!(event.target instanceof Element))return;
+      const choice=event.target.closest<HTMLAnchorElement>('[data-video-select]');
+      const play=event.target.closest<HTMLAnchorElement>('[data-video-play]');
+      if((play||choice)&&root.contains((play||choice)!)){
+        if(event instanceof MouseEvent&&(event.button!==0||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey))return;
+        const card=choice?root.querySelector<HTMLElement>(`#video-${choice.dataset.videoSelect}`):play?.closest<HTMLElement>('.video-stage');
+        const host=card?.querySelector<HTMLElement>('.video-host');
+        const template=card?.querySelector<HTMLTemplateElement>('[data-video-template]');
+        if(!card||!host||!template)return;
+        event.preventDefault();
+        root.querySelectorAll<HTMLElement>('.video-stage').forEach(stage=>{close(stage);stage.hidden=stage!==card;});
+        root.querySelectorAll<HTMLAnchorElement>('[data-video-select]').forEach(link=>{if(link.dataset.videoSelect===card.id.slice(6))link.setAttribute('aria-current','true');else link.removeAttribute('aria-current');});
+        host.replaceChildren(template.content.cloneNode(true));host.hidden=false;
+        const poster=card.querySelector<HTMLAnchorElement>('[data-video-play]');
+        if(poster)poster.hidden=true;
+        const button=card.querySelector<HTMLButtonElement>('[data-video-close]');
+        if(button)button.hidden=false;
+        const status=root.querySelector<HTMLElement>('[data-video-status]');
+        if(status)status.textContent=`Playing ${card.querySelector('h3')?.textContent}.`;
+        host.querySelector<HTMLIFrameElement>('iframe')?.focus();
+      }
+      const button=event.target.closest<HTMLButtonElement>('[data-video-close]');
+      if(button){const card=button.closest<HTMLElement>('.video-stage');if(card){close(card);card.querySelector<HTMLAnchorElement>('[data-video-play]')?.focus();const status=root.querySelector<HTMLElement>('[data-video-status]');if(status)status.textContent='Player closed.';}}
+    },{signal:controller.signal});
+    return()=>{controller.abort();root.querySelectorAll<HTMLElement>('.video-stage').forEach(close);};
+  });
+</script>
+<style>
+  .video-gallery{container-type:inline-size;min-width:0;margin:1.5rem 0 2rem;scroll-margin-top:5rem;}
+  .video-layout{display:grid;gap:1.25rem;align-items:start;}
+  .video-stages{min-width:0;}
+  .video-stage{min-width:0;max-width:320px;margin-inline:auto;border:1px solid var(--nb-border);border-radius:.8rem;overflow:hidden;background:var(--nb-card,var(--nb-background));}
+  .video-stage[hidden]{display:none!important;}
+  .video-frame{position:relative;aspect-ratio:9/16;background:#121722;}
+  .video-poster{position:absolute;inset:0;display:block;text-decoration:none!important;}
+  .video-poster img{display:block;width:100%;height:100%;object-fit:contain;margin:0!important;}
+  .video-poster::after{content:'';position:absolute;inset:45% 0 0;background:linear-gradient(transparent,rgba(0,0,0,.35));pointer-events:none;}
+  .video-duration{position:absolute;top:.65rem;right:.65rem;z-index:1;border-radius:.3rem;background:rgba(0,0,0,.72);color:#fff;font-size:.67rem;font-variant-numeric:tabular-nums;padding:.2rem .4rem;}
+  .video-play{position:absolute;z-index:1;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;align-items:center;gap:.4rem;white-space:nowrap;padding:.65rem .85rem;border:1px solid rgba(255,255,255,.6);border-radius:2rem;background:rgba(14,25,42,.88);color:#fff;box-shadow:0 4px 20px rgba(0,0,0,.14);font-size:.75rem;font-weight:550;}
+  .video-poster:hover .video-play{background:#1b3655;}.video-poster:focus-visible{outline:3px solid var(--nb-ring);outline-offset:-4px;}
+  .video-host{position:absolute;inset:0;}.video-host :global(.embed){margin:0!important;border:0;border-radius:0;height:100%;width:100%;}.video-host :global(iframe){min-width:200px;min-height:200px;}
+  .video-poster[hidden],.video-host[hidden],.video-close[hidden]{display:none!important;}
+  .video-copy{padding:.85rem 1rem .95rem;}
+  .video-eyebrow{display:block;color:var(--nb-muted-foreground);font-size:.63rem;font-variant-numeric:tabular-nums;margin-bottom:.35rem;letter-spacing:.04em;}
+  h3{font-size:1rem;line-height:1.4;letter-spacing:-.015em;margin:0!important;font-weight:650;}
+  .video-copy>p{font-size:.82rem;line-height:1.6;margin:.5rem 0 .7rem!important;color:var(--nb-muted-foreground);}
+  .video-links{display:flex;align-items:center;justify-content:space-between;gap:.5rem;font-size:.67rem;}.video-links>a{display:inline-flex;align-items:center;gap:.15rem;color:var(--nb-muted-foreground);padding:.25rem 0;text-decoration:none!important;}.video-links>a:hover{color:var(--nb-foreground);text-decoration:underline!important;}
+  .video-close{display:flex;align-items:center;justify-content:center;gap:.4rem;width:100%;margin-top:.7rem;padding:.45rem;border:1px solid var(--nb-border);border-radius:.4rem;color:var(--nb-foreground);background:var(--nb-muted);font-size:.7rem;cursor:pointer;}
+  .video-links>a:focus-visible,.video-close:focus-visible,.video-choice:focus-visible{outline:2px solid var(--nb-ring);outline-offset:3px;}
+  .choices-heading{font-size:.8rem;font-weight:600;margin:0 0 .8rem!important;}
+  .video-list{display:grid;gap:.7rem;list-style:none;padding:0!important;margin:0!important;}
+  .video-list>li{margin:0!important;padding:0!important;}
+  .video-choice{display:flex;align-items:center;gap:.75rem;padding:.6rem;border:1px solid var(--nb-border);border-radius:.7rem;text-decoration:none!important;color:var(--nb-foreground);background:var(--nb-card,var(--nb-background));}
+  .video-choice[aria-current]{border-color:var(--nb-foreground);background:var(--nb-muted);}
+  .video-choice:hover{background:var(--nb-muted);}
+  .video-choice img{display:block;flex:none;width:3.25rem;height:auto;aspect-ratio:9/16;border-radius:.3rem;margin:0!important;}
+  .choice-copy{flex:1;min-width:0;}
+  .choice-number{display:block;font-size:.65rem;color:var(--nb-muted-foreground);font-variant-numeric:tabular-nums;margin-bottom:.35rem;}
+  .choice-title{display:block;font-size:.85rem;font-weight:550;line-height:1.5;}
+  .gallery-hint{color:var(--nb-muted-foreground);font-size:.7rem;line-height:1.5;margin:.8rem 0 0!important;}
+  .gallery-reading{font-size:.88rem;line-height:1.7;}
+  .gallery-reading :global(details){border:1px solid var(--nb-border);border-radius:.6rem;margin:.7rem 0;padding:.8rem .95rem;}
+  .gallery-reading :global(summary){cursor:pointer;font-size:.82rem;font-weight:550;line-height:1.6;}.gallery-reading :global(summary:focus-visible){outline:2px solid var(--nb-ring);outline-offset:3px;border-radius:.2rem;}
+  .gallery-reading :global(details p){font-size:.85rem;line-height:1.8;margin:1rem 0 0;}
+  @container(min-width:580px){.video-layout{grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);}.video-stage{max-width:360px;margin-inline:0;}}
+  @media print{.video-layout{display:block;}.video-stage[hidden]{display:block!important;}.video-stage{max-width:none;break-inside:avoid;margin-bottom:1rem;}.video-frame,.video-close,.video-choices{display:none!important;}.video-links{display:block;}.gallery-reading :global(details){break-inside:avoid;}}
+</style>

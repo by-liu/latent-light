@@ -1,0 +1,130 @@
+{
+  "revision": 2,
+  "checked": "2026-10-10T15:45:39.761Z",
+  "site_page_sha256": "520d2aa5cbc16edd2f32fcf7d2b75bb798cac63490e1f504c65dc048aecbeef2",
+  "source_resources": {
+    "report": "https://arxiv.org/abs/2511.21631v1",
+    "hugging_face": "https://huggingface.co/Qwen/Qwen3-VL-8B-Instruct",
+    "checkpoint": "Qwen/Qwen3-VL-8B-Instruct"
+  },
+  "collection_checks": {
+    "site_validation": "106 tests, zero Astro diagnostics, build and all 43 docs lint passed.",
+    "browser_views": 81,
+    "model_benchmarks": "Not executed.",
+    "source_figures": "32 unique report assets; 33 placements; 48 total numbered collection figures. Rights retained per asset."
+  },
+  "viewports": [
+    {
+      "slug": "qwen3-vl",
+      "width": 1440,
+      "mode": "light",
+      "title": "Qwen3-VL",
+      "titleCount": 1,
+      "overflow": false,
+      "figures": [
+        {
+          "id": "figure-1",
+          "caption": "Figure 1. Visual input plus early depth connections. Original schematic,\nwith residual additions checked in the pinned implementation.12"
+        }
+      ],
+      "resources": [
+        {
+          "kind": "report",
+          "href": "https://arxiv.org/abs/2511.21631v1",
+          "label": "Technical reportRead the original research"
+        },
+        {
+          "kind": "model",
+          "href": "https://huggingface.co/Qwen/Qwen3-VL-8B-Instruct",
+          "label": "Hugging FaceQwen/Qwen3-VL-8B-Instruct"
+        }
+      ],
+      "visibleHashes": [],
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "missingImages": [],
+      "activeNav": [
+        {
+          "label": "Qwen3-VL",
+          "visible": true
+        }
+      ],
+      "panFrames": []
+    },
+    {
+      "slug": "qwen3-vl",
+      "width": 390,
+      "mode": "light",
+      "title": "Qwen3-VL",
+      "titleCount": 1,
+      "overflow": false,
+      "figures": [
+        {
+          "id": "figure-1",
+          "caption": "Figure 1. Visual input plus early depth connections. Original schematic,\nwith residual additions checked in the pinned implementation.12"
+        }
+      ],
+      "resources": [
+        {
+          "kind": "report",
+          "href": "https://arxiv.org/abs/2511.21631v1",
+          "label": "Technical reportRead the original research"
+        },
+        {
+          "kind": "model",
+          "href": "https://huggingface.co/Qwen/Qwen3-VL-8B-Instruct",
+          "label": "Hugging FaceQwen/Qwen3-VL-8B-Instruct"
+        }
+      ],
+      "visibleHashes": [],
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "missingImages": [],
+      "activeNav": [
+        {
+          "label": "Qwen3-VL",
+          "visible": false
+        }
+      ],
+      "panFrames": []
+    },
+    {
+      "slug": "qwen3-vl",
+      "width": 320,
+      "mode": "dark",
+      "title": "Qwen3-VL",
+      "titleCount": 1,
+      "overflow": false,
+      "figures": [
+        {
+          "id": "figure-1",
+          "caption": "Figure 1. Visual input plus early depth connections. Original schematic,\nwith residual additions checked in the pinned implementation.12"
+        }
+      ],
+      "resources": [
+        {
+          "kind": "report",
+          "href": "https://arxiv.org/abs/2511.21631v1",
+          "label": "Technical reportRead the original research"
+        },
+        {
+          "kind": "model",
+          "href": "https://huggingface.co/Qwen/Qwen3-VL-8B-Instruct",
+          "label": "Hugging FaceQwen/Qwen3-VL-8B-Instruct"
+        }
+      ],
+      "visibleHashes": [],
+      "referenceHeadings": 1,
+      "brokenAnchors": [],
+      "missingImages": [],
+      "activeNav": [
+        {
+          "label": "Qwen3-VL",
+          "visible": false
+        }
+      ],
+      "panFrames": []
+    }
+  ],
+  "manual_review": "All 48 figure renders inspected as contact sheets; source figure completeness, labels and supplemental diagrams reviewed. Dense focus view and native dark diagrams inspected separately."
+}

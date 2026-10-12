@@ -1,0 +1,4 @@
+interface:
+  display_name: "Latent Light Deep Research"
+  short_description: "Rigorous research and polished site pages"
+  default_prompt: "Use $latent-light-deep-research to investigate this topic and create a clear, well-presented Latent Light page with sources and purposeful visuals."

@@ -1,0 +1,222 @@
+---
+import {readArchitectureAtlas} from '../../../plugins/architecture-atlas.mjs';
+interface Props {id: string; kind: string;}
+const {id, kind} = Astro.props;
+const atlas = readArchitectureAtlas(kind);
+const grid = (n: number) => Array.from({length: n * n}, (_, i) => ({x: i % n, y: Math.floor(i / n)}));
+---
+
+<figure id={id} class:list={['architecture-atlas', 'atlas-' + kind]} aria-labelledby={id + '-title'}>
+  <div class="atlas-heading"><span class="atlas-tag">Mechanism map</span><strong id={id + '-title'}>{atlas.title}</strong></div>
+  <div class="atlas-panels">
+    {atlas.panels.map((panel: {label: string; drawing: string; detail: string}, index: number) => {
+      const arrow = id + '-arrow-' + index;
+      const to = 'url(#' + arrow + ')';
+      return <section class="atlas-panel">
+        <h3>{panel.label}</h3>
+        <svg viewBox={panel.drawing === 'gate' ? '0 0 300 285' : '0 0 300 190'} aria-hidden="true" focusable="false">
+          <defs><marker id={arrow} markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0 0L6 3L0 6Z" class="arrow-fill" /></marker></defs>
+
+          {panel.drawing === 'block' && <g>
+            <path class="edge" d="M150 23V48M150 88V108M150 148V170" marker-end={to}/>
+            <path class="edge bypass" d="M150 34H54V96H150M150 96H54V156H150"/>
+            <rect class="blue" x="84" y="48" width="132" height="40" rx="8"/>
+            <rect class="violet" x="84" y="108" width="132" height="40" rx="8"/>
+          </g>}
+          {panel.drawing === 'axes' && <g>
+            <circle class="core" cx="150" cy="95" r="30"/>
+            <path class="edge" d="M120 95H69M180 95H231M150 65V35M150 125V155"/>
+            <circle class="blue" cx="50" cy="95" r="19"/><circle class="violet" cx="250" cy="95" r="19"/>
+            <circle class="teal" cx="150" cy="24" r="17"/><circle class="amber" cx="150" cy="167" r="17"/>
+          </g>}
+          {panel.drawing === 'report' && <g>
+            <rect class="core" x="82" y="17" width="135" height="154" rx="8"/>
+            <path class="thin" d="M101 42H195M101 54H171M101 138H195M101 151H182"/>
+            <rect class="blue" x="102" y="72" width="38" height="42" rx="5"/>
+            <path class="edge" d="M140 94H157" marker-end={to}/>
+            <rect class="violet" x="159" y="72" width="36" height="42" rx="5"/>
+            <circle class="teal" cx="221" cy="141" r="27"/><path class="check" d="M208 141L217 150L237 132"/>
+          </g>}
+          {panel.drawing === 'tokens' && <g>
+            {[36,93,150,207,264].map((x, i) => <g><rect class:list={['tile', i === 4 ? 'blue' : 'core']} x={x-18} y="126" width="36" height="30" rx="5"/><text class="small" x={x} y="146">{i+1}</text></g>)}
+            {[36,93,150,207].map(x => <path class="edge" d={'M264 123Q' + x + ' 21 ' + x + ' 121'} marker-end={to}/>)}
+            <text class="muted" x="150" y="30">Read earlier positions</text>
+          </g>}
+          {panel.drawing === 'experts' && <g>
+            <rect class="core" x="113" y="13" width="74" height="32" rx="6"/><text x="150" y="34">Token</text>
+            <path class="edge" d="M150 45V64M150 94L56 125M150 94L245 125" marker-end={to}/>
+            <rect class="violet" x="96" y="64" width="108" height="30" rx="6"/><text x="150" y="85">Router</text>
+            {[26,121,216].map((x,i) => <g><rect class:list={[i === 1 ? 'inactive' : 'violet']} x={x} y="127" width="58" height="36" rx="6"/><text class="small" x={x+29} y="150">{'E'+(i+1)}</text></g>)}
+          </g>}
+          {panel.drawing === 'depth' && <g>
+            {[25,77,129].map((y,i) => <g><rect class:list={[i===1?'violet':'core']} x="100" y={y} width="120" height="32" rx="6"/><text x="160" y={y+22}>{'Layer '+(i+1)}</text></g>)}
+            <path class="edge" d="M160 57V76M160 109V128" marker-end={to}/>
+            <path class="edge bypass" d="M100 41H55V145H100" marker-end={to}/>
+            <text class="small muted" x="150" y="179">Earlier → later</text>
+          </g>}
+          {panel.drawing === 'patches' && <g>
+            {grid(4).map(cell => <rect class:list={[cell.x<2?'blue':'teal']} x={28+cell.x*19} y={43+cell.y*19} width="16" height="16" rx="2"/>)}
+            <path class="edge" d="M110 81H143" marker-end={to}/>
+            <rect class="core" x="146" y="51" width="128" height="59" rx="8"/><text x="210" y="76">Visual</text><text x="210" y="97">interface</text>
+            <text class="small muted" x="68" y="149">Pixels / patches</text><text class="small muted" x="210" y="149">Language features</text>
+          </g>}
+          {(panel.drawing === 'history' || panel.drawing === 'latent' || panel.drawing === 'sparse') && <g>
+            {[28,63,98,133].map((y,i) => <g>
+              <text class="small muted" x="25" y={y+17}>{'t'+(i+1)}</text>
+              {Array.from({length:panel.drawing==='latent'?2:6},(_,j) => <rect class:list={[(panel.drawing==='sparse' && (i===1||i===3))?'blue':panel.drawing==='latent'?'teal':'core']} x={52+j*32} y={y} width="27" height="23" rx="4"/>)}
+            </g>)}
+            <path class="edge" d="M270 30V157" marker-end={to}/>
+            <text class="small muted" x="150" y="185">{panel.drawing==='latent'?'Latent + positional key':panel.drawing==='sparse'?'Blue rows: selected reads':'More positions → more state'}</text>
+          </g>}
+          {panel.drawing === 'state' && <g>
+            {grid(4).map(cell => <rect class:list={[cell.y===1?'teal':'core']} x={125+cell.x*25} y={25+cell.y*25} width="21" height="21" rx="3"/>)}
+            <rect class="blue" x="18" y="50" width="67" height="36" rx="7"/><text class="small" x="51" y="72">Token</text>
+            <path class="edge" d="M85 68H119" marker-end={to}/>
+            <path class="edge" d="M225 79Q280 79 260 135H153Q125 135 125 123" marker-end={to}/>
+            <text class="small muted" x="150" y="178">Update the same state</text>
+          </g>}
+          {(panel.drawing === 'rotation-a' || panel.drawing === 'rotation-b') && <g>
+            <circle class="rotation-ring" cx="150" cy="96" r="64"/>
+            <path class="thin" d="M66 96H234M150 14V178"/>
+            <path class="edge vector blue-line" d={panel.drawing==='rotation-a'?'M150 96L195.3 50.7':'M150 96V32'} marker-end={to}/>
+            <path class="edge vector violet-line" d={panel.drawing==='rotation-a'?'M150 96V32':'M150 96L104.7 50.7'} marker-end={to}/>
+            <path class="angle" d={panel.drawing==='rotation-a'?'M150 64A32 32 0 0 1 172.6 73.4':'M127.4 73.4A32 32 0 0 1 150 64'}/>
+            <text class="small" x="181" y="89">45°</text>
+            <text class="small blue-text" x={panel.drawing==='rotation-a'?226:174} y={panel.drawing==='rotation-a'?48:28}>q</text>
+            <text class="small violet-text" x={panel.drawing==='rotation-a'?128:81} y={panel.drawing==='rotation-a'?29:44}>k</text>
+            <text class="small muted" x="150" y="180">Same relative offset</text>
+          </g>}
+          {panel.drawing === 'gate' && <g>
+            <rect class="core" x="117" y="4" width="66" height="30" rx="6"/><text x="150" y="25">x · D</text>
+            <path class="edge" d="M150 34V45H70V62" marker-end={to}/>
+            <path class="edge" d="M150 45H230V62" marker-end={to}/>
+            <rect class="violet" x="22" y="64" width="96" height="35" rx="6"/><text x="70" y="87">Wg · D → F</text>
+            <rect class="blue" x="182" y="64" width="96" height="35" rx="6"/><text x="230" y="87">Wu · D → F</text>
+            <path class="edge" d="M70 99V115" marker-end={to}/>
+            <path class="edge" d="M230 99V154H173" marker-end={to}/>
+            <path class="edge" d="M70 147V154H127" marker-end={to}/>
+            <rect class="violet" x="29" y="116" width="82" height="30" rx="6"/><text x="70" y="137">SiLU</text>
+            <circle class="core" cx="150" cy="154" r="20"/><text class="operator" x="150" y="160">×</text>
+            <path class="edge" d="M150 175V192" marker-end={to}/>
+            <path class="edge" d="M150 227V250" marker-end={to}/>
+            <rect class="teal" x="87" y="194" width="126" height="33" rx="6"/><text x="150" y="216">Wd · F → D</text>
+            <text x="150" y="272">Updated features · D</text>
+          </g>}
+          {(panel.drawing === 'recurrent-hybrid' || panel.drawing === 'local-hybrid') && <g>
+            {Array.from({length:panel.drawing==='recurrent-hybrid'?4:6},(_,i) => {
+              const n=panel.drawing==='recurrent-hybrid'?4:6;
+              const w=240/n;
+              return <g><rect class:list={[i===n-1?'violet':'teal']} x={30+i*w} y="30" width={w-8} height="43" rx="6"/><text class="small" x={30+i*w+(w-8)/2} y="56">{i===n-1?'G':n===4?'R':'L'}</text></g>;
+            })}
+            <path class="edge" d="M30 86H266" marker-end={to}/>
+            <rect class="teal" x="29" y="109" width="97" height="44" rx="6"/><text class="small" x="77" y="136">{panel.drawing==='recurrent-hybrid'?'State':'Window'}</text>
+            <rect class="violet" x="173" y="109" width="97" height="44" rx="6"/><text class="small" x="221" y="136">Full history</text>
+            <text class="small muted" x="150" y="183">Pattern repeats through depth</text>
+          </g>}
+          {panel.drawing === 'residual' && <g>
+            <rect class="core" x="18" y="75" width="50" height="32" rx="6"/><text x="43" y="97">x</text>
+            <path class="edge" d="M68 91H210M77 91V35H147M185 54V91H211" marker-end={to}/>
+            <rect class="violet" x="148" y="18" width="75" height="36" rx="7"/><text x="185" y="41">F(x)</text>
+            <circle class="core" cx="231" cy="91" r="19"/><text class="operator" x="231" y="98">+</text>
+            <path class="edge" d="M250 91H283" marker-end={to}/><text class="small muted" x="150" y="158">Bypass + new update</text>
+          </g>}
+          {panel.drawing === 'multistream' && <g>
+            {[42,86,130].map(y => <g><path class="edge teal-line" d={'M20 '+y+'H94M204 '+y+'H280'} marker-end={to}/></g>)}
+            <rect class="core" x="95" y="21" width="108" height="129" rx="9"/>
+            <text class="small" x="149" y="45">Read</text><text class="small" x="149" y="93">Mix bypass</text><text class="small" x="149" y="135">Write update</text>
+            <rect class="violet" x="221" y="10" width="56" height="30" rx="6"/><text class="small" x="249" y="30">F</text>
+            <path class="edge" d="M177 45V25H219M249 40V161H173V148" marker-end={to}/>
+            <text class="small muted" x="149" y="184">Several streams, one sublayer</text>
+          </g>}
+          {panel.drawing === 'depth-attention' && <g>
+            {[20,76,132].map((y,i) => <g><rect class="core" x="23" y={y} width="76" height="32" rx="5"/><text class="small" x="61" y={y+22}>{'Source '+(i+1)}</text><path class="edge" d={'M99 '+(y+16)+'L163 92'} marker-end={to}/></g>)}
+            <circle class="violet" cx="184" cy="92" r="20"/><text class="operator" x="184" y="98">Σ</text>
+            <path class="edge" d="M204 92H228" marker-end={to}/>
+            <rect class="teal" x="230" y="73" width="53" height="38" rx="6"/><text x="256" y="97">F</text>
+            <text class="small muted" x="188" y="155">Learned depth weights</text>
+          </g>}
+          {panel.drawing === 'gated-depth' && <g>
+            {[32,68,104,140].map(y => <g><path class="edge teal-line" d={'M20 '+y+'H71M227 '+y+'H280'} marker-end={to}/><circle class="blue" cx="82" cy={y} r="11"/><circle class="violet" cx="217" cy={y} r="11"/><path class="edge" d={'M93 '+y+'L132 84M167 84L206 '+y} marker-end={to}/></g>)}
+            <rect class="core" x="132" y="65" width="36" height="38" rx="6"/><text x="150" y="90">F</text>
+            <text class="small blue-text" x="82" y="168">Read gates</text><text class="small violet-text" x="220" y="168">Write gates</text>
+            <text class="tiny muted" x="150" y="185">Bypass paths omitted</text>
+          </g>}
+          {panel.drawing === 'contrastive' && <g>
+            <rect class="blue" x="25" y="25" width="93" height="33" rx="6"/><text x="71" y="47">Image</text>
+            <rect class="violet" x="182" y="25" width="93" height="33" rx="6"/><text x="228" y="47">Text</text>
+            <path class="edge" d="M71 58V94M228 58V94" marker-end={to}/>
+            <circle class="blue" cx="71" cy="113" r="17"/><circle class="violet" cx="228" cy="113" r="17"/>
+            <path class="edge" d="M90 113H208" marker-end={to}/>
+            <text class="small muted" x="150" y="166">Compare embeddings</text>
+          </g>}
+          {(panel.drawing === 'queries' || panel.drawing === 'projection') && <g>
+            {grid(4).map(cell => <rect class="blue" x={30+cell.x*19} y={13+cell.y*19} width="16" height="16" rx="2"/>)}
+            <path class="edge" d="M105 52H158" marker-end={to}/>
+            {panel.drawing==='queries'?<g>{[173,213,253].map(x=><circle class="violet" cx={x} cy="52" r="11"/>)}</g>:<rect class="violet" x="161" y="31" width="115" height="42" rx="6"/>}
+            {panel.drawing==='projection'&&<text class="small" x="218" y="57">Projection</text>}
+            <path class="edge" d="M219 83V112" marker-end={to}/>
+            <rect class="teal" x="142" y="116" width="138" height="36" rx="7"/><text class="small" x="211" y="139">Language input</text>
+            <text class="small muted" x="71" y="137">Vision features</text>
+          </g>}
+          {panel.drawing === 'injection' && <g>
+            {[21,78,135].map((y,i) => <g><rect class="blue" x="20" y={y} width="84" height="30" rx="5"/><text class="small" x="62" y={y+21}>{'ViT '+['a','b','c'][i]}</text><rect class="teal" x="190" y={y} width="89" height="30" rx="5"/><text class="small" x="234" y={y+21}>{'LLM '+['a','b','c'][i]}</text></g>)}
+            <path class="edge" d="M62 51V76M62 108V133M234 51V76M234 108V133" marker-end={to}/>
+            {[36,93,150].map(y=><path class="edge violet-line" d={'M106 '+y+'H185'} marker-end={to}/>)}
+            <text class="tiny muted" x="150" y="186">Selected depths; input route omitted</text>
+          </g>}
+          {(panel.drawing === 'merge-small' || panel.drawing === 'merge-large') && <g>
+            {grid(panel.drawing==='merge-small'?4:8).map(cell=>{
+              const n=panel.drawing==='merge-small'?4:8, w=96/n;
+              return <rect class:list={[Math.floor(cell.x/2)%2===Math.floor(cell.y/2)%2?'blue':'teal']} x={20+cell.x*w} y={34+cell.y*w} width={w-2} height={w-2} rx="2"/>;
+            })}
+            <path class="edge" d="M126 83H169" marker-end={to}/>
+            {grid(panel.drawing==='merge-small'?2:4).map(cell=>{
+              const n=panel.drawing==='merge-small'?2:4,w=96/n;
+              return <rect class="violet" x={182+cell.x*w} y={34+cell.y*w} width={w-3} height={w-3} rx="4"/>;
+            })}
+            <text class="small" x="68" y="158">{panel.drawing==='merge-small'?'16 patches':'64 patches'}</text>
+            <text class="small" x="230" y="158">{panel.drawing==='merge-small'?'4 tokens':'16 tokens'}</text>
+            <text class="small muted" x="149" y="185">Merge neighboring 2 × 2 features</text>
+          </g>}
+          {panel.drawing === 'paired' && <g>
+            <rect class="core" x="70" y="17" width="160" height="34" rx="6"/><text class="small" x="150" y="39">Shared task and budget</text>
+            <path class="edge" d="M150 51V66H74V87M150 66H226V87" marker-end={to}/>
+            <rect class="blue" x="22" y="90" width="106" height="42" rx="7"/><text x="75" y="116">Baseline</text>
+            <rect class="violet" x="173" y="90" width="106" height="42" rx="7"/><text x="226" y="116">Candidate</text>
+            <text class="small muted" x="150" y="174">One declared change</text>
+          </g>}
+          {panel.drawing === 'metrics' && <g>
+            {['Quality','Latency','State','Weights'].map((label,i)=><g>
+              <rect class:list={[i===0?'blue':i===1?'violet':i===2?'teal':'amber']} x={22+(i%2)*143} y={24+Math.floor(i/2)*69} width="112" height="49" rx="8"/>
+              <text x={78+(i%2)*143} y={54+Math.floor(i/2)*69}>{label}</text>
+            </g>)}
+            <text class="small muted" x="150" y="180">No single score replaces these</text>
+          </g>}
+        </svg>
+        <p>{panel.detail}</p>
+      </section>;
+    })}
+  </div>
+  <p class="atlas-note">{atlas.note}</p>
+  <figcaption><slot /></figcaption>
+</figure>
+
+<style>
+  .architecture-atlas{--atlas-blue:#266fc2;--atlas-violet:#7453ad;--atlas-teal:#16786e;--atlas-amber:#986522;container-type:inline-size;container-name:atlas;min-width:0;margin:1.8rem 0;border:1px solid var(--nb-border);border-radius:1rem;padding:1.15rem;background:linear-gradient(140deg,color-mix(in srgb,var(--atlas-blue) 4%,var(--nb-background)),var(--nb-background) 55%);color:var(--nb-foreground);}
+  :global(html[data-mode='dark']) .architecture-atlas{--atlas-blue:#7eaff0;--atlas-violet:#bea5e4;--atlas-teal:#72c5b6;--atlas-amber:#d5b074;}
+  .atlas-heading{display:grid;gap:.35rem;margin-bottom:1.2rem;}.atlas-heading strong{font-size:1.1rem;line-height:1.4;}.atlas-tag{text-transform:uppercase;letter-spacing:.12em;color:var(--atlas-blue);font-size:.66rem;font-weight:650;}
+  .atlas-panels{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.9rem;}.atlas-panel{min-width:0;padding:1rem .8rem .8rem;border:1px solid var(--nb-border);border-radius:.7rem;background:var(--nb-background);}
+  .atlas-panel h3{font-size:.83rem!important;font-weight:650;line-height:1.45;margin:0!important;letter-spacing:0;}
+  .atlas-panel p{font-size:.8rem;line-height:1.6;margin:.7rem 0 0;color:var(--nb-muted-foreground);}
+  .atlas-panel svg{display:block;width:100%;max-width:22rem;height:auto;margin:.7rem auto .4rem;}
+  .atlas-reading .atlas-panels{grid-template-columns:1fr;}.atlas-reading .atlas-panel{display:grid;grid-template-columns:7rem 1fr;column-gap:1rem;align-items:center;}.atlas-reading .atlas-panel h3{grid-column:2;grid-row:1;}.atlas-reading .atlas-panel svg{grid-column:1;grid-row:1/3;margin:0;}.atlas-reading .atlas-panel p{grid-column:2;grid-row:2;margin-top:.3rem;}.atlas-gate .atlas-panels{grid-template-columns:1fr;max-width:27rem;margin:auto;}
+  svg text{fill:var(--nb-foreground);text-anchor:middle;font:15px system-ui,sans-serif;font-weight:500;}svg text.small{font-size:13px;}svg text.tiny{font-size:11px;}svg text.muted{fill:var(--nb-muted-foreground);}svg text.operator{font-size:22px;}svg text.blue-text{fill:var(--atlas-blue);}svg text.violet-text{fill:var(--atlas-violet);}
+  .core{fill:var(--nb-background);stroke:var(--nb-border);stroke-width:1.5;}.blue{fill:color-mix(in srgb,var(--atlas-blue) 10%,var(--nb-background));stroke:var(--atlas-blue);stroke-width:1.3;}.violet{fill:color-mix(in srgb,var(--atlas-violet) 10%,var(--nb-background));stroke:var(--atlas-violet);stroke-width:1.3;}.teal{fill:color-mix(in srgb,var(--atlas-teal) 10%,var(--nb-background));stroke:var(--atlas-teal);stroke-width:1.3;}.amber{fill:color-mix(in srgb,var(--atlas-amber) 10%,var(--nb-background));stroke:var(--atlas-amber);stroke-width:1.3;}
+  .inactive{fill:var(--nb-background);stroke:var(--nb-muted-foreground);stroke-dasharray:4 3;}.edge{fill:none;stroke:var(--nb-muted-foreground);stroke-width:1.6;}.thin{fill:none;stroke:var(--nb-border);stroke-width:1.3;}.bypass{stroke-dasharray:4 3;}.arrow-fill{fill:var(--nb-muted-foreground);}.check{fill:none;stroke:var(--atlas-teal);stroke-width:2.5;}
+  .blue-line{stroke:var(--atlas-blue);}.violet-line{stroke:var(--atlas-violet);}.teal-line{stroke:var(--atlas-teal);}.blue-text{fill:var(--atlas-blue);}.violet-text{fill:var(--atlas-violet);}.vector{stroke-width:2.5;}.rotation-ring{fill:color-mix(in srgb,var(--atlas-blue) 3%,var(--nb-background));stroke:var(--nb-border);stroke-width:1.5;}.angle{fill:none;stroke:var(--nb-muted-foreground);stroke-dasharray:3 2;stroke-width:1.5;}
+  .atlas-note{font-size:.8rem;line-height:1.65;color:var(--nb-muted-foreground);margin:1rem 0 0;}
+  figcaption{font-size:.8rem;line-height:1.6;color:var(--nb-muted-foreground);border-top:1px solid var(--nb-border);padding-top:.8rem;margin-top:1rem;}
+  @container atlas (max-width:480px){.atlas-panels,.atlas-reading .atlas-panels{grid-template-columns:1fr;}.atlas-reading svg{max-width:18rem;}.atlas-panel{padding:1rem;}.atlas-panel p{font-size:.85rem;}}
+  @media(max-width:520px){.architecture-atlas{padding:.85rem;}.atlas-panels,.atlas-reading .atlas-panels{grid-template-columns:1fr;}.atlas-panel{padding:1rem .65rem;}}
+  @media print{.architecture-atlas{break-inside:avoid;background:none;}.atlas-panels{grid-template-columns:1fr 1fr;}}
+</style>

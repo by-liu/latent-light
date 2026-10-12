@@ -1,44 +1,74 @@
 ---
 title: Emerging Directions
-description: A focused research agenda for architectural questions, controlled tests, and evidence that would change our conclusions.
-lastUpdated: 2026-10-05
+description: Turn architectural ideas into controlled questions, useful comparisons and revisable conclusions.
+lastUpdated: 2026-10-10
 ---
 
-The next useful architecture is not necessarily the next release.
-This page collects questions worth investigating and the evidence that would
-make their answers useful. It is an editorial research agenda, not a forecast
-or a claim that these questions are unsolved everywhere.
+import FocusCanvas from '../../../../components/FocusCanvas.astro';
+import ArchitectureAtlas from '../../../../components/architectures/ArchitectureAtlas.astro';
 
-## Questions and tests
+The next useful direction is a question whose answer would change our
+understanding. This page turns the model studies into a research agenda:
+what to change, what to hold fixed, what to measure, and what could falsify
+the explanation. It is not a forecast or a claim that these questions are
+unsolved everywhere.
 
-| Direction | Question to investigate | A useful controlled test |
-| --- | --- | --- |
-| [Memory](/architectures/evolution/attention-and-memory/) | Which facts need explicit history, and which can survive a state summary? | Vary dependency distance and repeated distractors; measure retrieval quality, state size, and decoding latency |
-| [Visual allocation](/architectures/evolution/multimodal-integration/) | Can the visual budget follow the evidence a question needs? | Compare fine detail tasks at matched image and inference budgets; include questions needing several regions |
-| [Feature computation](/architectures/evolution/ffns-and-experts/) | When do richer FFNs or sparse experts justify their complexity? | Match active compute and training budget; separately report total weights, routing, and communication costs |
-| [Position](/architectures/evolution/position-and-long-context/) | Which spatial and temporal relationships survive preprocessing? | Change sampling, resolution, and evidence position independently; test whether the answer still depends on the right evidence |
-| [Integration](/architectures/models/qwen3-vl/) | Where should visual features enter the decoder? | Hold encoder, data, and training budget fixed; ablate input only versus additional depth connections |
+## An idea is not yet a conclusion
 
-These are proposed tests, not experiments performed by Latent Light.
-They describe what to measure, not which model will win.
+<FocusCanvas size="diagram" label="Paired architectural comparison and separate outcome measurements">
+<ArchitectureAtlas kind="experiment" id="figure-1">
 
-## What would change our view?
+**Figure 1.** A shared contract, several outcomes, and visible failure cases. Experimental design proposed here; no measurements are shown.
 
-A promising result first enters as an attributed finding under its tested
-conditions. A broader recommendation needs relevant comparisons, enough
-implementation detail to inspect, and evidence beyond a favorable example.
-Negative results matter too: a gain that disappears when budgets are matched
-should change the explanation.
+</ArchitectureAtlas>
+</FocusCanvas>
 
-Separate a mechanism's plausibility from demonstrated usefulness.
-For a proprietary model, public disclosure and plausible reconstruction are
-different evidence. An unknown internal detail must not become a fact through
-analogy with another paper.
+Use [Figure 1](#figure-1) to define the comparison before reading the result.
+Architecture, data, optimizer, precision and policy learning often change
+together. A full model result establishes what that system achieved under
+its evaluation conditions. A controlled ablation is better evidence for
+which ingredient produced a particular effect.
 
-## Add a model when it teaches something
+## Questions worth testing
 
-A new [model study](/architectures/models/) earns its place by revealing
-a distinct mechanism, an instructive combination, or a clear implementation.
-Connect it to the existing design questions and revise any conclusion that
-its evidence challenges. A release announcement alone is not a reason to add
-another page.
+| Direction | One controlled change | What would make it useful? | Start with |
+| --- | --- | --- | --- |
+| Memory | Change recurrent/global ratio at a declared budget | Retrieval under distance and distractors, plus state and decoding cost | [Kimi Linear](/architectures/models/kimi-linear/), [MiniMax 01](/architectures/models/minimax-01/) |
+| Selected history | Change selector or block budget | Preserve tasks requiring several distant facts; count index overhead and cache | [GLM-5](/architectures/models/glm-5/), [MiniMax M3](/architectures/models/minimax-m3/) |
+| Capacity | Change expert width, count or sharing | Distinguish active work, total weights, communication and quality | [Mixtral](/architectures/models/mixtral/), [DeepSeek-V3](/architectures/models/deepseek-v3/) |
+| Depth | Change residual reads, writes or source granularity | Improve final behavior without unstable optimization or excessive traffic | [Kimi K3](/architectures/models/kimi-k3/), [Qwen3.8-Next](/architectures/models/qwen3-8-flash-next/) |
+| Visual evidence | Change resolution, merging or entry depth | Gains at matched visual and training budgets, including fine detail and conflicting evidence | [Qwen3-VL](/architectures/models/qwen3-vl/), [Gemma 3](/architectures/models/gemma-3/) |
+| Position and reach | Change scaling or sampling while controlling evidence | Preserve use of the right region, frame or distant fact, not only accepted length | [Qwen2.5 1M](/architectures/models/qwen2-5-1m/), [Qwen2.5-VL](/architectures/models/qwen2-5-vl/) |
+
+These are proposed comparisons. A matched active compute experiment and a
+matched total parameter experiment answer different questions; choose and
+state the contract rather than claim both were controlled.
+
+## Negative results are part of the map
+
+Qwen3.8-Next reports that a residual read shortcut can look acceptable in
+pretraining metrics yet degrade later quality.[^qwen] MiniMax's sparse
+attention report likewise shows that aggregate competitiveness does not mean
+every long context subtask improves.[^msa]
+
+Such evidence should narrow a claim. “Useful in this setup” is stronger
+scientifically than an unsupported “better in general.” A failed replication
+also needs its setup checked before declaring the mechanism false.
+
+## What would change these pages?
+
+A new study earns a place when it supplies a distinct mechanism, a useful
+combination, an inspectable implementation, or counterevidence to an existing
+explanation. Record the baseline, versions, task, budget and failure slices
+beside the result. Connect it to the relevant mechanism page.
+
+For a proprietary model, public disclosure and a plausible reconstruction
+remain different evidence. An unknown internal detail must not become fact
+by analogy with a released model.
+
+Selected examples rechecked October 10, 2026. No controlled experiments
+were performed here. Return to the [design map](/architectures/evolution/)
+or the [model catalog](/architectures/models/) to follow a specific question.
+
+[^qwen]: Qwen Team. [On the Design of Qwen3.8-Next Architecture](https://arxiv.org/html/2608.30320v1), 2026, section 2.2 and later-stage residual read ablations.
+[^msa]: MiniMax. [MiniMax Sparse Attention](https://arxiv.org/html/2606.13392v2), 2026, long context evaluation and continued pretraining comparisons.

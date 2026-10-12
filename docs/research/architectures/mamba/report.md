@@ -1,0 +1,227 @@
+---
+title: "Mamba"
+topic_id: "mamba"
+status: reviewed
+revision: 3
+updated: "2026-10-10"
+evidence_cutoff: "2026-10-10"
+audience: "Readers learning released LLM and VLM architecture and training"
+canonical_format: "markdown"
+---
+
+# Mamba
+
+## Executive answer
+
+[Technical report](https://arxiv.org/abs/2312.00752v2) · [Hugging Face: state-spaces/mamba-2.8b](https://huggingface.co/state-spaces/mamba-2.8b)
+
+Mamba asks whether a language model can choose what to remember without storing a separate key and value for every earlier token. Its answer is a selective state-space model: the current input controls how a recurrent state is updated and read. A hardware-aware scan makes that recurrent computation practical during training, while generation keeps a fixed-size state instead of a growing attention cache.[^1]
+
+## Visual overview
+
+Purposeful figures below cover the input contract, distinctive mechanism or bounded evidence; their captions identify provenance and scope.
+
+
+## Key findings
+
+- **Content-dependent memory.** Input-dependent step sizes, input projections, and readouts help the model preserve relevant information and ignore distractions.[^1]
+- **No attention in the original stack.** The model combines selective state-space mixing, a short convolution, gates, projections, normalization, and residual connections.[^1][^3]
+- **Parallel training, recurrent generation.** A fused scan avoids naively materializing the full expanded state history; one-token decoding updates persistent state.[^1][^3]
+- **An architectural alternative, not a free long-context guarantee.** Fixed state changes the memory contract, but the released language checkpoint was trained with 2,048-token sequences.[^1]
+
+## Detailed analysis
+
+## Scope and scale
+
+This study covers **original Mamba**, published in December 2023, and the released **mamba-2.8b** base language checkpoint. Mamba-2 and later hybrids are different architectures and are not substituted into this explanation.[^1][^2]
+
+| Item | Original Mamba 2.8B |
+| --- | --- |
+| Parameters | Approximately 2.8B |
+| Stack | 64 blocks; model width 2,560 |
+| Mixer dimensions | Inner width 5,120; state size 16; short convolution width 4 in inspected Mamba1 defaults |
+| Pretraining | 300B tokens from the Pile; GPT-NeoX tokenizer |
+| Training sequence length | 2,048 tokens |
+| Training compute | Total FLOPs and GPU-hour budget not disclosed in the inspected report |
+| Generation state | Fixed per-layer convolution and SSM states, independent of sequence length |
+| Availability | Base checkpoint and Apache 2.0 implementation; no original assistant recipe established here |
+
+The checkpoint config pins layer count and width and leaves its SSM settings empty; the inspected Mamba1 implementation supplies expansion 2, state size 16, and convolution width 4. These are traced defaults, not values written explicitly in the checkpoint JSON. Code inspection did not execute weights or measure serving performance.[^2][^3][^4]
+
+## Motivation: remember selectively, not by position alone
+
+A fixed linear state-space model applies the same transition rule at every step. That can be efficient, but it struggles when relevance depends on content. A useful token may arrive between many irrelevant ones; the model must decide when to write memory, preserve it, and read it back. The paper uses selective copying and induction tasks to make this distinction concrete.[^1]
+
+Mamba makes parts of the recurrence depend on the current input. It does not compare the current query with every stored token, as attention does. Instead, it chooses how to compress the stream into state.
+
+
+
+
+<!-- visual-id: V201 -->
+![Fixed copying uses predictable gaps, selective copying places relevant A B C D tokens among variable distractors, and induction requires recalling the value that followed a repeated key.](../../../../public/figures/model-studies/mamba/selective-copying.png)
+
+
+
+**Figure 1.** Content changes what should be remembered. Reproduced from Gu and Dao, Figure 2; figure crop, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).[^1]
+
+
+
+In Figure 1, fixed copying can use predictable offsets. Selective copying must preserve relevant tokens despite varying gaps. Induction must recognize a repeated key and recall what followed it. These are controlled toy tasks that motivate selectivity, not demonstrations that a released language model remembers everything.[^1]
+
+## Architecture: one mixer, two branches
+
+
+
+
+<!-- visual-id: V101 -->
+![The Mamba block combines a convolution and state space path with a parallel activated gate, then multiplies the branches and projects back. H3 and gated MLP panels show its design ancestry.](../../../../public/figures/model-studies/mamba/block-architecture.png)
+
+
+
+**Figure 2.** Mamba combines sequence mixing with a parallel gate. Reproduced from Gu and Dao, Figure 3; figure crop, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).[^1]
+
+
+
+Read Figure 2 upward from the input. Mamba’s main branch contains convolution, activation and an SSM; the other branch supplies a gate. Their outputs multiply before the final projection. The black box groups the mixer, not the residual skip, which the surrounding language block supplies.
+
+## The selective recurrence
+
+An explanatory discrete recurrence is:[^1]
+
+$$
+h_t=\overline{A}_t h_{t-1}+\overline{B}_t x_t,\qquad y_t=C_t h_t+D x_t
+\tag{1}
+$$
+
+The bars denote discretized transition and input coefficients. The learned underlying A is fixed across tokens; the input-dependent step size Δ_t changes its effective discrete transition. B_t controls what enters the state, and C_t controls what is read out. D is a direct skip term. This compact equation suppresses channel dimensions and the surrounding block gate.[^1][^3]
+
+Intuitively, Δ_t controls how strongly the system updates or forgets, B_t controls writing, and C_t controls reading. These are learned functions of features, not hard rules that identify “important” words perfectly. The state has multiple coordinates per channel, which gives it more representational capacity than a single scalar gate.[^1]
+
+
+
+
+<!-- visual-id: V102 -->
+![Current features project to input dependent B, C and delta. Delta discretizes the fixed underlying A transition; the expanded channel state carries history from h previous to h current, and C reads the output.](../../../../public/figures/model-studies/mamba/selective-state.png)
+
+
+
+**Figure 3.** The input controls writing, updating and reading state. Reproduced from Gu and Dao, Figure 1; figure crop, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).[^1]
+
+
+
+In Figure 3, the blue projections make B, C and Δ depend on the current input; A remains a learned underlying transition. Orange paths carry the expanded recurrent state. The GPU memory inset motivates computing that large state efficiently on chip instead of storing its full history in HBM.
+
+The selective state diagram shows the recurrence, not the complete block. Its Δ update and its recurrent readout are distinct from the surrounding multiplicative gate.[^1][^3]
+
+<details>
+<summary>The selective tensors and a discretization nuance</summary>
+
+For batch B and sequence T, B_t and C_t are projected to B × T × N and shared across inner channels; Δ has shape B × T × d_inner. A has shape d_inner × N, while the recurrent state has shape B × d_inner × N. Selection is not a fresh dense transition matrix for every channel and token.[^1][^3]
+
+The inspected Mamba1 default uses a low-rank step-size projection with rank ceil(d_model / 16), giving 160 for width 2,560. A is parameterized as negative exp(A_log), and a softplus makes Δ positive. Consequently exp(ΔA) supplies a channel-wise decaying transition; content changes its effective rate.[^3]
+
+The report introduces zero-order-hold discretization, where the input coefficient is A⁻¹(exp(ΔA) − I)B. The inspected one-token fallback instead multiplies the input by ΔB while retaining exp(ΔA) for the state transition. Do not label that concrete code path an exact implementation of the paper's displayed input discretization. This distinction does not by itself establish a quality difference.[^1][^3]
+
+</details>
+
+## The block is more than the state equation
+
+The inspected Mamba1 block projects a width-d input into two branches at expanded width 2d. One branch passes through a depthwise causal convolution and SiLU activation. From those features, linear projections produce Δ, B, and C. The SSM output is gated with SiLU applied to the other branch, then projected back to width d.[^3]
+
+The language stack wraps this mixer with normalization and residual addition. The released config enables RMSNorm, a fused add-and-normalize path, and residual accumulation in FP32. The original model has neither attention blocks nor separate conventional FFN blocks, but it still contains substantial dense projection computation.[^2][^4]
+
+“Linear time” therefore describes scaling with sequence length at fixed model width and state size. It does not mean there are no matrix multiplications or that increasing width is cheap.
+
+## Hardware-aware scan: recurrence without a serial training bottleneck
+
+Input dependence breaks the time-invariant convolution shortcut used by earlier SSMs. However, the affine state updates can be composed associatively, enabling a parallel scan. The implementation fuses parameter processing, discretization, and scanning so that expanded state is handled in fast on-chip memory rather than written in full to GPU high-bandwidth memory.[^1]
+
+The critical avoided tensor has shape roughly batch × sequence × channels × state size. Materializing that history would make the state expansion expensive. The fused operation also recomputes intermediate state during backward instead of storing every expanded activation.[^1]
+
+For a diagonal transition, write one update as F(h) = a ⊙ h + b. Two known-token updates compose as:[^1]
+
+$$
+(a_2,b_2)\circ(a_1,b_1)=\left(a_2\odot a_1,\;a_2\odot b_1+b_2\right)
+\tag{2}
+$$
+
+Equation (2) is an explanatory derivation of the associative affine composition used by a scan. Even though coefficients depend on each token, the sequence of coefficients is available when all training or prompt inputs are known. A parallel prefix algorithm can compose them without a Python loop over tokens. Autoregressive generation is still sequential because the next input token has not yet been generated.[^1]
+
+This is a joint algorithm and systems contribution. An efficient recurrence on paper can still be slow if its implementation repeatedly moves large states through memory.
+
+## Training: a controlled language-model comparison
+
+The released language-model experiments train on 300B Pile tokens using the GPT-NeoX tokenizer. Mamba and the compared Pythia models use 2,048-token sequences; RWKV uses 1,024. The report distinguishes these downstream checkpoints from smaller scaling-law experiments that use the GPT-2 tokenizer and shorter token budgets.[^1]
+
+The recipe uses next-token language modeling with AdamW, gradient clipping, weight decay, no dropout, and a warmed-up cosine schedule. Its improved recipe includes RMSNorm, reduced linear biases, and optimizer settings inspired by contemporary Transformer training. Architecture and recipe both matter, so comparisons to a weaker baseline are not a pure mixer ablation.[^1]
+
+No SFT, preference optimization, or online RL pipeline is established for the selected base checkpoint. A fluent continuation is not the same product contract as an instruction-following assistant.
+
+## Inference: fixed state is a different memory contract
+
+Prompt processing runs the scan and keeps its final SSM state, plus the recent inputs needed by the short convolution. Afterward, the inspected one-token step updates both in place. The cache contains no separate representation for every earlier token.[^3]
+
+Under equal stored precision, its raw state footprint is approximately:[^3]
+
+$$
+M_{\mathrm{state}}\approx BLd_{\mathrm{inner}}(N+K)b
+\tag{3}
+$$
+
+N is SSM state size, K is convolution width, and b is bytes per stored value. For batch 1, 64 layers, inner width 5,120, N = 16, K = 4, and two-byte state values, this gives **12.5 MiB** of raw state tensors. This is a derived estimate, not measured VRAM. It excludes weights, activations, temporary buffers, and runtime overhead; implementations may use different precisions for different states.[^2][^3]
+
+The benefit is stable state size as history grows. The tradeoff is compression: an earlier detail must survive in that state. There is no attention operation that can directly revisit an arbitrary earlier token. Supporting more steps does not prove accurate recall over an arbitrarily long conversation.
+
+## Evidence: what the paper actually establishes
+
+### Released language checkpoints
+
+On the paper’s six-task zero-shot accuracy average, Mamba 2.8B scores **63.3**, compared with Pythia 2.8B at **59.1**. Its Pile validation perplexity is 6.22 versus 6.73, under the same dataset and tokenizer. The average covers LAMBADA, HellaSwag, PIQA, ARC-Easy, ARC-Challenge, and WinoGrande with the specified metric conventions.[^1]
+
+These are author-reported historical results, not a current ranking or our replication. They show that the original alternative was competitive in this regime; they do not establish broad assistant parity with later instruction-tuned LLMs.
+
+### Controlled mechanism tests
+
+At roughly 350M scale and Chinchilla-style token budgets, Table 7 changes which parameters are selective. Perplexity falls from 10.93 with none selective to 9.81 with only Δ selective and 8.71 with Δ, B, and C all selective. This is more direct evidence for selection than the full-checkpoint comparison, but it still belongs to the stated smaller experiment.[^1]
+
+### Speed depends on the exact experiment
+
+The headline 4–5× generation throughput comes from the report’s implementation comparison on an **A100 80GB PCIe GPU**, with a 2,048-token prompt, 128 generated tokens, and varying batch sizes. It compares Mamba 1.4B and an untrained 6.9B model with standard Hugging Face GPT-3-style Transformers of nearby sizes. It is not a measured speedup for this 2.8B checkpoint against a modern optimized inference engine.[^1]
+
+The million-token experiments concern synthetic tasks and other modalities under separate training setups. They are not evidence that the released 2.8B language model has a validated million-token instruction context.[^1]
+
+## Counterevidence and uncertainty
+
+The fixed state can lose information, particularly when a task needs exact retrieval from a long history. The original paper itself frames robust long-term behavior as an open direction. Serving efficiency depends on fused kernels, batch size, precision, and hardware. The historical throughput comparison does not isolate every modern backend choice. Full training compute and a complete reproducible optimization record for the selected checkpoint are not disclosed in the inspected report.[^1]
+
+The public repository now supports later Mamba generations; this study traces the Mamba1 class and original checkpoint rather than importing later claims. Weights were not run, so numeric memory estimates remain derivations and performance remains author-reported evidence.[^2][^3][^4]
+
+Selectivity is not equally beneficial in every modality. Appendix E.4 contrasts discrete language with more continuous audio and reports that fixed, time-invariant SSM behavior can remain useful for audio. The language results should not be generalized into “input dependence always wins.”[^1]
+
+## Implications
+
+**Choose a memory contract, not just a complexity slogan.** Attention preserves directly addressable history; a selective SSM compresses it into persistent state.
+
+**Co-design the mechanism and kernel.** Input-dependent recurrence becomes useful at scale only when memory movement is controlled.
+
+**Use controlled experiments for causal conclusions.** Selectivity ablations say more about the defining mechanism than a broad leaderboard comparison. Compare [Transformer foundations](/architectures/foundations/) for explicit attention, [Mistral 7B](/architectures/models/mistral-7b/) for bounded attention windows, and [Llama 3.1](/architectures/models/llama-3/) for GQA caches.
+
+## Sources
+
+[^1]: Gu and Dao. [Mamba: Linear-Time Sequence Modeling with Selective State Spaces](https://arxiv.org/abs/2312.00752v2). Sections 2–5, Tables 3 and 6–10, Appendices C to E, including affine scan and modality-specific limitations.
+[^2]: State Spaces. [mamba-2.8b configuration](https://huggingface.co/state-spaces/mamba-2.8b/blob/e886be8192cbb383b01559a3877dfd5e6bfb3e55/config.json). Pinned checkpoint; inspected October 10, 2026.
+[^3]: State Spaces. [Original Mamba mixer implementation](https://github.com/state-spaces/mamba/blob/e9594ce1c732d97440f0332fdc43170a2294dbfa/mamba_ssm/modules/mamba_simple.py); Mamba1 defaults, scan, one-token update, and cache allocation inspected.
+[^4]: State Spaces. [Language-model wrapper](https://github.com/state-spaces/mamba/blob/e9594ce1c732d97440f0332fdc43170a2294dbfa/mamba_ssm/models/mixer_seq_simple.py), same release; Mamba1 selection, RMSNorm, residual, vocabulary padding and output path inspected.
+[^5]: State Spaces. [Repository license](https://github.com/state-spaces/mamba/blob/e9594ce1c732d97440f0332fdc43170a2294dbfa/LICENSE) and [released checkpoint card](https://huggingface.co/state-spaces/mamba-2.8b/blob/e886be8192cbb383b01559a3877dfd5e6bfb3e55/README.md). Apache 2.0 license and checkpoint availability inspected.
+
+## Open questions and future research
+
+See coverage-audit.md for the mechanism-by-mechanism audit, exact source locators, justified omissions and remaining artifact-access gaps. No weights or runtime benchmarks were executed. Renewed rendered and export QA passed; see the revision 3 presentation record.
+
+## What changed in this revision
+
+Revision 3: Selective copying/induction motivation with original Figure 2; channel/state tensor contracts and low-rank Δ; report-versus-fallback discretization nuance; associative scan equation versus sequential generation; modality counterevidence. Earlier evidence and visual-review history remain in the ledgers.
+
+## Revision 3 presentation verification
+
+106 automated tests, zero Astro diagnostics, the static build and all 43 docs lint checks passed. The collection passed 81 fresh browser views; this page was checked at 1440px light, 390px light and 320px dark, with desktop focus, active family navigation, caption order, anchors, image decoding, resource cards and no page overflow. Complete source figures fit desktop, while narrow frames support keyboard panning and full-size access. Search and Markdown/MDX exports preserve citations, figures and source links. All 66 model figure renders were inspected, with full-size review of new dense diagrams. See state/presentation-qa.json for exact page checksums and evidence. No model benchmark was reproduced. Existing bundler and redirect warnings remain.

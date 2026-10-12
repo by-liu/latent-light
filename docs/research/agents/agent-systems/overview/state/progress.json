@@ -1,0 +1,49 @@
+{
+  "schema_version": 3,
+  "topic_id": "agent-systems-overview",
+  "status": "complete",
+  "coverage": {
+    "primary_sources": 5,
+    "verified_claims": 5,
+    "numbered_figures": 1,
+    "source_scope": "Selected sources, not an exhaustive community census.",
+    "visual_omission_reason": null
+  },
+  "open_questions": [
+    "Recheck mutable documentation and security defaults before future adoption decisions."
+  ],
+  "recommended_next_direction": "Current section-wide refactor and delivery authority is ../frontier-refactor; this workspace also preserves the first-edition claim history.",
+  "last_seen": "2026-10-12T02:47:04Z",
+  "output": {
+    "kind": "site-page",
+    "path": "src/content/docs/agents/index.mdx",
+    "status": "reviewed",
+    "revision": 3,
+    "updated": "2026-10-11",
+    "evidence_cutoff": "2026-10-11",
+    "audience": "Readers learning to build and evaluate agent systems"
+  },
+  "quality_gate": {
+    "evidence_verified": true,
+    "contradictions_reviewed": true,
+    "output_reviewed": true,
+    "visuals_reviewed": true
+  },
+  "delivery_checks": {
+    "validation": {
+      "status": "passed",
+      "method": "npm run validate: 48 deployment tests, 135 content tests, Astro 0 errors/warnings/hints, 84-page build and docs lint.",
+      "checked_at": "2026-10-12T02:46:39.392Z"
+    },
+    "rendering": {
+      "status": "passed",
+      "method": "Five current overview views: 1440/light+dark, 768/light, 390/light, 320/dark; two Focus views; manual screenshot review; all unique linked routes/anchors, keyboard navigation, reduced motion and no-JS checked.",
+      "checked_at": "2026-10-12T02:46:39.392Z"
+    },
+    "exports": {
+      "status": "passed",
+      "method": "Current overview Markdown/MDX: complete intent, harness, four loop steps, feedback, capabilities, controls, role definitions, all example/frontier links, caveat, figure anchor, caption and five references; no raw map JSON in Markdown.",
+      "checked_at": "2026-10-12T02:46:39.392Z"
+    }
+  }
+}

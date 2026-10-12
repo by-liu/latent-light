@@ -1,0 +1,44 @@
+{
+  "schema_version": 2,
+  "topic_id": "deepseek-r1-technical-deep-dive",
+  "status": "complete",
+  "coverage": {
+    "eligibility": "official technical report and public artifact confirmed",
+    "mechanisms": "Revision3: complete report and relevant appendices compared to study; targeted artifact paths checked; coverage-audit.md records mechanisms/training/inference/ablations and omissions.",
+    "artifacts": "pinned config, tokenizer metadata where relevant and license inspected",
+    "runtime": "not executed",
+    "adversarial_review": "Distinct revision3 check: source section/equation locators, count and cost units, causal ordering, input-prefix/reward/policy distinctions, source-art grants, future-versus-implemented systems and diagram text/arrow boundaries. Corrections documented in coverage-audit.md.",
+    "presentation": "Revision 3 checked at 1440px light, 390px light, 320px dark and desktop focus. Full desktop art, mobile keyboard pan, full-size access, family navigation, caption order, citations, equations, resources, images, no overflow, search, Markdown/MDX and agent manifests passed. All 66 model figure renders manually inspected. No model execution.",
+    "figure_rights": "Later peer reviewed Nature article explicitly licenses article images under CC BY 4.0 unless separately credited; Figure 2 has no exclusion. © The Author(s) 2025 retained through caption reference and notice. Full unaltered Figure2 crop, not January arXiv reuse."
+  },
+  "open_questions": [
+    "Which undisclosed recipe details materially affect reproduction? Runtime measurements and independent benchmark reproduction remain outside this source-based study."
+  ],
+  "recommended_next_direction": null,
+  "last_seen": "2026-10-10T17:36:51.557Z",
+  "quality_gate": {
+    "evidence_verified": true,
+    "contradictions_reviewed": true,
+    "report_reviewed": true,
+    "visuals_reviewed": true
+  },
+  "artifact_record": {
+    "github": {
+      "sha": "0cf78561f1d51c84a21b2190626b21116d5c68bb",
+      "date": "2025-04-09T05:36:23Z"
+    },
+    "huggingface": "56d4cbbb4d29f4355bab4b9a39ccb717a14ad5ad",
+    "report_url": "https://arxiv.org/pdf/2501.12948v1",
+    "pdf_sha256": "52d8ca3ac93e88cef9944e1fd03b0e04aec5954495a8250fb2fadf8fa20a4dad",
+    "archive": "Exact source PDFs retained unchanged under /tmp only; publication includes only inspected figure excerpts under their individual grants.",
+    "figure_editions": [
+      {
+        "url": "https://www.nature.com/articles/s41586-025-09422-z.pdf",
+        "locator": "Figure 2, journal page 635 / PDF page 3",
+        "license": "CC BY 4.0",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "pdf_sha256": "916fdaafc3b44143a9744481d079744f773d73d06372f82b1dba1076525927f2"
+      }
+    ]
+  }
+}

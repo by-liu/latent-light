@@ -1,0 +1,20 @@
+{
+  "canonical": "https://arxiv.org/abs/2302.13971v1",
+  "version": "v1",
+  "accessed": "2026-10-10",
+  "local_study_copy": "/tmp/latent-llama-paper.pdf",
+  "sha256": "2e663675ae36ad12adb2f5a05281bac2747ecf8d23d92bedd9f937a89fee7136",
+  "distribution": "Exact study PDFs remain outside public repository; selected figure crops distributed under a verified CC BY 4.0 grant with attribution.",
+  "figure_edition": {
+    "url": "https://arxiv.org/abs/2302.13971v1",
+    "pdf_url": "https://arxiv.org/pdf/2302.13971v1",
+    "local_study_copy": "/tmp/latent-llama-paper.pdf",
+    "sha256": "2e663675ae36ad12adb2f5a05281bac2747ecf8d23d92bedd9f937a89fee7136",
+    "reuse_grant": {
+      "status": "verified",
+      "value": "CC BY 4.0",
+      "url": "https://creativecommons.org/licenses/by/4.0/"
+    },
+    "grant_evidence": "The version-specific arXiv landing page links Rights to this article to CC BY 4.0."
+  }
+}
