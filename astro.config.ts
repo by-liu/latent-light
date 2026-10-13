@@ -9,6 +9,7 @@ import { referenceHeading } from './plugins/reference-heading.mjs';
 import { satteri } from '@astrojs/markdown-satteri';
 import { mathTypesetting, mathAsMarkdown } from './plugins/math-typesetting.mjs';
 import { modelFlowAsMarkdown } from './plugins/model-flow.mjs';
+import { sourceFigureAsMarkdown } from './plugins/source-figure.mjs';
 import { modelResourcesAsMarkdown } from './plugins/model-resources.mjs';
 import { architectureAtlasAsMarkdown } from './plugins/architecture-atlas.mjs';
 import { landscapeMapAsMarkdown } from './plugins/landscape-map.mjs';
@@ -135,6 +136,20 @@ const nimbusConfig = defineNimbusConfig({
             { label: "Broader Ecosystem", link: "/agents/ecosystem/" },
           ] },
         ] },
+        { label: "Edge AI", collapsed: true, items: [
+          { label: "Overview", link: "/edge-ai/" },
+          { label: "Foundations & Bottlenecks", link: "/edge-ai/foundations/" },
+          { label: "On Device Computing", link: "/edge-ai/on-device-computing/" },
+          { label: "Efficient Models", link: "/edge-ai/efficient-models/" },
+          { label: "Quantization & Compression", link: "/edge-ai/quantization-compression/" },
+          { label: "Training Small Models", link: "/edge-ai/training-small-models/" },
+          { label: "Efficient Inference", link: "/edge-ai/efficient-inference/" },
+          { label: "Runtimes & Compilers", link: "/edge-ai/runtimes-compilers/" },
+          { label: "Multimodal Workloads", link: "/edge-ai/multimodal/" },
+          { label: "Agents & Hybrid Systems", link: "/edge-ai/agents-hybrid-systems/" },
+          { label: "Evaluation & Profiling", link: "/edge-ai/evaluation-profiling/" },
+          { label: "Production & Product Design", link: "/edge-ai/production-product-design/" },
+        ] },
       ] },
       { label: "Human Capabilities", items: [
         { label: "High agency", link: "/human-capabilities/high-agency/" },
@@ -235,7 +250,7 @@ export default defineConfig({
         "nimbus/internal-link": ["error", {
           // Static download notices are files, not Nimbus page routes.
           // test:content verifies these narrow exceptions exist in public/.
-          ignore: ["/licenses/*.txt", "/figures/model-studies/*/{NOTICE,SOURCES}.md"],
+          ignore: ["/licenses/*.txt", "/figures/model-studies/*/{NOTICE,SOURCES}.md", "/figures/edge-ai/*/{NOTICE,SOURCES}.md"],
         }],
       },
       // Use the same native Sätteri processor as Nimbus, with math enabled.
@@ -250,6 +265,7 @@ export default defineConfig({
           DocumentSystem: documentSystemAsMarkdown,
           ComparisonTable: comparisonTableAsMarkdown,
           ModelFlow: modelFlowAsMarkdown,
+          SourceFigure: sourceFigureAsMarkdown,
           ModelResources: modelResourcesAsMarkdown,
           ArchitectureAtlas: architectureAtlasAsMarkdown,
           LandscapeMap: landscapeMapAsMarkdown,

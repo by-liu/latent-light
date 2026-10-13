@@ -1,0 +1,62 @@
+{
+  "revision": 2,
+  "reviewed_at": "2026-10-13T04:53:45Z",
+  "assets": [
+    {
+      "asset": "timing-boundaries.svg",
+      "asset_sha256": "746fc69c5aaf01309304e064df2bc3f02e07f00435a36aed54bacd77901a045a",
+      "source": "Original Latent Light SVG from explicitly illustrative request/token/validation timestamps",
+      "extraction": {
+        "method": "Authored SVG; raster preview inspected via rsvg-convert."
+      },
+      "reuse_basis": "Original explanatory asset; repository MIT grant."
+    },
+    {
+      "asset": "mlperf-loadgen-boundary.png",
+      "source": {
+        "id": "S008",
+        "title": "MLPerf Mobile Inference Benchmark, original harness figure",
+        "url": "https://arxiv.org/pdf/2012.02328v4",
+        "authors": [
+          "Vijay Janapa Reddi et al."
+        ],
+        "version": "arXiv2012.02328v4,2022-04-06; MLSys2022,18-page PDF; Figure4 page6",
+        "source_type": "paper",
+        "claim_roles": [
+          "mechanism",
+          "context"
+        ],
+        "accessed": "2026-10-13",
+        "primary": true,
+        "inspected": true,
+        "license": {
+          "status": "unverified",
+          "value": null,
+          "url": null
+        },
+        "original_sha256": "078ebeae4f86ee83280edf061704a646ac9c811d94ad82500b635ae2d279b6c1"
+      },
+      "original_figure": "Figure4",
+      "page": 6,
+      "extraction": {
+        "tool": "pdftoppm (Poppler)",
+        "dpi": 300,
+        "page_number": 6,
+        "crop_pixels": {
+          "x": 216,
+          "y": 260,
+          "width": 1001,
+          "height": 453
+        },
+        "method": "Complete diagram artwork including SUT dashed envelope and all labels/arrows; caption and surrounding prose omitted."
+      },
+      "asset_sha256": "d6636a8f9ba4467cca69d4798102256e21e15cbcb2eb6efc487c290e35023703",
+      "dimensions": [
+        1001,
+        453
+      ],
+      "reuse_basis": "Specific criticism/review assessment in SOURCES.md; not a license grant."
+    }
+  ],
+  "qa": "Selected source pages,crops and native SVG raster previews inspected; actual revised-page QA pending."
+}

@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="465" viewBox="0 0 1000 465" role="img" aria-labelledby="title desc">
+  <title id="title">Three latency boundaries on one illustrative response</title>
+  <desc id="desc">Request accepted at zero seconds, first token delivered at 0.8 seconds, token 101 delivered at 4.8 seconds, and validated result ready at 5.2 seconds. Time to first token is 0.8 seconds. The 100 intertoken intervals span 4 seconds, giving mean intertoken latency of 40 milliseconds without specifying the individual gaps. Task completion includes final validation and is 5.2 seconds.</desc>
+  <rect width="1000" height="465" rx="18" fill="#ffffff"/>
+  <g font-family="Arial, Helvetica, sans-serif" fill="#172033">
+    <text x="35" y="42" font-size="24" font-weight="700">Name the end event before comparing latency</text>
+    <text x="35" y="73" font-size="16" fill="#475569">Illustrative timestamps. No device measurements or uniform token pacing is implied.</text>
+    <g font-size="16" text-anchor="middle">
+      <text x="180" y="115">Request accepted</text><text x="180" y="139">0.0 s</text>
+      <text x="294" y="172">First token</text><text x="294" y="196">0.8 s</text>
+      <text x="872" y="115">Token 101</text><text x="872" y="139">4.8 s</text>
+      <text x="930" y="172">Result ready</text><text x="930" y="196">5.2 s</text>
+    </g>
+    <path d="M180 151V222M294 205V222M872 151V222M930 205V222" stroke="#64748b" stroke-width="2"/>
+    <path d="M180 222H930" stroke="#172033" stroke-width="2"/>
+    <g fill="#172033"><circle cx="180" cy="222" r="5"/><circle cx="294" cy="222" r="5"/><circle cx="872" cy="222" r="5"/><circle cx="930" cy="222" r="5"/></g>
+    <text x="35" y="266" font-size="17" font-weight="700">TTFT</text>
+    <rect x="180" y="248" width="114" height="27" rx="5" fill="#dceafe" stroke="#3b67a1"/>
+    <text x="307" y="267" font-size="17">0.8 s to the first delivered token</text>
+    <text x="35" y="313" font-size="17" font-weight="700">Token gaps</text>
+    <rect x="294" y="295" width="578" height="27" rx="5" fill="#e9e1f6" stroke="#7859a6"/>
+    <text x="583" y="314" text-anchor="middle" font-size="17">4.0 s / 100 intervals = 40 ms mean</text>
+    <text x="35" y="360" font-size="17" font-weight="700">Task total</text>
+    <rect x="180" y="342" width="750" height="27" rx="5" fill="#e0f1e9" stroke="#387560"/>
+    <text x="555" y="361" text-anchor="middle" font-size="17">5.2 s including 0.4 s of final validation</text>
+    <text x="35" y="415" font-size="17" fill="#475569">Individual gaps can vary. Keep their distribution to reveal stalls and delivery batches.</text>
+    <text x="35" y="441" font-size="17" fill="#475569">For a one-token answer, there is no intertoken interval.</text>
+  </g>
+</svg>

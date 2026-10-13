@@ -1,0 +1,151 @@
+---
+title: Training capable small models
+description: How data, distillation, domain adaptation and preferences concentrate a small model's capacity, and how to test the tradeoffs.
+lastUpdated: 2026-10-12
+---
+
+import FocusCanvas from '../../../components/FocusCanvas.astro';
+import ModelFlow from '../../../components/architectures/ModelFlow.astro';
+import SourceFigure from '../../../components/architectures/SourceFigure.astro';
+
+A small model becomes useful by learning the right distinctions, not by reproducing every capability of a larger model. Data selection, teacher supervision and post-training decide where its limited capacity goes. The result can be strong within a defined task while remaining weak at broad factual recall, unfamiliar instructions or rare cases.[^phi3][^tinystories]
+
+For Edge AI, the objective is a capable **deployed system** within a memory, latency and energy budget. Training can be expensive even when inference is cheap. This page explains how to allocate that effort, distinguish training objectives and design a domain adaptation workflow. Papers and official artifacts were inspected October 12, 2026; the worked application is a proposed example, not an executed experiment.
+
+Read [efficient model architectures](/edge-ai/efficient-models/) for the capacity and state budget. [Transformer foundations](/architectures/foundations/) covers next-token learning and [evaluation and profiling](/edge-ai/evaluation-profiling/) covers the complete evaluation process.
+
+## Small at inference does not mean cheap to train
+
+Compute-optimal pretraining asks how to divide a **fixed training budget** between parameters and tokens. Chinchilla's experiments support increasing model size and token exposure together within that setting. An edge product adds a separate constraint: the model may run many times after training, and each run must fit the device.[^chinchilla]
+
+The SmolLM2 report describes longer training and staged data mixtures for its principal 1.7B model, including 11T processed tokens. That is training exposure, not 11T unique tokens. Its 135M and 360M variants have separate recipes; the principal model's token count should not be assigned to them.[^smollm2]
+
+Taken together, these sources explain why the training optimum and deployment optimum need not coincide. More work on a fixed small model can be worthwhile if it improves enough future inferences. That is an economic and task-specific tradeoff, not proof that unlimited repetition helps.
+
+Before choosing a training recipe, compare a suitable existing instruction model, a prompt or schema improvement, and a smaller task-specific model. Adapting an existing checkpoint is usually the relevant experiment for a product team; pretraining from scratch needs a different data and compute contract.
+
+## Data quality means fit for the capability
+
+“High quality” should identify a property: correct labels, self-contained explanations, diverse tasks, trustworthy provenance, useful difficulty or appropriate language coverage. It is not a universal score that can replace the intended distribution.
+
+TinyStories uses synthetic short stories with constrained vocabulary to study coherent language generation in very small models. Its evaluations include GPT-4 judgments of grammar, creativity and consistency. Success on that constrained distribution does not establish unrestricted assistant capability, factual expertise or robust tool use.[^tinystories]
+
+Phi-1 combines filtered Python material, synthetic educational text and synthetic exercises. Its experiments support the value of that recipe for the studied coding tasks; the report also discusses prompt sensitivity and incomplete disclosure of synthetic generation. The transferable idea is to curate the learning signal, not to assume that a “textbook” prompt produces a complete training corpus.[^phi1]
+
+Phi-3 makes the capacity tradeoff explicit: it filters data to emphasize reasoning and reports weaker factual knowledge for the small model. A local assistant can store behavior in weights while retrieving changing facts from a controlled source. Retrieval and tools are system components, however, and must be evaluated as part of [agents and hybrid systems](/edge-ai/agents-hybrid-systems/).[^phi3]
+
+A useful data plan therefore covers both frequent inputs and consequential exceptions. Deduplicate near copies, retain provenance and usage terms, and reserve evaluation families before generating more examples. More paraphrases of the same template are not equivalent to more coverage.
+
+## Distillation: what does the teacher actually provide?
+
+Distillation trains a student using information from another model. A teacher can provide a sampled answer, a next-token probability distribution, a ranking or another intermediate target. These carry different information and require different access.[^gemma2][^dpo]
+
+<FocusCanvas label="Different teacher targets create different student objectives" size="diagram">
+<ModelFlow
+  id="figure-1"
+  title="Three supervision signals"
+  lanesJson='[{"label":"Generated answer","steps":[{"label":"Teacher responds","detail":"A prompt produces one selected sequence"},{"label":"Keep verified tokens","detail":"The sequence becomes hard labels","accent":true},{"label":"Student predicts labels","detail":"Response-token cross-entropy"}],"note":"Sampling and filtering choose which alternatives disappear. Generated text is not a full teacher distribution."},{"label":"Token distribution","steps":[{"label":"Teacher scores a prefix","detail":"Probabilities over next-token alternatives"},{"label":"Retain soft targets","detail":"Aligned probabilities at training positions","accent":true},{"label":"Student matches probabilities","detail":"Distributional cross-entropy"}],"note":"Requires compatible targets, teacher access and additional computation or target storage."},{"label":"Preference pair","steps":[{"label":"Two candidate responses","detail":"Human, rule or model compares them"},{"label":"Keep an ordering","detail":"Preferred and dispreferred response","accent":true},{"label":"Adjust relative probability","detail":"For example, DPO relative to a reference policy"}],"note":"A preference is a comparison under a rubric, not a ground-truth token distribution."}]'
+>
+**Figure 1.** The target determines what the student can learn from the teacher. Original explanatory synthesis of Gemma 2's distillation and DPO's preference formulation.[^gemma2][^dpo]
+</ModelFlow>
+</FocusCanvas>
+
+[Figure 1](#figure-1) separates two commonly conflated uses of synthetic data. Generating a teacher response and treating it as correct gives hard next-token labels. **Token-level distillation** preserves probabilities over alternatives:
+
+<MathExpression display number="1" tex="\mathcal{L}_{\mathrm{KD}}=-\sum_t\sum_v p_T(v\mid x_{\lt t})\log p_S(v\mid x_{\lt t})" />
+
+T and S denote teacher and student; t is a training position and v a vocabulary entry. Both distributions must refer to compatible targets and prefixes. If tokenizers differ, matching raw vocabulary indices is invalid; use an explicit alignment method or sequence targets. Gemma 2 reports teacher-distribution pretraining for its smaller students. This formula expresses that disclosed objective, not every method called distillation.[^gemma2]
+
+For a hypothetical position, a teacher might assign Tuesday 0.6, Thursday 0.3 and other 0.1. A hard label retains only the selected word. The soft target also communicates the teacher's uncertainty. This is useful information only when the teacher's uncertainty and alternatives are appropriate for the task.
+
+A larger teacher is not an oracle. Verify generated answers where a ground truth or executable check exists, inspect disagreements and preserve difficult real examples. The student can inherit errors, omissions and stylistic biases, and its smaller capacity can prevent faithful imitation.
+
+## SFT teaches the response contract
+
+Supervised fine-tuning (SFT) trains on demonstrations of the desired behavior. A response-only loss can be written:
+
+<MathExpression display number="2" tex="\mathcal{L}_{\mathrm{SFT}}=-\frac{1}{\sum_t m_t}\sum_t m_t\log p_\theta(y_t\mid x,y_{\lt t})" />
+
+x is the prompt, y the target response and m a mask selecting supervised tokens. This is a conventional response-token cross-entropy formulation; a particular training pipeline may use different masking or weighting. Check the actual recipe rather than assume that prompt tokens, padding and every response receive the same weight.[^dpo]
+
+The response contract includes the chat template, structured fields, stopping markers, clarification behavior and refusal or abstention conditions. A fluent answer with a wrong date or identifier is a failed extraction. Good demonstrations make that distinction visible.
+
+Masking also creates a weighting choice. With a loss averaged over all response tokens, longer responses contribute more terms than shorter ones. Averaging each example first gives a different objective. State which behavior is intended, particularly when a small model must produce concise structured answers.
+
+**LoRA** freezes the base weights and learns low-rank updates to selected matrices. It can reduce trainable parameters and adaptation-state requirements; it does not remove the base weights from inference. The original method allows updates to be merged into a dense matrix. The deployed result must still fit the selected precision and backend.[^lora]
+
+Whether to keep adapters separate or merge them also affects packaging. Recheck the quantized artifact after adaptation or merging, since its numerical representation and errors may change. [Quantization and compression](/edge-ai/quantization-compression/) explains the next step.
+
+## Preferences shape choices, not factual truth
+
+A preference dataset gives a prompt x and two responses, preferred y+ and dispreferred y−. Direct Preference Optimization (DPO) compares their policy probabilities relative to a fixed reference policy:
+
+<MathExpression display number="3" tex="\begin{aligned}a_\theta(x,y)&=\log\frac{\pi_\theta(y\mid x)}{\pi_{\mathrm{ref}}(y\mid x)}\\ \mathcal{L}_{\mathrm{DPO}}&=-\mathbb{E}\log\sigma\!\left(\beta[a_\theta(x,y^+)-a_\theta(x,y^-)]\right)\end{aligned}" />
+
+πθ is the trained policy, πref the reference, σ the logistic function and β the coefficient from the KL-regularized formulation. The response probability is the product of conditional token probabilities, usually evaluated as a sum of log probabilities. DPO uses offline pairs and does not require an explicit reward model or online RL sampling loop in the original procedure.[^dpo]
+
+Use a rubric tied to the task: correct arguments, appropriate clarification, concise wording and preserved constraints. Record who or what supplied the preference. A model judge's preference is evidence of that judge's choice; it is not proof of correctness.
+
+Longer explanations can appear more helpful while making an edge workflow slower. Conversely, rewarding brevity can hide necessary uncertainty. Evaluate these tradeoffs directly. Do not infer PPO, DPO or another objective merely because a model card says “aligned” or “reasoning.”
+
+## Worked workflow: a local reminder parser
+
+Consider a proposed phone feature that turns typed notes into a **proposal** to create or update a reminder. The model emits structured arguments; the application validates them and asks for confirmation when needed. No actual user notes are used in this example.
+
+An input might be: “Move the garden meeting to Tuesday; keep the time.” The output must identify the existing meeting, retain its time and change the date relative to the application's explicit calendar context. If multiple meetings match, a valid output asks for clarification. It must not guess an identifier. This contract is more specific than “helpful assistant.”
+
+1. **Freeze a held-out evaluation.** Split by conversation, event family and date pattern before generation. Include negation, ambiguous references, missing dates, locale changes and distractor reminders.
+2. **Build demonstrations.** Combine reviewed examples with synthetic variations generated from a coverage plan. Validate schema and dates deterministically; review the interpretation where those checks are insufficient.
+3. **Adapt a baseline.** Try response-only SFT, perhaps with a low-rank adapter. Use distillation if the teacher supplies better verified demonstrations or compatible soft targets.
+4. **Add targeted preferences if needed.** Compare a correct clarification with a confident guess, or a minimal valid proposal with irrelevant prose. Keep correctness tests independent of the preference judge.
+5. **Convert and test the device artifact.** Compare the original, adapted and quantized models on identical cases and hardware conditions. Test the surrounding parser and confirmation flow as well as the model.
+
+This is a Latent Light proposed workflow synthesized from the objectives above. Its quantities and acceptance criteria would need to be chosen for the product, not copied from a paper.
+
+For a concrete training ledger, suppose the retained training set has 60,000 examples averaging 96 supervised response tokens and is visited twice. That is **11.52M supervised token exposures**, not 120,000 independent examples. Prompt tokens still cost forward computation even when masked out of the loss. Track unique examples, processed tokens and repetitions separately.
+
+A general instruction benchmark cannot replace the reminder tests. Measure exact fields, incorrect-action proposals, clarification quality and behavior with malformed context. Profile the actual output lengths: a model that needs a long reasoning response to produce four fields can violate the latency budget despite its small parameter count.
+
+## Synthetic data needs an independent anchor
+
+Synthetic data can extend coverage, but repeated generation can reproduce narrow patterns and errors. Shumailov et al. study degradation when successive generations learn from recursively generated data, including the loss of low-probability parts of the distribution. That setting does not establish that every mixture containing synthetic examples will collapse.[^collapse]
+
+Gerstgrasser et al. directly contrast replacement with accumulation. Retaining the original data alongside later synthetic generations avoids increasing test cross-entropy in their language-model experiments; other modalities and minor variations show remaining limitations. The distinction is a useful skeptical check, not a universal guarantee for industrial training.[^accumulation]
+
+For the reminder example, retain reviewed examples and independently authored tests. Check diversity by behavior, not only by surface wording. Keep the teacher, generator settings, filtering, provenance and contamination checks in the training record. Do not use benchmark questions as generation seeds for a benchmark later presented as held out.
+
+## What a controlled data comparison can establish
+
+The SmolLM2 report holds architecture, hyperparameters and token exposure fixed while changing English web data. Its ablation models have **1.7B parameters**, 2,048-token sequences and **350B processed training tokens**. [Figure 2](#figure-2) shows six benchmark curves for DCLM, FineWeb-Edu and a 60/40 FineWeb-Edu/DCLM mixture.[^smollm2-figure]
+
+<FocusCanvas label="Author-reported learning curves comparing three web-data mixtures" size="figure">
+<SourceFigure id="figure-2" src="/figures/edge-ai/training-small-models/smollm2-data-ablation.png" alt="Six accuracy curves over training tokens in billions compare DCLM, FineWeb-Edu and their 60/40 mixture in 1.7B ablation models. FineWeb-Edu leads on MMLU, ARC and OpenBookQA; DCLM leads on HellaSwag and CommonsenseQA; PIQA differences are smaller. The mixture balances these profiles. All panel axes and the shared legend are retained." minWidth={880}>
+<div slot="image">
+
+![SmolLM2 controlled web-data ablations: six benchmark learning curves over up to 350B tokens compare DCLM, FineWeb-Edu and a 60/40 mixture; the data choices have different capability profiles.](/figures/edge-ai/training-small-models/smollm2-data-ablation.png)
+
+</div>
+
+**Figure 2.** A data mixture changes the capability profile. Author-reported 1.7B ablations reproduced from Ben Allal et al., SmolLM2 v1, Figure 4, PDF page 17; surrounding prose removed, complete plot retained. CC BY 4.0.[^smollm2-figure]
+</SourceFigure>
+</FocusCanvas>
+
+The text equivalent is the pattern across tasks: FineWeb-Edu is stronger on MMLU, ARC and OpenBookQA; DCLM is stronger on HellaSwag and CommonsenseQA; PIQA is closer. The mixed run compromises between these profiles rather than winning every panel. These are benchmark accuracies, with different vertical ranges, not product reliability scores. The experiment supports comparing mixtures under controlled conditions; it does not prove that this ratio is optimal for a reminder parser, a different model size or the final 11T-token run.[^smollm2-figure]
+
+## Decide which capabilities the system must retain
+
+Evaluate the model before and after each consequential change. Specialization can improve the target behavior while weakening another useful behavior; include a small set of general capability and robustness checks when those remain part of the product contract.
+
+The key comparison is the smallest **complete system** that satisfies the requirements. A specialized local model may handle routine cases, while retrieval supplies facts and a controlled larger-model path handles exceptions. Routing quality, connectivity and privacy then become part of the evaluation rather than disappear from it. Continue with [agents and hybrid systems](/edge-ai/agents-hybrid-systems/) and [production and product design](/edge-ai/production-product-design/).
+
+[^phi3]: Marah Abdin et al. [Phi-3 Technical Report: A Highly Capable Language Model Locally on Your Phone](https://arxiv.org/html/2404.14219v4), 2024, training data and phi-3-mini's factual-knowledge limitations. The report edition also covers later family additions; claims here concern the named mini model.
+[^tinystories]: Ronen Eldan and Yuanzhi Li. [TinyStories: How Small Can Language Models Be and Still Speak Coherent English?](https://arxiv.org/html/2305.07759v2), 2023, dataset construction and Section 3 evaluation.
+[^chinchilla]: Jordan Hoffmann et al. [Training Compute-Optimal Large Language Models](https://arxiv.org/pdf/2203.15556), 2022, fixed-compute scaling experiments.
+[^smollm2]: Loubna Ben Allal et al. [SmolLM2: When Smol Goes Big — Data-Centric Training of a Small Language Model](https://arxiv.org/html/2502.02737v1), 2025, staged 1.7B pretraining and Section 6's separate smaller-model recipes.
+[^phi1]: Suriya Gunasekar et al. [Textbooks Are All You Need](https://arxiv.org/html/2306.11644v2), 2023, Sections 2 and 5 and Appendix B.
+[^gemma2]: Gemma Team. [Gemma 2: Improving Open Language Models at a Practical Size](https://arxiv.org/html/2408.00118v3), 2024, Sections 3.2, 4 and 5. See also the [Gemma 2 study](/architectures/models/gemma-2/).
+[^dpo]: Rafael Rafailov et al. [Direct Preference Optimization: Your Language Model is Secretly a Reward Model](https://arxiv.org/html/2305.18290v3), NeurIPS 2023, Sections 3–4, Equation (7) and Appendix B.
+[^lora]: Edward J. Hu et al. [LoRA: Low-Rank Adaptation of Large Language Models](https://arxiv.org/html/2106.09685v2), ICLR 2022, low-rank updates and inference merging.
+[^collapse]: Ilia Shumailov et al. [The Curse of Recursion: Training on Generated Data Makes Models Forget](https://arxiv.org/html/2305.17493v3), 2023, recursive replacement setting and distribution tails.
+[^accumulation]: Matthias Gerstgrasser et al. [Is Model Collapse Inevitable? Breaking the Curse of Recursion by Accumulating Real and Synthetic Data](https://arxiv.org/html/2404.01413v2), ICML 2024, Sections 2.1–2.3 and the limitations of the accumulation results.
+[^smollm2-figure]: Loubna Ben Allal et al. [SmolLM2: When Smol Goes Big — Data-Centric Training of a Small Language Model](https://arxiv.org/pdf/2502.02737v1), v1 dated February 4, 2025, Sections 3.1–3.2 and Appendix B, Figure 4. The [versioned report](https://arxiv.org/html/2502.02737v1) identifies CC BY 4.0; [extraction and attribution record](/figures/edge-ai/training-small-models/SOURCES.md).

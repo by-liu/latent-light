@@ -1,0 +1,37 @@
+Edge AI figures
+
+Source artwork retains its own terms and is excluded from Latent Light's MIT license.
+
+CC BY 4.0 source excerpts:
+- efficient-models/gqa-head-sharing.png: GQA, Ainslie et al., EMNLP 2023, Figure 2.
+- quantization-compression/smoothquant-outliers.png: SmoothQuant, Xiao et al., arXiv v5, Figure 4.
+- training-small-models/smollm2-data-ablation.png: SmolLM2, Ben Allal et al., arXiv v1, Figure 4.
+- efficient-inference/speculative-three-iterations.png: Leviathan, Kalman and Matias, ICML 2023, selected first three iteration rows of Figure 1.
+- multimodal/smolvlm-architecture.webp and smolvlm-pixel-shuffle.webp: Marafioti et al., SmolVLM v1, Figures 2 and 4. The report license is not a blanket grant for integrated identity artwork; its limited review basis is recorded separately.
+License: https://creativecommons.org/licenses/by/4.0/
+Exact authors, publisher terms, editions, source links and changes are retained in each directory's SOURCES.md and NOTICE.md.
+
+BSD licensed documentation artwork:
+- runtimes-compilers/executorch-high-level.png: unchanged official ExecuTorch diagram. Meta Platforms and affiliates; Arm Limited and affiliates. Complete upstream BSD notice retained in that directory's NOTICE.md.
+
+Specific criticism/review assessments, not permissive artwork grants:
+- foundations/roofline-original-figure1.png: Williams, Waterman and Patterson, UCB/EECS-2008-134, original Figure 1.
+- efficient-inference/flashattention-tiling.png: Dao et al., NeurIPS 2022, memory-hierarchy and tiling panels of Figure 1.
+- evaluation-profiling/mlperf-loadgen-boundary.png: Reddi et al., MLPerf Mobile v4, original Figure 4.
+- agents-hybrid-systems/rag-mechanism.webp: Lewis et al., Retrieval-Augmented Generation v4, original Figure 1.
+No public reuse grant is inferred from arXiv access, publication, attribution, code or weight licenses. The per-asset records explicitly consider public site and GitHub distribution, purpose, amount, alternatives, nature, likely effect, embedded material and contextual uncertainty. A citation alone is not permission, and these assessments do not license unrelated reuse.
+
+Independent SVG diagrams:
+- foundations/memory-budget.svg
+- runtimes-compilers/partition-boundaries.svg
+- evaluation-profiling/timing-boundaries.svg
+- production-product-design/model-readiness.svg
+- on-device-computing/memory-topologies.svg
+- on-device-computing/soc-roles.svg
+These diagrams and their generators use the repository MIT license. They are illustrative derivations or proposed system models, not measured benchmarks.
+
+AI-generated overview:
+- overview/landscape-v1.png
+Generated editorial illustration; exact prompt/method and qualified rights review retained. No exclusive rights, cleared trademark or general third-party clearance is asserted for generated pixels.
+
+Records: public/figures/edge-ai/<topic>/SOURCES.md and NOTICE.md, with source artwork locators, crop geometry and SHA-256 checksums. Complete source PDFs are not deployed.

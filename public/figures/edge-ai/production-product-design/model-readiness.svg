@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="530" viewBox="0 0 900 530" role="img" aria-labelledby="title desc">
+  <title id="title">Model readiness can change between requests</title>
+  <desc id="desc">Four readiness states: unavailable, downloadable, downloading and available. Recheck after support or options change. Start an allowed download from downloadable; on completion recheck availability. Interrupted download returns to a status check. A removed model needs another download. Even available models still require request validation and resource checks.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="#3b536a"/></marker>
+    <style>text{font-family:DejaVu Sans,Arial,sans-serif;fill:#172c40}.state{fill:#f3f7fb;stroke:#7890a5;stroke-width:2}.label{font-size:21px;font-weight:700}.detail{font-size:15px;fill:#3b536a}.edge{fill:none;stroke:#3b536a;stroke-width:2.5;marker-end:url(#arrow)}.edge-label{font-size:14px;fill:#334e64}.note{font-size:16px;fill:#3b536a}</style>
+  </defs>
+  <rect width="900" height="530" rx="16" fill="#fff"/>
+  <text x="32" y="38" font-size="25" font-weight="700">Model readiness is a lifecycle</text>
+  <text x="32" y="65" class="note">Proposed application state model, informed by platform availability contracts</text>
+  <rect class="state" x="32" y="118" width="210" height="106" rx="12"/>
+  <text class="label" x="52" y="152">Unavailable</text><text class="detail" x="52" y="182">Unsupported request,</text><text class="detail" x="52" y="204">device or options</text>
+  <rect class="state" x="334" y="118" width="222" height="106" rx="12"/>
+  <text class="label" x="354" y="152">Downloadable</text><text class="detail" x="354" y="182">Supported, but required</text><text class="detail" x="354" y="204">artifacts are missing</text>
+  <rect class="state" x="648" y="118" width="220" height="106" rx="12"/>
+  <text class="label" x="668" y="152">Downloading</text><text class="detail" x="668" y="182">Work is preparing;</text><text class="detail" x="668" y="204">show progress or cancel</text>
+  <rect x="648" y="358" width="220" height="106" rx="12" fill="#e7f4ef" stroke="#43876f" stroke-width="2"/>
+  <text class="label" x="668" y="393">Available</text><text class="detail" x="668" y="423">A session can start;</text><text class="detail" x="668" y="445">check this request too</text>
+  <path class="edge" d="M242 170 H334" stroke-dasharray="5 5"/>
+  <text class="edge-label" x="250" y="100">Recheck if</text><text class="edge-label" x="250" y="116">support changes</text>
+  <path class="edge" d="M556 170 H648"/>
+  <text class="edge-label" x="567" y="100">Start allowed</text><text class="edge-label" x="567" y="116">download</text>
+  <path class="edge" d="M802 224 V358"/>
+  <text class="edge-label" x="813" y="276">Complete</text><text class="edge-label" x="813" y="296">and recheck</text>
+  <path class="edge" d="M709 224 V286 H445 V224"/>
+  <text class="edge-label" x="462" y="275">Interrupted or failed: recheck status</text>
+  <path class="edge" d="M648 412 H589 V325 H378 V224"/>
+  <text class="edge-label" x="370" y="346">Model removed: recheck and download</text>
+  <rect x="32" y="370" width="492" height="112" rx="12" fill="#f9fafc" stroke="#b6c3cf" stroke-width="1.5"/>
+  <text x="52" y="401" font-size="18" font-weight="700">Readiness is not a complete admission check</text>
+  <text class="detail" x="52" y="430">Validate input and language; reserve context and resources.</text>
+  <text class="detail" x="52" y="453">Keep source viewing or a disclosed fallback usable.</text>
+  <text x="32" y="513" font-size="13" fill="#536b80">Conceptual state names, not a portable API enum. Recheck the actual provider contract.</text>
+</svg>

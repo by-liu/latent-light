@@ -1,0 +1,142 @@
+---
+title: Quantization and compression
+description: Understand low-bit weights, activations and caches, calibration, PTQ and QAT, and when compression becomes real device savings.
+lastUpdated: 2026-10-12
+---
+
+import FocusCanvas from '../../../components/FocusCanvas.astro';
+import ModelFlow from '../../../components/architectures/ModelFlow.astro';
+import SourceFigure from '../../../components/architectures/SourceFigure.astro';
+
+Quantization replaces a dense set of numerical values with a smaller set of representable levels. The aim is to keep the task's useful behavior while reducing storage, memory traffic or arithmetic cost. Those are three different benefits: a smaller model file can still run through expensive conversions or unsupported operations.[^jacob][^onnx]
+
+The central question is **what is quantized, and how does the device compute with it?** A W4A16 model uses four-bit weights and sixteen-bit activations. It says nothing by itself about the KV cache, accumulators, normalization or final output head. Start with [efficient model architectures](/edge-ai/efficient-models/) for the memory ledger and [Edge AI foundations](/edge-ai/foundations/) for device constraints.[^awq]
+
+This is a mechanism study based on papers and official documentation inspected October 12, 2026. The numerical examples are calculations; no checkpoint conversion, training run or device benchmark was executed.
+
+## A quantizer is a numerical contract
+
+An affine integer quantizer represents a real value x through integer q, positive scale s and integer zero point z:
+
+<MathExpression display number="1" tex="\begin{aligned}q &= \operatorname{clip}\!\left(\operatorname{round}(x/s)+z,q_{\min},q_{\max}\right)\\ \hat{x} &= s(q-z)\end{aligned}" />
+
+The reconstructed value is x̂. Rounding loses detail; clipping loses range. The zero point makes real zero exactly representable, which matters for operations such as padded convolutions. Scales may belong to a whole tensor, a channel, a token or a group of weights. Different granularities create different accuracy, metadata and kernel requirements.[^jacob][^smoothquant]
+
+Consider an illustrative symmetric four-bit quantizer using integers from −7 to 7, z = 0 and s = 0.2. It covers −1.4 to 1.4:
+
+| Original x | Stored q | Reconstructed x̂ | Error x̂ − x |
+| --- | --- | --- | --- |
+| −0.72 | −4 | −0.80 | −0.08 |
+| 0.13 | 1 | 0.20 | 0.07 |
+| 0.93 | 5 | 1.00 | 0.07 |
+
+This is a Latent Light calculation from [Equation (1)](#equation-1), not a published model measurement. Without clipping, round-to-nearest error is at most half a step. If an outlier of magnitude eight forces the same group's scale to 8 / 7, the step becomes about 1.143. Values near zero now have much coarser representation.
+
+Smaller groups can isolate an outlier, but require more scales. Clipping it keeps a finer step for ordinary values but damages that outlier. Whether that is acceptable depends on its effect on the layer output and task, not simply on how rare it is.[^smoothquant]
+
+### Four bits is not exactly four bits of storage
+
+For a group of g weights, nominal weight precision b and m metadata bits per group, the ideal packed storage is:
+
+<MathExpression display number="2" tex="b_{\mathrm{effective}} = b + \frac{m}{g}" />
+
+For 128 four-bit weights plus one sixteen-bit scale, the group occupies 64 + 2 = **66 bytes**, or **4.125 bits per weight**. The ideal ratio relative to FP16 is 16 / 4.125 ≈ **3.88**, before padding, zero points, headers or tensors left in higher precision. This derivation assumes that all groups use this exact representation. A format name alone does not establish it.
+
+Keep three ledgers: file bytes, peak resident memory and runtime traffic. Unpacking the whole model into FP16 at load time could erase the resident saving; fused dequantization can retain packed weights while reconstructing values near the computation.[^awq]
+
+## PTQ and QAT solve different preparation problems
+
+**Post-training quantization (PTQ)** starts with a trained model and chooses a representation, often using calibration inputs. These inputs reveal ranges, activation patterns or how errors affect layer outputs. “No retraining” does not mean “no data” or “no preparation computation.”[^gptq][^awq]
+
+**Quantization-aware training (QAT)** updates model weights while simulating the target rounding and clipping in its forward pass. Fake quantization can leave tensors in floating point while reproducing quantize/dequantize numerics. A straight-through gradient approximation commonly allows optimization through rounding. The resulting model still needs conversion to a real deployment representation.[^jacob][^pytorch-qat]
+
+<FocusCanvas label="Calibration and training prepare different quantized artifacts" size="diagram">
+<ModelFlow
+  id="figure-1"
+  title="Prepare for the arithmetic that will actually run"
+  lanesJson='[{"label":"Post-training quantization","steps":[{"label":"Trained model + samples","detail":"Run calibration inputs through the existing model"},{"label":"Choose scales and weights","detail":"Observe ranges or reconstruct layer outputs","accent":true},{"label":"Pack for the backend","detail":"Store low-bit values and required metadata"}],"note":"Model training is not repeated, but preparation may optimize rounding or compensate errors."},{"label":"Quantization-aware training","steps":[{"label":"Insert fake quantizers","detail":"Simulate the intended rounding and clipping"},{"label":"Update floating weights","detail":"Train while exposing quantization error","accent":true},{"label":"Convert and pack","detail":"Replace simulation with the deployment format"}],"note":"The training graph must match the eventual precision, grouping and operation boundaries. Fake quantization alone is not an inference kernel."}]'
+>
+**Figure 1.** Two preparation routes, one requirement: match the target computation. Original synthesis informed by GPTQ, Jacob et al. and PyTorch's QAT explanation.[^gptq][^jacob][^pytorch-qat]
+</ModelFlow>
+</FocusCanvas>
+
+As [Figure 1](#figure-1) shows, QAT adds an opportunity to adapt weights to error; it also adds training cost and data requirements. PTQ is a useful first candidate. If it misses the quality target, investigate calibration, sensitive layers and representation before assuming that every operation needs retraining.
+
+## GPTQ, AWQ and SmoothQuant: three error-control ideas
+
+| Method | Main target in the cited work | How it controls error | Deployment implication |
+| --- | --- | --- | --- |
+| GPTQ | Low-bit weights | Reconstruct layer outputs using calibration inputs; compensate remaining weights as columns are quantized | Requires a matching packed representation and kernels |
+| AWQ | Low-bit weights | Use activation statistics to identify salient channels and search an equivalent channel scaling | Protects channels without requiring a permanent mixed-precision exception for each salient weight |
+| SmoothQuant | Eight-bit weights and activations | Move activation magnitude variation into weights with a compensating rescaling | Designed around W8A8 matrix operations |
+
+This comparison is a mechanism synthesis, not a ranking of current implementations.[^gptq][^awq][^smoothquant]
+
+**GPTQ** approximates a layer reconstruction problem: choose quantized weights whose outputs resemble the original outputs on calibration inputs. Its second-order information comes from those layer inputs. Quantizing one column changes the remaining floating weights to compensate; block updates and a Cholesky formulation make the procedure practical. It is not an end-to-end task-loss optimizer, and its original results do not quantize activations.[^gptq]
+
+**AWQ** asks which weight channels matter most under the input activations. Large activation magnitudes can amplify error in the corresponding channels. Rather than leave a small collection of salient weights in FP16, it searches scales that protect those channels while preserving a uniform low-bit weight format. The paper reports calibration-generalization benefits; that is evidence for its tested distributions, not immunity to arbitrary distribution shift.[^awq]
+
+**SmoothQuant** addresses activation outliers. With row-vector activations X, weight matrix W and positive diagonal scaling S, the floating-point linear operation can be rewritten:
+
+<MathExpression display number="3" tex="XW = (XS^{-1})(SW)" />
+
+S scales input channels; its inverse counteracts the scale on activations. This is algebraically equivalent before rounding. After quantization, the two sides have different errors. SmoothQuant chooses a balance that makes activation ranges easier to quantize while keeping weights manageable. The method's identity is W8A8 preparation, not a generic synonym for four-bit weights.[^smoothquant]
+
+<FocusCanvas label="Original SmoothQuant plot of activation and weight magnitudes before and after channel scaling" size="figure">
+<SourceFigure id="figure-2" src="/figures/edge-ai/quantization-compression/smoothquant-outliers.png" alt="Four source panels show absolute activation and weight magnitudes for an OPT-13B linear layer. Original activations have a few channels above magnitude 70 across tokens. Smoothed activations have a reduced range; original weights are comparatively flat, while scaled weights become less uniform. Axes and their differing ranges are retained." minWidth={1000}>
+<div slot="image">
+
+![OPT-13B linear-layer magnitude plots: a few original activation channels dominate across tokens; SmoothQuant reduces their range and shifts some magnitude variation into the weights. The four panels have different vertical ranges.](/figures/edge-ai/quantization-compression/smoothquant-outliers.png)
+
+</div>
+
+**Figure 2.** Rescaling moves the difficult range between activations and weights. Reproduced from Xiao et al., SmoothQuant v5, Figure 4, PDF page 4; surrounding prose removed. © 2023 the authors, CC BY 4.0.[^smoothquant-figure]
+</SourceFigure>
+</FocusCanvas>
+
+[Figure 2](#figure-2) is an author-reported observation for **one OPT-13B linear layer**, not a statement that every small model has the same outliers. The first panel shows large values recurring in particular input channels across tokens. After scaling, activation magnitude is easier to represent, while the weight range becomes less uniform. Notice the differing vertical scales: visual height cannot be compared as if every panel used one range. The figure shows magnitude redistribution, not model accuracy, device latency or memory consumption.[^smoothquant-figure]
+
+All three use information about input behavior. Their methods and comparisons do not justify taking a speedup reported on one GPU, batch and sequence length as a prediction for a phone.
+
+## Calibration must resemble the difficult inputs
+
+A practical calibration set should exercise the actual preprocessing and input distribution: chat templates, languages, code or structured fields, prompt lengths, images or audio where supported, and rare but important cases. Keep calibration separate from the final test set. This is a proposed evaluation design informed by data-dependent quantization, not a universally optimal sample count.[^gptq][^awq]
+
+Static activation quantization determines ranges in advance. Dynamic quantization computes ranges at runtime, adding work while adapting to each input. ONNX Runtime documents both approaches and several calibration methods, including MinMax, Entropy and Percentile. Their suitability depends on the model and execution provider.[^onnx]
+
+Compare the original and converted models on the same held-out tasks. Perplexity or layer reconstruction error is informative but does not alone establish exact extraction, reasoning, tool arguments or safety behavior. Inspect failures by slice; a modest average change can hide a large regression on a rare input class.
+
+## The KV cache is a separate compression target
+
+Weight quantization leaves the per-request cache unchanged unless a separate cache scheme is selected. KIVI studies low-bit KV storage and finds different useful axes for keys and values in the tested models: keys per channel and values per token. It retains a recent full-precision residual buffer while quantizing grouped older entries.[^kivi]
+
+That residual is substantive. In the paper, quantizing every token in a simulated two-bit cache hurts difficult generation tasks more than the actual KIVI scheme. Its “two-bit cache” therefore does not mean every retained byte uses two bits. Scales, residual state and mixed-precision attention all belong in a memory calculation.[^kivi]
+
+Cache quality depends on length and content. Test distant exact retrieval, repeated distractors and generation length, not just a short prompt. Reducing cache precision and reducing its attention window are separate interventions: one changes numerical fidelity, the other changes which history is visible.
+
+## Pruning needs an executable sparsity pattern
+
+Pruning sets selected weights to zero or removes structures such as channels, heads or blocks. **Unstructured pruning** can preserve matrix shapes; a dense kernel still processes those shapes. **Structured pruning** can shrink them but removes larger units of capacity. SparseGPT demonstrates efficient one-shot pruning with layer reconstruction and discusses both unstructured and hardware-compatible patterns; its quality results do not automatically establish a speedup on every device.[^sparsegpt]
+
+For a concrete backend constraint, TensorRT's 10.x documentation specifies a **2:4** pattern: at least two zeros in each group of four along the required reduction dimension. Eligible weights, enabled sparsity and supported hardware are still insufficient to guarantee that the builder chooses a sparse tactic. It can select a dense one when that is faster. Check the resulting engine and measure the complete workload.[^tensorrt-sparsity]
+
+Pruning and quantization can be combined, but their errors need joint evaluation. Distillation can recover or transfer useful behavior during compression; [training capable small models](/edge-ai/training-small-models/) covers that objective.
+
+## The format, graph and kernel must agree
+
+Record the weight and activation dtypes, scale axes, group size, symmetric or asymmetric scheme, zero-point representation, packed layout, accumulator precision and cache dtype. A quantization algorithm is not a portable file format. Backend conversion is part of the model's numerical contract.
+
+ONNX Runtime illustrates the specificity: its documented four-bit path is blockwise weight-only quantization for selected operations with constant weights. MatMul can become MatMulNBits or a DequantizeLinear/MatMul pair; Int4 and UInt4 require ONNX opset 21. This does not promise low-bit execution for an arbitrary graph or execution provider.[^onnx]
+
+The same documentation warns that quantization can be slower when hardware lacks efficient instructions or conversions dominate. Follow [runtimes and compilers](/edge-ai/runtimes-compilers/) to inspect delegation and fallback, [efficient inference](/edge-ai/efficient-inference/) to understand memory traffic, and [evaluation and profiling](/edge-ai/evaluation-profiling/) to measure time to first token, sustained generation, memory and energy under the actual workload.[^onnx]
+
+[^jacob]: Benoit Jacob et al. [Quantization and Training of Neural Networks for Efficient Integer-Arithmetic-Only Inference](https://arxiv.org/pdf/1712.05877), CVPR 2018, Sections 2–3.
+[^onnx]: Microsoft. [Quantize ONNX models](https://onnxruntime.ai/docs/performance/model-optimizations/quantization.html), representation formats, calibration, Int4/UInt4 and performance FAQ. Inspected October 12, 2026.
+[^awq]: Ji Lin et al. [AWQ: Activation-aware Weight Quantization for On-Device LLM Compression and Acceleration](https://arxiv.org/html/2306.00978v5), MLSys 2024, Sections 3–5.
+[^smoothquant]: Guangxuan Xiao et al. [SmoothQuant: Accurate and Efficient Post-Training Quantization for Large Language Models](https://arxiv.org/html/2211.10438v5), ICML 2023, Sections 2–4.
+[^gptq]: Elias Frantar et al. [GPTQ: Accurate Post-Training Quantization for Generative Pre-trained Transformers](https://arxiv.org/pdf/2210.17323), ICLR 2023, v2, Sections 3–4 and the original activation-quantization boundary.
+[^pytorch-qat]: PyTorch. [Quantization-Aware Training for Large Language Models with PyTorch](https://pytorch.org/blog/quantization-aware-training/), July 2024, fake quantization, straight-through gradients and conversion. This is the dated method explanation, not a claim about the latest torchao API.
+[^kivi]: Zirui Liu et al. [KIVI: A Tuning-Free Asymmetric 2bit Quantization for KV Cache](https://arxiv.org/html/2402.02750v2), ICML 2024, Sections 3 and 4.2.1.
+[^sparsegpt]: Elias Frantar and Dan Alistarh. [SparseGPT: Massive Language Models Can Be Accurately Pruned in One-Shot](https://arxiv.org/html/2301.00774v3), ICML 2023, Sections 2–4.
+[^tensorrt-sparsity]: NVIDIA. [TensorRT I/O Formats: Sparsity](https://docs.nvidia.com/deeplearning/tensorrt/10.x.x/inference-library/io-formats-sparsity.html#sparsity), 10.x documentation, required weight pattern and tactic selection. Inspected October 12, 2026.
+[^smoothquant-figure]: Guangxuan Xiao, Ji Lin, Mickael Seznec, Hao Wu, Julien Demouth and Song Han. [SmoothQuant: Accurate and Efficient Post-Training Quantization for Large Language Models](https://arxiv.org/pdf/2211.10438v5), ICML 2023, v5 dated June 5, 2023, Figure 4 and Sections 3–4. The [versioned report](https://arxiv.org/html/2211.10438v5) identifies CC BY 4.0; [extraction and attribution record](/figures/edge-ai/quantization-compression/SOURCES.md).

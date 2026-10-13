@@ -1,0 +1,90 @@
+{
+  "schema_version": 3,
+  "topic_id": "multimodal",
+  "status": "complete",
+  "coverage": {
+    "visual_budget": "Verified encoder/LM balance, view count, rearrangement and OCR limits.",
+    "temporal_evidence": "Verified queue and timestamp behavior; proposed freshness/event/reuse policy.",
+    "streaming_audio": "Verified provisional/final states and implementation/language limits.",
+    "memory": "Proposed combined workload review, no fabricated byte or timing results.",
+    "parent_cross_review": "Revision 1 parent reader/evidence review retained; revision 2 visual additions await new parent review.",
+    "delivery": "Visual revision: full validate (49 deployment +157 content tests, Astro, build and lint), 27 research tests, 66 actual preview views, 22 Focus checks, 16 full-size assets, complete exports and search passed.",
+    "visual_enrichment": "Original mechanism or precise state figures added with portable source, hash and reuse records.",
+    "parent_visual_review": "Generated landscape, original source mechanisms, independent diagrams, figure numbering, prose interpretation, source scope, attribution and reuse limits inspected.",
+    "final_review": "Read the complete twelve-page collection; targeted clarity, navigation and notice corrections applied. All delivery gates passed for the final source."
+  },
+  "open_questions": [
+    "Parent must validate and inspect revision 2 source figures/state diagram at desktop/mobile/light/dark/Focus widths and check captions, panning, citations and complete text exports."
+  ],
+  "recommended_next_direction": "Await explicit commit/push authorization. A push to main triggers configured automatic deployment; verify live content afterward. No upload occurred.",
+  "last_seen": "2026-10-13T19:05:09.754Z",
+  "output": {
+    "kind": "site-page",
+    "path": "src/content/docs/edge-ai/multimodal.mdx",
+    "status": "reviewed",
+    "revision": 2,
+    "updated": "2026-10-12",
+    "evidence_cutoff": "2026-10-12",
+    "audience": "Technical readers building multimodal edge applications"
+  },
+  "quality_gate": {
+    "evidence_verified": true,
+    "contradictions_reviewed": true,
+    "output_reviewed": true,
+    "visuals_reviewed": true
+  },
+  "delivery_checks": {
+    "validation": {
+      "status": "passed",
+      "method": "Production-origin full validation passed: 49 deployment tests, 159 content tests, Astro with zero diagnostics, 96-page build and 96 lint-clean documents. A clean Git-eligible copy passed npm ci and the same full validation. Research tools: 27 tests passed; npm audit reported zero vulnerabilities. Deployment origin and Wrangler dry-run packaging passed without upload.",
+      "checked_at": "2026-10-13T19:05:09.754Z"
+    },
+    "rendering": {
+      "status": "passed",
+      "method": "Actual production preview on port 4327: 12 pages at 1440/390/320 pixels in light/dark (72 views), 24 keyboard Focus checks, image decoding, no document overflow, sequential anchors, keyboard panning and no console errors. Selected source/native figure screenshots manually inspected. The catalog passed keyword, empty-result and reset tests; all rows remained without JavaScript. Existing Model Deep Dives artwork switches to exactly one matching theme image and prints the light image. Canonical URLs and editor/unknown-route HTTP 404 boundaries passed.",
+      "checked_at": "2026-10-13T19:00:17.605Z"
+    },
+    "exports": {
+      "status": "passed",
+      "method": "All 12 complete Markdown/MDX exports checked: source images, captions, descriptions, figure/equation anchors, TeX, references and every flow step/note remain. Hardware catalog, roadmap and software-path rows survive exports and no-JavaScript reading. Actual search and root/section discovery passed.",
+      "checked_at": "2026-10-13T19:00:17.605Z"
+    }
+  },
+  "worker_checks": {
+    "source_review": "Completed entailment, scope and public-safety review.",
+    "flow_transform": "Passed direct native flow JSON and component-level Markdown transform check.",
+    "research_validation": "Revision 2 schema 3 structural validator passed. Sequential figure links, existing assets and static ModelFlow export transform passed. Full endpoint and rendering checks remain pending.",
+    "visual_assets": "Source PDF pages and final crops or SVG raster preview visually inspected; these asset checks do not replace browser review."
+  },
+  "prior_revision_reviews": [
+    {
+      "revision": 1,
+      "recorded_at": "2026-10-13T04:52:50.163Z",
+      "output_status": "reviewed",
+      "quality_gate": {
+        "evidence_verified": true,
+        "contradictions_reviewed": true,
+        "output_reviewed": true,
+        "visuals_reviewed": true
+      },
+      "delivery_checks": {
+        "validation": {
+          "status": "passed",
+          "method": "SITE_URL=https://latentlit.com npm run validate with Node24.21.0:49 deployment tests,154 content tests,Astro162 files with0 errors/warnings/hints,95 built pages and95 lint-clean files. npm run test:research:27 tests passed. Per-workspace schema validation also performed.",
+          "checked_at": "2026-10-13T04:38:25.124Z"
+        },
+        "rendering": {
+          "status": "passed",
+          "method": "Actual local Astro production preview on port4327 in Chromium:1440/390/320px,light/dark,reduced motion; keyboard Focus controls and pannable tables/equations; native figures,citation anchors and numbered KaTeX; no document overflow or browser errors. All11 desktop and mobile diagrams manually inspected; mobile figure captures use document-coordinate clips to avoid screenshot-induced sticky-chrome overlays.",
+          "checked_at": "2026-10-13T04:38:25.124Z"
+        },
+        "exports": {
+          "status": "passed",
+          "method": "Built Markdown retains all ModelFlow steps/details/notes,captions,formula text and footnotes; MDX retains complete source body. Actual preview search finds the compression chapter. /llms.txt,/llms-full.txt and /edge-ai/llms.txt discover the collection. No-JavaScript overview retains ten topic rows and useful links.",
+          "checked_at": "2026-10-13T04:34:25.447Z"
+        }
+      },
+      "coverage_delivery": "Full validate, research tests, 66 browser views, 22 Focus checks, search and complete exports passed."
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+const style='<style>text{font-family:Inter,Arial,sans-serif;fill:#172b46}.title{font-size:27px;font-weight:700}.label{font-size:21px;font-weight:650}.body{font-size:18px}.note{font-size:17px;fill:#52647b}.eyebrow{font-size:16px;font-weight:700;letter-spacing:1px;fill:#52647b}</style>';
+const text=(x,y,s,c='body')=>'<text x="'+x+'" y="'+y+'" class="'+c+'">'+s+'</text>';
+const box=(x,y,w,h,fill='#f5f7fb',stroke='#b7c5d6')=>'<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" rx="12" fill="'+fill+'" stroke="'+stroke+'" stroke-width="1.6"/>';
+const arrow=(d,color='#697e98',marker='arrow')=>'<path d="'+d+'" fill="none" stroke="'+color+'" stroke-width="2.3" marker-end="url(#'+marker+')"/>';
+const head=(title,desc,h)=>'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 '+h+'" role="img" aria-labelledby="title desc"><title id="title">'+title+'</title><desc id="desc">'+desc+'</desc><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#697e98"/></marker></defs>'+style+'<rect width="1000" height="'+h+'" rx="16" fill="#fff"/>';
+export function memoryTopology(){return head('Follow the memory, not just the chip','Three representative arrangements: host CPU plus a discrete GPU with dedicated HBM or GDDR; an integrated system sharing DRAM; and a microcontroller with a small SRAM working set and external storage. These are examples, not a universal cloud/device boundary.',640)
+ +text(32,46,'The same model meets different memory roads.','title')
+ +box(28,76,452,350)+box(500,76,472,350)
+ +text(48,110,'DISCRETE ACCELERATOR','eyebrow')+text(48,142,'Cloud server or local GPU workstation','label')
+ +box(48,166,185,72,'#edf2fc','#8da7d3')+text(64,196,'Host CPU','label')+text(64,222,'System DRAM','body')
+ +box(265,166,193,72,'#f0ebf9','#a792c5')+text(281,196,'GPU','label')+text(281,222,'Tensor / SIMD work','body')
+ +arrow('M234 200H261')+text(88,274,'PCIe or another host interconnect','note')
+ +box(265,300,193,69,'#f0ebf9','#a792c5')+text(281,329,'Dedicated VRAM','label')+text(281,352,'HBM or GDDR','body')+arrow('M361 239V295')
+ +text(48,401,'Host RAM is not automatically fast GPU RAM.','note')
+ +text(520,110,'INTEGRATED SYSTEM','eyebrow')+text(520,142,'Many phones, PCs and robot modules','label')
+ +box(520,166,133,78,'#edf2fc','#8da7d3')+text(555,210,'CPU','label')
+ +box(667,166,133,78,'#f0ebf9','#a792c5')+text(702,210,'GPU','label')
+ +box(814,166,136,78,'#e8f5f0','#78aaa2')+text(838,198,'NPU /','label')+text(838,224,'engines','body')
+ +arrow('M586 245V284')+arrow('M734 245V284')+arrow('M882 245V284')
+ +box(520,292,430,77,'#e8f5f0','#78aaa2')+text(538,323,'Shared DRAM pool + memory fabric','label')+text(538,350,'Often LPDDR · device and runtime specific','body')
+ +text(520,401,'Shared capacity; bandwidth and access still matter.','note')
+ +box(28,447,944,165,'#fffbf3','#c4ad7c')+text(48,480,'MICROCONTROLLER / TINY ENDPOINT','eyebrow')
+ +box(48,494,207,70,'#fff4df','#c4ad7c')+text(65,521,'Flash / storage','body')+text(65,548,'Weights and firmware','note')
+ +box(356,494,263,70,'#fff4df','#c4ad7c')+text(373,521,'Small SRAM','label')+text(373,548,'Inputs, live tensors and scratch','note')
+ +box(723,494,225,70,'#fff4df','#c4ad7c')+text(741,521,'CPU / DSP / optional NPU','note')+text(741,548,'Compiled task execution','note')
+ +arrow('M257 529H351')+arrow('M622 529H718')+text(48,595,'Illustrative topologies. Coherent cloud systems and discrete device GPUs are important exceptions.','note')+'</svg>\n';}
+export function socRoles(){return head('A device is a team of processors','An illustrative SoC includes CPU control, GPU parallel compute, NPU tensor execution, ISP camera processing and DSP audio/sensor processing. They connect through a shared memory fabric; a sensor hub can trigger heavier work. The runtime decides which supported graph regions use each engine.',650)
+ +text(32,46,'One device. Several kinds of work.','title')
+ +text(34,82,'Illustrative roles, not a vendor floorplan or fixed assignment','note')
+ +box(230,105,742,494)+text(252,140,'SYSTEM ON CHIP / PACKAGE','eyebrow')
+ +box(254,161,215,119,'#edf2fc','#8da7d3')+text(272,191,'CPU','label')+text(272,220,'Control and scheduling','body')+text(272,246,'Parsing · tools · fallback','note')
+ +box(487,161,215,119,'#f0ebf9','#a792c5')+text(505,191,'GPU','label')+text(505,220,'Parallel tensor work','body')+text(505,246,'Graphics + matrix units','note')
+ +box(720,161,228,119,'#e8f5f0','#78aaa2')+text(738,191,'NPU','label')+text(738,220,'Compiled neural graphs','body')+text(738,246,'Precision / operator limits','note')
+ +box(254,346,448,107,'#fff4df','#c4ad7c')+text(274,377,'ISP + DSP + media engines','label')+text(274,406,'Condition pixels, audio and video efficiently','body')+text(274,432,'Not interchangeable with a language model','note')
+ +box(720,346,228,107,'#edf2fc','#8da7d3')+text(739,377,'Sensor hub','label')+text(739,406,'Small ongoing signals','body')+text(739,432,'Trigger optional work','note')
+ +box(254,515,694,65,'#f5f7fb','#b7c5d6')+text(276,542,'Memory fabric + caches + DRAM interfaces','label')+text(276,566,'Weights, cache, live tensors, camera buffers and the rest of the app','note')
+ +arrow('M361 281V322H707V510')+arrow('M594 281V320H707')+arrow('M834 281V326H707')
+ +arrow('M478 454V510')+arrow('M834 454V510')
+ +box(28,164,172,74,'#fff4df','#c4ad7c')+text(46,194,'Camera pixels','label')+text(46,221,'Captured pixels','note')
+ +box(28,263,172,74,'#fff4df','#c4ad7c')+text(46,294,'Mic / sensors','label')+text(46,319,'Audio · timing','note')
+ +arrow('M201 201H214V378H248')+arrow('M201 300H222V418H248')
+ +box(28,492,172,86,'#edf2fc','#8da7d3')+text(46,525,'Storage + I/O','label')+text(46,554,'Models and results','note')+arrow('M201 546H248')
+ +text(32,630,'Compute, memory and heat are shared budgets. Physical blocks do not guarantee application access.','note')+'</svg>\n';}

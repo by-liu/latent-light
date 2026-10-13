@@ -1,0 +1,122 @@
+---
+title: Production and product design
+description: Turn device inference into a dependable feature through artifact contracts, resource management and explicit failure behavior.
+lastUpdated: 2026-10-12
+---
+
+import FocusCanvas from '../../../components/FocusCanvas.astro';
+import ModelFlow from '../../../components/architectures/ModelFlow.astro';
+import SourceFigure from '../../../components/architectures/SourceFigure.astro';
+
+A fast model demonstration is only one part of an edge product. A person still needs the feature to be available after installation, behave clearly without a network, respect the device’s resources and survive an update. **The product contract is what happens across that whole experience, including failure.**
+
+Begin with [Edge AI foundations](/edge-ai/foundations/) for resource constraints and [Evaluation and profiling](/edge-ai/evaluation-profiling/) for measurement. This page develops a proposed delivery and product review. The checklists are Latent Light’s synthesis, not a published validated method or certification.
+
+## Define the job before the artifact
+
+“Runs locally” describes a location, not the user benefit. Choose a bounded job: search saved documents offline, draft a short reply, identify a visible object, or transcribe a voice note. Then specify acceptable output, time to useful feedback, conditions of use and the behavior when the model cannot help.
+
+An example product contract might say: “Show the saved source immediately, then offer a cancellable summary; retain edits if generation stops; disclose before transmitting text.” That is more reviewable than “instant private AI.” It does not promise a particular latency or privacy outcome without measurements and a reviewed data path.
+
+Our proposed workload service level agreement, or SLA, names the device class, input size, context and output limits, simultaneous features, network state and sustained session duration. Define both normal and failure outcomes: cold start, first useful result, completion, cancellation, memory pressure and battery or thermal limits. Tie each threshold to the user’s task. A short summary and continuous captioning do not need the same contract.
+
+## Ship a compatible bundle
+
+An artifact contract needs more than a weights filename. Our proposed manifest records model identity and checksum, runtime and format version, tokenizer, input transformations, special tokens or prompt template, quantization configuration, output schema, supported languages and modalities, license notices and the tested device matrix.
+
+Compatibility has two layers. The runtime must load and execute the graph correctly; the surrounding application must interpret the same inputs and outputs correctly. For a concrete example, Firebase’s TensorFlow Lite integration requires the input and output array shapes and types, and notes that normalization depends on the model.[^firebase] A replacement with the same file extension can therefore still require application changes.
+
+Retest representative prompts, retrieval and structured output after changing the model or processor. If an embedding model changes, migrate its index as part of the release contract. If a platform manages the base model, record the returned model identity where available and test the supported variants: ML Kit documents different Nano versions across devices and warns that the same prompt can produce different results.[^mlkit]
+
+| Delivery choice | What the product controls | What to plan for |
+| --- | --- | --- |
+| Bundle a model with the app | Exact included artifact and initial offline access | Package size, app release cycle and device storage |
+| Download an app managed model | Model selection and rollout policy | Interrupted downloads, integrity and extra storage |
+| Use a system or browser model | Application behavior around a provider API | Availability, provider updates, supported devices and quotas |
+
+This is a delivery taxonomy, not a vendor scorecard. Ownership of weights and ownership of the complete runtime are different questions. See [Runtimes and compilers](/edge-ai/runtimes-compilers/) for backend compatibility.
+
+## Availability is a state, not a purchase
+
+A supported device may still need a download before a feature is ready. ML Kit’s summarization example distinguishes unavailable, downloadable, downloading and available states, with the initial request able to trigger a download.[^availability] Apple’s Foundation Models overview likewise demonstrates checking availability and handling unsupported language, guardrail and context errors.[^apple]
+
+Storage can change that state later. Chrome’s current built in AI guide says its model can be removed when free storage falls below a threshold and downloaded again once requirements are met. The guide also separates initial network access from subsequent model use.[^chrome] A successful first run therefore does not prove indefinite offline readiness.
+
+[Figure 1](#figure-1) follows the resulting readiness transitions. It groups the documented availability concepts into a proposed application state model; these are not one portable API enum. The application rechecks after download completion, interruption or model removal, while request admission still needs its own checks.
+
+<FocusCanvas size="diagram" label="Model readiness state transitions">
+<SourceFigure id="figure-1" src="/figures/edge-ai/production-product-design/model-readiness.svg" alt="Model readiness transitions from unavailable, after a relevant support change, to downloadable; an allowed download enters downloading and completion is followed by a readiness check. Interrupted downloads and removed models require another status check. Available models still need input, context and resource admission checks." minWidth={820}>
+<div slot="image">
+
+![Proposed model readiness state transitions.](/figures/edge-ai/production-product-design/model-readiness.svg)
+
+</div>
+
+**Figure 1.** Readiness can change between requests. Independent Latent Light state diagram informed by ML Kit download states and Chrome model availability and storage removal; transition handling and fallback are proposed application policy.[^availability][^chrome]
+
+</SourceFigure>
+</FocusCanvas>
+
+In text: unavailable means the current device or request cannot use the feature; downloadable means preparation is possible; downloading needs progress and cancellation; available allows session creation. Failure or eviction sends the app back to a status check. Availability alone does not establish input support, enough context or a permitted action.
+
+A proposed UI should show what the person can do now: open the source, use manual search, download the feature, wait with progress, cancel, or choose a disclosed online route. Preserve user work through those transitions. When availability changes, explain the actual condition rather than reporting every case as a generic model error.
+
+## Update, observe and recover deliberately
+
+For app managed artifacts, [Figure 2](#figure-2) sketches a proposed release lifecycle. It keeps delivery integrity separate from useful behavior: an authentic package can still contain a model that is wrong for this workload.
+
+<FocusCanvas size="diagram" label="Model release and device request lifecycles">
+<ModelFlow id="figure-2" title="A release contract and a request contract" lanesJson='[{"label":"Artifact lifecycle","steps":[{"label":"Build an identified bundle","detail":"Model, processor, runtime and evaluation record"},{"label":"Stage and verify","detail":"Authorized origin, integrity and compatibility","accent":true},{"label":"Activate a small rollout","detail":"Observe workload regressions by version"},{"label":"Keep a recovery path","detail":"Restore an approved compatible bundle or disable feature"}],"note":"Activation follows completed download and checks. A previous artifact is not automatically an allowed recovery if it is revoked or incompatible with new application state."},{"label":"Each device request","steps":[{"label":"Check readiness","detail":"Model, storage, app state and input support"},{"label":"Admit within budget","detail":"Deadline, memory and device resources","accent":true},{"label":"Produce useful feedback","detail":"Progress, evidence and cancellation"},{"label":"Record a bounded outcome","detail":"Version, timings, failure code and quality feedback"}],"note":"Telemetry follows its own access and retention policy. Offline behavior and recovery are part of the feature, not evidence that all requests will succeed."}]'>
+
+**Figure 2.** Two contracts meet on the device. Independent Latent Light synthesis informed by model download, platform availability, update security and thermal management; staged rollout and product recovery steps are proposed here.[^firebase][^availability][^tuf][^thermal]
+
+</ModelFlow>
+</FocusCanvas>
+
+Firebase provides download modes that use a local model while checking for an update in the background, or wait for the latest version, with conditions such as Wi-Fi, charging and device idle.[^firebase] Those delivery mechanisms do not replace your regression and activation policy.
+
+For update security, The Update Framework specifies trusted signed metadata, target hashes and lengths, version checks against rollback attacks and expiry checks against freeze attacks.[^tuf] These are distinct protections; a hash obtained from an untrusted source is not an authorization to install its file.
+
+Our proposed activation plan uses a separate staging location, verifies the complete bundle, tests it, and switches the active version only after success. Keep enough storage for staging and a permitted recovery artifact. Product recovery should follow authenticated policy; do not defeat antirollback protections by accepting arbitrary older downloads. An emergency recovery may need a newly authorized release of prior model content. Also check whether persistent state or an index has migrated: restoring weights alone may not restore compatible behavior.
+
+## Share the device with the person
+
+The device also renders the UI, captures sensors, handles calls and runs other apps. A product should admit work according to the measured complete workload, not only the accelerator’s advertised throughput. Android’s Thermal API exposes status and headroom to help applications adapt workload, but its guide records device support limitations and rate limits for headroom queries.[^thermal]
+
+Our proposed resource policy caps concurrent requests, releases inactive sessions and scratch buffers, limits visual crops and output length, and reduces optional work when the device is constrained. Test sustained sessions and interruption by other activities. Avoid silently lowering quality on a task where missing a character or event defeats the purpose; ask for another capture or expose a limited mode.
+
+Platform policies can impose their own limits. ML Kit GenAI currently documents per app inference and battery use quotas, and blocks inference when the app is not the top foreground application.[^mlkit] A background feature cannot infer permission from a successful foreground demo.
+
+Streaming makes progress visible; it does not make an unfinished result complete. Keep cancellable work, editable drafts and committed actions visually distinct. Link to [Multimodal AI](/edge-ai/multimodal/) for provisional speech and temporal evidence, and [Agents and hybrid systems](/edge-ai/agents-hybrid-systems/) for action authorization.
+
+## Observe quality without collecting everything
+
+As a proposed telemetry baseline, record model and runtime version, input size buckets, cold or warm state, duration, cancellation and error category. Add task specific feedback such as an accepted edit or a corrected extraction when the collection is appropriate. Keep hardware and thermal context only at the granularity needed to investigate performance.
+
+Do not treat raw prompts, images, audio and document text as the default debugging payload. Logs, backups and analytics need their own access, retention and disclosure decisions. ML Kit's privacy terms illustrate the distinction: model inputs and outputs stay local for its APIs, while performance and utilization metrics can be sent to Google.[^privacy] Your application may have additional data flows.
+
+A local processing claim should describe which processing stays local, when a remote service is used and which data crosses the boundary. Review credentials, network destinations, document access and update channels as part of the actual implementation. Neither offline inference nor a signed model is a complete security boundary.
+
+## A concrete release review
+
+For a hypothetical offline document summary feature, our proposed acceptance review is:
+
+1. Open and search the saved document when the model is unavailable; preserve the person's selected passage and edits.
+2. Test initial download, interruption, low storage and a second offline session after a restart.
+3. Evaluate the intended languages, long inputs and incorrect summaries on each supported model and runtime combination.
+4. Measure cold and sustained use with the camera or another relevant feature active; test cancellation and app state changes.
+5. Exercise failed activation and authenticated recovery, including tokenizer and index compatibility.
+6. Inspect actual network traffic and logs, then confirm that the product's disclosure matches them.
+
+These steps are a review plan, not completed tests. The feature earns its place when it improves the user's task under its operating contract. Compare it with source viewing or manual search, not only with a larger model. A smaller implementation that consistently completes the intended job can be more useful than a broader feature that is often unavailable.
+
+Continue with [Evaluation and profiling](/edge-ai/evaluation-profiling/) to design that evidence. Mutable platform documentation inspected October 12, 2026; no download, rollout, privacy audit or device measurement was performed here.
+
+[^firebase]: Firebase. [Use a custom TensorFlow Lite model on Android](https://firebase.google.com/docs/ml/android/use-custom-models), download modes and conditions, input and output shapes, and input transformations. Inspected October 12, 2026.
+[^mlkit]: Google ML Kit. [Overview of the ML Kit GenAI APIs](https://developers.google.com/ml-kit/genai), model version, per application quota and background usage. Page updated October 8, 2026; inspected October 12, 2026.
+[^availability]: Google ML Kit. [GenAI Summarization API](https://developers.google.com/ml-kit/genai/summarization/android), availability and download example. Inspected October 12, 2026.
+[^apple]: Apple. [Meet the Foundation Models framework](https://developer.apple.com/videos/play/wwdc2025/286/), WWDC25, Stateful session chapter and availability example. Inspected October 12, 2026.
+[^chrome]: Chrome for Developers. [Get started with built-in AI](https://developer.chrome.com/docs/ai/get-started), Required hardware and Model download. Inspected October 12, 2026; thresholds and supported devices can change.
+[^tuf]: The Update Framework. [Specification](https://theupdateframework.github.io/specification/latest/), version 1.0.37, October 8, 2026; target metadata and sections 5.3 to 5.6 on authenticated updates. Inspected October 12, 2026. Product recovery guidance is our synthesis, not a claim that TUF automatically provides application rollback.
+[^thermal]: Android Developers. [Thermal API](https://developer.android.com/games/optimize/adpf/thermal), thermal headroom and Device limitations. Inspected October 12, 2026; game guidance supplies the device API behavior, not a measured AI product result.
+[^privacy]: Google ML Kit. [Terms & Privacy](https://developers.google.com/ml-kit/terms), Privacy. Page updated May 14, 2025; inspected October 12, 2026.

@@ -1,0 +1,105 @@
+{
+  "revision": 2,
+  "reviewed_at": "2026-10-13T04:53:45Z",
+  "assets": [
+    {
+      "asset": "flashattention-tiling.png",
+      "source": {
+        "id": "S008",
+        "title": "FlashAttention conference edition",
+        "url": "https://papers.neurips.cc/paper_files/paper/2022/file/67d57c32e20fd0a7a302cb81d36e40d5-Paper-Conference.pdf",
+        "authors": [
+          "Tri Dao",
+          "Daniel Y. Fu",
+          "Stefano Ermon",
+          "Atri Rudra",
+          "Christopher Re"
+        ],
+        "version": "NeurIPS 2022 conference PDF, 16 pages; Figure 1 page 2",
+        "source_type": "paper",
+        "claim_roles": [
+          "mechanism",
+          "context"
+        ],
+        "accessed": "2026-10-13",
+        "primary": true,
+        "inspected": true,
+        "license": {
+          "status": "unverified",
+          "value": null,
+          "url": null
+        },
+        "original_sha256": "315f252a8c791dd051ae84b531e4549465279c2a7264606a9cfe1f3495d9dfc8"
+      },
+      "original_figure": "Figure 1",
+      "page": 2,
+      "extraction": {
+        "tool": "pdftoppm (Poppler)",
+        "dpi": 300,
+        "page_number": 2,
+        "crop_pixels": {
+          "x": 420,
+          "y": 265,
+          "width": 1220,
+          "height": 685
+        },
+        "method": "Render only the selected region; original memory hierarchy and tiling panels unchanged. Runtime comparison panel and original caption omitted."
+      },
+      "asset_sha256": "954ec835066e2511f5ee56c0b932b828cf08c95cb5344e27c8c0bd7f64d60ca3",
+      "dimensions": [
+        1220,
+        685
+      ],
+      "reuse_basis": "Specific criticism/review assessment in SOURCES.md; not a license grant."
+    },
+    {
+      "asset": "speculative-three-iterations.png",
+      "source": {
+        "id": "S009",
+        "title": "Fast Inference from Transformers via Speculative Decoding, published edition",
+        "url": "https://proceedings.mlr.press/v202/leviathan23a/leviathan23a.pdf",
+        "authors": [
+          "Yaniv Leviathan",
+          "Matan Kalman",
+          "Yossi Matias"
+        ],
+        "version": "ICML 2023, PMLR 202:19274–19286; Figure 1 page 2",
+        "source_type": "paper",
+        "claim_roles": [
+          "mechanism",
+          "context"
+        ],
+        "accessed": "2026-10-13",
+        "primary": true,
+        "inspected": true,
+        "license": {
+          "status": "verified",
+          "value": "CC BY 4.0",
+          "url": "https://proceedings.mlr.press/pmlr-license-agreement.html"
+        },
+        "original_sha256": "b287adca11d8126e86dfd6facf162f74f2f6dcfefdef9130af7dde35b08e1d1d"
+      },
+      "original_figure": "Figure 1",
+      "page": 2,
+      "extraction": {
+        "tool": "pdftoppm (Poppler)",
+        "dpi": 300,
+        "page_number": 2,
+        "crop_pixels": {
+          "x": 225,
+          "y": 278,
+          "width": 1015,
+          "height": 177
+        },
+        "method": "Retain first three full iteration rows, original labels/colors/underlining; later rows and original caption omitted."
+      },
+      "asset_sha256": "0732cd411249b2f041ec1dc8bce73a11a9f8d873c0c068c2251cf4e5d6aacca4",
+      "dimensions": [
+        1015,
+        177
+      ],
+      "reuse_basis": "CC BY 4.0 established by PMLR publication agreement; attribution, publisher hyperlink, license hyperlink and cropping disclosure retained."
+    }
+  ],
+  "qa": "Selected source pages,crops and native SVG raster previews inspected; actual revised-page QA pending."
+}

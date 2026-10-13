@@ -1,0 +1,53 @@
+{
+  "schema_version": 3,
+  "topic_id": "evaluation-and-profiling",
+  "status": "complete",
+  "coverage": {
+    "mechanisms": "verified source support and stated assumptions",
+    "comparison": "bounded synthesis, no universal ranking",
+    "worked_examples": "arithmetic checked with units and teaching labels",
+    "skeptical_pass": "Inspected llama-bench exclusions and Android thermal stabilization/cooling; reviewed MLPerf summary versus its explicit rules authority. Preserved boundary, sample-count and sustained-session caveats instead of translating a rate into a product recommendation.",
+    "parent_cross_review": "Reader flow, units, arithmetic, scope, citations and illustrative-versus-measured boundaries checked.",
+    "delivery": "Visual revision: full validate (49 deployment +157 content tests, Astro, build and lint), 27 research tests, 66 actual preview views, 22 Focus checks, 16 full-size assets, complete exports and search passed.",
+    "visual_revision": "Inspected source originals and cropped assets,retained exact rights/provenance,and added distinct original diagrams where useful.",
+    "parent_visual_review": "Generated landscape, original source mechanisms, independent diagrams, figure numbering, prose interpretation, source scope, attribution and reuse limits inspected.",
+    "final_review": "Read the complete twelve-page collection; targeted clarity, navigation and notice corrections applied. All delivery gates passed for the final source."
+  },
+  "open_questions": [
+    "Application-specific quality thresholds, percentile confidence and energy counter coverage require a chosen product workload and real device test."
+  ],
+  "recommended_next_direction": "Await explicit commit/push authorization. A push to main triggers configured automatic deployment; verify live content afterward. No upload occurred.",
+  "last_seen": "2026-10-13T19:05:09.754Z",
+  "output": {
+    "kind": "site-page",
+    "path": "src/content/docs/edge-ai/evaluation-profiling.mdx",
+    "status": "reviewed",
+    "revision": 2,
+    "updated": "2026-10-12",
+    "evidence_cutoff": "2026-10-12",
+    "audience": "Readers building an understanding of edge AI and engineers planning on-device applications."
+  },
+  "quality_gate": {
+    "evidence_verified": true,
+    "contradictions_reviewed": true,
+    "output_reviewed": true,
+    "visuals_reviewed": true
+  },
+  "delivery_checks": {
+    "validation": {
+      "status": "passed",
+      "method": "Production-origin full validation passed: 49 deployment tests, 159 content tests, Astro with zero diagnostics, 96-page build and 96 lint-clean documents. A clean Git-eligible copy passed npm ci and the same full validation. Research tools: 27 tests passed; npm audit reported zero vulnerabilities. Deployment origin and Wrangler dry-run packaging passed without upload.",
+      "checked_at": "2026-10-13T19:05:09.754Z"
+    },
+    "rendering": {
+      "status": "passed",
+      "method": "Actual production preview on port 4327: 12 pages at 1440/390/320 pixels in light/dark (72 views), 24 keyboard Focus checks, image decoding, no document overflow, sequential anchors, keyboard panning and no console errors. Selected source/native figure screenshots manually inspected. The catalog passed keyword, empty-result and reset tests; all rows remained without JavaScript. Existing Model Deep Dives artwork switches to exactly one matching theme image and prints the light image. Canonical URLs and editor/unknown-route HTTP 404 boundaries passed.",
+      "checked_at": "2026-10-13T19:00:17.605Z"
+    },
+    "exports": {
+      "status": "passed",
+      "method": "All 12 complete Markdown/MDX exports checked: source images, captions, descriptions, figure/equation anchors, TeX, references and every flow step/note remain. Hardware catalog, roadmap and software-path rows survive exports and no-JavaScript reading. Actual search and root/section discovery passed.",
+      "checked_at": "2026-10-13T19:00:17.605Z"
+    }
+  }
+}

@@ -1,0 +1,697 @@
+{
+  "reviewed_at": "2026-10-13T19:05:09.754Z",
+  "status": "locally-reviewed-awaiting-commit-push-authorization",
+  "baseline_commit": "1cde75f99c18b40292052075e7eb21b40b133de4",
+  "production_origin": "https://latentlit.com",
+  "repository": "by-liu/latent-light",
+  "pages": 12,
+  "validation": {
+    "deployment_tests": 49,
+    "content_tests": 159,
+    "research_tests": 27,
+    "browser_views": 72,
+    "focus_checks": 24,
+    "audit_reported_vulnerabilities": 0,
+    "clean_install_build": "passed",
+    "upload_free_dry_run": "passed"
+  },
+  "files": [
+    {
+      "path": "THIRD_PARTY_NOTICES.md",
+      "sha256": "5ff397900884427b3db427441f3b5c090298f298722f9e9e8ef5825bcec6e3cc"
+    },
+    {
+      "path": "astro.config.ts",
+      "sha256": "7f38688b1aaa34f477455a69bb94d4b47d0e49fe5ac3bbe461728784d94049cc"
+    },
+    {
+      "path": "docs/publication-readiness.md",
+      "sha256": "3505805431cabf13e22cb22091e091d3dfe38b25ca39ef8432f935455a80ae1d"
+    },
+    {
+      "path": "docs/research/edge-ai/agents-hybrid-systems/review.md",
+      "sha256": "ebd65ecbe7b7f42d98a1828363ec52ac46517b99a65dfd0186f583703735435d"
+    },
+    {
+      "path": "docs/research/edge-ai/agents-hybrid-systems/state/claims.jsonl",
+      "sha256": "1a1580c9afbd7a5e95b151ae68500ef460192164c522a35a3c58b0ed37ebc1af"
+    },
+    {
+      "path": "docs/research/edge-ai/agents-hybrid-systems/state/progress.json",
+      "sha256": "9713a5ebec684eb74da2cffdcc0c0d7d81b4ae7112cdfb0bdc4827a38067fc50"
+    },
+    {
+      "path": "docs/research/edge-ai/agents-hybrid-systems/state/runs.jsonl",
+      "sha256": "6256c275171695e92597e656246efcfb43197e62289120d85e849f6b91c7428e"
+    },
+    {
+      "path": "docs/research/edge-ai/agents-hybrid-systems/state/sources.jsonl",
+      "sha256": "55e9fbe6ea1844e7c981c2e2b3b90a324198a9a2f7c508a9cade70e0851b31c1"
+    },
+    {
+      "path": "docs/research/edge-ai/agents-hybrid-systems/state/task_spec.md",
+      "sha256": "9c0f11bc27968e32c3a3d39864c78d8ae8c5d31f625d11a02f8aa191d8c0fa5d"
+    },
+    {
+      "path": "docs/research/edge-ai/agents-hybrid-systems/state/visuals.jsonl",
+      "sha256": "11ea0d5b98484a6111344a374616e049132f2a1544f6bfb828d2121684700ef5"
+    },
+    {
+      "path": "docs/research/edge-ai/efficient-inference/asset-provenance.json",
+      "sha256": "f5b0ffb0bcc9ab6ddd9ffb093434210d53fee6fbbd577a9f76caa781da2acda3"
+    },
+    {
+      "path": "docs/research/edge-ai/efficient-inference/review.md",
+      "sha256": "b313628dadb45334292431c33fb68753c60fac925c8a3086935a7611c5f3ac07"
+    },
+    {
+      "path": "docs/research/edge-ai/efficient-inference/state/claims.jsonl",
+      "sha256": "137d93016318acaa1ba1d9324882d1dbfd208e6e964e9919166cd9d770da2797"
+    },
+    {
+      "path": "docs/research/edge-ai/efficient-inference/state/progress.json",
+      "sha256": "a83b54a1ff2a3f78129494c52418f310d4093d68f5cdee59e306f546b5ce1892"
+    },
+    {
+      "path": "docs/research/edge-ai/efficient-inference/state/revision-1-review.json",
+      "sha256": "72c1d1e1a0c7ba1a992cca2e7560764a7095f8f0c5baec34896d5141e54109f2"
+    },
+    {
+      "path": "docs/research/edge-ai/efficient-inference/state/runs.jsonl",
+      "sha256": "1073f2ea4fcaf24e4ed7ad959d430b338721dd53eaa75e3cbd0ace2b0b12206b"
+    },
+    {
+      "path": "docs/research/edge-ai/efficient-inference/state/sources.jsonl",
+      "sha256": "1c037db65ae40d17251cb32fada48f69ce3acef8a577975bfd13d564368186e1"
+    },
+    {
+      "path": "docs/research/edge-ai/efficient-inference/state/task_spec.md",
+      "sha256": "ce75f16cc3dc5623536950c9b7de56268bd753df56f134c68db61f519e8ee6c4"
+    },
+    {
+      "path": "docs/research/edge-ai/efficient-inference/state/visuals.jsonl",
+      "sha256": "f6b1f148c493e0b7edce44a6ed6276b7799cfe0b6f7d6fa46fe722a7dea88b07"
+    },
+    {
+      "path": "docs/research/edge-ai/efficient-models/review.md",
+      "sha256": "9295a93ed6c36b13e8264224be57eecd82415ffccba7e0424c5f33902d114d24"
+    },
+    {
+      "path": "docs/research/edge-ai/efficient-models/state/claims.jsonl",
+      "sha256": "67cac53284a074cb076ed8d1f2678b5bedefb6329d3f7f58ed4c5a2c3a3ba5e1"
+    },
+    {
+      "path": "docs/research/edge-ai/efficient-models/state/progress.json",
+      "sha256": "10130d1a092c90a9f1029075f742414c7573880bc4d07e6a78e33d354eaf364f"
+    },
+    {
+      "path": "docs/research/edge-ai/efficient-models/state/runs.jsonl",
+      "sha256": "6fa9a1579fd83f762943ba1d1f4321b4ec7383199ddb68cfc2b117df114f6fd7"
+    },
+    {
+      "path": "docs/research/edge-ai/efficient-models/state/sources.jsonl",
+      "sha256": "42511e978b4d5a0de440ae3189ca6e78022c37d02902d88386a9d0e47a2ddc6f"
+    },
+    {
+      "path": "docs/research/edge-ai/efficient-models/state/task_spec.md",
+      "sha256": "06037ab27f10b3588286aa59bd8a9d13389c4b1a342cadd9e4d068f37aa86a91"
+    },
+    {
+      "path": "docs/research/edge-ai/efficient-models/state/visual-history.jsonl",
+      "sha256": "5de7077fefad8f1bb662425ee7d0eb299a6a3a9a7e295ef8fd7c7f4845248fb3"
+    },
+    {
+      "path": "docs/research/edge-ai/efficient-models/state/visuals.jsonl",
+      "sha256": "8d009ff1ae1fb7ea3759d4ed096c99305adca9b753439b2d99b2efbe587ddcd5"
+    },
+    {
+      "path": "docs/research/edge-ai/evaluation-profiling/asset-provenance.json",
+      "sha256": "0225c19d32b9680a44f47e40b03e09acaf6c4f5732c976a01db88835c2b9418c"
+    },
+    {
+      "path": "docs/research/edge-ai/evaluation-profiling/review.md",
+      "sha256": "add91689d08b9087036e3ce4b8e53dc46f093fb99bd1bcce58dc0e5624b267b4"
+    },
+    {
+      "path": "docs/research/edge-ai/evaluation-profiling/state/claims.jsonl",
+      "sha256": "424b524a4c51990c885c32df312978a2192b4a7c8f921fe923fae3d6f19121a9"
+    },
+    {
+      "path": "docs/research/edge-ai/evaluation-profiling/state/progress.json",
+      "sha256": "e23314f53b7ffdbbd183f0364db30cc9d1939546b4fca095ccc2e56c805fc144"
+    },
+    {
+      "path": "docs/research/edge-ai/evaluation-profiling/state/revision-1-review.json",
+      "sha256": "c1a4766a8bd9f63a6faf43ced51b92c35220d0220dd4c41efbe10481ab57ac1a"
+    },
+    {
+      "path": "docs/research/edge-ai/evaluation-profiling/state/runs.jsonl",
+      "sha256": "d3de0e064332a73a38eace053e643a6ce5885c3b2c2aa5258b79f0cbfd36605b"
+    },
+    {
+      "path": "docs/research/edge-ai/evaluation-profiling/state/sources.jsonl",
+      "sha256": "cb43c9097fe583b649b891568f7874c9be9dfbc8f84d22ad34e57b2138252939"
+    },
+    {
+      "path": "docs/research/edge-ai/evaluation-profiling/state/task_spec.md",
+      "sha256": "631788e2ef2e6e0dfca149d41654616fc47007f0c4369ff59e90b04642d4f794"
+    },
+    {
+      "path": "docs/research/edge-ai/evaluation-profiling/state/visuals.jsonl",
+      "sha256": "143215ed9458b083373a43be36282a0b498998656eeed3fcee0879fb45113496"
+    },
+    {
+      "path": "docs/research/edge-ai/foundations/review.md",
+      "sha256": "939880658176289086c036b3c568774f384622fe9e64634a5bd50a845e9dd45d"
+    },
+    {
+      "path": "docs/research/edge-ai/foundations/state/claims.jsonl",
+      "sha256": "15a686ae05a8d44004d8a7d696ec7bef1abeca7052c1b76a0bf1d9b7362c3dd6"
+    },
+    {
+      "path": "docs/research/edge-ai/foundations/state/progress.json",
+      "sha256": "6d3dee84d522b4dfc7457d87556db8ba62edb291bf03e1beebfdadacf332d554"
+    },
+    {
+      "path": "docs/research/edge-ai/foundations/state/revision-2-visuals.jsonl",
+      "sha256": "2a3ce8e0e431ffaf6d51800c63b5e8e61c5c2c614abedbacec958ead6248bf6a"
+    },
+    {
+      "path": "docs/research/edge-ai/foundations/state/runs.jsonl",
+      "sha256": "4962a7d4397a2d0d4d5624f4abf12e4ae2e5e7d5525982a9dd4635eed827c16e"
+    },
+    {
+      "path": "docs/research/edge-ai/foundations/state/sources.jsonl",
+      "sha256": "15c54d9aab28e824487d0566ba164fca7e7bf8a80e115ff02aa25e303ed10994"
+    },
+    {
+      "path": "docs/research/edge-ai/foundations/state/task_spec.md",
+      "sha256": "cd012e605ef3f3c12bbab04098eef516d34bf3b27fe60681092d99c6f5df9853"
+    },
+    {
+      "path": "docs/research/edge-ai/foundations/state/visuals.jsonl",
+      "sha256": "1e911689fd1a0bdf6d7c1fea6f127562c69cdaa1e72c5c948d0bd06681425a66"
+    },
+    {
+      "path": "docs/research/edge-ai/foundations/visuals/memory-budget.mjs",
+      "sha256": "e93908278fa93064db9d51a8626c50eb9f11a260c06ef2df12cd0b149c0803c7"
+    },
+    {
+      "path": "docs/research/edge-ai/multimodal/review.md",
+      "sha256": "2a7703c0a1176ed3961c5b54b9ceaf799087355a1ad639120ab22121b8887bad"
+    },
+    {
+      "path": "docs/research/edge-ai/multimodal/state/claims.jsonl",
+      "sha256": "ecd7cdc08ee3090f963bf706c7570c5355c40478175659dc0ba034ff8d3cbcea"
+    },
+    {
+      "path": "docs/research/edge-ai/multimodal/state/progress.json",
+      "sha256": "4b9942fa47b51523e1ac531853e73f2634da9ac8b1da14ca0e6a3e891a31d73d"
+    },
+    {
+      "path": "docs/research/edge-ai/multimodal/state/runs.jsonl",
+      "sha256": "7a0e96e336e6f78eff60bf4fa768d3b6710772ac8744d8191c7ed6fdff0facbc"
+    },
+    {
+      "path": "docs/research/edge-ai/multimodal/state/sources.jsonl",
+      "sha256": "fc918adf64130ab92b0c976982ef01c55aac6bea60cf9262fbe63df90f4ab495"
+    },
+    {
+      "path": "docs/research/edge-ai/multimodal/state/task_spec.md",
+      "sha256": "770a738deda72c50a4239e22583fe9721a165f95f4ebad53c457ac2bd9845506"
+    },
+    {
+      "path": "docs/research/edge-ai/multimodal/state/visuals.jsonl",
+      "sha256": "f8854eb2257517761a867b2e6e3df5af26490ae1f891b234c2a513d0afbe7364"
+    },
+    {
+      "path": "docs/research/edge-ai/on-device-computing/access-notes.md",
+      "sha256": "6ef73237b55e0bbbf2786a6e9760e0a3f35b4944a034c46ad504b91811582736"
+    },
+    {
+      "path": "docs/research/edge-ai/on-device-computing/review.md",
+      "sha256": "51a0ff8710ffdc26577fd42fe9024f58a985c24196c05f14c869c57878d12631"
+    },
+    {
+      "path": "docs/research/edge-ai/on-device-computing/state/claims.jsonl",
+      "sha256": "e9e6a500efe6dd39bb7dc9c6eda169208213b40641fad22bac5a3fd9e7086e7c"
+    },
+    {
+      "path": "docs/research/edge-ai/on-device-computing/state/progress.json",
+      "sha256": "7377bd1805a8a1d016bfe9a4222307d942917c8d0da0de80e20f171d9cc1c96a"
+    },
+    {
+      "path": "docs/research/edge-ai/on-device-computing/state/runs.jsonl",
+      "sha256": "4ad3af8b9e38f784b8dcaaee271f0a61a86fbb6939a245146f209e619c38fefe"
+    },
+    {
+      "path": "docs/research/edge-ai/on-device-computing/state/sources.jsonl",
+      "sha256": "a16e2c2126f8bbe3cbe6d448d373a31d1d7c78a42bfb9f73c70e21187fb11394"
+    },
+    {
+      "path": "docs/research/edge-ai/on-device-computing/state/task_spec.md",
+      "sha256": "bdb6756742e6651aae72625a634e3fc4197f302ba41ddaaa79e30fb1ea541992"
+    },
+    {
+      "path": "docs/research/edge-ai/on-device-computing/state/visuals.jsonl",
+      "sha256": "f0054e1fe0b80ee873cd3a72a0c745476f5bc39a440d11415c53da9f62cbdee4"
+    },
+    {
+      "path": "docs/research/edge-ai/on-device-computing/visuals/diagrams.mjs",
+      "sha256": "8dbea48626b93d3b465298974fd917cf7fea952fa210de0d6026c0468fe1c13e"
+    },
+    {
+      "path": "docs/research/edge-ai/overview/review.md",
+      "sha256": "df97997410b25bdcff4b70c2455335e83c7d2c7fe5fc76c08268bf98a72d78ed"
+    },
+    {
+      "path": "docs/research/edge-ai/overview/state/claims.jsonl",
+      "sha256": "b8e8ac487c69c6d3f7dabc1a75b3be3e6e5012ad865e701be85af45d0e6d176a"
+    },
+    {
+      "path": "docs/research/edge-ai/overview/state/progress.json",
+      "sha256": "3166ddeaa6690f78def4d7581e83d642f91d2ac13d9d454b1c3168ec71d781fb"
+    },
+    {
+      "path": "docs/research/edge-ai/overview/state/revision-2-visuals.jsonl",
+      "sha256": "705912fc158e64663a68246a42b9d65e14eee6186f8592a040caecb0fa0449ec"
+    },
+    {
+      "path": "docs/research/edge-ai/overview/state/runs.jsonl",
+      "sha256": "e28fb6f94cdf1d62e61f863dd1c1e58db6f07ede55a6f55b0818df0c19ce67d4"
+    },
+    {
+      "path": "docs/research/edge-ai/overview/state/sources.jsonl",
+      "sha256": "641317ee6f8cc162882475f4ac188531f9f1772b7a59db48cd83b40ce848ea45"
+    },
+    {
+      "path": "docs/research/edge-ai/overview/state/task_spec.md",
+      "sha256": "b9e8e74987a70d98dd09a8c2a20ee6666b58c977da25a9c5a408d8793f700221"
+    },
+    {
+      "path": "docs/research/edge-ai/overview/state/visuals.jsonl",
+      "sha256": "6edbab71fa8a5a4b45cbb8fdb3de8cb4fa125fc2f128fa21f0c19176c9a02156"
+    },
+    {
+      "path": "docs/research/edge-ai/overview/visuals/landscape-prompt-v1.md",
+      "sha256": "4c3d6bc19f14eb7102feb867277c1685efd82c5d149373e49b9270822eb30776"
+    },
+    {
+      "path": "docs/research/edge-ai/production-product-design/review.md",
+      "sha256": "10ad42922922b9af91deb47e7c11283f55865f7bac06378d095e9b11f2ee160b"
+    },
+    {
+      "path": "docs/research/edge-ai/production-product-design/state/claims.jsonl",
+      "sha256": "230bf8dfc324bb8def2d3ba44869527a1afb458a20a0e9a6bb9ee5f01a87cc2c"
+    },
+    {
+      "path": "docs/research/edge-ai/production-product-design/state/progress.json",
+      "sha256": "ca638be16efcc0461d567802044db38b1df54151e30a624a86b010aa4400187e"
+    },
+    {
+      "path": "docs/research/edge-ai/production-product-design/state/runs.jsonl",
+      "sha256": "4a725176f97e1c0d0168c58b15b87756dc0dedbe7e78d58224ca57b771eb93d1"
+    },
+    {
+      "path": "docs/research/edge-ai/production-product-design/state/sources.jsonl",
+      "sha256": "74adcbab673590ddee555685e5204a64bdc46570dd2b3dc104d7ceaef2906bd1"
+    },
+    {
+      "path": "docs/research/edge-ai/production-product-design/state/task_spec.md",
+      "sha256": "91ff00347c6a179212deccad64278297cac5e0534c92aa18fed5688307e6466b"
+    },
+    {
+      "path": "docs/research/edge-ai/production-product-design/state/visuals.jsonl",
+      "sha256": "0a617b3e90e95f626c8d188c906c5126463cabb96aa26d394fb03308d88561aa"
+    },
+    {
+      "path": "docs/research/edge-ai/quantization-compression/review.md",
+      "sha256": "ba9840999e3d259f7383b16f18711df1d19c5821ec3a61d682473d227036bacd"
+    },
+    {
+      "path": "docs/research/edge-ai/quantization-compression/state/claims.jsonl",
+      "sha256": "4804c29c2fc5c6c0c2b11ff793813add22839c943342d27290085d2ad1bfd10b"
+    },
+    {
+      "path": "docs/research/edge-ai/quantization-compression/state/progress.json",
+      "sha256": "d8162bb55bd8ee5c5cd7b3740b68796a55b1e82824e519e149aecacda283142c"
+    },
+    {
+      "path": "docs/research/edge-ai/quantization-compression/state/runs.jsonl",
+      "sha256": "fca7e7c14fdb4412119fd58271510846fe7aba751bb8a7f842d9a270b1fdcd67"
+    },
+    {
+      "path": "docs/research/edge-ai/quantization-compression/state/sources.jsonl",
+      "sha256": "05284526aa5de9b1f2ce229c322d14d594fbed05b6c6d8c2f2ccc775af289f1b"
+    },
+    {
+      "path": "docs/research/edge-ai/quantization-compression/state/task_spec.md",
+      "sha256": "3e45b47194275ac72e6bd763fb49767505f220f292ad73442ec4da64d10e7e90"
+    },
+    {
+      "path": "docs/research/edge-ai/quantization-compression/state/visual-history.jsonl",
+      "sha256": "fe4f3cc096be321fb3cffc87fe5a4f57ab5dad4e2d08aa655eeabc32607718cf"
+    },
+    {
+      "path": "docs/research/edge-ai/quantization-compression/state/visuals.jsonl",
+      "sha256": "53f1a701c42615607e03ac43e884d7c2bbf74a0dd18bf1d985352f17a5c8ad89"
+    },
+    {
+      "path": "docs/research/edge-ai/review.md",
+      "sha256": "570287dc580b86784897889e919374afb3dbd78d991e69fc35a9dcae766b0615"
+    },
+    {
+      "path": "docs/research/edge-ai/runtimes-compilers/asset-provenance.json",
+      "sha256": "638777eca4e74c040c30438a267114f36537d3d7195785ecd075d64da271279e"
+    },
+    {
+      "path": "docs/research/edge-ai/runtimes-compilers/review.md",
+      "sha256": "15b53a176ce82e04d750bd7d0fa93b4549e1e5932856ec5b66a72482bf8ac804"
+    },
+    {
+      "path": "docs/research/edge-ai/runtimes-compilers/state/claims.jsonl",
+      "sha256": "e537fc1f8a7a73172693902a0eb224f857d931b94559911d91018f220a2e5be7"
+    },
+    {
+      "path": "docs/research/edge-ai/runtimes-compilers/state/progress.json",
+      "sha256": "309e9419581663847083dbeadc67aa328e7e7a34dd05cce612124a7489df5a2f"
+    },
+    {
+      "path": "docs/research/edge-ai/runtimes-compilers/state/revision-1-review.json",
+      "sha256": "6c8b5b4d29caef67d3b557fde6914cb60b9dbcbb1ba5b677a323dff0d94f15bf"
+    },
+    {
+      "path": "docs/research/edge-ai/runtimes-compilers/state/runs.jsonl",
+      "sha256": "86a1680db6c9e6b089c8107c98cc590b4f324ab779f8146c7aee8bc677d37a3b"
+    },
+    {
+      "path": "docs/research/edge-ai/runtimes-compilers/state/sources.jsonl",
+      "sha256": "19354d4259a05749cf3e999cff8652d8b815014aa3c66c6f81eee4997531063b"
+    },
+    {
+      "path": "docs/research/edge-ai/runtimes-compilers/state/task_spec.md",
+      "sha256": "c0f089175577a35db04414a259944cd8b4b113248a61a2c9c4af8f8dfdafa8f3"
+    },
+    {
+      "path": "docs/research/edge-ai/runtimes-compilers/state/visuals.jsonl",
+      "sha256": "422b25c1d9da660568025f63ce63f83ef9379657e3961b3fc6476cc4b0207737"
+    },
+    {
+      "path": "docs/research/edge-ai/training-small-models/review.md",
+      "sha256": "2747009d2a5a4a367bf5f40139edcc91f89d3806ac79f0b77c7e42d7e3e06e84"
+    },
+    {
+      "path": "docs/research/edge-ai/training-small-models/state/claims.jsonl",
+      "sha256": "8abc61c3d568a5c34d88ddad5c6977446d40c8f470ac550f662d2b91bd35c4da"
+    },
+    {
+      "path": "docs/research/edge-ai/training-small-models/state/progress.json",
+      "sha256": "228b2999ed0e72eb2e4848eaf9f3cc52b54fb45d5a675126818b23c2cdb1d114"
+    },
+    {
+      "path": "docs/research/edge-ai/training-small-models/state/runs.jsonl",
+      "sha256": "39a6530f04dbb3902f1ebd62b45265763faef10923e7d87a77f5750254b2875d"
+    },
+    {
+      "path": "docs/research/edge-ai/training-small-models/state/sources.jsonl",
+      "sha256": "40b719b4cc172b59956cedbb86a5ac0c50c891cb8050c081bf33363ac12449e9"
+    },
+    {
+      "path": "docs/research/edge-ai/training-small-models/state/task_spec.md",
+      "sha256": "42fcd64f1594a85e0c2aca84daa2e4cd9dc279d5c0501d9835347bd22f786486"
+    },
+    {
+      "path": "docs/research/edge-ai/training-small-models/state/visual-history.jsonl",
+      "sha256": "c813a00bafb394f9ac26e510610e4fbb2a5deb1f7aa5ef2a4e1b816915626e92"
+    },
+    {
+      "path": "docs/research/edge-ai/training-small-models/state/visuals.jsonl",
+      "sha256": "efb87aad1fb991636d5adfdaee5cb5ead3dc659d92298bbff54f5dcf3406f9ce"
+    },
+    {
+      "path": "docs/research/edge-ai/visual-enrichment-review.md",
+      "sha256": "beca82fd4c670227bf6fb8349694dd14589d8180d0ecc34da242c419298a64f6"
+    },
+    {
+      "path": "package.json",
+      "sha256": "502e345255967fc34375addc5d450f7d5f5c563477912d0627d42b99f317526e"
+    },
+    {
+      "path": "plugins/source-figure.mjs",
+      "sha256": "9458b10ef876f783dc7ce4d20269975f1caaad039e9e1832d5457148cb66e62b"
+    },
+    {
+      "path": "public/figures/edge-ai/agents-hybrid-systems/NOTICE.md",
+      "sha256": "d37d76be7a75e1e4148c6165f6e57c53fe62a47156ac5a1bbe31a5f6388b6755"
+    },
+    {
+      "path": "public/figures/edge-ai/agents-hybrid-systems/SOURCES.md",
+      "sha256": "b73e28130cfdfd06b4fa0dacf75f8bff80b98d0e898e0e5aa0838782c85f0a60"
+    },
+    {
+      "path": "public/figures/edge-ai/agents-hybrid-systems/rag-mechanism.webp",
+      "sha256": "095761d775e4003c26db2bb64fffe184d00bdd51407739c719cabfd883960d19"
+    },
+    {
+      "path": "public/figures/edge-ai/efficient-inference/NOTICE.md",
+      "sha256": "22a662d33a2a168d12b55f7a1bc1717ffba708f2a82a848780e55c3225b82ed1"
+    },
+    {
+      "path": "public/figures/edge-ai/efficient-inference/SOURCES.md",
+      "sha256": "26241639d6a22319ceb2826840755affa19933078dabbbdedd36d68db0e87aec"
+    },
+    {
+      "path": "public/figures/edge-ai/efficient-inference/flashattention-tiling.png",
+      "sha256": "954ec835066e2511f5ee56c0b932b828cf08c95cb5344e27c8c0bd7f64d60ca3"
+    },
+    {
+      "path": "public/figures/edge-ai/efficient-inference/speculative-three-iterations.png",
+      "sha256": "0732cd411249b2f041ec1dc8bce73a11a9f8d873c0c068c2251cf4e5d6aacca4"
+    },
+    {
+      "path": "public/figures/edge-ai/efficient-models/NOTICE.md",
+      "sha256": "b48314d3da5832766f5d33d203261d2f33d12e6e72f59e55abe1a14e1df9630d"
+    },
+    {
+      "path": "public/figures/edge-ai/efficient-models/SOURCES.md",
+      "sha256": "7c29b96a0a848055cec8004138a5b36fa943607cd6c8d00740cc985d67679a25"
+    },
+    {
+      "path": "public/figures/edge-ai/efficient-models/gqa-head-sharing.png",
+      "sha256": "97da46bc4a9dea622d345a68faaf331e537890a79e84267a40c9329c1bf12d41"
+    },
+    {
+      "path": "public/figures/edge-ai/evaluation-profiling/NOTICE.md",
+      "sha256": "eddd14d097c75b9fb17f557a902d0ac52e54b4860f4d02f44bc397e035129087"
+    },
+    {
+      "path": "public/figures/edge-ai/evaluation-profiling/SOURCES.md",
+      "sha256": "2433d8a5afce281c4c8055f4f040cc94eeac8c0ee5e5be93540216b809e680e2"
+    },
+    {
+      "path": "public/figures/edge-ai/evaluation-profiling/mlperf-loadgen-boundary.png",
+      "sha256": "d6636a8f9ba4467cca69d4798102256e21e15cbcb2eb6efc487c290e35023703"
+    },
+    {
+      "path": "public/figures/edge-ai/evaluation-profiling/timing-boundaries.svg",
+      "sha256": "746fc69c5aaf01309304e064df2bc3f02e07f00435a36aed54bacd77901a045a"
+    },
+    {
+      "path": "public/figures/edge-ai/foundations/NOTICE.md",
+      "sha256": "5cd770dcbdfe317cc8fcbb71f0c4d108024119f7c5bee8485297609a62429b8c"
+    },
+    {
+      "path": "public/figures/edge-ai/foundations/SOURCES.md",
+      "sha256": "874a48e754c5789f1d04a270cfed91b429cca112a235b300291ab108da155367"
+    },
+    {
+      "path": "public/figures/edge-ai/foundations/memory-budget.svg",
+      "sha256": "10ee0fba06901c82a646f0fee780c9f8867341c7445cd36f4729eb578cc3a9bf"
+    },
+    {
+      "path": "public/figures/edge-ai/foundations/roofline-original-figure1.png",
+      "sha256": "8f00c6df7380022158a0f014b3af2393f8d0cbc262428abc7e7de1d2e5e85d62"
+    },
+    {
+      "path": "public/figures/edge-ai/multimodal/NOTICE.md",
+      "sha256": "9e277502b14b3f7352815398294d20a8d8d1646def86896a1a1d38500ca901dd"
+    },
+    {
+      "path": "public/figures/edge-ai/multimodal/SOURCES.md",
+      "sha256": "b39c3db6c21f6ed6d29552798d039abc6e781dbccb6594ec274f33cb98e43a88"
+    },
+    {
+      "path": "public/figures/edge-ai/multimodal/smolvlm-architecture.webp",
+      "sha256": "ed76402b7c321bac4d318e1026839809eb74ea4ffa1964c747e4d62fd2767d5d"
+    },
+    {
+      "path": "public/figures/edge-ai/multimodal/smolvlm-pixel-shuffle.webp",
+      "sha256": "32375187773fa84807bb5022b6b8bd14441a897bd38b358b282af4ac99ec34f5"
+    },
+    {
+      "path": "public/figures/edge-ai/on-device-computing/NOTICE.md",
+      "sha256": "793911349c17697646be9651213aa649da049ff4b9313f37755e92b7bc26c2da"
+    },
+    {
+      "path": "public/figures/edge-ai/on-device-computing/SOURCES.md",
+      "sha256": "4ce941c7353e7da9ecbe8074affae765221ddd0d51ada30487186639597e6da3"
+    },
+    {
+      "path": "public/figures/edge-ai/on-device-computing/memory-topologies.svg",
+      "sha256": "0a8569f432ac4a618a9d47a2f638721bc522475b4f8b5aa980262bc3e9ef32be"
+    },
+    {
+      "path": "public/figures/edge-ai/on-device-computing/soc-roles.svg",
+      "sha256": "be93c980d38039eb130f26308537b8bcad8792638fd3ba5967451d5ea651ee4f"
+    },
+    {
+      "path": "public/figures/edge-ai/overview/NOTICE.md",
+      "sha256": "8a01a551a36ad62813e1bde55963031ecf97dae4f36f8e189eba2c351209b71b"
+    },
+    {
+      "path": "public/figures/edge-ai/overview/SOURCES.md",
+      "sha256": "a5b06171fac4d85eb4c0f91eab99ac0ec82de388ae2f188d483a043ad729ff76"
+    },
+    {
+      "path": "public/figures/edge-ai/overview/landscape-v1.png",
+      "sha256": "f726da5ea29077cb5728fdf169fec0f50dbf2adbd23817361d0068cafb6a115c"
+    },
+    {
+      "path": "public/figures/edge-ai/production-product-design/NOTICE.md",
+      "sha256": "4659d50e74d5968d92331674f635b9598abd990ae57dd6084a8f508b701354b5"
+    },
+    {
+      "path": "public/figures/edge-ai/production-product-design/SOURCES.md",
+      "sha256": "bf886c608f8b16b48f1bb7e3e23793971a72e0e44cbbbd58f03ac370621bdfcb"
+    },
+    {
+      "path": "public/figures/edge-ai/production-product-design/model-readiness.svg",
+      "sha256": "0485321444ceb920b5bc55be4f8cfab69d7849092ba437d46aab7b8e5d9c0d43"
+    },
+    {
+      "path": "public/figures/edge-ai/quantization-compression/NOTICE.md",
+      "sha256": "f89d4a69048ba415074a313a6a1e57fda79cbd2f40552ece715eb68af0cabb63"
+    },
+    {
+      "path": "public/figures/edge-ai/quantization-compression/SOURCES.md",
+      "sha256": "7b66448f752f1157150c44d5d8c7b46fc41f528b47096ee6df1cfe593665aa4c"
+    },
+    {
+      "path": "public/figures/edge-ai/quantization-compression/smoothquant-outliers.png",
+      "sha256": "d9837f36ff48b652c039187cbf9813b9b7fed0987323d7bc5776b44169beb9d0"
+    },
+    {
+      "path": "public/figures/edge-ai/runtimes-compilers/NOTICE.md",
+      "sha256": "dfadf07445662bb1817766a8b91ccb7ed5f334604e29b202e1a3b858cf243881"
+    },
+    {
+      "path": "public/figures/edge-ai/runtimes-compilers/SOURCES.md",
+      "sha256": "76540cdcda3acbb0767ccbe995d1fd5747b3d20049910b858e691fa18c6a35ae"
+    },
+    {
+      "path": "public/figures/edge-ai/runtimes-compilers/executorch-high-level.png",
+      "sha256": "b7de85af15534ea1d6616c835fc50c997d01738e29fd25fc242937d23d129e50"
+    },
+    {
+      "path": "public/figures/edge-ai/runtimes-compilers/partition-boundaries.svg",
+      "sha256": "ec5acef6df8c7e6082b2d505156fd8e9fa6e60bdeead53e2b43cf74ff5f59cf4"
+    },
+    {
+      "path": "public/figures/edge-ai/training-small-models/NOTICE.md",
+      "sha256": "c325e1d0bf72c9a04301b421a0f51a52dc901e2ecc6492d11f93f212daaf4c60"
+    },
+    {
+      "path": "public/figures/edge-ai/training-small-models/SOURCES.md",
+      "sha256": "55cd25074fcd67cd1342e13637bafd38aa7c80a3a9bd42f92ac57042b9f9b0e7"
+    },
+    {
+      "path": "public/figures/edge-ai/training-small-models/smollm2-data-ablation.png",
+      "sha256": "545c7b2e90282d3408e07bcdfaa55f551ebe50197735a1f4ee59fc3621249772"
+    },
+    {
+      "path": "public/licenses/edge-ai-figures.txt",
+      "sha256": "3e4c2dd6d87b0ae882b3fa85a3854456927c46d6bdf08362c4ce0f6950e58a97"
+    },
+    {
+      "path": "scripts/edge-ai-content.test.mjs",
+      "sha256": "4cb278297f6eb5ac0d6480a3269de11fde50359a75348cefcfb38e4de0782b67"
+    },
+    {
+      "path": "scripts/source-figure.test.mjs",
+      "sha256": "4dc6327a6d49561428d1170da373560f7b9aebd94dbdc5a4157f25bf6fc094dd"
+    },
+    {
+      "path": "src/components/architectures/SourceFigure.astro",
+      "sha256": "2d5c198ac48a9957a120280502c09d8d4058fa58b3716b5308835782d51951fa"
+    },
+    {
+      "path": "src/content/docs/about/content-guidance/model-deep-dive-template.mdx",
+      "sha256": "3b84923d544f74ca8969ab1e3a020b2871cc5dba78dfc34cc4d10e47237aa296"
+    },
+    {
+      "path": "src/content/docs/about/development-guide.mdx",
+      "sha256": "0dce7e50f4562f76c8b444509c9a738ca5da10ced8c5504b1738b54e75a799e7"
+    },
+    {
+      "path": "src/content/docs/about/framework.mdx",
+      "sha256": "38603961faaa251a041e84d8bfa37a868aa37769ec5d4f8858dc2f3f78732dea"
+    },
+    {
+      "path": "src/content/docs/edge-ai/agents-hybrid-systems.mdx",
+      "sha256": "b9905f6e8f8c62ae6f016a5d079a51d6f1a9f7ca8e09e050969943062713a1f9"
+    },
+    {
+      "path": "src/content/docs/edge-ai/efficient-inference.mdx",
+      "sha256": "dfebb993a5a981b1449462d4f6f98a23476dc7ca7edad630363040bc08ac746e"
+    },
+    {
+      "path": "src/content/docs/edge-ai/efficient-models.mdx",
+      "sha256": "5f9e9b210ee3aef2dc3bc2cee2ae2d12d88f185bcf1960640b9f55da8ea7a311"
+    },
+    {
+      "path": "src/content/docs/edge-ai/evaluation-profiling.mdx",
+      "sha256": "66067bfdb12654143aa216b914a0711c630ade5a3efd8abe4acefc00f9b72943"
+    },
+    {
+      "path": "src/content/docs/edge-ai/foundations.mdx",
+      "sha256": "5243098fc3703b8567e7229315a0a730c4b5a1ef2e2eea57f829ca6839fe44c1"
+    },
+    {
+      "path": "src/content/docs/edge-ai/index.mdx",
+      "sha256": "0416137c1eec190f6ca78900945eba41a8c1ab192523551a18c8eeb610e74bb8"
+    },
+    {
+      "path": "src/content/docs/edge-ai/multimodal.mdx",
+      "sha256": "603041a4638bba6eb15cf99b92ca87dea29ef74faadfda7ef98da97cadb8ee55"
+    },
+    {
+      "path": "src/content/docs/edge-ai/on-device-computing.mdx",
+      "sha256": "89b83bc8cbcbaa88abc452aca4975bbe9454cb53d4a9988a4974b1f126374ff0"
+    },
+    {
+      "path": "src/content/docs/edge-ai/production-product-design.mdx",
+      "sha256": "7273b2ba99a36282b93db676fb8474b659578886cb6aeebcfb19cdfb868297af"
+    },
+    {
+      "path": "src/content/docs/edge-ai/quantization-compression.mdx",
+      "sha256": "baf94e9132ab6172a3cde3183b7120fa238c9b221eb14fb9ae897d87334eb5d5"
+    },
+    {
+      "path": "src/content/docs/edge-ai/runtimes-compilers.mdx",
+      "sha256": "65cf432344f58fe273f108f1b651ad214515e585ab02431650d034e164858d17"
+    },
+    {
+      "path": "src/content/docs/edge-ai/training-small-models.mdx",
+      "sha256": "50e596bebae74e2c12a87955effcbdbe67938db72eeceb6603109a2c7df4fd7e"
+    },
+    {
+      "path": "src/content/docs/index.mdx",
+      "sha256": "d9775d97bcd1902d591fb667f174aaa40af603b0aada5491ee71b538efe31201"
+    }
+  ],
+  "excluded_ignored_local_outputs": true,
+  "staged": false,
+  "committed": false,
+  "pushed": false,
+  "deployed": false
+}

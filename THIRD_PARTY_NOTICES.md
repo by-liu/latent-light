@@ -126,3 +126,20 @@ The author supplied the complete NotebookLM-generated podcast for MP3 hosting
 and article playback. Its original recording is unchanged; the audio and its
 automatic text equivalent are also excluded from the site's MIT grant. The
 same media notice and research records retain its exact source and review limits.
+
+## Edge AI figures
+
+Selected original paper and documentation figures under `public/figures/edge-ai/`
+retain their own attribution and terms, and are not relicensed under MIT.
+[The consolidated notice](public/licenses/edge-ai-figures.txt) distinguishes
+CC BY 4.0 report excerpts, the unchanged BSD ExecuTorch diagram, and specific
+criticism/review assessments for Roofline, FlashAttention, MLPerf Mobile and RAG.
+Integrated SmolVLM identity artwork has a separate bounded review; the report
+license is not treated as blanket third-party clearance. Each asset directory
+retains exact editions, checksums, extraction changes and reuse limits.
+
+Independent budget, memory-topology, processor-role, processor-boundary, timing
+and model-readiness SVGs are
+original MIT-licensed diagrams. The generated overview is an editorial map,
+not source artwork or a measured result; its prompt and qualified rights review
+are retained in the overview records. Complete source PDFs are not deployed.

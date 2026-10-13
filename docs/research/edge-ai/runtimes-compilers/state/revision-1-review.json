@@ -1,0 +1,90 @@
+{
+  "recorded_at": "2026-10-13T04:53:45Z",
+  "reason": "Preserve completed parent QA before visual-enrichment revision 2",
+  "progress": {
+    "schema_version": 3,
+    "topic_id": "runtimes-and-compilers",
+    "status": "complete",
+    "coverage": {
+      "mechanisms": "verified source support and stated assumptions",
+      "comparison": "bounded synthesis, no universal ranking",
+      "worked_examples": "arithmetic checked with units and teaching labels",
+      "skeptical_pass": "Inspected ORT usability warning, IO-copy explanation, optimized-model compatibility notes and LiteRT Apple packaging caveat. Runtime comparison covers API/artifact boundaries without rankings or untested performance claims.",
+      "parent_cross_review": "Reader flow, units, arithmetic, scope, citations and illustrative-versus-measured boundaries checked.",
+      "delivery": "Full validate, research tests, 66 browser views, 22 Focus checks, search and complete exports passed."
+    },
+    "open_questions": [
+      "Actual full-model coverage, precision and latency for each desired model/backend/device version combination need a deployment experiment."
+    ],
+    "recommended_next_direction": "Review the local collection; publication needs separate authorization. Recheck runtime contracts before implementation and measure a specified device workload before claiming performance.",
+    "last_seen": "2026-10-13T04:38:25.124Z",
+    "output": {
+      "kind": "site-page",
+      "path": "src/content/docs/edge-ai/runtimes-compilers.mdx",
+      "status": "reviewed",
+      "revision": 1,
+      "updated": "2026-10-12",
+      "evidence_cutoff": "2026-10-12",
+      "audience": "Readers building an understanding of edge AI and engineers planning on-device applications."
+    },
+    "quality_gate": {
+      "evidence_verified": true,
+      "contradictions_reviewed": true,
+      "output_reviewed": true,
+      "visuals_reviewed": true
+    },
+    "delivery_checks": {
+      "validation": {
+        "status": "passed",
+        "method": "SITE_URL=https://latentlit.com npm run validate with Node24.21.0:49 deployment tests,154 content tests,Astro162 files with0 errors/warnings/hints,95 built pages and95 lint-clean files. npm run test:research:27 tests passed. Per-workspace schema validation also performed.",
+        "checked_at": "2026-10-13T04:38:25.124Z"
+      },
+      "rendering": {
+        "status": "passed",
+        "method": "Actual local Astro production preview on port4327 in Chromium:1440/390/320px,light/dark,reduced motion; keyboard Focus controls and pannable tables/equations; native figures,citation anchors and numbered KaTeX; no document overflow or browser errors. All11 desktop and mobile diagrams manually inspected; mobile figure captures use document-coordinate clips to avoid screenshot-induced sticky-chrome overlays.",
+        "checked_at": "2026-10-13T04:38:25.124Z"
+      },
+      "exports": {
+        "status": "passed",
+        "method": "Built Markdown retains all ModelFlow steps/details/notes,captions,formula text and footnotes; MDX retains complete source body. Actual preview search finds the compression chapter. /llms.txt,/llms-full.txt and /edge-ai/llms.txt discover the collection. No-JavaScript overview retains ten topic rows and useful links.",
+        "checked_at": "2026-10-13T04:34:25.447Z"
+      }
+    }
+  },
+  "visuals": [
+    {
+      "id": "V001",
+      "revision": 1,
+      "section": "Execution/evaluation path",
+      "purpose": "Separate the important stages and their boundaries while retaining a complete textual path.",
+      "type": "flowchart",
+      "provenance": "synthesis",
+      "creation_method": "code",
+      "source_ids": [
+        "S001",
+        "S002",
+        "S004"
+      ],
+      "claim_ids": [
+        "C001",
+        "C002",
+        "C004"
+      ],
+      "output_anchor": "figure-1",
+      "editable_source": "../../../../src/content/docs/edge-ai/runtimes-compilers.mdx",
+      "rendered_asset": null,
+      "alt": "Preparation exports a graph, transforms and lowers it, and packages an artifact. Execution initializes/plans, runs assigned partitions and returns output. Supported kernels, fallback, layout and processor boundaries remain explicit.",
+      "caption": "Figure 1. Latent Light synthesis of export, lowering and execution, informed by ExecuTorch and ONNX Runtime.",
+      "license": {
+        "status": "not-applicable",
+        "value": null,
+        "url": null
+      },
+      "status": "verified",
+      "last_verified": "2026-10-12",
+      "source_figure_decision": "A cross-source explanatory path is more useful than copying a paper-specific server schedule or product screenshot; original responsive HTML retains every label in text exports.",
+      "review_notes": "Actual production-preview desktop/mobile/light/dark and Focus inspections passed. Labels, arrows, notes and numbered cited captions retained in exported text; no third-party artwork copied.",
+      "verification_scope": "Inspected rendered explanation and text equivalent; this diagram is synthesis, not experimental evidence."
+    }
+  ]
+}

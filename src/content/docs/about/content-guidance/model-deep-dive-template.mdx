@@ -1,7 +1,7 @@
 ---
 title: Model Deep Dive template
 description: A copyable study scaffold with source-figure and equation recipes.
-lastUpdated: 2026-10-10
+lastUpdated: 2026-10-12
 ---
 
 Use this starter with the [Model Deep Dive guide](/about/content-guidance/model-deep-dive-guide/).
@@ -11,8 +11,8 @@ Copy it into `src/content/docs/architectures/models/<model-slug>.mdx`.
 Replace every `REPLACE_` placeholder with inspected evidence. Remove unused sections and instructional comments before adding the page to navigation.
 Do not publish a scaffold with missing evidence or empty sections.
 
-The import paths below match that source directory. `ModelResources`, `ModelFlow`, and `MathExpression` are globally registered.
-`FocusCanvas` and `SourceFigure` require the explicit imports shown in the starter.
+The import paths below match that source directory. `ModelResources` and `MathExpression` are globally registered.
+`FocusCanvas`, `SourceFigure` and `ModelFlow` require explicit imports. The starter imports the components it uses; the independent-diagram recipe adds `ModelFlow`.
 
 ## Copy the scaffold
 
@@ -168,6 +168,8 @@ Record the original edition, page, figure number, crop, checksum, and reuse basi
 Use native SVG or another precise diagram when geometry, matrices, or dense branching matter.
 
 ```mdx
+import ModelFlow from '../../../../components/architectures/ModelFlow.astro';
+
 <FocusCanvas label="REPLACE_MECHANISM_PURPOSE" size="diagram">
 <ModelFlow
   id="figure-2"

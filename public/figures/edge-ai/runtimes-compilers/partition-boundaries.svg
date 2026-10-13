@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="490" viewBox="0 0 1000 490" role="img" aria-labelledby="title desc">
+  <title id="title">Accelerated regions can lose their benefit at processor boundaries</title>
+  <desc id="desc">A hypothetical serial path has accelerator regions totaling 3 milliseconds, a CPU fallback operation taking 0.5 milliseconds, and two boundary operations taking 2 milliseconds each. Total latency is 7.5 milliseconds, compared with a hypothetical 6 millisecond all-CPU path. Boundary operations may include synchronization, copies and layout conversion; the drawing is not a device measurement.</desc>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#475569"/></marker></defs>
+  <rect width="1000" height="490" rx="18" fill="#ffffff"/>
+  <g font-family="Arial, Helvetica, sans-serif" fill="#172033">
+    <text x="36" y="42" font-size="23" font-weight="700">The partition boundary belongs in the latency budget</text>
+    <text x="36" y="73" font-size="16" fill="#475569">Hypothetical serial schedule. Times illustrate a mechanism, not measured hardware.</text>
+    <rect x="34" y="115" width="205" height="102" rx="12" fill="#e8f1ff" stroke="#3b67a1" stroke-width="2"/>
+    <text x="136" y="147" text-anchor="middle" font-size="18" font-weight="700">Accelerated region A</text>
+    <text x="136" y="176" text-anchor="middle" font-size="16">Device buffers</text>
+    <rect x="278" y="115" width="155" height="102" rx="12" fill="#fff2d6" stroke="#976520" stroke-width="2"/>
+    <text x="355" y="147" text-anchor="middle" font-size="18" font-weight="700">Boundary 1</text>
+    <text x="355" y="179" text-anchor="middle" font-size="22">2 ms</text>
+    <rect x="473" y="115" width="155" height="102" rx="12" fill="#f0eafa" stroke="#7859a6" stroke-width="2"/>
+    <text x="550" y="147" text-anchor="middle" font-size="18" font-weight="700">CPU fallback</text>
+    <text x="550" y="179" text-anchor="middle" font-size="22">0.5 ms</text>
+    <rect x="668" y="115" width="155" height="102" rx="12" fill="#fff2d6" stroke="#976520" stroke-width="2"/>
+    <text x="745" y="147" text-anchor="middle" font-size="18" font-weight="700">Boundary 2</text>
+    <text x="745" y="179" text-anchor="middle" font-size="22">2 ms</text>
+    <rect x="862" y="115" width="104" height="102" rx="12" fill="#e8f1ff" stroke="#3b67a1" stroke-width="2"/>
+    <text x="914" y="144" text-anchor="middle" font-size="17" font-weight="700">Region B</text>
+    <text x="914" y="176" text-anchor="middle" font-size="15">Device</text>
+    <text x="914" y="197" text-anchor="middle" font-size="15">buffers</text>
+    <g stroke="#475569" stroke-width="2" fill="none" marker-end="url(#arrow)"><path d="M240 166H270"/><path d="M434 166H465"/><path d="M629 166H660"/><path d="M824 166H854"/></g>
+    <path d="M136 220V241H914V220" fill="none" stroke="#3b67a1" stroke-width="2"/>
+    <rect x="345" y="227" width="360" height="29" fill="#ffffff"/>
+    <text x="525" y="248" text-anchor="middle" font-size="17" fill="#3b67a1">Regions A and B together: 3 ms</text>
+    <text x="36" y="294" font-size="18" font-weight="700">Boundary work can include</text>
+    <text x="36" y="325" font-size="17">Synchronization · data copies · layout or precision conversion</text>
+    <text x="36" y="354" font-size="16" fill="#475569">Unified memory can avoid a physical copy; other boundary work still needs inspection.</text>
+    <rect x="34" y="383" width="932" height="71" rx="12" fill="#f3f5f8" stroke="#cbd5e1"/>
+    <text x="54" y="412" font-size="20" font-weight="700">Mixed path: 3 + 0.5 + 2 + 2 = 7.5 ms</text>
+    <text x="54" y="439" font-size="17">All-CPU comparison: 6 ms. Faster device regions do not guarantee a faster complete path.</text>
+  </g>
+</svg>

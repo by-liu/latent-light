@@ -1,7 +1,7 @@
 ---
 title: Development guide
 description: Where source files live and how to develop pages, components, and exports.
-lastUpdated: 2026-10-11
+lastUpdated: 2026-10-13
 ---
 
 Develop the site from its source files. Preserve the calm reading experience.
@@ -60,7 +60,7 @@ Add each new page to the explicit sidebar in `astro.config.ts`. Link related
 explanations. Preserve established URLs. Use a redirect when replacing a route.
 
 Organize learning collections under broader domains.
-AI Technology contains LLM & VLM, Document AI and Agents.
+AI Technology contains LLM & VLM, Document AI, Agents and Edge AI.
 Products & Markets contains AI Landscapes. Human Capabilities contains High agency and Taste.
 Do not add empty navigation groups.
 A sidebar grouping change does not require moving source files or changing page URLs.
@@ -111,6 +111,13 @@ Keep a meaningful text equivalent in the exported content.
 Follow the [figure numbering and caption standards](/about/content-guidance/content-standards/#figure-numbering-and-captions).
 `SourceFigure` and `FoundationDiagram` accept an `id` for figure anchors.
 Keep caption labels in the page source so the text export retains them.
+Import `SourceFigure` and `ModelFlow` explicitly in pages that use them.
+They are not globally registered.
+
+Keep `sourceFigureAsMarkdown` from `plugins/source-figure.mjs` registered in
+`astro.config.ts`. It preserves the image, numbered anchor, meaningful
+description, complete caption and citations while removing the image-slot
+presentation wrapper. Its regression tests run with `npm run test:content`.
 
 For dense report figures, set `SourceFigure`'s optional `minWidth` to a readable
 width in pixels. Desktop shows the complete image; smaller screens preserve

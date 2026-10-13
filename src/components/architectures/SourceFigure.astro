@@ -25,10 +25,10 @@ if (minWidth !== undefined && (!Number.isFinite(minWidth) || minWidth < 0 || min
   .figure-tools{display:flex;justify-content:space-between;align-items:center;gap:.6rem;margin-top:.5rem;color:var(--nb-muted-foreground);font-size:.72rem;line-height:1.5;}.figure-tools a{white-space:nowrap;}
   .source-figure :global(img){display:block;width:100%;height:auto;background:#fff;border:1px solid var(--nb-border);border-radius:.75rem;padding:.5rem;}
   .poster :global(img){padding:0;background:transparent;}
-  .theme-dark{display:none;}
-  :global(html[data-mode='dark']) .theme-light{display:none;}
-  :global(html[data-mode='dark']) .theme-dark{display:block;}
-  @media print{.theme-light{display:block !important;}.theme-dark{display:none !important;}}
+  .image-viewport>.theme-dark{display:none;}
+  :global(html[data-mode='dark']) .image-viewport>.theme-light{display:none;}
+  :global(html[data-mode='dark']) .image-viewport>.theme-dark{display:block;}
+  @media print{.image-viewport>.theme-light{display:block !important;}.image-viewport>.theme-dark{display:none !important;}}
   .source-figure :global([slot="image"] p){margin:0;}
   .image-viewport>a{display:block;border-radius:.75rem;}.image-viewport>a:focus-visible,.figure-tools a:focus-visible{outline:2px solid var(--nb-primary);outline-offset:4px;}
   .image-viewport>a:hover{cursor:zoom-in;}

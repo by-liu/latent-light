@@ -1,0 +1,234 @@
+---
+title: Foundations and Bottlenecks
+description: Distinguish model size, peak working memory, bandwidth, compute and sustained performance before choosing an Edge AI design.
+lastUpdated: 2026-10-13
+---
+
+import FocusCanvas from '../../../components/FocusCanvas.astro';
+import ModelFlow from '../../../components/architectures/ModelFlow.astro';
+import SourceFigure from '../../../components/architectures/SourceFigure.astro';
+import ComparisonTable from '../../../components/ComparisonTable.astro';
+
+The first Edge AI question is not “How large a model can this device load?”
+It is **“Can this device complete the useful task, reliably, within its
+budgets?”** A compact checkpoint is only part of that answer. Model state,
+temporary tensors, input processing and the runtime also need space and time.
+Mobile deployment guidance explicitly separates storage, memory, performance
+and execution-provider choices.[^ort]
+
+For a hardware introduction and current device platforms, read
+[On device computing](/edge-ai/on-device-computing/).
+
+Use this page to form a budget before optimizing. Its numerical examples
+are hypothetical calculations, not measurements of a particular model or device.
+
+## Start from the workload
+
+A short voice command, a document question and continuous camera perception
+are different workloads. State the input size, expected output, arrival
+pattern, quality threshold and deadline. Then ask what must remain available
+while the task runs.
+
+<ComparisonTable id="device-budgets" title="Five budgets, not one model-size limit" label="Edge AI workload budgets" itemLabel="budgets">
+
+| Budget | Useful question | What to carry into a test |
+| --- | --- | --- |
+| Capability | Does the output solve the task? | Acceptance criteria, important failure slices and abstention behavior |
+| Capacity | What must coexist in memory? | Resident weights, cache, live tensors, workspace and application state |
+| Movement and compute | Where is time actually spent? | Bytes transferred, kernel work, copies and processor transitions |
+| Responsiveness | When does the user get a useful result? | Cold start, first useful output, completion and cancellation |
+| Sustained operation | Does repeated use remain acceptable? | Temperature, battery state, energy and competing application load |
+
+</ComparisonTable>
+
+This is a proposed design checklist, not a universal benchmark standard.
+MCUNet shows why device regime matters: its microcontroller study jointly
+designed the network and inference engine for severe memory constraints.[^mcunet]
+A phone or laptop has different resources and system behavior. Do not
+transfer a result between these regimes without testing the relevant workload.
+
+## Stored weights are the first estimate
+
+For <MathExpression tex="N" /> stored parameter values represented at
+<MathExpression tex="b_w" /> bits each, the ideal weight payload in bytes is:
+
+<MathExpression display number="1" tex="M_{\mathrm{weights}}=\frac{N b_w}{8}" />
+
+This is representation arithmetic. A hypothetical dense 3 billion parameter
+model at four bits per value has a **1.5 GB** weight payload, about **1.40 GiB**.
+GB here means <MathExpression tex="10^9" /> bytes; GiB means
+<MathExpression tex="2^{30}" /> bytes. Packing, scales, zero points,
+unquantized tensors and file metadata can increase the actual size.
+
+The number of parameters **stored** matters here. A sparse model's active
+parameter count describes selected computation, not permission to omit
+the other expert weights from its storage budget. See
+[efficient architectures](/edge-ai/efficient-models/).
+
+## Context is another growing allocation
+
+An ordinary autoregressive Transformer caches attention keys and values so
+it can reuse past states. Grouped query attention (GQA) shares those states
+among query heads, reducing their size relative to separate KV heads for
+every query head.[^gqa]
+
+For a uniform full-context decoder cache, the ideal payload in bytes is:
+
+<MathExpression display number="2" tex="M_{\mathrm{KV}}=\frac{2 L B T H_{\mathrm{KV}} d_h b_{\mathrm{KV}}}{8}" />
+
+| Symbol | Meaning |
+| --- | --- |
+| <MathExpression tex="L" /> | Number of layers storing this cache |
+| <MathExpression tex="B" /> | Number of sequences cached concurrently |
+| <MathExpression tex="T" /> | Stored token positions per sequence, including generated tokens |
+| <MathExpression tex="H_{\mathrm{KV}}" /> | Stored key and value heads, not the query-head count |
+| <MathExpression tex="d_h" /> | Key and value head width, assumed equal |
+| <MathExpression tex="b_{\mathrm{KV}}" /> | Bits per stored cache value |
+
+The factor two is for keys and values. This is a local shape derivation from
+the ordinary attention contract, not an implementation's allocation report.[^gqa]
+Sliding windows, different layer types, compressed latent attention and
+recurrent state require their own accounting. Allocators may also reserve
+more positions than are currently occupied.
+
+### Work through a hypothetical budget
+
+Assume one sequence, 28 cached layers, eight KV heads, head width 128 and
+16 bit cache values. These are illustrative inputs, not a named checkpoint.
+
+[Figure 1](#figure-1) adds the fixed weight payload to each cache case.
+
+<FocusCanvas size="figure" label="Calculated weight and cache budget">
+<SourceFigure id="figure-1" src="/figures/edge-ai/foundations/memory-budget.svg" alt="A hypothetical 3B model has 1.5 GB of ideal four-bit weights. With 4,096 positions and 8 KV heads, the 448 MiB cache brings payload to 1.83 GiB. Doubling positions makes cache 896 MiB and total 2.27 GiB; using 2 KV heads gives 112 MiB cache and 1.51 GiB total. Other allocations are excluded." minWidth={700}>
+<div slot="image">
+
+![Calculated ideal weight-plus-cache payload: 4,096 tokens and 8 KV heads gives 448 MiB cache and 1.83 GiB total; 8,192 tokens and 8 KV heads gives 896 MiB cache and 2.27 GiB total; 4,096 tokens and 2 KV heads gives 112 MiB cache and 1.51 GiB total. Weights are fixed at 1.5 GB. This is hypothetical payload arithmetic, not device memory measurements.](/figures/edge-ai/foundations/memory-budget.svg)
+
+</div>
+**Figure 1.** Context changes ideal weight-plus-cache payload. Calculated here from the hypothetical budget.[^gqa]
+</SourceFigure>
+</FocusCanvas>
+
+The three cache values are **448 MiB**, **896 MiB** and **112 MiB**,
+calculated from [Equation (2)](#equation-2). With the 1.5 GB weight payload,
+the baseline already needs about **1.83 GiB** for weights and cache alone.
+That does not prove it fits a 3 GiB application budget: the next step is to
+account for everything else that is live at the same time. Nor does the
+smaller cache prove equal task quality or supported fast kernels.
+
+## Peak memory follows lifetimes
+
+Do not add a model file to every tensor ever created. Add the allocations
+that coexist, then take the largest total over time:
+
+<MathExpression display number="3" tex="M_{\mathrm{peak}}=\max_t\left[M_{\mathrm{resident\ weights}}(t)+M_{\mathrm{KV}}(t)+M_{\mathrm{live\ tensors}}(t)+M_{\mathrm{runtime/workspace}}(t)+M_{\mathrm{application}}(t)\right]" />
+
+[Equation (3)](#equation-3) is a bookkeeping model. Define categories without double counting;
+include duplicated buffers, reservations and application allocations in the
+measured budget. Here the cache term means allocated storage, including
+reserved capacity, not only Equation 2's occupied payload. Device and process
+accounting can expose different views.
+
+ExecuTorch's memory planner tracks tensor sizes and lifetimes to assign
+buffers. With bounded dynamic shapes, planning may use upper-bound sizes
+rather than the current input's occupied size.[^memory-planning]
+[Figure 2](#figure-2) follows the allocations through a request.
+
+<FocusCanvas size="diagram" label="Memory lifetimes across a device request">
+  <ModelFlow id="figure-2" title="The peak belongs to a phase, not a checkpoint file" lanesJson='[{"label":"A generative request","steps":[{"label":"Load","detail":"Weights, mappings and runtime initialization"},{"label":"Prefill","detail":"Prompt states, temporary tensors and growing KV cache","accent":true},{"label":"Decode","detail":"Resident weights, cache and per-step workspace"},{"label":"Release or reuse","detail":"Free task state or retain a bounded cache"}],"note":"A vision or audio encoder may add a separate peak. Profile whether its buffers coexist with decoder state."},{"label":"What the planner can reuse","steps":[{"label":"Tensor lifetimes","detail":"When each intermediate is needed"},{"label":"Buffer assignment","detail":"Reuse storage for tensors whose lifetimes do not overlap","accent":true},{"label":"Actual peak","detail":"Check reservations, backend workspace and application load"}]}]' footer="An illustrative lifecycle. It does not assert which phase has the largest allocation on your runtime.">
+    **Figure 2.** Peak memory depends on overlapping allocations. Independent lifecycle synthesis informed by memory planning and decoder-cache methods.[^memory-planning][^gqa]
+  </ModelFlow>
+</FocusCanvas>
+
+Storage outside DRAM can extend capacity, but it creates an I/O problem.
+Apple's *LLM in a Flash* summary describes loading selected parameters from
+flash and organizing reads around reuse and contiguous bundles. It does
+not establish that arbitrary offloading is fast.[^flash]
+
+## Compute and bandwidth are different bottlenecks
+
+The Roofline view compares arithmetic with data movement. For a fixed
+workload, let <MathExpression tex="F" /> be operation count,
+<MathExpression tex="D" /> bytes moved at the memory level being studied,
+<MathExpression tex="C" /> attainable operation throughput and
+<MathExpression tex="\beta" /> attainable bandwidth. An optimistic lower
+bound is:[^roofline]
+
+<MathExpression display number="4" tex="t_{\mathrm{core}}\geq\max\left(\frac{F}{C},\frac{D}{\beta}\right)" />
+
+This local adaptation assumes ideal overlap and ignores additional overhead.
+Use matching operation types and precision: advertised INT8 TOPS is not
+an FP16 FLOP/s budget. Arithmetic intensity is operation count per byte;
+the relevant memory level and attainable limits matter.[^roofline]
+
+[Figure 3](#figure-3) shows the original visual argument. On the left,
+low operational intensity reaches the sloped memory ceiling before the
+flat compute ceiling. On the right, the authors compare Opteron X2 and X4:
+more arithmetic capacity does not give the same gain to workloads near the
+memory slope. These are historical CPU examples, not phone or NPU results.[^roofline-original]
+
+<FocusCanvas size="figure" label="Original Roofline performance envelope">
+<SourceFigure id="figure-3" src="/figures/edge-ai/foundations/roofline-original-figure1.png" alt="Original Roofline Figure 1. The left Opteron X2 plot bounds attainable GFLOP/s by a rising memory-bandwidth slope and a flat compute roof. The right comparison raises the Opteron X4 compute roof while retaining a similar bandwidth slope, shifting the ridge to a higher operations-per-byte requirement." minWidth={850}>
+<div slot="image">
+
+![Historical Roofline Figure 1: performance is bounded by the lower of a memory-bandwidth slope and a compute ceiling. The comparison illustrates why a higher compute peak alone does not improve every workload. Axes are attainable GFLOP/s and operational intensity in FLOPs per byte; the data concern 2008 Opteron systems, not an edge-device benchmark.](/figures/edge-ai/foundations/roofline-original-figure1.png)
+
+</div>
+**Figure 3.** Historical Roofline examples. Cropped from Williams, Waterman and Patterson, Figure 1 (2008), with both panels retained.[^roofline-original][^figure-credits]
+</SourceFigure>
+</FocusCanvas>
+
+For one sequence using ordinary one-token-per-step decoding, assume all
+1.5 GB of packed weights must be read once from memory per step at an
+effective 30 GB/s. Weight traffic alone takes at least **50 ms**, giving a
+ceiling of **20 tokens/s** under those assumptions. Actual step time can be
+higher because of cache traffic, compute, dequantization and synchronization;
+some of that work may overlap. This is not a device prediction. Batching,
+multi-token verification or a different access pattern changes the premise.
+
+GQA's motivation includes memory-bandwidth costs during incremental
+decoding.[^gqa] Processing many prompt positions together and generating
+one position at a time are different workloads. Use the
+[inference chapter](/edge-ai/efficient-inference/) to separate them before
+choosing an optimization.
+
+## Turn the budget into a measurement contract
+
+Suppose the product asks for a short answer to a local document question.
+A useful test record would specify the device and software versions,
+document input, prompt and output limits, quality target, cold and warm
+conditions, peak memory, first useful output, completion time and repeated
+use conditions. This is a proposed experiment, not one we performed.
+
+MLPerf Mobile pairs defined workloads with quality targets and scenario
+metrics. Its structure is a useful reminder that “fast” needs a task and
+quality contract, although a benchmark is not the complete product
+experience.[^mlperf]
+
+Three traps are worth checking explicitly:
+
+- **The file fits, the workload does not.** Test the maximum supported
+  context and input shape, not only a short demonstration.
+- **The accelerator exists, the graph does not stay on it.** Unsupported
+  operators can split execution across providers; measure the resulting
+  path rather than assuming acceleration.[^ort]
+- **The first run is good, sustained use is unknown.** Keep isolated
+  inference results separate from the repeated workload the product needs.
+
+The next move follows the failing budget. Use
+[compression](/edge-ai/quantization-compression/) for representations,
+[runtimes](/edge-ai/runtimes-compilers/) for backend support, and
+[evaluation](/edge-ai/evaluation-profiling/) for actual measurements.
+If the useful task still does not fit, reconsider its scope or use a
+[bounded hybrid system](/edge-ai/agents-hybrid-systems/).
+
+[^ort]: ONNX Runtime, [Deploy on mobile](https://onnxruntime.ai/docs/tutorials/mobile/), storage, memory, execution providers and partitioning. Inspected October 12, 2026.
+[^mcunet]: Ji Lin et al., [MCUNet](https://hanlab.mit.edu/projects/mcunet), official summary of the TinyNAS and TinyEngine co-design, NeurIPS 2020.
+[^gqa]: Joshua Ainslie et al., [GQA: Training Generalized Multi-Query Transformer Models from Multi-Head Checkpoints](https://arxiv.org/html/2305.13245v3), Introduction and Section 2.2; v3, December 23, 2023. The paper's experiments use T5 variants, not a universal edge-device benchmark.
+[^memory-planning]: PyTorch, [ExecuTorch memory planning](https://docs.pytorch.org/executorch/stable/compiler-memory-planning.html), tensor lifetimes, dynamic-shape bounds and buffer planning; documentation identified as version 1.5 when inspected October 12, 2026.
+[^flash]: Keivan Alizadeh et al., [LLM in a Flash: Efficient Large Language Model Inference with Limited Memory](https://machinelearning.apple.com/research/efficient-large-language), Apple's official research summary, ACL 2024. The summary, not the full experimental paper, is the inspected source here.
+[^roofline]: NERSC, [Roofline Performance Model](https://docs.nersc.gov/tools/performance/roofline/), performance envelope, attainable hardware limits and arithmetic intensity. Inspected October 12, 2026. Equation 4 is a local time-bound adaptation, not a reported device result.
+[^mlperf]: MLCommons, [MLPerf Inference: Mobile](https://mlcommons.org/benchmarks/inference-mobile/), scenario metrics and quality targets. Inspected October 12, 2026.
+
+[^roofline-original]: Samuel Williams, Andrew Waterman and David Patterson. [Roofline: An Insightful Visual Performance Model for Floating-Point Programs and Multicore Architectures](https://www2.eecs.berkeley.edu/Pubs/TechRpts/2008/EECS-2008-134.html), UCB/EECS-2008-134, October 17, 2008. Section 3 and Figure 1, PDF page 4 (printed page 2). The caption is omitted from the image crop; plots, axes and labels are unchanged.
+[^figure-credits]: [Figure sources and reuse assessment](/figures/edge-ai/foundations/SOURCES.md). The report retains copyright 2008 by its authors; the selected figure is included for specific criticism and review, not relicensed under MIT.

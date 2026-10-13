@@ -1,0 +1,120 @@
+---
+title: Multimodal AI at the edge
+description: Budget visual and audio evidence, preserve time, and keep multimodal workloads within device limits.
+lastUpdated: 2026-10-12
+---
+
+import FocusCanvas from '../../../components/FocusCanvas.astro';
+import ModelFlow from '../../../components/architectures/ModelFlow.astro';
+import SourceFigure from '../../../components/architectures/SourceFigure.astro';
+
+A camera assistant can run a small language model and still feel slow, miss a label, or describe a scene that has already changed. The expensive part may be capturing, resizing and encoding images, waiting for speech to finish, or carrying too much evidence into the language context. Multimodal edge design therefore starts with a question: **which evidence must survive, and how fresh must it be when the answer arrives?**
+
+This page follows vision, audio and sensor inputs through one device system. For the underlying model interfaces, see [Multimodal Integration](/architectures/evolution/multimodal-integration/). For the general resource contract, begin with [Edge AI foundations](/edge-ai/foundations/).
+
+## Spend the visual budget on the task
+
+A vision encoder converts pixels into features; a connector makes those features usable by a language model. The encoder size, input resolution and number of features reaching the language model are separate decisions. In SmolVLM, pairing its smallest language model with a larger vision encoder reduced the evaluated performance. A bigger encoder was not automatically a better use of a small total budget.[^smolvlm]
+
+[Figure 1](#figure-1) locates the budgets in the original architecture: splitting creates views, encoding creates features, and the connector supplies language input. The question has its own tokenizer path. Optimizing only the decoder leaves these earlier stages outside the analysis.
+
+<FocusCanvas size="figure" label="Original SmolVLM visual and language input architecture">
+<SourceFigure id="figure-1" src="/figures/edge-ai/multimodal/smolvlm-architecture.webp" alt="SmolVLM splits an image into views, encodes them, rearranges features with pixel shuffle and projects them into visual tokens. Text passes through a tokenizer; both streams enter SmolLM2 to generate text." minWidth={880}>
+<div slot="image">
+
+![SmolVLM visual and language input paths.](/figures/edge-ai/multimodal/smolvlm-architecture.webp)
+
+</div>
+
+**Figure 1.** Original SmolVLM interface. Reproduced from Marafioti et al., 2025 Figure 2, PDF page 2; unchanged diagram crop, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Embedded identity artwork and extraction details are reviewed in the [asset record](/figures/edge-ai/multimodal/SOURCES.md).[^smolvlm]
+
+</SourceFigure>
+</FocusCanvas>
+
+Count the **views**, not just the image files. A processor may create a resized overview plus several high resolution crops. Each encoded view consumes work and can add visual tokens. SmolVLM uses image splitting and space to depth rearrangement, reducing the visual sequence by the square of its shuffle ratio. Its paper also reports a spatial precision tradeoff relevant to OCR.[^smolvlm]
+
+For a geometry example, a 512 by 512 view divided into 16 by 16 patches has 32 by 32, or 1,024, patches. A rearrangement ratio of four gives 1,024 / 16 = 64 spatial outputs. Five such views give 320 outputs before delimiters or other processor tokens. This calculation explains a budget; it does not assert that every model uses this processor or that sixteen times fewer outputs yields sixteen times lower latency.[^smolvlm]
+
+[Figure 2](#figure-2) makes the rearrangement visible. Its four illustrated shapes each contain 4,096 values: a smaller spatial grid has more channels. Rearrangement itself is different from the following learned projection; the complete model still needs testing for lost task detail. The cube dimensions are explanatory examples, not the hidden width of every SmolVLM encoder.
+
+<FocusCanvas size="figure" label="Original SmolVLM space to depth rearrangement">
+<SourceFigure id="figure-2" src="/figures/edge-ai/multimodal/smolvlm-pixel-shuffle.webp" alt="Four feature cubes show 64 by 64 by 1, 32 by 32 by 4, 16 by 16 by 16, and 8 by 8 by 64. Spatial dimensions shrink as channel count grows, retaining 4096 scalar positions in each illustrated shape." minWidth={820}>
+<div slot="image">
+
+![Space to depth trades spatial positions for channels.](/figures/edge-ai/multimodal/smolvlm-pixel-shuffle.webp)
+
+</div>
+
+**Figure 2.** Spatial positions become channels. Reproduced from Marafioti et al., 2025 Figure 4, PDF page 4; unchanged diagram crop, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).[^smolvlm]
+
+</SourceFigure>
+</FocusCanvas>
+
+Our proposed selection rule is to start from the evidence the task requires:
+
+| Task | Evidence to preserve | Candidate budget choice | Failure to test |
+| --- | --- | --- | --- |
+| Describe a whole scene | Objects and broad spatial layout | Resized overview | Small object omitted |
+| Read a serial number | Exact characters in a small region | Targeted crop plus overview | Crop misses the relevant label |
+| Explain a chart | Labels, axes and values together | Enough resolution for text and layout | Values detached from their axes |
+| Detect a brief change | Frames before and after the event | Timestamped samples around the change | Sampling skips the entire event |
+
+The table is Latent Light's task design synthesis, not a published optimal processor. A crop helps only when it includes the needed evidence. A language model cannot reconstruct characters discarded before encoding. Document tasks often need spatial evidence rather than a fluent scene caption; see [Document AI](/document-ai/).
+
+## Treat a live stream as a queue
+
+An application receives input whether inference is ready or not. It must choose whether to buffer, block capture, replace older frames, or decline work. CameraX illustrates the choice directly: its latest image strategy overwrites the pending buffer, while producer blocking can also block other bound camera use cases such as preview.[^camerax]
+
+MediaPipe's Object Detector offers a different concrete contract: video and live calls require a frame timestamp; in live mode the call returns asynchronously, and an input submitted while the task is busy is ignored. That behavior is specific to this API, not a guarantee of all streaming runtimes.[^mediapipe]
+
+[Figure 3](#figure-3) shows a proposed system that makes dropped input and evidence age visible rather than treating every captured frame as an analyzed observation.
+
+<FocusCanvas size="diagram" label="Budgeted visual and audio evidence routes">
+<ModelFlow id="figure-3" title="Capture continuously, reason selectively" lanesJson='[{"label":"Vision and sensors","steps":[{"label":"Capture and timestamp","detail":"Frame identity, capture time and sensor clock"},{"label":"Select evidence","detail":"Latest view, event trigger or requested crop","accent":true},{"label":"Encode selected views","detail":"Resolution, crops and visual token limit"},{"label":"Check freshness","detail":"Evidence age and missing frame intervals"}] ,"note":"A cheap detector or change signal may trigger a larger model. Reuse cached features only when the input, preprocessing and encoder version still match; a new timestamp does not make an old feature fresh."},{"label":"Speech and response","steps":[{"label":"Buffer audio chunks","detail":"Capture times and bounded queue"},{"label":"Stream recognition","detail":"Partial text and finalized spans"},{"label":"Assemble evidence","detail":"Align speech with selected visual times","accent":true},{"label":"Answer or reacquire","detail":"Expose missing evidence before acting"}],"note":"The application chooses admission, deadlines and behavior when evidence is insufficient. The model receives the selected evidence, not the complete sensor history."}]'>
+
+**Figure 3.** Two streams share an evidence selection boundary. Independent Latent Light synthesis informed by capture backpressure, timestamped detection and streaming ASR; the gating and freshness policy is proposed here.[^camerax][^mediapipe][^moonshine]
+
+</ModelFlow>
+</FocusCanvas>
+
+Event gating can mean motion, a recognized keyword, a user tap or a change in a monitored sensor. It is our proposed scheduling option, not a free accuracy improvement. Test missed triggers as well as false triggers. Reusing an unchanged frame's features can avoid repeated encoding, but preserve the original capture time and invalidate the cache when the image transform or encoder changes. Reusing a caption is a different approximation: it retains only what that caption described.
+
+A latest frame policy suits a question about the current scene; it can erase the decisive evidence for a question about what just happened. SmolVLM's tested frame averaging reduced video performance, providing a concrete warning against assuming temporal compression preserves the answer.[^smolvlm]
+
+## Speech needs a stability contract
+
+Automatic speech recognition, or ASR, converts audio into text. Streaming ASR exposes useful text while capture continues, but the newest words need not be final. Moonshine v2 uses bounded sliding window attention in its encoder and distinguishes provisional from finalized encoder states. Future context accumulates across layers; its 80 ms lookahead at particular layers is not the full application delay. The decoder still generates tokens serially.[^moonshine]
+
+For a caption UI, revising a partial word may be acceptable. For a command such as “do not delete,” executing after the first two recognized words is a poor contract. Our proposed design separates provisional display, finalized interpretation and authorized action. Word timestamps locate evidence; they do not prove transcription correctness or identify a speaker.
+
+Moonshine v2 reports 34M, 123M and 245M parameters for its tiny, small and medium ASR models. Its latency uses a C++ implementation on an Apple M3, while accuracy is evaluated through a different implementation. It focuses on English ASR. Those conditions matter when judging another language, phone or execution backend.[^moonshine]
+
+Speech quality deserves its own challenge pass. OpenAI's Whisper model card documents text that was not spoken and uneven performance across languages and accents. That does not quantify the error rate of another ASR model; it establishes why fluent text alone is an insufficient quality signal.[^whisper]
+
+## A worked camera and voice scenario
+
+Consider a hypothetical phone assistant that answers “which setting was showing when I said save?” No performance has been measured for this design.
+
+1. Keep a bounded ring of timestamped camera samples and audio chunks. Preserve capture time separately from processing completion time.
+2. Show partial ASR text, then identify the finalized time span containing “save.” A revised transcript updates the selected span.
+3. Retrieve the corresponding camera sample and an adjacent sample. If the ring no longer contains them, ask the person to repeat the action instead of answering from the current scene.
+4. Encode an overview and a targeted crop of the setting. Reserve language context for the question, selected evidence and short output.
+5. Return the extracted setting with its evidence time. If the crop is unreadable or the visual state changed between samples, request a fresh capture.
+
+A 30 frame per second camera supplies a frame roughly every 33.3 ms. If a hypothetical analysis step takes 120 ms, a serial analyzer can process at most about 8.3 frames per second before any other work. An unbounded queue will accumulate stale input. These are arithmetic assumptions, not benchmark results. The product must choose acceptable coverage and age before choosing the queue policy.
+
+For a robot or control system with a strict deadline, define what happens when inference misses that deadline. A measured average or a fast text stream is not a worst case timing guarantee. Keep the safety controller and permitted actions explicit; a generative answer should not silently become a real time control signal.
+
+## Budget the combined peak
+
+The model file alone is not the workload. Our proposed allocation review includes camera and decoded image buffers, transformed crops, vision features and scratch space, audio rings and ASR state, language weights and cache, output buffers, and the app's ordinary UI. Some backends share or reuse buffers; others hold copies. Measure the actual concurrent allocation rather than blindly adding isolated component peaks.
+
+Scheduling can trade latency for memory: encode one crop at a time, release intermediate images, or pause ASR decoding during a large visual request. It can also damage responsiveness. Test camera plus speech plus generation under sustained use, not each feature only in isolation.
+
+Continue with [Efficient inference](/edge-ai/efficient-inference/) for execution costs, [Evaluation and profiling](/edge-ai/evaluation-profiling/) for end to end measurements, and [Agents and hybrid systems](/edge-ai/agents-hybrid-systems/) when these observations feed tools or cloud routing. Mechanisms and mutable documentation inspected October 12, 2026; no device benchmarks were run here.
+
+[^smolvlm]: Andrés Marafioti et al. [SmolVLM: Redefining small and efficient multimodal models](https://arxiv.org/html/2504.05299v1), April 2025, sections 2.1 to 2.3. Token arithmetic is calculated here from the stated patch and shuffle assumptions; frame averaging findings apply to the paper's tests.
+[^camerax]: Android Developers. [Image analysis](https://developer.android.com/media/camera/camerax/analyze), operating modes and backpressure. Page updated March 4, 2025; inspected October 12, 2026.
+[^mediapipe]: Google AI Edge. [Object detection guide for Python](https://developers.google.com/edge/mediapipe/solutions/vision/object_detector/python), Run the task. Page updated August 17, 2026; inspected October 12, 2026.
+[^moonshine]: Manjunath Kudlur, Evan King, James Wang and Pete Warden. [Moonshine v2: Ergodic Streaming Encoder ASR for Latency-Critical Speech Applications](https://arxiv.org/html/2602.12241v1), February 2026, sections 3.2, 3.4, 4.1.2 and 5.
+[^whisper]: OpenAI. [Whisper model card](https://github.com/openai/whisper/blob/main/model-card.md), Performance and Limitations. Inspected October 12, 2026.

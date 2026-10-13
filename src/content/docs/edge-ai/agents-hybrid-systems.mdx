@@ -1,0 +1,106 @@
+---
+title: Agents and hybrid systems
+description: Connect local retrieval, constrained tools and cloud routing without confusing model capability with system authority.
+lastUpdated: 2026-10-12
+---
+
+import FocusCanvas from '../../../components/FocusCanvas.astro';
+import ModelFlow from '../../../components/architectures/ModelFlow.astro';
+import SourceFigure from '../../../components/architectures/SourceFigure.astro';
+
+A useful device assistant might search saved manuals, explain an error and prepare a repair note while offline. Sending a small prompt to a local model does not provide those capabilities by itself. The application must retrieve the right evidence, preserve task state, expose appropriate tools and decide what may leave the device.
+
+**An edge agent is a system boundary, not a model size.** A model can propose an answer or a tool call; application code decides which resources that call can reach and whether its effects are authorized. Start with [How Agents Work](/agents/foundations/) for the general loop. This page focuses on the additional constraints introduced by device storage, small context and intermittent connectivity.
+
+## Local retrieval adds evidence, not authority
+
+Original retrieval augmented generation, or RAG, pairs a learned retriever and document index with a generator. Its index acts as replaceable memory, including the paper’s knowledge update experiment.[^rag]
+
+[Figure 1](#figure-1) shows retrieval by maximum inner product search, or MIPS, followed by predictions combined across retrieved candidates. The dashed return arrow is training. A local retrieve and prompt application need not implement this learned architecture or its marginalization.[^rag]
+
+<FocusCanvas size="figure" label="Original RAG learned retrieval and generation mechanism">
+<SourceFigure id="figure-1" src="/figures/edge-ai/agents-hybrid-systems/rag-mechanism.webp" alt="The original RAG query encoder retrieves candidate documents from a vector index by maximum inner product search. The generator conditions on query and documents, and predictions are marginalized across candidates. A dashed return arrow shows end to end training through the query encoder and generator." minWidth={920}>
+<div slot="image">
+
+![Original RAG combines learned retrieval with a generator.](/figures/edge-ai/agents-hybrid-systems/rag-mechanism.webp)
+
+</div>
+
+**Figure 1.** Original RAG mechanism. Reproduced from Lewis et al., Figure 1, arXiv v4, April 12, 2021, PDF page 2; unchanged diagram crop for the specific comparison above. Copyright retained; [reuse assessment](/figures/edge-ai/agents-hybrid-systems/SOURCES.md).[^rag]
+
+</SourceFigure>
+</FocusCanvas>
+
+A local implementation can parse approved documents, divide them into chunks, compute embeddings, retrieve matches for a query and supply selected passages to the language model. Embeddings are numerical representations used for similarity search, not answer text. Google’s EmbeddingGemma card provides a concrete compact example: 300 million parameters, a 2K token input limit, and output dimensions of 768 with supported shorter representations after truncation and renormalization.[^embedding]
+
+For a hypothetical index of 10,000 chunks, 256 dimensions and two bytes per value require 10,000 × 256 × 2 = 5.12 million bytes for vectors alone. At 768 dimensions, the same calculation gives 15.36 million bytes. Text, metadata, search structures and the embedding model require additional storage. This arithmetic is not a measured index footprint or a quality comparison.[^embedding]
+
+Our proposed retrieval contract retains document identity, version, chunk location and access scope beside each vector. Rebuild or migrate the index when the embedding function changes; do not assume vectors from different models remain comparable. Evaluate exact identifiers, abbreviations and recently updated passages, not only paraphrased questions.
+
+A retrieved passage is still external content. Greshake et al. demonstrated indirect prompt injection through retrieved material and persistence through stored notes in their studied systems. The important edge implication is that downloading a document does not make its instructions trusted.[^injection] For a deeper treatment, see [Security & Control](/agents/security-control/).
+
+## Keep the small context intentional
+
+A device context can contain instructions, the current question, tool definitions, retrieved passages, recent observations and output. The exact accounting depends on the runtime. Apple’s 2025 Foundation Models session material demonstrates stateful transcripts and tool results inserted into the session; it also identifies context window errors as a failure the app must handle.[^apple]
+
+Do not fill a small window with every stored document or an entire work history. Our proposed order is to preserve the task and authority constraints, select the needed source passages, include the current operation state, then allocate room for the response. Store original evidence outside the prompt so a concise handoff can retrieve it later.
+
+Three stores have different purposes: active context is what this invocation sees; retrieved memory is what may be selected later; execution state records what actually happened and what remains pending. A conversational summary is useful continuity, but it is not a receipt for an external action. See [Context, Memory & Execution State](/agents/context-memory-state/) rather than repeating the complete persistence design here.
+
+## Tools cross a separate boundary
+
+Tool calling support lets a model request an operation with structured arguments. It does not grant that operation permission. LiteRT-LM's current overview lists function calling and constrained decoding as supported features; neither feature establishes that a generated target, value or action is appropriate.[^litertlm]
+
+The MCP tools specification provides concrete control responsibilities: servers validate inputs and enforce access controls, while clients should expose sensitive operations for review and implement timeouts. Tool annotations from untrusted servers are themselves untrusted.[^mcp] The same control problem exists for a tool implemented directly inside an app; using MCP is optional.
+
+[Figure 2](#figure-2) separates choosing a model from authorizing an effect. It is a proposed architecture, not a claim that a framework supplies every boundary automatically.
+
+<FocusCanvas size="diagram" label="Local evidence, routing and tool execution boundaries">
+<ModelFlow id="figure-2" title="Route computation, retain control" lanesJson='[{"label":"Understand and choose a route","steps":[{"label":"Read task state","detail":"User goal, allowed data and pending effects"},{"label":"Retrieve local evidence","detail":"Approved sources and exact locations"},{"label":"Apply routing policy","detail":"Capability, connectivity, deadline and disclosure","accent":true},{"label":"Request a model result","detail":"Local model or permitted cloud service"}],"note":"The cloud route has its own data contract. A retrieval miss or unsupported input can trigger a request for more evidence instead of automatic escalation."},{"label":"Validate and execute","steps":[{"label":"Inspect proposed action","detail":"Schema, target, arguments and source support"},{"label":"Enforce authority","detail":"Service access, scope and required review","accent":true},{"label":"Execute bounded tool","detail":"Timeout, operation identity and cancellation"},{"label":"Record observed outcome","detail":"Receipt, uncertain effect or failure"}],"note":"The next step uses observed results. A network timeout does not prove that the remote operation failed; reconcile the effect before repeating it."}]'>
+
+**Figure 2.** Model routing and effect authorization remain separate. Independent Latent Light synthesis informed by RAG, learned routing, tool contracts and indirect prompt injection research.[^rag][^routing][^mcp][^injection]
+
+</ModelFlow>
+</FocusCanvas>
+
+Expose the smallest useful tool surface: searching approved manuals, reading one record or preparing a draft can be separate from sending a message or changing equipment. Keep authorization checks in the code or service that performs the action. Include a deadline, cancellation behavior and an observable result in the tool contract. These are proposed implementation choices; see [Tools, Skills & Integrations](/agents/tools-skills-protocols/) for the broader design.
+
+## Route for the complete task
+
+A hybrid system may choose local inference for a supported offline task and remote inference for a permitted task needing additional capability. RouteLLM studies learned selection between stronger and weaker models using preference data. Its routing overhead was measured on cloud VMs, and its authors identify application distribution shift as a limitation. It does not establish a universally reliable device router.[^routing]
+
+A practical edge routing policy must also account for connectivity, device load, permitted disclosure and the remaining deadline. Our proposed policy uses explicit failure signals such as a retrieval miss, unsupported modality, exceeded context, or failed output validation. A model saying “I am confident” is not sufficient evidence to execute a consequential action. Calibrate any learned uncertainty threshold on the actual workload and include an abstention path.
+
+Compare the whole path. A local request may wait for model loading, retrieval, prefill and decoding. A remote request may wait for upload, network exchange, server queueing and generation. A cascade that tries local generation before cloud generation can pay for both. These are components to measure, not a claim that either route is always faster. Use [Evaluation and profiling](/edge-ai/evaluation-profiling/) to define the comparison.
+
+## A worked offline manual assistant
+
+Consider a hypothetical tablet assistant for a user’s own appliance manuals. It can answer a question from saved evidence and prepare a note. It cannot control the appliance or contact a service provider. No system measurements are claimed.
+
+| Situation | Proposed behavior | State to preserve |
+| --- | --- | --- |
+| Relevant passage is available locally | Quote the short needed passage and explain it | Manual version and page location |
+| Exact model number is missing | Ask for the model number or a fresh image | Unresolved identity |
+| Local model cannot produce a valid answer | Offer a permitted cloud request or show the source directly | Validation failure and selected evidence |
+| Network is unavailable | Keep local search and source viewing usable | Draft and pending request |
+| Remote request times out | Distinguish an unknown outcome from a confirmed failure | Request identity and observed status |
+| User cancels | Stop new work and preserve the draft | Completed effects and remaining uncertainty |
+
+This table is our proposed product behavior. If sending the note were added later, its permission and retry semantics would need a new review. A cloud fallback must not quietly send the whole document library merely because the local model failed.
+
+## On device is not automatically private or secure
+
+Local inference can keep model input processing on the device while the application still syncs files, calls online tools or sends telemetry. ML Kit’s terms make this distinction concrete: input and output processing stays local, but APIs can contact Google for updates and send performance and utilization metrics.[^privacy]
+
+Our proposed data review follows the full route: captured input, document text, embeddings, prompts, tool arguments, outputs, logs and backups. Assign access and retention separately to each. An embedding store deserves review alongside its source text; a smaller representation is not a privacy guarantee. Restrict network destinations and credentials independently of model instructions.
+
+Continue with [Production and product design](/edge-ai/production-product-design/) for delivery and failure experience, and [Agents evaluation](/agents/evaluation-reliability/) for task success, recovery and security tests. Primary mechanisms and mutable platform details inspected October 12, 2026; no local routing or retrieval benchmark was run here.
+
+[^rag]: Patrick Lewis et al. [Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks](https://arxiv.org/html/2005.11401v4), NeurIPS 2020, arXiv v4 revision April 12, 2021; Figure 1 and sections on index hot swapping and retrieval ablations.
+[^embedding]: Google. [EmbeddingGemma model card](https://ai.google.dev/gemma/docs/embeddinggemma/model_card), Description and Inputs and outputs. Inspected October 12, 2026. Vector storage examples are calculated here and omit index overhead.
+[^injection]: Kai Greshake et al. [Not what you’ve signed up for: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection](https://arxiv.org/html/2302.12173v2), 2023, sections 3 and 4, including persistence. Findings establish studied attack paths, not an attack rate for current local models.
+[^apple]: Apple. [Meet the Foundation Models framework](https://developer.apple.com/videos/play/wwdc2025/286/), WWDC25, Tool calling and Stateful session chapters. Inspected October 12, 2026; this citation describes the 2025 session design rather than every newer model route.
+[^litertlm]: Google AI Edge. [LiteRT-LM Overview](https://developers.google.com/edge/litert-lm/overview), tool use and embedding support. Inspected October 12, 2026.
+[^mcp]: Model Context Protocol. [Tools](https://modelcontextprotocol.io/specification/2025-11-25/server/tools), November 25, 2025 specification, tool annotations and Security Considerations. Inspected October 12, 2026.
+[^routing]: Isaac Ong et al. [RouteLLM: Learning to Route LLMs with Preference Data](https://arxiv.org/html/2406.18665v4), ICLR 2025, sections 3, 5.5 and 6.
+[^privacy]: Google ML Kit. [Terms & Privacy](https://developers.google.com/ml-kit/terms), Privacy. Page updated May 14, 2025; inspected October 12, 2026.
