@@ -1,0 +1,50 @@
+{
+  "schema_version": 3,
+  "topic_id": "knowledge-distillation-modern-methods",
+  "status": "complete",
+  "coverage": {
+    "foundations": "Soft labels, temperature, ordered divergences and sequence/prefix distinction",
+    "methods": "Access, signal, experience, objective; historical anchors and bounded recent preprints",
+    "recipes": "Disclosed training stages, modality boundaries and matched-ablation conditions",
+    "skeptical": "Style/factuality and fact/skill distinctions; capacity and cost confounds",
+    "delivery": "Validated, browser-inspected and exports checked"
+  },
+  "open_questions": [
+    "Public disclosures do not provide complete reproducible recipes for every model.",
+    "No universal method ranking is established across teacher access, student capacity, modalities and budgets."
+  ],
+  "recommended_next_direction": "User review of the local five-page collection; no commit or deployment authorized.",
+  "last_seen": "2026-10-15T04:42:48.088Z",
+  "output": {
+    "kind": "site-page",
+    "path": "src/content/docs/knowledge-distillation/modern-methods.mdx",
+    "status": "reviewed",
+    "revision": 1,
+    "updated": "2026-10-14",
+    "evidence_cutoff": "2026-10-14",
+    "audience": "AI researchers and engineers; overview also supports an introductory reading path."
+  },
+  "quality_gate": {
+    "evidence_verified": true,
+    "contradictions_reviewed": true,
+    "output_reviewed": true,
+    "visuals_reviewed": true
+  },
+  "delivery_checks": {
+    "validation": {
+      "status": "passed",
+      "method": "Pinned Node 24.21.0 npm run validate; 49 deployment tests, 167 content tests, typecheck, build and docs lint.",
+      "checked_at": "2026-10-15T04:42:48.088Z"
+    },
+    "rendering": {
+      "status": "passed",
+      "method": "Chromium: 30 desktop/mobile views, both themes, 10 Focus checks; screenshots visually inspected; comparison search/reset, keyboard, reduced motion and no-JavaScript baseline.",
+      "checked_at": "2026-10-15T04:41:38.734Z"
+    },
+    "exports": {
+      "status": "passed",
+      "method": "All five built Markdown/MDX exports retain figures, captions, equations, references, diagram steps and tables; discovery, search and internal page/hash links checked.",
+      "checked_at": "2026-10-15T04:41:38.734Z"
+    }
+  }
+}

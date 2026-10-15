@@ -1,7 +1,7 @@
 ---
 title: Training capable small models
 description: How data, distillation, domain adaptation and preferences concentrate a small model's capacity, and how to test the tradeoffs.
-lastUpdated: 2026-10-12
+lastUpdated: 2026-10-14
 ---
 
 import FocusCanvas from '../../../components/FocusCanvas.astro';
@@ -37,6 +37,10 @@ Phi-3 makes the capacity tradeoff explicit: it filters data to emphasize reasoni
 A useful data plan therefore covers both frequent inputs and consequential exceptions. Deduplicate near copies, retain provenance and usage terms, and reserve evaluation families before generating more examples. More paraphrases of the same template are not equivalent to more coverage.
 
 ## Distillation: what does the teacher actually provide?
+
+The [Knowledge Distillation collection](/knowledge-distillation/) develops the
+foundations, modern methods, LLM/VLM recipes and evaluation in more depth.
+This section keeps the focus on training a useful small model for deployment.
 
 Distillation trains a student using information from another model. A teacher can provide a sampled answer, a next-token probability distribution, a ranking or another intermediate target. These carry different information and require different access.[^gemma2][^dpo]
 

@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 650" role="img" aria-labelledby="title desc">
+ <title id="title">Knowledge distillation: the transfer contract</title>
+ <desc id="desc">Teacher supervision and student experience meet in a contract specifying the signal, visited prefixes and objective. Student learning is evaluated on independent tasks. Feedback changes the recipe. The deployed student normally runs without the teacher.</desc>
+ <defs>
+  <linearGradient id="paper" x2="1" y2="1"><stop stop-color="#f5faf9"/><stop offset="1" stop-color="#f6f3fc"/></linearGradient>
+  <linearGradient id="spectrum"><stop stop-color="#45adab"/><stop offset=".5" stop-color="#7979c6"/><stop offset="1" stop-color="#c58aad"/></linearGradient>
+  <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="m1 1 7 4-7 4" fill="none" stroke="#777b91" stroke-width="1.6"/></marker>
+ </defs>
+ <rect width="1180" height="650" rx="22" fill="url(#paper)"/>
+ <rect x="40" y="38" width="56" height="5" rx="2.5" fill="url(#spectrum)"/>
+ <g font-family="Inter,Arial,sans-serif" fill="#252b3d">
+  <text x="110" y="46" font-size="15" font-weight="650" letter-spacing="2">KNOWLEDGE DISTILLATION</text>
+  <text x="40" y="100" font-size="35" font-weight="650" letter-spacing="-1">A capability, not a copy of the weights.</text>
+  <text x="40" y="130" font-size="18" fill="#646b7f">Choose what transfers. Choose where the student learns. Test what remains.</text>
+  <rect x="40" y="170" width="270" height="223" rx="16" fill="#e5f2ef" stroke="#acd0c9"/>
+  <text x="62" y="206" font-size="14" fill="#467870" font-weight="650" letter-spacing="1.5">01 / SUPERVISION</text>
+  <text x="62" y="245" font-size="28" font-weight="650">Teacher</text>
+  <text x="62" y="279" font-size="19">Answers and rationales</text>
+  <text x="62" y="308" font-size="19">Token probabilities</text>
+  <text x="62" y="337" font-size="19">Features and relations</text>
+  <text x="62" y="373" font-size="15" fill="#52736f">Access limits the available signal</text>
+  <rect x="355" y="170" width="470" height="223" rx="16" fill="#fff" stroke="#cbd1df"/>
+  <text x="378" y="206" font-size="14" fill="#707187" font-weight="650" letter-spacing="1.5">02 / THE LEARNING CONTRACT</text>
+  <path d="M378 224H800 M378 274H800 M378 324H800" stroke="#e5e7ee"/>
+  <text x="378" y="255" font-size="20" font-weight="650">Signal</text><text x="540" y="255" font-size="19" fill="#62697b">What should transfer?</text>
+  <text x="378" y="305" font-size="20" font-weight="650">Experience</text><text x="540" y="305" font-size="19" fill="#62697b">Which prefixes are visited?</text>
+  <text x="378" y="355" font-size="20" font-weight="650">Objective</text><text x="540" y="355" font-size="19" fill="#62697b">How is the student updated?</text>
+  <rect x="870" y="170" width="270" height="223" rx="16" fill="#eeebf9" stroke="#c6bedf"/>
+  <text x="892" y="206" font-size="14" fill="#77659d" font-weight="650" letter-spacing="1.5">03 / LEARNING</text>
+  <text x="892" y="245" font-size="28" font-weight="650">Student</text>
+  <text x="892" y="279" font-size="19">Its own architecture</text>
+  <text x="892" y="308" font-size="19">Its own starting capability</text>
+  <text x="892" y="337" font-size="19">A measured improvement</text>
+  <text x="892" y="373" font-size="15" fill="#776d90">Only the intended parameters learn</text>
+  <path d="M315 281H347 M830 281H862" fill="none" stroke="#777b91" stroke-width="2.2" marker-end="url(#arrow)"/>
+  <path d="M1005 397V436H591V400" fill="none" stroke="#9386b1" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#arrow)"/>
+  <rect x="660" y="420" width="274" height="30" rx="15" fill="#f6f3fc"/>
+  <text x="797" y="441" text-anchor="middle" font-size="16" fill="#796a94">Optional student-rollout feedback</text>
+  <rect x="40" y="470" width="1100" height="85" rx="14" fill="#fff" stroke="#d5d9e3"/>
+  <circle cx="74" cy="513" r="12" fill="none" stroke="#62a3a0" stroke-width="2"/><path d="m68 513 4 4 8-9" fill="none" stroke="#528f8c" stroke-width="2"/>
+  <text x="103" y="505" font-size="21" font-weight="650">Independent evaluation</text>
+  <text x="103" y="535" font-size="18" fill="#62697b">Facts · reasoning · visual grounding · retained skills · complete system cost</text>
+  <text x="40" y="602" font-size="17" font-weight="650" fill="#50586e">DEPLOYMENT</text>
+  <text x="202" y="602" font-size="19" fill="#62697b">Normally the student alone. A draft or hybrid system has a different contract.</text>
+ </g>
+</svg>

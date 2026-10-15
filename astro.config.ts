@@ -113,6 +113,13 @@ const nimbusConfig = defineNimbusConfig({
           ] },
         ] },
         { label: "Document AI", link: "/document-ai/" },
+        { label: "Knowledge Distillation", collapsed: true, items: [
+          { label: "Overview", link: "/knowledge-distillation/" },
+          { label: "Foundations", link: "/knowledge-distillation/foundations/" },
+          { label: "Modern Methods", link: "/knowledge-distillation/modern-methods/" },
+          { label: "LLM & VLM Recipes", link: "/knowledge-distillation/llm-vlm-recipes/" },
+          { label: "Practice & Evaluation", link: "/knowledge-distillation/practice-evaluation/" },
+        ] },
         { label: "Agents", items: [
           { label: "Overview", link: "/agents/" },
           { label: "Core Concepts", collapsed: true, items: [
@@ -250,7 +257,7 @@ export default defineConfig({
         "nimbus/internal-link": ["error", {
           // Static download notices are files, not Nimbus page routes.
           // test:content verifies these narrow exceptions exist in public/.
-          ignore: ["/licenses/*.txt", "/figures/model-studies/*/{NOTICE,SOURCES}.md", "/figures/edge-ai/*/{NOTICE,SOURCES}.md"],
+          ignore: ["/licenses/*.txt", "/figures/model-studies/*/{NOTICE,SOURCES}.md", "/figures/edge-ai/*/{NOTICE,SOURCES}.md", "/figures/knowledge-distillation/{NOTICE,SOURCES}.md"],
         }],
       },
       // Use the same native Sätteri processor as Nimbus, with math enabled.

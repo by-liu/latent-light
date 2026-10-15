@@ -1,0 +1,175 @@
+---
+title: Distillation Foundations
+description: Soft targets, temperature, KL divergence, capacity gaps and the mathematics behind learning from a teacher.
+lastUpdated: 2026-10-14
+---
+
+import FocusCanvas from '../../../components/FocusCanvas.astro';
+import SourceFigure from '../../../components/architectures/SourceFigure.astro';
+
+A teacher can tell a student more than the winning answer. It can reveal which
+alternatives are plausible and how strongly it prefers one to another. That
+extra structure is the intuition behind soft-target distillation.[^hinton]
+
+This page develops the objectives before considering complete training
+recipes. It assumes familiarity with next-token prediction; the
+[Transformer foundations](/architectures/foundations/) provide that background.
+The equations below describe explicit mathematical settings, not one recipe
+shared by every model.
+
+## From a label to a distribution
+
+Suppose a classifier chooses between cat, dog, fox and car. A hard label for
+cat is the vector `(1, 0, 0, 0)`. It does not say whether dog is a more plausible
+alternative than car. A teacher distribution can express that distinction.
+These toy categories are an illustration, not a claim about a particular model.
+[Figure 1](#figure-1) makes the additional information visible.
+
+<FocusCanvas label="Hard labels and temperature-softened teacher targets" size="diagram">
+<SourceFigure id="figure-1" src="/figures/knowledge-distillation/soft-targets.svg" poster alt="Illustrative four-class targets. The hard label assigns cat 100 percent. With logits 4, 2, 0 and minus 2, temperature 1 gives approximately 86.5, 11.7, 1.6 and 0.2 percent. Temperature 3 gives approximately 52.3, 26.8, 13.8 and 7.1 percent. Higher temperature exposes alternatives without changing their ranking." minWidth={760}>
+<div slot="image">
+
+![Hard labels versus soft targets for cat, dog, fox and car. The same toy logits produce a peaked distribution at temperature 1 and a softer distribution at temperature 3, while preserving their ordering.](/figures/knowledge-distillation/soft-targets.svg)
+
+</div>
+
+**Figure 1.** One answer versus a pattern of alternatives. Original toy calculation using Equation (1), not model measurements.
+</SourceFigure>
+</FocusCanvas>
+
+For logit vector <MathExpression tex="z" /> and positive temperature
+<MathExpression tex="\tau" />, define:
+
+<MathExpression display number="1" tex="p_i^{(\tau)}=\frac{\exp(z_i/\tau)}{\sum_{j=1}^{V}\exp(z_j/\tau)}" />
+
+Here, <MathExpression tex="V" /> is the number of classes or vocabulary entries.
+For fixed finite logits, increasing the temperature softens the distribution
+toward uniform; lowering it concentrates mass on the largest logits.
+This training temperature is a separate choice from deployment sampling.[^hinton]
+
+The relative probabilities sometimes called **dark knowledge** are not hidden
+facts that the student automatically acquires. They are information in the
+teacher's predictive behavior. They can contain useful structure, uncertainty,
+or systematic errors.
+
+## Match probabilities, not parameter files
+
+Let <MathExpression tex="p" /> be a frozen teacher distribution and
+<MathExpression tex="q_\theta" /> the student's distribution at the same input.
+Forward KL is:
+
+<MathExpression display number="2" tex="D_{\mathrm{KL}}(p\Vert q_\theta)=\sum_{i=1}^{V}p_i\log\frac{p_i}{q_{\theta,i}}" />
+
+Assume both distributions use the same events and the student assigns positive
+probability wherever the teacher does. Expanding the definition gives this
+local derivation:
+
+<MathExpression display number="3" tex="\begin{aligned}D_{\mathrm{KL}}(p\Vert q_\theta)&=H(p,q_\theta)-H(p),\\ H(p,q_\theta)&=-\sum_i p_i\log q_{\theta,i}.\end{aligned}" />
+
+The teacher entropy <MathExpression tex="H(p)" /> is constant with respect to
+the student. Minimizing soft-target cross-entropy therefore gives the same
+student gradient as forward KL in this fixed-target setting. A hard label is
+the special case where the target puts all mass on one event.
+
+A common classical objective combines real labels with softened supervision:
+
+<MathExpression display number="4" tex="\mathcal L=(1-\alpha)\mathcal L_{\mathrm{hard}}+\alpha\tau^2D_{\mathrm{KL}}\!\left(p^{(\tau)}\Vert q_\theta^{(\tau)}\right)" />
+
+Here, <MathExpression tex="\alpha\in[0,1]" /> controls the mixture and the hard
+loss uses temperature 1. The conventional
+<MathExpression tex="\tau^2" /> factor compensates for the approximate
+temperature-related gradient scaling described in the original formulation.
+It does not make every temperature or modern objective equivalent.[^hinton]
+
+## Why the KL direction matters
+
+Reverse KL swaps the distributions:
+
+<MathExpression display number="5" tex="D_{\mathrm{KL}}(q_\theta\Vert p)=\sum_i q_{\theta,i}\log\frac{q_{\theta,i}}{p_i}" />
+
+The weighting changes the question. Forward KL weights discrepancies by what
+the **teacher** considers likely. Reverse KL weights them by what the
+**student** currently considers likely. Unlike the fixed teacher entropy in
+Equation (3), the student entropy in reverse KL depends on the parameters.
+Dropping it changes the objective.
+
+An exact toy calculation makes the asymmetry concrete:
+
+| Candidate student | Probabilities over three events | Forward KL | Reverse KL |
+| --- | --- | --- | --- |
+| Broad allocation | `(0.45, 0.35, 0.20)` | 0.225 nats | 0.466 nats |
+| Concentrated allocation | `(0.98, 0.01, 0.01)` | 0.741 nats | 0.296 nats |
+
+The teacher here is `(0.70, 0.29, 0.01)`. Values are calculated from Equations
+(2) and (5), rounded to three decimals. Among these **two candidates**, forward
+KL prefers the broad one and reverse KL prefers the concentrated one. With no
+capacity restriction, both are minimized by matching the teacher exactly.
+The table is not a proof that every neural student follows these patterns.
+
+MiniLLM uses reverse KL to address limited student capacity in generative
+language modeling, with policy-gradient optimization, variance reduction,
+teacher-mixed sampling and length normalization. Its gains belong to that
+tested recipe, not a theorem that reverse KL always wins.[^minillm]
+
+## Language models introduce a second distribution
+
+A language model predicts complete responses through next-token probabilities.
+For prompt <MathExpression tex="x" /> and response
+<MathExpression tex="y=(y_1,\ldots,y_n)" />:
+
+<MathExpression display number="6" tex="p(y\mid x)=\prod_{t=1}^{n}p(y_t\mid x,y_{\lt t})" />
+
+There are now two choices: **which prefix is visited**, and **which next-token
+distribution is matched there**. A teacher-generated response supplies teacher
+prefixes. A student rollout supplies student prefixes. Scoring a sequence with
+teacher forcing does not mean the teacher generated that sequence.
+
+For a shared vocabulary, finite response horizon including stopping, and the
+usual support assumptions, the chain rule gives:
+
+<MathExpression display number="7" tex="D_{\mathrm{KL}}(P\Vert Q)=\mathbb E_{y\sim P}\left[\sum_t D_{\mathrm{KL}}\!\left(p(\cdot\mid x,y_{\lt t})\Vert q(\cdot\mid x,y_{\lt t})\right)\right]" />
+
+Capital letters denote sequence distributions. The expectation in this
+identity is over **teacher trajectories**. Evaluating forward token KL along
+student trajectories is a valid training objective, but is not automatically
+the same sequence-level forward KL. Reversing the sequence KL instead induces
+an expectation over student trajectories. Length averaging or truncated
+vocabularies changes the exact formulation.[^gkd][^minillm]
+
+Sequence distillation often replaces the full expectation with selected teacher
+responses and trains their token likelihood. Kim and Rush's translation work
+uses high-probability teacher sequences, including a beam-search approximation;
+that selection is not the entire teacher distribution.[^seqkd]
+
+## What can limit transfer?
+
+**Capacity and learnability.** A stronger teacher need not be easier to imitate.
+Teacher Assistant KD studies intermediate students to bridge large capacity
+gaps in its classification experiments. This motivates testing teacher–student
+fit, not adopting a universal assistant-size formula for LLMs.[^takd]
+
+**Coverage.** Matching the teacher on a narrow set of prefixes constrains the
+student there. It does not establish behavior on an unseen document type,
+language or tool state. The student also brings its own pretraining and
+architecture; distillation gains should be measured relative to that starting
+point.
+
+**Teacher quality.** The objective encourages agreement, not truth by
+definition. Correct labels, executable checks and independent evaluation can
+anchor the recipe when teacher confidence is misleading.
+
+**Knowledge versus execution.** A recent controlled preprint separates random
+factual associations from composing known facts. Its reverse-KL experiments
+transfer composition more effectively than held-out facts; forward KL restores
+more factual transfer. That is a setting-specific finding, not evidence that
+all on-policy distillation cannot teach facts.[^knowledge-skill]
+
+Continue with [Modern Methods](/knowledge-distillation/modern-methods/) to
+combine these objectives with different signals and training experience.
+
+[^hinton]: Geoffrey Hinton, Oriol Vinyals and Jeff Dean. [Distilling the Knowledge in a Neural Network](https://arxiv.org/html/1503.02531v1), 2015, Sections 1–2, temperature and mixed hard/soft objectives.
+[^minillm]: Yuxian Gu et al. [MiniLLM: Knowledge Distillation of Large Language Models](https://arxiv.org/html/2306.08543v2), ICLR 2024, Sections 2 and 3.4 and Appendix A; reverse sequence KL and its optimization.
+[^gkd]: Rishabh Agarwal et al. [On-Policy Distillation of Language Models: Learning from Self-Generated Mistakes](https://arxiv.org/html/2306.13649v3), ICLR 2024, Sections 2–3; divergence choice and prefix sampling.
+[^seqkd]: Yoon Kim and Alexander M. Rush. [Sequence-Level Knowledge Distillation](https://arxiv.org/abs/1606.07947), EMNLP 2016, Section 3; sequence approximation and teacher decoding.
+[^takd]: Seyed Iman Mirzadeh et al. [Improved Knowledge Distillation via Teacher Assistant](https://arxiv.org/abs/1902.03393), AAAI 2020, capacity-gap experiments and intermediate assistants.
+[^knowledge-skill]: Yixuan Tang and Yi Yang. [On-Policy Distillation Teaches New Skills but Not New Knowledge](https://arxiv.org/html/2610.09639v1), October 7, 2026 preprint, controlled fact/skill setup and divergence/prefix ablations. Its title should not be read as a universal impossibility result.

@@ -1,0 +1,121 @@
+---
+title: Knowledge Distillation
+description: How models learn from other models, from soft targets and student rollouts to modern LLM and VLM training.
+lastUpdated: 2026-10-14
+---
+
+import FocusCanvas from '../../../components/FocusCanvas.astro';
+import SourceFigure from '../../../components/architectures/SourceFigure.astro';
+
+Knowledge distillation trains a **student model using supervision from a teacher**.
+The teacher might provide an answer, probabilities over possible answers, or
+internal representations. The transfer is learned through training, not simply
+by shrinking the teacher's parameter file.[^hinton][^fitnets]
+
+The useful question is broader than “How do we make a model smaller?” It is:
+**Which capability should transfer, through what signal, and how will we know
+the student learned it?** Students can even have the same architecture and size
+as their teachers, as studied in Born Again Networks.[^born-again]
+
+[Figure 1](#figure-1) maps the learning contract and its evaluation boundary.
+
+<FocusCanvas label="Knowledge distillation at a glance" size="diagram">
+<SourceFigure id="figure-1" src="/figures/knowledge-distillation/transfer-map.svg" poster alt="Training combines task inputs, teacher supervision and student experience. Choose the signal, prefixes and objective, then update the student. Evaluate independent task outcomes and feed failures back into the recipe. Deployment uses the student without the teacher unless the product explicitly includes a larger-model path." minWidth={760}>
+<div slot="image">
+
+![Distillation map: inputs and teacher supervision shape student learning; student rollouts can supply training prefixes; independent evaluation guides revisions. The teacher is normally absent when the student is deployed.](/figures/knowledge-distillation/transfer-map.svg)
+
+</div>
+
+**Figure 1.** Transfer a useful capability, then test it independently. Original synthesis of teacher supervision, student rollouts and same-size transfer.[^hinton][^gkd][^born-again]
+</SourceFigure>
+</FocusCanvas>
+
+## The idea in one minute
+
+A correct answer tells the student **what to predict**. A probability
+distribution also exposes alternatives. An explanation can expose a route to
+the answer. Teacher feedback on the student's own partial response can address
+states that polished demonstrations never visit. These are different learning
+signals, not interchangeable names for the same procedure.[^seqkd][^gkd][^step-by-step]
+
+Three distinctions organize this collection:
+
+- **Signal:** generated text, token probabilities, features or relationships.
+- **Experience:** reference prefixes, teacher responses, current student
+  responses, or replayed responses from an older student.
+- **Objective:** the discrepancy or task criterion used to update the student.
+
+We use this as an editorial map, not a universal taxonomy. Teacher access,
+student architecture and available compute constrain which combinations are
+practical. “On policy” describes whose behavior supplies the training
+experience; it does not uniquely specify a loss.[^gkd]
+
+## Explore the collection
+
+<CardGrid class="sm:grid-cols-1">
+  <Card title="Foundations" icon="ph:lightbulb">
+    Understand soft targets, temperature, KL divergence and the difference
+    between token and sequence distributions.
+
+    [Build the intuition and mathematics](/knowledge-distillation/foundations/)
+  </Card>
+  <Card title="Modern Methods" icon="ph:git-branch">
+    Compare supervision signals, student rollouts, reasoning transfer,
+    context distillation and recent research directions.
+
+    [Follow the design choices](/knowledge-distillation/modern-methods/)
+  </Card>
+  <Card title="LLM and VLM Recipes" icon="ph:stack">
+    Inspect what Gemma, DeepSeek and Qwen actually disclose, with a closer
+    look at visual supervision and multimodal transfer.
+
+    [Read the training recipes](/knowledge-distillation/llm-vlm-recipes/)
+  </Card>
+  <Card title="Practice and Evaluation" icon="ph:flask">
+    Design a reliable pipeline, check the loss, compare fair baselines and
+    measure the complete cost of the resulting capability.
+
+    [Turn the ideas into a defensible experiment](/knowledge-distillation/practice-evaluation/)
+  </Card>
+</CardGrid>
+
+Read in order for a connected explanation. If you already know the objectives,
+start with the recipes and use the foundations as a reference.
+
+## What this research asks beyond compression
+
+**What actually transfers?** A student that sounds more helpful may not know
+more. Gudibande et al.'s imitation experiments exposed this distinction in
+their tested models; their conclusion is not a verdict on every later
+distillation method.[^imitation]
+
+**Which “best method” fits the setting?** We compare evidence under its teacher
+access, student size, task and budget. A recent method beating its evaluated
+baselines is not a universal state of the art.
+
+**Does the complete system improve?** Better task accuracy can be offset by
+longer responses, expensive teacher queries or a deployment backend that does
+not exploit the smaller architecture. The [Edge AI collection](/edge-ai/)
+examines the deployment side; this collection examines the transfer itself.
+
+## Scope and evidence
+
+Primary sources were inspected through **October 14, 2026**. This is a selected
+research synthesis, not an exhaustive catalog or a reproduced training run.
+Recent preprints remain identified as such. Model recipes distinguish disclosed
+details from missing settings and broader interpretation.
+
+[Model Deep Dives](/architectures/models/) supply the wider architecture
+context. [Training capable small models](/edge-ai/training-small-models/)
+connects distillation with data curation and domain adaptation.
+[Document AI](/document-ai/) and [Agents](/agents/) provide application settings
+where preserving evidence and behavior matters more than imitating style.
+
+[^hinton]: Geoffrey Hinton, Oriol Vinyals and Jeff Dean. [Distilling the Knowledge in a Neural Network](https://arxiv.org/html/1503.02531v1), 2015, Sections 1–2.
+[^fitnets]: Adriana Romero et al. [FitNets: Hints for Thin Deep Nets](https://arxiv.org/abs/1412.6550), ICLR 2015, intermediate representation supervision.
+[^born-again]: Tommaso Furlanello et al. [Born Again Neural Networks](https://arxiv.org/abs/1805.04770), ICML 2018, same-architecture students in the studied vision and language settings.
+[^gkd]: Rishabh Agarwal et al. [On-Policy Distillation of Language Models: Learning from Self-Generated Mistakes](https://arxiv.org/html/2306.13649v3), ICLR 2024, Sections 3–4.
+[^seqkd]: Yoon Kim and Alexander M. Rush. [Sequence-Level Knowledge Distillation](https://arxiv.org/abs/1606.07947), EMNLP 2016, Section 3.
+[^step-by-step]: Cheng-Yu Hsieh et al. [Distilling Step-by-Step! Outperforming Larger Language Models with Less Training Data and Smaller Model Sizes](https://arxiv.org/html/2305.02301v2), ACL 2023, rationale supervision.
+[^imitation]: Arnav Gudibande et al. [The False Promise of Imitating Proprietary LLMs](https://arxiv.org/html/2305.15717v1), 2023, targeted evaluations versus human impressions in the tested imitation setting.

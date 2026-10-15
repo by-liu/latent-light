@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 465" role="img" aria-labelledby="title desc">
+ <title id="title">Hard labels and temperature-softened targets</title>
+ <desc id="desc">Three illustrative distributions over cat, dog, fox and car: hard label 100,0,0,0 percent; logits 4,2,0,-2 at temperature 1 give 86.5,11.7,1.6,0.2 percent, and at temperature 3 give 52.3,26.8,13.8,7.1 percent.</desc>
+ <rect width="1120" height="465" rx="18" fill="#f6f8fb"/>
+ <g font-family="Inter,Arial,sans-serif" fill="#293044">
+  <text x="34" y="44" font-size="27" font-weight="650">The answer is the same. The learning signal is not.</text>
+  <text x="34" y="73" font-size="17" fill="#687085">Illustrative teacher logits: 4, 2, 0, −2. Bar height is probability.</text>
+  <rect x="30" y="101" width="340" height="305" rx="12" fill="#fff" stroke="#d9dfe8"/>
+  <rect x="390" y="101" width="340" height="305" rx="12" fill="#fff" stroke="#c4ddd8"/>
+  <rect x="750" y="101" width="340" height="305" rx="12" fill="#fff" stroke="#d4cce7"/>
+  <text x="50" y="137" font-size="22" font-weight="650">Hard label</text>
+  <text x="410" y="137" font-size="22" font-weight="650">Teacher · temperature 1</text>
+  <text x="770" y="137" font-size="22" font-weight="650">Teacher · temperature 3</text>
+  <path d="M53 350H347 M413 350H707 M773 350H1067" stroke="#d4dbe5"/>
+  <g fill="#78949a"><rect x="66" y="180" width="45" height="170" rx="4"/><rect x="138" y="348" width="45" height="2"/><rect x="210" y="348" width="45" height="2"/><rect x="282" y="348" width="45" height="2"/></g>
+  <g fill="#5d9f94"><rect x="426" y="202.95" width="45" height="147.05" rx="4"/><rect x="498" y="330.11" width="45" height="19.89" rx="3"/><rect x="570" y="347.28" width="45" height="2.72"/><rect x="642" y="349.66" width="45" height=".34"/></g>
+  <g fill="#8a77b3"><rect x="786" y="261.09" width="45" height="88.91" rx="4"/><rect x="858" y="304.44" width="45" height="45.56" rx="3"/><rect x="930" y="326.54" width="45" height="23.46" rx="3"/><rect x="1002" y="337.93" width="45" height="12.07" rx="2"/></g>
+  <g text-anchor="middle" font-size="17" font-weight="600">
+   <text x="88.5" y="168">100%</text><text x="160.5" y="336">0%</text><text x="232.5" y="336">0%</text><text x="304.5" y="336">0%</text>
+   <text x="448.5" y="191">86.5%</text><text x="520.5" y="317">11.7%</text><text x="592.5" y="335">1.6%</text><text x="664.5" y="335">0.2%</text>
+   <text x="808.5" y="249">52.3%</text><text x="880.5" y="292">26.8%</text><text x="952.5" y="314">13.8%</text><text x="1024.5" y="325">7.1%</text>
+  </g>
+  <g text-anchor="middle" font-size="18" fill="#687085">
+   <text x="88.5" y="382">cat</text><text x="160.5" y="382">dog</text><text x="232.5" y="382">fox</text><text x="304.5" y="382">car</text>
+   <text x="448.5" y="382">cat</text><text x="520.5" y="382">dog</text><text x="592.5" y="382">fox</text><text x="664.5" y="382">car</text>
+   <text x="808.5" y="382">cat</text><text x="880.5" y="382">dog</text><text x="952.5" y="382">fox</text><text x="1024.5" y="382">car</text>
+  </g>
+  <text x="34" y="443" font-size="17" fill="#687085">Higher temperature exposes alternatives while preserving the order of fixed logits. Not model measurements.</text>
+ </g>
+</svg>

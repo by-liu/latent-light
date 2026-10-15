@@ -143,3 +143,16 @@ and model-readiness SVGs are
 original MIT-licensed diagrams. The generated overview is an editorial map,
 not source artwork or a measured result; its prompt and qualified rights review
 are retained in the overview records. Complete source PDFs are not deployed.
+
+## Knowledge Distillation figures
+
+The ALM Figure 1 excerpt in `public/figures/knowledge-distillation/` retains
+Minixhofer, Vulić and Ponti's CC BY-SA 4.0 terms. The Switch-KD Figure 2
+excerpt retains Sun et al.'s original rights and a specific bounded
+research/criticism assessment, not a permissive artwork grant. The reused Qwen3
+figure retains its existing terms and source record. See the collection's
+[source records](public/figures/knowledge-distillation/SOURCES.md) and
+[notice](public/figures/knowledge-distillation/NOTICE.md) for exact editions,
+changes, checksums, attribution and reuse boundaries. These source figures are
+not under Latent Light's MIT grant. The independently authored transfer-map and
+soft-target SVGs are original MIT-licensed material, not model measurements.

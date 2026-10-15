@@ -1,0 +1,261 @@
+---
+title: Distillation Practice and Evaluation
+description: Design a trustworthy distillation pipeline, implement the intended loss, evaluate capability transfer and account for the complete cost.
+lastUpdated: 2026-10-14
+---
+
+import FocusCanvas from '../../../components/FocusCanvas.astro';
+import ModelFlow from '../../../components/architectures/ModelFlow.astro';
+import ComparisonTable from '../../../components/ComparisonTable.astro';
+
+Start with a capability the student must deliver, then choose the cheapest
+supervision that can plausibly teach it. The experiment should establish
+**useful transfer**, not merely a lower teacher-matching loss.
+
+This chapter proposes a workflow synthesized from the methods and evidence in
+this collection. The document example, code and storage calculations are
+illustrative, not an executed training job. Read the
+[foundations](/knowledge-distillation/foundations/) for the objectives and the
+[model recipes](/knowledge-distillation/llm-vlm-recipes/) for reported settings.
+
+## Write the capability contract first
+
+Consider a small VLM that answers questions about charts in documents and
+returns a short structured response. It must read labels and values, combine
+evidence correctly and abstain when the chart is unreadable. These requirements
+need different tests; “good answers” is not an adequate specification.
+
+Before generating data, define the deployment input, allowed output, important
+failure types and resource budget. Compare the starting student with a prompt
+improvement, a stronger existing small checkpoint and a teacher-assisted
+system. Distillation is one option, not the assumed winner.
+
+<FocusCanvas label="A defensible distillation development loop" size="diagram">
+<ModelFlow id="figure-1" title="The evaluation contract shapes the training recipe" lanesJson='[{"label":"Build and test","steps":[{"label":"Reserve tests","detail":"Document families and failure categories","accent":true},{"label":"Collect supervision","detail":"Coverage, teacher versions and verification"},{"label":"Train a baseline","detail":"One defined signal and loss"},{"label":"Audit transfer","detail":"Capability, retention and device cost","accent":true}],"note":"Feed errors back into the coverage plan or objective. Do not regenerate the held-out tests from the same templates used to train."}]' footer="A proposed development loop, not a published end-to-end recipe or a required sequence of model calls.">
+**Figure 1.** Keep an independent test of what the student learned. Original workflow informed by controlled imitation studies and distillation cost accounting.[^imitation][^scaling]
+</ModelFlow>
+</FocusCanvas>
+
+The loop in [Figure 1](#figure-1) returns measured failures to the coverage plan
+or the training choice that can address them.
+
+## Build a coverage plan before a large corpus
+
+For the chart example, stratify by chart type, document layout, resolution,
+language, number format, missing evidence and reasoning difficulty. Split at
+the document or source-family level before making variants. A paraphrase of a
+training question is not an independent test simply because its wording differs.
+
+Generate teacher answers with their checkpoint, prompt, sampling settings and
+provenance. Validate structure and arithmetic where possible. Human review
+should include rare categories and failures, not only high-confidence samples.
+Use “unknown” or abstention targets only when their meaning is defined.
+
+Keep two questions separate: **Is this sample correct?** and **Does this mixture
+cover the desired behavior?** Filtering every sample through a judge does not
+automatically solve the second question. Likewise, passing a JSON parser does
+not establish that a value was read from the image.
+
+## Add complexity only after a useful baseline
+
+1. **Response baseline.** Train the same student on verified teacher answers.
+   Keep model initialization, data split and evaluation fixed.
+2. **Soft-target comparison.** If teacher access and tokenizer alignment permit,
+   test probability matching on the same selected prefixes.
+3. **Student experience.** Test refreshed student rollouts if free generation
+   fails despite good teacher-forced scores.
+4. **Visual supervision.** If errors come from perception, test an appropriate
+   visual target or input representation, not just a longer rationale.
+5. **Deployment artifact.** Evaluate compression, output length and actual
+   hardware execution after training.
+
+This is a proposed experimental sequence, not a claim that every later stage
+will help. For vocabulary mismatch, use a validated alignment method such as
+[ALM](/knowledge-distillation/modern-methods/#different-tokenizers-need-a-common-event)
+or begin with response targets instead of silently padding logits.
+
+## Check the loss at a tiny scale
+
+For fixed, aligned prefixes, full teacher targets and a response-token mask,
+the following conceptual PyTorch core implements forward token KL. It omits
+the model calls, data preparation, distributed synchronization and memory
+optimization. It is not a complete trainer or a reverse sequence-KL optimizer.
+
+```python
+# Both logits have shape [batch, sequence_length, vocabulary].
+# Vocabulary IDs and the conditioned prefixes must have the same meaning.
+# response_mask[:, j] says whether token j is a supervised response token.
+assert temperature > 0
+assert teacher_logits.shape == student_logits.shape
+
+# Logits at position j predict the token at j + 1.
+log_p = (teacher_logits[:, :-1].detach().float() / temperature).log_softmax(-1)
+log_q = (student_logits[:, :-1].float() / temperature).log_softmax(-1)
+valid = response_mask[:, 1:].bool() & attention_mask[:, 1:].bool()
+assert valid.any(), "The batch must contain supervised response tokens"
+
+p = log_p.exp()
+per_token_kl = (p * (log_p - log_q)).sum(-1)
+loss = temperature**2 * per_token_kl[valid].sum() / valid.sum()
+loss.backward()
+```
+
+This exact identity is a direct implementation of the
+[forward KL definition](/knowledge-distillation/foundations/#match-probabilities-not-parameter-files).
+The example assumes finite logits with full support. For packed samples,
+the mask must also exclude cross-example transitions. Preserve gradients into
+the student; freezing the teacher does not mean disabling the entire loss graph.
+
+Check identity, nonnegativity within numerical tolerance, KL direction, token
+shift, padding, response masks and empty batches before running at scale.
+If targets are sampled or truncated, explicitly implement that target and its
+normalization. It is no longer the full distribution used in this snippet.
+
+### Response length changes weighting
+
+Suppose one microbatch contains two valid tokens with mean loss 1 and another
+contains eight with mean loss 3. Averaging those means gives 2. A combined
+token average is instead:
+
+<MathExpression display number="1" tex="\frac{2\cdot1+8\cdot3}{2+8}=2.6" />
+
+For a true token average over an accumulation window, accumulate valid-token
+loss sums and divide by the total valid-token count. With distributed gradient
+averaging, account for the framework's averaging convention as well. An equal
+example average is also a legitimate objective, but it is a different one.
+Do not change it accidentally when increasing accumulation or varying lengths.
+
+## Full-vocabulary targets have a real cost
+
+Take an illustrative **20 million supervised positions**, **128,000 vocabulary
+entries** and **two bytes per retained value**. Materializing a dense target
+for every position requires:
+
+<MathExpression display number="2" tex="20\times10^6\times128{,}000\times2=5.12\times10^{12}\ \text{bytes}=5.12\ \text{TB}" />
+
+Keeping 256 entries per position with a two-byte value and four-byte token ID
+instead takes **30.72 GB**, before metadata and storage overhead. These are
+decimal units and arithmetic estimates, not measured model costs. Streaming
+targets avoids retaining the whole corpus, but not the work of computing them.
+
+Three approximations must not be conflated: top-k truncation, probability-weighted
+sampling, and keeping only the realized token's probability. They expose
+different information. Gemma 3 explicitly describes sampled logits and a
+renormalized target; OPID's sampled-token signal is a different construction.[^gemma3][^opid]
+
+If a truncated teacher assigns zero probability outside its retained set,
+forward KL against a full-support student is well-defined. Reverse KL is
+infinite wherever that student assigns positive mass to a zero teacher target.
+A practical restricted reverse-KL implementation therefore needs a stated
+restriction, smoothing or other approximation. Reusing the forward loss's
+target file is not enough.
+
+## Teacher inference is part of the training system
+
+Once a response exists, a causal teacher can score its prefixes in a parallel
+forward pass with the correct mask. Full teacher answer generation is a
+different workload. Neither is free: long contexts, visual encoders, logits
+and communication can dominate a training step.
+
+For a first implementation, Hugging Face's current GKD documentation exposes
+the student-data fraction and divergence as separate controls. It places GKD
+under the experimental namespace at inspection time. Pin and inspect the
+version you use rather than treating this page as a maintained API recipe.[^trl]
+
+Asynchronous collection can overlap generation, teacher scoring and updates.
+DeepSeek-V4.1-Flash reports this operational pattern at scale. A proposed
+implementation should record sample age, policy version, teacher version and
+configuration changes. A faster queue does not make old experience on policy;
+importance correction, replay limits or refresh rules require their own
+justification.[^v41]
+
+## Evaluate transfer, not resemblance
+
+<FocusCanvas label="Distillation evaluation dimensions and controls" size="wide">
+<ComparisonTable id="distillation-evaluation" title="What evidence would convince us?" label="Capability transfer evaluation and matched controls" itemLabel="evaluation dimensions">
+
+| Dimension | Useful test | Confound to control |
+| --- | --- | --- |
+| Facts and perception | Held-out facts, values, OCR and changed visual evidence | Same document or template appearing in the generated corpus. |
+| Reasoning | New compositions, longer dependencies and executable outcomes | More attempts or longer reasoning mistaken for better single-attempt performance. |
+| Grounding | Original, removed, changed and unreadable images | Fluent answers supported by language priors rather than the actual image. |
+| Agent behavior | Unseen tool states, recovery and completion in a controlled environment | Teacher transcripts containing information unavailable to the deployed student. |
+| Retention and safety | General tasks, abstention and important rare failures | A target-task average hiding regressions elsewhere. |
+| Efficiency | Training cost and complete request latency, memory and energy | Reporting only parameter count, a kernel timing or decode tokens per second. |
+
+</ComparisonTable>
+</FocusCanvas>
+
+This is a proposed evaluation matrix. Counterfactual or removed-image tests
+need careful construction: an invalid input can measure robustness rather
+than ordinary task accuracy. Report the test's intended meaning.
+
+Keep the same starting student, prompt families, number of attempts, generation
+budget and evaluator where a comparison requires them. Separate three
+questions: equal data exposure, equal training compute, and equal total teacher
+plus student cost. No single comparison answers all three.
+
+Use a development set for recipe selection and a final held-out set for the
+reported result. Retain multiple seeds where feasible, uncertainty intervals,
+category-level errors and response lengths. An evaluator that helped filter
+the training samples should not be the only judge of success.
+
+### Challenge the apparent improvement
+
+Gudibande et al. found a gap between convincing imitation and targeted task
+improvement in their tested models. Tang and Yang's newer controlled study
+separates factual associations from compositional skill. Together they motivate
+testing distinct capabilities; neither establishes that all teacher-generated
+training is ineffective.[^imitation][^knowledge-skill]
+
+If the teacher-matching loss falls while downstream quality stalls, investigate
+coverage, target correctness, response length, objective weighting and student
+capacity before generating more of the same data.
+
+## Account for the complete cost
+
+Distillation Scaling Laws distinguishes whether a teacher already exists,
+whether teacher training is charged, and whether its costs are amortized across
+students. Its fitted language-model loss relationships are not universal
+product or multimodal cost laws.[^scaling]
+
+For a proposed product, a simple accounting model is:
+
+<MathExpression display number="3" tex="C_{\mathrm{lifetime}}=C_{\mathrm{teacher\ allocation}}+C_{\mathrm{data}}+C_{\mathrm{student\ training}}+N_{\mathrm{requests}}C_{\mathrm{served\ request}}" />
+
+All terms must use the same cost unit and accounting boundary. This is an
+original budget identity, not a FLOP estimate. Include refreshes, failed
+generation, review and serving overhead in the appropriate terms. If an
+alternative serves requests at lower quality, its apparent savings are not an
+equal-capability comparison.
+
+Distillation can be combined with
+[quantization and compression](/edge-ai/quantization-compression/), but check
+quality again on the final artifact. A smaller checkpoint with unsupported
+operators or longer outputs may not improve device latency. Follow
+[evaluation and profiling](/edge-ai/evaluation-profiling/) for the deployment
+measurement contract.
+
+Before using teacher outputs, check the applicable data rights, provider terms
+and privacy boundary. Do not send confidential material to a teacher service
+or assume that publicly accessible weights grant every downstream use.
+
+## A useful experiment ends with an explanation
+
+The handoff should say **what improved, under which controls, what regressed
+and what it cost**. Keep the teacher and student artifacts, data mixture,
+objective, normalization, rollout settings, evaluation version and deployment
+conditions together. Missing information should remain missing, not become a
+confident reproduction claim.
+
+Return to the [overview](/knowledge-distillation/) for the reading map, or use
+the [method families](/knowledge-distillation/modern-methods/) to choose the
+next controlled comparison.
+
+[^imitation]: Arnav Gudibande et al. [The False Promise of Imitating Proprietary LLMs](https://arxiv.org/html/2305.15717v1), 2023, targeted evaluations and style-versus-capability limitations.
+[^scaling]: Dan Busbridge et al. [Distillation Scaling Laws](https://arxiv.org/html/2502.08606v2), ICML 2025, compute-accounting scenarios and fitted student-loss analysis.
+[^gemma3]: Gemma Team. [Gemma 3 Technical Report](https://arxiv.org/html/2503.19786v1), 2025, Section 2.1, probability-weighted sampled logits and target renormalization.
+[^opid]: Shuo Yang et al. [OPID: On-Policy Skill Distillation for Agentic Reinforcement Learning](https://arxiv.org/abs/2606.26790), June 2026 preprint, Section 3.3 and Appendix A's sampled-token treatment.
+[^trl]: Hugging Face. [Generalized Knowledge Distillation Trainer](https://huggingface.co/docs/trl/gkd_trainer), usage tips and `trl.experimental.gkd` API, inspected October 14, 2026. Documentation inspection is not a trainer execution.
+[^v41]: DeepSeek-AI. [DeepSeek-V4.1-Flash report](https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash/blob/2cba9e42aa026125f3ed06c6d98c1db82f7ca027/DeepSeek_V41_Tech_Report.pdf), Section 5.2.4, asynchronous generation and configuration transitions. Inspected October 14, 2026.
+[^knowledge-skill]: Yixuan Tang and Yi Yang. [On-Policy Distillation Teaches New Skills but Not New Knowledge](https://arxiv.org/html/2610.09639v1), October 7, 2026 preprint. The controlled setup and KL-direction ablations limit the generality of the title.

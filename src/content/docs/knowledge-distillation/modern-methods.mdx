@@ -1,0 +1,199 @@
+---
+title: Modern Distillation Methods
+description: A practical map of response, feature, on-policy, reasoning, context and cross-tokenizer distillation.
+lastUpdated: 2026-10-14
+---
+
+import FocusCanvas from '../../../components/FocusCanvas.astro';
+import ModelFlow from '../../../components/architectures/ModelFlow.astro';
+import SourceFigure from '../../../components/architectures/SourceFigure.astro';
+import ComparisonTable from '../../../components/ComparisonTable.astro';
+
+Distillation methods differ in **what they transfer, where they supervise the
+student, and how they update it**. Separating those decisions is more useful
+than memorizing algorithm names. A teacher answer, a teacher probability
+distribution and a reward for completing a task are different objects.
+
+This is a selected method map through **October 14, 2026**, including recent
+preprints. It is not a universal leaderboard. The
+[foundations](/knowledge-distillation/foundations/) define the objectives;
+[LLM and VLM recipes](/knowledge-distillation/llm-vlm-recipes/) show deployed
+model families' disclosed uses.
+
+## Start with the access you actually have
+
+| Teacher access | Available signal | Important constraint |
+| --- | --- | --- |
+| Responses only | Answers, rationales and tool trajectories | Unselected alternatives and internal states are unavailable. |
+| Probabilities or logits | Soft targets at specified prefixes | Vocabularies, event meanings, precision and truncation must align. |
+| Intermediate computation | Hidden states, attention or feature relationships | Layer, width, token and modality correspondence must be defined. |
+
+This is an editorial access map. A few API log probabilities do not imply
+full-vocabulary access. Conversely, different network architectures can still
+share an output vocabulary. Access and architecture are separate constraints.
+
+## The main families
+
+<FocusCanvas label="Distillation methods and their supervision contracts" size="wide">
+<ComparisonTable id="distillation-methods" title="Methods by learning signal" label="Distillation methods, mechanisms and conditions" itemLabel="method families" search>
+
+| Family | Mechanism | What to check |
+| --- | --- | --- |
+| Response or sequence | Train on selected teacher responses with token likelihood. SeqKD established this route for translation.[^seqkd] | Selection and decoding change which teacher behavior survives. |
+| Soft token targets | Match next-token alternatives rather than one observed token. Gemma 2 uses this during smaller-model pretraining.[^gemma2] | Events must align; full, sampled and top-k targets differ. |
+| Feature hints | Match an intermediate teacher representation through a specified mapping. FitNets studies this for thinner students.[^fitnets] | Matching dimensions alone does not establish matching semantics. |
+| Relationship matching | Transfer distances or angles between examples, as in RKD; MiniLM transfers attention and value relations within sequences.[^rkd][^minilm] | State which objects are related and which structure is preserved. |
+| Student-rollout distillation | Ask the teacher to supervise prefixes the student actually generates, as in GKD.[^gkd] | Rollout freshness and the divergence are independent choices. |
+| Contrastive distillation | DistiLLM-2 couples different objectives with teacher and student responses.[^distillm2] | It is not simply DPO with a teacher substituted for the reference. |
+| Cross-tokenizer transfer | ALM compares likelihoods of aligned text chunks under different tokenizations.[^alm] | Token IDs cannot be compared as if they denoted the same event. |
+| Context and self-distillation | OPCD teaches a student without extra context using a teacher that receives it.[^opcd] | Identify the teacher's information advantage and update policy. |
+
+</ComparisonTable>
+</FocusCanvas>
+
+Methods can be combined. An assistant can first learn teacher demonstrations,
+then receive soft targets on its own rollouts. A VLM can combine output
+supervision with visual relationships. The combination needs a defined
+objective and evidence, not just more loss terms.
+
+## Why supervise the student's own mistakes?
+
+Training only on polished teacher responses can leave the student unprepared
+for its own imperfect continuations. At inference, one mistaken step changes
+the prefix for every later step. GKD addresses this mismatch using student
+responses and allows several discrepancy measures.[^gkd]
+
+<FocusCanvas label="Teacher demonstrations versus student-rollout feedback" size="diagram">
+<ModelFlow id="figure-1" title="Who supplies the prefix?" lanesJson='[{"label":"Demonstration path","steps":[{"label":"Prompt","detail":"Task input"},{"label":"Teacher response","detail":"Teacher supplies the trajectory","accent":true},{"label":"Student update","detail":"Hard labels or soft teacher targets"}],"note":"Feedback is evaluated on the selected demonstration prefixes."},{"label":"Student-rollout path","steps":[{"label":"Student generates","detail":"Current or recorded student version","accent":true},{"label":"Teacher scores","detail":"The same visited response prefixes"},{"label":"Student update","detail":"Chosen divergence and token weighting"}],"note":"Refresh experience after updates. A replayed rollout is not automatically on policy for the new student."}]' footer="Teacher scoring can use a parallel forward pass over a completed response. It need not generate a new answer at every token.">
+**Figure 1.** Change the visited experience, not only the loss. Independent explanation informed by GKD.[^gkd]
+</ModelFlow>
+</FocusCanvas>
+
+In [Figure 1](#figure-1), the teacher evaluates what should come **next**, conditional on the visited
+prefix. It does not rewrite the past. If the prefix is already contradictory,
+teacher advice may itself be unreliable. Filtering, a useful cold start and
+retaining correct demonstrations remain meaningful design options.
+
+### The loss and sampling policy are independent axes
+
+A useful conceptual objective is:
+
+<MathExpression display number="1" tex="\mathcal L_D(\theta)=\mathbb E_{x,\,y\sim\mu}\!\left[\frac{1}{n_y}\sum_{t=1}^{n_y}D\!\left(p_T(\cdot\mid h_t),q_\theta(\cdot\mid h_t)\right)\right]" />
+
+Here, <MathExpression tex="h_t=(x,y_{\lt t})" /> is the visited prefix,
+<MathExpression tex="\mu" /> supplies trajectories, and
+<MathExpression tex="D" /> specifies the ordered discrepancy. Forward KL,
+reverse KL and generalized Jensen–Shannon objectives give different updates.
+This length-averaged expression is a schematic of prefix-conditioned matching,
+not the exact objective of every method.[^gkd]
+
+In a common implementation, rollout collection is outside backpropagation and
+the update treats collected prefixes as fixed. Differentiating the full
+parameter-dependent trajectory distribution would introduce additional terms.
+MiniLLM derives a policy-gradient optimizer for its reverse **sequence** KL;
+that is not interchangeable with every local token-KL update.[^minillm]
+
+“Offline” often means a fixed stored dataset. “On policy” means experience
+from the policy being updated. A dataset generated yesterday by an older
+student is student-generated but stale. “Online distillation” can also mean
+co-trained teacher/student networks in other literature. State the operational
+meaning rather than treating these labels as synonyms.
+
+## DistiLLM-2: match the objective to the response source
+
+DistiLLM-2 combines a contrastive loss with teacher and student outputs,
+dataset curation and a changing skew coefficient. Its implementation collects
+student responses ahead of each training epoch, instead of regenerating them
+at every update. That trades rollout freshness for generation efficiency.
+The paper evaluates instruction, code, preference and VLM settings; these are
+its tested settings, not evidence of optimality on every task.[^distillm2]
+
+## Different tokenizers need a common event
+
+For the same text, one model may emit a single token where another emits
+several. Padding a vocabulary or aligning token indices does not solve this.
+**ALM, Approximate Likelihood Matching**, identifies chunks covering the same
+text span, then approximates a discrepancy between their likelihoods. It also
+studies debiasing and optional hidden-state supervision.[^alm]
+
+<FocusCanvas label="Original cross-tokenizer likelihood matching figure" size="diagram">
+<SourceFigure id="figure-2" src="/figures/knowledge-distillation/alm-chunk-matching.png" alt="ALM tokenizes the same input text with teacher and student tokenizers, identifies chunks spanning the same text despite different token boundaries, and minimizes a chunk likelihood discrepancy. Colored spans identify correspondence, not identical token IDs." minWidth={780}>
+<div slot="image">
+
+![ALM: the same text is tokenized twice, comparable spans are identified, and their chunk likelihoods are compared instead of matching vocabulary indices.](/figures/knowledge-distillation/alm-chunk-matching.png)
+
+</div>
+
+**Figure 2.** Match text spans across different token boundaries. Minixhofer, Vulić and Ponti, ALM v4, original Figure 1; figure-region crop, CC BY-SA 4.0.[^alm][^figures]
+</SourceFigure>
+</FocusCanvas>
+
+Notice in [Figure 2](#figure-2) that matching a chunk is not enumerating every
+possible string continuation. The approximation is part of the method, not an
+exact conversion of arbitrary teacher logits into student vocabulary logits.
+
+## Reasoning: transfer more than an answer
+
+Distilling Step-by-Step uses teacher rationales as an additional task alongside
+label prediction. This is different from requiring a deployed student to emit
+the entire rationale before every answer. Its reported benefits concern
+specific task models and datasets.[^step-by-step]
+
+For a modern reasoning assistant, separate four experiments: final answers
+only, answer plus rationale, verified or filtered rationale, and feedback on
+student-generated reasoning. Keep answer correctness, reasoning length and
+generalization separate. A fluent rationale can still be wrong; an answer
+check alone cannot establish that every reasoning step is valid.
+
+## A teacher can know more because it sees more
+
+OPCD conditions the teacher on additional context, such as accumulated
+experience or a system prompt, while the student generates without it.
+The teacher may be a separate model or share the student's weights. In the
+latter case, the information advantage comes from the context, not additional
+parameters.[^opcd]
+
+This suggests a useful deployment question: which stable behavior can move
+from repeated context into weights? It does not establish that a changing
+knowledge base can be safely discarded. Test unseen questions, factual
+updates and retained capabilities independently.
+
+## Recent directions worth watching
+
+**Selective teacher supervision.** Dr. OPD, a September 2026 preprint, uses
+outcome rewards to weight token-level teacher guidance. Its surrogate connects
+teacher corrections with reward improvement, with practical approximations and
+assumptions. The published experiments concern math and code, not every
+assistant workload.[^dr-opd]
+
+**Agent skill feedback.** OPID extracts episode and critical-step guidance from
+completed trajectories. An old policy re-scores the same actions with and
+without that guidance. The resulting token signal augments an outcome-based
+RL objective; this is not merely copying a teacher tool transcript. Its
+reported environments include ALFWorld, WebShop and search QA.[^opid]
+
+**Do methods teach facts or better execution?** The October 2026 fact/skill
+study tests this distinction directly. It strengthens the case for separate
+evaluation dimensions, while leaving open how results change with privileged
+context, data, scale and objectives.[^knowledge-skill]
+
+The open problem is not simply finding a new divergence. It is allocating
+teacher attention where a particular student can learn something useful,
+without losing rare behaviors or mistaking agreement for capability.
+Continue with the [training recipes](/knowledge-distillation/llm-vlm-recipes/).
+
+[^seqkd]: Yoon Kim and Alexander M. Rush. [Sequence-Level Knowledge Distillation](https://arxiv.org/abs/1606.07947), EMNLP 2016, Section 3.
+[^gemma2]: Gemma Team. [Gemma 2: Improving Open Language Models at a Practical Size](https://arxiv.org/html/2408.00118v3), 2024, Section 3.2.
+[^fitnets]: Adriana Romero et al. [FitNets: Hints for Thin Deep Nets](https://arxiv.org/abs/1412.6550), ICLR 2015, hint-based training and representation mapping.
+[^rkd]: Wonpyo Park et al. [Relational Knowledge Distillation](https://arxiv.org/abs/1904.05068), CVPR 2019, distance and angle losses between examples.
+[^minilm]: Wenhui Wang et al. [MiniLM: Deep Self-Attention Distillation for Task-Agnostic Compression of Pre-Trained Transformers](https://arxiv.org/abs/2002.10957), NeurIPS 2020, attention and value-relation transfer. MiniLM is distinct from MiniLLM.
+[^gkd]: Rishabh Agarwal et al. [On-Policy Distillation of Language Models: Learning from Self-Generated Mistakes](https://arxiv.org/html/2306.13649v3), ICLR 2024, Section 3 and Algorithm 1.
+[^minillm]: Yuxian Gu et al. [MiniLLM: Knowledge Distillation of Large Language Models](https://arxiv.org/html/2306.08543v2), ICLR 2024, Section 2 and Appendix A.
+[^distillm2]: Jongwoo Ko et al. [DistiLLM-2: A Contrastive Approach Boosts the Distillation of LLMs](https://arxiv.org/abs/2503.07067v2), ICML 2025, Sections 2.2–3, Algorithm 1 and Section 6.
+[^alm]: Benjamin Minixhofer, Ivan Vulić and Edoardo M. Ponti. [Universal Cross-Tokenizer Distillation via Approximate Likelihood Matching](https://arxiv.org/html/2503.20083v4), NeurIPS 2025, Figure 1 and Section 3. The original submission used a shorter title.
+[^opcd]: Tianzhu Ye et al. [On-Policy Context Distillation for Language Models](https://arxiv.org/html/2602.12275v2), March 23, 2026 preprint, Section 3 and Algorithm 1.
+[^step-by-step]: Cheng-Yu Hsieh et al. [Distilling Step-by-Step! Outperforming Larger Language Models with Less Training Data and Smaller Model Sizes](https://arxiv.org/html/2305.02301v2), ACL 2023, Section 3's multitask rationale and label formulation.
+[^dr-opd]: Zhenyu Wang et al. [Dr. OPD: Learning What to Follow for Optimal On-Policy Distillation of Large Language Models](https://arxiv.org/html/2609.38025v1), September 29, 2026 preprint, Sections 3–5; theoretical assumptions and practical credit approximation are separate.
+[^opid]: Shuo Yang et al. [OPID: On-Policy Skill Distillation for Agentic Reinforcement Learning](https://arxiv.org/abs/2606.26790), June 25, 2026 preprint, Sections 3.2–3.4 and evaluation settings.
+[^knowledge-skill]: Yixuan Tang and Yi Yang. [On-Policy Distillation Teaches New Skills but Not New Knowledge](https://arxiv.org/html/2610.09639v1), October 7, 2026 preprint, independent control of teacher facts and compositional skill.
+[^figures]: [Figure sources and reuse records](/figures/knowledge-distillation/SOURCES.md), ALM extraction and retained share-alike artwork terms. Original figures are not under the site's MIT license.
