@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="620" viewBox="0 0 1120 620" role="img" aria-labelledby="title desc">
+<title id="title">Smart devices, nearby specialists and a cloud agent</title>
+<desc id="desc">A proposed three-tier architecture. A device captures signals and runs lightweight perception. An optional phone or hub provides larger specialists, buffering and disclosure checks. Permitted evidence reaches a cloud agent. Requests return through local policy checks. Offline operation retains only explicitly supported local functions.</desc>
+<defs>
+ <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto-start-reverse"><path d="M0 0 8 4 0 8Z" fill="#426480"/></marker>
+ <marker id="return" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 8 4 0 8Z" fill="#a56528"/></marker>
+</defs>
+<rect width="1120" height="620" rx="20" fill="#fafbf9"/>
+<g font-family="Inter, Arial, sans-serif">
+ <text x="32" y="42" font-size="13" font-weight="700" letter-spacing="2" fill="#54718a">A POSSIBLE ALLOCATION OF RESPONSIBILITIES</text>
+ <text x="32" y="79" font-size="27" font-weight="700" fill="#182d40">Sense nearby. Reason broadly. Look again selectively.</text>
+ <rect x="32" y="111" width="298" height="295" rx="16" fill="#eef6f2" stroke="#b5d2c6"/>
+ <rect x="411" y="111" width="298" height="295" rx="16" fill="#edf3fb" stroke="#b3c9e3"/>
+ <rect x="790" y="111" width="298" height="295" rx="16" fill="#f3effa" stroke="#cabce0"/>
+ <g font-size="13" font-weight="700" letter-spacing="1.3">
+  <text x="54" y="141" fill="#376751">01 · DEVICE</text>
+  <text x="433" y="141" fill="#3a5f86">02 · NEARBY COMPUTE</text>
+  <text x="812" y="141" fill="#6d538f">03 · CLOUD</text>
+ </g>
+ <g font-size="23" font-weight="700" fill="#182d40">
+  <text x="54" y="177">Glasses, phone, camera</text>
+  <text x="433" y="177">Phone or home hub</text>
+  <text x="812" y="177">General agent</text>
+ </g>
+ <g font-size="15" fill="#526375">
+  <text x="54" y="202">Closest to the physical signal</text>
+  <text x="433" y="202">Optional extra local capacity</text>
+  <text x="812" y="202">Goal and task level reasoning</text>
+ </g>
+ <g stroke="#cad8d2"><path d="M54 220H308"/><path d="M433 220H687"/><path d="M812 220H1066"/></g>
+ <g font-size="17" fill="#243e50">
+  <text x="54" y="254">Capture and select</text>
+  <text x="54" y="286">Detect, track or read</text>
+  <text x="54" y="318">Immediate local feedback</text>
+  <text x="433" y="254">Larger specialist models</text>
+  <text x="433" y="286">Buffer attributable evidence</text>
+  <text x="433" y="318">Mediate the cloud connection</text>
+  <text x="812" y="254">Interpret the user's goal</text>
+  <text x="812" y="286">Combine evidence and tools</text>
+  <text x="812" y="318">Ask what is still missing</text>
+ </g>
+ <g font-size="14" font-weight="600">
+  <rect x="49" y="345" width="264" height="40" rx="8" fill="#fff" stroke="#c6dad0"/>
+  <text x="64" y="370" fill="#376751">Consent and capture controls</text>
+  <rect x="428" y="345" width="264" height="40" rx="8" fill="#fff" stroke="#c3d2e6"/>
+  <text x="443" y="370" fill="#3a5f86">Disclosure checks before upload</text>
+  <rect x="807" y="345" width="264" height="40" rx="8" fill="#fff" stroke="#d4c8e5"/>
+  <text x="822" y="370" fill="#6d538f">Receive only permitted evidence</text>
+ </g>
+ <g stroke="#426480" stroke-width="2.2" fill="none" marker-end="url(#arrow)">
+  <path d="M332 270H405"/><path d="M711 270H784"/>
+ </g>
+ <g font-size="12" text-anchor="middle" fill="#426480" font-weight="600">
+  <text x="370" y="247">selected</text><text x="370" y="261">signals</text>
+  <text x="750" y="247">permitted</text><text x="750" y="261">evidence</text>
+ </g>
+ <path d="M940 406V455H181V414" fill="none" stroke="#a56528" stroke-width="2.3" stroke-dasharray="7 5" marker-end="url(#return)"/>
+ <rect x="322" y="436" width="546" height="37" rx="9" fill="#fafbf9"/>
+ <text x="595" y="460" font-size="16" text-anchor="middle" font-weight="600" fill="#92591e">Request → local policy check → bounded observation</text>
+ <text x="32" y="510" font-size="15" fill="#526375">Without a hub, its supported functions move to the device. Local disclosure checks still apply.</text>
+ <rect x="32" y="535" width="1056" height="56" rx="12" fill="#fff5e8" stroke="#ead0ac"/>
+ <text x="52" y="560" font-size="16" font-weight="700" fill="#7b5024">Disconnected?</text>
+ <text x="185" y="560" font-size="15" fill="#7b5024">Keep supported local functions. Pause cloud dependent work. Make the limitation visible.</text>
+ <text x="52" y="579" font-size="12" fill="#926b41">Proposed system pattern, not one product's internals or a measured performance result.</text>
+</g>
+</svg>

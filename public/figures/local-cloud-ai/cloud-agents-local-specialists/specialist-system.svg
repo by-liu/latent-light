@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="570" viewBox="0 0 1120 570" role="img" aria-labelledby="title desc">
+<title id="title">Cloud agent, local specialists</title>
+<desc id="desc">Local sources are observed by specialists. A host policy gate checks tool access and evidence disclosure before the cloud agent reasons. Targeted requests and proposed actions return through that gate. Only approved actions execute, and their results are observed again.</desc>
+<defs>
+ <linearGradient id="bg" x2="1" y2="1"><stop stop-color="#f5f7fc"/><stop offset="1" stop-color="#faf9f5"/></linearGradient>
+ <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 10 5 0 10z" fill="#537a92"/></marker>
+ <marker id="back" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 10 5 0 10z" fill="#7663a1"/></marker>
+</defs>
+<rect width="1120" height="570" rx="22" fill="url(#bg)"/>
+<g font-family="Inter,Arial,sans-serif" fill="#223241">
+ <text x="38" y="44" font-size="13" letter-spacing="2.2" fill="#596f88">ONE AGENT · SPECIALIZED CAPABILITIES</text>
+ <text x="38" y="84" font-size="29" font-weight="650">Cloud reasoning. Local specialist capabilities.</text>
+ <rect x="24" y="118" width="804" height="320" rx="16" fill="#eef3f6" stroke="#ccd8e2"/>
+ <text x="44" y="147" font-size="12" letter-spacing="1.4" fill="#526d82">LOCAL DEVICE OR TRUSTED LOCAL COMPUTE</text>
+ <rect x="846" y="118" width="250" height="320" rx="16" fill="#f0edf7" stroke="#d5cce5"/>
+ <text x="864" y="147" font-size="12" letter-spacing="1.4" fill="#786394">CLOUD SERVICE</text>
+ <g stroke="#ced9e1" fill="#ffffff">
+  <rect x="44" y="177" width="194" height="221" rx="12"/>
+  <rect x="286" y="177" width="218" height="221" rx="12"/>
+  <rect x="552" y="177" width="254" height="221" rx="12"/>
+ </g>
+ <rect x="864" y="177" width="214" height="221" rx="12" fill="#fff" stroke="#c9bcde"/>
+ <g font-size="12" fill="#677b8a"><text x="62" y="204">01 / OBSERVE</text><text x="304" y="204">02 / SPECIALIZE</text><text x="570" y="204">03 / MEDIATE</text><text x="882" y="204" fill="#786394">04 / REASON</text></g>
+ <g font-size="21" font-weight="650"><text x="62" y="239">Local sources</text><text x="304" y="239">Specialist tools</text><text x="570" y="239">Host policy gate</text><text x="882" y="239">Cloud agent</text></g>
+ <g font-size="15" fill="#435b6d">
+  <text x="62" y="279">Screens and files</text><text x="62" y="307">Documents</text><text x="62" y="335">Camera or video</text>
+  <text x="304" y="279">Parse and ground</text><text x="304" y="307">Extract or detect</text><text x="304" y="335">Generate artifacts</text>
+  <text x="570" y="279">Bound tool access</text><text x="570" y="307">Check data disclosure</text><text x="570" y="335">Authorize execution</text>
+  <text x="882" y="279">Understand the goal</text><text x="882" y="307">Plan and select tools</text><text x="882" y="335">Inspect the evidence</text>
+ </g>
+ <g font-size="12" fill="#6a7b88"><text x="62" y="376">Preserve original evidence</text><text x="304" y="376">Typed results + source IDs</text><text x="570" y="376">Enforced outside the models</text><text x="882" y="376">Not direct device authority</text></g>
+ <g stroke="#537a92" stroke-width="2" fill="none" marker-end="url(#arrow)"><path d="M238 286h45"/><path d="M504 286h45"/><path d="M806 286h55"/></g>
+ <path d="M971 398v69H395v-66" fill="none" stroke="#7663a1" stroke-width="2" marker-end="url(#back)"/>
+ <path d="M679 398v54" fill="none" stroke="#7663a1" stroke-width="1.5" stroke-dasharray="4 4"/>
+ <rect x="611" y="451" width="136" height="32" rx="9" fill="#f6f4f8" stroke="#c9bcde"/>
+ <text x="679" y="472" text-anchor="middle" font-size="13" fill="#675687">Host checks</text>
+ <text x="858" y="455" text-anchor="middle" font-size="12" fill="#675687">Requests and proposed actions</text>
+ <text x="495" y="455" text-anchor="middle" font-size="12" fill="#675687">Allowed tool calls</text>
+ <text x="38" y="526" font-size="14" fill="#526879">Approve an action → execute locally → observe the result → reason again</text>
+ <text x="38" y="550" font-size="12" fill="#74838f">Proposed architecture, not a product schematic. The host mediates both directions.</text>
+</g>
+</svg>

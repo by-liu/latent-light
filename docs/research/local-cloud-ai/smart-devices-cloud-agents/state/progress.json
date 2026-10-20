@@ -1,0 +1,52 @@
+{
+  "schema_version": 3,
+  "topic_id": "smart-devices-cloud-agents",
+  "status": "complete",
+  "coverage": {
+    "glasses": "Perception, offload and actual local building blocks distinguished.",
+    "phones": "Local specialist composition versus server GPU simulation made explicit.",
+    "cameras": "Disclosed split compute, configurable VSS and Ring placement gap.",
+    "skeptical_review": "Compression, task success, locality, privacy and offline claims challenged.",
+    "presentation": "Two original figures, six-example comparison and five-part proposed evaluation.",
+    "navigation": "Sidebar and both companion links; existing routes preserved."
+  },
+  "open_questions": [
+    "No universal battery, latency, task or privacy advantage established.",
+    "Product placement and rollout claims remain bounded to inspected disclosures.",
+    "The tier allocation and coffee workflow remain proposed designs."
+  ],
+  "recommended_next_direction": "User review. DeepInfer is a separate inquiry; its official repository is available, while X returns 403. No commit or deployment authorized.",
+  "last_seen": "2026-10-20T19:50:29.389Z",
+  "output": {
+    "kind": "site-page",
+    "path": "src/content/docs/local-cloud-ai/smart-devices-cloud-agents.mdx",
+    "status": "reviewed",
+    "revision": 1,
+    "updated": "2026-10-20",
+    "evidence_cutoff": "2026-10-20",
+    "audience": "AI researchers and engineers learning how cloud agents can use local smart-device capabilities."
+  },
+  "quality_gate": {
+    "evidence_verified": true,
+    "contradictions_reviewed": true,
+    "output_reviewed": true,
+    "visuals_reviewed": true
+  },
+  "delivery_checks": {
+    "validation": {
+      "status": "passed",
+      "method": "Pinned Node 24.21.0 npm run validate: 49 deployment tests and 173 content tests; Astro zero errors/warnings, 104 built routes and lint-clean files.",
+      "checked_at": "2026-10-20T19:50:29.389Z"
+    },
+    "rendering": {
+      "status": "passed",
+      "method": "Chromium 1440/390/320 light/dark; screenshots inspected; Focus, keyboard panning, reduced motion, filter/empty/reset, no-JS, print, search, links and actual dev mobile drawer passed; zero runtime errors.",
+      "checked_at": "2026-10-20T19:49:21.847Z"
+    },
+    "exports": {
+      "status": "passed",
+      "method": "Built Markdown/MDX preserve ten citations, both numbered figures, complete visible overview equivalent, six workflow steps and all comparison rows. Discovery and both companion links passed.",
+      "checked_at": "2026-10-20T19:49:21.847Z"
+    }
+  }
+}

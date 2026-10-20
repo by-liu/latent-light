@@ -1,0 +1,55 @@
+{
+  "schema_version": 3,
+  "topic_id": "deepinfer",
+  "status": "complete",
+  "coverage": {
+    "release_and_service_boundary": "reviewed",
+    "execution_mechanisms": "reviewed",
+    "benchmark_accounting": "reviewed",
+    "protocol_and_streaming": "reviewed",
+    "practical_recipes": "source-inspected; syntax checked; not executed",
+    "counterevidence": "reviewed",
+    "visuals": "six figures reviewed, numbering and anchors checked",
+    "delivery": "passed",
+    "overview": "TL;DR and AI-generated synthesis reviewed; full text retained"
+  },
+  "open_questions": [
+    "Supplied X and Zhihu pages were inaccessible; claims rely on inspected official repository artifacts.",
+    "No GPU performance reproduction or independent cross-framework comparison was performed.",
+    "Published production token mix and full service cost breakdown remain undisclosed."
+  ],
+  "recommended_next_direction": null,
+  "last_seen": "2026-10-20T20:30:01.781Z",
+  "output": {
+    "kind": "site-page",
+    "path": "src/content/docs/inference/deepinfer.mdx",
+    "status": "reviewed",
+    "revision": 2,
+    "updated": "2026-10-20",
+    "evidence_cutoff": "2026-10-20",
+    "audience": "AI researchers and systems engineers seeking a rigorous, approachable release deep dive suitable for community sharing."
+  },
+  "quality_gate": {
+    "evidence_verified": true,
+    "contradictions_reviewed": true,
+    "output_reviewed": true,
+    "visuals_reviewed": true
+  },
+  "delivery_checks": {
+    "validation": {
+      "status": "passed",
+      "method": "Node24.21.0 npm run validate:49 deployment/176 content tests; Astro169files0errors/0warnings;105 built and lint-clean routes; existing bundler and redirect-stub warnings unchanged. git diff --check.",
+      "checked_at": "2026-10-20T20:29:02Z"
+    },
+    "rendering": {
+      "status": "passed",
+      "method": "Real Chromium1440/390/320 light/dark; six figures, no page overflow, Focus, label enlargement, keyboard panning, no-JavaScript enlargement/text/table, print zoom reset, local links, actual dev mobile navigation and zero console errors. Manually inspected opening, overview normal/Focus and mobile dark screenshots.",
+      "checked_at": "2026-10-20T20:30:01.781Z"
+    },
+    "exports": {
+      "status": "passed",
+      "method": "Complete Markdown/MDX retained TL;DR, image description, six-step textual map, six anchored captions,29 references,2 equations, resource cards and source conditions. Search, discovery and companion links pass.",
+      "checked_at": "2026-10-20T20:30:01.781Z"
+    }
+  }
+}

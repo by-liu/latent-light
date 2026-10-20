@@ -1,0 +1,293 @@
+---
+title: Smart Devices & Cloud Agents
+description: How glasses, phones and cameras combine local perception with cloud reasoning, with concrete research, platforms and products.
+lastUpdated: 2026-10-20
+---
+
+import FocusCanvas from '../../../components/FocusCanvas.astro';
+import SourceFigure from '../../../components/architectures/SourceFigure.astro';
+import ModelFlow from '../../../components/architectures/ModelFlow.astro';
+import ComparisonTable from '../../../components/ComparisonTable.astro';
+
+A smart device does not need to understand everything it senses. It can
+identify useful events, read a region or check an action, while a stronger
+cloud agent connects that evidence to the user's goal.
+
+**The promising pattern is local perception and bounded execution, guided by
+cloud reasoning.** Google Home describes a camera architecture that sends
+locally selected keyframes and metadata to its cloud. EcoAgent studies a
+cloud planner with smaller mobile execution and observation models. These
+are related designs, but their evidence and hardware readiness differ.[^google][^ecoagent]
+
+This page explores glasses, phones and cameras. For the general architecture,
+tool contracts and permission boundaries, read
+[Cloud Agents & Local Specialists](/local-cloud-ai/cloud-agents-local-specialists/).
+For routing and other forms of cooperation, start with the
+[Local & Cloud AI overview](/edge-ai/local-cloud-collaboration/).
+
+## Where the computation lives
+
+“Local” needs a location. A model running on glasses, a paired phone and an
+edge GPU server has a different power, memory and connectivity budget.
+Qualcomm discusses both standalone glasses and designs connected to a phone
+or nearby computing puck. NVIDIA documents vision agents on edge platforms
+such as AGX Thor and DGX Spark.[^qualcomm][^vss-edge]
+
+[Figure 1](#figure-1) shows a possible allocation, not one product's internals.
+The middle tier is optional: its responsibilities can move to the device
+when resources allow. Disclosure checks must remain local in either case.
+
+<FocusCanvas size="diagram" label="Device, nearby compute and cloud responsibilities">
+<SourceFigure id="figure-1" src="/figures/local-cloud-ai/smart-devices-cloud-agents/device-hub-cloud.svg" alt="A device captures signals and runs lightweight perception. An optional phone or home hub supplies larger specialists, buffering and disclosure checks. Permitted evidence reaches a cloud agent for reasoning. Requests for new observations return through local policy checks. During an outage, only explicitly supported local functions continue." minWidth={1000}>
+<div slot="image">
+
+![A proposed device, phone or hub, and cloud architecture with a controlled evidence and request loop.](/figures/local-cloud-ai/smart-devices-cloud-agents/device-hub-cloud.svg)
+
+</div>
+
+**Figure 1.** Three places to compute, with a deliberate disclosure boundary. Independent synthesis informed by device platforms and modular cloud reasoning.[^qualcomm][^google][^vss]
+
+</SourceFigure>
+</FocusCanvas>
+
+The text equivalent is:
+
+- **Device:** capture, lightweight detection or tracking, local consent and
+  capture controls, and immediate feedback.
+- **Phone or home hub, when used:** larger specialists, temporary evidence
+  buffers, policy checks and the cloud connection.
+- **Cloud agent:** interpret the goal, combine permitted observations, use
+  remote tools and request more evidence.
+- **Return path:** validate each request locally before capturing, disclosing
+  or acting. A cloud request is not authority to bypass consent.
+- **Disconnection:** preserve only the functions explicitly supported locally;
+  do not silently promise that cloud reasoning remains available.
+
+These are proposed responsibilities, not a requirement that every system
+contain three machines or three language models.
+
+## Research, platforms and products
+
+**Selected primary sources rechecked October 20, 2026.** Read the final column
+as carefully as the capability column. A proposed architecture, a configurable
+framework and a consumer feature establish different things.
+
+<FocusCanvas size="wide" label="Smart-device systems and their evidence boundaries">
+<ComparisonTable id="device-evidence" title="What actually runs where?" label="Selected systems, device roles, cloud roles and maturity limits" itemLabel="examples" search>
+
+| System | Device or nearby computation | Cloud contribution | Evidence boundary |
+| --- | --- | --- | --- |
+| [Intention-aware AI glasses](https://arxiv.org/html/2604.23691v1), April 2026 | Task selected visual preprocessing | Infer intention and reason over retained information | Simulation study, not measured wearable deployment.[^glasses] |
+| [EcoAgent](https://arxiv.org/html/2505.05440v3), AAAI 2026 | Smaller execution and observation models | Plan and replan mobile tasks | Mobile inference simulated on a server GPU.[^ecoagent] |
+| [NVIDIA VSS 3.2.1](https://docs.nvidia.com/vss/3.2.1/vss-agent/configure-llm.html) | Configurable local VLM | Configurable remote reasoning LLM | Documented configuration; edge hardware is not necessarily inside the camera.[^vss][^vss-edge] |
+| [Google Home camera platform](https://developers.googleblog.com/en/gemini-for-home-expanding-the-platform-for-a-new-era-of-smart-home-ai/) | Select keyframes and metadata | Camera understanding and Gemini features | Disclosed commercial platform split, not a published agent benchmark.[^google] |
+| [Meta AI glasses Private Processing](https://engineering.fb.com/2026/09/23/security/private-processing-meta-ai-glasses/), September 2026 | Some everyday functions stay on the device | Larger personal AI workloads | Engineering disclosure; visual specialist placement is not fully specified.[^meta] |
+| [Ring and Alexa+ Greetings](https://www.aboutamazon.com/news/devices/alexa-ring-doorbell-ai-greetings) | Local visual placement not disclosed | Visual context informs visitor conversation | Announced consumer feature, not proof of a local vision model.[^ring] |
+
+</ComparisonTable>
+</FocusCanvas>
+
+This is a map of documented mechanisms, not a ranking or an exhaustive product
+catalog. Availability also depends on device, region, software and subscription.
+
+## Glasses: decide what deserves attention
+
+### Task directed perception
+
+The intention-aware glasses paper proposes a cloud VLM that selects local
+preprocessing: OCR for text, Canny boundary detection for document regions,
+or YOLO for objects. It studies intermittent images and semantic transmission,
+not unrestricted continuous video.[^glasses]
+
+Its results also reveal the risk of overcompression. In its document QA
+comparison, success is **44% with OCR text versus 78% with JPEG images**.
+Removing the image can remove spatial relationships needed for the answer.
+The study uses simulated wireless conditions; its results do not establish
+wearable battery life or sustained latency.[^glasses]
+
+The design lesson is to preserve a path back to richer evidence. A compact
+representation is useful only if it retains what the next decision needs.
+
+### Product infrastructure and local building blocks
+
+Meta's Private Processing disclosure describes confidential cloud computing
+for intensive glasses workloads such as transcription, contextual search and
+recall. This concerns the offload trust boundary, not simply a smaller local
+model. It does not reveal every perception component or independently establish
+the system's security guarantees.[^meta]
+
+Local capability is already broader than language generation. **Aria Gen 2**
+uses a custom coprocessor for visual inertial odometry, eye tracking and hand
+tracking. It is a research platform, not a consumer cloud agent. Separately,
+Qualcomm demonstrated a **Llama 1B** assistant entirely on RayNeo X3 Pro glasses
+in June 2025. That is an actual local inference demonstration, but not the
+cloud planner architecture studied here.[^aria][^qualcomm]
+
+Do not classify every glasses agent as a local specialist system.
+**Egocentric Co-Pilot** relies on cloud computation and stable connectivity.
+Its appendix describes stronger local visual privacy filtering as future work,
+rather than an implemented capability.[^copilot]
+
+## Phones: local execution and verification
+
+EcoAgent divides mobile automation among a cloud planner, a smaller execution
+model and a smaller observation model. The observer checks whether the screen
+matches the expected outcome and returns compact text when replanning is
+needed. Its tested specialists include ShowUI 2B or OS-Atlas-Pro 4B for
+execution and Qwen2-VL-2B for observation.[^ecoagent]
+
+Two qualifications matter. The authors use an **RTX 3090 with 24 GB memory**
+to simulate mobile inference. And Table 1 reports **27.6% AndroidWorld success**
+for the OS-Atlas variant, compared with **54.3% for Agent S2**. Lower cloud
+usage is not equivalent to the highest task success.[^ecoagent]
+
+The useful idea is a local verification loop, not a claim that these models
+already meet phone power budgets. A product evaluation should test actual
+hardware, including interaction with foreground apps and sustained use.
+See [On Device Computing](/edge-ai/on-device-computing/) for the hardware context.
+
+## Cameras: connect events to useful conversations
+
+### Google Home: an explicit device and cloud split
+
+Google describes an embedded camera SDK and a reference design for partners.
+Local ML supplies keyframes and metadata; the camera cloud preserves and
+prioritizes that information alongside event video for features such as
+Gemini AI Descriptions. Its announcement identifies onn camera and doorbell
+products as the first partner devices.[^google]
+
+This is a concrete example of local selection feeding cloud understanding.
+It does not mean every frame stays local, or that every camera interaction
+uses an autonomous planning loop.
+
+### NVIDIA VSS: a configurable development stack
+
+VSS 3.2.1 explicitly allows independent placement of the LLM and VLM.
+Its managed remote LLM example keeps the VLM on a local GPU while a hosted
+LLM supplies reasoning and tool coordination. Edge deployment documentation
+covers DGX Spark, IGX Thor and AGX Thor.[^vss][^vss-edge]
+
+That is a useful implementation reference for cameras connected to nearby
+compute. It is not evidence that an inexpensive camera can host the same
+stack. Also, a “remote” endpoint can be another local machine; verify its
+actual location rather than inferring cloud deployment from a flag.
+
+### Ring and Alexa+: the product value, with placement unresolved
+
+Alexa+ Greetings combines Ring Video Descriptions, visitor speech and user
+instructions to handle doorbell conversations. Amazon describes an Early
+Access rollout with specified devices and subscription requirements.
+The announcement does not establish where the visual inference executes.[^ring]
+
+This is evidence for the value of connecting perception to a conversational
+assistant, not evidence for a particular local model or chip.
+
+## Let the agent ask the device to look again
+
+A static pipeline captures, summarizes and uploads. A more interesting design
+lets the agent identify a missing detail and request a bounded new observation.
+That is our proposed product pattern in [Figure 2](#figure-2), not a benchmark
+result or a claim about any named product.
+
+Consider glasses helping compare two coffee packages by price per 100 grams.
+The first observation may capture prices but miss a package weight. Sending
+more text from the same incomplete read will not resolve the problem.
+
+<FocusCanvas size="diagram" label="A proposed smart-glasses evidence loop">
+<ModelFlow id="figure-2" title="Observe only what the task still needs" lanesJson='[{"label":"1 · Establish the comparison","steps":[{"label":"Select the two products","detail":"The user identifies the packages. Local tools associate labels, prices and package regions."},{"label":"Send permitted evidence","detail":"The host sends the selected fields with capture times, source IDs and missing values."},{"label":"Find the information gap","detail":"The cloud agent identifies a missing weight rather than inventing it.","accent":true}],"note":"This is an illustrative workflow. No product accuracy, latency or energy result is implied."},{"label":"2 · Request one useful observation","steps":[{"label":"Ask for the weight region","detail":"The cloud requests a specific detail. Local policy checks access, consent and the remaining budget."},{"label":"Read again locally","detail":"A fresh crop or a user guided view supplies the package weight and its unit.","accent":true},{"label":"Answer or abstain","detail":"The cloud computes comparable unit prices only if the product identity, values and units are resolved."}],"note":"A stale frame, changed product, denied request or lost connection must not silently become a confident answer."}]' footer="Stop when the comparison is supported, the resource budget is exhausted, or the user must clarify. The observation loop does not authorize a purchase.">
+
+**Figure 2.** A bounded request for missing visual evidence. Proposed workflow, not a measured implementation.
+
+</ModelFlow>
+</FocusCanvas>
+
+The important interface is not just a caption. It should identify **which
+object, which observation, which time and which unresolved detail** the
+result refers to. Retain access to a permitted source region instead of
+forcing the cloud to trust an irreversible summary.
+
+## Design for budgets and outages
+
+The following are design priorities proposed from the evidence above, not
+universal requirements or measured results.
+
+**Spend sensing and computation deliberately.** Compare periodic capture,
+event triggered processing and user requests. A detector can reduce uploads
+yet still cost energy if it runs continuously. Count the sensor, image
+processing, specialist inference, radio and cloud calls together.
+
+**Treat freshness as part of correctness.** Bind requests to an observation
+and object identity. If the camera moves or a screen changes, invalidate stale
+coordinates. Record skipped intervals; an event not seen in sampled frames
+is not proof that it never happened.
+
+**Separate disclosure from inference.** Local OCR can still expose personal
+information if its output is uploaded. Nearby compute is another trust
+boundary, not automatically a private one. Inspect transmitted fields, logs,
+retention and access controls. Confidential cloud processing addresses a
+different part of this problem from avoiding disclosure in the first place.[^meta]
+
+**Define a bounded offline mode.** Decide which local functions continue, what
+must wait and what the user sees. The connected glasses prototype above
+explicitly lacks a complete offline fallback for complex queries.
+Cloud dependent reasoning should fail visibly, not manufacture completion.[^copilot]
+
+**Keep consequential authority outside the model.** A perception result or a
+cloud instruction should not automatically authorize a purchase, account
+change or physical access. The host must enforce the appropriate permissions.
+The [general architecture page](/local-cloud-ai/cloud-agents-local-specialists/#keep-the-cloud-connection-deliberate)
+covers this boundary in more detail.
+
+## Evaluate the whole device experience
+
+The proposed comparison is the same task with the same cloud planner, using
+full permitted observations, a fixed local representation, or targeted
+reinspection. Keep disclosure policies comparable and report their differences.
+Do not deliberately weaken a baseline to make specialization look beneficial.
+
+<FocusCanvas size="wide" label="A proposed smart-device evaluation checklist">
+<ComparisonTable id="device-evaluation" title="What would establish an edge advantage?" label="Proposed evaluation dimensions, measurements and stress conditions" itemLabel="checks">
+
+| Dimension | Measure | Stress condition |
+| --- | --- | --- |
+| Useful assistance | Task success, unsupported answers, corrections and abstention quality | Glare, motion, small text, unfamiliar objects and multiple languages. |
+| Interactive latency | Capture to useful response at p50 and p95, including retries | Cold start, network variation and unavailable cloud service. |
+| Device cost | Energy per completed task, sustained power, temperature and memory | Repeated use on the actual device, not just a desktop GPU. |
+| Evidence efficiency | Bytes and cloud calls per successful task; missed information | Compare full observations, fixed summaries and targeted new reads. |
+| Privacy and control | Actual disclosure, retention and unauthorized actions | Bystanders, sensitive text, denied consent, hostile visual content and outages. |
+
+</ComparisonTable>
+</FocusCanvas>
+
+Report hardware and execution location for every stage. A phone benchmark,
+a glasses simulation and an edge GPU deployment cannot share one implied
+latency or battery claim. Include failed tasks in resource accounting;
+efficiency measured only on successful examples hides expensive failures.
+
+## Where to investigate next
+
+Three questions connect this field to model research:
+
+1. **Perception that preserves future usefulness:** what should a compact
+   representation retain when the next question is not yet known?
+2. **Task directed observation:** when is a new crop, frame or specialist call
+   worth its energy, delay and disclosure?
+3. **Learning across hardware tiers:** can a cloud model teach a local
+   specialist without making the deployed system depend on the teacher?
+
+The first two belong to this device and agent interface. For the third, continue
+with [Knowledge Distillation](/knowledge-distillation/).
+For system controls and testing, see
+[Agent Evaluation](/agents/evaluation-reliability/) and
+[Edge AI Agents](/edge-ai/agents-hybrid-systems/).
+
+[^google]: Ravi Akella, Google. [Gemini for Home: Expanding the Platform for a New Era of Smart Home AI](https://developers.googleblog.com/en/gemini-for-home-expanding-the-platform-for-a-new-era-of-smart-home-ai/), October 1, 2025, Building the Next Generation of AI Cameras. Architecture and partner announcement rechecked October 20, 2026.
+[^ecoagent]: Biao Yi et al. [EcoAgent: An Efficient Device-Cloud Collaborative Multi-Agent Framework for Mobile Automation](https://arxiv.org/html/2505.05440v3), v3, November 17, 2025; accepted at AAAI 2026. Device-Based Observation Agent, Tables 1 and 3, and Appendix Experimental Setup. Rechecked October 20, 2026.
+[^qualcomm]: Ziad Asghar, Qualcomm. [A world's first on-glass GenAI demonstration: Qualcomm's vision for the future of smart glasses](https://www.qualcomm.com/news/onq/2025/06/a-worlds-first-on-glass-gen-ai-demo-qualcomms-vision-for-smart-glasses), June 10, 2025. Local Llama 1B demonstration and Expand and evolve. Rechecked October 20, 2026.
+[^vss-edge]: NVIDIA. [VSS 3.2.1: Edge Deployment](https://docs.nvidia.com/vss/3.2.1/edge-deployment.html), deployment profiles and prerequisites. Rechecked October 20, 2026.
+[^vss]: NVIDIA. [VSS 3.2.1: Configure the LLM](https://docs.nvidia.com/vss/3.2.1/vss-agent/configure-llm.html), placement combinations and Managed remote LLMs. Rechecked October 20, 2026.
+[^glasses]: Peiwen Jiang et al. [Intention-Aware Semantic Agent Communications for AI Glasses](https://arxiv.org/html/2604.23691v1), April 26, 2026, Sections IV–V and Table II. Rechecked October 20, 2026.
+[^meta]: Pritam Shah et al., Meta. [Bringing Private Processing to Meta AI Glasses](https://engineering.fb.com/2026/09/23/security/private-processing-meta-ai-glasses/), September 23, 2026. Workload placement and the confidential computing architecture. Rechecked October 20, 2026.
+[^ring]: Amazon. [Alexa+ can now answer your Ring doorbell and talk to visitors](https://www.aboutamazon.com/news/devices/alexa-ring-doorbell-ai-greetings), product description and rollout conditions. Rechecked October 20, 2026; no publication date inferred from the inspection date.
+[^aria]: Meta. [Inside Aria Gen 2: Explore the Cutting-Edge Tech Behind the Device](https://ai.meta.com/blog/aria-gen-2-research-glasses-under-the-hood-reality-labs/), June 4, 2025, On-device Realtime Machine Perception Signals. Rechecked October 20, 2026.
+[^copilot]: Sicheng Yang et al. [Egocentric Co-Pilot: Web-Native Smart-Glasses Agents for Assistive Egocentric AI](https://arxiv.org/html/2603.01104v1), March 1, 2026, Appendix E.1–E.2. Connected prototype, offline limitations and proposed privacy work. Rechecked October 20, 2026.

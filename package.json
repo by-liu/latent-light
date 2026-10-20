@@ -10,7 +10,7 @@
     "preview": "astro preview",
     "typecheck": "astro check",
     "validate": "npm run test:deployment && npm run test:content && npm run typecheck && npm run build && npm run lint:docs",
-    "test:content": "node --test scripts/reference-heading.test.mjs scripts/source-editor.test.mjs scripts/math-typesetting.test.mjs scripts/model-flow.test.mjs scripts/source-figure.test.mjs scripts/model-resources.test.mjs scripts/model-studies.test.mjs scripts/model-authoring.test.mjs scripts/architecture-atlas.test.mjs scripts/agents-content.test.mjs scripts/landscapes-content.test.mjs scripts/taste-content.test.mjs scripts/document-ai-content.test.mjs scripts/media-content.test.mjs scripts/edge-ai-content.test.mjs scripts/distillation-content.test.mjs",
+    "test:content": "node --test scripts/reference-heading.test.mjs scripts/source-editor.test.mjs scripts/math-typesetting.test.mjs scripts/model-flow.test.mjs scripts/source-figure.test.mjs scripts/model-resources.test.mjs scripts/model-studies.test.mjs scripts/model-authoring.test.mjs scripts/architecture-atlas.test.mjs scripts/agents-content.test.mjs scripts/landscapes-content.test.mjs scripts/taste-content.test.mjs scripts/document-ai-content.test.mjs scripts/media-content.test.mjs scripts/edge-ai-content.test.mjs scripts/local-cloud-ai-content.test.mjs scripts/distillation-content.test.mjs scripts/deepinfer-content.test.mjs",
     "test:deployment": "node --test scripts/check-deployment-origin.test.mjs scripts/verify-deployment.test.mjs",
     "test:research": "PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s .agents/skills/latent-light-deep-research/tests -v",
     "check:deploy-origin": "node scripts/check-deployment-origin.mjs",

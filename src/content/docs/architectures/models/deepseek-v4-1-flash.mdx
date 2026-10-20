@@ -14,6 +14,10 @@ DeepSeek-V4.1-Flash separates the work of reading a long prompt from the work of
 
 Representative checkpoint: **DeepSeek-V4.1-Flash**, the released multimodal instruct model. Report, configuration, license and targeted reference inference code checked October 10, 2026. No weights downloaded, model executed or serving performance measured.[^config][^code][^license]
 
+For the released execution stack and its deployment boundaries, see the
+[DeepInfer deep dive](/inference/deepinfer/). That study separates the public
+engine, protocol library and surrounding production services.
+
 ## Highlights
 
 - **Cheaper reading, full-depth generation.** The advertised active-parameter budget is 8B during prefill and 16B during decoding. This benefits input-heavy workloads; it does not halve every request's latency.[^report]

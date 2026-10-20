@@ -13,7 +13,7 @@ import {modelFlowAsMarkdown,readModelLanes} from '../plugins/model-flow.mjs';
 import {sourceFigureAsMarkdown} from '../plugins/source-figure.mjs';
 import {comparisonTableAsMarkdown} from '../plugins/comparison-table.mjs';
 
-const slugs=['index','foundations','on-device-computing','efficient-models','quantization-compression','training-small-models','efficient-inference','runtimes-compilers','multimodal','agents-hybrid-systems','evaluation-profiling','production-product-design'];
+const slugs=['index','foundations','on-device-computing','efficient-models','quantization-compression','training-small-models','efficient-inference','runtimes-compilers','multimodal','agents-hybrid-systems','local-cloud-collaboration','evaluation-profiling','production-product-design'];
 const read=p=>readFile(new URL('../'+p,import.meta.url),'utf8');
 
 for(const slug of slugs)test('Edge AI '+slug+' preserves references, figures and formulas in text exports',async()=>{
@@ -72,10 +72,17 @@ test('Edge AI is a complete collection inside AI Technology',async()=>{
  const visit=node=>{if(ts.isObjectLiteralExpression(node)){if(prop(node,'label')?.text==='AI Technology')tech=node;if(prop(node,'label')?.text==='Edge AI')edge=node;}ts.forEachChild(node,visit);};visit(source);
  assert.ok(tech&&edge);assert.ok(prop(tech,'items').elements.includes(edge));
  const links=prop(edge,'items').elements.map(node=>prop(node,'link')?.text);
- assert.deepEqual(links,slugs.map(s=>'/edge-ai/'+(s==='index'?'':s+'/')));
+ // The collaboration page retains its historical route and content checks,
+ // but now belongs to Local & Cloud AI rather than the Edge AI collection.
+ assert.deepEqual(links,slugs.filter(s=>s!=='local-cloud-collaboration').map(s=>'/edge-ai/'+(s==='index'?'':s+'/')));
+ const collaboration=prop(tech,'items').elements.filter(node=>prop(node,'label')?.text==='Local & Cloud AI');
+ assert.equal(collaboration.length,1);
+ assert.deepEqual(prop(collaboration[0],'items').elements.map(node=>prop(node,'link')?.text),['/edge-ai/local-cloud-collaboration/','/local-cloud-ai/cloud-agents-local-specialists/','/local-cloud-ai/smart-devices-cloud-agents/']);
+ assert.ok(!links.includes('/edge-ai/local-cloud-collaboration/'));
  const overview=await read('src/content/docs/edge-ai/index.mdx');
  for(const link of links.filter(l=>l!=='/edge-ai/'))assert.ok(overview.includes('('+link+')'),link);
  assert.ok((await read('src/content/docs/index.mdx')).includes('[Edge AI](/edge-ai/)'));
+ for(const related of ['edge-ai/index','agents/orchestration','knowledge-distillation/index'])assert.ok((await read('src/content/docs/'+related+'.mdx')).includes('(/edge-ai/local-cloud-collaboration/)'),related+' retains the cross-link');
 });
 
 test('Foundations retains a transparent, calculated memory budget',async()=>{
@@ -88,6 +95,20 @@ test('Foundations retains a transparent, calculated memory budget',async()=>{
  assert.equal(2*28*8192*8*128*16/8,896*2**20);
  assert.equal(2*28*4096*2*128*16/8,112*2**20);
  assert.equal(1.5e9/30e9,0.05);
+});
+
+test('Local and cloud collaboration keeps measurements, hypotheses and accounting distinct',async()=>{
+ const body=await read('src/content/docs/edge-ai/local-cloud-collaboration.mdx');
+ for(const value of ['not a leaderboard','not a device benchmark','not a measured speedup','at most one advisor interaction','not a measured or necessary','ten LongHealth samples','server-only tree speculative decoding','25 held-out examples','not a calibrated probability','16 MiB','6.71 seconds','0.64 seconds','1.60 seconds'])assert.ok(body.includes(value),value);
+ assert.ok((await read('src/content/docs/edge-ai/agents-hybrid-systems.mdx')).includes('(/edge-ai/local-cloud-collaboration/)'));
+ assert.equal((2048*4096*2)/(2**20),16);
+ assert.equal(((2048*4096*2*8)/(20e6)).toFixed(2),'6.71');
+ assert.equal((.35+.05+.2*1.2).toFixed(2),'0.64');
+ assert.equal((.35+.05+1.2).toFixed(2),'1.60');
+ assert.equal((31.81/11).toFixed(2),'2.89');
+ const patterns=body.match(/<ComparisonTable id="collaboration-patterns"[\s\S]*?<\/ComparisonTable>/)?.[0];
+ assert.ok(patterns);assert.equal((patterns.match(/^\| /gm)||[]).length-2,7);
+ for(const label of ['Request routing','Answer cascade','Task decomposition','Advisory cooperation','Collaborative decoding','Speculative decoding','Split inference'])assert.ok(patterns.includes(label),label);
 });
 
 test('The original memory chart is reproducible and its quantities are not benchmarks',async()=>{

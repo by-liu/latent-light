@@ -1,0 +1,50 @@
+{
+  "schema_version": 3,
+  "topic_id": "cloud-agents-local-specialists",
+  "status": "complete",
+  "coverage": {
+    "architecture": "primary examples and separate host authority explained",
+    "specialists": "screens, documents, video and generation; eight bounded comparison entries",
+    "skeptical_review": "source identity, physical placement, hardware and measurement limits reviewed separately",
+    "presentation": "three reviewed figures, complete tool contract and proposed evaluation plan",
+    "navigation": "Local & Cloud AI now includes the smart-device companion; original overview and architecture URLs preserved."
+  },
+  "open_questions": [
+    "No universal efficiency or quality gain is established; implementation needs task and hardware evaluation.",
+    "The proposed targeted reinspection workflow remains an untested hypothesis, not a published result."
+  ],
+  "recommended_next_direction": "User review; recheck mutable implementations and measure a target workload before implementation. Commit, push and deployment remain separately authorized.",
+  "last_seen": "2026-10-20T19:51:15.759Z",
+  "output": {
+    "kind": "site-page",
+    "path": "src/content/docs/local-cloud-ai/cloud-agents-local-specialists.mdx",
+    "status": "reviewed",
+    "revision": 2,
+    "updated": "2026-10-20",
+    "evidence_cutoff": "2026-10-17",
+    "audience": "AI researchers and engineers designing cloud-led agents with local specialists"
+  },
+  "quality_gate": {
+    "evidence_verified": true,
+    "contradictions_reviewed": true,
+    "output_reviewed": true,
+    "visuals_reviewed": true
+  },
+  "delivery_checks": {
+    "validation": {
+      "status": "passed",
+      "method": "Pinned Node 24.21.0 npm run validate: 49 deployment and 173 content tests, Astro zero errors/warnings, 104 built routes and lint-clean files. git diff --check clean.",
+      "checked_at": "2026-10-20T19:51:15.759Z"
+    },
+    "rendering": {
+      "status": "passed",
+      "method": "Reran the existing architecture-page browser suite after the companion link: desktop/mobile both themes, three figures, Focus, panning, filters, no-JS, print, search and live dev mobile drawer; no runtime errors. Page content and visuals otherwise unchanged.",
+      "checked_at": "2026-10-20T19:50:53.256Z"
+    },
+    "exports": {
+      "status": "passed",
+      "method": "Reran complete Markdown/MDX, 13 citations, three figures, JSON contract, comparison rows and workflow checks. Added companion link resolves; discovery and old overview still valid.",
+      "checked_at": "2026-10-20T19:50:53.256Z"
+    }
+  }
+}

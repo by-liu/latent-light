@@ -1,7 +1,7 @@
 ---
 title: Agents and hybrid systems
 description: Connect local retrieval, constrained tools and cloud routing without confusing model capability with system authority.
-lastUpdated: 2026-10-12
+lastUpdated: 2026-10-17
 ---
 
 import FocusCanvas from '../../../components/FocusCanvas.astro';
@@ -66,6 +66,11 @@ The MCP tools specification provides concrete control responsibilities: servers 
 Expose the smallest useful tool surface: searching approved manuals, reading one record or preparing a draft can be separate from sending a message or changing equipment. Keep authorization checks in the code or service that performs the action. Include a deadline, cancellation behavior and an observable result in the tool contract. These are proposed implementation choices; see [Tools, Skills & Integrations](/agents/tools-skills-protocols/) for the broader design.
 
 ## Route for the complete task
+
+For a dedicated technical study of routing, decomposition, advice, token
+cooperation and their evidence, see
+[Local and Cloud Model Collaboration](/edge-ai/local-cloud-collaboration/).
+This page keeps the focus on retrieval, state and action boundaries.
 
 A hybrid system may choose local inference for a supported offline task and remote inference for a permitted task needing additional capability. RouteLLM studies learned selection between stronger and weaker models using preference data. Its routing overhead was measured on cloud VMs, and its authors identify application distribution shift as a limitation. It does not establish a universally reliable device router.[^routing]
 

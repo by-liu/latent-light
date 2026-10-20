@@ -1,9 +1,9 @@
 ---
-interface Props { src: string; darkSrc?: string; alt: string; narrow?: boolean; poster?: boolean; id?: string; minWidth?: number; }
-const { src, darkSrc, alt, narrow = false, poster = false, id, minWidth } = Astro.props;
+interface Props { src: string; darkSrc?: string; alt: string; narrow?: boolean; poster?: boolean; id?: string; minWidth?: number; zoomable?: boolean; }
+const { src, darkSrc, alt, narrow = false, poster = false, id, minWidth, zoomable = false } = Astro.props;
 if (minWidth !== undefined && (!Number.isFinite(minWidth) || minWidth < 0 || minWidth > 1600)) throw new Error('SourceFigure minWidth must be between 0 and 1600 pixels.');
 ---
-<figure id={id} class:list={['source-figure', {narrow, poster}]}>
+<figure id={id} class:list={['source-figure', {narrow, poster, zoomable}]}>
   <div class:list={['image-viewport', {pannable: Boolean(minWidth)}]} style={minWidth ? `--source-min-width:${minWidth}px` : undefined} tabindex={minWidth ? '0' : undefined} role={minWidth ? 'region' : undefined} aria-label={minWidth ? `Scrollable figure: ${alt}` : undefined}>
   <a class:list={{'theme-light': Boolean(darkSrc)}} href={src} target="_blank" rel="noopener" aria-label={`Open full resolution: ${alt}`}>
     <slot name="image" />
@@ -16,13 +16,14 @@ if (minWidth !== undefined && (!Number.isFinite(minWidth) || minWidth < 0 || min
     </a>
   )}
   </div>
-  {minWidth && <div class="figure-tools"><span>Pan on smaller screens</span><a href={src} target="_blank" rel="noopener">Open full size ↗</a></div>}
+  {minWidth && <div class="figure-tools"><span>Pan on smaller screens</span>{zoomable && <label class="figure-zoom-control"><input class="figure-zoom" type="checkbox" />Enlarge labels · pan for detail</label>}<a href={src} target="_blank" rel="noopener">Open full size ↗</a></div>}
   <figcaption class="source-caption"><slot /></figcaption>
 </figure>
 <style>
   .source-figure{margin:1.5rem auto;min-width:0;}.narrow{max-width:30rem;}
   .image-viewport{min-width:0;}.pannable{overflow-x:auto;overscroll-behavior-inline:contain;border-radius:.75rem;}.pannable>a{min-width:var(--source-min-width);}.pannable:focus-visible{outline:2px solid var(--nb-primary);outline-offset:4px;}.pannable .zoom-hint{display:none;}
   .figure-tools{display:flex;justify-content:space-between;align-items:center;gap:.6rem;margin-top:.5rem;color:var(--nb-muted-foreground);font-size:.72rem;line-height:1.5;}.figure-tools a{white-space:nowrap;}
+  .figure-zoom-control{display:none;align-items:center;gap:.4rem;cursor:pointer;}.figure-zoom{accent-color:var(--nb-primary);margin:0;}.figure-zoom:focus-visible{outline:2px solid var(--nb-primary);outline-offset:3px;}
   .source-figure :global(img){display:block;width:100%;height:auto;background:#fff;border:1px solid var(--nb-border);border-radius:.75rem;padding:.5rem;}
   .poster :global(img){padding:0;background:transparent;}
   .image-viewport>.theme-dark{display:none;}
@@ -34,5 +35,6 @@ if (minWidth !== undefined && (!Number.isFinite(minWidth) || minWidth < 0 || min
   .image-viewport>a:hover{cursor:zoom-in;}
   .zoom-hint{display:block;text-align:right;font-size:.72rem;line-height:1.5;color:var(--nb-muted-foreground);margin:.35rem 0;}
   .source-caption{font-size:.8rem;line-height:1.6;color:var(--nb-muted-foreground);margin-top:.65rem;}
-  @media(min-width:768px){.pannable>a{min-width:0;}.figure-tools>span{visibility:hidden;}}
+  @media(min-width:768px){.pannable>a{min-width:0;}.figure-tools>span{visibility:hidden;}.zoomable .figure-tools>span{display:none;}.figure-zoom-control{display:flex;}.zoomable:has(.figure-zoom:checked) .pannable>a{min-width:var(--source-min-width);}}
+  @media print{.pannable{overflow:visible;}.pannable>a{min-width:0 !important;}.figure-tools{display:none;}}
 </style>

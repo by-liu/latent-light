@@ -143,6 +143,12 @@ const nimbusConfig = defineNimbusConfig({
             { label: "Broader Ecosystem", link: "/agents/ecosystem/" },
           ] },
         ] },
+        { label: "DeepInfer", link: "/inference/deepinfer/" },
+        { label: "Local & Cloud AI", items: [
+          { label: "Overview", link: "/edge-ai/local-cloud-collaboration/" },
+          { label: "Cloud Agents & Local Specialists", link: "/local-cloud-ai/cloud-agents-local-specialists/" },
+          { label: "Smart Devices & Cloud Agents", link: "/local-cloud-ai/smart-devices-cloud-agents/" },
+        ] },
         { label: "Edge AI", collapsed: true, items: [
           { label: "Overview", link: "/edge-ai/" },
           { label: "Foundations & Bottlenecks", link: "/edge-ai/foundations/" },
@@ -257,7 +263,7 @@ export default defineConfig({
         "nimbus/internal-link": ["error", {
           // Static download notices are files, not Nimbus page routes.
           // test:content verifies these narrow exceptions exist in public/.
-          ignore: ["/licenses/*.txt", "/figures/model-studies/*/{NOTICE,SOURCES}.md", "/figures/edge-ai/*/{NOTICE,SOURCES}.md", "/figures/knowledge-distillation/{NOTICE,SOURCES}.md"],
+          ignore: ["/licenses/*.txt", "/figures/model-studies/*/{NOTICE,SOURCES}.md", "/figures/edge-ai/*/{NOTICE,SOURCES}.md", "/figures/local-cloud-ai/*/{NOTICE,SOURCES}.md", "/figures/knowledge-distillation/{NOTICE,SOURCES}.md"],
         }],
       },
       // Use the same native Sätteri processor as Nimbus, with math enabled.

@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="595" viewBox="0 0 1120 595" role="img" aria-labelledby="title desc">
+<title id="title">CPU and GPU work can overlap across decode steps</title>
+<desc id="desc">In a serial view, CPU scheduling, GPU forward and sampling, and CPU result handling leave device idle periods. In a pipelined view, the CPU prepares later work and handles older outputs while the GPU executes. Sample-dependent metadata still requires correction. Bars are schematic and not timing measurements.</desc>
+<defs><pattern id="idle" width="8" height="8" patternUnits="userSpaceOnUse"><path d="M0 8L8 0" stroke="#d9dfe2" stroke-width="1"/></pattern></defs>
+<rect width="1120" height="595" rx="18" fill="#fafbf9"/>
+<g font-family="Inter, Arial, sans-serif">
+<text x="32" y="40" font-size="13" fill="#526f89" font-weight="700" letter-spacing="2">MOVE BOOKKEEPING OFF THE DEVICE'S CRITICAL PATH</text>
+<text x="32" y="78" font-size="29" fill="#172f42" font-weight="700">Overlap the work. Keep the dependencies.</text>
+<text x="32" y="119" font-size="17" font-weight="700" fill="#526375">Serial mental model</text>
+<text x="58" y="165" font-size="17" font-weight="700" fill="#526375">CPU</text>
+<text x="58" y="224" font-size="17" font-weight="700" fill="#526375">GPU</text>
+<rect x="159" y="137" width="187" height="47" rx="8" fill="#fff0d9" stroke="#dfbf8d"/>
+<text x="252" y="166" text-anchor="middle" font-size="17" fill="#80541c">Schedule step N</text>
+<rect x="760" y="137" width="310" height="47" rx="8" fill="#fff0d9" stroke="#dfbf8d"/>
+<text x="915" y="166" text-anchor="middle" font-size="17" fill="#80541c">Process step N results</text>
+<rect x="159" y="196" width="187" height="47" rx="8" fill="url(#idle)" stroke="#cbd4dc"/>
+<text x="252" y="225" text-anchor="middle" font-size="16" fill="#687581">Device waits</text>
+<rect x="359" y="196" width="388" height="47" rx="8" fill="#eaf1fa" stroke="#b9cde5"/>
+<text x="553" y="225" text-anchor="middle" font-size="17" fill="#294d70">Forward + sample step N</text>
+<rect x="760" y="196" width="310" height="47" rx="8" fill="url(#idle)" stroke="#cbd4dc"/>
+<text x="915" y="225" text-anchor="middle" font-size="16" fill="#687581">Device waits again</text>
+<path d="M32 274H1088" stroke="#d5dddf"/>
+<text x="32" y="312" font-size="17" font-weight="700" fill="#526375">Pipelined mental model</text>
+<text x="58" y="366" font-size="17" font-weight="700" fill="#526375">CPU</text>
+<text x="58" y="425" font-size="17" font-weight="700" fill="#526375">GPU</text>
+<rect x="159" y="337" width="321" height="47" rx="8" fill="#fff0d9" stroke="#dfbf8d"/>
+<text x="319" y="367" text-anchor="middle" font-size="17" fill="#80541c">Prepare a later batch</text>
+<rect x="497" y="337" width="335" height="47" rx="8" fill="#fff0d9" stroke="#dfbf8d"/>
+<text x="664" y="367" text-anchor="middle" font-size="17" fill="#80541c">Handle older outputs</text>
+<rect x="159" y="396" width="454" height="47" rx="8" fill="#eaf1fa" stroke="#b9cde5"/>
+<text x="386" y="426" text-anchor="middle" font-size="17" fill="#294d70">Forward current step</text>
+<rect x="630" y="396" width="177" height="47" rx="8" fill="#eaf5ef" stroke="#b8d4c4"/>
+<text x="718" y="426" text-anchor="middle" font-size="17" fill="#2e5b43">Sample</text>
+<rect x="824" y="396" width="246" height="47" rx="8" fill="#eaf1fa" stroke="#b9cde5"/>
+<text x="947" y="426" text-anchor="middle" font-size="17" fill="#294d70">Next forward</text>
+<rect x="32" y="481" width="1056" height="80" rx="11" fill="#fff" stroke="#d4ddd9"/>
+<text x="51" y="510" font-size="17" font-weight="700" fill="#244563">Sample-dependent sequence metadata must be corrected before it is used.</text>
+<text x="51" y="539" font-size="16" fill="#526375">Illustrative overlap slots, not measured durations or a guarantee of zero idle time.</text>
+</g></svg>

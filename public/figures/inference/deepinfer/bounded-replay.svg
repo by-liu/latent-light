@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="590" viewBox="0 0 1120 590" role="img" aria-labelledby="title desc">
+<title id="title">Global history is retained; local state is rebuilt from a bounded tail</title>
+<desc id="desc">The causal encoder prepares reusable global history over the prompt. The decoder reads that history while its local sliding-window state is rebuilt from a bounded suffix. The conceptual window is 128 tokens; the inspected compact configuration keeps 140 to cover backtracking. Approximate local replay does not discard the global prompt.</desc>
+<defs><marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 8 4 0 8Z" fill="#426480"/></marker><marker id="b" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 8 4 0 8Z" fill="#9a6222"/></marker></defs>
+<rect width="1120" height="590" rx="18" fill="#fafbf9"/>
+<g font-family="Inter, Arial, sans-serif">
+<text x="32" y="40" fill="#526f89" font-size="13" font-weight="700" letter-spacing="2">TWO KINDS OF STATE, TWO KINDS OF WORK</text>
+<text x="32" y="78" fill="#172f42" font-size="29" font-weight="700">Keep the history. Rebuild only the local tail.</text>
+<rect x="32" y="111" width="1056" height="62" rx="10" fill="#eaf1fa" stroke="#b9cde5"/>
+<path d="M855 111H1078Q1088 111 1088 121V163Q1088 173 1078 173H855Z" fill="#fff0d9" stroke="#d7b77d"/>
+<text x="55" y="149" font-size="19" font-weight="600" fill="#294d70">The long prompt remains part of the global context</text>
+<text x="971" y="149" text-anchor="middle" font-size="18" font-weight="700" fill="#80541c">Bounded suffix</text>
+<path d="M330 175V215" fill="none" stroke="#426480" stroke-width="2.5" marker-end="url(#a)"/>
+<rect x="70" y="225" width="520" height="82" rx="12" fill="#eaf1fa" stroke="#b9cde5"/>
+<text x="94" y="257" font-size="21" font-weight="700" fill="#244563">Causal encoder</text>
+<text x="94" y="284" font-size="17" fill="#526375">Prepare reusable global history</text>
+<path d="M330 308V345" fill="none" stroke="#426480" stroke-width="2.5" marker-end="url(#a)"/>
+<rect x="70" y="355" width="520" height="93" rx="12" fill="#eaf5ef" stroke="#b8d4c4"/>
+<text x="94" y="388" font-size="21" font-weight="700" fill="#2e5b43">Retained global history</text>
+<text x="94" y="416" font-size="17" fill="#526375">Do not recompute or drop all earlier context</text>
+<path d="M592 401H665" fill="none" stroke="#426480" stroke-width="2.5" marker-end="url(#a)"/>
+<rect x="677" y="355" width="367" height="93" rx="12" fill="#f2edf9" stroke="#cfbfe3"/>
+<text x="701" y="388" font-size="21" font-weight="700" fill="#634486">Decoder</text>
+<text x="701" y="416" font-size="17" fill="#526375">Read global state + rebuilt local state</text>
+<path d="M971 176V225" fill="none" stroke="#9a6222" stroke-width="2.5" marker-end="url(#b)"/>
+<rect x="677" y="237" width="367" height="80" rx="12" fill="#fff0d9" stroke="#dfbf8d"/>
+<text x="701" y="268" font-size="20" font-weight="700" fill="#80541c">Rebuild local SWA state</text>
+<text x="701" y="295" font-size="16" fill="#80541c">Approximate boundary, bounded replay</text>
+<path d="M860 319V344" fill="none" stroke="#9a6222" stroke-width="2.5" marker-end="url(#b)"/>
+<rect x="32" y="482" width="1056" height="75" rx="11" fill="#fff" stroke="#d4ddd9"/>
+<text x="51" y="511" font-size="17" font-weight="700" fill="#244563">128-token conceptual window ≠ the complete retained implementation suffix</text>
+<text x="51" y="540" font-size="16" fill="#526375">The inspected compact setting keeps 140 tokens and checks window + backtracking coverage. Not to scale.</text>
+</g></svg>

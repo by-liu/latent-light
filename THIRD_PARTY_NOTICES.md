@@ -156,3 +156,41 @@ figure retains its existing terms and source record. See the collection's
 changes, checksums, attribution and reuse boundaries. These source figures are
 not under Latent Light's MIT grant. The independently authored transfer-map and
 soft-target SVGs are original MIT-licensed material, not model measurements.
+
+## Local and cloud collaboration figures
+
+The Minions and Advisor Models original figure excerpts in
+`public/figures/edge-ai/local-cloud-collaboration/` retain their authors'
+copyright and CC BY 4.0 licenses. They are not under this project's MIT grant.
+The [source record](public/figures/edge-ai/local-cloud-collaboration/SOURCES.md)
+and [notice](public/figures/edge-ai/local-cloud-collaboration/NOTICE.md) retain
+the exact editions, authors, crops, licenses and checksums. The overview SVG
+and native workflow are independent, MIT-licensed explanatory syntheses.
+
+The ScreenVLM architecture in
+`public/figures/local-cloud-ai/cloud-agents-local-specialists/` reproduces
+Gurbuz et al.'s arXiv v1 Figure 4 under CC BY 4.0, not this project's MIT grant.
+Its [source record](public/figures/local-cloud-ai/cloud-agents-local-specialists/SOURCES.md)
+and [notice](public/figures/local-cloud-ai/cloud-agents-local-specialists/NOTICE.md)
+retain attribution, the exact image checksum and the bounded review of its
+incidental webpage inset. The specialist-system SVG and native inspection
+workflow are original MIT-licensed explanatory diagrams.
+
+## DeepInfer release study
+
+The three original architecture and benchmark figures in
+`public/figures/inference/deepinfer/` are reproduced unchanged from DeepSeek-AI's
+Apache-2.0 repository. They are not under this project's MIT grant. The
+[source record](public/figures/inference/deepinfer/SOURCES.md) and
+[notice](public/figures/inference/deepinfer/NOTICE.md) retain exact source
+revisions, image checksums, attribution and scope. The complete
+[Apache license](public/licenses/deepinfer-Apache-2.0.txt) is included.
+
+Adapted protocol examples retain DeepSeek's
+[MIT notice](public/licenses/deepseek-recipe-MIT.txt), copyright 2026 DeepSeek.
+No tokenizer, checkpoint or complete model implementation is redistributed.
+The bounded-replay and scheduling SVGs are original MIT-licensed explanations.
+The overview PNG is an independent AI-generated explanatory synthesis with
+its prompt and review retained in the research records. It is not DeepSeek
+artwork or a measured result; original generated project artwork is offered
+under MIT terms to the extent applicable.

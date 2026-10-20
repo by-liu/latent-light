@@ -1,0 +1,50 @@
+{
+  "schema_version": 3,
+  "topic_id": "local-and-cloud-model-collaboration",
+  "status": "complete",
+  "coverage": {
+    "mechanisms": "verified with explicit distinctions",
+    "measurements": "bounded by models, accounting, hardware and sample scope",
+    "deployment": "current Apple disclosure plus historical robotics examples; no population claim",
+    "skeptical_review": "cost vs latency, information loss, limited oracles and activation privacy addressed",
+    "visuals": "source pages, crops, rendering and exports reviewed; navigation regrouping checked with the companion page"
+  },
+  "open_questions": [
+    "Real device and production network gains remain workload-dependent and unmeasured here.",
+    "New preprint results require independent replication; no universal best protocol established."
+  ],
+  "recommended_next_direction": "Refresh mutable APIs, model pairs and device/network measurements before implementation; publication remains separately authorized.",
+  "last_seen": "2026-10-17T23:49:33Z",
+  "output": {
+    "kind": "site-page",
+    "path": "src/content/docs/edge-ai/local-cloud-collaboration.mdx",
+    "status": "reviewed",
+    "revision": 2,
+    "updated": "2026-10-17",
+    "evidence_cutoff": "2026-10-17",
+    "audience": "AI researchers and engineers designing local/cloud systems"
+  },
+  "quality_gate": {
+    "evidence_verified": true,
+    "contradictions_reviewed": true,
+    "output_reviewed": true,
+    "visuals_reviewed": true
+  },
+  "delivery_checks": {
+    "validation": {
+      "status": "passed",
+      "method": "Pinned Node24.21.0 npm run validate and schema3 validator passed; git diff --check clean.",
+      "checked_at": "2026-10-17T21:56:05.236Z"
+    },
+    "rendering": {
+      "status": "passed",
+      "method": "Built-site Chromium desktop/mobile light/dark, focus, keyboard panning, reduced motion, explorer filtering/no-JS, images and local anchors checked; actual screenshots reviewed.",
+      "checked_at": "2026-10-17T21:56:05.236Z"
+    },
+    "exports": {
+      "status": "passed",
+      "method": "Complete Markdown/MDX, math, citations, all figures/flow steps, table rows and discovery indexes checked; search finds route.",
+      "checked_at": "2026-10-17T21:56:05.236Z"
+    }
+  }
+}

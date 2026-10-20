@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 570" role="img" aria-labelledby="title desc">
+ <title id="title">Local and cloud models share work through an explicit boundary</title>
+ <desc id="desc">Local sources and state feed a local specialist. A disclosure policy gates selected requests and evidence sent to a stronger cloud model. Answers, plans or targeted help return to local validation and authorized execution. Cloud capacity does not grant authority. Quality, time, cost, energy and disclosure constrain the design.</desc>
+ <defs>
+  <marker id="blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="#3b718d"/></marker>
+  <marker id="purple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="#755893"/></marker>
+  <style>text{font-family:Arial,Helvetica,sans-serif;fill:#1e3041}.title{font-size:27px;font-weight:700}.eyebrow{font-size:13px;font-weight:700;letter-spacing:1.7px}.label{font-size:20px;font-weight:700}.body{font-size:15px;fill:#4f6271}.small{font-size:14px;fill:#4f6271}.arrow-label{font-size:15px;font-weight:600}.line{fill:none;stroke-width:2.5}</style>
+ </defs>
+ <rect width="1080" height="570" rx="24" fill="#f8fafc"/>
+ <text x="36" y="45" class="title">Two places to compute. One task to complete.</text>
+ <rect x="32" y="74" width="346" height="402" rx="19" fill="#eef5fa" stroke="#c9dae7"/>
+ <rect x="702" y="74" width="346" height="402" rx="19" fill="#f3eff8" stroke="#dcd1e8"/>
+ <path d="M540 204V470" stroke="#c2ccd4" stroke-width="2" stroke-dasharray="5 6"/>
+ <text x="57" y="110" class="eyebrow" style="fill:#35667e">LOCAL DEVICE</text>
+ <text x="727" y="110" class="eyebrow" style="fill:#72558e">CLOUD SERVICE</text>
+ <rect x="58" y="134" width="294" height="81" rx="12" fill="#fff" stroke="#bed3e1"/>
+ <text x="76" y="163" class="label">Sources &amp; task state</text>
+ <text x="76" y="190" class="body">Documents · sensors · memory</text>
+ <path class="line" d="M205 215V246" stroke="#3b718d" marker-end="url(#blue)"/>
+ <rect x="58" y="250" width="294" height="91" rx="12" fill="#fff" stroke="#6093ad" stroke-width="2"/>
+ <text x="76" y="281" class="label">Local specialist</text>
+ <text x="76" y="308" class="body">Perceive · retrieve · execute</text>
+ <path class="line" d="M205 341V374" stroke="#3b718d" marker-end="url(#blue)"/>
+ <rect x="58" y="379" width="294" height="74" rx="12" fill="#fff" stroke="#bed3e1"/>
+ <text x="76" y="406" class="label">Validate &amp; authorize</text>
+ <text x="76" y="431" class="body">Keep observed outcomes locally</text>
+ <rect x="401" y="94" width="278" height="104" rx="14" fill="#fff" stroke="#c6d0d8"/>
+ <text x="540" y="123" text-anchor="middle" class="label">Policy before disclosure</text>
+ <text x="540" y="150" text-anchor="middle" class="body">Allowed data · scope · deadline</text>
+ <text x="540" y="177" text-anchor="middle" class="small">May choose local, cloud or abstain</text>
+ <path d="M540 198V248" stroke="#a3b2bc" stroke-width="2" stroke-dasharray="4 5"/>
+ <rect x="728" y="217" width="294" height="124" rx="12" fill="#fff" stroke="#9678ad" stroke-width="2"/>
+ <text x="746" y="250" class="label">Stronger general model</text>
+ <text x="746" y="278" class="body">Reason · plan · synthesize</text>
+ <text x="746" y="307" class="small">Receives only permitted messages</text>
+ <path class="line" d="M352 265H723" stroke="#3b718d" marker-end="url(#blue)"/>
+ <rect x="380" y="230" width="320" height="25" rx="8" fill="#f8fafc"/>
+ <text x="540" y="248" text-anchor="middle" class="arrow-label" style="fill:#35667e">Approved query + evidence →</text>
+ <path class="line" d="M728 319H357" stroke="#755893" marker-end="url(#purple)"/>
+ <rect x="375" y="333" width="330" height="25" rx="8" fill="#f8fafc"/>
+ <text x="540" y="351" text-anchor="middle" class="arrow-label" style="fill:#72558e">← Answer, plan or targeted help</text>
+ <text x="728" y="399" class="label" style="font-size:18px">More capacity, not more authority</text>
+ <text x="728" y="427" class="body">Remote outputs remain proposals.</text>
+ <text x="728" y="451" class="body">They do not bypass local controls.</text>
+ <rect x="32" y="495" width="1016" height="50" rx="12" fill="#e8eef2"/>
+ <text x="540" y="526" text-anchor="middle" style="font-size:17px;font-weight:600">Optimize together: quality · time · total cost · device energy · disclosure</text>
+</svg>
