@@ -1,0 +1,161 @@
+{
+  "checked_at": "2026-10-31",
+  "inquiry": "Which recent OCR/document models add useful coverage to the existing Document AI page?",
+  "scope": "Release discovery and editorial prioritization. Full model reports, implementations, licenses and benchmarks still need a publication-level audit before drafting consequential technical details.",
+  "baseline": {
+    "path": "src/content/docs/document-ai.mdx",
+    "evidence_cutoff": "2026-10-11",
+    "already_covered": [
+      "DeepSeek-OCR 1 and 2",
+      "Unlimited-OCR",
+      "HunyuanOCR-1.5",
+      "PaddleOCR-VL 1.6",
+      "GLM-OCR",
+      "olmOCR 2",
+      "dots.mocr",
+      "LightOnOCR-2 and 3",
+      "Granite Docling",
+      "Nemotron Parse 2.0",
+      "MinerU2.5 and Pro",
+      "HPD-Parsing",
+      "MinerU-Diffusion",
+      "TeleOCR",
+      "Xiaomi-OCR-0"
+    ]
+  },
+  "method": "Compared the page source with first-party repositories, model cards, paper abstracts and announcements. Third-party release trackers were discovery leads only. No weights downloaded, code executed, paid APIs called, or model benchmarks run.",
+  "candidates": [
+    {
+      "name": "MiniCPM-OCR 1.0 and MiniCPM-OCR Jev",
+      "priority": "First update",
+      "release_evidence": "ModelBest's dated press announcement is October 31, 2026. This is an announcement date, not a claim about the first availability of the checkpoint files.",
+      "reported_scale": "1.3B parser and 2B verifier (author labels).",
+      "fit": "Compact OCR plus direct key-information extraction; Jev separately scores existing text/formula/table region candidates, supporting review routing and candidate selection.",
+      "page_placement": [
+        "Model mechanisms",
+        "Evaluation and judge validation",
+        "Production review loop"
+      ],
+      "sources": [
+        "https://github.com/OpenBMB/MiniCPM-OCR",
+        "https://github.com/OpenBMB/MiniCPM-OCR/blob/main/docs/minicpm_ocr_1dot0_en.md",
+        "https://github.com/OpenBMB/MiniCPM-OCR/blob/main/docs/minicpm_ocr_jev_en.md",
+        "https://huggingface.co/openbmb/MiniCPM-OCR-1.0",
+        "https://huggingface.co/openbmb/MiniCPM-OCR-Jev",
+        "https://www.prnewswire.com/news-releases/modelbest-and-openbmb-open-source-minicpm-ocr-series-delivering-high-performance-document-parsing-and-ai-powered-quality-control-302925594.html"
+      ],
+      "release_boundary": "Official cards and repository link weights and Apache-2.0 terms. Jev is a verifier, not another OCR generator. A 0–1 score and reported AUROC do not establish calibration on a target workload. DSpark is an optional matching draft-model path."
+    },
+    {
+      "name": "Xiaomi-OCR-0",
+      "priority": "First update; expand existing brief coverage",
+      "release_evidence": "Paper v1 submitted September 28, 2026. Official repository news lists technical-report publication and weight release on September 30, followed by community-conversion news on October 8. Do not substitute a later announcement date for first artifact availability.",
+      "reported_scale": "0.8B (author label), initialized from Qwen3.5-0.8B.",
+      "fit": "A compact unified parser, key-information extractor and OCR-centric VQA model. The approximately 170M-sample data engine, Q-Mask text anchoring, CPT and mixed-task RL provide a distinct study of how understanding supervision can improve parsing.",
+      "page_placement": [
+        "Expand the Xiaomi paragraph into a focused study",
+        "Update the availability column and official artifact links",
+        "Data and supervision mechanisms",
+        "Parsing versus understanding and evaluation"
+      ],
+      "sources": [
+        "https://arxiv.org/abs/2609.36136v1",
+        "https://github.com/xiaomi-research/Xiaomi-OCR-0",
+        "https://huggingface.co/xiaomi-research/Xiaomi-OCR-0",
+        "https://huggingface.co/xiaomi-research/Xiaomi-OCR-0/tree/main"
+      ],
+      "release_boundary": "The former SeerRay-Lab model URL redirects to xiaomi-research. Official weights, code, inference and evaluation instructions are now inspectable; the model card lists Apache-2.0. Headline OmniDocBench v1.6 (96.83), Real5 (95.24) and Wild (87.94) results are author-reported two-stage parsing results using PP-DocLayoutV3, not an isolated one-shot 0.8B model measurement. Whole-page, KIE and VQA paths have different runtime requirements. Community GGUF/NInfer conversions are separate artifacts without established benchmark parity.",
+      "inspection": "Official README, current model card and file listing, and report abstract inspected. Full report and implementation not yet audited. No weights downloaded or inference run.",
+      "baseline_correction": "The existing page already contains a short Xiaomi paragraph and reports that checkpoint availability was not verified at its prior evidence cutoff. Refresh that verification status and give the model more depth."
+    },
+    {
+      "name": "Unlimited-OCR 2",
+      "priority": "First update",
+      "release_evidence": "Official model-card release log: October 27, 2026.",
+      "fit": "A direct update to the existing R-SWA explanation: sparse working reference selection for long multi-page parsing.",
+      "page_placement": [
+        "Unlimited-OCR section",
+        "History-memory mechanism map",
+        "Long-document evaluation"
+      ],
+      "sources": [
+        "https://huggingface.co/baidu/Unlimited-OCR-2"
+      ],
+      "release_boundary": "The official card documents SR-SWA, Transformers inference and a customized SGLang path. Its own deployment notes retain memory, page-window and cross-page-context tradeoffs. Do not repeat an unconditional constant-memory or literally unlimited end-to-end claim."
+    },
+    {
+      "name": "OXR-1.0",
+      "priority": "First update",
+      "release_evidence": "October 2026 announcement; exact first checkpoint publication date not established in this scouting pass.",
+      "fit": "A separate layout model with recognition and reading-order branches, plus a post-training RSI data loop targeting weak cases.",
+      "page_placement": [
+        "Layout-first parsers",
+        "Data engines and post-training"
+      ],
+      "sources": [
+        "https://huggingface.co/SoMarkAI/OXR-1.0",
+        "https://github.com/SoMarkAI/OXR",
+        "https://somark.ai/oxr",
+        "https://somark.cn/oxr"
+      ],
+      "release_boundary": "Official model card links released weights, code and a custom Apache-based license with extra terms. Its technical report is listed as forthcoming. Advertised 1.3B and the Hub's rounded model-size summary differ; inspect a pinned artifact before reporting an exact count. Treat speed and accuracy as author-reported under the published setup. RSI is a post-training process, not automatic learning from production pages."
+    },
+    {
+      "name": "OCRia-1",
+      "priority": "First update",
+      "release_evidence": "Official technical report is dated October 2026. The exact announcement day was not independently established from a dated first-party page in this pass.",
+      "reported_scale": "4B (author report).",
+      "fit": "Preserving merged headers, long-table structure, chart data and meaningful formatting; training with dimension-specific verifiable rewards and accelerated serving.",
+      "page_placement": [
+        "Structured output and supervision",
+        "Complex tables and charts",
+        "LlamaParse entry in the product map",
+        "Evaluation"
+      ],
+      "sources": [
+        "https://www.llamaindex.ai/blog/parse-ocria-1",
+        "https://www.llamaindex.ai/ocria/ocria-1-technical-report.pdf"
+      ],
+      "release_boundary": "The official announcement establishes use inside LlamaParse. Open checkpoint availability was not verified. Only the report abstract and announcement were inspected; the 37-page report still needs a full audit. ParseBench comparisons are vendor-reported and use stated rendering/evaluation conditions."
+    },
+    {
+      "name": "Youtu-Parsing-Omni",
+      "priority": "Concise additional coverage",
+      "release_evidence": "Official paper v1 submitted October 29, 2026; model card describes an October release. Paper date is not asserted as the first checkpoint release date.",
+      "reported_scale": "5B (author report and model card).",
+      "fit": "A shared encoder and structured output schema across documents, charts, geometry, audio and video; useful expansion from OCR into structured multimodal perception.",
+      "page_placement": [
+        "Document representations",
+        "Additional models and studies"
+      ],
+      "sources": [
+        "https://arxiv.org/abs/2610.39301",
+        "https://huggingface.co/tencent/Youtu-Parsing-Omni"
+      ],
+      "release_boundary": "Official paper/card describe publicly available weights and code. Model card uses a custom youtu-parsing license. Keep audio/video discussion short on a Document AI page. Report abstract and model card inspected; full paper not audited."
+    },
+    {
+      "name": "WeVisDoc-2B / WeVisDoc-4B",
+      "priority": "Concise gap-fill",
+      "release_evidence": "Official paper submitted September 17, 2026. This is an omission from the October 11 page, not a newly discovered October release date.",
+      "fit": "Coverage expansion with structure-preserving degradation synthesis, followed by held-out diagnostics of residual errors and targeted training-budget allocation.",
+      "page_placement": [
+        "Data engines and robustness",
+        "Additional models and studies"
+      ],
+      "sources": [
+        "https://arxiv.org/abs/2609.20423",
+        "https://github.com/Tencent/WeVisDoc"
+      ],
+      "release_boundary": "Official repository links 2B/4B checkpoints and inference instructions. Its headline ranking is scoped to compared end-to-end parsers and specific benchmark tracks. Abstract and README inspected; full paper not audited."
+    }
+  ],
+  "evaluation_companion": {
+    "name": "Document Parsing Protocol (DPP), working draft 0.1",
+    "date": "2026-10-28",
+    "source": "https://www.llamaindex.ai/blog/introducing-the-document-parsing-protocol",
+    "fit": "A concrete proposed output contract for table headers, empty fields, charts, diagrams and visible content. Relevant to the existing representation/evaluation sections.",
+    "boundary": "A LlamaIndex-authored proposal derived from ParseBench annotation rules, not an adopted standard or another model."
+  },
+  "next_step": "Main refresh: MiniCPM-OCR plus Jev, an expanded Xiaomi-OCR-0 study, Unlimited-OCR 2, OXR-1.0 and OCRia-1. Add concise Youtu-Parsing-Omni and WeVisDoc entries and selective updates to existing families. Pin sources and audit reports before publishing detailed claims. No page revision made in this scouting pass."
+}

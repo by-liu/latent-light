@@ -1,0 +1,63 @@
+{
+  "revision": 8,
+  "checked_at": "2026-11-01T00:03:12.560051+00:00",
+  "canonical_output": "src/content/docs/document-ai.mdx",
+  "scope": "Whole-page freshness, synthesis, landscape and presentation.",
+  "findings": [
+    {
+      "area": "Opening and navigation",
+      "finding": "Two successive large figures delayed the first answer; no direct reader route to evaluation/products.",
+      "change": "Lead with the definition, retain the generated poster, add compact route links, and move systemFigure2 after task layers; figure order and anchors preserved."
+    },
+    {
+      "area": "Frontier synthesis",
+      "finding": "The earlier high-level synthesis did not integrate verification, resident versus attended memory, structured rewards or refinement passes.",
+      "change": "Reconcile the frontier, production manifest, selection advice and conclusions with the reviewed releases."
+    },
+    {
+      "area": "Model landscape",
+      "finding": "Nemotron3.5 and Datalab model/service boundaries were absent.",
+      "change": "Add focused3.5/Chandra2/Surya2 explanations,27-row model catalog and29atlas milestones; maintain seven verified links. The card explicitly supports the Nemotron update edge."
+    },
+    {
+      "area": "Retrieval",
+      "finding": "ColPali alone gave an incomplete view of current visual retrieval interfaces.",
+      "change": "Add October dense image/text embedding and reranking boundaries, keeping retrieval, parsing and answering distinct."
+    },
+    {
+      "area": "Evaluation",
+      "finding": "Historical PureDocBench result was bounded but lacked the maintained artifact; no compact guide to benchmark units or OctoberOmniParseBench.",
+      "change": "Add a seven-row benchmark map, revision/GT cautions, family averaging, coverage and vendor/label-provenance limits."
+    },
+    {
+      "area": "Products",
+      "finding": "Roles mixed model, API, toolkit and operator suite; LandingAI migration summary stopped atOctober7subscription transition.",
+      "change": "Recheck all product-boundary rows; use a consistent role/adoption-question schema, add Datalab, update all-tierOctober8 and distinguishAzure/UiPathGA versuspreview. No live API test."
+    },
+    {
+      "area": "Research identity",
+      "finding": "Unlimited2 now has an arXiv record; OXR still advertises report forthcoming.",
+      "change": "UpdateUnlimited2citation metadata without asserting byte equality; preserveOXR availability boundary."
+    },
+    {
+      "area": "Curation",
+      "finding": "Scout also identifiedJinaOCR1 andInfinityParser2, but a catalog is not an exhaustive release feed.",
+      "change": "Record bounded card/config/license scouting; retain a selected mechanism map. Existing decoding/reward/data-engine lessons already cover their broad themes; full reports not claimed reviewed."
+    },
+    {
+      "area": "Rendered table refinement",
+      "finding": "A separate role column wasted width, while long benchmark questions made rows unnecessarily tall.",
+      "change": "Keep product role as a second row-header line; use three meaningful columns and short task labels. Re-inspected final Focus/mobile views and repeated actual checks."
+    }
+  ],
+  "challenge_review": [
+    "CheckedNemo2add_cross_attention againstNemo3.5causal_vision_prefix; did not infer MTP serving from an auxiliary artifact.",
+    "The Nemo card and release blog use different timing revisions; avoided copying a universal throughput comparison.",
+    "Kept Chandra open2 separate from hosted2.5; did not infer initialization from qwen3_5 configuration type.",
+    "Chandra/SuryaOct23 atlas dates are explicitly benchmark snapshots, not fabricated release dates.",
+    "OmniParse deterministic scoring and model-assisted construction are separate facts; no independent vendor accuracy claim adopted.",
+    "No old evidence date, report score, source artwork or usage-right record was silently refreshed."
+  ],
+  "pending": [],
+  "completed_checks": "checks-whole-page-2026-10-31.json"
+}

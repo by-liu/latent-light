@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en" data-background="both">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Latent Light — Six flashes</title>
+  <link rel="icon" href="data:,">
+  <style>
+    :root{color-scheme:dark;--bg:#111412;--surface:#191d1a;--line:#333a33;--text:#f3f1e9;--muted:#b0b8ae;--gold:#f5c85b;--ink:#10150f;--preview-size:148px;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-size:14px;line-height:1.5}button,input,select,textarea{font:inherit}button,a,input,select,textarea{-webkit-tap-highlight-color:transparent}button{cursor:pointer}button,a{touch-action:manipulation}button{color:inherit}a{color:inherit;text-underline-offset:4px}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--gold);outline-offset:4px}button:disabled{opacity:.45;cursor:default}[hidden]{display:none!important}.wrap{width:min(1320px,calc(100% - 80px));margin:auto}.masthead{border-bottom:1px solid var(--line)}.masthead .wrap{height:78px;display:flex;align-items:center;justify-content:space-between;gap:20px}.wordmark{font-weight:650;letter-spacing:.19em;font-size:13px;display:flex;align-items:center;gap:15px}.brand-symbol{color:var(--gold);font-size:26px;line-height:1}.edition{color:var(--muted);font-size:11px;letter-spacing:.16em;text-transform:uppercase}.hero{display:flex;align-items:flex-end;justify-content:space-between;gap:48px;padding:48px 0 34px}.eyebrow{color:var(--gold);font-size:11px;font-weight:600;letter-spacing:.17em;text-transform:uppercase;margin:0 0 13px}h1{font-family:Georgia,"Times New Roman",serif;font-weight:400;letter-spacing:-.045em;font-size:clamp(44px,5vw,70px);line-height:1.08;margin:0}h1 em{font-weight:400;color:var(--gold)}.intro{max-width:450px;color:var(--muted);font-size:14px;line-height:1.7;margin:0 0 3px}.toolbar{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:18px 0;border-top:1px solid var(--line);margin-bottom:22px;flex-wrap:wrap}.tool-left,.tool-right,.segmented{display:flex;align-items:center;gap:10px}.control-label{font-size:12px;color:var(--muted);margin-right:3px}.segmented{gap:3px;border:1px solid var(--line);padding:4px;border-radius:9px}.segmented button{border:0;background:transparent;border-radius:5px;padding:6px 12px;font-size:12px;min-height:32px;color:var(--muted)}.segmented button[aria-pressed="true"]{background:#e7e9de;color:var(--ink);font-weight:650}.tool-right{flex-wrap:wrap;gap:14px}.tool-right input[type=range]{width:100px;accent-color:var(--gold)}.size-value{font:11px ui-monospace,SFMono-Regular,Consolas,monospace;color:var(--muted);min-width:39px}.filter-button{background:transparent;border:1px solid var(--line);border-radius:8px;padding:10px 13px;min-height:40px;font-size:12px;display:flex;align-items:center;gap:8px}.filter-button[aria-pressed="true"]{border-color:var(--gold);color:var(--gold)}.count{color:var(--gold);font-variant-numeric:tabular-nums}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}.card{background:var(--surface);border:1px solid var(--line);border-radius:13px;overflow:hidden;min-width:0}.card[data-selected="true"]{border-color:var(--gold)}.card-head{display:flex;align-items:center;gap:12px;padding:17px 18px;min-height:78px}.number{width:31px;height:31px;border:1px solid #465044;border-radius:50%;display:grid;place-items:center;color:var(--gold);font-size:11px;flex-shrink:0;font-variant-numeric:tabular-nums}.card h2{font-size:19px;line-height:1.15;font-weight:550;letter-spacing:-.03em;margin:0 0 4px}.theme-label{font-size:10px;letter-spacing:.08em;color:var(--muted);text-transform:uppercase}.shortlist{margin-left:auto;flex-shrink:0;border:1px solid var(--line);border-radius:7px;background:transparent;display:grid;place-items:center;min-height:40px;width:40px}.shortlist svg{width:17px;height:17px;fill:none;stroke:var(--muted);stroke-width:1.5}.shortlist[aria-pressed="true"]{background:#3c3420;border-color:#756035}.shortlist[aria-pressed="true"] svg{fill:var(--gold);stroke:var(--gold)}.stage{display:grid;grid-template-columns:1fr 1fr;height:214px;border-top:1px solid #343a32;border-bottom:1px solid #343a32}.pane{position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;min-width:0}.pane-dark{background:#101815}.pane-light{background:#f2f0e9}.pane-label{position:absolute;top:12px;left:13px;letter-spacing:.16em;font-size:8px;font-weight:650;color:#7f9186}.pane-light .pane-label{color:#77796d}.pane img{width:min(var(--preview-size),calc(100% - 20px));height:min(var(--preview-size),174px);object-fit:contain;display:block}.card-body{padding:16px 18px 17px}.description{margin:0 0 15px;color:#c2c8be;font-size:12px;line-height:1.65;min-height:40px}.miniatures{display:flex;justify-content:space-between;align-items:center;border:1px solid var(--line);border-radius:7px;padding:9px 12px;gap:8px}.mini-label{font-size:9px;color:var(--muted);letter-spacing:.07em;text-transform:uppercase;max-width:48px;line-height:1.6}.miniatures figure{margin:0;display:flex;align-items:center;gap:5px}.miniatures figure img{display:block;object-fit:contain}.miniatures figcaption{font-size:9px;color:var(--muted);font-family:ui-monospace,SFMono-Regular,Consolas,monospace}.card-foot{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-top:16px}.palette{font-size:10px;color:var(--muted)}.inspect{border:0;background:transparent;padding:6px 0;min-height:32px;font-size:11px;color:var(--text);display:flex;align-items:center;gap:7px}.inspect span:last-child{color:var(--gold);font-size:15px}.empty{padding:70px 25px;text-align:center;border:1px dashed var(--line);border-radius:13px;color:var(--muted)}.empty strong{color:var(--text);font-weight:500}.review-panel{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin:40px 0 30px;padding-top:30px;border-top:1px solid var(--line)}.review-panel h2{font-family:Georgia,"Times New Roman",serif;font-size:30px;font-weight:400;letter-spacing:-.025em;margin:0 0 10px}.review-panel p{color:var(--muted);max-width:430px;font-size:12px;line-height:1.75}.selection-summary{color:var(--gold)!important;min-height:22px}.notes-label{font-size:11px;display:block;margin:0 0 9px;color:var(--muted)}textarea{resize:vertical;min-height:94px;width:100%;background:#171b17;border:1px solid var(--line);border-radius:8px;color:var(--text);padding:12px;font-size:12px;line-height:1.65}textarea::placeholder{color:#929b8e}.review-actions{margin-top:11px;display:flex;align-items:center;gap:18px}.primary{border:0;border-radius:7px;background:var(--gold);color:var(--ink);padding:10px 15px;min-height:40px;font-weight:650;font-size:12px}.text-button{border:0;background:transparent;color:var(--muted);font-size:11px;padding:9px 0;min-height:36px}.footer{border-top:1px solid var(--line);padding:20px 0 30px;display:flex;justify-content:space-between;gap:20px;color:#a4ada0;font-size:10px}.status{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);padding:11px 18px;border:1px solid var(--line);border-radius:8px;background:#e8ecdd;color:#151b13;box-shadow:0 5px 25px #0004;font-size:12px;max-width:calc(100% - 32px);z-index:5}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}dialog{padding:0;border:1px solid #53604e;border-radius:14px;background:var(--surface);color:var(--text);width:min(660px,calc(100% - 32px));max-height:calc(100dvh - 32px);overflow:auto}dialog::backdrop{background:#040907d9;backdrop-filter:blur(5px)}.dialog-head{padding:20px 24px;display:flex;align-items:center;justify-content:space-between;gap:12px}.dialog-head h2{margin:0;font-size:21px;font-weight:500}.close-dialog{border:1px solid var(--line);background:transparent;border-radius:7px;width:40px;height:40px;font-size:22px;line-height:1}.inspect-stage{height:340px;display:grid;place-items:center;margin:0 24px;overflow:hidden;border:1px solid var(--line);border-radius:8px;background:#101815}.inspect-stage[data-surface="light"]{background:#f2f0e9}.inspect-stage[data-surface="grid"]{background-color:#e5e7df;background-image:conic-gradient(#bec5b8 25%,transparent 0 50%,#bec5b8 0 75%,transparent 0);background-size:24px 24px}.inspect-stage img{object-fit:contain;width:192px;height:192px;max-width:100%;display:block}.dialog-controls{display:flex;gap:15px;align-items:center;padding:18px 24px;flex-wrap:wrap}.dialog-controls label{font-size:11px;color:var(--muted)}.dialog-controls select{border:1px solid var(--line);background:var(--bg);color:var(--text);padding:6px 8px;border-radius:5px;font-size:11px;min-height:36px}.dialog-controls input{width:140px;accent-color:var(--gold)}.download{margin-left:auto;font-size:11px}.dialog-description{margin:0;padding:0 24px 24px;color:var(--muted);font-size:12px}.noscript{padding:20px;background:#382f19;border-radius:8px;margin-bottom:20px}
+    [data-background="light"] .stage{grid-template-columns:1fr}[data-background="light"] .pane-dark{display:none}[data-background="dark"] .stage{grid-template-columns:1fr}[data-background="dark"] .pane-light{display:none}[data-background="light"] .miniatures{background:#f2f0e9;border-color:#d8dace}[data-background="light"] .miniatures :is(.mini-label,figcaption){color:#656c5f}
+    @media(min-width:1600px){.stage{height:240px}}
+    @media(max-width:1150px){.wrap{width:calc(100% - 48px)}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.hero{gap:30px}.intro{max-width:390px}.miniatures{justify-content:flex-start;gap:24px}.mini-label{margin-right:auto}}
+    @media(max-width:700px){.wrap{width:calc(100% - 32px)}.masthead .wrap{height:64px}.edition{font-size:9px;letter-spacing:.06em}.wordmark{font-size:11px;letter-spacing:.12em;gap:9px}.hero{display:block;padding:32px 0 26px}h1{font-size:47px;max-width:350px}.intro{margin-top:20px;font-size:13px;max-width:440px}.eyebrow{font-size:10px}.toolbar{align-items:flex-start;gap:14px;margin-bottom:18px}.tool-left{gap:8px}.tool-right{width:100%;justify-content:space-between;gap:8px}.tool-right input[type=range]{width:90px}.filter-button{margin-left:auto}.grid{grid-template-columns:1fr;gap:18px}.stage{height:230px}.pane img{height:min(var(--preview-size),190px)}.card-body{padding:16px 18px}.description{min-height:0}.miniatures{gap:18px;justify-content:space-between}.mini-label{margin-right:0}.review-panel{grid-template-columns:1fr;gap:16px;margin-top:30px}.footer{flex-direction:column;gap:7px}.dialog-head{padding:16px}.inspect-stage{margin:0 16px;height:300px}.dialog-controls{padding:16px;gap:10px}.dialog-controls input{width:100px}.download{margin-left:0}.dialog-description{padding:0 16px 20px}}
+    @media(max-width:380px){.miniatures{gap:6px;padding-left:9px;padding-right:9px}.mini-label{font-size:8px}.miniatures figure{gap:3px}.miniatures figcaption{font-size:8px}}
+    @media(prefers-reduced-motion:no-preference){button,a{transition:background-color .12s,border-color .12s,color .12s}.card{transition:border-color .12s}}
+    @media print{body{background:#fff;color:#111}.wrap{width:100%}.masthead,.toolbar,.shortlist,.inspect,.review-actions,.footer,.review-panel,dialog{display:none!important}.hero{padding:10px 0 20px}.intro,.eyebrow,h1 em{color:#333}.grid{grid-template-columns:repeat(2,1fr);gap:12px}.card{break-inside:avoid;background:#fff;color:#111;border-color:#aaa}.description,.theme-label,.palette,.mini-label,.miniatures figcaption{color:#333}.stage{height:150px}.pane img{height:120px;width:120px}.miniatures{border-color:#aaa}.pane-dark{print-color-adjust:exact;-webkit-print-color-adjust:exact}.card-body{padding:10px}.card-foot{margin-top:6px}.hero h1{font-size:38px}.number{color:#333}.card-head{min-height:60px;padding:10px}}
+  </style>
+</head>
+<body>
+  <header class="masthead"><div class="wrap"><div class="wordmark"><span class="brand-symbol" aria-hidden="true">ϟ</span> LATENT LIGHT</div><div class="edition">Identity explorations · 02</div></div></header>
+  <main class="wrap">
+    <section class="hero" aria-labelledby="page-title"><div><p class="eyebrow">Six candidates. One spark.</p><h1 id="page-title">A flash of <em>insight.</em></h1></div><p class="intro">The energy of ⚡, with a little more character.<br>Compare the shapes, try both backgrounds, and see which one still feels right when it gets small.</p></section>
+    <div class="toolbar">
+      <div class="tool-left"><span class="control-label" id="background-label">Background</span><div class="segmented" role="group" aria-labelledby="background-label"><button data-bg="both" aria-pressed="true">Both</button><button data-bg="light" aria-pressed="false">Light</button><button data-bg="dark" aria-pressed="false">Dark</button></div></div>
+      <div class="tool-right"><label class="control-label" for="preview-size">Preview</label><input id="preview-size" type="range" min="72" max="180" value="148" step="2"><output class="size-value" for="preview-size" id="preview-output">148 px</output><button class="filter-button" id="filter" aria-pressed="false">Shortlisted <span class="count" id="shortlist-count">0</span></button></div>
+    </div>
+    <noscript><div class="noscript">Enable JavaScript for the comparison controls, or open the original images: <a href="01-fold.png">01 Fold</a>, <a href="02-flow.png">02 Flow</a>, <a href="03-prism.png">03 Prism</a>, <a href="04-aperture.png">04 Aperture</a>, <a href="05-echo.png">05 Echo</a>, <a href="06-spark.png">06 Spark</a>.</div></noscript>
+    <section class="grid" id="candidates" aria-label="Six icon candidates"></section>
+    <div class="empty" id="empty" hidden><strong>No shortlisted candidates yet.</strong><br>Return to all six and use the star to save a favorite.<br><button class="text-button" id="show-all">Show all candidates →</button></div>
+    <section class="review-panel" aria-labelledby="review-heading"><div><p class="eyebrow">Your take</p><h2 id="review-heading">Which light feels right?</h2><p>Star your favorites, then note what you would keep or change. Your shortlist and notes stay in this browser.</p><p class="selection-summary" id="selection-summary">No favorites selected.</p><p>Generated design concepts. We can refine the chosen shape and polish its edges next.</p></div><div><label class="notes-label" for="notes">Review notes</label><textarea id="notes" placeholder="For example: 03 has the right personality, but I prefer the simpler shape of 01."></textarea><div class="review-actions"><button class="primary" id="copy-feedback">Copy my feedback</button><button class="text-button" id="clear-shortlist">Clear shortlist</button></div></div></section>
+    <footer class="footer"><span>Latent Light · Icon study · October 31, 2026</span><span>Six original AI-generated directions inspired by ⚡</span></footer>
+  </main>
+  <template id="card-template"><article class="card"><header class="card-head"><div class="number"></div><div><h2></h2><div class="theme-label"></div></div><button class="shortlist" type="button" aria-pressed="false" title="Add to shortlist"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.8 5.7 6.3.9-4.6 4.4 1.1 6.3-5.6-3-5.6 3 1.1-6.3L3 9.6l6.2-.9Z"/></svg></button></header><div class="stage" role="img"><div class="pane pane-dark"><span class="pane-label">DARK</span><img alt="" width="148" height="148"></div><div class="pane pane-light"><span class="pane-label">LIGHT</span><img alt="" width="148" height="148"></div></div><div class="card-body"><p class="description"></p><div class="miniatures" role="group" aria-label="Actual size previews at 16, 32 and 64 pixels"><span class="mini-label">Actual<br>sizes</span><figure><img alt="" width="16" height="16"><figcaption>16</figcaption></figure><figure><img alt="" width="32" height="32"><figcaption>32</figcaption></figure><figure><img alt="" width="64" height="64"><figcaption>64</figcaption></figure></div><footer class="card-foot"><span class="palette"></span><button class="inspect" type="button"><span>Inspect & download</span><span aria-hidden="true">↗</span></button></footer></div></article></template>
+  <dialog id="inspect-dialog" aria-labelledby="inspect-title" aria-describedby="inspect-description"><header class="dialog-head"><h2 id="inspect-title">Inspect icon</h2><button class="close-dialog" id="close-dialog" aria-label="Close preview" autofocus>×</button></header><div class="inspect-stage" id="inspect-stage" data-surface="dark"><img id="inspect-image" alt=""></div><div class="dialog-controls"><label for="inspect-background">Surface</label><select id="inspect-background"><option value="dark">Dark</option><option value="light">Light</option><option value="grid">Transparency</option></select><label for="inspect-size">Size</label><input id="inspect-size" type="range" min="16" max="256" step="1" value="192"><output class="size-value" for="inspect-size" id="inspect-size-output">192 px</output><a class="download" id="download-png" download>Download PNG ↗</a></div><p class="dialog-description" id="inspect-description"></p></dialog>
+  <div class="status" role="status" aria-live="polite" id="status" hidden></div>
+  <script type="application/json" id="candidate-data">
+  [
+    {"id":"01","name":"Fold","theme":"Sculpted geometry","description":"Two golden planes meet in a sharp, compact flash.","palette":"Gold · amber","image":"01-fold.png"},
+    {"id":"02","name":"Flow","theme":"Soft energy","description":"A single ribbon bends into a warm, fluid bolt.","palette":"Saffron · tangerine","image":"02-flow.png"},
+    {"id":"03","name":"Prism","theme":"Refracted light","description":"A golden flash catches a narrow edge of the spectrum.","palette":"Gold · cyan · violet","image":"03-prism.png"},
+    {"id":"04","name":"Aperture","theme":"Light revealed","description":"A lightning-shaped opening cuts through a golden disc.","palette":"Marigold · honey","image":"04-aperture.png"},
+    {"id":"05","name":"Echo","theme":"Paired strokes","description":"A second golden stroke gives the flash an echo.","palette":"Lemon gold · orange","image":"05-echo.png"},
+    {"id":"06","name":"Spark","theme":"A flash of insight","description":"A bold bolt opens into one integrated point of light.","palette":"Warm yellow · amber","image":"06-spark.png"}
+  ]
+  </script>
+  <script>
+  (function () {
+    'use strict';
+    const candidates = JSON.parse(document.getElementById('candidate-data').textContent);
+    const storageKey = 'latent-light-icon-review-2026-10-31-round-2';
+    const get = function (id) { return document.getElementById(id); };
+    const validIds = new Set(candidates.map(function (c) { return c.id; }));
+    let saved = {};
+    try { saved = JSON.parse(localStorage.getItem(storageKey) || '{}') || {}; } catch (_) {}
+    const shortlist = new Set((Array.isArray(saved.shortlist) ? saved.shortlist : []).filter(function (id) { return validIds.has(id); }));
+    let onlyShortlist = false;
+    let statusTimer;
+    let dialogOpener;
+    get('notes').value = typeof saved.notes === 'string' ? saved.notes : '';
+    function persist() { try { localStorage.setItem(storageKey, JSON.stringify({shortlist: Array.from(shortlist), notes: get('notes').value})); } catch (_) {} }
+    function announce(text) { clearTimeout(statusTimer); get('status').textContent = text; get('status').hidden = false; statusTimer = setTimeout(function () { get('status').hidden = true; }, 3000); }
+    function updateSelection() {
+      get('shortlist-count').textContent = shortlist.size;
+      get('filter').setAttribute('aria-pressed', String(onlyShortlist));
+      document.querySelectorAll('.card').forEach(function (card) {
+        const selected = shortlist.has(card.dataset.id);
+        card.dataset.selected = String(selected);
+        card.hidden = onlyShortlist && !selected;
+        const button = card.querySelector('.shortlist');
+        button.setAttribute('aria-pressed', String(selected));
+        button.title = selected ? 'Remove from shortlist' : 'Add to shortlist';
+      });
+      const names = candidates.filter(function (c) { return shortlist.has(c.id); }).map(function (c) { return c.id + ' ' + c.name; });
+      get('selection-summary').textContent = names.length ? 'Your shortlist: ' + names.join(' · ') : 'No favorites selected.';
+      get('clear-shortlist').disabled = !shortlist.size;
+      get('empty').hidden = !(onlyShortlist && !shortlist.size);
+    }
+    function toggleShortlist(id) {
+      const wasSelected = shortlist.has(id);
+      if (wasSelected) { shortlist.delete(id); } else { shortlist.add(id); }
+      persist(); updateSelection();
+      const c = candidates.find(function (item) { return item.id === id; });
+      announce(c.name + (wasSelected ? ' removed from shortlist' : ' added to shortlist'));
+      if (onlyShortlist && wasSelected) { get('filter').focus(); }
+    }
+    function inspect(c, opener) {
+      dialogOpener = opener;
+      get('inspect-title').textContent = c.id + ' / ' + c.name;
+      get('inspect-description').textContent = c.description;
+      get('inspect-image').src = c.image;
+      get('inspect-image').alt = c.name + ': ' + c.description;
+      get('download-png').href = c.image;
+      get('download-png').download = 'latent-light-' + c.id + '-' + c.name.toLowerCase() + '.png';
+      get('inspect-dialog').showModal();
+    }
+    candidates.forEach(function (c) {
+      const fragment = get('card-template').content.cloneNode(true);
+      const card = fragment.querySelector('.card');
+      card.dataset.id = c.id;
+      card.querySelector('.number').textContent = c.id;
+      card.querySelector('h2').textContent = c.name;
+      card.querySelector('.theme-label').textContent = c.theme;
+      card.querySelector('.description').textContent = c.description;
+      card.querySelector('.palette').textContent = c.palette;
+      card.querySelector('.stage').setAttribute('aria-label', c.name + ': ' + c.description + ' Shown on dark and light surfaces.');
+      card.querySelectorAll('img').forEach(function (img) { img.src = c.image; img.decoding = 'async'; });
+      card.querySelector('.shortlist').setAttribute('aria-label', 'Shortlist ' + c.id + ' ' + c.name);
+      card.querySelector('.shortlist').addEventListener('click', function () { toggleShortlist(c.id); });
+      card.querySelector('.inspect').setAttribute('aria-label', 'Inspect and download ' + c.id + ' ' + c.name);
+      card.querySelector('.inspect').addEventListener('click', function (event) { inspect(c, event.currentTarget); });
+      get('candidates').appendChild(fragment);
+    });
+    document.querySelectorAll('[data-bg]').forEach(function (button) {
+      button.addEventListener('click', function () {
+        document.documentElement.dataset.background = button.dataset.bg;
+        document.querySelectorAll('[data-bg]').forEach(function (b) { b.setAttribute('aria-pressed', String(b === button)); });
+      });
+    });
+    get('preview-size').addEventListener('input', function (event) { document.documentElement.style.setProperty('--preview-size', event.target.value + 'px'); get('preview-output').textContent = event.target.value + ' px'; });
+    get('filter').addEventListener('click', function () { onlyShortlist = !onlyShortlist; updateSelection(); });
+    get('show-all').addEventListener('click', function () { onlyShortlist = false; updateSelection(); get('filter').focus(); });
+    get('clear-shortlist').addEventListener('click', function () { shortlist.clear(); persist(); updateSelection(); get('filter').focus(); announce('Shortlist cleared'); });
+    get('notes').addEventListener('input', persist);
+    get('close-dialog').addEventListener('click', function () { get('inspect-dialog').close(); });
+    get('inspect-dialog').addEventListener('close', function () { if (dialogOpener) { dialogOpener.focus(); } });
+    get('inspect-dialog').addEventListener('click', function (event) { const rect = event.currentTarget.getBoundingClientRect(); if (event.target === event.currentTarget && (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom)) { event.currentTarget.close(); } });
+    get('inspect-background').addEventListener('change', function (event) { get('inspect-stage').dataset.surface = event.target.value; });
+    get('inspect-size').addEventListener('input', function (event) { const size = event.target.value + 'px'; get('inspect-image').style.width = size; get('inspect-image').style.height = size; get('inspect-size-output').textContent = event.target.value + ' px'; });
+    get('copy-feedback').addEventListener('click', async function () {
+      const choices = candidates.filter(function (c) { return shortlist.has(c.id); }).map(function (c) { return c.id + ' ' + c.name; });
+      const text = 'Latent Light icon review\nShortlist: ' + (choices.join(', ') || 'Not selected yet') + '\nNotes: ' + (get('notes').value.trim() || 'None');
+      try { if (!navigator.clipboard) { throw new Error('Clipboard unavailable'); } await navigator.clipboard.writeText(text); announce('Feedback copied — paste it into our conversation.'); }
+      catch (_) { const a = document.createElement('a'); const url = URL.createObjectURL(new Blob([text], {type: 'text/plain'})); a.href = url; a.download = 'latent-light-icon-feedback.txt'; a.click(); setTimeout(function () { URL.revokeObjectURL(url); }, 1000); announce('Feedback saved as a text file.'); }
+    });
+    updateSelection();
+  }());
+  </script>
+</body>
+</html>

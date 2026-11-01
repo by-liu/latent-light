@@ -1,0 +1,77 @@
+{
+  "date": "2026-10-31",
+  "method": "Built-in image generation; six separate new-image calls; candidate 04 also received one targeted edit.",
+  "inspiration": "The user's ⚡ emoji suggestion; no vendor emoji artwork used as an image input.",
+  "status": "Six original concepts retained. Candidate 05 was selected, refined and applied to the local site.",
+  "selected_candidate": "05",
+  "selected_output_record": "../echo-selected/prompt.md",
+  "candidates": [
+    {
+      "id": "01",
+      "slug": "fold",
+      "name": "Fold",
+      "theme": "Sculpted geometry",
+      "description": "Two golden planes meet in a sharp, compact flash.",
+      "palette": "Gold · amber",
+      "prompt": "Use case: logo-brand. Asset: one new icon candidate for Latent Light, a thoughtful personal notebook about AI, ideas and human potential. Inspiration: the compact, immediately legible silhouette and energy of the ⚡ emoji, reinterpreted as an original identity mark. Keep the style exceptionally neat, restrained, contemporary and intelligent. This must be a strong usable symbol, not an illustration.\nDirection: FOLD. A confidently proportioned lightning bolt built from two broad folded geometric planes, like one small folded sheet of golden light. A distinctively compact zigzag with a generous central waist, precise oblique cuts, a subtle small-radius rounding only at the inner elbows, and sharp upper-right and lower-left tips. Two nearly flat warm colors: bright marigold yellow on the main face, honey amber on a single folded return face. Use the fold to give the icon a clever twist while keeping the whole silhouette instantly recognizable as a lightning bolt. Minimal, strong and beautifully balanced; no surrounding enclosure.\nOutput: exactly one complete centered icon on a square canvas with a genuinely transparent background and about 12 percent clear margin. Large simple shapes, crisp smooth antialiased edges, no detached stray pixels or noisy alpha edges. Think of recognition at 16–32 pixels. No writing, no wordmark, no letters, no watermark, no mockup, no presentation board, no grid, no multiple versions, no texture, no grain, no cast shadow, no glow or lens flare, no 3D extrusion, no scenery, no tiny decorative details.",
+      "image": "01-fold.png",
+      "generation_file": "exec-52b447a2-11e4-4ac4-b878-e5b9348d3cf7.png"
+    },
+    {
+      "id": "02",
+      "slug": "flow",
+      "name": "Flow",
+      "theme": "Soft energy",
+      "description": "A single ribbon bends into a warm, fluid bolt.",
+      "palette": "Saffron · tangerine",
+      "prompt": "Use case: logo-brand. Asset: one new icon candidate for Latent Light, a thoughtful personal notebook about AI, ideas and human potential. Inspiration: the compact, immediately legible silhouette and energy of the ⚡ emoji, reinterpreted as an original identity mark. Keep the style exceptionally neat, restrained, contemporary and intelligent. This must be a strong usable symbol, not an illustration.\nDirection: FLOW. A single substantial ribbon of golden light makes a lightning-bolt zigzag. Keep the two pointed diagonal ends and bold lightning silhouette, but let the middle make one beautifully controlled smooth S-shaped turn, with generously rounded inner elbows. It should feel fast, fluid and effortless while remaining geometrically simple. Broad flat saffron-yellow faces with one restrained tangerine turn on the underside. No closed loop, no knot, no metallic finish. The silhouette is compact and sturdy, never a thin squiggle. Modern flat graphic emblem with just two or three smooth color areas; no surrounding enclosure.\nOutput: exactly one complete centered icon on a square canvas with a genuinely transparent background and about 12 percent clear margin. Large simple shapes, crisp smooth antialiased edges, no detached stray pixels or noisy alpha edges. Think of recognition at 16–32 pixels. No writing, no wordmark, no letters, no watermark, no mockup, no presentation board, no grid, no multiple versions, no texture, no grain, no cast shadow, no glow or lens flare, no 3D extrusion, no scenery, no tiny decorative details.",
+      "image": "02-flow.png",
+      "generation_file": "exec-8ef9239b-db52-41fa-957e-98b298a85cbe.png"
+    },
+    {
+      "id": "03",
+      "slug": "prism",
+      "name": "Prism",
+      "theme": "Refracted light",
+      "description": "A golden flash catches a narrow edge of the spectrum.",
+      "palette": "Gold · cyan · violet",
+      "prompt": "Use case: logo-brand. Asset: one new icon candidate for Latent Light, a thoughtful personal notebook about AI, ideas and human potential. Inspiration: the compact, immediately legible silhouette and energy of the ⚡ emoji, reinterpreted as an original identity mark. Keep the style exceptionally neat, restrained, contemporary and intelligent. This must be a strong usable symbol, not an illustration.\nDirection: PRISM. One bold angular lightning bolt, upper tip reaching upper right and lower tip lower left. The main face is golden yellow. Along just one diagonal folded edge, a narrow clean refractive face transitions through electric cyan and deep violet, like light revealing a hidden spectrum. This is a refined logo with three broad clean geometric faces, mostly flat and with only a restrained smooth transition inside the color edge. Preserve a simple chunky silhouette and clear negative space. The spectrum is an accent, not an all-over rainbow. Clever visual connection between an emoji-like lightning flash and a prism. No glass realism, no gemstone, no transparency inside the bolt, no rays, no enclosure.\nOutput: exactly one complete centered icon on a square canvas with a genuinely transparent background and about 12 percent clear margin. Large simple shapes, crisp smooth antialiased edges, no detached stray pixels or noisy alpha edges. Think of recognition at 16–32 pixels. No writing, no wordmark, no letters, no watermark, no mockup, no presentation board, no grid, no multiple versions, no texture, no grain, no cast shadow, no glow or lens flare, no 3D extrusion, no scenery, no tiny decorative details.",
+      "image": "03-prism.png",
+      "generation_file": "exec-83dff18a-f166-4f87-9b50-87c3ea50b866.png"
+    },
+    {
+      "id": "04",
+      "slug": "aperture",
+      "name": "Aperture",
+      "theme": "Light revealed",
+      "description": "A lightning-shaped opening cuts through a golden disc.",
+      "palette": "Marigold · honey",
+      "prompt": "Use case: logo-brand. Asset: one new icon candidate for Latent Light, a thoughtful personal notebook about AI, ideas and human potential. Inspiration: the compact, immediately legible silhouette and energy of the ⚡ emoji, reinterpreted as an original identity mark. Keep the style exceptionally neat, restrained, contemporary and intelligent. This must be a strong usable symbol, not an illustration.\nDirection: APERTURE. A simple solid golden circular disc is divided by a bold lightning-bolt-shaped negative-space opening that passes diagonally completely through the disc from upper right to lower left. The lightning is a genuinely transparent cutout, showing the background through it. The two remaining compact golden portions form one balanced circular emblem. The cutout must clearly read as a chunky zigzag lightning bolt, not a straight slash, letter S, or crack with branches. Main upper-left portion bright marigold yellow, smaller lower-right portion honey amber. Flat vector-like graphic, two solid colors, absolutely no bevels, no gradients, no glows. A memorable minimal meeting of an aperture and a flash of insight. No extra surrounding frame.\nOutput: exactly one complete centered icon on a square canvas with a genuinely transparent background and about 12 percent clear margin. Large simple shapes, crisp smooth antialiased edges, no detached stray pixels or noisy alpha edges. Think of recognition at 16–32 pixels. No writing, no wordmark, no letters, no watermark, no mockup, no presentation board, no grid, no multiple versions, no texture, no grain, no cast shadow, no glow or lens flare, no 3D extrusion, no scenery, no tiny decorative details.",
+      "image": "04-aperture.png",
+      "generation_file": "exec-0c48c1d6-3062-415b-891b-e238e52757f4.png",
+      "refinement_prompt": "Refine this exact logo. Keep its circular golden silhouette and the exact bold zigzag lightning-bolt cutout dividing the circle. Make the negative-space opening completely empty and genuinely transparent from end to end: remove all yellow and red speckles, flecks, debris, grain, and stray pixels within the opening and outside the circle. Use only two clean flat golden filled portions with very smooth antialiased borders. Preserve the existing geometry, proportions and composition. Crisp minimal vector-like emblem, no texture, no noise, no extra elements, no shadow, no glow, no writing. Transparent background and transparent bolt-shaped opening."
+    },
+    {
+      "id": "05",
+      "slug": "echo",
+      "name": "Echo",
+      "theme": "Paired strokes",
+      "description": "Two offset strokes create a compact flash with momentum.",
+      "palette": "Lemon gold · orange",
+      "prompt": "Use case: logo-brand. Asset: one new icon candidate for Latent Light, a thoughtful personal notebook about AI, ideas and human potential. Inspiration: the compact, immediately legible silhouette and energy of the ⚡ emoji, reinterpreted as an original identity mark. Keep the style exceptionally neat, restrained, contemporary and intelligent. This must be a strong usable symbol, not an illustration.\nDirection: ECHO. Construct one compact lightning emblem from exactly two thick interlocking angular strokes, slightly offset, with a narrow diagonal transparent channel between them. Together their outer contour reads unmistakably as one forward-moving lightning bolt. The leading stroke is bright lemon-gold and the smaller following stroke is deeper golden orange. Both are broad geometric shapes with confidently cut tips and subtly softened inner elbows. Clever negative space, dynamic but exceptionally spare. The two strokes should seem related as an echo, without looking like two separate complete bolts or a fast-forward media button. No enclosure, no added streaks, no gradient, no other elements.\nOutput: exactly one complete centered icon on a square canvas with a genuinely transparent background and about 12 percent clear margin. Large simple shapes, crisp smooth antialiased edges, no detached stray pixels or noisy alpha edges. Think of recognition at 16–32 pixels. No writing, no wordmark, no letters, no watermark, no mockup, no presentation board, no grid, no multiple versions, no texture, no grain, no cast shadow, no glow or lens flare, no 3D extrusion, no scenery, no tiny decorative details.",
+      "image": "05-echo.png",
+      "generation_file": "exec-438a45c8-d462-4279-99cd-204a076b430d.png"
+    },
+    {
+      "id": "06",
+      "slug": "spark",
+      "name": "Spark",
+      "theme": "A flash of insight",
+      "description": "A bold bolt opens into one integrated point of light.",
+      "palette": "Warm yellow · amber",
+      "prompt": "Use case: logo-brand. Asset: one new icon candidate for Latent Light, a thoughtful personal notebook about AI, ideas and human potential. Inspiration: the compact, immediately legible silhouette and energy of the ⚡ emoji, reinterpreted as an original identity mark. Keep the style exceptionally neat, restrained, contemporary and intelligent. This must be a strong usable symbol, not an illustration.\nDirection: SPARK. One original lightning-bolt silhouette whose upper right end opens into a small integrated four-point glint, as though the bolt is becoming a flash of understanding. The glint and bolt must be a single continuous bold silhouette, not separate floating symbols. The lower left end remains a long confident lightning point. Make the upper glint understated and geometric, about one quarter the mark's height, while the main body is still clearly a compact chunky zigzag lightning bolt. Warm golden yellow face with just one flat amber facet on the lower diagonal. Simple, iconic and surprising. No extra stars, no spark particles, no orbit, no enclosing container, no decorative background.\nOutput: exactly one complete centered icon on a square canvas with a genuinely transparent background and about 12 percent clear margin. Large simple shapes, crisp smooth antialiased edges, no detached stray pixels or noisy alpha edges. Think of recognition at 16–32 pixels. No writing, no wordmark, no letters, no watermark, no mockup, no presentation board, no grid, no multiple versions, no texture, no grain, no cast shadow, no glow or lens flare, no 3D extrusion, no scenery, no tiny decorative details.",
+      "image": "06-spark.png",
+      "generation_file": "exec-0bb12d8c-3995-4d59-ad89-e2ff3fdf8b3b.png"
+    }
+  ]
+}

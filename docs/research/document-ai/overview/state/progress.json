@@ -3,24 +3,31 @@
   "topic_id": "document-ai-from-pages-to-reliable-information",
   "status": "complete",
   "coverage": {
-    "source inventory": "All 942 lines read; substantive layers, model mechanisms, evaluation and selection retained.",
-    "fresh primary evidence": "56 inspected primary source records including scoped reuse-context evidence; released checkpoint cards distinguished from report-only studies.",
+    "source inventory": "The entire1633-line pre-review canonical page was read; revision8 retains all prior studies and19figures while reconciling the opening, synthesis, retrieval, evaluation, products and conclusions.",
+    "fresh primary evidence": "135source records total. Revision8 adds36bounded primary inspections across model/config/license artifacts, retrieval, benchmarks, current product contracts and release scouting. Prior mechanism and figure evidence dates remain explicit.",
     "technical audit": "Masks, pixel/token budgets, cache bounds, decoding paths, synthetic consistency and causal attribution checked.",
-    "product evidence": "12 product boundaries retained; Mistral4.1 lifecycle and LandingAI transition updated."
+    "product evidence": "All14product-boundary rows reviewed using current first-party material, including the already inspectedOctober31LlamaParse/OCRia evidence. Provider claims are not independently exercised.",
+    "October refresh": "Primary evidence and released interfaces inspected for MiniCPM/Jev, Xiaomi, Unlimited2, OXR, OCRia, Youtu and WeVisDoc; DPP announcement inspected. Older mutable contracts retainOctober11 boundary.",
+    "skeptical review": "Availability, attention versus resident memory, benchmark denominators, metadata counts, training versus inference stages, and isolated causal claims checked.",
+    "presentation": "Revision8:19figures (11report excerpts,7native diagrams,1generated synthesis),80references,8equations and7tables (two searchable).27model rows,14product rows,7benchmark tasks. Opening routes, earlier short answer and compact three-column product map reviewed.",
+    "family atlas": "29typed milestones and7supported links. Chandra/Surya dates are benchmark snapshots. Native subtitle derives its count from the shared registry; newNemo family update follows an explicit newer-version notice.",
+    "opening infographic": "Original built-in image generation with18selected model/version labels across six themes. Prompt, correction, source master, pixel-identical WebP and provenance retained; complete cited text equivalent and native enlargement available.",
+    "whole-page review": "Completed: findings and challenge review in whole-page-review-2026-10-31.json, pinned artifact metadata and final checks retained. Original artwork, studies and unrelated work preserved."
   },
   "open_questions": [
-    "TeleOCR, Xiaomi-OCR0 and MinerU-Diffusion checkpoint availability is not verified.",
-    "No independent model/API benchmark was executed; local workload and judge validation remain application-specific."
+    "No model/service runtime benchmark conducted.",
+    "OXR formal report remains forthcoming; OCRia public weights not verified; retained TeleOCR/MinerU-Diffusion availability gaps remain dated.",
+    "Workload transfer, calibration and independently reproduced accuracy remain unknown."
   ],
-  "recommended_next_direction": "User review of the page. Later refresh model artifacts and workload-specific evaluation if requested. No commit/push/deploy authorized.",
-  "last_seen": "2026-10-12T01:50:34.707Z",
+  "recommended_next_direction": null,
+  "last_seen": "2026-11-01T00:08:30.889910+00:00",
   "output": {
     "kind": "site-page",
     "path": "src/content/docs/document-ai.mdx",
     "status": "reviewed",
-    "revision": 3,
-    "updated": "2026-10-11",
-    "evidence_cutoff": "2026-10-11",
+    "revision": 8,
+    "updated": "2026-10-31",
+    "evidence_cutoff": "2026-10-31",
     "audience": "Readers with basic ML knowledge seeking intuition, technical depth and practical system design."
   },
   "quality_gate": {
@@ -32,18 +39,18 @@
   "delivery_checks": {
     "validation": {
       "status": "passed",
-      "method": "npm run validate: deployment/content checks, Astro check, static build and Nimbus lint; git diff --check; schema3 research validator.",
-      "checked_at": "2026-10-12T01:50:34.707Z"
+      "method": "Final Node24.21.0 npm run validate:49deployment+178content tests; Astro0errors/warnings/hints;105-page build/105-file lint. Schema3 research validator and git diff --check pass. Known warnings remain.",
+      "checked_at": "2026-11-01T00:08:30.889910+00:00"
     },
     "rendering": {
       "status": "passed",
-      "method": "Chromium1440 light/dark,390light,320dark; responsive five-layer figure and horizontal Focus;7 tables and3 catalog search controls; pinned semantic headers; actual keyboard pan; filter/reset/empty states; print restores filtered rows; complete no-JavaScript fallback; reduced-motion mode. Previous14figures/53footnotes/8equations and source-artwork checks retained; no overflow/errors.",
-      "checked_at": "2026-10-12T01:50:34.707Z"
+      "method": "Actual Chromium review of every major section:1440desktop,1216Focus,390/320mobile, light/dark, reduced motion, native keyboard selection/pan and catalog filters, no-JS and unfiltered print. Final table refinements re-inspected.19figures,12decoded images,80references, no broken fragments/overflow/JS errors.",
+      "checked_at": "2026-11-01T00:08:30.889910+00:00"
     },
     "exports": {
       "status": "passed",
-      "method": "All5system layers, artifact contracts, feedback/evaluation notes, all7unchanged native Markdown tables,14caption numbers and53reference definitions survive complete exports without component syntax. Table-semantic unit test preserves cell markup, links and citations.",
-      "checked_at": "2026-10-12T01:50:34.707Z"
+      "method": "Live Markdown/MDX and llms endpoints retain allnew explanations,19captions,29milestones/7links,80references and7tables without raw component payloads. Exact-phraseOmniParseBench search via actualUI and current built index passes. Project server refreshed on4327.",
+      "checked_at": "2026-11-01T00:08:30.889910+00:00"
     }
   }
 }

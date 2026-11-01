@@ -1,7 +1,7 @@
 ---
 title: Development guide
 description: Where source files live and how to develop pages, components, and exports.
-lastUpdated: 2026-10-17
+lastUpdated: 2026-10-31
 ---
 
 Develop the site from its source files. Preserve the calm reading experience.
@@ -128,6 +128,11 @@ expand the whole page. Extract a high resolution source crop that retains
 every label, legend, axis and arrow. Record its page, figure number, crop,
 source version and reuse basis in the research records. Follow the
 [paper figure reuse standard](/about/content-guidance/content-standards/#reuse-original-paper-figures-deliberately).
+
+For an overview poster, add `zoomable fitInitially` with `minWidth`. The full
+image fits the frame on every screen until the reader selects **Enlarge labels**.
+The enlarged image pans within its frame, including with the keyboard. Keep a
+text equivalent beside the figure and retain the full size link.
 
 For generated figures with light and dark artwork, keep the primary image in
 the Markdown image slot of `SourceFigure` and pass the matching asset as
@@ -261,6 +266,25 @@ Keep its numbered caption in the page source.
 Use `FocusCanvas` with `size="diagram"` for the complete horizontal view.
 Narrow layouts must retain the path through all five layers and readable text.
 Use `ModelFlow` for other flows rather than copying this fixed system map.
+
+### Document model family atlas
+
+`DocumentModelAtlas.astro` renders the dated family map on Document AI.
+Import it explicitly, supply a numbered figure `id`, and wrap it in `FocusCanvas`.
+Keep the caption in the page source. The milestone data, typed relationships and
+complete Markdown equivalent share `plugins/document-model-atlas.mjs`.
+
+A milestone identifies its report revision, release log, announcement or explicitly
+labelled benchmark snapshot; it does
+not silently establish first weight availability. Keep family/design updates
+separate from explicit checkpoint initialization. Lanes are overlapping themes.
+Date and relationship evidence lives with the Document AI research records.
+
+Keep `documentModelAtlasAsMarkdown` registered in `astro.config.ts`.
+Check native keyboard selection, model/study/source links, both themes,
+responsive reflow, the no-JavaScript map and complete text exports after changes.
+The expanded timeline uses measured node positions; narrow layouts retain dates
+and explicit text connections without shrinking a poster.
 
 ### Agent maps and navigation cards
 
@@ -425,15 +449,19 @@ intended use, link to the source or write an independent explanation.
 
 ## Visual identity and provenance
 
-The identity uses the refined K spectral aperture. It combines a subtly elliptical
-blue form, converging light, and a spectral edge. Keep the separate, text free
-`public/brand/logo-dark.png` and `public/brand/logo-light.png` assets.
-Each image is 1254 by 1254 pixels. The header switches between the complete
-images with the theme. These raster references are neither vector masters nor
-a cleared trademark.
+The identity uses Echo, two offset lightning bolts in gold and orange.
+Preserve the complete silhouettes and transparent gap between the bolts.
+Keep the established `public/brand/logo-dark.png` and
+`public/brand/logo-light.png` paths. Both currently contain the same transparent
+1254 by 1254 pixel artwork, which works in either theme. The header switches
+between these complete images with the theme. The selection, exact generation
+prompts and asset checksums are recorded in `docs/branding/identity.md` and its
+linked concept records. The PNGs are raster artwork, not vector masters.
 
-`public/favicon.ico` contains 16, 32, 48, 64, and 256 pixel versions of an AI
-generated symbol adaptation. Its source is `public/brand/favicon-master.png`.
+`public/favicon.ico` contains 16, 32, 48, 64, and 256 pixel versions of Echo.
+Its source is `public/brand/favicon-master.png`, the same transparent artwork
+used for the theme logos. Generate the icon sizes from that master without
+changing the mark's proportions.
 The homepage uses `public/brand/galaxy-line-art.png` as original AI generated
 decorative artwork. This artwork is not an astronomical diagram.
 

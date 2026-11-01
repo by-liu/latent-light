@@ -3,7 +3,7 @@
     <picture>
       <source media="(prefers-color-scheme: dark)" srcset="public/brand/logo-dark.png">
       <source media="(prefers-color-scheme: light)" srcset="public/brand/logo-light.png">
-      <img src="public/brand/logo-light.png" alt="Latent Light spectral aperture logo" width="128" height="128">
+      <img src="public/brand/logo-light.png" alt="Latent Light Echo lightning logo" width="128" height="128">
     </picture>
   </a>
 </p>

@@ -4,6 +4,9 @@ This file is the agent entry point. Detailed guidance lives in the About source
 pages. Its Content Guidance group contains writing standards and study workflows.
 Read the source files directly. A running site is not required.
 
+Read [the session handoff](./docs/HANDOFF.md) for recent work and restart steps.
+Treat it as a dated snapshot, not permission to publish.
+
 ## Before changes
 
 1. Run `git status --short`. Preserve unrelated work.

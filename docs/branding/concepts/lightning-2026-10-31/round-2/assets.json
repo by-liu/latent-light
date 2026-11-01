@@ -1,0 +1,64 @@
+{
+  "assets": [
+    {
+      "id": "01",
+      "file": "01-fold.png",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "sha256": "11fb7b781b4aa77f9ca5d9ccca06b5e8e8546689d161c5f6ab56201a64a3127e",
+      "bytes": 308666
+    },
+    {
+      "id": "02",
+      "file": "02-flow.png",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "sha256": "086055fa34fd9f0bd69a544e3844ea34df1f4d2d96673bbe64033814fa7775f4",
+      "bytes": 335142
+    },
+    {
+      "id": "03",
+      "file": "03-prism.png",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "sha256": "c173aebcae960a2c21ae11cd58d363ab103017ab4f568c5820b373c2c3517ce4",
+      "bytes": 377718
+    },
+    {
+      "id": "04",
+      "file": "04-aperture.png",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "sha256": "988e152e9a25dfc2307172b07785681404e6fa80590eb4e120305bc212de053c",
+      "bytes": 713783
+    },
+    {
+      "id": "05",
+      "file": "05-echo.png",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "sha256": "3c15dcfce980a26c80602566f88f3457fd24cd453297e209bfda57a2a6d322e9",
+      "bytes": 316286
+    },
+    {
+      "id": "06",
+      "file": "06-spark.png",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "sha256": "59fa00b841aae638bbf69663f006e5196b7d5bc40db7a372b4c40b86ae314581",
+      "bytes": 300576
+    }
+  ]
+}

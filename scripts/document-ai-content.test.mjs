@@ -9,13 +9,14 @@ import {renderEntryAsMarkdown} from '@cloudflare/nimbus-docs';
 import {mathAsMarkdown,prepareMdxMath,renderMath} from '../plugins/math-typesetting.mjs';
 import {modelFlowAsMarkdown,readModelLanes} from '../plugins/model-flow.mjs';
 import {documentSystem,documentSystemAsMarkdown} from '../plugins/document-system.mjs';
+import {atlasModels,atlasRelations,atlasLanes,atlasPeriods,atlasPeriodFor,documentModelAtlasAsMarkdown} from '../plugins/document-model-atlas.mjs';
 import {comparisonTableAsMarkdown,prepareComparisonTable} from '../plugins/comparison-table.mjs';
 const path='src/content/docs/document-ai.mdx';
 const read=p=>readFile(new URL('../'+p,import.meta.url),'utf8');
 
 test('Document AI preserves numbered references, diagrams and math in agent exports',async()=>{
  const body=await read(path);
- const md=renderEntryAsMarkdown({body,filePath:path},{componentMap:{MathExpression:mathAsMarkdown.render,ModelFlow:modelFlowAsMarkdown.render,DocumentSystem:documentSystemAsMarkdown.render,ComparisonTable:comparisonTableAsMarkdown.render}});
+ const md=renderEntryAsMarkdown({body,filePath:path},{componentMap:{MathExpression:mathAsMarkdown.render,ModelFlow:modelFlowAsMarkdown.render,DocumentSystem:documentSystemAsMarkdown.render,DocumentModelAtlas:documentModelAtlasAsMarkdown.render,ComparisonTable:comparisonTableAsMarkdown.render}});
  const {html}=markdownToHtml(md,{hastPlugins:[referenceHeading()]});
  assert.equal((html.match(/<h2[^>]*>References<\/h2>/g)||[]).length,1,'The rendered page must have one References heading');
  assert.doesNotMatch(body,/^## References\s*$/m,'Native footnotes already generate the References heading');
@@ -24,14 +25,14 @@ test('Document AI preserves numbered references, diagrams and math in agent expo
  assert.deepEqual([...definitions].sort(),used.sort());
  assert.equal(new Set(definitions).size,definitions.length);
  assert.doesNotMatch(body,/Eclipse|<Aside|<PaperFigure|FIGURE_NUMBER|EQUATION_NUMBER/);
- assert.doesNotMatch(md,/<ModelFlow|lanesJson=|<MathExpression|<DocumentSystem|<ComparisonTable/);
+ assert.doesNotMatch(md,/<ModelFlow|lanesJson=|<MathExpression|<DocumentSystem|<DocumentModelAtlas|<ComparisonTable/);
  assert.ok(md.includes(documentSystem.feedback));
  for(const stage of documentSystem.stages){assert.ok(md.includes(stage.label));assert.ok(md.includes(stage.output));for(const item of stage.items)assert.ok(md.includes(item));}
  const tables=[...body.matchAll(/<ComparisonTable ([^>]+)>([\s\S]*?)<\/ComparisonTable>/g)];
- assert.equal(tables.length,7);assert.equal(tables.filter(t=>/\bsearch(?:\s|$)/.test(t[1])).length,3);
+ assert.equal(tables.length,7);assert.equal(tables.filter(t=>/\bsearch(?:\s|$)/.test(t[1])).length,2);
  for(const table of tables)for(const line of table[2].trim().split("\n").filter(line=>line.startsWith("|")))assert.ok(md.includes(line),line);
  const figures=[...body.matchAll(/\*\*Figure (\d+)\./g)].map(m=>Number(m[1]));
- assert.deepEqual(figures,Array.from({length:14},(_,i)=>i+1));
+ assert.deepEqual(figures,Array.from({length:19},(_,i)=>i+1));
  for(const n of figures){assert.ok(body.includes('id="figure-'+n+'"'));assert.ok(body.includes('](#figure-'+n+')'));assert.ok(md.includes('**Figure '+n+'.**'));}
  for(const [,json]of body.matchAll(/lanesJson='([^']+)'/g))for(const lane of readModelLanes(json)){
   for(const step of lane.steps){assert.ok(md.includes(step.label));if(step.detail)assert.ok(md.includes(step.detail));}
@@ -51,20 +52,31 @@ test('Document AI preserves numbered references, diagrams and math in agent expo
 
 test('Document AI distinguishes availability, version contracts and conditional gains',async()=>{
  const body=await read(path);
- for(const value of ['TeleOCR','Xiaomi-OCR-0','LightOnOCR-3','HPD-Parsing','Nemotron Parse 2.0','Granite Docling','MinerU2.5-Pro','ColPali','OCR 4.1','32K','128K'])assert.ok(body.includes(value),value);
+ for(const value of ['TeleOCR','Xiaomi-OCR-0','LightOnOCR-3','HPD-Parsing','Nemotron Parse 2.0','Granite Docling','MinerU2.5-Pro','ColPali','OCR 4.1','32K','128K','MiniCPM-OCR 1.0','MiniCPM-OCR Jev','Unlimited-OCR 2','OXR-1.0','OCRia-1','Youtu-Parsing-Omni','WeVisDoc','Document Parsing Protocol','Nemotron 3.5 Parse','Chandra OCR 2','Surya OCR 2','OmniParseBench'])assert.ok(body.includes(value),value);
  assert.match(body,/checkpoint availability was not\nverified/);
  assert.match(body,/not a ceiling on later releases/);
  assert.match(body,/not the complete GRPO objective/);
  assert.match(body,/auxiliary[\s\S]+not loaded by the standard checkpoint/);
  assert.match(body,/Authorization|authorization/);
- assert.match(body,/October 7 model transition/);
- assert.match(body,/not an\nindependent model or service benchmark/);
+ assert.match(body,/October 8, 2026/);
+ assert.match(body,/No model or\s+commercial service benchmark was run/);
+ assert.match(body,/only `verdict: scored`/);
+ assert.match(body,/excludes visual grounding/);
+ assert.match(body,/not the official eight-category/);
+ assert.match(body,/Official checkpoints are available/);
+ assert.match(body,/sparse attention alone does not/);
+ assert.match(body,/two stages are training stages/);
+ assert.match(body,/causal visual-prefix decoder/);
+ assert.match(body,/cross-attending Parse 2\.0/);
+ assert.match(body,/old request string does not\nkeep the old model/);
+ assert.match(body,/averages text, table and layout family scores/);
+ assert.match(body,/additional OXR\nterms/);
  assert.doesNotMatch(body,/65[0-9a-f]{38}|2cba9e/);
 });
 
 test('Every report excerpt exists with a matching checksum and scoped rights record',async()=>{
  const assets=JSON.parse(await read('docs/research/document-ai/overview/figure-assets.json'));
- assert.equal(assets.length,10);
+ assert.equal(assets.length,11);
  const notice=await read('public/licenses/document-ai-figures.txt');
  for(const item of assets){
   const bytes=await readFile(new URL('../public'+item.public_path,import.meta.url));
@@ -107,4 +119,39 @@ test('Comparison table semantics preserve links, citations, column order and all
  assert.ok(md.includes(table));assert.match(md,/<a id="model-table"><\/a>/);
  assert.doesNotMatch(md,/input|Reset|search=true/);
  assert.doesNotMatch(comparisonTableAsMarkdown.render({attrs:{id:'bad" onclick="bad'},children:table}),/onclick/);
+});
+
+test('Document model atlas keeps dated milestones distinct from typed family links',()=>{
+ const ids=new Set(atlasModels.map(model=>model.id));
+ assert.equal(ids.size,29);
+ for(const model of atlasModels){
+  assert.ok(atlasLanes.some(lane=>lane.id===model.lane));
+  assert.ok(atlasPeriods.some(period=>period.id===atlasPeriodFor(model.date)));
+  assert.match(model.source,/^https:\/\//);
+  assert.match(model.href,/^#[a-z][a-z0-9-]+$/);
+  assert.ok(['Report v1','Report v3','Model-card release','Release log','Announcement','Benchmark snapshot'].includes(model.event));
+ }
+ const visit=(id,seen=new Set())=>{assert(!seen.has(id),'Family links must not create a cycle');for(const edge of atlasRelations.filter(edge=>edge.from===id))visit(edge.to,new Set([...seen,id]));};
+ for(const edge of atlasRelations){
+  assert(ids.has(edge.from)&&ids.has(edge.to));
+  assert.ok(['update','initialization'].includes(edge.type));
+  const from=atlasModels.find(model=>model.id===edge.from),to=atlasModels.find(model=>model.id===edge.to);
+  assert(from.date<=to.date,'A successor cannot precede its displayed predecessor');
+  assert.equal(from.lane,to.lane,'The drawing expects explicit links within a lane');
+  assert.match(edge.source,/^https:\/\//);assert.ok(edge.note);
+ }
+ for(const id of ids)visit(id);
+ assert.equal(atlasRelations.find(edge=>edge.to==='unlimited1').from,'deep1');
+ assert.equal(atlasRelations.find(edge=>edge.to==='unlimited1').type,'initialization');
+ assert.equal(atlasRelations.find(edge=>edge.to==='granite').type,'update');
+ assert(!atlasRelations.some(edge=>['jev','xiaomi','diffusion'].includes(edge.to)),'Do not infer ancestry from integration, shared base or branding');
+});
+
+test('Document model atlas exports every milestone, source and relationship without requiring selection',()=>{
+ const md=documentModelAtlasAsMarkdown.render({attrs:{id:'figure-3'},children:'**Figure 3.** Atlas.[^source]'});
+ for(const model of atlasModels)for(const field of ['label','event','source','scale','access','idea','href'])assert.ok(md.includes(model[field]),model.id+' '+field);
+ for(const edge of atlasRelations){assert.ok(md.includes(edge.label));assert.ok(md.includes(edge.note));assert.ok(md.includes(edge.source));}
+ assert.match(md,/not necessarily first weight availability/);
+ assert.match(md,/\*\*Figure 3\.\*\* Atlas/);
+ assert.throws(()=>documentModelAtlasAsMarkdown.render({attrs:{id:'x" onclick="x'}}),/numbered figure ID/);
 });

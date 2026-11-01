@@ -1,0 +1,136 @@
+{
+  "revision": 5,
+  "checked_at": "2026-10-31T17:59:36.795001+00:00",
+  "scope": "User-requested catalog consolidation; no new research or model execution.",
+  "validation": {
+    "status": "passed",
+    "method": "mise exec node@24.21.0 -- npm run validate",
+    "deployment_tests": 49,
+    "content_tests": 176,
+    "astro": "0errors,0warnings,0hints",
+    "build_pages": 105,
+    "lint_files": 105,
+    "existing_warnings": [
+      "Nimbus/Vite astro:head-inject module directives",
+      "25 Pagefind legacy redirect pages without html"
+    ]
+  },
+  "browser": {
+    "scope": "Merged model catalog, revision5; source evidence unchanged",
+    "views": [
+      {
+        "name": "merged-desktop-light",
+        "width": 1440,
+        "scrollWidth": 1434,
+        "tableWidth": 976,
+        "viewport": 648,
+        "mode": "light"
+      },
+      {
+        "name": "merged-desktop-dark-focus",
+        "width": 1440,
+        "scrollWidth": 1434,
+        "tableWidth": 1214,
+        "viewport": 1216,
+        "mode": "dark"
+      },
+      {
+        "name": "merged-mobile-light",
+        "width": 390,
+        "scrollWidth": 390,
+        "tableWidth": 810,
+        "viewport": 358,
+        "mode": "light"
+      },
+      {
+        "name": "merged-mobile-dark",
+        "width": 320,
+        "scrollWidth": 320,
+        "tableWidth": 600,
+        "viewport": 288,
+        "mode": "dark"
+      }
+    ],
+    "checks": {
+      "structure": {
+        "tables": 6,
+        "formerTable": 0,
+        "legacyAnchor": true,
+        "rows": 24,
+        "columns": [
+          "Model",
+          "Scale and access",
+          "Design",
+          "Output"
+        ],
+        "missingAnchors": [],
+        "names": [
+          "SmolDocling",
+          "Granite Docling",
+          "DeepSeek-OCR 1",
+          "DeepSeek-OCR 2",
+          "Unlimited-OCR 1 / 2",
+          "HunyuanOCR-1.5",
+          "LightOnOCR-2 / 3",
+          "Nemotron Parse 2.0",
+          "MinerU2.5",
+          "MinerU2.5-Pro",
+          "PaddleOCR-VL 1.6",
+          "GLM-OCR",
+          "MiniCPM-OCR 1.0",
+          "OXR-1.0",
+          "HPD-Parsing",
+          "MinerU-Diffusion",
+          "olmOCR 2",
+          "dots.mocr",
+          "TeleOCR",
+          "Xiaomi-OCR-0",
+          "WeVisDoc",
+          "OCRia-1",
+          "Youtu-Parsing-Omni",
+          "MiniCPM-OCR Jev"
+        ],
+        "reducedMotion": true
+      },
+      "filtered": {
+        "Xiaomi": [
+          "Xiaomi-OCR-03132"
+        ],
+        "Granite": [
+          "Granite Docling13"
+        ],
+        "verifier": [
+          "MiniCPM-OCR Jev37"
+        ],
+        "hosted": [
+          "OCRia-13435"
+        ],
+        "region": [
+          "MinerU2.510",
+          "MinerU2.5-Pro22",
+          "PaddleOCR-VL 1.612",
+          "GLM-OCR23",
+          "MiniCPM-OCR 1.024",
+          "OXR-1.02526",
+          "Xiaomi-OCR-03132"
+        ],
+        "xyznone": []
+      },
+      "keyboardPan": {
+        "before": 0,
+        "after": 40
+      },
+      "exports": {
+        "rows": 24,
+        "header": true,
+        "legacyAnchor": true,
+        "rawComponents": false,
+        "mdxOneCatalog": 1,
+        "mdxFormerTable": false
+      },
+      "browserErrors": 0
+    }
+  },
+  "manual_review": "Final1440 light/dark Focus and390 light/320dark screenshots reviewed; all24rows retained, linked study names, consistent four-column data, no clipped page or unreadable labels beyond the intended pannable table. Focus shows all columns. Filtered mobile and keyboard pan/reset reviewed.",
+  "exports": "Live Markdown and MDX checked:24rows, four consistent headers, no old separate table, no raw component syntax in Markdown, preserved legacy model-refresh anchor."
+}

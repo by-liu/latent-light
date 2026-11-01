@@ -1,5 +1,5 @@
 Document AI figure sources and reuse notices
-Checked October 11, 2026
+Existing excerpts checked October 11, 2026; Xiaomi excerpt added and checked October 31, 2026
 
 The figures below are third-party material. They are excluded from Latent Light's MIT license. Attribution is also given beside each figure on /document-ai/. Copyright remains with the original rights holders. No author endorsement is implied. Model-weight and repository-code licenses do not replace figure rights.
 
@@ -97,4 +97,15 @@ Nature and effect: publicly available research; this limited use is not a substi
 Assessment reference: Canadian Copyright Act, section 29.1: https://laws-lois.justice.gc.ca/eng/acts/c-42/Section-29.1.html . This provision requires source/author attribution; attribution alone is not a blanket finding of fairness.
 Basis: a scoped criticism/review exception assessment, not a claim that arXiv's distribution license authorizes copying. Rights were reviewed for this use only. Reassess if the use, distribution or commercial context changes; this notice does not grant a license to downstream users.
 
-The four native ModelFlow figures are independent explanatory designs. They do not copy paper artwork and are included under the repository's MIT license.
+The native diagrams are independent explanatory designs. They do not copy paper artwork and are included under the repository's MIT license.
+
+xiaomi-ocr-0-training.webp
+Authors: Xin Chen, Anan Du, Feng Feng, Pei Fu, Jian Luan, Longwei Xu, Shaojie Zhang, Hang Li, Heng Qu and Cheng Tan
+Title: Xiaomi-OCR-0 Technical Report
+Source: https://arxiv.org/abs/2609.36136v1
+Locator: Figure 3, PDF page 9
+Rights: CC BY 4.0
+License: https://creativecommons.org/licenses/by/4.0/ (verified through the versioned arXiv record on October 31, 2026)
+Changes: Complete figure artwork excerpt; surrounding page prose, original caption and blank margins omitted. Rendered with Poppler at 220 dpi, pixel crop 1442x220+214+250; lossless WebP conversion. No labels redrawn or colors changed.
+PDF SHA256: 7f20b1f56aa20002397422c61ffcb925569c1821f689d1f3d85f9032c6a70ff7
+Asset SHA256: 3fb5c2be93bc8deaab6e366654aff8a56bfa5120b6bdfdc1c0d5c10e4934b269

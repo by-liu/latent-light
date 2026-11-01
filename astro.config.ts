@@ -20,6 +20,7 @@ import { agentCardsAsMarkdown, agentArchitectureAsMarkdown, agentLandscapeAsMark
 import { videoGalleryAsMarkdown } from './plugins/video-gallery.mjs';
 import { podcastPlayerAsMarkdown } from './plugins/podcast-player.mjs';
 import { documentSystemAsMarkdown } from './plugins/document-system.mjs';
+import { documentModelAtlasAsMarkdown } from './plugins/document-model-atlas.mjs';
 import { comparisonTableAsMarkdown } from './plugins/comparison-table.mjs';
 
 const nimbusConfig = defineNimbusConfig({
@@ -276,6 +277,7 @@ export default defineConfig({
         componentMap: {
           MathExpression: mathAsMarkdown,
           DocumentSystem: documentSystemAsMarkdown,
+          DocumentModelAtlas: documentModelAtlasAsMarkdown,
           ComparisonTable: comparisonTableAsMarkdown,
           ModelFlow: modelFlowAsMarkdown,
           SourceFigure: sourceFigureAsMarkdown,

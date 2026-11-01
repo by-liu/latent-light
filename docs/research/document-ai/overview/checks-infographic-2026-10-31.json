@@ -1,0 +1,206 @@
+{
+  "revision": 7,
+  "checked_at": "2026-10-31T22:08:04.275494+00:00",
+  "scope": "Generated infographic near the page opening; fitted presentation, native enlargement, complete text equivalent and renumbered figures. Existing atlas, studies and source art retained. No model inference or publication.",
+  "validation": {
+    "command": "mise exec node@24.21.0 -- npm run validate",
+    "status": "passed",
+    "deployment_tests": 49,
+    "content_tests": 178,
+    "astro": {
+      "errors": 0,
+      "warnings": 0,
+      "hints": 0
+    },
+    "build_pages": 105,
+    "lint_files": 105,
+    "existing_build_warnings": [
+      "Nimbus/Vite module-level astro:head-inject directives",
+      "25 Pagefind legacy redirects without html"
+    ]
+  },
+  "browser": {
+    "views": [
+      {
+        "name": "desktop-light",
+        "x": 399,
+        "y": 179.75,
+        "width": 648,
+        "height": 563.09375,
+        "imageWidth": 646,
+        "imageNaturalWidth": 1448,
+        "viewportWidth": 648,
+        "scrollWidth": 648,
+        "toolsRight": 1047,
+        "overflow": false,
+        "mode": "light"
+      },
+      {
+        "name": "desktop-dark",
+        "x": 399,
+        "y": 179.75,
+        "width": 648,
+        "height": 563.09375,
+        "imageWidth": 646,
+        "imageNaturalWidth": 1448,
+        "viewportWidth": 648,
+        "scrollWidth": 648,
+        "toolsRight": 1047,
+        "overflow": false,
+        "mode": "dark"
+      },
+      {
+        "name": "focus-light",
+        "x": 205,
+        "y": 179.75,
+        "width": 1024,
+        "height": 845.09375,
+        "imageWidth": 1022,
+        "imageNaturalWidth": 1448,
+        "viewportWidth": 1024,
+        "scrollWidth": 1024,
+        "toolsRight": 1229,
+        "overflow": false,
+        "mode": "light"
+      },
+      {
+        "name": "focus-dark",
+        "x": 205,
+        "y": 179.75,
+        "width": 1024,
+        "height": 845.09375,
+        "imageWidth": 1022,
+        "imageNaturalWidth": 1448,
+        "viewportWidth": 1024,
+        "scrollWidth": 1024,
+        "toolsRight": 1229,
+        "overflow": false,
+        "mode": "dark"
+      },
+      {
+        "name": "mobile-light",
+        "x": 16,
+        "y": 227.875,
+        "width": 358,
+        "height": 386.53125,
+        "imageWidth": 356,
+        "imageNaturalWidth": 1448,
+        "viewportWidth": 358,
+        "scrollWidth": 358,
+        "toolsRight": 374,
+        "overflow": false,
+        "mode": "light"
+      },
+      {
+        "name": "mobile-dark",
+        "x": 16,
+        "y": 228.375,
+        "width": 288,
+        "height": 354.5,
+        "imageWidth": 286,
+        "imageNaturalWidth": 1448,
+        "viewportWidth": 288,
+        "scrollWidth": 288,
+        "toolsRight": 304,
+        "overflow": false,
+        "mode": "dark"
+      }
+    ],
+    "checks": {
+      "structure": {
+        "figures": [
+          "figure-1",
+          "figure-2",
+          "figure-3",
+          "figure-4",
+          "figure-5",
+          "figure-6",
+          "figure-7",
+          "figure-8",
+          "figure-9",
+          "figure-10",
+          "figure-11",
+          "figure-12",
+          "figure-13",
+          "figure-14",
+          "figure-15",
+          "figure-16",
+          "figure-17",
+          "figure-18",
+          "figure-19"
+        ],
+        "firstBeforeHeading": true,
+        "textBullets": 6,
+        "models": 26,
+        "rows": 24,
+        "budget": true,
+        "badAnchors": [],
+        "imageLink": "/figures/document-ai/document-ai-model-ideas-v1.webp"
+      },
+      "enlarged": {
+        "checked": true,
+        "viewport": 288,
+        "scrollWidth": 1448,
+        "overflow": false
+      },
+      "keyboardPan": 40,
+      "exports": {
+        "captions": 19,
+        "hero": true,
+        "caption": true,
+        "alt": true,
+        "text": true,
+        "atlasSources": 26,
+        "raw": false,
+        "mdx": true,
+        "fullStatus": 200,
+        "fullHero": true,
+        "shortStatus": 200
+      },
+      "print": {
+        "minWidth": "0px",
+        "tools": "none",
+        "alt": "An illustrated field guide to six Document AI themes: document languages, compression and memory, layout and decoding, learning objectives, richer outputs and separate OCR verification."
+      },
+      "search": [
+        {
+          "text": "Document AI",
+          "href": "/document-ai/"
+        },
+        {
+          "text": "Document AI",
+          "href": "/document-ai/"
+        }
+      ],
+      "searchMethod": "Actual search UI, native input after reset, exact phrase matched through built Pagefind assets supplied by CDP interception.",
+      "nojs": {
+        "image": 1448,
+        "checkbox": true,
+        "textBullets": 6,
+        "rows": 24
+      },
+      "browserErrors": 0,
+      "searchQuery": "\"landscape of model ideas\""
+    }
+  },
+  "image_review": {
+    "record": "opening-infographic-2026-10-31.json",
+    "views_inspected": [
+      "Selected final image at native size",
+      "desktop light/dark",
+      "Focus light/dark",
+      "390px mobile light",
+      "320px mobile dark",
+      "mobile enlarged/panned",
+      "mobile text equivalent"
+    ],
+    "result": "passed",
+    "notes": "White editorial poster is preserved in both themes. Full composition fits initially; labels can be enlarged to native1448px width or opened directly. Six cited text bullets provide complete meaning. Corrected the initial invented score to the documented0–1 range before publication-asset integration."
+  },
+  "source_assets": "All11original report excerpts match their retained SHA256s; their source/evidence and rights dates remain unchanged.",
+  "dev_server": "Restarted the verified project process on127.0.0.1:4327 to refresh cached Markdown/llms bodies. Live exports now contain all19captions and the new asset/text.",
+  "research_structure": "Passed schema3 validator; no research tools changed.",
+  "diff_check": "passed",
+  "unresolved": [],
+  "publication": "Local uncommitted work only; no commit, push or deployment."
+}

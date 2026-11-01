@@ -1,0 +1,55 @@
+{
+  "revision": 7,
+  "date": "2026-10-31",
+  "mode": "built-in image_gen",
+  "use_case": "infographic-diagram",
+  "generation": "Original text-only prompt, no reference art; one targeted edit of generated output.",
+  "final_output_id": "exec-052e1355-e3e5-4f2a-9604-e25aca1f567e",
+  "dimensions": {
+    "width": 1448,
+    "height": 1086
+  },
+  "assets": [
+    {
+      "path": "docs/research/document-ai/overview/visuals/overview-infographic-v1.png",
+      "bytes": 1752929,
+      "sha256": "360bb74e887ff9c0321548c025f1b7b4cd4c42aa7a07c01fb4de8f256d94be79"
+    },
+    {
+      "path": "public/figures/document-ai/document-ai-model-ideas-v1.webp",
+      "bytes": 1187504,
+      "sha256": "ab196e80eace8b7f33ae5b02e17c7a291d0a42599ad859f4f175951c4e106588"
+    },
+    {
+      "path": "docs/research/document-ai/overview/visuals/overview-infographic-prompt.md",
+      "bytes": 5110,
+      "sha256": "193842edae447225e89e6ea803447d5228dbd393132d9883310324c2aa5a8f8c"
+    }
+  ],
+  "conversion": {
+    "format": "lossless WebP",
+    "pixel_difference_AE": 0,
+    "method": "ImageMagick format conversion only, no resizing or artwork editing."
+  },
+  "inspected": {
+    "model_labels": 18,
+    "themes": 6,
+    "family_arrows": [
+      "SmolDocling → Granite Docling",
+      "DeepSeek-OCR 1 → 2",
+      "Unlimited-OCR 1 → 2",
+      "MinerU2.5 → Pro"
+    ],
+    "correction": "Replaced invented example 0.92/gauge with documented 0–1 score range.",
+    "illustrative_elements": [
+      "page examples",
+      "token and memory schematics",
+      "toy category/quarter table",
+      "editable vector graphic",
+      "Total crop/candidate/render inputs"
+    ],
+    "limitations": "Editorial theme selection; not an exhaustive model catalog, accuracy ranking, measured result or chronology. Jev score range does not establish probability calibration."
+  },
+  "fact_basis": "Existing canonical study and native atlas primary evidence; no new factual research or model inference.",
+  "publication_asset": "public/figures/document-ai/document-ai-model-ideas-v1.webp"
+}

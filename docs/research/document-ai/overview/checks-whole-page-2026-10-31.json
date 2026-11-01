@@ -1,0 +1,272 @@
+{
+  "revision": 8,
+  "checked_at": "2026-11-01T00:08:30.889910+00:00",
+  "scope": "Whole-page freshness, landscape, synthesis and presentation audit. Primary documentation only; no model or service benchmark and no publication.",
+  "validation": {
+    "command": "mise exec node@24.21.0 -- npm run validate",
+    "status": "passed",
+    "deployment_tests": 49,
+    "content_tests": 178,
+    "astro": {
+      "errors": 0,
+      "warnings": 0,
+      "hints": 0
+    },
+    "build_pages": 105,
+    "lint_files": 105,
+    "existing_build_warnings": [
+      "Nimbus/Vite astro:head-inject module directives",
+      "25 Pagefind legacy redirects without html"
+    ]
+  },
+  "browser": {
+    "views": [
+      {
+        "name": "opening-desktop",
+        "x": 399,
+        "y": 129,
+        "width": 208.734375,
+        "height": 43.75,
+        "pageOverflow": false
+      },
+      {
+        "name": "short-answer-desktop",
+        "x": 399,
+        "y": 1320.09375,
+        "width": 648,
+        "height": 36.390625,
+        "pageOverflow": false
+      },
+      {
+        "name": "frontier-desktop",
+        "x": 399,
+        "y": 6146.34375,
+        "width": 648,
+        "height": 36.390625,
+        "pageOverflow": false
+      },
+      {
+        "name": "model-updates-desktop",
+        "x": 399,
+        "y": 24177.296875,
+        "width": 648,
+        "height": 26.25,
+        "pageOverflow": false
+      },
+      {
+        "name": "atlas-focus",
+        "x": 109,
+        "y": 9640.40625,
+        "width": 1216,
+        "height": 1747.453125,
+        "pageOverflow": false
+      },
+      {
+        "name": "benchmark-focus",
+        "x": 109,
+        "y": 40293.5,
+        "width": 1216,
+        "height": 601.34375,
+        "pageOverflow": false
+      },
+      {
+        "name": "products-focus",
+        "x": 109,
+        "y": 46838.78125,
+        "width": 1216,
+        "height": 1474.875,
+        "pageOverflow": false
+      },
+      {
+        "name": "retrieval-desktop",
+        "x": 399,
+        "y": 37995.65625,
+        "width": 648,
+        "height": 30.78125,
+        "pageOverflow": false
+      },
+      {
+        "name": "production-desktop",
+        "x": 399,
+        "y": 44045.3125,
+        "width": 648,
+        "height": 36.390625,
+        "pageOverflow": false
+      },
+      {
+        "name": "conclusion-desktop",
+        "x": 399,
+        "y": 49426.3125,
+        "width": 648,
+        "height": 36.390625,
+        "pageOverflow": false
+      },
+      {
+        "name": "selection-desktop",
+        "x": 399,
+        "y": 48265.15625,
+        "width": 648,
+        "height": 36.390625,
+        "pageOverflow": false
+      },
+      {
+        "name": "working-conclusion",
+        "x": 399,
+        "y": 50372.515625,
+        "width": 648,
+        "height": 36.390625,
+        "pageOverflow": false
+      },
+      {
+        "name": "opening-mobile",
+        "x": 16,
+        "y": 129,
+        "width": 208.734375,
+        "height": 43.75,
+        "pageOverflow": false
+      },
+      {
+        "name": "model-updates-mobile",
+        "x": 16,
+        "y": 39160.546875,
+        "width": 288,
+        "height": 52.5,
+        "pageOverflow": false
+      },
+      {
+        "name": "benchmark-mobile",
+        "x": 16,
+        "y": 55678.921875,
+        "width": 358,
+        "height": 627.90625,
+        "pageOverflow": false
+      },
+      {
+        "name": "products-mobile",
+        "x": 16,
+        "y": 78229.703125,
+        "width": 288,
+        "height": 1811.4375,
+        "pageOverflow": false
+      }
+    ],
+    "checks": {
+      "structure": {
+        "figures": [
+          "figure-1",
+          "figure-2",
+          "figure-3",
+          "figure-4",
+          "figure-5",
+          "figure-6",
+          "figure-7",
+          "figure-8",
+          "figure-9",
+          "figure-10",
+          "figure-11",
+          "figure-12",
+          "figure-13",
+          "figure-14",
+          "figure-15",
+          "figure-16",
+          "figure-17",
+          "figure-18",
+          "figure-19"
+        ],
+        "references": 80,
+        "images": 12,
+        "shortAnswerBeforeSystem": true,
+        "models": 29,
+        "connections": 7,
+        "catalogRows": 27,
+        "benchmarkRows": 7,
+        "productRows": 14,
+        "productColumns": 3,
+        "badAnchors": []
+      },
+      "productKeyboardPan": 40,
+      "modelFilter": 1,
+      "roleFilter": 4,
+      "printRows": 14,
+      "exports": {
+        "status": 200,
+        "captions": 19,
+        "sources": 29,
+        "models": true,
+        "benchmark": true,
+        "roles": true,
+        "contracts": true,
+        "routes": true,
+        "raw": false,
+        "mdx": true,
+        "fullStatus": 200,
+        "fullNew": true,
+        "shortStatus": 200
+      },
+      "search": {
+        "query": "\"OmniParseBench\"",
+        "results": [
+          {
+            "text": "Document AI",
+            "href": "/document-ai/"
+          },
+          {
+            "text": "Evaluation is now a limiting layer",
+            "href": "/document-ai/#evaluation-is-now-a-limiting-layer"
+          }
+        ]
+      },
+      "nojs": {
+        "models": 29,
+        "links": 7,
+        "rows": 27,
+        "products": 14,
+        "benchmarks": 7
+      },
+      "browserErrors": 0
+    }
+  },
+  "manual_render_review": {
+    "result": "passed",
+    "views": [
+      "opening desktop/mobile",
+      "short answer and frontier",
+      "new model explanations desktop/mobile",
+      "full atlas Focus dark",
+      "benchmark Focus light/mobile",
+      "product Focus dark/mobile",
+      "retrieval and production",
+      "selection table and conclusions"
+    ],
+    "refinements": [
+      "Moved system map after task layers to bring the short answer forward; retained figure order and all19anchors.",
+      "Removed the repeated opening definition.",
+      "After inspecting the four-column product draft, placed role labels beside names to reveal capabilities sooner on mobile.",
+      "Shortened benchmark task labels, reducing Focus table height from770px to600px; re-inspected final screenshots."
+    ],
+    "no_overflow": true,
+    "images_decoded": 12,
+    "search_method": "Actual search UI with native exact-phrase input after reset; current dist/pagefind assets supplied by CDP interception because dev does not serve built search assets.",
+    "reduced_motion": "All views and keyboard operations ran with prefers-reduced-motion:reduce.",
+    "javascript_errors": 0
+  },
+  "evidence_review": {
+    "sources_total": 135,
+    "sources_added": 36,
+    "claims_added": 14,
+    "record": "whole-page-review-2026-10-31.json",
+    "artifact_pins": "whole-page-artifacts-2026-10-31.json",
+    "milestone_snapshot": "atlas-milestones-revision8-2026-10-31.json",
+    "limits": [
+      "Retained historical model evidence dates remain explicit.",
+      "Vendor documents establish documented capability, not independent runtime quality.",
+      "Jina and Infinity are bounded release scouts, not new full technical studies."
+    ]
+  },
+  "source_art": "11report assets retain exact SHA256s and reuse records; generated poster unchanged.",
+  "exports": "Live Markdown has19captions,29milestones,7typed links, all seven native tables and80references. AuthoredMDX, llms.txt and llms-full.txt also checked. No raw visual-component payload in Markdown.",
+  "research_validator": "Schema3 passed; tools and schemas unchanged.",
+  "diff_check": "passed",
+  "unresolved": [],
+  "publication": "Local and uncommitted; no commit, push or deployment."
+}

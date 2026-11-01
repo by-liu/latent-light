@@ -1,0 +1,209 @@
+{
+  "checked_at": "2026-10-31T17:52:04.090864+00:00",
+  "scope": "Local revision4 of Document AI only; no model benchmark or deployment.",
+  "validation": {
+    "command": "mise exec node@24.21.0 -- npm run validate",
+    "status": "passed",
+    "deployment_tests": 49,
+    "content_tests": 176,
+    "astro": {
+      "errors": 0,
+      "warnings": 0,
+      "hints": 0
+    },
+    "built_pages": 105,
+    "lint_files": 105,
+    "existing_build_warnings": [
+      "Nimbus/Vite module-level astro:head-inject directives",
+      "25 Pagefind legacy redirect pages have no html element"
+    ]
+  },
+  "rendering_and_exports": {
+    "views": [
+      {
+        "name": "desktop-light-opening",
+        "width": 1440,
+        "scrollWidth": 1434,
+        "mode": "light"
+      },
+      {
+        "name": "desktop-light-memory",
+        "width": 1440,
+        "scrollWidth": 1434,
+        "mode": "light"
+      },
+      {
+        "name": "desktop-dark-xiaomi",
+        "width": 1440,
+        "scrollWidth": 1434,
+        "mode": "dark"
+      },
+      {
+        "name": "desktop-dark-xiaomi-zoom",
+        "width": 1440,
+        "scrollWidth": 1434,
+        "mode": "dark"
+      },
+      {
+        "name": "desktop-light-jev",
+        "width": 1440,
+        "scrollWidth": 1434,
+        "mode": "light"
+      },
+      {
+        "name": "desktop-focus-xiaomi",
+        "width": 1440,
+        "scrollWidth": 1434,
+        "mode": "light"
+      },
+      {
+        "name": "mobile-light-xiaomi",
+        "width": 390,
+        "scrollWidth": 390,
+        "mode": "light"
+      },
+      {
+        "name": "mobile-dark-jev",
+        "width": 390,
+        "scrollWidth": 390,
+        "mode": "dark"
+      },
+      {
+        "name": "mobile-dark-models",
+        "width": 320,
+        "scrollWidth": 320,
+        "mode": "dark"
+      }
+    ],
+    "checks": {
+      "structure": {
+        "figures": [
+          "figure-1",
+          "figure-2",
+          "figure-3",
+          "figure-4",
+          "figure-5",
+          "figure-6",
+          "figure-7",
+          "figure-8",
+          "figure-9",
+          "figure-10",
+          "figure-11",
+          "figure-12",
+          "figure-13",
+          "figure-14",
+          "figure-15",
+          "figure-16",
+          "figure-17"
+        ],
+        "images": [
+          {
+            "src": "/figures/document-ai/smoldocling.webp",
+            "loaded": true
+          },
+          {
+            "src": "/figures/document-ai/deepseek-ocr.webp",
+            "loaded": true
+          },
+          {
+            "src": "/figures/document-ai/deepseek-ocr-2.webp",
+            "loaded": true
+          },
+          {
+            "src": "/figures/document-ai/unlimited-ocr.webp",
+            "loaded": true
+          },
+          {
+            "src": "/figures/document-ai/hunyuan-ocr-15.webp",
+            "loaded": true
+          },
+          {
+            "src": "/figures/document-ai/mineru25.webp",
+            "loaded": true
+          },
+          {
+            "src": "/figures/document-ai/paddle-ocr-vl-16.webp",
+            "loaded": true
+          },
+          {
+            "src": "/figures/document-ai/glm-ocr.webp",
+            "loaded": true
+          },
+          {
+            "src": "/figures/document-ai/olmocr2-rewards.webp",
+            "loaded": true
+          },
+          {
+            "src": "/figures/document-ai/dots-mocr.webp",
+            "loaded": true
+          },
+          {
+            "src": "/figures/document-ai/xiaomi-ocr-0-training.webp",
+            "loaded": true
+          }
+        ],
+        "badLinks": [],
+        "tables": 7,
+        "refs": 169,
+        "reducedMotion": true
+      },
+      "figureZoom": "Keyboard Space toggles native enlarge-label control and creates1200px pannable artwork",
+      "focus": {
+        "width": 1024,
+        "overflow": false
+      },
+      "keyboardPan": {
+        "before": 0,
+        "after": 40
+      },
+      "filter": "Xiaomi-only filter, keyboard reset, zero-result message and reset passed",
+      "search": [
+        {
+          "text": "Document AI",
+          "href": "/document-ai/"
+        },
+        {
+          "text": "Document AI",
+          "href": "/document-ai/"
+        },
+        {
+          "text": "Model map at a glance",
+          "href": "/document-ai/#model-map-at-a-glance"
+        },
+        {
+          "text": "Xiaomi-OCR-0: connect reading to understanding",
+          "href": "/document-ai/#xiaomi-ocr-0-connect-reading-to-understanding"
+        }
+      ],
+      "searchMethod": "Actual search UI with generated dist/pagefind assets supplied through CDP Fetch interception; Astro dev does not serve a production index.",
+      "exports": {
+        "mdLength": 102409,
+        "mdxLength": 107805,
+        "allNewModels": true,
+        "rawComponent": false,
+        "figures": 17
+      },
+      "browserErrors": 0
+    }
+  },
+  "manual_review": {
+    "images_inspected": [
+      "desktop-light-opening",
+      "desktop-light-memory",
+      "desktop-dark-xiaomi",
+      "desktop-light-jev",
+      "desktop-focus-xiaomi",
+      "desktop-dark-xiaomi-zoom",
+      "mobile-light-xiaomi",
+      "mobile-dark-jev",
+      "mobile-dark-models"
+    ],
+    "refinement": "Added native1200px enlargement to original Xiaomi figure; corrected QA viewport settling before mobile screenshots.",
+    "source_excerpts": 11,
+    "native_figures": 6,
+    "numbered_equations": 8,
+    "reference_definitions": 66,
+    "all_narrative_fragments_and_citation_targets_resolve": true,
+    "notes": "Browser layout/navigation checks used the local Astro route. Production Pagefind files were fulfilled from dist through CDP interception for the actual search UI; no index is expected from Astro dev."
+  }
+}

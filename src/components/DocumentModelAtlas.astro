@@ -1,0 +1,141 @@
+---
+import {atlasModels,atlasLanes,atlasPeriods,atlasRelations,atlasPeriodFor,atlasDateLabel,atlasNote} from '../../plugins/document-model-atlas.mjs';
+interface Props {id:string;}
+const {id}=Astro.props;
+const first=atlasModels.find(m=>m.id==='unlimited2')!;
+const allModels=[...atlasModels].sort((a,b)=>a.date.localeCompare(b.date));
+---
+<figure id={id} class="document-atlas" aria-labelledby={`${id}-title`}>
+<document-model-atlas>
+ <header class="da-header">
+  <p class="da-eyebrow">A landscape of ideas · 2025—2026</p>
+  <strong id={`${id}-title`} class="da-title">Document AI family atlas</strong>
+  <p class="da-subtitle">{allModels.length} milestones. Five approaches. A separate verification rail.</p>
+ </header>
+ <div class="da-legend" aria-label="Connection legend">
+  <span><i class="da-key" aria-hidden="true"></i>Family / design update</span>
+  <span><i class="da-key da-dashed" aria-hidden="true"></i>Checkpoint initialization</span>
+  <span class="da-interaction" hidden>Select a model to explore</span>
+ </div>
+ <div class="da-map">
+  <div class="da-axis" aria-hidden="true"><span>Design themes</span>{atlasPeriods.map(period=><span>{period.label}</span>)}</div>
+  {atlasLanes.map((lane,index)=>{
+   const models=allModels.filter(m=>m.lane===lane.id);
+   const relations=atlasRelations.filter(r=>models.some(m=>m.id===r.to));
+   return <section class:list={['da-lane',`da-${lane.color}`,{'da-verification':lane.id==='verify'}]} data-lane={lane.id} aria-labelledby={`${id}-${lane.id}`}>
+    <header class="da-lane-heading"><span class="da-lane-number">0{index+1}</span><strong id={`${id}-${lane.id}`}>{lane.label}</strong><span class="da-lane-detail">{lane.detail}</span></header>
+    <div class="da-stations">
+     <svg class="da-connections" aria-hidden="true" focusable="false"><defs><marker id={`${id}-${lane.id}-arrow`} markerWidth="6" markerHeight="6" refX="5.4" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 Z" /></marker></defs></svg>
+     {atlasPeriods.map(period=><div class="da-period" data-period={period.id}>
+      {models.filter(m=>atlasPeriodFor(m.date)===period.id).map(m=><button type="button" class:list={['da-station',{'da-selected':m.id===first.id}]} data-model={m.id} aria-pressed={m.id===first.id} aria-label={`${m.label}, ${atlasDateLabel(m.date)}, ${m.event}`}>
+       <span class="da-station-name"><i aria-hidden="true"></i>{m.label}</span>
+       <span class="da-station-meta"><time datetime={m.date}>{atlasDateLabel(m.date,true)}</time><span>{m.event.startsWith('Report')?'Report':m.event==='Release log'||m.event==='Model-card release'?'Release':'News'}</span></span>
+      </button>)}
+     </div>)}
+    </div>
+    {relations.length>0&&<p class="da-lineage">{relations.map((r,i)=><>{i>0&&<span class="da-separator"> · </span>}<a href={r.source} class:list={{'da-initialization':r.type==='initialization'}}>{atlasModels.find(m=>m.id===r.from)!.label} <span aria-label={r.type==='initialization'?'initialized':'updated to'}>{r.type==='initialization'?'⇢':'→'}</span> {atlasModels.find(m=>m.id===r.to)!.label}</a></>)}</p>}
+   </section>;
+  })}
+ </div>
+ <section class="da-detail" aria-live="polite" aria-atomic="true" aria-label="Selected model">
+  <div class="da-detail-top"><strong data-detail="label">{first.label}</strong><span data-detail="date">{atlasDateLabel(first.date)} · {first.event}</span></div>
+  <p data-detail="idea">{first.idea}</p>
+  <div class="da-detail-bottom"><span data-detail="access">{first.scale} · {first.access}</span><span class="da-detail-links"><a data-detail="study" href={first.href}>Read study →</a><a data-detail="source" href={first.source}>Milestone source ↗</a></span></div>
+ </section>
+ <p class="da-note">{atlasNote}</p>
+ <noscript><p class="da-nojs">The map and dated connections remain visible. Use the linked model names in the comparison table below to read each study.</p></noscript>
+ <script is:inline type="application/json" data-atlas-data set:html={JSON.stringify({models:atlasModels,relations:atlasRelations}).replace(/</g,'\\u003c')} />
+</document-model-atlas>
+<figcaption><slot /></figcaption>
+</figure>
+
+<script>
+ type Model={id:string;label:string;date:string;event:string;source:string;scale:string;access:string;idea:string;href:string;};
+ type Relation={from:string;to:string;type:string;};
+ class DocumentModelAtlas extends HTMLElement{
+  connectedCallback(){
+   if(this.dataset.ready)return;
+   const raw=this.querySelector('[data-atlas-data]')?.textContent;
+   if(!raw)return;
+   const {models,relations}=JSON.parse(raw) as {models:Model[];relations:Relation[]};
+   const buttons=Array.from(this.querySelectorAll<HTMLButtonElement>('[data-model]'));
+   const selected=(id:string)=>{
+    const model=models.find(m=>m.id===id);if(!model)return;
+    const connected=new Set([id]);let changed=true;
+    while(changed){changed=false;for(const r of relations){if(connected.has(r.from)||connected.has(r.to)){for(const key of [r.from,r.to])if(!connected.has(key)){connected.add(key);changed=true;}}}}
+    for(const b of buttons){b.classList.toggle('da-selected',b.dataset.model===id);b.classList.toggle('da-related',b.dataset.model!==id&&connected.has(b.dataset.model!));b.setAttribute('aria-pressed',String(b.dataset.model===id));}
+    for(const path of this.querySelectorAll<SVGPathElement>('[data-connection]'))path.classList.toggle('da-related',connected.has(path.dataset.from!)&&connected.has(path.dataset.to!));
+    const detail=this.querySelector<HTMLElement>('.da-detail')!;
+    const lane=buttons.find(button=>button.dataset.model===id)!.closest('.da-lane')!;
+    if(detail.parentElement!==lane)lane.append(detail);
+    if(this.dataset.selected===id)return;
+    const fields={label:model.label,date:new Intl.DateTimeFormat('en-GB',{day:'numeric',month:'short',year:'numeric',timeZone:'UTC'}).format(new Date(model.date+'T00:00:00Z'))+' · '+model.event,idea:model.idea,access:model.scale+' · '+model.access};
+    for(const [field,value] of Object.entries(fields)){const element=this.querySelector(`[data-detail="${field}"]`);if(element)element.textContent=value;}
+    this.querySelector<HTMLAnchorElement>('[data-detail="study"]')!.href=model.href;
+    this.querySelector<HTMLAnchorElement>('[data-detail="source"]')!.href=model.source;
+    this.dataset.selected=id;
+   };
+   const controller=new AbortController();this.abort=controller;
+   this.addEventListener('click',event=>{const button=(event.target as Element).closest<HTMLButtonElement>('[data-model]');if(button&&this.contains(button))selected(button.dataset.model!);},{signal:controller.signal});
+   const draw=()=>{
+    for(const lane of this.querySelectorAll<HTMLElement>('.da-lane')){
+     const container=lane.querySelector<HTMLElement>('.da-stations')!,svg=lane.querySelector<SVGSVGElement>('svg')!;
+     svg.querySelectorAll('[data-connection]').forEach(path=>path.remove());
+     if(getComputedStyle(svg).display==='none')continue;
+     const box=container.getBoundingClientRect();svg.setAttribute('viewBox',`0 0 ${box.width} ${box.height}`);
+     for(const r of relations){
+      const from=lane.querySelector<HTMLElement>(`[data-model="${r.from}"]`),to=lane.querySelector<HTMLElement>(`[data-model="${r.to}"]`);if(!from||!to)continue;
+      const a=from.getBoundingClientRect(),b=to.getBoundingClientRect();let d;
+      if(Math.abs(a.left-b.left)<5){const x=a.left+a.width/2-box.left,y1=a.bottom-box.top+2,y2=b.top-box.top-3;d=`M${x} ${y1} L${x} ${y2}`;}
+      else{
+       const x1=a.right-box.left+2,x2=b.left-box.left-3,y1=a.top+a.height/2-box.top,y2=b.top+b.height/2-box.top;
+       const blocked=buttons.some(button=>{if(button===from||button===to||!lane.contains(button))return false;const c=button.getBoundingClientRect();return c.left>a.right&&c.right<b.left&&Math.abs((c.top+c.height/2)-a.top-a.height/2)<30;});
+       if(blocked){const y=box.height-8;d=`M${x1} ${y1} C${x1+10} ${y1},${x1+10} ${y},${x1+20} ${y} L${x2-20} ${y} C${x2-10} ${y},${x2-10} ${y2},${x2} ${y2}`;}
+       else d=`M${x1} ${y1} C${x1+(x2-x1)/2} ${y1},${x1+(x2-x1)/2} ${y2},${x2} ${y2}`;
+      }
+      const path=document.createElementNS('http://www.w3.org/2000/svg','path');path.setAttribute('d',d);path.dataset.connection=r.type;path.dataset.from=r.from;path.dataset.to=r.to;path.setAttribute('marker-end',`url(#${svg.querySelector('marker')!.id})`);svg.append(path);
+     }
+    }
+    selected(this.dataset.selected||'unlimited2');
+   };
+   this.querySelector<HTMLElement>('.da-interaction')!.hidden=false;
+   this.dataset.ready='true';this.observer=new ResizeObserver(draw);this.observer.observe(this);draw();
+  }
+  abort?:AbortController;observer?:ResizeObserver;
+  disconnectedCallback(){this.abort?.abort();this.observer?.disconnect();delete this.dataset.ready;}
+ }
+ if(!customElements.get('document-model-atlas'))customElements.define('document-model-atlas',DocumentModelAtlas);
+</script>
+
+<style>
+.document-atlas{container-type:inline-size;container-name:document-atlas;min-width:0;margin:1.8rem 0 2rem;color:var(--nb-foreground);--da-violet:#7956a0;--da-blue:#246c9a;--da-teal:#247a6c;--da-amber:#986c23;--da-rose:#a25273;--da-slate:#60738a;}
+:global(html[data-mode='dark']) .document-atlas{--da-violet:#bb9cde;--da-blue:#87bedf;--da-teal:#82c9ba;--da-amber:#dcb777;--da-rose:#dda1ba;--da-slate:#acbdcf;}
+document-model-atlas{display:block;min-width:0;border:1px solid var(--nb-border);border-radius:1rem;overflow:hidden;background:var(--nb-background);}
+.da-header{padding:1.5rem 1.4rem 1rem;background:linear-gradient(115deg,color-mix(in srgb,var(--da-violet) 5%,var(--nb-background)),var(--nb-background) 60%);}
+.da-eyebrow{margin:0 0 .55rem;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--nb-muted-foreground);}
+.da-title{display:block;font-size:clamp(1.4rem,3.8cqi,2rem);font-weight:650;letter-spacing:-.045em;line-height:1.2;}
+.da-subtitle{margin:.65rem 0 0;font-size:.8rem;color:var(--nb-muted-foreground);line-height:1.6;}
+.da-legend{display:flex;align-items:center;flex-wrap:wrap;gap:.6rem 1.2rem;padding:0 1.4rem 1.15rem;font-size:.7rem;line-height:1.6;color:var(--nb-muted-foreground);}
+.da-legend>span{display:inline-flex;align-items:center;gap:.4rem;}.da-key{display:inline-block;width:1.5rem;height:0;border-top:1.5px solid currentColor;}.da-dashed{border-top-style:dashed;}.da-interaction{margin-left:auto;}.da-interaction[hidden]{display:none;}
+.da-map{padding:0 1.1rem;}.da-axis{display:none;}.da-lane{--lane:var(--da-violet);padding:1rem 0 .8rem;border-top:1px solid var(--nb-border);position:relative;min-width:0;}.da-blue{--lane:var(--da-blue)}.da-teal{--lane:var(--da-teal)}.da-amber{--lane:var(--da-amber)}.da-rose{--lane:var(--da-rose)}.da-slate{--lane:var(--da-slate)}
+.da-lane-heading{display:grid;grid-template-columns:1.2rem 1fr;column-gap:.5rem;align-items:baseline;margin-bottom:.8rem;}.da-lane-number{font-size:.7rem;color:var(--lane);font-weight:650;}.da-lane-heading>strong{font-size:.83rem;line-height:1.4;font-weight:600;}.da-lane-detail{grid-column:2;font-size:.7rem;line-height:1.5;color:var(--nb-muted-foreground);margin-top:.15rem;}
+.da-stations{display:flex;flex-wrap:wrap;gap:.65rem;position:relative;min-width:0;}.da-period{display:contents;}.da-connections{display:none;}
+.da-station{flex:0 1 calc((100% - 1.3rem)/3);min-width:0;text-align:left;border:1px solid color-mix(in srgb,var(--lane) 22%,var(--nb-border));border-radius:.45rem;background:color-mix(in srgb,var(--lane) 4%,var(--nb-background));color:var(--nb-foreground);padding:.6rem .55rem;cursor:pointer;font-family:inherit;transition:background-color .15s,border-color .15s;}
+.da-station:hover{background:color-mix(in srgb,var(--lane) 10%,var(--nb-background));border-color:var(--lane);}.da-station:focus-visible{outline:2px solid var(--nb-foreground);outline-offset:3px;}.da-selected{border-color:var(--lane);background:color-mix(in srgb,var(--lane) 13%,var(--nb-background));box-shadow:inset 0 0 0 1px var(--lane);}.da-related{border-color:var(--lane);}
+.da-station-name{display:flex;gap:.4rem;align-items:baseline;font-size:.76rem;font-weight:600;line-height:1.35;overflow-wrap:anywhere;}.da-station-name i{flex:none;display:inline-block;width:.35rem;height:.35rem;border-radius:50%;background:var(--lane);}
+.da-station-meta{display:flex;align-items:baseline;justify-content:space-between;gap:.3rem;margin:.4rem 0 0 .75rem;font-size:.7rem;line-height:1.4;color:var(--nb-muted-foreground);}.da-station-meta>span{font-size:.7rem;}
+.da-lineage{font-size:.7rem;line-height:1.8;color:var(--nb-muted-foreground);margin:.65rem 0 0;padding:0;}.da-lineage a{text-decoration:none;}.da-lineage a:hover{text-decoration:underline;}.da-separator{padding:0 .25rem;}.da-initialization{border-bottom:1px dashed color-mix(in srgb,var(--lane) 40%,var(--nb-border));}
+.da-verification{border-top-style:dashed;}.da-verification .da-station{flex-basis:calc((100% - 1.3rem)/3);}
+.da-detail{padding:1.1rem 1.35rem;margin:.2rem 0 0;border-top:1px solid var(--nb-border);background:color-mix(in srgb,var(--nb-muted) 35%,var(--nb-background));font-size:.8rem;line-height:1.6;}.da-detail-top{display:flex;flex-wrap:wrap;align-items:baseline;gap:.25rem 1rem;justify-content:space-between;}.da-detail-top>strong{font-size:.93rem;font-weight:650;}.da-detail-top>span{font-size:.7rem;color:var(--nb-muted-foreground);}.da-detail p{margin:.4rem 0 .65rem;}.da-detail-bottom{display:flex;flex-wrap:wrap;align-items:baseline;gap:.4rem 1rem;justify-content:space-between;font-size:.7rem;color:var(--nb-muted-foreground);}.da-detail-links{display:flex;flex-wrap:wrap;gap:.5rem 1.1rem;}.da-detail-links a{color:var(--nb-foreground);text-underline-offset:3px;}.da-note,.da-nojs{font-size:.7rem;line-height:1.7;color:var(--nb-muted-foreground);margin:0;padding:.8rem 1.35rem 1rem;}.da-nojs{padding-top:0;}
+.da-lane>.da-detail{grid-column:1/-1;margin:.9rem 0 .2rem;border:1px solid var(--nb-border);border-radius:.5rem;}.da-station-meta time{white-space:nowrap;}
+figcaption{font-size:.8rem;line-height:1.65;color:var(--nb-muted-foreground);margin-top:.7rem;}
+@container document-atlas (min-width:1000px){
+ .da-axis{display:grid;grid-template-columns:150px repeat(6,minmax(0,1fr));gap:0;font-size:.7rem;color:var(--nb-muted-foreground);padding:.6rem 0 .8rem;border-top:1px solid var(--nb-border);}.da-axis>span:not(:first-child){padding-left:.5rem;}.da-axis>span:first-child{padding-left:.25rem;}
+ .da-lane{display:grid;grid-template-columns:150px minmax(0,1fr);padding:.65rem 0 .45rem;}.da-lane-heading{display:block;padding:.6rem .85rem .6rem .25rem;margin:0;}.da-lane-number{display:block;margin-bottom:.3rem;}.da-lane-heading>strong{display:block;font-size:.78rem;}.da-lane-detail{display:block;font-size:.7rem;line-height:1.6;margin-top:.35rem;}
+ .da-stations{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:0;align-items:start;padding-bottom:1.4rem;}.da-period{display:flex;flex-direction:column;gap:1.15rem;min-width:0;padding:.4rem .45rem .6rem;border-left:1px solid color-mix(in srgb,var(--nb-border) 50%,transparent);height:100%;}.da-station{width:100%;flex:none;position:relative;z-index:1;padding:.55rem .4rem;}.da-station-name{font-size:.75rem;gap:.3rem;}.da-station-meta{display:block;margin-left:.65rem;font-size:.7rem;}.da-station-meta>span{display:none;}.da-lineage{grid-column:2;font-size:.7rem;line-height:1.7;margin:0;padding:.05rem .5rem .2rem;}
+ .da-connections{display:block;position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none;color:var(--lane);}.da-connections :global(path[data-connection]){stroke:var(--lane);stroke-width:1.3;fill:none;opacity:.6;}.da-connections :global(path[data-connection='initialization']){stroke-dasharray:4 3;}.da-connections :global(path.da-related){opacity:1;stroke-width:1.8;}.da-connections marker path{fill:var(--lane);}
+}
+@container document-atlas (max-width:440px){.da-station{flex-basis:calc((100% - .65rem)/2);}.da-verification .da-station{flex-basis:calc((100% - .65rem)/2);}.da-header{padding:1.15rem 1rem .9rem;}.da-title{font-size:1.45rem;}.da-subtitle{font-size:.75rem;}.da-legend{padding:0 1rem .9rem;font-size:.7rem;gap:.45rem .8rem;}.da-interaction{margin-left:0;width:100%;}.da-map{padding:0 .85rem;}.da-detail{padding:1rem;}.da-note{padding:.8rem 1rem 1rem;}.da-station-meta{display:block;}.da-station-meta>span{margin-left:.3rem;}.da-station-name{font-size:.76rem;}}
+@media(prefers-reduced-motion:reduce){.da-station{transition:none;}}
+@media print{document-model-atlas{overflow:visible;}.da-station{break-inside:avoid;}.da-detail{display:none;}.da-interaction{display:none;}.da-lane{break-inside:avoid;}.da-station{box-shadow:none;}}
+</style>

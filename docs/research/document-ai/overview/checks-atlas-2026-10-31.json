@@ -1,0 +1,209 @@
+{
+  "revision": 6,
+  "checked_at": "2026-10-31T18:54:39.287081+00:00",
+  "scope": "New atlas and date/relationship evidence; budget figure, existing model studies and comparison table retained. No publication or model inference.",
+  "validation": {
+    "command": "mise exec node@24.21.0 -- npm run validate",
+    "status": "passed",
+    "deployment_tests": 49,
+    "content_tests": 178,
+    "astro": {
+      "errors": 0,
+      "warnings": 0,
+      "hints": 0
+    },
+    "build_pages": 105,
+    "lint_files": 105,
+    "existing_build_warnings": [
+      "Nimbus/Vite module-level astro:head-inject directives",
+      "25 Pagefind legacy redirects without html"
+    ]
+  },
+  "browser": {
+    "views": [
+      {
+        "name": "atlas-desktop-light",
+        "x": 399,
+        "y": 8896.203125,
+        "width": 648,
+        "height": 1806.328125,
+        "overflow": false
+      },
+      {
+        "name": "atlas-focus-light",
+        "x": 109,
+        "y": 8522.03125,
+        "width": 1216,
+        "height": 1594.984375,
+        "overflow": false
+      },
+      {
+        "name": "atlas-focus-dark",
+        "x": 109,
+        "y": 8522.03125,
+        "width": 1216,
+        "height": 1594.984375,
+        "overflow": false
+      },
+      {
+        "name": "atlas-mobile-light",
+        "x": 16,
+        "y": 12553.59375,
+        "width": 358,
+        "height": 2229.546875,
+        "overflow": false
+      },
+      {
+        "name": "atlas-mobile-dark",
+        "x": 30.59375,
+        "y": 15637.921875,
+        "width": 258.8125,
+        "height": 447.609375,
+        "overflow": false
+      }
+    ],
+    "checks": {
+      "initial": {
+        "models": 26,
+        "lanes": 6,
+        "selected": "unlimited2",
+        "figures": 18,
+        "budgetPreserved": true,
+        "badAnchors": []
+      },
+      "family": [
+        "deep1",
+        "unlimited1",
+        "unlimited2"
+      ],
+      "minimumTextPx": 11.2,
+      "exports": {
+        "atlas": true,
+        "modelSources": 26,
+        "connections": true,
+        "budget": true,
+        "captions": 18,
+        "raw": false
+      },
+      "nojs": {
+        "models": 26,
+        "lineages": 6,
+        "rows": 24
+      },
+      "browserErrors": 0
+    }
+  },
+  "additional_browser": {
+    "touch": "Native touch selects Xiaomi and places the detail beside its family",
+    "studyLink": "Keyboard Enter navigates to the existing Xiaomi study anchor",
+    "endpoints": {
+      "/document-ai/index.md": {
+        "status": 200,
+        "length": 115643,
+        "atlas": true,
+        "documentAI": true
+      },
+      "/document-ai/index.mdx": {
+        "status": 200,
+        "length": 110941,
+        "atlas": false,
+        "documentAI": true
+      },
+      "/llms.txt": {
+        "status": 200,
+        "length": 1038,
+        "atlas": false,
+        "documentAI": true
+      },
+      "/llms-full.txt": {
+        "status": 200,
+        "length": 1808184,
+        "atlas": true,
+        "documentAI": true
+      }
+    },
+    "search": [
+      {
+        "text": "Development guide",
+        "href": "/about/development-guide/"
+      },
+      {
+        "text": "Keep agent exports complete",
+        "href": "/about/development-guide/#keep-agent-exports-complete"
+      },
+      {
+        "text": "Document model family atlas",
+        "href": "/about/development-guide/#document-model-family-atlas"
+      },
+      {
+        "text": "Agent maps and navigation cards",
+        "href": "/about/development-guide/#agent-maps-and-navigation-cards"
+      },
+      {
+        "text": "Physical AI",
+        "href": "/products-markets/landscapes/physical-ai/"
+      },
+      {
+        "text": "Company explorer",
+        "href": "/products-markets/landscapes/physical-ai/#company-explorer"
+      },
+      {
+        "text": "A value chain with a feedback loop",
+        "href": "/products-markets/landscapes/physical-ai/#a-value-chain-with-a-feedback-loop"
+      },
+      {
+        "text": "A platform, a robot and an operator are different businesses",
+        "href": "/products-markets/landscapes/physical-ai/#a-platform-a-robot-and-an-operator-are-different-businesses"
+      },
+      {
+        "text": "Document AI",
+        "href": "/document-ai/"
+      },
+      {
+        "text": "3. Layout-aware multimodal pretraining",
+        "href": "/document-ai/#3-layout-aware-multimodal-pretraining"
+      },
+      {
+        "text": "Model families and evolution",
+        "href": "/document-ai/#model-families-and-evolution"
+      },
+      {
+        "text": "Granite Docling: the next compact document-native converter",
+        "href": "/document-ai/#granite-docling-the-next-compact-document-native-converter"
+      }
+    ],
+    "searchMethod": "Actual search UI using generated dist/pagefind assets supplied by CDP Fetch interception; dev itself does not serve the built index.",
+    "browserErrors": 0
+  },
+  "print_media": {
+    "models": 26,
+    "dates": 26,
+    "connections": 6,
+    "selectedDetail": "none",
+    "note": "Lanes are overlapping design themes, not ancestry. Solid arrows show family/design updates; dashed arrows show explicit checkpoint initialization. Dates identify the cited report revision, release log or announcement, not necessarily first weight availability. Time columns are unequal periods, not a proportional scale.",
+    "overflow": false
+  },
+  "manual_review": {
+    "views": [
+      "1440normal light",
+      "1440Focus light",
+      "1440Focus dark",
+      "390mobile light",
+      "320mobile dark"
+    ],
+    "refinements": [
+      "Keep minimum checked label size11.2px.",
+      "Prevent date line breaks on narrow screens.",
+      "Move the single detail panel beside the selected lane."
+    ],
+    "evidence_challenge": [
+      "Family/design update is different from checkpoint initialization.",
+      "Report revision, card release and announcement dates remain typed.",
+      "Granite17September card date differs from24September article date.",
+      "TeleOCR uses10Septemberv3 rather than its earlier-name August submission.",
+      "OXR date read in official page bundle; no untrusted code executed.",
+      "Shared base model, name or downstream verification does not establish ancestry."
+    ],
+    "notes": "Final affected screenshots inspected. Markdown and llms-full include every model/date/event/contribution/source and every relationship. MDX remains authored source, importing the shared component and retaining the cited caption. No standalone raster asset required."
+  }
+}

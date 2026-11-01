@@ -79,3 +79,49 @@ One page under AI Technology is appropriate. Existing source dates are not a
 current freshness cutoff. Native code is preferable for exact diagrams. New
 report-only methods can be discussed without claiming released checkpoints.
 Local development stays on 4327; production changes are not authorized.
+
+## October 31 refresh scope
+
+The user authorized updating the existing page after reviewing a release shortlist.
+Expand MiniCPM-OCR 1.0 and Jev, Xiaomi-OCR-0, Unlimited-OCR 2, OXR-1.0 and OCRia-1.
+Add concise Youtu-Parsing-Omni and WeVisDoc coverage and the Document Parsing
+Protocol draft where it improves representation and evaluation. Preserve useful
+existing mechanisms, production guidance, assets, URLs and original evidence
+dates. One canonical page remains the deliverable. Read primary reports and
+relevant released interfaces; perform a separate skeptical claim review.
+Do not run weights, paid services or untrusted model code. Single-agent work.
+Rendering, exports, full validation and the research validator remain required.
+The new evidence cutoff applies to refreshed sections, not to every retained
+product contract. Keep prior completed review notes as dated history.
+
+## Family atlas follow-up
+
+The user authorized the proposed timeline/family atlas, then clarified that the
+existing six-budget mechanism figure must remain. Add the atlas above the
+unified table. Use verified report/release/announcement milestones and distinguish
+family/design succession from explicit checkpoint initialization. Show the
+covered model families with readable labels, selected model details and study
+links; treat lanes as overlapping editorial themes, not architecture ancestry.
+Preserve full agent text equivalents, keyboard/touch/no-JavaScript access,
+reduced motion, both themes and mobile reflow. No publication authorization.
+
+## Opening infographic follow-up
+
+The user requested a well-presented generated infographic near the beginning of
+the same page. Create an original editorial overview from the reviewed evidence,
+keep the complete interactive atlas and studies, and label illustrative content.
+Provide fitted mobile presentation, optional enlargement, native keyboard pan,
+a complete text equivalent and full-resolution access. Record the built-in
+generation prompt, selected asset, correction and lossless conversion. No new
+benchmark or publication action is authorized.
+
+## Whole-page landscape and presentation review
+
+The user requested a review of the entire page for recent developments, landscape
+coverage and better presentation. Audit the opening and reader routes, synthesis,
+model/retrieval coverage, benchmark currency, product boundaries, operational
+guidance and conclusions. Verify consequential changes against primary sources.
+Keep prior report/evidence dates explicit, retain model studies and useful visuals,
+and avoid conflating a model, SDK, service and full workflow. Deliver the revised
+canonical page, an auditable disposition of findings, and actual rendered/export
+checks. Single-agent local work; no model execution or publication authorization.

@@ -1,0 +1,578 @@
+{
+  "checked_at": "2026-10-31",
+  "scope": "Date and typed-connection audit for native atlas. Reports, release logs and announcements are different events; none is silently equated with first checkpoint availability. Existing model mechanism evidence remains in the page and prior records.",
+  "note": "Lanes are overlapping design themes, not ancestry. Solid arrows show family/design updates; dashed arrows show explicit checkpoint initialization. Dates identify the cited report revision, release log or announcement, not necessarily first weight availability. Time columns are unequal periods, not a proportional scale.",
+  "models": [
+    {
+      "id": "smol",
+      "label": "SmolDocling",
+      "lane": "language",
+      "date": "2025-03-14",
+      "event": "Report v1",
+      "source": "https://arxiv.org/abs/2503.11576v1",
+      "scale": "256M",
+      "access": "Official weights",
+      "idea": "Compact visual tokens and DocTags preserve content, structure and location.",
+      "href": "#smoldocling-make-the-document-language-compact"
+    },
+    {
+      "id": "granite",
+      "label": "Granite Docling",
+      "lane": "language",
+      "date": "2025-09-17",
+      "event": "Model-card release",
+      "source": "https://huggingface.co/ibm-granite/granite-docling-258M",
+      "scale": "258M",
+      "access": "Official weights",
+      "idea": "Docling design successor with SigLIP2 and a Granite decoder; this is not a claim of inherited weights.",
+      "href": "#granite-docling-the-next-compact-document-native-converter"
+    },
+    {
+      "id": "deep1",
+      "label": "DeepSeek-OCR 1",
+      "lane": "memory",
+      "date": "2025-10-21",
+      "event": "Report v1",
+      "source": "https://arxiv.org/abs/2510.18234v1",
+      "scale": "3B MoE decoder",
+      "access": "Official weights",
+      "idea": "A local-to-global vision encoder compresses a page into a short visual sequence.",
+      "href": "#deepseek-ocr-1-treat-the-page-as-optical-context-compression"
+    },
+    {
+      "id": "deep2",
+      "label": "DeepSeek-OCR 2",
+      "lane": "memory",
+      "date": "2026-01-28",
+      "event": "Report v1",
+      "source": "https://arxiv.org/abs/2601.20552v1",
+      "scale": "3B MoE decoder",
+      "access": "Official weights",
+      "idea": "Causal-flow queries organize visual evidence before the decoder reads it.",
+      "href": "#deepseek-ocr-2-learn-a-causal-flow-over-visual-evidence"
+    },
+    {
+      "id": "unlimited1",
+      "label": "Unlimited-OCR",
+      "lane": "memory",
+      "date": "2026-06-22",
+      "event": "Report v1",
+      "source": "https://arxiv.org/abs/2606.23050v1",
+      "scale": "3B MoE decoder",
+      "access": "Official weights",
+      "idea": "R-SWA keeps the visual reference while bounding generated-output history.",
+      "href": "#unlimited-ocr-keep-the-reference-forget-old-output"
+    },
+    {
+      "id": "unlimited2",
+      "label": "Unlimited-OCR 2",
+      "lane": "memory",
+      "date": "2026-10-27",
+      "event": "Release log",
+      "source": "https://huggingface.co/baidu/Unlimited-OCR-2/tree/c14071b549f4fcab10909f3c4acc6a2edb366947",
+      "scale": "3B MoE decoder",
+      "access": "Official weights; custom SGLang path",
+      "idea": "Sparse visual access and overlapping page chunks separately control attention and resident KV.",
+      "href": "#unlimited-ocr-2-bound-attention-and-resident-pages-separately"
+    },
+    {
+      "id": "miner",
+      "label": "MinerU2.5",
+      "lane": "regions",
+      "date": "2025-09-26",
+      "event": "Report v1",
+      "source": "https://arxiv.org/abs/2509.22186v1",
+      "scale": "1.2B recognizer",
+      "access": "Official weights",
+      "idea": "Global layout on a thumbnail routes high-resolution regions to recognition.",
+      "href": "#mineru25-global-layout-then-native-resolution-crops"
+    },
+    {
+      "id": "glm",
+      "label": "GLM-OCR",
+      "lane": "regions",
+      "date": "2026-03-11",
+      "event": "Report v1",
+      "source": "https://arxiv.org/abs/2603.10910v1",
+      "scale": "0.9B",
+      "access": "Official weights",
+      "idea": "Layout-routed recognition or direct KIE, with shared multi-token prediction heads.",
+      "href": "#glm-ocr-compact-region-recognition-with-multi-token-heads"
+    },
+    {
+      "id": "diffusion",
+      "label": "MinerU-Diffusion",
+      "lane": "regions",
+      "date": "2026-03-23",
+      "event": "Report v1",
+      "source": "https://arxiv.org/abs/2603.22458v1",
+      "scale": "Size not summarized here",
+      "access": "Checkpoint unverified",
+      "idea": "Parallel block diffusion changes target decoding; the MinerU name alone does not establish weight ancestry.",
+      "href": "#mineru-diffusion-change-the-target-decoder-not-just-its-draft"
+    },
+    {
+      "id": "minerpro",
+      "label": "MinerU2.5-Pro",
+      "lane": "regions",
+      "date": "2026-04-06",
+      "event": "Report v1",
+      "source": "https://arxiv.org/abs/2604.04771v1",
+      "scale": "1.2B recognizer",
+      "access": "Official weights",
+      "idea": "Retain the 2.5 architecture while expanding curation and progressive training.",
+      "href": "#mineru25-pro-improve-the-data-engine-retain-the-architecture"
+    },
+    {
+      "id": "paddle",
+      "label": "PaddleOCR-VL 1.6",
+      "lane": "regions",
+      "date": "2026-06-02",
+      "event": "Report v1",
+      "source": "https://arxiv.org/abs/2606.03264v1",
+      "scale": "0.9B recognizer",
+      "access": "Official weights",
+      "idea": "Target under-optimized regions with a data engine and staged post-training.",
+      "href": "#the-paddleocr-family-and-its-current-vl-model"
+    },
+    {
+      "id": "hpd",
+      "label": "HPD-Parsing",
+      "lane": "regions",
+      "date": "2026-07-21",
+      "event": "Report v1",
+      "source": "https://arxiv.org/abs/2607.18839v1",
+      "scale": "Main model + P-MTP",
+      "access": "Official weights; custom runtime",
+      "idea": "A layout branch coordinates parallel content branches and progressive multi-token prediction.",
+      "href": "#hpd-parsing-parallelize-the-output-tree"
+    },
+    {
+      "id": "oxr",
+      "label": "OXR-1.0",
+      "lane": "regions",
+      "date": "2026-10-20",
+      "event": "Announcement",
+      "source": "https://somark.cn/oxr",
+      "scale": "Advertised 1.3B; about 1.53B stored BF16 values",
+      "access": "Weights with additional license terms",
+      "idea": "Replaceable layout, recognition/order branches and a targeted post-training data loop.",
+      "href": "#oxr-10-make-layout-replaceable-retain-recognition-and-order"
+    },
+    {
+      "id": "mini",
+      "label": "MiniCPM-OCR 1.0",
+      "lane": "regions",
+      "date": "2026-10-31",
+      "event": "Announcement",
+      "source": "https://www.prnewswire.com/news-releases/modelbest-and-openbmb-open-source-minicpm-ocr-series-delivering-high-performance-document-parsing-and-ai-powered-quality-control-302925594.html",
+      "scale": "1.3B recognizer",
+      "access": "Official weights, Apache-2.0",
+      "idea": "Layout-first parsing or direct field extraction, with optional DSpark draft decoding.",
+      "href": "#minicpm-ocr-10-distinguish-the-recognizer-from-the-parser"
+    },
+    {
+      "id": "olm",
+      "label": "olmOCR 2",
+      "lane": "specialists",
+      "date": "2025-10-22",
+      "event": "Report v1",
+      "source": "https://arxiv.org/abs/2510.19817v1",
+      "scale": "7B",
+      "access": "Official weights",
+      "idea": "Executable document unit tests reward selected content, order and structural properties.",
+      "href": "#olmocr-2-executable-document-tests-as-rewards"
+    },
+    {
+      "id": "light2",
+      "label": "LightOnOCR-2",
+      "lane": "specialists",
+      "date": "2026-01-20",
+      "event": "Report v1",
+      "source": "https://arxiv.org/abs/2601.14251v1",
+      "scale": "1B",
+      "access": "Official weights; variant-specific outputs",
+      "idea": "Distilled data, localization rewards and checkpoint merging target compact page conversion.",
+      "href": "#lightonocr-2-optimize-data-and-the-localization-objective"
+    },
+    {
+      "id": "hunyuan",
+      "label": "HunyuanOCR-1.5",
+      "lane": "specialists",
+      "date": "2026-07-06",
+      "event": "Report v1",
+      "source": "https://arxiv.org/abs/2607.04884v1",
+      "scale": "0.5B decoder plus vision",
+      "access": "Official weights",
+      "idea": "Native-resolution reading, a compressed visual interface and DFlash decoding support unified OCR tasks.",
+      "href": "#hunyuanocr-15-one-model-long-context-faster-decoding"
+    },
+    {
+      "id": "nemotron",
+      "label": "Nemotron Parse 2.0",
+      "lane": "specialists",
+      "date": "2026-08-03",
+      "event": "Model-card release",
+      "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-Parse-2.0",
+      "scale": "Under 1B",
+      "access": "Official weights",
+      "idea": "C-RADIO vision features feed a cross-attending mBART decoder with typed output and locations.",
+      "href": "#nemotron-parse-20-encoderdecoder-attention-is-still-useful"
+    },
+    {
+      "id": "tele",
+      "label": "TeleOCR",
+      "lane": "specialists",
+      "date": "2026-09-10",
+      "event": "Report v3",
+      "source": "https://arxiv.org/abs/2608.12898v3",
+      "scale": "Size not summarized here",
+      "access": "Checkpoint unverified",
+      "idea": "Deformation-aware learning and content/structure decoupling address difficult capture; earlier indexing used NaviDC.",
+      "href": "#teleocr-geometry-remains-a-frontier"
+    },
+    {
+      "id": "wevis",
+      "label": "WeVisDoc",
+      "lane": "specialists",
+      "date": "2026-09-17",
+      "event": "Report v1",
+      "source": "https://arxiv.org/abs/2609.20423v1",
+      "scale": "2B / 4B",
+      "access": "Official weights",
+      "idea": "Coverage training is followed by held-out residual diagnosis and targeted data/token allocation.",
+      "href": "#wevisdoc-use-residual-errors-to-allocate-training"
+    },
+    {
+      "id": "xiaomi",
+      "label": "Xiaomi-OCR-0",
+      "lane": "specialists",
+      "date": "2026-09-28",
+      "event": "Report v1",
+      "source": "https://arxiv.org/abs/2609.36136v1",
+      "scale": "0.8B base",
+      "access": "Official weights, Apache-2.0",
+      "idea": "Q-Mask, curated data and mixed-task RL connect parsing with KIE/VQA; headline parsing includes a layout detector.",
+      "href": "#xiaomi-ocr-0-connect-reading-to-understanding"
+    },
+    {
+      "id": "light3",
+      "label": "LightOnOCR-3",
+      "lane": "specialists",
+      "date": "2026-10-08",
+      "event": "Announcement",
+      "source": "https://huggingface.co/blog/lightonai/lightonocr-3",
+      "scale": "0.8B / 1B / 4B",
+      "access": "Official weights",
+      "idea": "A family update adds grounded regions, image descriptions and chart data; backbones differ by size.",
+      "href": "#lightonocr-2-optimize-data-and-the-localization-objective"
+    },
+    {
+      "id": "ocria",
+      "label": "OCRia-1",
+      "lane": "specialists",
+      "date": "2026-10-22",
+      "event": "Announcement",
+      "source": "https://www.llamaindex.ai/blog/parse-ocria-1",
+      "scale": "4B target plus serving components",
+      "access": "Hosted in LlamaParse; public weights unverified",
+      "idea": "Structured rewards target table/header associations, chart values and formatting; no output boxes.",
+      "href": "#ocria-1-reward-associations-not-just-recovered-strings"
+    },
+    {
+      "id": "dots",
+      "label": "dots.mocr",
+      "lane": "beyond",
+      "date": "2026-03-13",
+      "event": "Report v1",
+      "source": "https://arxiv.org/abs/2603.13032v1",
+      "scale": "3B",
+      "access": "Official weights",
+      "idea": "Eligible graphics become renderable SVG alongside text, tables and formulas.",
+      "href": "#dotsmocr-treat-graphics-as-programs-not-leftover-pixels"
+    },
+    {
+      "id": "youtu",
+      "label": "Youtu-Parsing-Omni",
+      "lane": "beyond",
+      "date": "2026-10-29",
+      "event": "Report v1",
+      "source": "https://arxiv.org/abs/2610.39301v1",
+      "scale": "5B",
+      "access": "Weights with custom Youtu terms",
+      "idea": "A shared perception encoder and schema ground document, image, audio and video content.",
+      "href": "#youtu-parsing-omni-one-grounded-interface-across-modalities"
+    },
+    {
+      "id": "jev",
+      "label": "MiniCPM-OCR Jev",
+      "lane": "verify",
+      "date": "2026-10-31",
+      "event": "Announcement",
+      "source": "https://www.prnewswire.com/news-releases/modelbest-and-openbmb-open-source-minicpm-ocr-series-delivering-high-performance-document-parsing-and-ai-powered-quality-control-302925594.html",
+      "scale": "2B verifier",
+      "access": "Official weights, Apache-2.0",
+      "idea": "Score an original crop, candidate text and rendered candidate. This verifies OCR rather than generating it.",
+      "href": "#minicpm-ocr-jev-score-the-candidate-against-the-crop"
+    }
+  ],
+  "relations": [
+    {
+      "from": "smol",
+      "to": "granite",
+      "type": "update",
+      "label": "Docling design successor",
+      "source": "https://www.ibm.com/new/announcements/granite-docling-end-to-end-document-conversion",
+      "note": "IBM describes an evolution of SmolDocling with new vision and language backbones; no direct weight-inheritance claim."
+    },
+    {
+      "from": "deep1",
+      "to": "deep2",
+      "type": "update",
+      "label": "DeepSeek-OCR family update",
+      "source": "https://arxiv.org/abs/2601.20552v1",
+      "note": "Second generation changes the visual encoder and reading-flow design."
+    },
+    {
+      "from": "deep1",
+      "to": "unlimited1",
+      "type": "initialization",
+      "label": "Initialized from DeepSeek-OCR",
+      "source": "https://arxiv.org/html/2606.23050v1#S4.SS2",
+      "note": "Section4.2 starts from the DeepSeek-OCR checkpoint, freezes DeepEncoder and trains the language model."
+    },
+    {
+      "from": "unlimited1",
+      "to": "unlimited2",
+      "type": "initialization",
+      "label": "Initialized from Unlimited-OCR",
+      "source": "https://github.com/baidu/Unlimited-OCR/blob/6c5d1906ba638a7cd87bc00f14452a47fdabf16b/Unlimited-OCR-2.pdf",
+      "note": "Section4.2 initializes from Unlimited-OCR and post-trains with SR-SWA."
+    },
+    {
+      "from": "miner",
+      "to": "minerpro",
+      "type": "update",
+      "label": "MinerU2.5 architecture retained",
+      "source": "https://arxiv.org/abs/2604.04771v2",
+      "note": "The Pro report retains the2.5 architecture and changes the data engine and progressive training."
+    },
+    {
+      "from": "light2",
+      "to": "light3",
+      "type": "update",
+      "label": "LightOnOCR family update",
+      "source": "https://huggingface.co/blog/lightonai/lightonocr-3",
+      "note": "The1B retains the preceding architecture;0.8B and4B adopt Qwen3.5. Family succession is not uniform weight ancestry."
+    }
+  ],
+  "report_histories": [
+    {
+      "key": "deep2",
+      "url": "https://arxiv.org/abs/2601.20552v1",
+      "title": "DeepSeek-OCR 2: Visual Causal Flow",
+      "citation_date": "2026/01/28",
+      "history": "Submission history From: Haoran Wei [ view email ] [v1] Wed, 28 Jan 2026 12:46:07 UTC (696 KB) ",
+      "sha256": "67d1a4a13c1c4e00c81b740bdb4cef07bafcb4d212639427fd985676e16fca14"
+    },
+    {
+      "key": "deep1",
+      "url": "https://arxiv.org/abs/2510.18234v1",
+      "title": "DeepSeek-OCR: Contexts Optical Compression",
+      "citation_date": "2025/10/21",
+      "history": "Submission history From: Haoran Wei [ view email ] [v1] Tue, 21 Oct 2025 02:41:44 UTC (7,007 KB) ",
+      "sha256": "a96692e8de010b3620297a9a1e07d2c6bf54f3cd970f774532b4ef1d3a86fc0a"
+    },
+    {
+      "key": "smol",
+      "url": "https://arxiv.org/abs/2503.11576v1",
+      "title": "SmolDocling: An ultra-compact vision-language model for end-to-end multi-modal document conversion",
+      "citation_date": "2025/03/14",
+      "history": "Submission history From: Ahmed Nassar [ view email ] [v1] Fri, 14 Mar 2025 16:44:14 UTC (14,179 KB) ",
+      "sha256": "6f742394cf2a0788212d868994ac59df6ffe87db0befb8abe2eab6892716c279"
+    },
+    {
+      "key": "unlimited1",
+      "url": "https://arxiv.org/abs/2606.23050v1",
+      "title": "Unlimited OCR Works",
+      "citation_date": "2026/06/22",
+      "history": "Submission history From: Youyang Yin [ view email ] [v1] Mon, 22 Jun 2026 09:01:29 UTC (272 KB) ",
+      "sha256": "cecbbe37d0f75796d2e4205176dc4f5d6f292ac9e2e6a57d5ec36f07c9dd30c4"
+    },
+    {
+      "key": "hunyuan",
+      "url": "https://arxiv.org/abs/2607.04884v1",
+      "title": "HunyuanOCR-1.5: Making Lightweight OCR VLMs Faster and Better",
+      "citation_date": "2026/07/06",
+      "history": "Submission history From: Shangpin Peng [ view email ] [v1] Mon, 6 Jul 2026 10:06:05 UTC (5,112 KB) [v2] Thu, 6 Aug 2026 10:55:17 UTC (10,899 KB) [v3] Thu, 17 Sep 2026 14:10:42 UTC (10,900 KB) ",
+      "sha256": "759c1747d01017d8b45a95796f37a27bbe9a1d0ae536decad6149a5c0a284c22"
+    },
+    {
+      "key": "miner",
+      "url": "https://arxiv.org/abs/2509.22186v1",
+      "title": "MinerU2.5: A Decoupled Vision-Language Model for Efficient High-Resolution Document Parsing",
+      "citation_date": "2025/09/26",
+      "history": "Submission history From: Bin Wang [ view email ] [v1] Fri, 26 Sep 2025 10:45:48 UTC (39,049 KB) [v2] Mon, 29 Sep 2025 16:41:28 UTC (39,008 KB) ",
+      "sha256": "6ba53dc46cfc7071096e103b595f4ec748a4c89a1e84667352d7bfb4c7c83c96"
+    },
+    {
+      "key": "paddle",
+      "url": "https://arxiv.org/abs/2606.03264v1",
+      "title": "PaddleOCR-VL-1.6: Expanding the Frontier of Document Parsing with Under-Optimized Region Refinement and Progressive Post-Training",
+      "citation_date": "2026/06/02",
+      "history": "Submission history From: Cheng Cui [ view email ] [v1] Tue, 2 Jun 2026 07:27:03 UTC (1,537 KB) ",
+      "sha256": "8a95a9cf164354c9e206cbf07f1e0c03c90e2103ce6304571aa34f80ad76eb76"
+    },
+    {
+      "key": "glm",
+      "url": "https://arxiv.org/abs/2603.10910v1",
+      "title": "GLM-OCR Technical Report",
+      "citation_date": "2026/03/11",
+      "history": "Submission history From: Wenmeng Yu [ view email ] [v1] Wed, 11 Mar 2026 15:55:47 UTC (1,959 KB) [v2] Mon, 16 Mar 2026 13:48:45 UTC (1,958 KB) ",
+      "sha256": "4f75cc9511aa5b1e3f9f3848925ad30c4e8de47b79131ce90b62d48afe7d5960"
+    },
+    {
+      "key": "minerpro",
+      "url": "https://arxiv.org/abs/2604.04771v1",
+      "title": "MinerU2.5-Pro: Pushing the Limits of Data-Centric Document Parsing at Scale",
+      "citation_date": "2026/04/06",
+      "history": "Submission history From: Bin Wang [ view email ] [v1] Mon, 6 Apr 2026 15:44:18 UTC (16,699 KB) [v2] Thu, 9 Apr 2026 09:16:34 UTC (16,841 KB) ",
+      "sha256": "338ce06cd080ddfeeca38013ec23195777a34176ea4f725433b6327cebb84c96"
+    },
+    {
+      "key": "dots",
+      "url": "https://arxiv.org/abs/2603.13032v1",
+      "title": "Multimodal OCR: Parse Anything from Documents",
+      "citation_date": "2026/03/13",
+      "history": "Submission history From: Yuliang Liu [ view email ] [v1] Fri, 13 Mar 2026 14:42:21 UTC (27,598 KB) [v2] Thu, 19 Mar 2026 09:48:54 UTC (27,599 KB) ",
+      "sha256": "d9dbf8cf88e7b6087a9c6d59a282af2738322e82505937ac2a7fd51ae3941216"
+    },
+    {
+      "key": "light2",
+      "url": "https://arxiv.org/abs/2601.14251v1",
+      "title": "LightOnOCR: A 1B End-to-End Multilingual Vision-Language Model for State-of-the-Art OCR",
+      "citation_date": "2026/01/20",
+      "history": "Submission history From: Said Taghadouini [ view email ] [v1] Tue, 20 Jan 2026 18:58:32 UTC (11,094 KB) [v2] Tue, 30 Jun 2026 08:51:50 UTC (11,094 KB) ",
+      "sha256": "ee827eaa9ec7c9e21e0252ed3bf193e22decbdfb4ddd9b34524612289f740a31"
+    },
+    {
+      "key": "olm",
+      "url": "https://arxiv.org/abs/2510.19817v1",
+      "title": "olmOCR 2: Unit Test Rewards for Document OCR",
+      "citation_date": "2025/10/22",
+      "history": "Submission history From: Kyle Lo [ view email ] [v1] Wed, 22 Oct 2025 17:53:02 UTC (1,916 KB) ",
+      "sha256": "ab2e7b83e9fa7fdd3106492ea8f8628f6f9fed1bd898adffc1610431f734282f"
+    },
+    {
+      "key": "diffusion",
+      "url": "https://arxiv.org/abs/2603.22458v1",
+      "title": "MinerU-Diffusion: Rethinking Document OCR as Inverse Rendering via Diffusion Decoding",
+      "citation_date": "2026/03/23",
+      "history": "Submission history From: Junbo Niu [ view email ] [v1] Mon, 23 Mar 2026 18:25:17 UTC (25,052 KB) ",
+      "sha256": "1a2c9d32a77afcb950dbbc080068b6d2ee056c18571f341902e0c9491c60a589"
+    },
+    {
+      "key": "tele",
+      "url": "https://arxiv.org/abs/2608.12898v3",
+      "title": "TeleOCR: Navigating Document Parsing Across Digital and Camera-Captured Documents",
+      "citation_date": "2026/08/13",
+      "history": "Submission history From: Peng Cai [ view email ] [v1] Thu, 13 Aug 2026 07:34:21 UTC (41,721 KB) [v2] Tue, 18 Aug 2026 06:14:21 UTC (43,269 KB) [v3] Thu, 10 Sep 2026 08:46:30 UTC (10,448 KB) ",
+      "sha256": "790813b18d8fcee6492db6b0231f4fe14cac6d612679d94b5780c68367da8bab"
+    },
+    {
+      "key": "xiaomi",
+      "url": "https://arxiv.org/abs/2609.36136v1",
+      "title": "Xiaomi-OCR-0 Technical Report",
+      "citation_date": "2026/09/28",
+      "history": "Submission history From: Longwei Xu [ view email ] [v1] Mon, 28 Sep 2026 19:10:10 UTC (5,485 KB) ",
+      "sha256": "f4462fe616d7c102c84152e786ca7f5f6efc80443f51e39437b28cad0e5d2dae"
+    },
+    {
+      "key": "youtu",
+      "url": "https://arxiv.org/abs/2610.39301v1",
+      "title": "Youtu-Parsing-Omni: One Encoder, One Schema, All Modalities",
+      "citation_date": "2026/10/29",
+      "history": "Submission history From: Zhongpeng Cai [ view email ] [v1] Thu, 29 Oct 2026 03:49:25 UTC (33,417 KB) ",
+      "sha256": "0c24ff223eefe8c48c1871459c916d952b9fa6700dff5dd1dd704bde8c85c84a"
+    },
+    {
+      "key": "wevis",
+      "url": "https://arxiv.org/abs/2609.20423v1",
+      "title": "WeVisDoc: From Coverage to Capability for Robust End-to-End Document Parsing",
+      "citation_date": "2026/09/17",
+      "history": "Submission history From: Hao Yu [ view email ] [v1] Thu, 17 Sep 2026 14:04:31 UTC (30,034 KB) ",
+      "sha256": "17c7300c5f9ec89ec191a47d1022407aeb586fd6ed703caa1d4ce36ad25f9425"
+    },
+    {
+      "key": "hpd",
+      "url": "https://arxiv.org/abs/2607.18839v1",
+      "title": "HPD-Parsing: Hierarchical Parallel Document Parsing",
+      "citation_date": "2026/07/21",
+      "history": "Submission history From: Jingjing Wu [ view email ] [v1] Tue, 21 Jul 2026 08:25:32 UTC (9,780 KB) ",
+      "sha256": "78635711d87dc4f69649936353e485d201e10ff4e256963379c5c45c63e37320"
+    }
+  ],
+  "other_date_sources": [
+    {
+      "key": "granite",
+      "url": "https://huggingface.co/ibm-granite/granite-docling-258M/raw/main/README.md",
+      "sha256": "b43727febeba2c6ce20b8746322e7687ca667d81a12d0364f346148f30622d84",
+      "snippets": [
+        "nglish (NLP) - **License**: [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) - **Release Date**: September 17, 2025 Granite-docling-258M is fully integrated into the Docling pipelines, carrying over existing [features](https://huggin",
+        "*License**: [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) - **Release Date**: September 17, 2025 Granite-docling-258M is fully integrated into the Docling pipelines, carrying over existing [features](https://huggingface.co/ds4sd/S"
+      ]
+    },
+    {
+      "key": "nemotron",
+      "url": "https://huggingface.co/nvidia/NVIDIA-Nemotron-Parse-2.0/raw/main/README.md",
+      "sha256": "c29a964b2f363e27908f72bf0fffb4893d515af98406c343f4db95c04a7bba35",
+      "snippets": [
+        "er table detection, structure recovery, and text extraction on table-heavy documents. ### Release Date: Hugging Face August 3, 2026 on the [NVIDIA Nemotron Parse 2.0 model page](https://huggingface.co/nvidia/NVIDIA-Nemotron-Parse-2.0) ## Refe",
+        "re recovery, and text extraction on table-heavy documents. ### Release Date: Hugging Face August 3, 2026 on the [NVIDIA Nemotron Parse 2.0 model page](https://huggingface.co/nvidia/NVIDIA-Nemotron-Parse-2.0) ## References(s): * [Hugging F"
+      ]
+    },
+    {
+      "key": "oxr",
+      "url": "https://somark.cn/oxr",
+      "sha256": "0f2990d921959955e5553c0037f12c767baf98752bde017f785acf3e4522441a",
+      "snippets": []
+    },
+    {
+      "key": "ocria",
+      "url": "https://www.llamaindex.ai/blog/parse-ocria-1",
+      "sha256": "225e5cedb08bf21dbc318382e21d2366431e6440924925c42220fdb3bd65839a",
+      "snippets": []
+    },
+    {
+      "key": "mini",
+      "url": "https://www.prnewswire.com/news-releases/modelbest-and-openbmb-open-source-minicpm-ocr-series-delivering-high-performance-document-parsing-and-ai-powered-quality-control-302925594.html",
+      "sha256": "9ca5dba80490995d10e4aa9845869f9159a35ce64ab9e0d9b22f325b4cfdf069",
+      "snippets": [
+        "livering High-Performance Document Parsing and AI-Powered Quality Control\", \"image\": [], \"datePublished\": \"2026-10-31T15:24:00Z\", \"dateModified\": \"2026-10-31T15:25:35Z\", \"description\": \"/PRNewswire/ -- ModelBest and OpenBMB jointly announced t",
+        "gh-Performance Document Parsing and AI-Powered Quality Control News provided by ModelBest Oct 31, 2026, 11:24 ET Share this article Share this article .release-content span.prnews_span{font-size:8pt;font-family:\"Arial\";color:black}.rele",
+        "datePublished\": \"2026-10-31T15:24:00Z\","
+      ]
+    }
+  ],
+  "official_page_source_fingerprints": [
+    {
+      "file": "oxr-app.js",
+      "sha256": "f86dad1b1f60a4b23225cd85ca3363551b3731cc2c5e2d9fb54c078d577d6b01",
+      "bytes": 1646377,
+      "scope": "Official page source text inspected; not executed or redistributed."
+    },
+    {
+      "file": "oxr-page.js",
+      "sha256": "83d0e827299635a5839aa15ed01552ad3ade987e3d69460177a38b321e0a0311",
+      "bytes": 179347,
+      "scope": "Official page source text inspected; not executed or redistributed."
+    }
+  ],
+  "decisions": [
+    "Granite card release17September2025 is plotted; IBM article published24September establishes design succession, not the plotted date.",
+    "TeleOCR uses10September2026v3 under the present name rather than13August first submission indexed as NaviDC.",
+    "OCRia22October announcement date is supported by the official DPP article listing.",
+    "OXR20October is publishedAt/publishedLabel in official Index-baVl39Ex.js; no third-party release tracker used as evidence.",
+    "MiniCPM/Jev31October are announcement milestones; pinned code existed before the announcement."
+  ]
+}

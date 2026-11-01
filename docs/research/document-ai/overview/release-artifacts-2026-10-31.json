@@ -1,0 +1,274 @@
+{
+  "checked_at": "2026-10-31",
+  "scope": "Public report, source and configuration identification only. No model weights downloaded or code executed. Actual reading coverage is in coverage-audit.md and sources.jsonl. Tensor metadata is stored-value metadata, not a counted trainable-parameter total.",
+  "artifacts": [
+    {
+      "kind": "github",
+      "repo": "OpenBMB/MiniCPM-OCR",
+      "sha": "c0881ac7fe9d78623bc222f8ee93e2c722f5413b",
+      "commit_date": "2026-10-30T05:22:04Z",
+      "readme": {
+        "file": "repos/MiniCPM-OCR/README.md",
+        "url": "https://raw.githubusercontent.com/OpenBMB/MiniCPM-OCR/c0881ac7fe9d78623bc222f8ee93e2c722f5413b/README.md",
+        "bytes": 17410,
+        "sha256": "91dfeb2ce5bf25a85cbf9f720e8411e9eaf823a9587c2d8bb053cb34e534dfc9"
+      }
+    },
+    {
+      "file": "ocria.pdf",
+      "url": "https://www.llamaindex.ai/ocria/ocria-1-technical-report.pdf",
+      "bytes": 6037081,
+      "sha256": "a295202d54acbd1b38bed509205e75ec68adb3178fe086de602ffa5520272c7e"
+    },
+    {
+      "kind": "github",
+      "repo": "xiaomi-research/Xiaomi-OCR-0",
+      "sha": "b1a9bb4c07060c453785e9151715ccda6b96f0b1",
+      "commit_date": "2026-10-29T02:10:38Z",
+      "readme": {
+        "file": "repos/Xiaomi-OCR-0/README.md",
+        "url": "https://raw.githubusercontent.com/xiaomi-research/Xiaomi-OCR-0/b1a9bb4c07060c453785e9151715ccda6b96f0b1/README.md",
+        "bytes": 15332,
+        "sha256": "b55b1d7c769ec5177fae7f7f90d65b9aec4592b55ebb7e3974f0a142c97ed32f"
+      }
+    },
+    {
+      "kind": "github",
+      "repo": "SoMarkAI/OXR",
+      "sha": "c1a1dcb312ee9f691404f127785510453c0d9350",
+      "commit_date": "2026-10-24T15:45:08Z",
+      "readme": {
+        "file": "repos/OXR/README.md",
+        "url": "https://raw.githubusercontent.com/SoMarkAI/OXR/c1a1dcb312ee9f691404f127785510453c0d9350/README.md",
+        "bytes": 19406,
+        "sha256": "14deade5f116d786d1f83bdb27079fd87f04f92829414814b5c774ed02e4d2fa"
+      }
+    },
+    {
+      "kind": "github",
+      "repo": "baidu/Unlimited-OCR",
+      "sha": "6c5d1906ba638a7cd87bc00f14452a47fdabf16b",
+      "commit_date": "2026-10-29T09:15:20Z",
+      "readme": {
+        "file": "repos/Unlimited-OCR/README.md",
+        "url": "https://raw.githubusercontent.com/baidu/Unlimited-OCR/6c5d1906ba638a7cd87bc00f14452a47fdabf16b/README.md",
+        "bytes": 15085,
+        "sha256": "18c26561ec0baefdd70c21ee95682d997e743b67d29c11f5bec2dbf2c6deda9f"
+      }
+    },
+    {
+      "kind": "github",
+      "repo": "Tencent/WeVisDoc",
+      "sha": "bcbc0eacb976ecb8d69675fe6bcee123f5640777",
+      "commit_date": "2026-09-18T02:44:11Z",
+      "readme": {
+        "file": "repos/WeVisDoc/README.md",
+        "url": "https://raw.githubusercontent.com/Tencent/WeVisDoc/bcbc0eacb976ecb8d69675fe6bcee123f5640777/README.md",
+        "bytes": 9151,
+        "sha256": "ef33e2a745a1dca8ccd5a418301336ddac1d9165ab93d2f44c8aaf587b1e5a17"
+      }
+    },
+    {
+      "kind": "huggingface",
+      "id": "openbmb/MiniCPM-OCR-Jev",
+      "sha": "bdb03f86182a2824d2632d129c719cdf780502e2",
+      "lastModified": "2026-10-30T02:16:51.000Z",
+      "safetensors": {
+        "parameters": {
+          "BF16": 2213245760
+        },
+        "total": 2213245760
+      }
+    },
+    {
+      "file": "xiaomi.pdf",
+      "url": "https://arxiv.org/pdf/2609.36136v1",
+      "bytes": 4916553,
+      "sha256": "7f20b1f56aa20002397422c61ffcb925569c1821f689d1f3d85f9032c6a70ff7"
+    },
+    {
+      "kind": "huggingface",
+      "id": "xiaomi-research/Xiaomi-OCR-0",
+      "sha": "bbd8cf8d21f256b3644b44cb860f3a7cecb93c30",
+      "lastModified": "2026-10-29T02:17:14.000Z",
+      "safetensors": {
+        "parameters": {
+          "BF16": 873438784
+        },
+        "total": 873438784
+      }
+    },
+    {
+      "kind": "huggingface",
+      "id": "openbmb/MiniCPM-OCR-1.0",
+      "sha": "c5833cddb363aa62f1cb60ddde48c832e8f1a92c",
+      "lastModified": "2026-10-29T15:39:19.000Z",
+      "safetensors": {
+        "parameters": {
+          "BF16": 1300434160
+        },
+        "total": 1300434160
+      }
+    },
+    {
+      "kind": "huggingface",
+      "id": "SoMarkAI/OXR-1.0",
+      "sha": "c708407f9d2b4df658f2543d9132b62bb7221df4",
+      "lastModified": "2026-10-24T15:59:48.000Z",
+      "safetensors": {
+        "parameters": {
+          "BF16": 1534378216
+        },
+        "total": 1534378216
+      }
+    },
+    {
+      "kind": "huggingface",
+      "id": "tencent/WeVisDoc-4B",
+      "sha": "1754bfa79ba1a6e24aacc001da2e7bb39b9fbc34",
+      "lastModified": "2026-09-18T02:50:25.000Z",
+      "safetensors": {
+        "parameters": {
+          "BF16": 4826771968
+        },
+        "total": 4437815808
+      }
+    },
+    {
+      "kind": "huggingface",
+      "id": "baidu/Unlimited-OCR-2",
+      "sha": "c14071b549f4fcab10909f3c4acc6a2edb366947",
+      "lastModified": "2026-10-29T09:18:46.000Z",
+      "safetensors": {
+        "parameters": {
+          "I64": 257,
+          "BF16": 3343978240
+        },
+        "total": 3343978497
+      }
+    },
+    {
+      "file": "youtu.pdf",
+      "url": "https://arxiv.org/pdf/2610.39301v1",
+      "bytes": 20341330,
+      "sha256": "d5b946512ad3be2cb82d0322d41af8051ae41127f609a0f8658c72fe39cd740b"
+    },
+    {
+      "file": "wevisdoc.pdf",
+      "url": "https://arxiv.org/pdf/2609.20423v1",
+      "bytes": 29890812,
+      "sha256": "9b3cf6c80d20ba93f3d94d14426511dfa1d9b196944110687e7e57a98725badc"
+    },
+    {
+      "kind": "huggingface",
+      "id": "tencent/Youtu-Parsing-Omni",
+      "sha": "77d243bfd75c3e79b9e322f0668654ca22b8b187",
+      "lastModified": "2026-10-30T09:15:46.000Z",
+      "safetensors": {
+        "parameters": {
+          "BF16": 5334472192
+        },
+        "total": 5334472192
+      }
+    },
+    {
+      "url": "https://media.githubusercontent.com/media/baidu/Unlimited-OCR/6c5d1906ba638a7cd87bc00f14452a47fdabf16b/Unlimited-OCR-2.pdf",
+      "sha256": "1eb5885f4ddfa4ec6fbff375092377f30b5d6a5e034ec4936213f125bf2f9444",
+      "bytes": 1515878
+    }
+  ],
+  "additional_retrieved_file_fingerprints": [
+    {
+      "file": "repos/MiniCPM-OCR/docs/minicpm_ocr_jev_en.md",
+      "url": "https://raw.githubusercontent.com/OpenBMB/MiniCPM-OCR/c0881ac7fe9d78623bc222f8ee93e2c722f5413b/docs/minicpm_ocr_jev_en.md",
+      "bytes": 9225,
+      "sha256": "1bcbc61d50e2da57335446fd07c31adec2af0ae869f4cfffd97e925ebb9db82b"
+    },
+    {
+      "file": "repos/MiniCPM-OCR/docs/minicpm_ocr_1dot0_en.md",
+      "url": "https://raw.githubusercontent.com/OpenBMB/MiniCPM-OCR/c0881ac7fe9d78623bc222f8ee93e2c722f5413b/docs/minicpm_ocr_1dot0_en.md",
+      "bytes": 16536,
+      "sha256": "0d261d1098691a127083bb68ea818d7e83b3e82ff8131010d9aa126cd36ffb21"
+    },
+    {
+      "file": "repos/Xiaomi-OCR-0/evaluation_pipeline/README.md",
+      "url": "https://raw.githubusercontent.com/xiaomi-research/Xiaomi-OCR-0/b1a9bb4c07060c453785e9151715ccda6b96f0b1/evaluation_pipeline/README.md",
+      "bytes": 8614,
+      "sha256": "1ff1796f2f9634214147457b8be03290d3def19f8edc71afbb8e9c22c5fca594"
+    },
+    {
+      "file": "repos/MiniCPM-OCR/docs/finetune_jev_en.md",
+      "url": "https://raw.githubusercontent.com/OpenBMB/MiniCPM-OCR/c0881ac7fe9d78623bc222f8ee93e2c722f5413b/docs/finetune_jev_en.md",
+      "bytes": 8211,
+      "sha256": "9cab091a22c7d811ce303176facd12f68caffef33b7ee8eabe076bc8b16346d2"
+    },
+    {
+      "file": "repos/MiniCPM-OCR/docs/benchmark_reproduction_en.md",
+      "url": "https://raw.githubusercontent.com/OpenBMB/MiniCPM-OCR/c0881ac7fe9d78623bc222f8ee93e2c722f5413b/docs/benchmark_reproduction_en.md",
+      "bytes": 10021,
+      "sha256": "a3e5afc85587fa34b809a369c296dc991e2d3fccb57a7fb208ccabccdc3c06e0"
+    },
+    {
+      "file": "repos/OXR/LICENSE",
+      "url": "https://raw.githubusercontent.com/SoMarkAI/OXR/c1a1dcb312ee9f691404f127785510453c0d9350/LICENSE",
+      "bytes": 6588,
+      "sha256": "4577df88e499926976b390c4ea3992cc91baa9ebac29386f35b557bd3cb4a662"
+    },
+    {
+      "file": "repos/Unlimited-OCR/Unlimited-OCR-2.pdf",
+      "url": "https://raw.githubusercontent.com/baidu/Unlimited-OCR/6c5d1906ba638a7cd87bc00f14452a47fdabf16b/Unlimited-OCR-2.pdf",
+      "bytes": 132,
+      "sha256": "0f877c0fde800e30677e5859462f2a7b4a4539d24ba0337ed483b6b57ce0f87d"
+    },
+    {
+      "file": "repos/OXR/docs/benchmark.md",
+      "url": "https://raw.githubusercontent.com/SoMarkAI/OXR/c1a1dcb312ee9f691404f127785510453c0d9350/docs/benchmark.md",
+      "bytes": 10674,
+      "sha256": "09b362c8ea636b584f9cc14dfcaf5c43a4a4c7038557a35ef89af8d3071c94bf"
+    },
+    {
+      "file": "repos/Unlimited-OCR/utils/README.md",
+      "url": "https://raw.githubusercontent.com/baidu/Unlimited-OCR/6c5d1906ba638a7cd87bc00f14452a47fdabf16b/utils/README.md",
+      "bytes": 2236,
+      "sha256": "3070bb2f2802a5b17ad48923caffa905e2a8ff62394330e8ab0ba05533490ad1"
+    },
+    {
+      "file": "models/openbmb--MiniCPM-OCR-1.0/config.json",
+      "url": "https://huggingface.co/openbmb/MiniCPM-OCR-1.0/resolve/c5833cddb363aa62f1cb60ddde48c832e8f1a92c/config.json",
+      "bytes": 2275,
+      "sha256": "762025491b206967a3c29c3e36ff2cccd8af6a8c750360b61dc91882b573f759"
+    },
+    {
+      "file": "repos/Xiaomi-OCR-0/tree.json",
+      "url": "https://api.github.com/repos/xiaomi-research/Xiaomi-OCR-0/git/trees/b1a9bb4c07060c453785e9151715ccda6b96f0b1?recursive=1",
+      "bytes": 36348,
+      "sha256": "b75fcdbcf13fd91149ef5d93bcd81d4079684d432e506dfda48215ffa1bc7653"
+    },
+    {
+      "file": "repos/MiniCPM-OCR/tree.json",
+      "url": "https://api.github.com/repos/OpenBMB/MiniCPM-OCR/git/trees/c0881ac7fe9d78623bc222f8ee93e2c722f5413b?recursive=1",
+      "bytes": 306074,
+      "sha256": "b3aa1b5119531c3bbfbeef5f5989bda8ea97e82a219502799ac2c240800efb58"
+    },
+    {
+      "file": "repos/MiniCPM-OCR/docs/vllm_deploy_en.md",
+      "url": "https://raw.githubusercontent.com/OpenBMB/MiniCPM-OCR/c0881ac7fe9d78623bc222f8ee93e2c722f5413b/docs/vllm_deploy_en.md",
+      "bytes": 10597,
+      "sha256": "cbe07fe625805d0469d1e6f5e4b022611a5a4c3ab028285519f1a3d123efd645"
+    },
+    {
+      "file": "oxr_pipeline.png",
+      "url": "https://raw.githubusercontent.com/SoMarkAI/image_bed/main/OXR_README/assets/oxr_pipeline.png",
+      "bytes": 56619,
+      "sha256": "86dda25982eaa0fff0702610ed9d458ff46abc98425617b4a1337decb6a1e5c9",
+      "scope": "Visually inspected only; mutable official diagram URL, not redistributed."
+    },
+    {
+      "file": "oxr_rsi_loop.png",
+      "url": "https://raw.githubusercontent.com/SoMarkAI/image_bed/main/OXR_README/assets/oxr_rsi_loop.png",
+      "bytes": 252854,
+      "sha256": "9b7c8a899636b21b795ea46e6cafdd451b9c74f734cc89df49fb49b4e9227402",
+      "scope": "Visually inspected only; mutable official diagram URL, not redistributed."
+    }
+  ]
+}

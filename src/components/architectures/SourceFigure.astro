@@ -1,9 +1,9 @@
 ---
-interface Props { src: string; darkSrc?: string; alt: string; narrow?: boolean; poster?: boolean; id?: string; minWidth?: number; zoomable?: boolean; }
-const { src, darkSrc, alt, narrow = false, poster = false, id, minWidth, zoomable = false } = Astro.props;
+interface Props { src: string; darkSrc?: string; alt: string; narrow?: boolean; poster?: boolean; id?: string; minWidth?: number; zoomable?: boolean; fitInitially?: boolean; }
+const { src, darkSrc, alt, narrow = false, poster = false, id, minWidth, zoomable = false, fitInitially = false } = Astro.props;
 if (minWidth !== undefined && (!Number.isFinite(minWidth) || minWidth < 0 || minWidth > 1600)) throw new Error('SourceFigure minWidth must be between 0 and 1600 pixels.');
 ---
-<figure id={id} class:list={['source-figure', {narrow, poster, zoomable}]}>
+<figure id={id} class:list={['source-figure', {narrow, poster, zoomable, 'fit-initially': fitInitially}]}>
   <div class:list={['image-viewport', {pannable: Boolean(minWidth)}]} style={minWidth ? `--source-min-width:${minWidth}px` : undefined} tabindex={minWidth ? '0' : undefined} role={minWidth ? 'region' : undefined} aria-label={minWidth ? `Scrollable figure: ${alt}` : undefined}>
   <a class:list={{'theme-light': Boolean(darkSrc)}} href={src} target="_blank" rel="noopener" aria-label={`Open full resolution: ${alt}`}>
     <slot name="image" />
@@ -36,5 +36,10 @@ if (minWidth !== undefined && (!Number.isFinite(minWidth) || minWidth < 0 || min
   .zoom-hint{display:block;text-align:right;font-size:.72rem;line-height:1.5;color:var(--nb-muted-foreground);margin:.35rem 0;}
   .source-caption{font-size:.8rem;line-height:1.6;color:var(--nb-muted-foreground);margin-top:.65rem;}
   @media(min-width:768px){.pannable>a{min-width:0;}.figure-tools>span{visibility:hidden;}.zoomable .figure-tools>span{display:none;}.figure-zoom-control{display:flex;}.zoomable:has(.figure-zoom:checked) .pannable>a{min-width:var(--source-min-width);}}
+  .fit-initially .pannable>a{min-width:0;}
+  .fit-initially .figure-zoom-control{display:flex;}
+  .fit-initially .figure-tools{flex-wrap:wrap;}
+  .fit-initially .figure-tools>span{display:none;}
+  .fit-initially:has(.figure-zoom:checked) .pannable>a{min-width:var(--source-min-width);}
   @media print{.pannable{overflow:visible;}.pannable>a{min-width:0 !important;}.figure-tools{display:none;}}
 </style>

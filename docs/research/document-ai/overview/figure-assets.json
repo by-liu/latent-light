@@ -243,5 +243,32 @@
       "current_sha256": "94bb529171ebea8d09530425ff622fc70c08e7372b99b130ab1d3a974f70c6dd",
       "note": "The external locator now contains different bytes from the recorded extraction. The repository figure still matches its original recorded checksum; its bytes and attribution are unchanged."
     }
+  },
+  {
+    "name": "xiaomi-ocr-0-training",
+    "pdf": "2609.36136v1.pdf",
+    "page": 9,
+    "rect": [
+      70,
+      82,
+      542,
+      154
+    ],
+    "license": "CC BY 4.0",
+    "url": "https://arxiv.org/abs/2609.36136v1",
+    "figure": "Figure 3",
+    "changes": "Complete figure artwork excerpt; surrounding page prose, original caption and blank margins omitted. Rendered with Poppler at 220 dpi, pixel crop 1442x220+214+250; lossless WebP conversion. No labels redrawn or colors changed.",
+    "pdf_sha256": "7f20b1f56aa20002397422c61ffcb925569c1821f689d1f3d85f9032c6a70ff7",
+    "asset_sha256": "3fb5c2be93bc8deaab6e366654aff8a56bfa5120b6bdfdc1c0d5c10e4934b269",
+    "public_path": "/figures/document-ai/xiaomi-ocr-0-training.webp",
+    "pdf_storage": {
+      "kind": "local-only",
+      "included_in_repository": false,
+      "archive_kind": "Temporary primary-source inspection; full PDF not redistributed.",
+      "locator": "2609.36136v1.pdf",
+      "verification": "Retrieve the versioned arXiv PDF and compare the recorded SHA256."
+    },
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_inspected": "2026-10-31"
   }
 ]
