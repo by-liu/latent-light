@@ -1,0 +1,329 @@
+{
+  "checked_at": "2026-11-01T20:17:35.822129Z",
+  "canonical_output": "src/content/docs/hardware/index.mdx",
+  "local_route": "/hardware/",
+  "branch": "research/hardware-101",
+  "scope": "Broad first-principles foundation for AI researchers and engineers learning to build varied AI devices; no single product field selected.",
+  "evidence": {
+    "sources": 32,
+    "claims": 26,
+    "cutoff": "2026-11-01",
+    "method": "Primary course notes, standards, original performance-model paper and official implementation/product documentation. Per-source notes bound actual section inspection.",
+    "experiments": "No hardware measurements, inference benchmark or circuit experiment performed. Worked examples and the signal plot are original illustrative calculations."
+  },
+  "skeptical_review": [
+    "ADC resolution versus complete-system accuracy and baseband anti-alias assumptions.",
+    "CPU/core/chip/board/module roles and N6x7 versus N6x5 product-line boundary.",
+    "Conditional peak arithmetic versus end-to-end timing; weight bytes versus working memory.",
+    "Shared memory versus access/coherency/ordering contracts.",
+    "Average energy versus transient power and enclosure-dependent thermal behavior.",
+    "Application OTA interruption resilience versus other partitions; signature verification versus application correctness."
+  ],
+  "refinements": [
+    "Replaced the overly tall three-panel calculator with keyboard-operable mode selection and moved the live result above inputs.",
+    "Corrected reset timing so native reset clears stale invalid-input messages.",
+    "Print shows all original examples and matching static results, even after interactive edits.",
+    "Clarified sampled-signal text and added a Linux single-board computer role distinct from the Pico MCU board."
+  ],
+  "validation": {
+    "command": "mise exec node@24.21.0 -- npm run validate",
+    "status": "passed",
+    "deployment_tests": 49,
+    "content_tests": 182,
+    "astro_errors": 0,
+    "astro_warnings": 0,
+    "astro_hints": 0,
+    "built_pages": 106,
+    "lint_files": 106,
+    "warnings": [
+      "Existing Nimbus/Vite module-directive warnings.",
+      "25 existing Pagefind legacy-redirect warnings."
+    ]
+  },
+  "rendering": {
+    "method": "Actual headless Chromium CDP against the loopback development server; screenshots inspected for hierarchy, labels, contrast, equations, tables and narrow-screen overflow. Native keyboard events exercised calculator selection/edit/tab/reset, invalid inputs, Focus, mobile drawer and table panning. Reduced motion emulated.",
+    "viewports": [
+      "1440×1000",
+      "390×844",
+      "320×800"
+    ],
+    "themes": [
+      "light",
+      "dark"
+    ],
+    "focus": "passed",
+    "no_javascript": "passed",
+    "print_media": "passed",
+    "browser_errors": 0,
+    "screenshots": "Disposable local QA captures; not publication assets.",
+    "views": [
+      {
+        "name": "opening-desktop",
+        "x": 399,
+        "y": 129,
+        "width": 648,
+        "height": 87.5,
+        "pageOverflow": false
+      },
+      {
+        "name": "system-desktop",
+        "x": 399,
+        "y": 914.390625,
+        "width": 648,
+        "height": 878.03125,
+        "pageOverflow": false
+      },
+      {
+        "name": "circuits-desktop",
+        "x": 399,
+        "y": 2588.59375,
+        "width": 648,
+        "height": 44.71875,
+        "pageOverflow": false
+      },
+      {
+        "name": "interfaces-desktop",
+        "x": 399,
+        "y": 9885.4375,
+        "width": 648,
+        "height": 36.390625,
+        "pageOverflow": false
+      },
+      {
+        "name": "prototype-desktop",
+        "x": 399,
+        "y": 15247.4375,
+        "width": 648,
+        "height": 36.390625,
+        "pageOverflow": false
+      },
+      {
+        "name": "signal-desktop",
+        "x": 399,
+        "y": 4542.4375,
+        "width": 648,
+        "height": 673.90625,
+        "pageOverflow": false
+      },
+      {
+        "name": "memory-dark",
+        "x": 399,
+        "y": 7776.828125,
+        "width": 648,
+        "height": 673.53125,
+        "pageOverflow": false
+      },
+      {
+        "name": "budget-desktop",
+        "x": 399,
+        "y": 14294.75,
+        "width": 648,
+        "height": 912.6875,
+        "pageOverflow": false
+      },
+      {
+        "name": "budget-focus",
+        "x": 109,
+        "y": 14185.03125,
+        "width": 1216,
+        "height": 681.765625,
+        "pageOverflow": false
+      },
+      {
+        "name": "system-focus",
+        "x": 144,
+        "y": 914.390625,
+        "width": 1152,
+        "height": 772.5,
+        "pageOverflow": false
+      },
+      {
+        "name": "platform-focus",
+        "x": 109,
+        "y": 17221.515625,
+        "width": 1216,
+        "height": 685.78125,
+        "pageOverflow": false
+      },
+      {
+        "name": "opening-mobile",
+        "x": 16,
+        "y": 129,
+        "width": 358,
+        "height": 131.25,
+        "pageOverflow": false
+      },
+      {
+        "name": "system-mobile",
+        "x": 16,
+        "y": 1366.390625,
+        "width": 358,
+        "height": 1187.0625,
+        "pageOverflow": false
+      },
+      {
+        "name": "signal-mobile",
+        "x": 16,
+        "y": 6713.921875,
+        "width": 358,
+        "height": 757.6875,
+        "pageOverflow": false
+      },
+      {
+        "name": "memory-mobile",
+        "x": 16,
+        "y": 13965.515625,
+        "width": 288,
+        "height": 1161.015625,
+        "pageOverflow": false
+      },
+      {
+        "name": "budget-mobile",
+        "x": 16,
+        "y": 25715.671875,
+        "width": 288,
+        "height": 1329.9375,
+        "pageOverflow": false
+      },
+      {
+        "name": "platform-mobile",
+        "x": 16,
+        "y": 26331.96875,
+        "width": 358,
+        "height": 827.125,
+        "pageOverflow": false
+      },
+      {
+        "name": "equation-mobile",
+        "x": 16,
+        "y": 16802.265625,
+        "width": 288,
+        "height": 62.15625,
+        "pageOverflow": false
+      },
+      {
+        "name": "power-mobile",
+        "x": 16,
+        "y": 20018.203125,
+        "width": 358,
+        "height": 58.859375,
+        "pageOverflow": false
+      }
+    ]
+  },
+  "checks": {
+    "structure": {
+      "figures": [
+        "figure-1",
+        "figure-2",
+        "figure-3",
+        "figure-4"
+      ],
+      "references": 32,
+      "equations": 7,
+      "forms": 3,
+      "rows": 7,
+      "badAnchors": [],
+      "nav": 2
+    },
+    "focusKeyboard": true,
+    "nativeKeyboard": {
+      "edit": true,
+      "tab": true,
+      "empty": true,
+      "outOfRange": true,
+      "reset": true,
+      "battery": true,
+      "selection": true
+    },
+    "print": {
+      "forms": 0,
+      "examples": 3,
+      "results": [
+        "Example result: 82.944 MB/s; 663.552 Mbit/s of payload.",
+        "Example result: 0.5 GB; 0.466 GiB of weight payload.",
+        "Example result: 4.25 hours; Ideal energy budget, not measured runtime."
+      ],
+      "rows": 7
+    },
+    "tableKeyboardPan": true,
+    "mobileDrawerKeyboard": true,
+    "exports": {
+      "status": 200,
+      "mdxStatus": 200,
+      "figures": 4,
+      "equations": 7,
+      "sources": 32,
+      "raw": false,
+      "complete": true,
+      "mdx": true,
+      "discovery": true,
+      "full": true
+    },
+    "search": {
+      "query": "\"Hardware 101\"",
+      "results": [
+        {
+          "text": "Development guide",
+          "href": "/about/development-guide/"
+        },
+        {
+          "text": "Add or update a page",
+          "href": "/about/development-guide/#add-or-update-a-page"
+        },
+        {
+          "text": "How this site is built",
+          "href": "/about/framework/"
+        },
+        {
+          "text": "What is ready",
+          "href": "/about/framework/#what-is-ready"
+        },
+        {
+          "text": "Edge AI",
+          "href": "/edge-ai/"
+        },
+        {
+          "text": "Choose a reading path",
+          "href": "/edge-ai/#choose-a-reading-path"
+        },
+        {
+          "text": "Hardware 101 for AI Researchers and Engineers",
+          "href": "/hardware/"
+        },
+        {
+          "text": "See the whole device",
+          "href": "/hardware/#see-the-whole-device"
+        },
+        {
+          "text": "Latent Light",
+          "href": "/"
+        },
+        {
+          "text": "Explore",
+          "href": "/#explore"
+        }
+      ]
+    },
+    "nojs": {
+      "forms": 0,
+      "examples": 3,
+      "results": [
+        "82.944 MB/s663.552 Mbit/s of payload",
+        "0.5 GB0.466 GiB of weight payload",
+        "4.25 hoursIdeal energy budget, not measured runtime"
+      ],
+      "figures": 4,
+      "rows": 7
+    },
+    "browserErrors": 0
+  },
+  "search_method": "Development UI used the current dist/pagefind build through a scoped CDP request interceptor. The query returned the new route and related pages; this is a local build check, not a production verification.",
+  "exports_method": "Fetched /hardware/index.md, /hardware/index.mdx, /llms.txt and /llms-full.txt after restarting only this project’s dev server. Verified four captions, seven equations, 32 source definitions, complete figure/calculation content and no raw presentation components in Markdown.",
+  "publication": "Local, uncommitted work; no push or deployment for this task.",
+  "unrelated_preserved": [
+    "docs/research/edge-ai/local-cloud-collaboration/state/progress.json",
+    "docs/research/local-cloud-ai/cloud-agents-local-specialists/state/progress.json",
+    "docs/research/local-cloud-ai/smart-devices-cloud-agents/state/progress.json"
+  ]
+}

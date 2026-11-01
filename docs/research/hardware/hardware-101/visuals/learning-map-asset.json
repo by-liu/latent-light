@@ -1,0 +1,18 @@
+{
+  "generation_tool": "built-in image_gen.imagegen",
+  "generation_date": "2026-11-01",
+  "source_images": [],
+  "prompt": "docs/research/hardware/hardware-101/visuals/learning-map-prompt.md",
+  "raw_master": "output/imagegen/hardware-101-learning-map-v1.png",
+  "raw_master_sha256": "9f20b7e631a532876aacdcab112c4c45af4723a52ccc7fba8a70243bc13518d1",
+  "asset": "public/figures/hardware/hardware-101-learning-map-v1.webp",
+  "asset_sha256": "26f40a47db66669b8f8645239eacccf3cfdde8a6c1ad02b4ddc2edc28de3dfa3",
+  "dimensions": [
+    1659,
+    948
+  ],
+  "asset_bytes": 1605010,
+  "conversion": "ImageMagick lossless PNG-to-WebP encoding; compare -metric AE returned zero differing pixels. No content edit, crop or resize.",
+  "review": "All six learning-area labels, title/subtitle/audience and three outcomes inspected for spelling and meaning. Artwork is conceptual; no specifications, measured performance or third-party logos. No correction required.",
+  "reuse": "Original AI-generated illustration for this requested tutorial; no external source artwork supplied."
+}

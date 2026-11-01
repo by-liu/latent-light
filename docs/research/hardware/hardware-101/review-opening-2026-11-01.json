@@ -1,0 +1,203 @@
+{
+  "checked_at": "2026-11-01T20:30:13.416834Z",
+  "revision": 3,
+  "output": "src/content/docs/hardware/index.mdx",
+  "changes": [
+    "Added an AI-generated opening learning map with six tutorial areas and three practical learning outcomes.",
+    "Added the authored perspective of full stack expanding to AI + software + hardware, with a concrete assistant story.",
+    "Kept the four precise native figures and renumbered them as Figures 2–5.",
+    "Added an accessible six-topic text equivalent and native image enlargement/panning."
+  ],
+  "editorial_review": "The opening expresses a perspective for AI-device builders, not an empirical forecast about the whole software industry. The broad foundation and varied device scope remain. All six generated labels and three outcomes match the tutorial; hardware artwork is explicitly conceptual.",
+  "generation": {
+    "generation_tool": "built-in image_gen.imagegen",
+    "generation_date": "2026-11-01",
+    "source_images": [],
+    "prompt": "docs/research/hardware/hardware-101/visuals/learning-map-prompt.md",
+    "raw_master": "output/imagegen/hardware-101-learning-map-v1.png",
+    "raw_master_sha256": "9f20b7e631a532876aacdcab112c4c45af4723a52ccc7fba8a70243bc13518d1",
+    "asset": "public/figures/hardware/hardware-101-learning-map-v1.webp",
+    "asset_sha256": "26f40a47db66669b8f8645239eacccf3cfdde8a6c1ad02b4ddc2edc28de3dfa3",
+    "dimensions": [
+      1659,
+      948
+    ],
+    "asset_bytes": 1605010,
+    "conversion": "ImageMagick lossless PNG-to-WebP encoding; compare -metric AE returned zero differing pixels. No content edit, crop or resize.",
+    "review": "All six learning-area labels, title/subtitle/audience and three outcomes inspected for spelling and meaning. Artwork is conceptual; no specifications, measured performance or third-party logos. No correction required.",
+    "reuse": "Original AI-generated illustration for this requested tutorial; no external source artwork supplied."
+  },
+  "validation": {
+    "command": "mise exec node@24.21.0 -- npm run validate",
+    "status": "passed",
+    "deployment_tests": 49,
+    "content_tests": 182,
+    "astro_errors": 0,
+    "astro_warnings": 0,
+    "astro_hints": 0,
+    "build_pages": 106,
+    "lint_files": 106,
+    "research_structure": "passed",
+    "diff_check": "passed"
+  },
+  "browser": {
+    "views": [
+      {
+        "name": "desktop-light",
+        "x": 399,
+        "y": 698.75,
+        "width": 648,
+        "height": 468.203125,
+        "imageWidth": 646,
+        "imageNaturalWidth": 1659,
+        "viewportWidth": 648,
+        "scrollWidth": 648,
+        "toolsRight": 1047,
+        "overflow": false,
+        "mode": "light"
+      },
+      {
+        "name": "desktop-dark",
+        "x": 399,
+        "y": 698.75,
+        "width": 648,
+        "height": 468.203125,
+        "imageWidth": 646,
+        "imageNaturalWidth": 1659,
+        "viewportWidth": 648,
+        "scrollWidth": 648,
+        "toolsRight": 1047,
+        "overflow": false,
+        "mode": "dark"
+      },
+      {
+        "name": "focus-light",
+        "x": 141,
+        "y": 698.75,
+        "width": 1152,
+        "height": 735.734375,
+        "imageWidth": 1150,
+        "imageNaturalWidth": 1659,
+        "viewportWidth": 1152,
+        "scrollWidth": 1152,
+        "toolsRight": 1293,
+        "overflow": false,
+        "mode": "light"
+      },
+      {
+        "name": "focus-dark",
+        "x": 141,
+        "y": 698.75,
+        "width": 1152,
+        "height": 735.734375,
+        "imageWidth": 1150,
+        "imageNaturalWidth": 1659,
+        "viewportWidth": 1152,
+        "scrollWidth": 1152,
+        "toolsRight": 1293,
+        "overflow": false,
+        "mode": "dark"
+      },
+      {
+        "name": "mobile-light",
+        "x": 16,
+        "y": 1124.5,
+        "width": 358,
+        "height": 322.953125,
+        "imageWidth": 356,
+        "imageNaturalWidth": 1659,
+        "viewportWidth": 358,
+        "scrollWidth": 358,
+        "toolsRight": 374,
+        "overflow": false,
+        "mode": "light"
+      },
+      {
+        "name": "mobile-dark",
+        "x": 16,
+        "y": 1227.625,
+        "width": 288,
+        "height": 303.421875,
+        "imageWidth": 286,
+        "imageNaturalWidth": 1659,
+        "viewportWidth": 288,
+        "scrollWidth": 288,
+        "toolsRight": 304,
+        "overflow": false,
+        "mode": "dark"
+      }
+    ],
+    "checks": {
+      "structure": {
+        "figures": [
+          "figure-1",
+          "figure-2",
+          "figure-3",
+          "figure-4",
+          "figure-5"
+        ],
+        "firstBeforeHeading": true,
+        "textBullets": 6,
+        "rows": 7,
+        "budget": true,
+        "badAnchors": [],
+        "imageLink": "/figures/hardware/hardware-101-learning-map-v1.webp"
+      },
+      "enlarged": {
+        "checked": true,
+        "viewport": 288,
+        "scrollWidth": 1600,
+        "overflow": false
+      },
+      "keyboardPan": 40,
+      "exports": {
+        "status": 200,
+        "mdxStatus": 200,
+        "captions": 5,
+        "equations": 7,
+        "sources": 32,
+        "asset": true,
+        "caption": true,
+        "alt": true,
+        "text": true,
+        "raw": false,
+        "mdx": true,
+        "fullStatus": 200,
+        "fullHero": true,
+        "shortStatus": 200
+      },
+      "print": {
+        "minWidth": "0px",
+        "tools": "none"
+      },
+      "search": {
+        "query": "\"Read the learning map\"",
+        "results": [
+          {
+            "text": "Hardware 101 for AI Researchers and Engineers",
+            "href": "/hardware/"
+          },
+          {
+            "text": "Hardware 101 for AI Researchers and Engineers",
+            "href": "/hardware/"
+          }
+        ]
+      },
+      "nojs": {
+        "image": 1659,
+        "checkbox": true,
+        "textBullets": 6,
+        "figures": 5
+      },
+      "browserErrors": 0
+    }
+  },
+  "browser_method": "Actual Chromium CDP against local port 4327, with reduced motion emulated; screenshots inspected in desktop/mobile, both themes and Focus. Native Space/ArrowRight exercised enlargement/panning and the learning-map text disclosure, including without JavaScript. Print hides controls and fits artwork.",
+  "search_method": "Actual dev search UI with the current built dist/pagefind assets served through a scoped CDP interceptor. Query: Read the learning map.",
+  "export_review": "Actual HTTP Markdown/MDX and llms endpoints contain five captions, seven equations, 32 sources, the image and meaningful description, six topic explanations and learning outcomes. No raw presentation components remain in Markdown.",
+  "warnings": [
+    "Existing Nimbus/Vite module-directive warnings.",
+    "25 existing Pagefind legacy-redirect warnings."
+  ],
+  "publication": "Local and uncommitted. No push or deployment for this task. Existing unrelated research-state edits preserved."
+}

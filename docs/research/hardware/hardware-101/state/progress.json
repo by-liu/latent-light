@@ -1,0 +1,48 @@
+{
+  "schema_version": 3,
+  "topic_id": "hardware-101-for-ai-researchers-and-engineers",
+  "status": "complete",
+  "coverage": {
+    "circuits-and-signals": "verified",
+    "compute-and-memory": "verified",
+    "interfaces-and-embedded-software": "verified",
+    "power-and-integration": "verified",
+    "2026-platform-context": "verified",
+    "skeptical-review": "verified"
+  },
+  "open_questions": [],
+  "recommended_next_direction": null,
+  "last_seen": "2026-11-01T20:44:33.672199Z",
+  "output": {
+    "kind": "site-page",
+    "path": "src/content/docs/hardware/index.mdx",
+    "status": "reviewed",
+    "revision": 4,
+    "updated": "2026-11-01",
+    "evidence_cutoff": "2026-11-01",
+    "audience": "AI researchers and software engineers learning hardware foundations for AI devices"
+  },
+  "quality_gate": {
+    "evidence_verified": true,
+    "contradictions_reviewed": true,
+    "output_reviewed": true,
+    "visuals_reviewed": true
+  },
+  "delivery_checks": {
+    "validation": {
+      "status": "passed",
+      "method": "Full validate on Node 24.21.0: 49 deployment and 183 content tests, zero Astro diagnostics, 106-page build and 106-file lint; research structural validation and git diff --check.",
+      "checked_at": "2026-11-01T20:44:33.672199Z"
+    },
+    "rendering": {
+      "status": "passed",
+      "method": "Actual Chromium desktop/mobile, both themes and Focus; new circuit, board/chip and timing figures inspected and refined. Native diagram panning, no-JavaScript, reduced motion and print-media checks pass.",
+      "checked_at": "2026-11-01T20:44:33.672199Z"
+    },
+    "exports": {
+      "status": "passed",
+      "method": "Actual Markdown/MDX and llms endpoints retain eight captions, seven equations, 33 sources, all new figure labels, quantities, stage intervals and assumptions. Built search verified through the dev UI.",
+      "checked_at": "2026-11-01T20:44:33.672199Z"
+    }
+  }
+}

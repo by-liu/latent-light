@@ -1,0 +1,99 @@
+---
+import {budgetDefinitions,defaultBudgetValues,calculateBudget} from '../../../plugins/hardware-budgets.mjs';
+interface Props {id:string;}
+const {id}=Astro.props;
+---
+<figure id={id} class="hardware-budget">
+ <div class="budget-art" data-hardware-budget>
+  <header><span class="eyebrow">Try the assumptions</span><p class="budget-title">Three budgets before you choose a board.</p><p class="budget-intro">Change an input to see the arithmetic. These are first estimates, not measured performance.</p></header>
+  <div class="budget-choices" role="group" aria-label="Choose a calculation" hidden>
+   {budgetDefinitions.map((d,i)=><button type="button" data-budget-show={d.key} aria-controls={`${id}-${d.key}-panel`} aria-pressed={i===0?'true':'false'}>{d.label}</button>)}
+  </div>
+  <div class="budget-panels">
+   {budgetDefinitions.map(d=>{
+    const result=calculateBudget(d.key,defaultBudgetValues(d.key));
+    return <section id={`${id}-${d.key}-panel`} class="budget-panel" data-budget-key={d.key} aria-label={d.label}>
+     <span class="panel-label">{d.label}</span><p class="panel-title">{d.title}</p>
+     <div class="budget-result" role="status" aria-live="polite" aria-atomic="true"><strong data-primary>{result.ok?result.primary:''}</strong><span data-secondary>{result.ok?result.secondary:''}</span></div>
+     <form class="budget-form" hidden aria-label={d.label+' inputs'}>
+      <div class="budget-fields">{d.fields.map(f=><label for={`${id}-${d.key}-${f.key}`}><span>{f.label}</span><input id={`${id}-${d.key}-${f.key}`} name={f.key} type="number" value={f.value} min={f.min} max={f.max} step={f.step} required inputmode={f.step===1?'numeric':'decimal'} /><small>{f.min.toLocaleString('en-US')}–{f.max.toLocaleString('en-US')}{f.step===1?' · integer':''}</small></label>)}</div>
+      <button type="reset">Reset example</button>
+     </form>
+     <p class="default-inputs">Example: {d.fields.map(f=>f.label+' = '+f.value).join('; ')}.</p>
+     <p class="print-result">Example result: <strong>{result.ok?result.primary:''}</strong>; {result.ok?result.secondary:''}.</p>
+     <p class="budget-formula">{d.formula}</p>
+     <p class="budget-assumptions">{d.assumptions}</p>
+    </section>;
+   })}
+  </div>
+  <p class="budget-units">MB = 10⁶ bytes · GB = 10⁹ bytes · GiB = 2³⁰ bytes · 1 byte = 8 bits. Calculations run locally in your browser.</p>
+ </div>
+ <figcaption><slot /></figcaption>
+</figure>
+<script>
+ import {calculateBudget} from '../../../plugins/hardware-budgets.mjs';
+ function initHardwareBudgets() {
+  document.querySelectorAll<HTMLElement>('[data-hardware-budget]').forEach(root=>{
+   if(root.dataset.ready)return;
+   root.querySelectorAll<HTMLElement>('[data-budget-key]').forEach(panel=>{
+    const form=panel.querySelector<HTMLFormElement>('form');
+    const primary=panel.querySelector<HTMLElement>('[data-primary]');
+    const secondary=panel.querySelector<HTMLElement>('[data-secondary]');
+    const key=panel.dataset.budgetKey;
+    if(!form||!primary||!secondary||!key)return;
+    const update=()=>{
+     const values=Object.fromEntries(new FormData(form).entries());
+     const result=calculateBudget(key,values);
+     primary.textContent=result.ok?result.primary:'Check inputs';
+     secondary.textContent=result.ok?result.secondary:result.error;
+     panel.toggleAttribute('data-invalid',!result.ok);
+     form.querySelectorAll<HTMLInputElement>('input').forEach(input=>input.setAttribute('aria-invalid',String(!input.validity.valid)));
+    };
+    form.addEventListener('submit',event=>{event.preventDefault();update();});
+    form.addEventListener('input',update);
+    form.addEventListener('reset',()=>setTimeout(update,0));
+    form.hidden=false;
+   });
+   const choices=root.querySelector<HTMLElement>('.budget-choices');
+   const selectBudget=(key:string)=>{
+    root.querySelectorAll<HTMLElement>('[data-budget-key]').forEach(panel=>{panel.hidden=panel.dataset.budgetKey!==key;});
+    root.querySelectorAll<HTMLButtonElement>('[data-budget-show]').forEach(button=>{button.setAttribute('aria-pressed',String(button.dataset.budgetShow===key));});
+   };
+   root.querySelectorAll<HTMLButtonElement>('[data-budget-show]').forEach(button=>button.addEventListener('click',()=>{if(button.dataset.budgetShow)selectBudget(button.dataset.budgetShow);}));
+   selectBudget('sensor');
+   if(choices)choices.hidden=false;
+   root.dataset.ready='true';
+  });
+ }
+ initHardwareBudgets();
+ document.addEventListener('astro:page-load',initHardwareBudgets);
+</script>
+<style>
+ .hardware-budget{container-type:inline-size;min-width:0;scroll-margin-top:5rem;margin:2rem 0;}
+ .budget-art{border:1px solid var(--nb-border);border-radius:1rem;padding:1.4rem;background:var(--nb-background);}
+ .eyebrow{font-size:.65rem;text-transform:uppercase;letter-spacing:.12em;color:var(--nb-muted-foreground);font-weight:650;}
+ .budget-title{font-weight:650;font-size:clamp(1.2rem,3cqi,1.7rem);letter-spacing:-.035em;line-height:1.2;margin:.55rem 0;}
+ .budget-intro{font-size:.84rem;line-height:1.6;color:var(--nb-muted-foreground);margin:0 0 1.3rem;}
+ .budget-choices:not([hidden]){display:flex;gap:.5rem;margin:0 0 1rem;}
+ .budget-choices button{flex:1;margin:0;min-height:2.6rem;font-size:.75rem;font-weight:550;padding:.55rem .35rem;}
+ .budget-choices button[aria-pressed="true"]{color:var(--nb-foreground);border-color:var(--nb-foreground);background:color-mix(in srgb,var(--nb-foreground) 5%,var(--nb-background));}
+ .budget-panels{display:grid;grid-template-columns:1fr;gap:1.2rem;}
+ .budget-panel{border:1px solid var(--nb-border);border-radius:.6rem;padding:1rem;min-width:0;}
+ .panel-label{font-size:.63rem;text-transform:uppercase;letter-spacing:.08em;font-weight:650;color:var(--nb-muted-foreground);}
+ .panel-title{font-size:1rem;line-height:1.35;font-weight:600;margin:.4rem 0 1rem;}
+ .budget-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.75rem;}
+ label{display:flex;flex-direction:column;gap:.3rem;min-width:0;font-size:.72rem;}label>span{font-weight:550;}label>small{font-size:.59rem;color:var(--nb-muted-foreground);}
+ input{width:100%;box-sizing:border-box;min-width:0;border:1px solid var(--nb-border);border-radius:.3rem;background:var(--nb-background);color:var(--nb-foreground);font:inherit;font-size:.86rem;padding:.5rem;font-variant-numeric:tabular-nums;}
+ input:focus-visible,button:focus-visible{outline:2px solid var(--nb-foreground);outline-offset:3px;}
+ input[aria-invalid="true"]{border-color:#b55547;}
+ button{border:1px solid var(--nb-border);background:var(--nb-background);color:var(--nb-muted-foreground);border-radius:.3rem;padding:.4rem .6rem;font-size:.68rem;cursor:pointer;margin:.8rem 0 .2rem;}button:hover{color:var(--nb-foreground);}
+ .default-inputs{font-size:.73rem;line-height:1.6;}.budget-art[data-ready] .default-inputs{display:none;}
+ .budget-result{display:flex;flex-direction:column;gap:.3rem;margin:1rem 0 1.25rem;border-bottom:1px solid var(--nb-border);padding-bottom:1rem;}.budget-result strong{font-size:1.65rem;font-weight:650;letter-spacing:-.03em;line-height:1.2;overflow-wrap:anywhere;}.budget-result>span{font-size:.73rem;line-height:1.5;color:var(--nb-muted-foreground);}
+ .budget-formula{font-size:.73rem;line-height:1.6;margin:.7rem 0;}.budget-assumptions{font-size:.72rem;line-height:1.65;color:var(--nb-muted-foreground);margin:.7rem 0 0;}
+ .budget-units{font-size:.68rem;line-height:1.6;color:var(--nb-muted-foreground);margin:1rem 0 0;}
+ .print-result{display:none;}
+ figcaption{font-size:.78rem;line-height:1.65;color:var(--nb-muted-foreground);margin:.7rem .15rem 0;}figcaption :global(p){margin:0;}figcaption :global(strong){font-weight:600;color:var(--nb-foreground);}
+ @container(min-width:850px){.budget-fields{grid-template-columns:repeat(5,minmax(0,1fr));}.budget-choices{max-width:40rem;}}
+ @container(max-width:360px){.budget-art{padding:.9rem;}.budget-panel{padding:.8rem;}.budget-fields{grid-template-columns:1fr;}}
+ @media print{.budget-form,.budget-result,.budget-choices{display:none!important;}.budget-art[data-ready] .default-inputs,.print-result,.budget-panel[hidden]{display:block!important;}.budget-panels{grid-template-columns:1fr;}.budget-panel{break-inside:avoid;}}
+</style>

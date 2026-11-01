@@ -1,6 +1,6 @@
 # Session handoff
 
-Snapshot date: October 24, 2026, America/Vancouver.
+Snapshot date: November 1, 2026, America/Vancouver.
 
 This file records recent work and restart steps. It does not replace the
 [About guides](../src/content/docs/about/framework.mdx).
@@ -27,20 +27,20 @@ The next session does not need this conversation.
 
 ## Last verified release
 
-- Commit: [39c15ba](https://github.com/by-liu/latent-light/commit/39c15ba4c7aafb8186e970611dddcaedb179053f).
+- Commit: [7181f04](https://github.com/by-liu/latent-light/commit/7181f04f4578199145f24af5b6ef7855b7e81260).
 - Branch: `main`.
 - Public site: [latentlit.com](https://latentlit.com).
-- Verification date: October 20, 2026. The website was not checked again for this handoff.
+- Verification date: November 1, 2026, during the earlier Document AI / Echo release. The local Hardware 101 work below is not part of that release.
 - GitHub validation and Cloudflare deployment passed.
 - Cloudflare Worker: `latent-light`.
-- Worker version: `ccecd16f-e391-4282-a7c3-8e7b717e9eca`, deployed at 100%.
-- Local checks passed: 49 deployment tests, 176 content tests, Astro checks and content lint.
-- Live HTML, Markdown, MDX and the overview image matched the reviewed build.
+- Worker version: `b54a9f1a-ca6f-42d1-8eeb-a0f31addd433`, deployed at 100%.
+- Release checks passed: 49 deployment tests, 178 content tests, Astro checks, a 105-page build and 105-file content lint.
+- Live Document AI HTML, Markdown, MDX, figures and Echo assets matched the reviewed build.
 - Live desktop/mobile, both themes, Focus and search checks passed.
 - Known Nimbus/Vite and old Pagefind redirect warnings remained.
 
 The optional detailed release record is
-`output/releases/2026-10-20-39c15ba.json`.
+`output/releases/2026-11-01-7181f04.json`.
 Git ignores that local file. The summary above does not depend on it.
 Use the [maintenance guide](../src/content/docs/about/maintenance.mdx) for future publication checks.
 
@@ -82,9 +82,12 @@ It does not stop the Cloudflare-hosted website.
 
 ## Status and authority
 
-Commit 39c15ba contains the published application changes.
-The handoff documentation and progress cleanup may remain uncommitted.
-Check Git before changing or staging files.
+Commit 7181f04 contains the published Document AI and Echo changes.
+The user has now authorized committing and pushing the completed Hardware 101
+work from `research/hardware-101`. Release preparation is described below;
+the last verified release above remains the production baseline until the new
+deployment passes its public checks. Three earlier progress-only edits remain
+unrelated and must stay outside this release. Check Git before changing or staging files.
 
 The previous release authorization does not authorize future publication.
 Keep credentials and private conversations outside tracked files.
@@ -183,3 +186,92 @@ keyboard, no-JS, print, search and export review is in the revision8 check recor
 This note is prepared before the commit/push. Check GitHub checks, Cloudflare
 status and the live site for the release outcome. A dated authorization here
 does not authorize a later publication action.
+
+## November 1 Hardware 101 (local, ready for review)
+
+The release preparation above completed successfully; the Last verified release
+section records its outcome. The subsequent task is separate local work.
+
+The user requested deep research and page creation for a broad hardware
+foundation for AI researchers and engineers who want to build AI devices.
+They explicitly preferred foundations across device types rather than a single
+product field. The completed page is `/hardware/`, under AI Technology:
+
+- Canonical source: `src/content/docs/hardware/index.mdx`.
+- Evidence and actual review: `docs/research/hardware/hardware-101/`, starting
+  with `review-2026-11-01.json` and `state/progress.json`.
+- Scope: circuits, signals, computation, memory, interfaces, firmware, timing,
+  power, thermals, datasheets, prototyping and representative platform roles.
+- Five figures, including a generated opening learning map and four code-native
+  explanations; seven equations, 32 references, seven platform roles and an
+  interactive lab for sensor traffic, weight payload and battery energy.
+- Shared figure/export data: `plugins/hardware-foundations.mjs`.
+  Calculator definitions/math/exports: `plugins/hardware-budgets.mjs`.
+  Components are in `src/components/hardware/`; both exporters are registered
+  in `astro.config.ts`. Focused checks are in `scripts/hardware-content.test.mjs`.
+- Navigation, homepage, Edge AI and About guidance link to the page.
+
+Full validation passed on Node 24.21.0: 49 deployment and 182 content tests,
+Astro zero errors/warnings/hints, a 106-page build and 106-file lint.
+Research structural validation and `git diff --check` passed. Actual desktop
+and mobile, both themes, Focus, native keyboard controls, table panning,
+mobile navigation, reduced motion, print, no-JavaScript, built search and
+Markdown/MDX/agent exports passed. Browser review led to a more compact
+calculator, corrected native reset timing and consistent static print examples.
+Existing Nimbus/Vite module-directive and 25 Pagefind redirect warnings remain.
+No hardware measurement or model benchmark was performed.
+
+The dev server is running on `http://127.0.0.1:4327` and was restarted after
+the final content edits to refresh cached text exports. Temporary screenshots
+and the CDP harness are disposable; the research review retains the results.
+
+No commit, push or deployment was requested for Hardware 101. Preserve the
+three pre-existing progress-only edits under edge-ai/local-cloud research.
+Do not infer publication authorization from the earlier release or this handoff.
+
+The user then requested an attractive opening infographic and an opening story
+about full stack expanding to **AI + software + hardware**. Revision 3 adds both.
+The generated learning map previews six areas and three practical outcomes;
+the four native figures remain as Figures 2–5. The asset is
+`public/figures/hardware/hardware-101-learning-map-v1.webp`, created with the
+built-in image tool and converted losslessly from its PNG master. Prompt,
+hashes and generation review are in the research workspace's `visuals/`
+directory. `review-opening-2026-11-01.json` records the completed checks.
+Native enlargement, keyboard panning, mobile and both themes, Focus,
+no-JavaScript, print, built search and complete exports passed after the final
+story edit. Full validation remains 49 deployment / 182 content tests and a
+106-page build/lint. The dev server was refreshed on port 4327. All Hardware
+101 work remains local and uncommitted.
+
+The next visual review, revision 4, adds three focused native figures rather
+than images in every section: the ideal DC circuit (Figure 3), conceptual
+board/SoC boundaries (Figure 5), and a latency/throughput schedule (Figure 7).
+There are now eight figures, seven equations and 33 references. The schedule
+uses explicit hypothetical durations and separate resources; it is not a
+device measurement or a clocked logic pipeline. Shared figure data and complete
+exports remain in `plugins/hardware-foundations.mjs`.
+`review-section-figures-2026-11-01.json` records evidence, arithmetic and actual
+desktop/mobile, themes, Focus, keyboard panning, no-JavaScript, print, search
+and export checks. Full validation passed 49 deployment and 183 content tests,
+zero Astro diagnostics, a 106-page build and 106-file lint. Existing build
+warnings remain. The dev server on 4327 has current text exports. No commit,
+push or deployment was performed; preserve unrelated research-state edits.
+
+## November 1 Hardware 101 release preparation
+
+The user subsequently requested **commit and push**. The intended release
+contains the complete Hardware 101 page, eight figures, interactive budgets,
+text exports, navigation, focused tests, provenance and research review records.
+Use a pull request for the substantial change, check validation, then advance
+`main` to trigger the existing Cloudflare automatic deployment. The production
+origin remains `https://latentlit.com`; no hosting settings or dependencies change.
+Verify the public page, asset, exports, search and desktop/mobile rendering after
+deployment. Record the resulting source commit and deployment in the ignored
+`output/releases/` directory and the final response. This preparation note does
+not claim that a push or deployment has already succeeded.
+
+Leave these pre-existing files uncommitted:
+
+- `docs/research/edge-ai/local-cloud-collaboration/state/progress.json`
+- `docs/research/local-cloud-ai/cloud-agents-local-specialists/state/progress.json`
+- `docs/research/local-cloud-ai/smart-devices-cloud-agents/state/progress.json`

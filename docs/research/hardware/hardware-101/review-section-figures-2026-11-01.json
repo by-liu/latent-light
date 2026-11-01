@@ -1,0 +1,219 @@
+{
+  "checked_at": "2026-11-01T20:44:33.672199Z",
+  "revision": 4,
+  "output": "src/content/docs/hardware/index.mdx",
+  "selection": "Three focused native figures fill specific teaching gaps; the opening artwork and existing figures remain. No decorative images were added to every section.",
+  "changes": [
+    {
+      "figure": 3,
+      "section": "Electricity and digital signals",
+      "purpose": "Make voltage, loop current, return path and resistor dissipation concrete using the existing 3.3 V / 10 kΩ example."
+    },
+    {
+      "figure": 5,
+      "section": "Understand the chip",
+      "purpose": "Show board and SoC boundaries, optional CPU/GPU/NPU roles and surrounding parts without claiming a particular product layout."
+    },
+    {
+      "figure": 7,
+      "section": "Software owns time",
+      "purpose": "Distinguish 27 ms individual latency from 12 ms completion spacing using an explicitly hypothetical dedicated-resource pipeline."
+    }
+  ],
+  "evidence_review": [
+    "Circuit quantities recomputed: 0.33 mA and 1.089 mW. Current arrows follow the complete conventional-current path; the ground mark is a reference.",
+    "Board map is explicitly conceptual; GPU/NPU presence and memory integration vary. It does not assert i.MX 93 contains a GPU.",
+    "MIT 6.004 definitions and bottleneck discussion inspected as S033. The original software schedule uses independently scheduled resources and is distinguished from the course’s clocked-register example.",
+    "All three frames have 27 ms latency; finishes at 27/39/51 ms are 12 ms apart. A focused test verifies each dedicated stage has no overlapping jobs.",
+    "No circuit experiment or hardware performance measurement performed."
+  ],
+  "refinements": [
+    "Separated the two current-arrow paths so both source-to-load and return directions have visible arrowheads.",
+    "Hide panning hints at normal desktop widths when the SVG fits; keep them on narrow screens.",
+    "Complete visible text and Markdown equivalents retain quantities, roles, stage intervals and assumptions."
+  ],
+  "validation": {
+    "status": "passed",
+    "command": "mise exec node@24.21.0 -- npm run validate",
+    "deployment_tests": 49,
+    "content_tests": 183,
+    "astro_errors": 0,
+    "astro_warnings": 0,
+    "astro_hints": 0,
+    "built_pages": 106,
+    "lint_files": 106,
+    "research_structure": "passed",
+    "diff_check": "passed"
+  },
+  "browser": {
+    "views": [
+      {
+        "name": "circuit-desktop",
+        "x": 399,
+        "y": 3634.515625,
+        "width": 648,
+        "height": 714.125,
+        "overflow": false
+      },
+      {
+        "name": "chip-desktop",
+        "x": 399,
+        "y": 7977.984375,
+        "width": 648,
+        "height": 710.1875,
+        "overflow": false
+      },
+      {
+        "name": "timing-desktop",
+        "x": 399,
+        "y": 14847.796875,
+        "width": 648,
+        "height": 768.328125,
+        "overflow": false
+      },
+      {
+        "name": "circuit-dark",
+        "x": 399,
+        "y": 3634.515625,
+        "width": 648,
+        "height": 714.125,
+        "overflow": false
+      },
+      {
+        "name": "chip-focus",
+        "x": 141,
+        "y": 8176.421875,
+        "width": 1152,
+        "height": 957.1875,
+        "overflow": false
+      },
+      {
+        "name": "timing-focus",
+        "x": 208,
+        "y": 15223.453125,
+        "width": 1024,
+        "height": 871.203125,
+        "overflow": false
+      },
+      {
+        "name": "circuit-mobile",
+        "x": 16,
+        "y": 4827.796875,
+        "width": 358,
+        "height": 845.203125,
+        "overflow": false
+      },
+      {
+        "name": "chip-mobile",
+        "x": 16,
+        "y": 10936.890625,
+        "width": 358,
+        "height": 856.140625,
+        "overflow": false
+      },
+      {
+        "name": "timing-mobile",
+        "x": 16,
+        "y": 25191.484375,
+        "width": 288,
+        "height": 1056.90625,
+        "overflow": false
+      },
+      {
+        "name": "circuit-small",
+        "x": 16,
+        "y": 6016.9375,
+        "width": 288,
+        "height": 880.328125,
+        "overflow": false
+      }
+    ],
+    "checks": {
+      "structure": {
+        "figures": [
+          "figure-1",
+          "figure-2",
+          "figure-3",
+          "figure-4",
+          "figure-5",
+          "figure-6",
+          "figure-7",
+          "figure-8"
+        ],
+        "references": 33,
+        "equations": 7,
+        "badAnchors": [],
+        "descriptions": [
+          true,
+          true,
+          true
+        ],
+        "timingBars": 12,
+        "budget": "true",
+        "circuit": true
+      },
+      "keyboardPan": {
+        "figure-5": 40,
+        "figure-7": 40
+      },
+      "exports": {
+        "status": 200,
+        "mdxStatus": 200,
+        "captions": 8,
+        "equations": 7,
+        "sources": 33,
+        "raw": false,
+        "complete": true,
+        "mdx": true,
+        "full": true,
+        "short": true
+      },
+      "print": {
+        "figures": 8,
+        "plots": [
+          "0px",
+          "0px"
+        ],
+        "hints": [
+          "none",
+          "none"
+        ]
+      },
+      "search": {
+        "query": "\"complete loop\"",
+        "results": [
+          {
+            "text": "Physical AI",
+            "href": "/products-markets/landscapes/physical-ai/"
+          },
+          {
+            "text": "Company explorer",
+            "href": "/products-markets/landscapes/physical-ai/#company-explorer"
+          },
+          {
+            "text": "Hardware 101 for AI Researchers and Engineers",
+            "href": "/hardware/"
+          },
+          {
+            "text": "Voltage, current, resistance and power",
+            "href": "/hardware/#voltage-current-resistance-and-power"
+          }
+        ]
+      },
+      "nojs": {
+        "figures": 8,
+        "newFigures": true,
+        "timingBars": 12,
+        "keyboardPan": true
+      },
+      "browserErrors": 0
+    }
+  },
+  "browser_method": "Actual Chromium CDP against loopback port 4327 at 1440×1000, 390×844 and 320×800; screenshots inspected in light/dark and Focus. Native ArrowRight panning tested with and without JavaScript. Reduced motion and print media checked.",
+  "exports": "Actual Markdown, MDX, llms.txt and llms-full.txt contain eight figure captions, seven equations, 33 sources and complete new figure meaning, with no raw presentation markup. Pagefind search UI tested with current built index supplied through a scoped CDP interceptor.",
+  "warnings": [
+    "Existing Nimbus/Vite module-directive warnings.",
+    "25 existing Pagefind legacy-redirect warnings."
+  ],
+  "publication": "Local and uncommitted; no push or deployment authorized for this work. Three unrelated research-state edits preserved."
+}

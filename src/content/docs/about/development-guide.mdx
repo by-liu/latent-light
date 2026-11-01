@@ -1,7 +1,7 @@
 ---
 title: Development guide
 description: Where source files live and how to develop pages, components, and exports.
-lastUpdated: 2026-10-31
+lastUpdated: 2026-11-01
 ---
 
 Develop the site from its source files. Preserve the calm reading experience.
@@ -61,7 +61,7 @@ explanations. Preserve established URLs. Use a redirect when replacing a route.
 
 Organize learning collections under broader domains.
 AI Technology contains LLM & VLM, Document AI, Knowledge Distillation, Agents,
-Local & Cloud AI and Edge AI.
+Local & Cloud AI, Hardware 101 and Edge AI.
 Products & Markets contains AI Landscapes. Human Capabilities contains High agency and Taste.
 Do not add empty navigation groups.
 A sidebar grouping change does not require moving source files or changing page URLs.
@@ -252,6 +252,26 @@ Wrap wide comparisons in `FocusCanvas` with `size="wide"`.
 Keep `comparisonTableAsMarkdown` registered in `astro.config.ts`.
 Its implementation lives in `plugins/comparison-table.mjs`.
 Check search, pinned labels, keyboard scrolling, print and complete exports after changes.
+
+### Hardware foundation figures and budgets
+
+`src/components/hardware/HardwareFigure.astro` renders the system, circuit, sampling, chip,
+memory and timing figures on [Hardware 101](/hardware/). Pass a static `kind` and numbered
+figure `id`. Its shared content and complete text equivalent live in
+`plugins/hardware-foundations.mjs`; keep `hardwareFigureAsMarkdown` registered
+in `astro.config.ts`. The signal plot uses original mathematical samples,
+not measured sensor data. The circuit is an ideal DC example; the timing plot
+uses explicitly assumed stage durations and dedicated resources. Chip and timing
+diagrams pan at narrow widths, including with the keyboard. Preserve every
+label, duration, boundary and assumption in their shared text exports.
+
+`HardwareBudget.astro` uses `plugins/hardware-budgets.mjs` for shared input
+definitions, unit calculations, initial results and Markdown exports.
+Keep `hardwareBudgetAsMarkdown` registered. Inputs enhance the static examples;
+invalid or empty values must produce an understandable error, not a result.
+Check keyboard calculation selection, editing and reset, both themes, Focus view, narrow screens,
+the no-JavaScript examples, print and complete exports after changes.
+Calculator and export checks run with `npm run test:content`.
 
 ### The Document AI system map
 

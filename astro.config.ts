@@ -22,6 +22,8 @@ import { podcastPlayerAsMarkdown } from './plugins/podcast-player.mjs';
 import { documentSystemAsMarkdown } from './plugins/document-system.mjs';
 import { documentModelAtlasAsMarkdown } from './plugins/document-model-atlas.mjs';
 import { comparisonTableAsMarkdown } from './plugins/comparison-table.mjs';
+import { hardwareFigureAsMarkdown } from './plugins/hardware-foundations.mjs';
+import { hardwareBudgetAsMarkdown } from './plugins/hardware-budgets.mjs';
 
 const nimbusConfig = defineNimbusConfig({
   // CHANGE_ME: your site's canonical origin (no trailing slash). Drives
@@ -150,6 +152,7 @@ const nimbusConfig = defineNimbusConfig({
           { label: "Cloud Agents & Local Specialists", link: "/local-cloud-ai/cloud-agents-local-specialists/" },
           { label: "Smart Devices & Cloud Agents", link: "/local-cloud-ai/smart-devices-cloud-agents/" },
         ] },
+        { label: "Hardware 101", link: "/hardware/" },
         { label: "Edge AI", collapsed: true, items: [
           { label: "Overview", link: "/edge-ai/" },
           { label: "Foundations & Bottlenecks", link: "/edge-ai/foundations/" },
@@ -279,6 +282,8 @@ export default defineConfig({
           DocumentSystem: documentSystemAsMarkdown,
           DocumentModelAtlas: documentModelAtlasAsMarkdown,
           ComparisonTable: comparisonTableAsMarkdown,
+          HardwareFigure: hardwareFigureAsMarkdown,
+          HardwareBudget: hardwareBudgetAsMarkdown,
           ModelFlow: modelFlowAsMarkdown,
           SourceFigure: sourceFigureAsMarkdown,
           ModelResources: modelResourcesAsMarkdown,
