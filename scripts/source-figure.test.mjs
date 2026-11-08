@@ -15,3 +15,10 @@ test('SourceFigure does not invent an unsafe anchor or remove unrelated HTML',()
  assert.ok(out.includes('<div>Retained prose</div>'));
  assert.doesNotMatch(out,/<a id=/);
 });
+
+test('Animated SourceFigure keeps the still, motion link and explanation in Markdown',()=>{
+ const body='<SourceFigure id="figure-1" src="/still.webp" motionSrc="/loop.gif" alt="Sensor signals enter a processor.">\n<div slot="image">\n\n![Learning map.](/still.webp)\n\n</div>\n**Figure 1.** Motion is illustrative.\n</SourceFigure>';
+ const md=renderEntryAsMarkdown({body,filePath:'motion.mdx'},{componentMap:{SourceFigure:sourceFigureAsMarkdown.render}});
+ for(const text of ['![Learning map.](/still.webp)','[Open animated GIF](/loop.gif)','Motion is illustrative.','Sensor signals enter a processor.','<a id="figure-1"></a>'])assert.ok(md.includes(text),text);
+ assert.doesNotMatch(md,/<SourceFigure|motionSrc|slot="image"/);
+});

@@ -70,15 +70,15 @@ const {id}=Astro.props;
 </script>
 <style>
  .hardware-budget{container-type:inline-size;min-width:0;scroll-margin-top:5rem;margin:2rem 0;}
- .budget-art{border:1px solid var(--nb-border);border-radius:1rem;padding:1.4rem;background:var(--nb-background);}
+ .budget-art{border:1px solid var(--nb-border);border-radius:8px;padding:1.5rem;background:var(--nb-background);}
  .eyebrow{font-size:.65rem;text-transform:uppercase;letter-spacing:.12em;color:var(--nb-muted-foreground);font-weight:650;}
- .budget-title{font-weight:650;font-size:clamp(1.2rem,3cqi,1.7rem);letter-spacing:-.035em;line-height:1.2;margin:.55rem 0;}
- .budget-intro{font-size:.84rem;line-height:1.6;color:var(--nb-muted-foreground);margin:0 0 1.3rem;}
+ .budget-title{font-weight:600;font-size:clamp(1.25rem,3cqi,1.75rem);letter-spacing:-.035em;line-height:1.2;margin:.55rem 0;}
+ .budget-intro{font-size:.875rem;line-height:1.65;color:var(--nb-muted-foreground);margin:0 0 1.3rem;}
  .budget-choices:not([hidden]){display:flex;gap:.5rem;margin:0 0 1rem;}
- .budget-choices button{flex:1;margin:0;min-height:2.6rem;font-size:.75rem;font-weight:550;padding:.55rem .35rem;}
- .budget-choices button[aria-pressed="true"]{color:var(--nb-foreground);border-color:var(--nb-foreground);background:color-mix(in srgb,var(--nb-foreground) 5%,var(--nb-background));}
+ .budget-choices button{border:0;border-bottom:2px solid transparent;border-radius:0;flex:1;margin:0;min-height:2.6rem;font-size:.75rem;font-weight:550;padding:.55rem .35rem;}
+ .budget-choices button[aria-pressed="true"]{color:var(--nb-foreground);border-bottom-color:var(--nb-foreground);background:transparent;}
  .budget-panels{display:grid;grid-template-columns:1fr;gap:1.2rem;}
- .budget-panel{border:1px solid var(--nb-border);border-radius:.6rem;padding:1rem;min-width:0;}
+ .budget-panel{border:1px solid var(--nb-border);border-radius:6px;padding:1rem;min-width:0;}
  .panel-label{font-size:.63rem;text-transform:uppercase;letter-spacing:.08em;font-weight:650;color:var(--nb-muted-foreground);}
  .panel-title{font-size:1rem;line-height:1.35;font-weight:600;margin:.4rem 0 1rem;}
  .budget-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.75rem;}
@@ -88,7 +88,7 @@ const {id}=Astro.props;
  input[aria-invalid="true"]{border-color:#b55547;}
  button{border:1px solid var(--nb-border);background:var(--nb-background);color:var(--nb-muted-foreground);border-radius:.3rem;padding:.4rem .6rem;font-size:.68rem;cursor:pointer;margin:.8rem 0 .2rem;}button:hover{color:var(--nb-foreground);}
  .default-inputs{font-size:.73rem;line-height:1.6;}.budget-art[data-ready] .default-inputs{display:none;}
- .budget-result{display:flex;flex-direction:column;gap:.3rem;margin:1rem 0 1.25rem;border-bottom:1px solid var(--nb-border);padding-bottom:1rem;}.budget-result strong{font-size:1.65rem;font-weight:650;letter-spacing:-.03em;line-height:1.2;overflow-wrap:anywhere;}.budget-result>span{font-size:.73rem;line-height:1.5;color:var(--nb-muted-foreground);}
+ .budget-result{display:flex;flex-direction:column;gap:.3rem;margin:1rem 0 1.25rem;border-bottom:1px solid var(--nb-border);padding-bottom:1rem;}.budget-result strong{font-size:2rem;font-weight:600;letter-spacing:-.03em;line-height:1.2;overflow-wrap:anywhere;}.budget-result>span{font-size:.73rem;line-height:1.5;color:var(--nb-muted-foreground);}
  .budget-formula{font-size:.73rem;line-height:1.6;margin:.7rem 0;}.budget-assumptions{font-size:.72rem;line-height:1.65;color:var(--nb-muted-foreground);margin:.7rem 0 0;}
  .budget-units{font-size:.68rem;line-height:1.6;color:var(--nb-muted-foreground);margin:1rem 0 0;}
  .print-result{display:none;}
@@ -96,4 +96,6 @@ const {id}=Astro.props;
  @container(min-width:850px){.budget-fields{grid-template-columns:repeat(5,minmax(0,1fr));}.budget-choices{max-width:40rem;}}
  @container(max-width:360px){.budget-art{padding:.9rem;}.budget-panel{padding:.8rem;}.budget-fields{grid-template-columns:1fr;}}
  @media print{.budget-form,.budget-result,.budget-choices{display:none!important;}.budget-art[data-ready] .default-inputs,.print-result,.budget-panel[hidden]{display:block!important;}.budget-panels{grid-template-columns:1fr;}.budget-panel{break-inside:avoid;}}
+ /* Match the cascade layer of the global hidden reset when printing. */
+ @layer base{@media print{.hardware-budget .budget-panel[hidden]{display:block!important;}}}
 </style>

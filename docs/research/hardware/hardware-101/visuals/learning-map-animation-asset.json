@@ -1,0 +1,22 @@
+{
+  "date": "2026-11-07",
+  "asset": "public/figures/hardware/hardware-101-learning-map-motion-v1.gif",
+  "sha256": "89da3e4fc9520f530f03f2b2b756e92e6af1f360df2b990458ad87ffebd18ef5",
+  "bytes": 863326,
+  "dimensions": [
+    1248,
+    714
+  ],
+  "frames": 48,
+  "frame_duration_ms": 80,
+  "duration_seconds": 3.84,
+  "loop": "infinite",
+  "keyframe_tool": "built-in image_gen.imagegen",
+  "actual_tool_output": "single PNG keyframe, not native GIF",
+  "keyframe": "output/imagegen/hardware-101-learning-map-activated-v1.png",
+  "keyframe_sha256": "6665631d8fff17abbb871dc308afbedd4c4583930f23828f2d6c940d29c394e1",
+  "assembly": "scripts/render-hardware-learning-loop.mjs; librsvg raster frames and FFmpeg GIF palette/encoding",
+  "still": "public/figures/hardware/hardware-101-learning-map-v1.webp",
+  "source_art": "Original project AI-generated illustration; no external artwork",
+  "meaning": "Conceptual sensor-to-compute-to-output signal flow; timing and hardware are illustrative."
+}

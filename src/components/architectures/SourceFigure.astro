@@ -1,12 +1,13 @@
 ---
-interface Props { src: string; darkSrc?: string; alt: string; narrow?: boolean; poster?: boolean; id?: string; minWidth?: number; zoomable?: boolean; fitInitially?: boolean; }
-const { src, darkSrc, alt, narrow = false, poster = false, id, minWidth, zoomable = false, fitInitially = false } = Astro.props;
+interface Props { src: string; darkSrc?: string; motionSrc?: string; alt: string; narrow?: boolean; poster?: boolean; id?: string; minWidth?: number; zoomable?: boolean; fitInitially?: boolean; }
+const { src, darkSrc, motionSrc, alt, narrow = false, poster = false, id, minWidth, zoomable = false, fitInitially = false } = Astro.props;
 if (minWidth !== undefined && (!Number.isFinite(minWidth) || minWidth < 0 || minWidth > 1600)) throw new Error('SourceFigure minWidth must be between 0 and 1600 pixels.');
+if (motionSrc && (!id || darkSrc)) throw new Error('Animated SourceFigure requires an id and a single still image.');
 ---
-<figure id={id} class:list={['source-figure', {narrow, poster, zoomable, 'fit-initially': fitInitially}]}>
+<figure id={id} class:list={['source-figure', {narrow, poster, zoomable, animated: Boolean(motionSrc), 'fit-initially': fitInitially}]}>
   <div class:list={['image-viewport', {pannable: Boolean(minWidth)}]} style={minWidth ? `--source-min-width:${minWidth}px` : undefined} tabindex={minWidth ? '0' : undefined} role={minWidth ? 'region' : undefined} aria-label={minWidth ? `Scrollable figure: ${alt}` : undefined}>
-  <a class:list={{'theme-light': Boolean(darkSrc)}} href={src} target="_blank" rel="noopener" aria-label={`Open full resolution: ${alt}`}>
-    <slot name="image" />
+  <a class:list={{'theme-light': Boolean(darkSrc)}} href={src} target="_blank" rel="noopener" title="Open full-size figure" aria-label={`Open full resolution: ${alt}`}>
+    {motionSrc ? <img id={`${id}-motion`} data-figure-motion={motionSrc} data-still={src} src={src} alt={alt} loading="lazy" decoding="async" /> : <slot name="image" />}
     <span class="zoom-hint" aria-hidden="true">Open full size ↗</span>
   </a>
   {darkSrc && (
@@ -16,10 +17,46 @@ if (minWidth !== undefined && (!Number.isFinite(minWidth) || minWidth < 0 || min
     </a>
   )}
   </div>
-  {minWidth && <div class="figure-tools"><span>Pan on smaller screens</span>{zoomable && <label class="figure-zoom-control"><input class="figure-zoom" type="checkbox" />Enlarge labels · pan for detail</label>}<a href={src} target="_blank" rel="noopener">Open full size ↗</a></div>}
+  {minWidth && !motionSrc && <div class="figure-tools"><span>Pan on smaller screens</span>{zoomable && <label class="figure-zoom-control"><input class="figure-zoom" type="checkbox" />Enlarge labels · pan for detail</label>}<a href={src} target="_blank" rel="noopener">Open full size ↗</a></div>}
   <figcaption class="source-caption"><slot /></figcaption>
 </figure>
+<script>
+ function initFigureMotion() {
+  document.querySelectorAll<HTMLImageElement>('img[data-figure-motion]').forEach(img=>{
+   if(img.dataset.motionReady)return;
+   img.dataset.motionReady='true';
+   const preference=matchMedia('(prefers-reduced-motion: reduce)');
+   let visible=false;
+   let printing=false;
+   const update=()=>{
+    const next=visible&&!document.hidden&&!printing&&!preference.matches?img.dataset.figureMotion!:img.dataset.still!;
+    if(img.getAttribute('src')!==next)img.src=next;
+   };
+   const observer=new IntersectionObserver(entries=>{
+    visible=entries.some(entry=>entry.isIntersecting&&entry.intersectionRatio>=.25);
+    update();
+   },{threshold:.25});
+   observer.observe(img);
+   preference.addEventListener('change',update);
+   document.addEventListener('visibilitychange',update);
+   const beforePrint=()=>{printing=true;update();};
+   const afterPrint=()=>{printing=false;update();};
+   window.addEventListener('beforeprint',beforePrint);
+   window.addEventListener('afterprint',afterPrint);
+   document.addEventListener('astro:before-swap',()=>{
+    observer.disconnect();
+    preference.removeEventListener('change',update);
+    document.removeEventListener('visibilitychange',update);
+    window.removeEventListener('beforeprint',beforePrint);
+    window.removeEventListener('afterprint',afterPrint);
+   },{once:true});
+  });
+ }
+ initFigureMotion();
+ document.addEventListener('astro:page-load',initFigureMotion);
+</script>
 <style>
+  .animated .zoom-hint{display:none;}
   .source-figure{margin:1.5rem auto;min-width:0;}.narrow{max-width:30rem;}
   .image-viewport{min-width:0;}.pannable{overflow-x:auto;overscroll-behavior-inline:contain;border-radius:.75rem;}.pannable>a{min-width:var(--source-min-width);}.pannable:focus-visible{outline:2px solid var(--nb-primary);outline-offset:4px;}.pannable .zoom-hint{display:none;}
   .figure-tools{display:flex;justify-content:space-between;align-items:center;gap:.6rem;margin-top:.5rem;color:var(--nb-muted-foreground);font-size:.72rem;line-height:1.5;}.figure-tools a{white-space:nowrap;}

@@ -57,7 +57,7 @@ test('Every teaching figure exports its full meaning, assumptions, caption and c
  for(const f of hardwareFigures.system.flows)assert.ok(md.includes(f.detail));
  for(const l of hardwareFigures.memory.layers)assert.ok(md.includes(l.detail));
  assert.ok(md.includes(hardwareFigures.signal.explanation));
- for(const kind of ['circuit','chip','timing'])assert.ok(md.includes(hardwareFigures[kind].explanation));
+ for(const kind of ['circuit','chip','timing','memory'])assert.ok(md.includes(hardwareFigures[kind].explanation));
  for(const r of hardwareFigures.circuit.readouts)assert.ok(md.includes(r.value));
  for(const r of hardwareFigures.chip.roles)assert.ok(md.includes(r.detail));
  for(const f of timingFrames)assert.ok(md.includes('finish '+f.end+' ms; latency '+f.latency+' ms'));

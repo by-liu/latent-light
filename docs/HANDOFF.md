@@ -1,6 +1,6 @@
 # Session handoff
 
-Snapshot date: November 1, 2026, America/Vancouver.
+Snapshot date: November 8, 2026, America/Vancouver.
 
 This file records recent work and restart steps. It does not replace the
 [About guides](../src/content/docs/about/framework.mdx).
@@ -27,20 +27,20 @@ The next session does not need this conversation.
 
 ## Last verified release
 
-- Commit: [7181f04](https://github.com/by-liu/latent-light/commit/7181f04f4578199145f24af5b6ef7855b7e81260).
+- Commit: [032cc87](https://github.com/by-liu/latent-light/commit/032cc872ccb8a3ae060b4a32431d9a227a8fd1aa).
 - Branch: `main`.
 - Public site: [latentlit.com](https://latentlit.com).
-- Verification date: November 1, 2026, during the earlier Document AI / Echo release. The local Hardware 101 work below is not part of that release.
+- Verification date: November 1, 2026, after the initial Hardware 101 release. The subsequent animation and diagram refinements below are not part of that release.
 - GitHub validation and Cloudflare deployment passed.
 - Cloudflare Worker: `latent-light`.
-- Worker version: `b54a9f1a-ca6f-42d1-8eeb-a0f31addd433`, deployed at 100%.
-- Release checks passed: 49 deployment tests, 178 content tests, Astro checks, a 105-page build and 105-file content lint.
-- Live Document AI HTML, Markdown, MDX, figures and Echo assets matched the reviewed build.
-- Live desktop/mobile, both themes, Focus and search checks passed.
+- Worker version: `07c2fdd6-17db-42f5-bb1f-3892e00119db`, deployed at 100%.
+- Release checks passed: 49 deployment tests, 183 content tests, Astro checks, a 106-page build and 106-file content lint.
+- Live Hardware 101 HTML, Markdown, MDX, opening figure and related pages matched the reviewed build.
+- Live desktop/mobile, both themes, Focus, keyboard, search and no-JavaScript checks passed.
 - Known Nimbus/Vite and old Pagefind redirect warnings remained.
 
 The optional detailed release record is
-`output/releases/2026-11-01-7181f04.json`.
+`output/releases/2026-11-01-032cc87.json`.
 Git ignores that local file. The summary above does not depend on it.
 Use the [maintenance guide](../src/content/docs/about/maintenance.mdx) for future publication checks.
 
@@ -82,9 +82,9 @@ It does not stop the Cloudflare-hosted website.
 
 ## Status and authority
 
-Commit 7181f04 contains the published Document AI and Echo changes.
-The user has now authorized committing and pushing the completed Hardware 101
-work from `research/hardware-101`. Release preparation is described below;
+Commit 032cc87 contains the published initial Hardware 101 page.
+The user has now authorized committing and pushing the subsequent animation
+and diagram refinements from `refine/hardware-visuals`. Release preparation is described below;
 the last verified release above remains the production baseline until the new
 deployment passes its public checks. Three earlier progress-only edits remain
 unrelated and must stay outside this release. Check Git before changing or staging files.
@@ -275,3 +275,68 @@ Leave these pre-existing files uncommitted:
 - `docs/research/edge-ai/local-cloud-collaboration/state/progress.json`
 - `docs/research/local-cloud-ai/cloud-agents-local-specialists/state/progress.json`
 - `docs/research/local-cloud-ai/smart-devices-cloud-agents/state/progress.json`
+
+## November 7 animated Hardware 101 opening (local)
+
+The user requested a cool GIF for Figure 1 on `/hardware/`. The preceding
+Hardware 101 release completed as commit `032cc87`; this animation is subsequent
+local work and has not been committed, pushed or deployed.
+
+Figure 1 now has a looping 3.84-second, 48-frame GIF (about 844 KB), assembled from a
+built-in image-tool keyframe with moving signal packets and a slow chip glow.
+The original WebP remains the still. After the user preferred an uncluttered
+figure, all toolbars and playback buttons were removed. `SourceFigure` accepts
+optional `motionSrc`: continuous playback while the figure and tab are visible,
+as explicitly requested by the user. The image itself opens the full-size still. Reduced motion,
+no JavaScript and print use the still. Markdown retains the still and GIF link.
+Prompt, asset metadata and review are in `docs/research/hardware/hardware-101/`;
+assembly is reproducible with `scripts/render-hardware-learning-loop.mjs` when
+the ignored keyframe and local librsvg/FFmpeg tools are available.
+
+Validation passed: 49 deployment / 184 content tests, zero Astro diagnostics,
+106-page build and 106-file lint. Desktop/mobile, both themes, Focus, keyboard
+full-size access, reduced motion, print, no-JavaScript and exports passed.
+The title region is pixel-identical across the 48 GIF frames. Existing Nimbus/Vite
+and 25 Pagefind redirect warnings remain. A single current dev server runs at
+`http://127.0.0.1:4327`; its exports were refreshed. Preserve the three unrelated
+progress-file edits. The request to edit this figure does not authorize a new release.
+
+## November 7 Hardware 101 diagram refinement (local)
+
+The user approved applying the newly installed global `diagram-design` skill
+to Figures 2–8. Figure 1 was explicitly excluded: its authored block, both assets,
+component and exporter match the pre-refinement hashes. The previous GIF work
+and three unrelated research progress-file edits remain preserved and uncommitted.
+
+The board map now has clear nested boundaries and orthogonal connections; a new
+memory staging SVG states the mapped-flash/shared-pool exceptions; timing brackets
+distinguish 27 ms latency from 12 ms completion intervals. System lanes, the ideal
+circuit, sampling axes and the budget lab share calmer frames and the existing
+Inter/theme typography. Full definitions, calculations and references remain.
+The calculator print override was fixed to reveal all three examples despite
+the framework’s layered hidden rule.
+
+Design choices are in `visuals/diagram-refinement-brief.md` under the Hardware 101
+research workspace; `review-diagram-design-2026-11-07.json` records actual checks.
+Full validation passed: 49 deployment / 184 content tests, zero Astro diagnostics,
+106-page build and 106-file lint. Desktop/mobile, both themes, Focus, keyboard
+panning and calculation controls, reduced motion, print, no JavaScript, built
+search and full exports passed. The skill’s self-check passed on the ignored
+HTML proof in `output/hardware-diagram-refinement/`. Existing Nimbus/Vite and
+25 Pagefind redirect warnings remain. The current dev server is on loopback 4327.
+No new commit, push or deployment is authorized by this local refinement.
+
+## November 8 visual-refinement release preparation
+
+The user subsequently requested **commit and push** for the completed local
+work: the looping Figure 1 GIF with its clean presentation, refined Figures 2–8,
+print correction, complete exports, tests and provenance/review records.
+Use the `refine/hardware-visuals` branch and a pull request. After validation,
+advance `main` for the existing automatic Cloudflare release at
+`https://latentlit.com`. No hosting settings or dependencies change.
+The last verified release above remains the baseline until public verification
+succeeds. Record the new source commit, checks and Worker version under ignored
+`output/releases/` after release, and report the result to the user.
+
+Preserve the three unrelated progress-file edits listed above. The global
+diagram-design skill installation is outside this repository and is not included.

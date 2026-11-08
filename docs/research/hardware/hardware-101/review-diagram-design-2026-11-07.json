@@ -1,0 +1,139 @@
+{
+  "date": "2026-11-07",
+  "scope": "Diagram-design refinement of Figures 2\u20138; Figure 1 excluded and verified unchanged.",
+  "brief": "visuals/diagram-refinement-brief.md",
+  "implementation": [
+    "src/components/hardware/HardwareFigure.astro",
+    "src/components/hardware/HardwareBudget.astro",
+    "plugins/hardware-foundations.mjs"
+  ],
+  "design": "Site Inter Variable and light/dark tokens; neutral supporting strokes, amber focal category, orthogonal board connections, explicit sampling axes and timing intervals. Memory staging retains access-path exceptions.",
+  "technical_fidelity": "Preserved circuit quantities, both cosine signals, all nine displayed sample instants, twelve timing-stage bars and all calculator formulas/assumptions. No hardware measurements or new benchmark results.",
+  "validation": {
+    "deployment_tests": 49,
+    "content_tests": 184,
+    "astro_errors": 0,
+    "astro_warnings": 0,
+    "astro_hints": 0,
+    "build_pages": 106,
+    "lint_files": 106,
+    "whitespace": "passed"
+  },
+  "browser": {
+    "views": [
+      "desktop-2",
+      "desktop-3",
+      "desktop-4",
+      "desktop-5",
+      "desktop-6",
+      "desktop-7",
+      "desktop-8",
+      "focus-dark-5",
+      "focus-dark-6",
+      "focus-dark-7",
+      "mobile-2",
+      "mobile-3",
+      "mobile-4",
+      "mobile-5",
+      "mobile-6",
+      "mobile-7",
+      "mobile-8",
+      "small-2",
+      "small-4",
+      "small-5",
+      "small-6",
+      "small-7",
+      "small-8"
+    ],
+    "checks": {
+      "structure": {
+        "figures": 8,
+        "references": 33,
+        "timingBars": 12,
+        "samples": 9,
+        "font": "\"Inter Variable\", Inter, system-ui, -apple-system, \"Segoe UI\", Roboto, sans-serif",
+        "weight": "600",
+        "fontLoaded": true,
+        "titles": [
+          {
+            "title": "A complete ideal DC circuit",
+            "description": true
+          },
+          {
+            "title": "Different signals, identical samples",
+            "description": true
+          },
+          {
+            "title": "Board and SoC boundaries",
+            "description": true
+          },
+          {
+            "title": "Memory roles and a common staging path",
+            "description": true
+          },
+          {
+            "title": "Latency and completion intervals",
+            "description": true
+          }
+        ]
+      },
+      "textOverflow": [],
+      "browserErrors": [],
+      "keyboardPan": {
+        "5": 40,
+        "6": 40,
+        "7": 40
+      },
+      "budgets": "Native keyboard input, reset and all three modes pass",
+      "search": {
+        "query": "\"common staging path\"",
+        "found": true
+      },
+      "exports": {
+        "memory": true,
+        "exception": true,
+        "captions": 8,
+        "math": true,
+        "mdx": true,
+        "full": true
+      },
+      "print": {
+        "panels": 3,
+        "plots": [
+          "0px",
+          "0px",
+          "0px"
+        ],
+        "hints": [
+          "none",
+          "none"
+        ]
+      },
+      "nojs": {
+        "figures": 8,
+        "memory": true,
+        "bars": 12,
+        "panels": 3
+      }
+    }
+  },
+  "visual_review": "Desktop light, Focus dark, 390px dark and 320px light rendered; 23 views captured. Priority board, memory and timing plus sampling, circuit, system lanes and calculator screenshots inspected. No page overflow or SVG text outside its viewBox.",
+  "print_fix": "Scoped base-layer print override exposes all three budget examples despite the global hidden reset; static/no-JS examples remain available.",
+  "skill_check": {
+    "command": "python3 /home/lby/.codex/skills/diagram-design/scripts/self_check.py output/hardware-diagram-refinement/hardware-diagrams.html",
+    "result": "passed",
+    "artifact": "output/hardware-diagram-refinement/hardware-diagrams.html"
+  },
+  "figure_1_unchanged": {
+    "public/figures/hardware/hardware-101-learning-map-motion-v1.gif": "89da3e4fc9520f530f03f2b2b756e92e6af1f360df2b990458ad87ffebd18ef5",
+    "public/figures/hardware/hardware-101-learning-map-v1.webp": "26f40a47db66669b8f8645239eacccf3cfdde8a6c1ad02b4ddc2edc28de3dfa3",
+    "src/components/architectures/SourceFigure.astro": "a5f164b5e190fe12e92e09bba6ebd1bd150260c78315378a3f6b15284c5e437f",
+    "plugins/source-figure.mjs": "b1db1af72105ee9f6cc78b11bca01004977379cd307b56ecb70b4d77d0977825",
+    "figure_1_block": "b21f65abf0faece694bbd47fc33e1037e2fa9b644332e41279cdcf31a17542c3"
+  },
+  "warnings": [
+    "Existing Nimbus/Vite module-directive warnings",
+    "25 existing Pagefind legacy redirect warnings"
+  ],
+  "delivery": "Complete locally on port 4327; no commit, push or deployment requested for this refinement. Prior GIF work and three unrelated progress-file edits preserved."
+}

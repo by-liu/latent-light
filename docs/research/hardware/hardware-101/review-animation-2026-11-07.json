@@ -1,0 +1,52 @@
+{
+  "date": "2026-11-07",
+  "scope": "Presentation-only animated Figure 1; no new hardware evidence or measurements.",
+  "asset": "public/figures/hardware/hardware-101-learning-map-motion-v1.gif",
+  "generation": "Built-in image_gen produced the activated PNG keyframe; local renderer assembled the GIF.",
+  "validation": {
+    "deployment_tests": 49,
+    "content_tests": 184,
+    "astro_errors": 0,
+    "astro_warnings": 0,
+    "astro_hints": 0,
+    "build_pages": 106,
+    "lint_files": 106,
+    "whitespace": "passed"
+  },
+  "gif": {
+    "frames": 48,
+    "duration_seconds": 3.84,
+    "bytes": 863326,
+    "title_region": "identical pixel hash in all 48 decoded GIF frames",
+    "visual_review": "Final desktop light, Focus dark, 390px dark and 320px light screenshots inspected. No toolbar, playback button or visible file links. The image is a keyboard-accessible link to the full-size still.",
+    "loop": "infinite; 3.84-second cycle"
+  },
+  "browser": {
+    "views": [
+      "desktop",
+      "focus",
+      "mobile",
+      "small"
+    ],
+    "structure": {
+      "buttons": 0,
+      "toolbar": false,
+      "gif": "/figures/hardware/hardware-101-learning-map-motion-v1.gif",
+      "link": "/figures/hardware/hardware-101-learning-map-v1.webp"
+    },
+    "loopsBeyondFirstCycle": true,
+    "offscreenStill": true,
+    "fullSize": true,
+    "reducedMotion": true,
+    "print": true,
+    "nojs": true,
+    "errors": []
+  },
+  "exports": "Still, current GIF link, complete learning-map text and timing caveat retained in Markdown/MDX and built llms-full.txt.",
+  "warnings": [
+    "Existing Nimbus/Vite module-directive warnings",
+    "25 existing Pagefind legacy redirect warnings"
+  ],
+  "delivery": "Local only; not committed, pushed or deployed.",
+  "presentation_refinement": "User explicitly requested continued playback without visible controls. The GIF loops while the image and tab are visible; offscreen, reduced motion, no JavaScript and print use the original still. Browser captures of the actual image after the first cycle differ, confirming continued motion."
+}

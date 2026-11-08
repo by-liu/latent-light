@@ -63,6 +63,7 @@ export const hardwareFigures = {
  memory: {
   eyebrow:'Memory · Capacity is only one question',title:'Keep the next piece of work close to the engine.',
   intro:'A conceptual view; placement and access paths vary by chip.',
+  explanation:'One common staging path loads saved content from persistent storage into working RAM, then stages values near an execution engine for reuse. This is not a universal access path: some chips read mapped flash directly, and engines may use shared or separate memory pools.',
   layers:[
    {label:'Registers + local SRAM / cache',role:'Work in progress',detail:'Small tiles, reused values and instructions close to an execution engine. Cache is managed largely by hardware; scratchpad SRAM may be managed explicitly.'},
    {label:'Working RAM',role:'The live working set',detail:'Model weights in use, activations, sensor buffers, runtime workspace and task or language-model state. This may be on-chip SRAM, external PSRAM or DRAM.'},
@@ -74,7 +75,7 @@ export const hardwareFigures = {
 };
 
 export const hardwareFigureAsMarkdown = {
- revision:'1',
+ revision:'2',
  render({attrs,children}) {
   const d=hardwareFigures[attrs.kind];
   if(!d) throw new Error('Unknown HardwareFigure kind: '+attrs.kind);
@@ -85,7 +86,7 @@ export const hardwareFigureAsMarkdown = {
   if(attrs.kind==='timing') body=d.explanation+'\n\n**Stage durations:** '+timingStages.map((s,i)=>(i+1)+'. '+s.label+' '+s.duration+' ms').join('; ')+'.\n\n'+timingFrames.map(f=>'**'+f.label+':** start '+f.start+' ms; '+f.stages.map(s=>s.label+' '+s.start+'–'+s.end+' ms').join('; ')+'; finish '+f.end+' ms; latency '+f.latency+' ms.').join('\n\n');
   if(attrs.kind==='system') body=d.flows.map(f=>'**'+f.label+':** '+f.steps.join(' → ')+'. '+f.detail).join('\n\n')+'\n\n**Five scales:**\n\n'+d.scales.map((s,i)=>(i+1)+'. **'+s.label+':** '+s.detail+'.').join('\n');
   if(attrs.kind==='signal') body=d.labels.join('; ')+'.\n\n'+d.explanation+'\n\n'+d.steps.map((s,i)=>(i+1)+'. '+s+'.').join('\n');
-  if(attrs.kind==='memory') body=d.layers.map(l=>'**'+l.label+' · '+l.role+':** '+l.detail).join('\n\n')+'\n\n'+d.transfer;
+  if(attrs.kind==='memory') body=d.explanation+'\n\n'+d.layers.map(l=>'**'+l.label+' · '+l.role+':** '+l.detail).join('\n\n')+'\n\n'+d.transfer;
   return '\n\n'+anchor+'**'+d.title+'**\n\n'+d.intro+'\n\n'+body+'\n\n'+d.note+'\n\n'+(children||'')+'\n\n';
  },
 };

@@ -1,7 +1,7 @@
 ---
 title: Development guide
 description: Where source files live and how to develop pages, components, and exports.
-lastUpdated: 2026-11-01
+lastUpdated: 2026-11-07
 ---
 
 Develop the site from its source files. Preserve the calm reading experience.
@@ -140,6 +140,17 @@ the Markdown image slot of `SourceFigure` and pass the matching asset as
 client script. Print uses the light version. Keep the same content and text
 equivalent in both images; do not convey meaning through color alone.
 
+For an animated figure, give `SourceFigure` an `id`, the still `src` and an
+optional `motionSrc`. Keep the still in its Markdown image slot; the Markdown
+exporter also links to the animation. In the page, the image opens the full-size
+still, without a toolbar or playback buttons. Omit `minWidth` and `zoomable`
+for this presentation. Hardware 101 uses a continuous loop, as requested by the
+user, without visible playback controls. Playback runs with JavaScript while
+the image is in view, the tab is visible and reduced motion is not requested.
+Reduced motion, no JavaScript and printing use the still. Keep all essential
+labels stable and preserve the complete meaning without playback. Animated
+figures currently use one artwork variant rather than `darkSrc`.
+
 The local source editor exists only in development mode. The Edit source button
 opens a full height pane below the header while keeping desktop navigation
 available. The pane follows sidebar collapse and focus view. It opens at the
@@ -261,8 +272,13 @@ figure `id`. Its shared content and complete text equivalent live in
 `plugins/hardware-foundations.mjs`; keep `hardwareFigureAsMarkdown` registered
 in `astro.config.ts`. The signal plot uses original mathematical samples,
 not measured sensor data. The circuit is an ideal DC example; the timing plot
-uses explicitly assumed stage durations and dedicated resources. Chip and timing
-diagrams pan at narrow widths, including with the keyboard. Preserve every
+uses explicitly assumed stage durations and dedicated resources. Chip, memory and timing
+diagrams pan at narrow widths, including with the keyboard. The board map emphasizes
+containment; the memory diagram shows one staging path with access exceptions,
+and timing brackets distinguish per-frame latency from completion intervals.
+The figures inherit the site's Inter font and theme tokens, with one amber focal
+category and neutral supporting marks. Keep circuit symbols and plotted data
+faithful when applying diagram-design's layout guidance. Preserve every
 label, duration, boundary and assumption in their shared text exports.
 
 `HardwareBudget.astro` uses `plugins/hardware-budgets.mjs` for shared input
