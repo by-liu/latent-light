@@ -1,0 +1,73 @@
+{
+  "reviewed_at": "2026-11-11T18:24:13.433768+00:00",
+  "evidence_cutoff": "2026-11-08",
+  "checks": {
+    "validation": "npm run validate: 49 deployment + 187 content tests; zero Astro diagnostics; 107 pages built and lint clean; research validator; git diff --check. Existing Nimbus/Vite and 25 Pagefind redirect warnings remain.",
+    "rendering": "Chromium 1440\u00d71100 and 390\u00d7844; screenshot inspection of opening map and all mobile figures, dark/light/Focus, keyboard table controls, filter returns one v13 row, no document overflow or broken local anchors, loaded source images, reduced motion, print and no-JavaScript. No runtime exceptions.",
+    "exports": "Live /yolo/index.md, /yolo/index.mdx and /llms-full.txt checked for all eight captions and native meaning/source images; built Pagefind index served through dev-only request interception and returns YOLO page/sections."
+  },
+  "browser": {
+    "base": {
+      "columns": 5,
+      "title": "Latent Light",
+      "figures": 8,
+      "brokenAnchors": [],
+      "overflow": false
+    },
+    "motion": "/figures/yolo/yolo-opening-v1.gif",
+    "mobile": {
+      "overflow": false,
+      "images": [
+        {
+          "loaded": true,
+          "src": "/figures/yolo/yolo-opening-v1.gif"
+        },
+        {
+          "loaded": true,
+          "src": "/figures/yolo/yolov10-dual-heads.webp"
+        },
+        {
+          "loaded": true,
+          "src": "/figures/yolo/yolo26-training.webp"
+        }
+      ]
+    },
+    "filter": 1,
+    "keyboard": "BUTTON",
+    "reduced": {
+      "preference": true,
+      "src": "/figures/yolo/yolo-opening-v1.webp"
+    },
+    "exports": {
+      "captions": 8,
+      "meaning": true,
+      "source": true,
+      "mdx": true,
+      "full": true,
+      "caption_check_method": "curl live /yolo/index.md after restarting both identified same-project servers"
+    },
+    "search": [
+      "http://localhost:4327/yolo/index.md",
+      "/yolo/",
+      "/yolo/index.md",
+      "/figures/yolo/yolo-opening-v1.webp",
+      "/figures/yolo/yolov10-dual-heads.webp",
+      "/figures/yolo/yolo26-training.webp",
+      "/figures/yolo/SOURCES.md",
+      "/yolo/",
+      "/yolo/",
+      "/yolo/",
+      "/yolo/#inside-a-modern-yolo-detector",
+      "/yolo/#decoupled-heads-and-distributional-regression"
+    ],
+    "noJS": 5,
+    "print": 8,
+    "errors": []
+  },
+  "limits": [
+    "Research and released-source inspection, no inference or training reproduction.",
+    "Source figure 6 is a dense original diagram; full-resolution link and explanatory text provide its detail.",
+    "Mutable release status retains its actual November 8 evidence cutoff."
+  ],
+  "revision_note": "Final revision adds an original six-second GIF with reduced-motion poster and a five-column license table. Live exports rechecked after restarting stale dev servers: eight figure captions and license column present."
+}

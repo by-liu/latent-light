@@ -1,0 +1,516 @@
+{
+  "paper-manifest.json": [
+    {
+      "name": "yolo-v1",
+      "version": "1506.02640v5",
+      "url": "https://arxiv.org/pdf/1506.02640v5",
+      "bytes": 5296750,
+      "sha256": "54bcd2dd05dc618849e8a94d8b88fe3eeb37f80e96e200600d38f1f733931678",
+      "text": "output/research/yolo/papers/yolo-v1.txt"
+    },
+    {
+      "name": "yolo-v2",
+      "version": "1612.08242v1",
+      "url": "https://arxiv.org/pdf/1612.08242v1",
+      "bytes": 5256083,
+      "sha256": "6c5e99e00874eeebb58de6a6676c98a6e650b80e4a867a64ea1e7cd748ac738a",
+      "text": "output/research/yolo/papers/yolo-v2.txt"
+    },
+    {
+      "name": "yolo-v3",
+      "version": "1804.02767v1",
+      "url": "https://arxiv.org/pdf/1804.02767v1",
+      "bytes": 2456177,
+      "sha256": "37049049b5e06f67c6cd22b72f7b9352914b0eb3a03e99abf54594c1005a8468",
+      "text": "output/research/yolo/papers/yolo-v3.txt"
+    },
+    {
+      "name": "yolo-v4",
+      "version": "2004.10934v1",
+      "url": "https://arxiv.org/pdf/2004.10934v1",
+      "bytes": 3939513,
+      "sha256": "531196e36fc7e5e4190328039882671aba0ec1c6e2518102183eaf926635f502",
+      "text": "output/research/yolo/papers/yolo-v4.txt"
+    },
+    {
+      "name": "yolox",
+      "version": "2107.08430v2",
+      "url": "https://arxiv.org/pdf/2107.08430v2",
+      "bytes": 871604,
+      "sha256": "8b3d8689b65887885b5f6f1061ff9c278a59bcdfa2063ca0a0484d00040e8889",
+      "text": "output/research/yolo/papers/yolox.txt"
+    },
+    {
+      "name": "yolo-v6",
+      "version": "2209.02976v1",
+      "url": "https://arxiv.org/pdf/2209.02976v1",
+      "bytes": 1076035,
+      "sha256": "97fc40566a0b6fef0be2ba51b59edd609802ad6b0aadd30072dda5885a32591a",
+      "text": "output/research/yolo/papers/yolo-v6.txt"
+    },
+    {
+      "name": "yolo-v6-v3",
+      "version": "2301.05586v1",
+      "url": "https://arxiv.org/pdf/2301.05586v1",
+      "bytes": 670688,
+      "sha256": "224a56be3506ef59206084674db8ce1af3974496a0cb7c578f3b1cda654ae9a4",
+      "text": "output/research/yolo/papers/yolo-v6-v3.txt"
+    },
+    {
+      "name": "yolo-v7",
+      "version": "2207.02696v1",
+      "url": "https://arxiv.org/pdf/2207.02696v1",
+      "bytes": 2269417,
+      "sha256": "61827f8908649249cbe20f75a96c2899fae0ec2e1a888869572271eb5fd0ca4f",
+      "text": "output/research/yolo/papers/yolo-v7.txt"
+    },
+    {
+      "name": "yolo-v9",
+      "version": "2402.13616v1",
+      "url": "https://arxiv.org/pdf/2402.13616v1",
+      "bytes": 5123382,
+      "sha256": "5273453d2a75a8088b1d4f692125992343ec26090c4fc3fffa6bf469f565b19e",
+      "text": "output/research/yolo/papers/yolo-v9.txt"
+    },
+    {
+      "name": "yolo-v10",
+      "version": "2405.14458v1",
+      "url": "https://arxiv.org/pdf/2405.14458v1",
+      "bytes": 1168857,
+      "sha256": "2d891a5aa6b321b1710031045828181d208edaa07954dd425877381da7378478",
+      "text": "output/research/yolo/papers/yolo-v10.txt"
+    },
+    {
+      "name": "yolo-v12",
+      "version": "2502.12524v1",
+      "url": "https://arxiv.org/pdf/2502.12524v1",
+      "bytes": 2909966,
+      "sha256": "c99d1ab39ed6dfc35f8f7f4597956994ee6e526c158d5b9d92a949a0a6257931",
+      "text": "output/research/yolo/papers/yolo-v12.txt"
+    },
+    {
+      "name": "yolo-v13",
+      "version": "2506.17733v2",
+      "url": "https://arxiv.org/pdf/2506.17733v2",
+      "bytes": 7237447,
+      "sha256": "7b37fe059ae4686dd19664da8167f6f249dda6d799902ce4a55f20d6ac778611",
+      "text": "output/research/yolo/papers/yolo-v13.txt"
+    },
+    {
+      "name": "yolo26",
+      "version": "2606.03748v1",
+      "url": "https://arxiv.org/pdf/2606.03748v1",
+      "bytes": 9613058,
+      "sha256": "8dec3ca2adbbc78cbd4f338eb33235e4b9c13704e355e19d029fd0a4bc67fcff",
+      "text": "output/research/yolo/papers/yolo26.txt"
+    }
+  ],
+  "papers/abs-manifest.json": [
+    {
+      "id": "v1",
+      "url": "https://arxiv.org/abs/1506.02640",
+      "title": "You Only Look Once: Unified, Real-Time Object Detection",
+      "date": "2015/06/08",
+      "license": [
+        "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+      ],
+      "repos": []
+    },
+    {
+      "id": "v2",
+      "url": "https://arxiv.org/abs/1612.08242",
+      "title": "YOLO9000: Better, Faster, Stronger",
+      "date": "2016/12/25",
+      "license": [
+        "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+      ],
+      "repos": []
+    },
+    {
+      "id": "v3",
+      "url": "https://arxiv.org/abs/1804.02767",
+      "title": "YOLOv3: An Incremental Improvement",
+      "date": "2018/04/08",
+      "license": [
+        "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+      ],
+      "repos": []
+    },
+    {
+      "id": "v4",
+      "url": "https://arxiv.org/abs/2004.10934",
+      "title": "YOLOv4: Optimal Speed and Accuracy of Object Detection",
+      "date": "2020/04/23",
+      "license": [
+        "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+      ],
+      "repos": [
+        "https://github.com/AlexeyAB/darknet"
+      ]
+    },
+    {
+      "id": "yolox",
+      "url": "https://arxiv.org/abs/2107.08430",
+      "title": "YOLOX: Exceeding YOLO Series in 2021",
+      "date": "2021/07/18",
+      "license": [
+        "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+      ],
+      "repos": [
+        "https://github.com/Megvii-BaseDetection/YOLOX.",
+        "https://github.com/Megvii-BaseDetection/YOLOX"
+      ]
+    },
+    {
+      "id": "v6",
+      "url": "https://arxiv.org/abs/2209.02976",
+      "title": "YOLOv6: A Single-Stage Object Detection Framework for Industrial Applications",
+      "date": "2022/09/07",
+      "license": [
+        "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+      ],
+      "repos": [
+        "https://github.com/meituan/YOLOv6",
+        "https://github.com/meituan/YOLOv6."
+      ]
+    },
+    {
+      "id": "v6-v3",
+      "url": "https://arxiv.org/abs/2301.05586",
+      "title": "YOLOv6 v3.0: A Full-Scale Reloading",
+      "date": "2023/01/13",
+      "license": [
+        "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+      ],
+      "repos": [
+        "https://github.com/meituan/YOLOv6",
+        "https://github.com/meituan/YOLOv6."
+      ]
+    },
+    {
+      "id": "v7",
+      "url": "https://arxiv.org/abs/2207.02696",
+      "title": "YOLOv7: Trainable bag-of-freebies sets new state-of-the-art for real-time object detectors",
+      "date": "2022/07/06",
+      "license": [
+        "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+      ],
+      "repos": [
+        "https://github.com/WongKinYiu/yolov7.",
+        "https://github.com/WongKinYiu/yolov7"
+      ]
+    },
+    {
+      "id": "v9",
+      "url": "https://arxiv.org/abs/2402.13616",
+      "title": "YOLOv9: Learning What You Want to Learn Using Programmable Gradient Information",
+      "date": "2024/02/21",
+      "license": [
+        "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+      ],
+      "repos": [
+        "https://github.com/WongKinYiu/yolov9",
+        "https://github.com/WongKinYiu/yolov9."
+      ]
+    },
+    {
+      "id": "v10",
+      "url": "https://arxiv.org/abs/2405.14458",
+      "title": "YOLOv10: Real-Time End-to-End Object Detection",
+      "date": "2024/05/23",
+      "license": [
+        "http://creativecommons.org/licenses/by/4.0/"
+      ],
+      "repos": [
+        "https://github.com/THU-MIG/yolov10"
+      ]
+    },
+    {
+      "id": "v12",
+      "url": "https://arxiv.org/abs/2502.12524",
+      "title": "YOLOv12: Attention-Centric Real-Time Object Detectors",
+      "date": "2025/02/18",
+      "license": [
+        "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+      ],
+      "repos": [
+        "https://github.com/sunsmarterjie/yolov12"
+      ]
+    },
+    {
+      "id": "v13",
+      "url": "https://arxiv.org/abs/2506.17733",
+      "title": "YOLOv13: Real-Time Object Detection with Hypergraph-Enhanced Adaptive Visual Perception",
+      "date": "2025/06/21",
+      "license": [
+        "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+      ],
+      "repos": [
+        "https://github.com/iMoonLab/yolov13",
+        "https://github.com/iMoonLab/yolov13."
+      ]
+    },
+    {
+      "id": "yolo26",
+      "url": "https://arxiv.org/abs/2606.03748",
+      "title": "Ultralytics YOLO26: Unified Real-Time End-to-End Vision Models",
+      "date": "2026/06/02",
+      "license": [
+        "http://creativecommons.org/licenses/by/4.0/"
+      ],
+      "repos": [
+        "https://github.com/ultralytics/ultralytics.",
+        "https://github.com/ultralytics/ultralytics"
+      ]
+    },
+    {
+      "id": "world",
+      "url": "https://arxiv.org/abs/2401.17270",
+      "title": "YOLO-World: Real-Time Open-Vocabulary Object Detection",
+      "date": "2024/01/30",
+      "license": [
+        "http://creativecommons.org/licenses/by-nc-sa/4.0/"
+      ],
+      "repos": [
+        "https://github.com/AILab-CVC/YOLO-World"
+      ]
+    },
+    {
+      "id": "yoloe",
+      "url": "https://arxiv.org/abs/2503.07465",
+      "title": "YOLOE: Real-Time Seeing Anything",
+      "date": "2025/03/10",
+      "license": [
+        "http://creativecommons.org/licenses/by/4.0/"
+      ],
+      "repos": [
+        "https://github.com/THU-MIG/yoloe.",
+        "https://github.com/THU-MIG/yoloe"
+      ]
+    },
+    {
+      "id": "v14",
+      "url": "https://arxiv.org/abs/2608.04720",
+      "title": "YOLOv14: Adaptive Real-Time Object Detection for Diverse Imaging Conditions",
+      "date": "2026/08/05",
+      "license": [],
+      "repos": [
+        "https://github.com/zhangcbb/yolov14",
+        "https://github.com/zhangcbb/yolov14."
+      ]
+    }
+  ],
+  "artifacts/ultralytics-manifest.json": [
+    {
+      "repo": "ultralytics/ultralytics",
+      "ref": "v8.4.208",
+      "path": "ultralytics/cfg/models/26/yolo26.yaml",
+      "url": "https://raw.githubusercontent.com/ultralytics/ultralytics/v8.4.208/ultralytics/cfg/models/26/yolo26.yaml",
+      "sha256": "b1d1fa0c69eced64f9939536038bd8d697c32e72200b34187a767de431af7ef0",
+      "bytes": 2120
+    },
+    {
+      "repo": "ultralytics/ultralytics",
+      "ref": "v8.4.208",
+      "path": "ultralytics/nn/modules/head.py",
+      "url": "https://raw.githubusercontent.com/ultralytics/ultralytics/v8.4.208/ultralytics/nn/modules/head.py",
+      "sha256": "667a5dc59e89d7a6f042fb94f50cf36456eae4b8e044a867dac9bfb41a5f62ad",
+      "bytes": 89110
+    },
+    {
+      "repo": "ultralytics/ultralytics",
+      "ref": "v8.4.208",
+      "path": "ultralytics/utils/loss.py",
+      "url": "https://raw.githubusercontent.com/ultralytics/ultralytics/v8.4.208/ultralytics/utils/loss.py",
+      "sha256": "eb4f0f799bc059f8d37fd471bb544f478107ac5202b76ebc41b87ee519877a1d",
+      "bytes": 72130
+    },
+    {
+      "repo": "ultralytics/ultralytics",
+      "ref": "v8.4.208",
+      "path": "ultralytics/utils/tal.py",
+      "url": "https://raw.githubusercontent.com/ultralytics/ultralytics/v8.4.208/ultralytics/utils/tal.py",
+      "sha256": "95c142ef88aabd51a8ad23bd66b742fb08a7bf3251a59dd4677ddee25d5f416d",
+      "bytes": 35118
+    },
+    {
+      "repo": "ultralytics/ultralytics",
+      "ref": "v8.4.208",
+      "path": "ultralytics/utils/nms.py",
+      "url": "https://raw.githubusercontent.com/ultralytics/ultralytics/v8.4.208/ultralytics/utils/nms.py",
+      "sha256": "eacb46aaa66989a6525b9533a93aa5f21439a7d723f1da338dc4834597313e91",
+      "bytes": 13407
+    },
+    {
+      "repo": "ultralytics/ultralytics",
+      "ref": "v8.4.208",
+      "path": "ultralytics/models/yolo/detect/predict.py",
+      "url": "https://raw.githubusercontent.com/ultralytics/ultralytics/v8.4.208/ultralytics/models/yolo/detect/predict.py",
+      "sha256": "8a8339bc68f8a8f2b00983afc0b7829e1ed03ee37d9ce46a1397a2e00bb38e11",
+      "bytes": 5987
+    },
+    {
+      "repo": "ultralytics/ultralytics",
+      "ref": "v8.4.208",
+      "path": "ultralytics/cfg/models/11/yolo11.yaml",
+      "url": "https://raw.githubusercontent.com/ultralytics/ultralytics/v8.4.208/ultralytics/cfg/models/11/yolo11.yaml",
+      "sha256": "43d8a7c86acc77282ddf4966d6526e091e5b064c140ed4a6e4c0b68ecbc3784c",
+      "bytes": 2012
+    },
+    {
+      "repo": "ultralytics/ultralytics",
+      "ref": "v8.4.208",
+      "path": "ultralytics/cfg/models/v8/yolov8.yaml",
+      "url": "https://raw.githubusercontent.com/ultralytics/ultralytics/v8.4.208/ultralytics/cfg/models/v8/yolov8.yaml",
+      "sha256": "405a3c302eb6096103a99af4d82c1d2d8b2bbff469a228c55aac944b2c19672a",
+      "bytes": 1977
+    },
+    {
+      "repo": "ultralytics/ultralytics",
+      "ref": "v8.4.208",
+      "path": "LICENSE",
+      "url": "https://raw.githubusercontent.com/ultralytics/ultralytics/v8.4.208/LICENSE",
+      "sha256": "0d96a4ff68ad6d4b6f1f30f713b18d5184912ba8dd389f86aa7710db079abcb0",
+      "bytes": 34523
+    },
+    {
+      "repo": "ultralytics/ultralytics",
+      "ref": "v8.4.208",
+      "path": "docs/en/models/yolo26.md",
+      "url": "https://raw.githubusercontent.com/ultralytics/ultralytics/v8.4.208/docs/en/models/yolo26.md",
+      "sha256": "116147bdc4f51731c6005049e799efa48769ebdbcb7bd80d4b1ce2aa1392def0",
+      "bytes": 18482
+    },
+    {
+      "repo": "ultralytics/ultralytics",
+      "ref": "v8.4.208",
+      "path": "docs/en/models/yolo27.md",
+      "url": "https://raw.githubusercontent.com/ultralytics/ultralytics/v8.4.208/docs/en/models/yolo27.md",
+      "sha256": "680f866e148da0a19fbd04c2b7347f42577cdebbd123f3548cfea26fd7ba8eb5",
+      "bytes": 27298
+    },
+    {
+      "repo": "ultralytics/ultralytics",
+      "ref": "v8.4.208",
+      "path": "docs/en/guides/yolo26-training-recipe.md",
+      "url": "https://raw.githubusercontent.com/ultralytics/ultralytics/v8.4.208/docs/en/guides/yolo26-training-recipe.md",
+      "sha256": "1f3213ccfc644562bfeb779a1aa9cc424822a6aef24ee2ff33540a48da512e8f",
+      "bytes": 21987
+    }
+  ],
+  "artifacts/extra-manifest.json": [
+    {
+      "url": "https://raw.githubusercontent.com/ultralytics/ultralytics/v8.4.208/ultralytics/engine/predictor.py",
+      "path": "output/research/yolo/artifacts/ultralytics-ultralytics-v8.4.208/ultralytics/engine/predictor.py",
+      "sha256": "6bd9c76ee58d46032e51caa4bc20fc77b1c06e7616372f88a6663ae4cd875a99",
+      "bytes": 33158
+    },
+    {
+      "url": "https://raw.githubusercontent.com/ultralytics/ultralytics/v8.4.208/ultralytics/engine/validator.py",
+      "path": "output/research/yolo/artifacts/ultralytics-ultralytics-v8.4.208/ultralytics/engine/validator.py",
+      "sha256": "3fc017dce3af72e5fdc79aa78b0fcadb7e9205cb398e8416704aafc2895a2b9d",
+      "bytes": 24478
+    },
+    {
+      "url": "https://raw.githubusercontent.com/ultralytics/ultralytics/v8.4.208/ultralytics/nn/tasks.py",
+      "path": "output/research/yolo/artifacts/ultralytics-ultralytics-v8.4.208/ultralytics/nn/tasks.py",
+      "sha256": "035595747c190849e7b2cb712531528afc69f6b598ca2252ad6866d427ceab82",
+      "bytes": 102814
+    },
+    {
+      "url": "https://raw.githubusercontent.com/ultralytics/ultralytics/v8.4.208/ultralytics/cfg/default.yaml",
+      "path": "output/research/yolo/artifacts/ultralytics-ultralytics-v8.4.208/ultralytics/cfg/default.yaml",
+      "sha256": "f1ef53a8cf26a3c398d7a56a5d6ac29937c4838c35df78957e75952a5019fb05",
+      "bytes": 10544
+    },
+    {
+      "url": "https://raw.githubusercontent.com/ultralytics/ultralytics/v8.4.208/docs/en/guides/end2end-detection.md",
+      "path": "output/research/yolo/artifacts/ultralytics-ultralytics-v8.4.208/docs/en/guides/end2end-detection.md",
+      "sha256": "fce62afe14e72042fbe8833a161febffe568d0644a89941317c51ef597f3994a",
+      "bytes": 9848
+    },
+    {
+      "url": "https://raw.githubusercontent.com/ultralytics/yolov5/v7.0/README.md",
+      "path": "output/research/yolo/artifacts/ultralytics-yolov5-v7.0/README.md",
+      "sha256": "8a6e862af29bb0104f987cc0f9a338018a724e8326260123b9e54baa348d41be",
+      "bytes": 37340
+    },
+    {
+      "url": "https://raw.githubusercontent.com/ultralytics/ultralytics/v8.4.208/docs/en/models/yolov8.md",
+      "path": "output/research/yolo/artifacts/ultralytics-ultralytics-v8.4.208/docs/en/models/yolov8.md",
+      "sha256": "b64362ade09b795b55de3cc0e0731dda2da8c72f93876091bcdb396c26a690eb",
+      "bytes": 25625
+    },
+    {
+      "url": "https://raw.githubusercontent.com/ultralytics/ultralytics/v8.4.208/docs/en/models/yolo11.md",
+      "path": "output/research/yolo/artifacts/ultralytics-ultralytics-v8.4.208/docs/en/models/yolo11.md",
+      "sha256": "a878c03e7bdcd36bd61c2f21eefdab3e520307b273e366f7692c3419bb62b6f4",
+      "bytes": 23390
+    }
+  ],
+  "author_repositories": [
+    {
+      "repo": "sunsmarterjie/yolov12",
+      "sha": "64d5ffc6db35a1bde446689ab8450ecd43475e00",
+      "readme_url": "https://raw.githubusercontent.com/sunsmarterjie/yolov12/64d5ffc6db35a1bde446689ab8450ecd43475e00/README.md",
+      "sha256": "61a7da47c8bdf9dff487d75c785005db97e6f187db55f8c44ecc66c262d3d9e9",
+      "bytes": 14226
+    },
+    {
+      "repo": "AILab-CVC/YOLO-World",
+      "sha": "4f70adbaacf5685bd9ec5bea85f1f91057f6fc0b",
+      "readme_url": "https://raw.githubusercontent.com/AILab-CVC/YOLO-World/4f70adbaacf5685bd9ec5bea85f1f91057f6fc0b/README.md",
+      "sha256": "f553a1b9d04008f973ce9799fa706657a5318df34ba5d33af638e989dba159ba",
+      "bytes": 19064
+    },
+    {
+      "repo": "THU-MIG/yolov10",
+      "sha": "453c6e38a51e9d1d5a2aa5fb7f1014a711913397",
+      "readme_url": "https://raw.githubusercontent.com/THU-MIG/yolov10/453c6e38a51e9d1d5a2aa5fb7f1014a711913397/README.md",
+      "sha256": "564e214fab99ea611dfa0466ca8b35f3a3264a3b533605c4600d7c82905788cc",
+      "bytes": 15338
+    },
+    {
+      "repo": "iMoonLab/yolov13",
+      "sha": "73289949533efac82bb5f72ec19b746618656bd2",
+      "readme_url": "https://raw.githubusercontent.com/iMoonLab/yolov13/73289949533efac82bb5f72ec19b746618656bd2/README.md",
+      "sha256": "aabfae2c88e88c13653b1ebf2c97f1c0b4ee015a634549d86d1e60e30bda0aa0",
+      "bytes": 10924
+    },
+    {
+      "repo": "meituan/YOLOv6",
+      "sha": "e86a483f3f6bded25d45970b56831345a99744a4",
+      "readme_url": "https://raw.githubusercontent.com/meituan/YOLOv6/e86a483f3f6bded25d45970b56831345a99744a4/README.md",
+      "sha256": "6ea4ff45d23c43820f44ec43b802446cfaec857bc2f5a68f82931f80f503697d",
+      "bytes": 18893
+    },
+    {
+      "repo": "WongKinYiu/yolov7",
+      "sha": "a207844b1ce82d204ab36d87d496728d3d2348e7",
+      "readme_url": "https://raw.githubusercontent.com/WongKinYiu/yolov7/a207844b1ce82d204ab36d87d496728d3d2348e7/README.md",
+      "sha256": "3dd2c1b169ef559291ec36b61d28e8059457469538c55762f1ec73fe30939a6c",
+      "bytes": 14746
+    },
+    {
+      "repo": "WongKinYiu/yolov9",
+      "sha": "5b1ea9a8b3f0ffe4fe0e203ec6232d788bb3fcff",
+      "readme_url": "https://raw.githubusercontent.com/WongKinYiu/yolov9/5b1ea9a8b3f0ffe4fe0e203ec6232d788bb3fcff/README.md",
+      "sha256": "c0564bdf90a8f0e068ad9a635a86eeba51fb20b316ca5236447d879c83450960",
+      "bytes": 16480
+    },
+    {
+      "repo": "THU-MIG/yoloe",
+      "sha": "40cd606cabdbe2b566d6f14a6b162c89206e9a1b",
+      "readme_url": "https://raw.githubusercontent.com/THU-MIG/yoloe/40cd606cabdbe2b566d6f14a6b162c89206e9a1b/README.md",
+      "sha256": "a79a78c3879f33d4d0a4fe06c248d99fff4c84e62210c4f4cb1307465e0c6307",
+      "bytes": 19750
+    },
+    {
+      "repo": "Megvii-BaseDetection/YOLOX",
+      "sha": "6ddff4824372906469a7fae2dc3206c7aa4bbaee",
+      "readme_url": "https://raw.githubusercontent.com/Megvii-BaseDetection/YOLOX/6ddff4824372906469a7fae2dc3206c7aa4bbaee/README.md",
+      "sha256": "023dbf0a5f2c48c944cc6220f9c4750febe2ceafc535445278455186bec7ec6b",
+      "bytes": 13314
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "schema_version": 3,
+  "topic_id": "yolo-models-from-one-look-to-real-time-vision",
+  "status": "complete",
+  "coverage": {
+    "origin_and_foundations": "complete within scope recorded in coverage-audit.md",
+    "evolution_and_attribution": "complete within scope recorded in coverage-audit.md",
+    "current_releases": "complete within scope recorded in coverage-audit.md",
+    "mechanisms_and_code": "complete within scope recorded in coverage-audit.md",
+    "benchmarks_and_limits": "complete within scope recorded in coverage-audit.md",
+    "source_figures": "complete within scope recorded in coverage-audit.md"
+  },
+  "open_questions": [],
+  "recommended_next_direction": null,
+  "last_seen": "2026-11-11T18:35:01.596123+00:00",
+  "output": {
+    "kind": "site-page",
+    "path": "src/content/docs/yolo/index.mdx",
+    "status": "reviewed",
+    "revision": 2,
+    "updated": "2026-11-11",
+    "evidence_cutoff": "2026-11-08",
+    "audience": "AI researchers and engineers learning real-time object detection and evaluating AI devices"
+  },
+  "quality_gate": {
+    "evidence_verified": true,
+    "contradictions_reviewed": true,
+    "output_reviewed": true,
+    "visuals_reviewed": true
+  },
+  "delivery_checks": {
+    "validation": {
+      "status": "passed",
+      "method": "npm run validate: 49 deployment + 187 content tests; zero Astro diagnostics; 107 pages built and lint clean; research validator; git diff --check. Existing Nimbus/Vite and 25 Pagefind redirect warnings remain. November 11 revision: five-column license table, eight figures, six-second GIF and reduced-motion poster verified; full validation passed.",
+      "checked_at": "2026-11-11T18:35:01.596123+00:00"
+    },
+    "rendering": {
+      "status": "passed",
+      "method": "Chromium 1440\u00d71100 and 390\u00d7844; screenshot inspection of opening map and all mobile figures, dark/light/Focus, keyboard table controls, filter returns one v13 row, no document overflow or broken local anchors, loaded source images, reduced motion, print and no-JavaScript. No runtime exceptions. November 11 revision: five-column license table, eight figures, six-second GIF and reduced-motion poster verified; full validation passed.",
+      "checked_at": "2026-11-11T18:35:01.596123+00:00"
+    },
+    "exports": {
+      "status": "passed",
+      "method": "Live /yolo/index.md, /yolo/index.mdx and /llms-full.txt checked for all seven captions and native meaning/source images; built Pagefind index served through dev-only request interception and returns YOLO page/sections. November 11 revision: five-column license table, eight figures, six-second GIF and reduced-motion poster verified; full validation passed.",
+      "checked_at": "2026-11-11T18:35:01.596123+00:00"
+    }
+  }
+}

@@ -340,3 +340,27 @@ succeeds. Record the new source commit, checks and Worker version under ignored
 
 Preserve the three unrelated progress-file edits listed above. The global
 diagram-design skill installation is outside this repository and is not included.
+
+## November 11: YOLO family tutorial ready for local review
+
+New page: `/yolo/`, source `src/content/docs/yolo/index.mdx`, linked under AI
+Technology and from the home page. About 7,000 words, seven figures (five native,
+two licensed original paper excerpts), searchable 19-family comparison, core
+mechanisms, branching history, current YOLO26 source contracts, open vocabulary,
+evaluation and device workflow. Research workspace: `docs/research/vision/yolo/`.
+Evidence cutoff remains November 8, 2026; presentation/validation reviewed Nov 11.
+
+Full validation passed: 49 deployment + 187 content tests, zero Astro diagnostics,
+107 pages built and lint clean. Browser review covered desktop/mobile, themes,
+Focus, keyboard/filtering, static/reduced-motion/print, built search and complete
+exports. Existing Nimbus/Vite and 25 Pagefind redirect warnings remain. Local
+server runs on 4327. No commit/push/deploy authorized for this YOLO task.
+Preserve the three pre-existing unrelated research progress edits.
+
+The YOLO revision now includes eight figures: an original six-second opening
+GIF with a static reduced-motion/print poster, followed by the family overview
+and mechanism figures. The model table has five columns, including linked
+implementation licenses and the historical YOLOv5 GPL/current AGPL distinction.
+License files checked November 11; other release-status evidence retains Nov 8.
+The user subsequently authorized commit and push for this completed YOLO work.
+Release through a branch/PR and the existing automatic deployment on main.
