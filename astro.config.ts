@@ -23,6 +23,7 @@ import { documentSystemAsMarkdown } from './plugins/document-system.mjs';
 import { documentModelAtlasAsMarkdown } from './plugins/document-model-atlas.mjs';
 import { comparisonTableAsMarkdown } from './plugins/comparison-table.mjs';
 import { hardwareFigureAsMarkdown } from './plugins/hardware-foundations.mjs';
+import { yoloFigureAsMarkdown } from './plugins/yolo-figures.mjs';
 import { hardwareBudgetAsMarkdown } from './plugins/hardware-budgets.mjs';
 
 const nimbusConfig = defineNimbusConfig({
@@ -116,6 +117,7 @@ const nimbusConfig = defineNimbusConfig({
           ] },
         ] },
         { label: "Document AI", link: "/document-ai/" },
+        { label: "YOLO Models", link: "/yolo/" },
         { label: "Knowledge Distillation", collapsed: true, items: [
           { label: "Overview", link: "/knowledge-distillation/" },
           { label: "Foundations", link: "/knowledge-distillation/foundations/" },
@@ -267,7 +269,7 @@ export default defineConfig({
         "nimbus/internal-link": ["error", {
           // Static download notices are files, not Nimbus page routes.
           // test:content verifies these narrow exceptions exist in public/.
-          ignore: ["/licenses/*.txt", "/figures/model-studies/*/{NOTICE,SOURCES}.md", "/figures/edge-ai/*/{NOTICE,SOURCES}.md", "/figures/local-cloud-ai/*/{NOTICE,SOURCES}.md", "/figures/knowledge-distillation/{NOTICE,SOURCES}.md"],
+          ignore: ["/licenses/*.txt", "/figures/yolo/SOURCES.md", "/figures/model-studies/*/{NOTICE,SOURCES}.md", "/figures/edge-ai/*/{NOTICE,SOURCES}.md", "/figures/local-cloud-ai/*/{NOTICE,SOURCES}.md", "/figures/knowledge-distillation/{NOTICE,SOURCES}.md"],
         }],
       },
       // Use the same native Sätteri processor as Nimbus, with math enabled.
@@ -283,6 +285,7 @@ export default defineConfig({
           DocumentModelAtlas: documentModelAtlasAsMarkdown,
           ComparisonTable: comparisonTableAsMarkdown,
           HardwareFigure: hardwareFigureAsMarkdown,
+          YoloFigure: yoloFigureAsMarkdown,
           HardwareBudget: hardwareBudgetAsMarkdown,
           ModelFlow: modelFlowAsMarkdown,
           SourceFigure: sourceFigureAsMarkdown,

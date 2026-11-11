@@ -1,0 +1,93 @@
+[
+  {
+    "repo": "pjreddie/darknet",
+    "license": "NOASSERTION",
+    "url": "https://github.com/pjreddie/darknet/blob/master/LICENSE",
+    "sha": "a50f7d700ba02bfacd50f59b315311cf4d0bbda2",
+    "text": "                                  YOLO LICENSE\n                             Version 2, July 29 2016\n\nTHIS SOFTWARE LICENSE IS PROVIDED \"ALL CAPS\" SO THAT YOU KNOW IT IS SUPER\nSERIOUS AND YOU DON'T MESS AROUND WITH COPYRIGHT LAW BECAUSE YOU WILL GET IN\nTROUBLE HERE ARE SOME OTHER BUZZWORDS COMMONLY IN THESE THINGS WARRANTIES\nLIABILITY CONTRACT TORT LIABLE CLAIMS RESTRICTION MERCHANTABILITY. NOW HERE'S\nTHE REAL LICENSE:\n\n0. Darknet is public domain"
+  },
+  {
+    "repo": "AlexeyAB/darknet",
+    "license": "NOASSERTION",
+    "url": "https://github.com/AlexeyAB/darknet/blob/master/LICENSE",
+    "sha": "a50f7d700ba02bfacd50f59b315311cf4d0bbda2",
+    "text": "                                  YOLO LICENSE\n                             Version 2, July 29 2016\n\nTHIS SOFTWARE LICENSE IS PROVIDED \"ALL CAPS\" SO THAT YOU KNOW IT IS SUPER\nSERIOUS AND YOU DON'T MESS AROUND WITH COPYRIGHT LAW BECAUSE YOU WILL GET IN\nTROUBLE HERE ARE SOME OTHER BUZZWORDS COMMONLY IN THESE THINGS WARRANTIES\nLIABILITY CONTRACT TORT LIABLE CLAIMS RESTRICTION MERCHANTABILITY. NOW HERE'S\nTHE REAL LICENSE:\n\n0. Darknet is public domain"
+  },
+  {
+    "repo": "ultralytics/yolov5",
+    "license": "AGPL-3.0",
+    "url": "https://github.com/ultralytics/yolov5/blob/master/LICENSE",
+    "sha": "be3f7b28e564e7dd05eaf59d64adba1a4065ac0e",
+    "text": "                    GNU AFFERO GENERAL PUBLIC LICENSE\n                       Version 3, 19 November 2007\n\n Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>\n Everyone is permitted to copy and distribute verbatim copies\n of this license document, but changing it is not allowed.\n\n                            Preamble\n\n  The GNU Affero General Public License is a free, copyleft license for\nsoftware and other kinds of works, specifi"
+  },
+  {
+    "repo": "Megvii-BaseDetection/YOLOX",
+    "license": "Apache-2.0",
+    "url": "https://github.com/Megvii-BaseDetection/YOLOX/blob/main/LICENSE",
+    "sha": "1d4dc763d3d33d3722c6d86054c01b8a459bb2ea",
+    "text": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or enti"
+  },
+  {
+    "repo": "meituan/YOLOv6",
+    "license": "GPL-3.0",
+    "url": "https://github.com/meituan/YOLOv6/blob/main/LICENSE",
+    "sha": "f288702d2fa16d3cdf0035b15a9fcbc552cd88e7",
+    "text": "                    GNU GENERAL PUBLIC LICENSE\n                       Version 3, 29 June 2007\n\n Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>\n Everyone is permitted to copy and distribute verbatim copies\n of this license document, but changing it is not allowed.\n\n                            Preamble\n\n  The GNU General Public License is a free, copyleft license for\nsoftware and other kinds of works.\n\n  The licenses for most "
+  },
+  {
+    "repo": "WongKinYiu/yolov7",
+    "license": "GPL-3.0",
+    "url": "https://github.com/WongKinYiu/yolov7/blob/main/LICENSE.md",
+    "sha": "f288702d2fa16d3cdf0035b15a9fcbc552cd88e7",
+    "text": "                    GNU GENERAL PUBLIC LICENSE\n                       Version 3, 29 June 2007\n\n Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>\n Everyone is permitted to copy and distribute verbatim copies\n of this license document, but changing it is not allowed.\n\n                            Preamble\n\n  The GNU General Public License is a free, copyleft license for\nsoftware and other kinds of works.\n\n  The licenses for most "
+  },
+  {
+    "repo": "WongKinYiu/yolov9",
+    "license": "GPL-3.0",
+    "url": "https://github.com/WongKinYiu/yolov9/blob/main/LICENSE.md",
+    "sha": "f288702d2fa16d3cdf0035b15a9fcbc552cd88e7",
+    "text": "                    GNU GENERAL PUBLIC LICENSE\n                       Version 3, 29 June 2007\n\n Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>\n Everyone is permitted to copy and distribute verbatim copies\n of this license document, but changing it is not allowed.\n\n                            Preamble\n\n  The GNU General Public License is a free, copyleft license for\nsoftware and other kinds of works.\n\n  The licenses for most "
+  },
+  {
+    "repo": "THU-MIG/yolov10",
+    "license": "AGPL-3.0",
+    "url": "https://github.com/THU-MIG/yolov10/blob/main/LICENSE",
+    "sha": "be3f7b28e564e7dd05eaf59d64adba1a4065ac0e",
+    "text": "                    GNU AFFERO GENERAL PUBLIC LICENSE\n                       Version 3, 19 November 2007\n\n Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>\n Everyone is permitted to copy and distribute verbatim copies\n of this license document, but changing it is not allowed.\n\n                            Preamble\n\n  The GNU Affero General Public License is a free, copyleft license for\nsoftware and other kinds of works, specifi"
+  },
+  {
+    "repo": "sunsmarterjie/yolov12",
+    "license": "AGPL-3.0",
+    "url": "https://github.com/sunsmarterjie/yolov12/blob/main/LICENSE",
+    "sha": "0ad25db4bd1d86c452db3f9602ccdbe172438f52",
+    "text": "                    GNU AFFERO GENERAL PUBLIC LICENSE\n                       Version 3, 19 November 2007\n\n Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>\n Everyone is permitted to copy and distribute verbatim copies\n of this license document, but changing it is not allowed.\n\n                            Preamble\n\n  The GNU Affero General Public License is a free, copyleft license for\nsoftware and other kinds of works, specifi"
+  },
+  {
+    "repo": "iMoonLab/yolov13",
+    "license": "AGPL-3.0",
+    "url": "https://github.com/iMoonLab/yolov13/blob/main/LICENSE",
+    "sha": "0ad25db4bd1d86c452db3f9602ccdbe172438f52",
+    "text": "                    GNU AFFERO GENERAL PUBLIC LICENSE\n                       Version 3, 19 November 2007\n\n Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>\n Everyone is permitted to copy and distribute verbatim copies\n of this license document, but changing it is not allowed.\n\n                            Preamble\n\n  The GNU Affero General Public License is a free, copyleft license for\nsoftware and other kinds of works, specifi"
+  },
+  {
+    "repo": "AILab-CVC/YOLO-World",
+    "license": "GPL-3.0",
+    "url": "https://github.com/AILab-CVC/YOLO-World/blob/master/LICENSE",
+    "sha": "dd8b209f0bc925e778312b84191a75023c38eb87",
+    "text": "                    GNU GENERAL PUBLIC LICENSE\n                       Version 3, 29 June 2007\n\n Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>\n Everyone is permitted to copy and distribute verbatim copies\n of this license document, but changing it is not allowed.\n\n                            Preamble\n\n  The GNU General Public License is a free, copyleft license for\nsoftware and other kinds of works.\n\n  The licenses for most "
+  },
+  {
+    "repo": "THU-MIG/yoloe",
+    "license": "AGPL-3.0",
+    "url": "https://github.com/THU-MIG/yoloe/blob/main/LICENSE",
+    "sha": "be3f7b28e564e7dd05eaf59d64adba1a4065ac0e",
+    "text": "                    GNU AFFERO GENERAL PUBLIC LICENSE\n                       Version 3, 19 November 2007\n\n Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>\n Everyone is permitted to copy and distribute verbatim copies\n of this license document, but changing it is not allowed.\n\n                            Preamble\n\n  The GNU Affero General Public License is a free, copyleft license for\nsoftware and other kinds of works, specifi"
+  },
+  {
+    "repo": "ultralytics/ultralytics",
+    "license": "AGPL-3.0",
+    "url": "https://github.com/ultralytics/ultralytics/blob/main/LICENSE",
+    "sha": "be3f7b28e564e7dd05eaf59d64adba1a4065ac0e",
+    "text": "                    GNU AFFERO GENERAL PUBLIC LICENSE\n                       Version 3, 19 November 2007\n\n Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>\n Everyone is permitted to copy and distribute verbatim copies\n of this license document, but changing it is not allowed.\n\n                            Preamble\n\n  The GNU Affero General Public License is a free, copyleft license for\nsoftware and other kinds of works, specifi"
+  }
+]
