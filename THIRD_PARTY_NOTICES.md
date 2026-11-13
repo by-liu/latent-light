@@ -194,3 +194,15 @@ The overview PNG is an independent AI-generated explanatory synthesis with
 its prompt and review retained in the research records. It is not DeepSeek
 artwork or a measured result; original generated project artwork is offered
 under MIT terms to the extent applicable.
+
+## Jensen Huang collection hero photograph
+
+The 2026 Davos photograph and its resized/animated derivatives in
+`public/figures/jensen/jensen-davos-2026*` are ©2026 World Economic Forum /
+Thibaut Bouvier, licensed under
+[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/),
+and excluded from the project's MIT grant. This is a personal, noncommercial
+collection. The [source record](public/figures/jensen/SOURCES.md) retains the
+original publisher, date, license, modifications and rendering method.
+No endorsement is implied. The hero headline alludes to the Pink Floyd song
+title “Shine On You Crazy Diamond”; no audio recording or additional lyrics are included.

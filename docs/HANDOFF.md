@@ -364,3 +364,151 @@ implementation licenses and the historical YOLOv5 GPL/current AGPL distinction.
 License files checked November 11; other release-status evidence retains Nov 8.
 The user subsequently authorized commit and push for this completed YOLO work.
 Release through a branch/PR and the existing automatic deployment on main.
+
+## November 12: standalone Jensen Huang video collection
+
+Local `/jensen/` is a standalone Astro page with its own dark editorial layout,
+Chinese navigation, original publisher thumbnails, 7 verified video identities,
+category/year/keyword filters, local saved list and on-demand YouTube-nocookie
+player. Original source links remain available without JS; `/jensen/index.md`
+exports the catalog. No document sidebars or hosting changes. Catalog data is in
+`src/data/jensen-videos.json`; source review and QA in
+`docs/research/people/jensen/`. No claim of watching complete videos or verified
+quotes; no unverified controversy narrative in the gallery.
+
+Full validation passed: 49 + 187 tests, zero Astro diagnostics, 108-page build,
+107 docs lint clean. Desktop/mobile, filtering/empty states, saves, dialog
+keyboard close/focus and iframe cleanup, reduced motion, no-JS source links and
+Markdown source list reviewed. Actual audiovisual playback/regional availability
+is not established by headless UI checks. Existing warnings remain; Pagefind
+also notes no stemming for zh-cn. No commit/push/deployment authorized for this
+task. Preserve the same three unrelated research progress edits.
+
+The Jensen gallery is now entirely English at the user's request, including
+catalog metadata, filters, status messages, accessibility names and Markdown
+export. English desktop/mobile checks and full validation passed. Review record:
+`docs/research/people/jensen/review-english-2026-11-12.json`.
+
+Broader Jensen collection pass: 24 recordings across 17 original publisher
+channels, with Lex #494 and Joe Rogan #2422 first, plus Dwarkesh, YC, CHM,
+No Priors, BG2, SIEPR, Bloomberg, Milken, CBS, COMPUTEX and CES. All 24 years
+cross-checked against original YouTube publication metadata. New format filter,
+format labels, verified host transcript links and separate Stanford archive
+links from 2003/2009. Full validation and desktop/mobile/filter/player/export QA
+passed; all thumbnails load on scroll. Research scope, excluded unverified
+leads and actual review recorded under docs/research/people/jensen/. Still local;
+no commit, push or publication authorized for this gallery task.
+
+Jensen editorial redesign: warm ivory/forest palette, serif display headlines,
+self-hosted Inter, guided topic/long-conversation entry points, compact cards
+with expandable descriptions/transcripts, and next/previous player navigation.
+Fixed Astro scoping for dynamically created iframes so playback fills its frame.
+Desktop/mobile, keyboard details, journey filtering, player sizing/selection/
+cleanup/focus, saves, filters, print, reduced motion, no-JS and exports reviewed.
+Full validation passed with zero Astro diagnostics. Review record:
+`docs/research/people/jensen/review-style-2026-11-12.json`; ignored screenshots in
+`output/jensen-style-review/`. Remains local and uncommitted.
+
+Jensen living-tribute refinement: new first-person English dedication and
+“Jensen, keep building.” headline replace the somber introduction. Generated a
+colorful smiling Jensen illustration and authored a six-second circuit/spark GIF
+(`public/figures/jensen/`). Prompt, editable animation renderer and provenance
+are retained. Mobile places artwork before the longer dedication. Reduced
+motion, print, no-JS and offscreen/background states use the static WebP.
+Full validation and desktop/mobile, motion fallback, Markdown parity and existing
+gallery interaction checks passed. Review record:
+`docs/research/people/jensen/review-tribute-2026-11-12.json`; screenshots under
+ignored `output/jensen-tribute-review/`. No commit/push/deployment authorized.
+
+Latest Jensen direction supersedes the illustrated hero: “Jensen, wish you were
+here.” with a small Pink Floyd acknowledgement. Hero uses a real January 21,
+2026 Davos speaking photo, ©2026 World Economic Forum / Thibaut Bouvier,
+CC BY-NC-SA 4.0. Six-second camera loop (GIF plus efficient animated WebP), static
+fallback, original photo and license records under `public/figures/jensen/`.
+Photo derivatives are excluded from MIT. Editable renderer retained in research
+visuals; credit/source/license/modifications on page and in Markdown. Desktop,
+mobile, motion fallbacks and exports reviewed; record
+`docs/research/people/jensen/review-photo-2026-11-12.json`.
+Still local; no commit, push or deployment authorized.
+
+Latest Jensen title: “Shine on you crazy diamond.” with a verified Pink Floyd
+official-channel YouTube link (Parts 1–9 new stereo mix). Editorial opening now
+leads into four NVIDIA contribution milestones and three sourced mindset
+interpretations, then the author's complete personal tribute and the original
+24-video browsing experience. Real 2026 photo animation retained. Hero CTA still
+skips directly to the library. Primary history/transcript sources, song publisher
+verification and rendering/interaction QA are in the Jensen research directory.
+Review: `docs/research/people/jensen/review-shine-2026-11-12.json`; screenshots in
+ignored `output/jensen-shine-review/`. No commit, push or deployment authorized.
+
+Shine On layout final validation: 49 deployment and 187 content tests pass, zero
+Astro diagnostics, 108 pages built and 107 MDX files lint clean. Existing build
+notices remain. Unrelated research progress files preserved.
+
+Latest Jensen direction supersedes the contribution/philosophy layout. Removed
+timeline, mindset, associated references and extra journeys from page/export.
+Opening/song/photo retained; full dedication is a native expandable note near
+the opening. Video-first collection uses one large inline player with four
+suggestions, source/transcript, stop and filtered previous/next controls. All
+modal code/styles removed. Mobile uses a horizontal suggestion strip and compact
+library rows. No iframe until selection; stopping removes it. All 24 videos,
+filters, local saves and no-JS originals retained. New review:
+`docs/research/people/jensen/review-inline-2026-11-12.json`; screenshots in ignored
+`output/jensen-inline-review/`. No commit, push or deployment authorized.
+
+Inline redesign final validation passed: 49 deployment tests, 187 content tests,
+zero Astro diagnostics, 108 built pages and 107 lint-clean MDX files. Existing
+Nimbus/Vite and legacy redirect Pagefind notices remain. Unrelated research
+progress files preserved; no publication actions taken.
+
+Added two original All-In Podcast interviews (September 14 and March 19, 2026).
+Recent September recording is near the top and in the suggestion queue. Catalog
+now contains 26 recordings across 18 original publisher channels. Original YouTube
+publication dates and publisher identity verified; metadata retained in
+`docs/research/people/jensen/all-in-metadata-2026-11-12.json`. All counts and text
+exports derive from the catalog. No commit, push or deployment authorized.
+
+All-In additions validated: full site checks pass with existing notices. Desktop
+and mobile, all three search aliases, combined Podcast/2026 filter, new thumbnail
+loads, inline selection/navigation/stop and 26-entry Markdown export checked.
+Review: `docs/research/people/jensen/review-all-in-2026-11-12.json`.
+
+Homepage invitation: added a single clickable panel before Explore linking to
+`/jensen/`. Latest author-requested copy leads with “Jensen Huang. The GOAT.”
+under “A personal tribute,” with “A collection of his speeches and interviews,
+gathered with admiration.” The original song title remains on the collection
+page. Subtle diamond, native theme colors and keyboard focus; no homepage media
+payload or new navigation group. Source in `src/content/docs/index.mdx`, styling
+in `src/styles/latent-light.css`. Full validation passes with existing notices.
+Desktop/mobile and both themes visually reviewed; link retained in Markdown.
+Restarted only the confirmed Latent Light server to clear stale development
+exports; loopback port remains 4327. No commit, push or deployment authorized.
+
+Homepage badge now includes a transparent cartoon Jensen avatar generated from
+the user's supplied portrait. CSS supplies a gentle six-second greeting and
+sparkle, static under reduced motion/print; 16 KiB asset and prompts/provenance
+retained. The dedication now dates the resignation accurately: November 11,
+2026 effective date in the 8-K, November 12 public announcement. Added the user's
+lasting support and hope for a return to leadership, with primary-source date
+citation and Markdown parity. Full validation passed with existing notices.
+Homepage desktop/mobile/both themes, actual animation/static fallback, keyboard
+navigation and both exports checked. Review record:
+`docs/research/people/jensen/review-home-avatar-2026-11-12.json`.
+Dev server refreshed; remains on 127.0.0.1:4327 (SSH preview uses 14327).
+No commit, push or deployment authorized. Unrelated progress files preserved.
+
+Latest copy refinement: personal note retains its original meaning without dash
+punctuation. Homepage keeps the collection description and adds a separate
+resignation/support context line ending “hope to see him lead us again.”
+Full validation, desktop/mobile/both themes, keyboard, motion and exports pass.
+Review: `docs/research/people/jensen/review-clean-copy-2026-11-12.json`.
+No publication actions. Existing build notices and unrelated changes preserved.
+
+## Jensen collection release preparation
+
+The author authorized commit and push for the completed Jensen collection and
+homepage invitation. Use the substantial-change branch/PR workflow. Merge and
+production deployment are not authorized by this release step. Final validation
+and browser/export review passed; only existing Nimbus/Vite and legacy redirect
+Pagefind notices remain. Keep the three unrelated research progress JSON edits
+outside the commit.

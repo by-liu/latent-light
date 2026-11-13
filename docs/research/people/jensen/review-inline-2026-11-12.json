@@ -1,0 +1,57 @@
+{
+  "initial": {
+    "cards": 24,
+    "iframes": 0,
+    "dialogs": 0,
+    "context": false,
+    "song": "https://www.youtube.com/watch?v=Pd-qu_ErkbE",
+    "overflow": false
+  },
+  "selection": {
+    "src": "https://www.youtube-nocookie.com/embed/3hptKYix4X8?autoplay=1&rel=0",
+    "title": "Joe Rogan: a wide-ranging conversation",
+    "width": 811.265625,
+    "frameWidth": 811.265625,
+    "focus": "player-title",
+    "bodyLocked": "visible"
+  },
+  "stop": {
+    "iframes": 0,
+    "poster": true,
+    "focus": "player-poster"
+  },
+  "keyboard": {
+    "src": "https://www.youtube-nocookie.com/embed/3hptKYix4X8?autoplay=1&rel=0",
+    "focus": "player-title",
+    "scroll": "auto",
+    "static": true
+  },
+  "export": {
+    "sources": 24,
+    "tribute": true,
+    "removed": true,
+    "song": true
+  },
+  "print": {
+    "watch": "none",
+    "filters": "none"
+  },
+  "noJS": {
+    "links": 24,
+    "cards": 24,
+    "poster": "https://www.youtube.com/watch?v=vif8NQcjVf0",
+    "iframes": 0
+  },
+  "errors": [],
+  "validation": {
+    "deploymentTests": 49,
+    "contentTests": 187,
+    "astroErrors": 0,
+    "astroWarnings": 0,
+    "builtPages": 108,
+    "lintCleanMDX": 107,
+    "diffCheck": "passed",
+    "existingBuildNotices": "Nimbus/Vite module directive and 25 legacy redirect Pagefind notices retained",
+    "publication": "local only"
+  }
+}
