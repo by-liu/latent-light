@@ -1,0 +1,44 @@
+{
+  "motion": "/figures/jensen/jensen-davos-2026-motion.webp",
+  "context": {
+    "title": "Shine on\nyou crazy\ndiamond.",
+    "song": "https://www.youtube.com/watch?v=Pd-qu_ErkbE",
+    "milestones": 4,
+    "principles": 3,
+    "paragraphs": 5,
+    "cards": 24
+  },
+  "reduced": "/figures/jensen/jensen-davos-2026.webp",
+  "print": "/figures/jensen/jensen-davos-2026.webp",
+  "mobile": {
+    "overflow": false,
+    "imageTop": 459.140625,
+    "copyTop": 2773.703125,
+    "imageLoaded": true
+  },
+  "principlePlayer": {
+    "closed": true,
+    "focus": true,
+    "iframes": 0
+  },
+  "export": {
+    "tribute": true,
+    "returnHope": true,
+    "thanks": true,
+    "context": true,
+    "song": true
+  },
+  "noJS": "/figures/jensen/jensen-davos-2026.webp",
+  "errors": [],
+  "validation": {
+    "deploymentTests": 49,
+    "contentTests": 187,
+    "astroErrors": 0,
+    "astroWarnings": 0,
+    "builtPages": 108,
+    "lintCleanMDX": 107,
+    "diffCheck": "passed",
+    "existingBuildNotices": "Nimbus/Vite module directive notices and 25 legacy redirect Pagefind notices retained",
+    "publication": "local only"
+  }
+}

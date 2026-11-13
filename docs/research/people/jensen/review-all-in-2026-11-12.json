@@ -1,0 +1,25 @@
+{
+  "total": 26,
+  "suggestion": true,
+  "results": [
+    "S7CrlFLAmEA",
+    "gwW8GKwHB3I"
+  ],
+  "mobileOverflow": false,
+  "export": {
+    "count": 26,
+    "september": true,
+    "march": true
+  },
+  "errors": [],
+  "validation": {
+    "deploymentTests": 49,
+    "contentTests": 187,
+    "astroErrors": 0,
+    "astroWarnings": 0,
+    "builtPages": 108,
+    "lintCleanMDX": 107,
+    "existingNotices": "Nimbus/Vite and 25 legacy redirect Pagefind notices retained",
+    "publication": "local only"
+  }
+}

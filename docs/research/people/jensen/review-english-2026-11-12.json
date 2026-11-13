@@ -1,0 +1,82 @@
+{
+  "desktop": {
+    "language": "en",
+    "hasChinese": false,
+    "title": "Jensen Huang \u00b7 Voices Worth Returning To | Latent Light",
+    "cards": 7,
+    "overflow": false,
+    "thumbs": [
+      {
+        "loaded": true,
+        "src": "https://i.ytimg.com/vi/lXLBTBBil2U/hqdefault.jpg"
+      },
+      {
+        "loaded": true,
+        "src": "https://i.ytimg.com/vi/lXLBTBBil2U/hqdefault.jpg"
+      },
+      {
+        "loaded": true,
+        "src": "https://i.ytimg.com/vi/y6NfxiemvHg/hqdefault.jpg"
+      },
+      {
+        "loaded": true,
+        "src": "https://i.ytimg.com/vi/-qXDdToZHzE/hqdefault.jpg"
+      },
+      {
+        "loaded": true,
+        "src": "https://i.ytimg.com/vi/Y2F8yisiS6E/hqdefault.jpg"
+      },
+      {
+        "loaded": true,
+        "src": "https://i.ytimg.com/vi/_waPvOwL9Z8/hqdefault.jpg"
+      },
+      {
+        "loaded": true,
+        "src": "https://i.ytimg.com/vi/jw_o0xr8MWU/hqdefault.jpg"
+      },
+      {
+        "loaded": true,
+        "src": "https://i.ytimg.com/vi/H0WxJ7caZQU/hqdefault.jpg"
+      }
+    ]
+  },
+  "combined": 1,
+  "empty": true,
+  "saved": {
+    "cards": 1,
+    "pressed": "true"
+  },
+  "player": {
+    "open": true,
+    "src": "https://www.youtube-nocookie.com/embed/lXLBTBBil2U?autoplay=1&rel=0",
+    "focused": "close-player"
+  },
+  "close": {
+    "open": false,
+    "iframes": 0,
+    "focus": "feature-watch"
+  },
+  "mobile": {
+    "overflow": false,
+    "cards": 7
+  },
+  "export": {
+    "sources": 7,
+    "caltech": true
+  },
+  "reduced": "auto",
+  "noJS": {
+    "visible": 7,
+    "links": 7
+  },
+  "errors": [],
+  "checked_at": "2026-11-12T20:05:09.100476+00:00",
+  "revision": "English UI, catalog, accessibility labels and source export; all seven original titles preserved.",
+  "validation": {
+    "deployment_tests": 49,
+    "content_tests": 187,
+    "astro_diagnostics": 0,
+    "built_pages": 108,
+    "lint_docs": 107
+  }
+}

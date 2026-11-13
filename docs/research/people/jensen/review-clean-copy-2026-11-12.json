@@ -1,0 +1,36 @@
+{
+  "panel": {
+    "href": "/jensen/",
+    "text": "✧\nA PERSONAL TRIBUTE\nJensen Huang. The GOAT.\nA collection of his speeches and interviews, gathered with admiration.\nHe stepped down as NVIDIA’s CEO on November 11, 2026. I will always support him and hope to see him lead us again.\n↗",
+    "display": "flex",
+    "overflow": false
+  },
+  "avatar": {
+    "loaded": true,
+    "src": "http://127.0.0.1:4327/figures/jensen/jensen-avatar-v1.webp",
+    "animation": "jensen-avatar-greeting",
+    "alt": "AI-generated cartoon avatar of Jensen Huang"
+  },
+  "motion": "matrix(0.99821, -0.0598008, 0.0598008, 0.99821, 0, -1.91834)",
+  "dark": "color(srgb 0.0474545 0.0581241 0.0396146)",
+  "mobileOverflow": false,
+  "export": {
+    "link": true,
+    "title": true,
+    "jensen": true,
+    "avatar": true
+  },
+  "reduced": "1e-05s",
+  "destination": "/jensen/",
+  "tribute": {
+    "text": "A PERSONAL NOTEWhat his story means to me.+To me, Jensen Huang is the greatest entrepreneur of our time and a true godfather of AI. He helped lead a revolution. But what inspires me most is the optimism, conviction and resilience he asks of others. He lives those qualities himself.As a Chinese American immigrant who began with humble roots, he built something that once seemed impossible. His story embodies the American dream. His vision and persistence have given me energy and courage to meet each day with hope.Jensen stepped down as NVIDIA’s CEO on November 11, 2026. The company announced it publicly on November 12.1I believe this is only a pause in his work with the company he has poured his life into. I look forward to his return and to the extraordinary things he can still build. I will always support him. I hope to see him return to leadership and keep building, inspiring and leading the way forward.This collection is my way of saying thank you.With admiration,Latent Light1. NVIDIA, SEC filing, Item 5.02 (effective date) and CEO transition announcement (November 12, 2026). ↩",
+    "source": "1. NVIDIA, SEC filing, Item 5.02 (effective date) and CEO transition announcement (November 12, 2026). ↩"
+  },
+  "tributeExport": {
+    "dates": true,
+    "support": true,
+    "citation": true,
+    "videos": 26
+  },
+  "errors": []
+}

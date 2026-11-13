@@ -1,0 +1,188 @@
+{
+  "desktop": {
+    "language": "en",
+    "hasChinese": false,
+    "title": "Jensen Huang \u00b7 Voices Worth Returning To | Latent Light",
+    "cards": 24,
+    "overflow": false,
+    "thumbs": [
+      {
+        "loaded": true,
+        "src": "http://127.0.0.1:4327/favicon.ico"
+      },
+      {
+        "loaded": true,
+        "src": "https://i.ytimg.com/vi/lXLBTBBil2U/hqdefault.jpg"
+      },
+      {
+        "loaded": true,
+        "src": "https://i.ytimg.com/vi/vif8NQcjVf0/hqdefault.jpg"
+      },
+      {
+        "loaded": true,
+        "src": "https://i.ytimg.com/vi/3hptKYix4X8/hqdefault.jpg"
+      },
+      {
+        "loaded": true,
+        "src": "https://i.ytimg.com/vi/Hrbq66XqtCo/hqdefault.jpg"
+      },
+      {
+        "loaded": true,
+        "src": "https://i.ytimg.com/vi/lXLBTBBil2U/hqdefault.jpg"
+      },
+      {
+        "loaded": true,
+        "src": "https://i.ytimg.com/vi/y6NfxiemvHg/hqdefault.jpg"
+      },
+      {
+        "loaded": true,
+        "src": "https://i.ytimg.com/vi/I4B37S1dyQQ/hqdefault.jpg"
+      },
+      {
+        "loaded": true,
+        "src": "https://i.ytimg.com/vi/0c8i4T9BSqY/hqdefault.jpg"
+      },
+      {
+        "loaded": true,
+        "src": "https://i.ytimg.com/vi/ZFtW3g1dbUU/hqdefault.jpg"
+      },
+      {
+        "loaded": true,
+        "src": "https://i.ytimg.com/vi/hw7EnjC68Fw/hqdefault.jpg"
+      },
+      {
+        "loaded": false,
+        "src": "https://i.ytimg.com/vi/bUrCR4jQQg8/hqdefault.jpg"
+      },
+      {
+        "loaded": false,
+        "src": "https://i.ytimg.com/vi/eS7qQ3WJSrw/hqdefault.jpg"
+      },
+      {
+        "loaded": false,
+        "src": "https://i.ytimg.com/vi/cEg8cOx7UZk/hqdefault.jpg"
+      },
+      {
+        "loaded": false,
+        "src": "https://i.ytimg.com/vi/DpQQi2scsHo/hqdefault.jpg"
+      },
+      {
+        "loaded": false,
+        "src": "https://i.ytimg.com/vi/GjXag-NB1HM/hqdefault.jpg"
+      },
+      {
+        "loaded": false,
+        "src": "https://i.ytimg.com/vi/qqYwvEmg8fQ/hqdefault.jpg"
+      },
+      {
+        "loaded": false,
+        "src": "https://i.ytimg.com/vi/HT8-KPAjpiA/hqdefault.jpg"
+      },
+      {
+        "loaded": false,
+        "src": "https://i.ytimg.com/vi/dUFis1dte14/hqdefault.jpg"
+      },
+      {
+        "loaded": false,
+        "src": "https://i.ytimg.com/vi/H0WxJ7caZQU/hqdefault.jpg"
+      },
+      {
+        "loaded": false,
+        "src": "https://i.ytimg.com/vi/-qXDdToZHzE/hqdefault.jpg"
+      },
+      {
+        "loaded": false,
+        "src": "https://i.ytimg.com/vi/fHwmLOYJU_w/hqdefault.jpg"
+      },
+      {
+        "loaded": false,
+        "src": "https://i.ytimg.com/vi/Y2F8yisiS6E/hqdefault.jpg"
+      },
+      {
+        "loaded": false,
+        "src": "https://i.ytimg.com/vi/k82RwXqZHY8/hqdefault.jpg"
+      },
+      {
+        "loaded": false,
+        "src": "https://i.ytimg.com/vi/_waPvOwL9Z8/hqdefault.jpg"
+      },
+      {
+        "loaded": false,
+        "src": "https://i.ytimg.com/vi/jw_o0xr8MWU/hqdefault.jpg"
+      }
+    ]
+  },
+  "combined": 1,
+  "joe": [
+    "3hptKYix4X8"
+  ],
+  "lex": [
+    "vif8NQcjVf0"
+  ],
+  "empty": true,
+  "saved": {
+    "cards": 1,
+    "pressed": "true"
+  },
+  "player": {
+    "open": true,
+    "iframeWidth": 1098,
+    "frameWidth": 1098,
+    "src": "https://www.youtube-nocookie.com/embed/lXLBTBBil2U?autoplay=1&rel=0",
+    "focused": "close-player"
+  },
+  "next": "https://www.youtube-nocookie.com/embed/y6NfxiemvHg?autoplay=1&rel=0",
+  "previous": "https://www.youtube-nocookie.com/embed/lXLBTBBil2U?autoplay=1&rel=0",
+  "close": {
+    "open": false,
+    "iframes": 0,
+    "focus": "feature-watch"
+  },
+  "journey": {
+    "count": 8,
+    "format": "Podcast",
+    "focus": "INPUT"
+  },
+  "mobile": {
+    "overflow": false,
+    "cards": 24
+  },
+  "scrolledThumbnails": {
+    "loaded": 26,
+    "total": 26
+  },
+  "export": {
+    "sources": 24,
+    "lex": true,
+    "joe": true,
+    "formats": true,
+    "archives": true,
+    "caltech": true
+  },
+  "reduced": "auto",
+  "detailsKeyboard": true,
+  "print": {
+    "background": "rgb(255, 255, 255)",
+    "filters": "none"
+  },
+  "noJS": {
+    "visible": 24,
+    "links": 24
+  },
+  "errors": [],
+  "checked_at": "2026-11-12T20:38:20.370302+00:00",
+  "revision": "Warm editorial redesign: ivory/forest palette, self-hosted Inter with Georgia display, curiosity pathways, quieter expandable cards, full-size player with next/previous.",
+  "validation": {
+    "deployment_tests": 49,
+    "content_tests": 187,
+    "astro_diagnostics": 0,
+    "built_pages": 108,
+    "lint_docs": 107
+  },
+  "screenshots": "Ignored output/jensen-style-review/",
+  "limits": [
+    "Headless player checks establish sizing, selection, cleanup and focus, not audiovisual playback or regional availability.",
+    "Existing Nimbus/Vite and 25 legacy-redirect Pagefind warnings remain.",
+    "Video source review is unchanged; layout work does not refresh content evidence dates."
+  ]
+}

@@ -70,3 +70,101 @@ html[data-mode='dark'] #main-content[data-latent-home]::before {
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; }
 }
+
+/* A quiet homepage invitation to the standalone Jensen video collection. */
+.docs-content .home-listening-room {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  margin: 2rem 0;
+  padding: 1.2rem 1.3rem;
+  border: 1px solid var(--nb-border);
+  border-radius: .65rem;
+  background: color-mix(in srgb, var(--nb-background) 92%, #80a267);
+  color: var(--nb-foreground);
+  text-decoration: none;
+  transition: border-color .2s, background-color .2s;
+}
+.docs-content .home-listening-room:hover {
+  border-color: #7e9b69;
+  background: color-mix(in srgb, var(--nb-background) 87%, #80a267);
+}
+.docs-content .home-listening-room:focus-visible {
+  outline: 2px solid var(--nb-foreground);
+  outline-offset: 4px;
+}
+.home-listening-avatar {
+  position: relative;
+  display: block;
+  width: 76px;
+  height: 76px;
+  flex: 0 0 76px;
+}
+.docs-content .home-listening-avatar img {
+  display: block;
+  width: 76px;
+  height: 76px;
+  max-width: none;
+  margin: 0;
+  object-fit: contain;
+  transform-origin: 50% 90%;
+  animation: jensen-avatar-greeting 6s ease-in-out infinite;
+}
+.home-avatar-spark {
+  position: absolute;
+  right: -3px;
+  top: 5px;
+  color: #789563;
+  font: 1.1rem/1 Georgia, serif;
+  animation: jensen-avatar-spark 6s ease-in-out infinite;
+}
+@keyframes jensen-avatar-greeting {
+  0%, 65%, 100% { transform: translateY(0) rotate(0); }
+  73% { transform: translateY(-2px) rotate(-4deg); }
+  83% { transform: translateY(-1px) rotate(3deg); }
+  91% { transform: translateY(0) rotate(-1deg); }
+}
+@keyframes jensen-avatar-spark {
+  0%, 65%, 100% { opacity: .35; transform: scale(.85); }
+  76% { opacity: 1; transform: scale(1.15); }
+  90% { opacity: .55; transform: scale(1); }
+}
+.home-listening-copy { display: grid; gap: .35rem; min-width: 0; }
+.home-listening-copy strong {
+  font: italic 1.45rem/1.3 Georgia, serif;
+  letter-spacing: -.025em;
+}
+.home-listening-description,
+.home-listening-context {
+  font-size: .8rem;
+  line-height: 1.65;
+  color: var(--nb-muted-foreground);
+}
+.home-listening-label {
+  font-size: .62rem;
+  font-weight: 500;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--nb-muted-foreground);
+}
+.home-listening-arrow { margin-left: auto; color: var(--nb-muted-foreground); }
+@media (max-width: 480px) {
+  .docs-content .home-listening-room { gap: .8rem; padding: 1rem; }
+  .home-listening-avatar { width: 64px; height: 64px; flex-basis: 64px; }
+  .docs-content .home-listening-avatar img { width: 64px; height: 64px; }
+  .home-listening-copy strong { font-size: 1.2rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .docs-content .home-listening-room { transition: none; }
+}
+
+@media (prefers-reduced-motion: reduce), print {
+  .docs-content .home-listening-avatar img,
+  .home-avatar-spark { animation: none; transform: none; }
+}
+
+.home-listening-context {
+  margin-top: .45rem;
+  padding-top: .6rem;
+  border-top: 1px solid var(--nb-border);
+}

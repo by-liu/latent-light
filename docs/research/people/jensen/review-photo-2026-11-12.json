@@ -1,0 +1,18 @@
+{
+  "motion": "/figures/jensen/jensen-davos-2026-motion.webp",
+  "reduced": "/figures/jensen/jensen-davos-2026.webp",
+  "print": "/figures/jensen/jensen-davos-2026.webp",
+  "mobile": {
+    "overflow": false,
+    "imageTop": 475.28125,
+    "copyTop": 941.8125,
+    "imageLoaded": true
+  },
+  "export": {
+    "tribute": true,
+    "returnHope": true,
+    "thanks": true
+  },
+  "noJS": "/figures/jensen/jensen-davos-2026.webp",
+  "errors": []
+}

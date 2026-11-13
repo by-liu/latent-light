@@ -1,0 +1,18 @@
+{
+  "motion": "/figures/jensen/jensen-building-v1.gif",
+  "reduced": "/figures/jensen/jensen-building-v1.webp",
+  "print": "/figures/jensen/jensen-building-v1.webp",
+  "mobile": {
+    "overflow": false,
+    "imageTop": 390.984375,
+    "copyTop": 844.6875,
+    "imageLoaded": true
+  },
+  "export": {
+    "tribute": true,
+    "returnHope": true,
+    "thanks": true
+  },
+  "noJS": "/figures/jensen/jensen-building-v1.webp",
+  "errors": []
+}

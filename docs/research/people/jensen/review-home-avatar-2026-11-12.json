@@ -1,0 +1,47 @@
+{
+  "panel": {
+    "href": "/jensen/",
+    "text": "\u2727\nA PERSONAL TRIBUTE\nJensen Huang. The GOAT.\nA collection of his speeches and interviews, gathered with admiration.\n\u2197",
+    "display": "flex",
+    "overflow": false
+  },
+  "avatar": {
+    "loaded": true,
+    "src": "http://127.0.0.1:4327/figures/jensen/jensen-avatar-v1.webp",
+    "animation": "jensen-avatar-greeting",
+    "alt": "AI-generated cartoon avatar of Jensen Huang"
+  },
+  "motion": "matrix(0.99821, -0.0598008, 0.0598008, 0.99821, 0, -1.91834)",
+  "dark": "color(srgb 0.0474545 0.0581241 0.0396146)",
+  "mobileOverflow": false,
+  "export": {
+    "link": true,
+    "title": true,
+    "jensen": true,
+    "avatar": true
+  },
+  "reduced": "1e-05s",
+  "destination": "/jensen/",
+  "tribute": {
+    "text": "A PERSONAL NOTEWhat his story means to me.+To me, Jensen Huang is the greatest entrepreneur of our time\u2014and a true godfather of AI. He helped lead a revolution. But what inspires me most is the optimism, conviction and resilience he asks of others\u2014and lives himself.As a Chinese American immigrant who began with humble roots, he built something that once seemed impossible. His story embodies the American dream. His vision and persistence have given me energy and courage to meet each day with hope.Jensen stepped down as NVIDIA\u2019s CEO on November 11, 2026. The company announced it publicly on November 12.1I believe he still has extraordinary things to build. I will always support him, and I hope to see him return to leadership\u2014to keep building, inspiring and leading the way forward.This collection is my way of saying thank you.With admiration,Latent Light1. NVIDIA, Form 8-K, Item 5.02 (effective date) and CEO transition announcement (November 12, 2026). \u21a9",
+    "source": "1. NVIDIA, Form 8-K, Item 5.02 (effective date) and CEO transition announcement (November 12, 2026). \u21a9"
+  },
+  "tributeExport": {
+    "dates": true,
+    "support": true,
+    "citation": true,
+    "videos": 26
+  },
+  "errors": [],
+  "validation": {
+    "deploymentTests": 49,
+    "contentTests": 187,
+    "astroErrors": 0,
+    "astroWarnings": 0,
+    "builtPages": 108,
+    "lintCleanMDX": 107,
+    "diffCheck": "passed",
+    "existingNotices": "Nimbus/Vite module directives and 25 legacy redirect Pagefind notices retained",
+    "publication": "local only"
+  }
+}
