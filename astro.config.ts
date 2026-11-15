@@ -5,6 +5,7 @@ import nimbus, {
 } from "@cloudflare/nimbus-docs";
 import { tableScroll } from "@cloudflare/nimbus-docs/markdown";
 import { localContentEditor } from './plugins/local-content-editor.mjs';
+import { localJensenClips } from './plugins/local-jensen-clips.mjs';
 import { referenceHeading } from './plugins/reference-heading.mjs';
 import { satteri } from '@astrojs/markdown-satteri';
 import { mathTypesetting, mathAsMarkdown } from './plugins/math-typesetting.mjs';
@@ -237,7 +238,7 @@ export default defineConfig({
   // Tailwind v4 — replaces the PostCSS plugin, which doesn't build under
   // Astro 7's Vite 8 bundler).
   vite: {
-    plugins: [tailwindcss(), localContentEditor()],
+    plugins: [tailwindcss(), localContentEditor(), localJensenClips()],
   },
   // Hover-prefetch link targets so full-page navigations feel instant without
   // a client-side router.

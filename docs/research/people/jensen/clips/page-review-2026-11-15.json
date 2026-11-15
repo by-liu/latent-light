@@ -1,0 +1,92 @@
+{
+  "checked": "2026-11-15",
+  "scope": "Jensen page local short clip section, preserving the full recording collection",
+  "catalog": {
+    "final_clips": 5,
+    "featured_shared_on_x": [
+      "JH007",
+      "JH001"
+    ],
+    "unreleased": 5,
+    "source": "src/data/jensen-clips.json"
+  },
+  "presentation": {
+    "player": "One square native video player, sticky on desktop, above the directory on mobile",
+    "directory": "Compact searchable list with theme selection and six entries per page",
+    "growth_check": "19 browser-only fixture entries verified four pages, six rows per page, correct final page, filter page reset and uninterrupted playback during paging",
+    "no_infinite_feed": true
+  },
+  "media": {
+    "location": "Ignored output/jensen-clips; no media or third party posters copied to public or Git",
+    "local_preview": "Development-only, loopback and same-origin media middleware with a fixed catalog file whitelist and byte-range support",
+    "production": "All release fields are null. Production HTML and Markdown omit unreleased clips and local asset URLs. No upload, R2 change or deployment performed.",
+    "pending": "Public reuse basis, reviewed public media URLs and optional X post URLs remain unconfirmed."
+  },
+  "validation": {
+    "command": "mise exec node@24.21.0 -- npm run validate",
+    "result": "passed",
+    "deployment_tests": 49,
+    "content_tests": 193,
+    "astro_errors": 0,
+    "astro_warnings": 0,
+    "astro_hints": 0,
+    "built_pages": 108,
+    "lint_clean_mdx_files": 107,
+    "existing_build_notices": "Nimbus/Vite module directive notices and legacy redirect Pagefind notices remain",
+    "git_diff_check": "passed"
+  },
+  "browser": {
+    "tool": "Isolated headless system Chromium via CDP; connected browser surface was unavailable",
+    "viewports": [
+      "1440 x 1050 desktop",
+      "390 x 844 mobile"
+    ],
+    "checks": {
+      "initialVideoRequests": [],
+      "playback": true,
+      "seek": true,
+      "singlePlayerSwitching": true,
+      "exclusivePlayback": true,
+      "transcript": true,
+      "textExport": true,
+      "filterIndependentOfPlayer": true,
+      "existingFilters": true,
+      "mobileNoOverflow": true,
+      "keyboardAndReducedMotion": true,
+      "security": [
+        {
+          "status": 206,
+          "bytes": 256
+        },
+        416,
+        404,
+        404,
+        405
+      ],
+      "scalability": {
+        "fixtureEntries": 19,
+        "pages": 4,
+        "perPage": 6,
+        "filterResetsPage": true,
+        "pagingPreservesPlayback": true
+      },
+      "noJavaScriptFallback": true,
+      "runtimeErrors": []
+    },
+    "limits": "Viewport emulation, not physical-device testing. No public upload or production playback test."
+  },
+  "exports": {
+    "development": "Five full caption transcripts, source timestamps, video and caption links, plus all 27 original recordings verified",
+    "production": "No pending clip media, local endpoints or local filesystem paths in built Jensen HTML or Markdown"
+  },
+  "unrelated_files": "Three pre-existing research progress JSON files verified unchanged against the clipping session hashes",
+  "publication": "No commit, push, upload, external messaging, scheduling or deployment performed.",
+  "release_preparation": {
+    "authorized": "User explicitly authorized commit, push and merge on November 15",
+    "validation": "Production-origin full validation passed: 49 deployment tests, 194 content tests, zero Astro diagnostics, 108 built pages, 107 lint-clean MDX files",
+    "fresh_checkout": "Missing ignored media files are skipped; a new regression test passed. No local media is required to build the production site.",
+    "production_gate": "All five clips remain unreleased. Built public Jensen HTML and Markdown contain no clip section or development media URLs.",
+    "privacy": "Reviewed intended source and metadata; no video files, posters, captions, credentials or private session context will be included. Three unrelated research edits excluded.",
+    "publication_status": "Prepared before branch commit, push and merge. See PR and live deployment for final outcome."
+  }
+}
