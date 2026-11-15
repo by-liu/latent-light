@@ -533,3 +533,26 @@ Existing build notices remain; no commit or publication performed.
 The author subsequently authorized commit and push for this Taiwan video
 addition. Use the branch/PR workflow and exclude the same three unrelated
 research progress edits. This step does not authorize merge or deployment.
+
+## November 15: Jensen short clip directory release
+
+The author authorized commit, push and merge of the short clip directory. A merge
+to main triggers the configured production deployment. The implementation keeps
+one native square player beside a searchable, themed directory with six entries
+per page. Mobile stacks the player and compact directory. Filtering and paging
+do not interrupt playback; short clips and full conversations stop each other.
+
+Five final clip records are in `src/data/jensen-clips.json`; the two clips the
+author reported posting on X are prioritized. All release fields remain null.
+Public reuse records and public media URLs are still pending. Production excludes
+these unreleased clips; this release does not upload or publish their media.
+Developer preview reads the existing ignored `output/jensen-clips/` files through
+a loopback, same-origin, read-only route. Missing local files are skipped on a
+fresh checkout. Keep media outside Git and `public/`.
+
+Review: `docs/research/people/jensen/clips/page-review-2026-11-15.json`. Desktop and
+mobile Chromium, playback/seeking, keyboard, reduced motion, no-JavaScript
+fallback, full caption exports and a 19-entry pagination fixture passed. The
+recorded three unrelated research progress files remain outside this release.
+Check the PR and production build status for the final merge and deployment
+outcome; this note is prepared before publication.

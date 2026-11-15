@@ -1,0 +1,128 @@
+---
+import type { JensenClip } from './jensen-clip-types';
+interface Props { clips: JensenClip[]; }
+const { clips } = Astro.props;
+const first = clips[0];
+const themes = [...new Set(clips.map(clip => clip.theme))];
+---
+{first && <section id="clips" class="clip-section" aria-labelledby="clips-title" data-jensen-clips>
+  <div class="clip-heading"><div><p class="clip-eyebrow">SHORT CLIPS</p><h2 id="clips-title">Small moments.<br/><em>Lasting ideas.</em></h2></div><p>A little wisdom. A little warmth.<br/>Something to carry with you.</p></div>
+  <div class="clip-layout">
+    <article class="clip-stage" data-clip-stage={first.id}>
+      <div class="clip-screen"><video controls playsinline preload="none" poster={first.poster} src={first.video} aria-label={first.title} width="1080" height="1080">
+        <track kind="captions" src={first.captions} srclang="en" label="English (also visible in video)"/>
+        <p><a href={first.video}>Watch {first.title}</a></p>
+      </video></div>
+      <div class="clip-intro"><div class="clip-playing-meta"><p class="clip-eyebrow" data-clip-meta>{first.theme} · {first.duration}</p><button type="button" data-clip-stop hidden>Stop playback ×</button></div>
+        <h3 tabindex="-1" data-clip-title>{first.title}</h3><p class="clip-description" data-clip-description>{first.description}</p>
+        <div class="clip-actions"><a href={first.sourceUrl} data-clip-source target="_blank" rel="noopener">{first.sourcePublisher} · Original at {first.sourceTime} ↗</a><a href={first.xUrl || '#'} data-clip-x hidden={!first.xUrl} target="_blank" rel="noopener">View on X ↗</a></div>
+        <details class="clip-transcript" data-clip-transcript><summary>Read transcript <span>· English captions</span></summary><p data-clip-transcript-text>{first.transcript.join(' ')}</p><small>Captions lightly edited for readability. <span data-clip-source-title>From {first.sourceTitle}.</span></small></details>
+      </div>
+    </article>
+    <div class="clip-directory">
+      <div class="clip-directory-heading"><h3>Browse the moments <span>{clips.length}</span></h3><a href="#collection">Full conversations ↗</a></div>
+      <form class="clip-filters" role="search" aria-label="Find a short clip" hidden>
+        <label class="clip-search"><span class="clip-sr">Search short clips</span><input type="search" name="clip-query" placeholder="Search ideas, titles, sources…" autocomplete="off"/></label>
+        <label><span class="clip-sr">Filter short clips by theme</span><select name="clip-theme"><option value="all">All themes</option>{themes.map(theme => <option value={theme}>{theme}</option>)}</select></label>
+      </form>
+      <p class="clip-results" data-clip-results hidden></p>
+      <ol class="clip-list">
+        {clips.map((clip, i) => <li id={`clip-${clip.id}`} class="clip-row" data-clip-row={clip.id}>
+          <a class="clip-choice" href={clip.video} data-clip-select={clip.id} aria-current={i === 0 ? 'true' : undefined} aria-label={`Play ${clip.title}, ${clip.duration}`}>
+            <div class="clip-thumbnail"><img src={clip.poster} alt="" width="1080" height="1080" loading="lazy"/><span class="clip-card-play" aria-hidden="true">▶</span><span class="clip-duration">{clip.duration}</span></div>
+            <div class="clip-row-copy"><span class="clip-row-meta">{clip.theme}{clip.sharedOnX && <span class="clip-badge">Shared on X</span>}</span><h4>{clip.title}</h4><span class="clip-row-description">{clip.description}</span></div>
+          </a>
+          <a class="clip-row-source" href={clip.sourceUrl} target="_blank" rel="noopener" aria-label={`Original source for ${clip.title}, at ${clip.sourceTime}`}>Source ↗</a>
+        </li>)}
+      </ol>
+      <div class="clip-empty" hidden><p>No moments match this search.</p><button type="button" data-clip-reset>Show all clips</button></div>
+      <nav class="clip-pagination" aria-label="Short clip pages" hidden><button type="button" data-clip-previous>← Previous</button><span data-clip-page></span><button type="button" data-clip-next>Next →</button></nav>
+      <p class="clip-directory-note">Select a moment to play it here.</p>
+    </div>
+  </div>
+  <noscript><div class="clip-nojs-transcripts"><p>All clip transcripts</p>{clips.map(clip => <details><summary>{clip.title}</summary><p>{clip.transcript.join(' ')}</p><a href={clip.sourceUrl}>Original source · {clip.sourceTime}</a></details>)}</div></noscript>
+  <p class="clip-status clip-sr" role="status" aria-live="polite"></p>
+  <script is:inline type="application/json" data-clip-data set:html={JSON.stringify(clips).replace(/</g,'\\u003c')}/>
+</section>}
+<script>
+import { clipDirectoryPage } from '../../../plugins/clip-directory.mjs';
+import type { JensenClip } from './jensen-clip-types';
+const root = document.querySelector<HTMLElement>('[data-jensen-clips]');
+if (root) {
+  const clips: JensenClip[] = JSON.parse(root.querySelector('[data-clip-data]')!.textContent!);
+  const stage = root.querySelector<HTMLElement>('.clip-stage')!;
+  const video = stage.querySelector('video')!;
+  const heading = stage.querySelector<HTMLElement>('[data-clip-title]')!;
+  const status = root.querySelector<HTMLElement>('.clip-status')!;
+  const form = root.querySelector<HTMLFormElement>('.clip-filters')!;
+  const query = form.querySelector<HTMLInputElement>('input')!;
+  const theme = form.querySelector<HTMLSelectElement>('select')!;
+  const rows = [...root.querySelectorAll<HTMLElement>('[data-clip-row]')];
+  const choices = [...root.querySelectorAll<HTMLAnchorElement>('[data-clip-select]')];
+  const previous = root.querySelector<HTMLButtonElement>('[data-clip-previous]')!;
+  const next = root.querySelector<HTMLButtonElement>('[data-clip-next]')!;
+  const stop = stage.querySelector<HTMLButtonElement>('[data-clip-stop]')!;
+  let currentPage = 1;
+  let currentId = clips[0].id;
+  function renderDirectory() {
+    const result = clipDirectoryPage(clips, { query: query.value, theme: theme.value, page: currentPage, pageSize: 6 });
+    currentPage = result.page;
+    const visible = new Set(result.items.map((clip: JensenClip) => clip.id));
+    rows.forEach(row => { row.hidden = !visible.has(row.dataset.clipRow!); });
+    root!.querySelector<HTMLElement>('[data-clip-results]')!.textContent = `${result.start}–${result.end} of ${result.total} clips`;
+    root!.querySelector<HTMLElement>('[data-clip-page]')!.textContent = `${result.page} / ${result.pageCount}`;
+    previous.disabled = result.page <= 1; next.disabled = result.page >= result.pageCount;
+    root!.querySelector<HTMLElement>('.clip-empty')!.hidden = result.total !== 0;
+    status.textContent = `${result.total} clips found. Page ${result.page} of ${result.pageCount}.`;
+  }
+  function select(id: string, play = false) {
+    const clip = clips.find(clip => clip.id === id); if (!clip) return;
+    if (id !== currentId) {
+      video.pause(); video.src = clip.video; video.poster = clip.poster; video.setAttribute('aria-label', clip.title);
+      video.querySelector('track')!.src = clip.captions; video.load(); stop.hidden = true;
+      stage.dataset.clipStage = clip.id; currentId = clip.id;
+      heading.textContent = clip.title;
+      stage.querySelector('[data-clip-meta]')!.textContent = `${clip.theme} · ${clip.duration}`;
+      stage.querySelector('[data-clip-description]')!.textContent = clip.description;
+      const source = stage.querySelector<HTMLAnchorElement>('[data-clip-source]')!; source.href = clip.sourceUrl; source.textContent = `${clip.sourcePublisher} · Original at ${clip.sourceTime} ↗`;
+      const x = stage.querySelector<HTMLAnchorElement>('[data-clip-x]')!; x.hidden = !clip.xUrl; x.href = clip.xUrl || '#';
+      stage.querySelector('[data-clip-transcript-text]')!.textContent = clip.transcript.join(' ');
+      stage.querySelector('[data-clip-source-title]')!.textContent = `From ${clip.sourceTitle}.`;
+      stage.querySelector<HTMLDetailsElement>('[data-clip-transcript]')!.open = false;
+    }
+    choices.forEach(choice => { if (choice.dataset.clipSelect === id) choice.setAttribute('aria-current','true'); else choice.removeAttribute('aria-current'); });
+    status.textContent = `Selected ${clip.title}.`;
+    if (play) {
+      try { history.replaceState(null, '', location.pathname + location.search + `#clip-${clip.id}`); } catch {}
+      heading.focus({preventScroll:true});
+      if (matchMedia('(max-width:700px)').matches) stage.scrollIntoView({block:'start',behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'instant':'smooth'});
+      video.play().catch(() => {status.textContent='Use the video controls to start playback.';});
+    }
+  }
+  choices.forEach(choice => choice.addEventListener('click', event => {
+    if (event instanceof MouseEvent && (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey)) return;
+    event.preventDefault(); select(choice.dataset.clipSelect!,true);
+  }));
+  video.addEventListener('play', () => { document.dispatchEvent(new CustomEvent('jensen:clip-play')); stop.hidden=false; status.textContent=`Playing ${heading.textContent}.`; });
+  document.addEventListener('jensen:conversation-play', () => video.pause());
+  stop.addEventListener('click', () => {video.pause();video.currentTime=0;stop.hidden=true;video.focus();});
+  form.addEventListener('submit', event => event.preventDefault());
+  query.addEventListener('input', () => {currentPage=1;renderDirectory();});
+  theme.addEventListener('change', () => {currentPage=1;renderDirectory();});
+  previous.addEventListener('click', () => {currentPage--;renderDirectory();});
+  next.addEventListener('click', () => {currentPage++;renderDirectory();});
+  root.querySelector('[data-clip-reset]')!.addEventListener('click', () => {query.value='';theme.value='all';currentPage=1;renderDirectory();query.focus();});
+  const fromHash=() => {const id=/^#clip-(JH\d{3})$/.exec(location.hash)?.[1];if(id)select(id);};
+  window.addEventListener('hashchange',fromHash);fromHash();
+  form.hidden=false;root.querySelector<HTMLElement>('.clip-pagination')!.hidden=false;root.querySelector<HTMLElement>('[data-clip-results]')!.hidden=false;renderDirectory();
+}
+</script>
+<style>
+.clip-section{padding:48px 0 54px;border-top:1px solid #dcdfd2;scroll-margin-top:28px;color:#28382c;font-family:inherit;min-width:0}.clip-eyebrow{font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:#60724e;margin:0;line-height:1.6}.clip-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:30px}.clip-heading .clip-eyebrow{margin-bottom:16px}.clip-heading h2{font-family:Georgia,serif;font-size:48px;line-height:1.04;letter-spacing:-.045em;font-weight:400;margin:0}.clip-heading h2 em{font-weight:400;color:#6b7f58}.clip-heading>p{font-size:12px;line-height:1.9;color:#68705f;margin:0 0 3px}
+.clip-layout{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:36px;align-items:start}.clip-stage{position:sticky;top:24px;min-width:0;scroll-margin-top:24px}.clip-screen{aspect-ratio:1;background:#0e1717;border-radius:5px;overflow:hidden;min-width:0}.clip-screen video{display:block;width:100%;height:100%;object-fit:contain}.clip-intro{padding-top:18px}.clip-playing-meta{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:9px;min-height:20px}.clip-playing-meta button{background:none;border:0;font:inherit;font-size:10px;color:#52664a;cursor:pointer;padding:3px 0}.clip-intro h3{font-family:Georgia,serif;font-size:29px;font-weight:400;letter-spacing:-.035em;line-height:1.18;margin:0 0 12px}.clip-description{font-size:12px;line-height:1.8;color:#58634f;margin:0}.clip-actions{display:flex;flex-wrap:wrap;gap:10px 20px;font-size:10px;margin-top:15px;line-height:1.8}.clip-section a{color:inherit;text-decoration:none}.clip-actions a,.clip-row-source{color:#345c43!important;text-decoration:underline!important;text-underline-offset:3px}.clip-transcript{margin-top:16px;border-top:1px solid #dce2d1;padding-top:12px;font-size:11px;line-height:1.8}.clip-transcript summary{cursor:pointer;color:#52664a}.clip-transcript summary span{font-size:9px;color:#68705f}.clip-transcript p{color:#58634f;margin:12px 0;font-size:12px;line-height:1.85}.clip-transcript small{color:#68705f;font-size:10px;line-height:1.7}
+.clip-directory{min-width:0;border-top:1px solid #cbd4c0;padding-top:15px}.clip-directory-heading{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:17px}.clip-directory-heading h3{font-size:14px;font-weight:500;margin:0}.clip-directory-heading h3 span{font-size:10px;color:#68705f;margin-left:5px}.clip-directory-heading>a{font-size:9px;color:#52664a;white-space:nowrap}.clip-filters{display:grid;grid-template-columns:minmax(0,1fr) 125px;gap:8px}.clip-filters label{min-width:0}.clip-filters input,.clip-filters select{display:block;width:100%;min-width:0;box-sizing:border-box;border:1px solid #d3dac8;border-radius:3px;padding:11px 10px;color:#384c35;background:#f5f5ed;font:inherit;font-size:10px;line-height:1.5;min-height:40px}.clip-filters input::placeholder{color:#78846e}.clip-results{font-size:9px;line-height:1.6;color:#68705f;margin:12px 0 0;font-variant-numeric:tabular-nums}.clip-list{list-style:none;padding:0;margin:4px 0 0}.clip-row{position:relative;min-width:0;margin:0;border-bottom:1px solid #dce2d1;scroll-margin-top:24px;padding:0 0 9px}.clip-choice{display:grid;grid-template-columns:76px minmax(0,1fr);gap:13px;padding:13px 6px 0;align-items:start;border-radius:3px}.clip-choice[aria-current=true]{background:#e9efdf}.clip-thumbnail{position:relative;aspect-ratio:1;overflow:hidden;border-radius:3px;background:#0e1717}.clip-thumbnail img{display:block;width:100%;height:100%;object-fit:contain}.clip-card-play{position:absolute;left:8px;top:7px;font-size:11px;color:#fff;text-shadow:0 1px 6px #000}.clip-duration{position:absolute;right:4px;bottom:4px;font-size:8px;font-variant-numeric:tabular-nums;background:#13281bcc;color:#fff;padding:2px 4px;border-radius:2px}.clip-row-copy{min-width:0;padding-top:1px}.clip-row-meta{display:flex;align-items:center;gap:7px;flex-wrap:wrap;font-size:8px;color:#68705f;line-height:1.5;margin:0 0 5px}.clip-badge{font-size:7px;border:1px solid #cad3bc;border-radius:2px;padding:1px 4px;white-space:nowrap}.clip-choice h4{font-family:Georgia,serif;font-size:18px;line-height:1.15;font-weight:400;letter-spacing:-.025em;margin:0 0 6px}.clip-choice:hover h4,.clip-choice[aria-current] h4{color:#466b31}.clip-row-description{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;color:#68705f;font-size:10px;line-height:1.65}.clip-row-source{display:block;width:max-content;margin:6px 6px 0 95px;font-size:9px;line-height:1.6}.clip-pagination{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:18px;padding:0 4px;font-size:10px;color:#52664a;min-height:32px}.clip-pagination button,.clip-empty button{border:0;background:none;color:inherit;font:inherit;cursor:pointer;min-height:32px;padding:5px 0}.clip-pagination button:disabled{opacity:.4;cursor:default}.clip-pagination span{font-variant-numeric:tabular-nums;color:#68705f}.clip-directory-note{font-size:9px;color:#78846e;line-height:1.7;margin:8px 0 0}.clip-empty{padding:30px 10px;text-align:center;background:#edf0e5;margin-top:12px;border-radius:3px;font-size:12px;color:#68705f}.clip-empty button{text-decoration:underline;color:#345c43}.clip-section [hidden]{display:none!important}.clip-section a:focus-visible,.clip-section button:focus-visible,.clip-section input:focus-visible,.clip-section select:focus-visible,.clip-transcript summary:focus-visible,.clip-screen video:focus-visible,.clip-intro h3:focus-visible{outline:2px solid #52703c;outline-offset:4px}.clip-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}.clip-nojs-transcripts{font-size:12px;line-height:1.8;margin-top:25px}.clip-nojs-transcripts details{padding:12px 0;border-top:1px solid #dce2d1}
+@media(max-width:1000px){.clip-layout{gap:24px}.clip-filters{grid-template-columns:1fr}.clip-choice{grid-template-columns:66px minmax(0,1fr);gap:10px}.clip-row-source{margin-left:82px}.clip-choice h4{font-size:17px}.clip-row-description{font-size:9px}.clip-directory-heading>a{font-size:8px}}
+@media(max-width:700px){.clip-section{padding:32px 0}.clip-heading{margin-bottom:24px}.clip-heading h2{font-size:39px}.clip-heading>p{display:none}.clip-layout{grid-template-columns:1fr;gap:28px}.clip-stage{position:static}.clip-intro h3{font-size:27px}.clip-description{font-size:12px}.clip-filters{grid-template-columns:minmax(0,1fr) 115px}.clip-directory-heading h3{font-size:15px}.clip-directory-heading>a{font-size:9px}.clip-choice{grid-template-columns:74px minmax(0,1fr);gap:12px}.clip-choice h4{font-size:19px}.clip-row-meta{font-size:8px}.clip-row-description{font-size:10px}.clip-row-source{margin-left:92px;font-size:9px}.clip-pagination{font-size:11px}.clip-directory-note{font-size:10px}}
+@media(prefers-reduced-motion:reduce){.clip-section *{scroll-behavior:auto!important;transition:none!important}}
+@media print{.clip-screen,.clip-filters,.clip-pagination,.clip-thumbnail,.clip-row-source,.clip-status,.clip-playing-meta button{display:none!important}.clip-stage{position:static}.clip-layout{display:block}.clip-choice{display:block;padding:10px 0}.clip-row[hidden]{display:block!important}.clip-row-description{display:block}.clip-transcript::details-content{content-visibility:visible}.clip-transcript p,.clip-transcript small{display:block}}
+</style>

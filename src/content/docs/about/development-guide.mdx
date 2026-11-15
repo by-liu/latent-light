@@ -1,7 +1,7 @@
 ---
 title: Development guide
 description: Where source files live and how to develop pages, components, and exports.
-lastUpdated: 2026-11-07
+lastUpdated: 2026-11-14
 ---
 
 Develop the site from its source files. Preserve the calm reading experience.
@@ -363,6 +363,32 @@ Keep `videoGalleryAsMarkdown` from `plugins/video-gallery.mjs` registered in
 `astro.config.ts`. Check that exports retain every clip's link, duration,
 description and transcript. Store media provenance with the topic's research
 records and keep full audio and video files outside the public source assets.
+
+### Jensen’s edited clips
+
+The standalone Jensen collection uses `JensenClips.astro` for square MP4
+excerpts. Keep one native player beside a compact directory, with search,
+theme selection and six entries per page. Stack the player above the directory
+on phones. Do not turn a growing clip collection into an unbounded card grid
+or an infinite feed. Selection and directory filtering are independent; changing
+a directory page must not interrupt the active clip. Pause short clips when a
+full conversation starts, and close the conversation player when a short clip
+starts. Load video only after a reader chooses to play.
+
+Maintain clip titles, source timestamps and release metadata in
+`src/data/jensen-clips.json`. HTML and the Jensen Markdown export use the same
+catalog and preserve complete caption transcripts. An X post is not a reuse
+clearance record. A release needs a documented reuse basis, reviewed media on
+`media.latentlit.com`, captions and a complete transcript before it appears in
+a production build.
+
+Until release, the developer preview reads only the catalog’s named files from
+ignored `output/jensen-clips/`. Clips with missing local media are skipped so
+a fresh checkout remains usable. The development-only media middleware accepts
+loopback hosts, same-origin requests and read-only byte ranges. It must not
+be installed in production or expose arbitrary files. Keep unreleased MP4s,
+posters and captions outside `public/` and Git. Test range handling, publication
+gating and directory pagination with `npm run test:content`.
 
 ## Present a podcast
 
