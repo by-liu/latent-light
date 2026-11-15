@@ -556,3 +556,20 @@ fallback, full caption exports and a 19-entry pagination fixture passed. The
 recorded three unrelated research progress files remain outside this release.
 Check the PR and production build status for the final merge and deployment
 outcome; this note is prepared before publication.
+
+## November 15: public Jensen clip activation
+
+The author approved public upload of the five completed clips after reviewing
+the documented noncommercial exception assessment and its uncertainty. This is
+not rights-holder permission or a blanket reuse license. All fifteen MP4, poster
+and caption objects were uploaded to the existing R2 bucket and verified by
+public download hash, MIME, CORS and video byte ranges. No bucket settings or
+unrelated objects changed. See the public reuse review and media release JSON
+records under `docs/research/people/jensen/clips/`.
+
+The five release records now enable the short clip directory in production.
+Each includes an original contextual note, full transcript, caption track and
+timestamped source link. The single player uses anonymous CORS for hosted
+caption tracks. Local preview prefers existing ignored assets, with published
+URLs as the fallback on a fresh checkout. Source footage is excluded from MIT.
+The same three unrelated research progress files remain outside this update.

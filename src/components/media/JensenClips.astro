@@ -9,14 +9,14 @@ const themes = [...new Set(clips.map(clip => clip.theme))];
   <div class="clip-heading"><div><p class="clip-eyebrow">SHORT CLIPS</p><h2 id="clips-title">Small moments.<br/><em>Lasting ideas.</em></h2></div><p>A little wisdom. A little warmth.<br/>Something to carry with you.</p></div>
   <div class="clip-layout">
     <article class="clip-stage" data-clip-stage={first.id}>
-      <div class="clip-screen"><video controls playsinline preload="none" poster={first.poster} src={first.video} aria-label={first.title} width="1080" height="1080">
+      <div class="clip-screen"><video controls playsinline crossorigin="anonymous" preload="none" poster={first.poster} src={first.video} aria-label={first.title} width="1080" height="1080">
         <track kind="captions" src={first.captions} srclang="en" label="English (also visible in video)"/>
         <p><a href={first.video}>Watch {first.title}</a></p>
       </video></div>
       <div class="clip-intro"><div class="clip-playing-meta"><p class="clip-eyebrow" data-clip-meta>{first.theme} · {first.duration}</p><button type="button" data-clip-stop hidden>Stop playback ×</button></div>
         <h3 tabindex="-1" data-clip-title>{first.title}</h3><p class="clip-description" data-clip-description>{first.description}</p>
         <div class="clip-actions"><a href={first.sourceUrl} data-clip-source target="_blank" rel="noopener">{first.sourcePublisher} · Original at {first.sourceTime} ↗</a><a href={first.xUrl || '#'} data-clip-x hidden={!first.xUrl} target="_blank" rel="noopener">View on X ↗</a></div>
-        <details class="clip-transcript" data-clip-transcript><summary>Read transcript <span>· English captions</span></summary><p data-clip-transcript-text>{first.transcript.join(' ')}</p><small>Captions lightly edited for readability. <span data-clip-source-title>From {first.sourceTitle}.</span></small></details>
+        <details class="clip-transcript" data-clip-transcript><summary><span data-clip-details-label>{first.reviewNote ? "Context & transcript" : "Read transcript"}</span> <span>· English captions</span></summary><p data-clip-note hidden={!first.reviewNote}>{first.reviewNote}</p><p data-clip-transcript-text>{first.transcript.join(' ')}</p><small>Captions lightly edited for readability. <span data-clip-source-title>From {first.sourceTitle}.</span></small></details>
       </div>
     </article>
     <div class="clip-directory">
@@ -84,6 +84,8 @@ if (root) {
       heading.textContent = clip.title;
       stage.querySelector('[data-clip-meta]')!.textContent = `${clip.theme} · ${clip.duration}`;
       stage.querySelector('[data-clip-description]')!.textContent = clip.description;
+      const note=stage.querySelector<HTMLElement>('[data-clip-note]')!;note.textContent=clip.reviewNote||'';note.hidden=!clip.reviewNote;
+      stage.querySelector('[data-clip-details-label]')!.textContent=clip.reviewNote?'Context & transcript':'Read transcript';
       const source = stage.querySelector<HTMLAnchorElement>('[data-clip-source]')!; source.href = clip.sourceUrl; source.textContent = `${clip.sourcePublisher} · Original at ${clip.sourceTime} ↗`;
       const x = stage.querySelector<HTMLAnchorElement>('[data-clip-x]')!; x.hidden = !clip.xUrl; x.href = clip.xUrl || '#';
       stage.querySelector('[data-clip-transcript-text]')!.textContent = clip.transcript.join(' ');
