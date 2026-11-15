@@ -14,9 +14,26 @@
     "featured": true,
     "sharedOnX": true,
     "xUrl": null,
-    "release": null,
+    "release": {
+      "rightsRecord": "docs/research/people/jensen/clips/public-reuse-review-2026-11-15.json",
+      "video": "https://media.latentlit.com/video/jensen/jh007-v1/video.mp4",
+      "poster": "https://media.latentlit.com/video/jensen/jh007-v1/poster.webp",
+      "captions": "https://media.latentlit.com/video/jensen/jh007-v1/captions.vtt",
+      "transcript": [
+        "You gotta go through thick and thin.",
+        "There are a lot of unpredictable things in the future.",
+        "And it's because you're building a chip together. It's a foundry.",
+        "It's not exactly like buying something off the shelf.",
+        "You're building a chip together, and it's really hard to build chips.",
+        "So it's impossible to know all the details.",
+        "It's impossible to make all the decisions up front.",
+        "You really are choosing not...",
+        "what to buy, but who to work with."
+      ]
+    },
     "previewDirectory": "taiwan-trust",
-    "previewVideo": "jensen-taiwan-trust.mp4"
+    "previewVideo": "jensen-taiwan-trust.mp4",
+    "reviewNote": "The chip-building example explains the conclusion. A finished product can be specified in advance; a difficult collaboration keeps producing decisions that nobody could fully anticipate. Jensen is describing why a partner's judgment and values matter when the written plan runs out."
   },
   {
     "id": "JH001",
@@ -33,9 +50,35 @@
     "featured": true,
     "sharedOnX": true,
     "xUrl": null,
-    "release": null,
+    "release": {
+      "rightsRecord": "docs/research/people/jensen/clips/public-reuse-review-2026-11-15.json",
+      "video": "https://media.latentlit.com/video/jensen/jh001-v1/video.mp4",
+      "poster": "https://media.latentlit.com/video/jensen/jh001-v1/poster.webp",
+      "captions": "https://media.latentlit.com/video/jensen/jh001-v1/captions.vtt",
+      "transcript": [
+        "I don't like going into a problem, and somebody says,",
+        "It takes 74 days to do this today.",
+        "And we can do it for you in 72 days.",
+        "I'd rather strip it all back to zero",
+        "First of all, explain to me",
+        "why 74 days in the first place.",
+        "Let's think about what's possible today.",
+        "And if I were to build it completely from scratch,",
+        "How long would it take?",
+        "Oftentimes, you'd be surprised.",
+        "It might come to six days.",
+        "Now, the rest of the six days, the 74, could be",
+        "very well reasoned, and compromises,",
+        "cost reductions, and all kinds of different things.",
+        "But at least you know what they are.",
+        "Now that you know that six days is possible,",
+        "then the conversation from 74 to six,",
+        "surprisingly much more effective."
+      ]
+    },
     "previewDirectory": "pilot-v2",
-    "previewVideo": "jensen-first-principles-review.mp4"
+    "previewVideo": "jensen-first-principles-review.mp4",
+    "reviewNote": "The six day result is a hypothetical example, not a measured productivity claim. The useful step is to separate physical possibilities from inherited assumptions, then identify which real costs and compromises explain the remaining time. The clip keeps that qualification."
   },
   {
     "id": "JH004",
@@ -52,9 +95,25 @@
     "featured": false,
     "sharedOnX": false,
     "xUrl": null,
-    "release": null,
+    "release": {
+      "rightsRecord": "docs/research/people/jensen/clips/public-reuse-review-2026-11-15.json",
+      "video": "https://media.latentlit.com/video/jensen/jh004-v1/video.mp4",
+      "poster": "https://media.latentlit.com/video/jensen/jh004-v1/poster.webp",
+      "captions": "https://media.latentlit.com/video/jensen/jh004-v1/captions.vtt",
+      "transcript": [
+        "Everybody's working hard for a living, and they're working so hard,",
+        "and they still want to share a little something with you.",
+        "They don't have that much money.",
+        "Their profit margin on that thing must be a dime each.",
+        "They gave me all their profit, right?",
+        "Just to be kind.",
+        "It's the Taiwanese way,",
+        "and it's nice to watch these people, their craft."
+      ]
+    },
     "previewDirectory": "taiwan-kindness",
-    "previewVideo": "jensen-taiwan-kindness.mp4"
+    "previewVideo": "jensen-taiwan-kindness.mp4",
+    "reviewNote": "His attention shifts from the food to the people doing the work. The remark about a dime of profit is his estimate, not a verified margin. The moment is revealing because he notices the generosity of a small gesture as well as the skill behind it."
   },
   {
     "id": "JH006",
@@ -71,9 +130,24 @@
     "featured": false,
     "sharedOnX": false,
     "xUrl": null,
-    "release": null,
+    "release": {
+      "rightsRecord": "docs/research/people/jensen/clips/public-reuse-review-2026-11-15.json",
+      "video": "https://media.latentlit.com/video/jensen/jh006-v1/video.mp4",
+      "poster": "https://media.latentlit.com/video/jensen/jh006-v1/poster.webp",
+      "captions": "https://media.latentlit.com/video/jensen/jh006-v1/captions.vtt",
+      "transcript": [
+        "Look at that. That's beautiful.",
+        "When I was young, I would think that that's not good.",
+        "But now, I love wabi-sabi.",
+        "Beautiful things... imperfect.",
+        "I love that.",
+        "Imperfection is beauty.",
+        "Look at that. One of a kind."
+      ]
+    },
     "previewDirectory": "taiwan-imperfection",
-    "previewVideo": "jensen-taiwan-imperfection.mp4"
+    "previewVideo": "jensen-taiwan-imperfection.mp4",
+    "reviewNote": "This is a spontaneous reflection on how his taste has changed, rather than a formal design rule. He is responding to a display and appreciating something singular. The short exchange leaves room for imperfection without claiming to identify a particular defect."
   },
   {
     "id": "JH005",
@@ -90,8 +164,30 @@
     "featured": false,
     "sharedOnX": false,
     "xUrl": null,
-    "release": null,
+    "release": {
+      "rightsRecord": "docs/research/people/jensen/clips/public-reuse-review-2026-11-15.json",
+      "video": "https://media.latentlit.com/video/jensen/jh005-v1/video.mp4",
+      "poster": "https://media.latentlit.com/video/jensen/jh005-v1/poster.webp",
+      "captions": "https://media.latentlit.com/video/jensen/jh005-v1/captions.vtt",
+      "transcript": [
+        "You said you were looking for a foundry.",
+        "Just telling the story of how you",
+        "first returned back to Taiwan...",
+        "I see, I see.",
+        "...and built the relation with TSMC.",
+        "You know, Windows 95.",
+        "This is too important to me.",
+        "TSMC or that?",
+        "No, I can't talk.",
+        "Okay, yeah.",
+        "Priorities in life.",
+        "Lex, I will share this with you in a second,",
+        "but this is too important to me.",
+        "There we go."
+      ]
+    },
     "previewDirectory": "taiwan-breakfast",
-    "previewVideo": "jensen-taiwan-breakfast.mp4"
+    "previewVideo": "jensen-taiwan-breakfast.mp4",
+    "reviewNote": "The humor depends on the question and response staying together. Lex is trying to resume the TSMC story while Jensen enjoys his breakfast. It is a momentary, playful pause, not a statement that the food matters more than the relationship they are discussing."
   }
 ]

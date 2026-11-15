@@ -4,6 +4,7 @@ export interface JensenClip {
   theme: string;
   duration: string;
   description: string;
+  reviewNote?: string;
   sourceTitle: string;
   sourcePublisher: string;
   sourceTime: string;

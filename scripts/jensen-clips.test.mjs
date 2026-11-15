@@ -7,7 +7,7 @@ const catalog = await readClipCatalog();
 test('unreleased clips do not enter production, including clips already shared on X', async () => {
   assert.equal(catalog.length, 5);
   assert.equal(catalog.filter(clip => clip.sharedOnX).length, 2);
-  assert.deepEqual(await getJensenClips(), []);
+  assert.deepEqual(await getJensenClips({records:catalog.map(clip=>({...clip,release:null}))}), []);
   assert.equal(clipsAsMarkdown([]), '');
   assert.equal(localJensenClips().apply, 'serve');
 });
@@ -57,6 +57,12 @@ test('a fresh checkout without ignored media keeps the Jensen route usable', asy
   const { tmpdir } = await import('node:os');
   const { join } = await import('node:path');
   const previewRoot = await mkdtemp(join(tmpdir(), 'jensen-preview-empty-'));
-  try { assert.deepEqual(await getJensenClips({ preview: true, previewRoot }), []); }
+  try {
+    const pending=catalog.map(clip=>({...clip,release:null}));
+    assert.deepEqual(await getJensenClips({ preview: true, previewRoot, records:pending }), []);
+    const release={rightsRecord:'docs/research/people/jensen/clips/review.json',video:'https://media.latentlit.com/video/jensen/test/video.mp4',poster:'https://media.latentlit.com/video/jensen/test/poster.webp',captions:'https://media.latentlit.com/video/jensen/test/captions.vtt',transcript:['Test transcript.']};
+    const available=await getJensenClips({preview:true,previewRoot,records:[{...pending[0],release},pending[1]]});
+    assert.equal(available.length,1);assert.equal(available[0].video,release.video);
+  }
   finally { await rm(previewRoot, { recursive: true, force: true }); }
 });

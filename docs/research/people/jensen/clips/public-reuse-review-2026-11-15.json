@@ -1,0 +1,105 @@
+{
+  "checked": "2026-11-15",
+  "decision": "Approved for publication by the author under the documented exception assessment for these five attributed, noncommercial editorial excerpts. This assessment is not a rights-holder license, permission grant or legal assurance.",
+  "basis_type": "documented_exception_assessment",
+  "permission_granted": false,
+  "scope": "Latent Light's personal Jensen collection, including its contextual notes, complete accessible captions, source links and short edited excerpts. This decision does not cover advertising, paid distribution, sponsorship, commercial reuse, full recordings or unrelated footage.",
+  "new_work": "The author selected and directed the edits, titles and presentation, reviewed the results and assembled them into a personal tribute and explanatory collection. Original framing and contextual notes discuss the particular ideas and preserve qualifications. Captions and decorative changes alone are not treated as automatically transformative.",
+  "canadian_ugc_assessment": {
+    "individual_and_noncommercial": "The About page and README describe a personal notebook for learning and sharing. The inspected Jensen page has no sales, paywall, paid promotion or advertising placement. The use assessed here is solely noncommercial. Any change to that purpose requires review.",
+    "published_source_and_reasonable_belief": "Both source recordings were publicly published by Lex Fridman's original channel. Original metadata, publisher captions and actual source audio were inspected. No paywall, login, DRM or access control was bypassed. Nothing inspected indicates that these original publisher recordings were infringing copies.",
+    "attribution": "Each excerpt credits Lex Fridman on screen. The page names Jensen Huang and the source publisher, links the original recording at the relevant time, and identifies the clips as edited excerpts. Original footage is not offered under the site's MIT license and no endorsement is implied.",
+    "market_effect_and_substitution": "Four Taiwan excerpts total 99.1 seconds out of 5418 seconds, about 1.83 percent; the separate podcast excerpt is 49.8 seconds out of 8758 seconds, about 0.57 percent. The collection does not reproduce a complete recording or an official compilation. It points readers to the complete sources and adds context rather than offering a replacement. The existence of an official clips channel weighs against assuming that a short duration alone is sufficient. Audience size and financial effect are not known; substantial adverse effects or a rights-holder objection require reassessment.",
+    "intermediary": "The author requested website publication through the existing hosting services. Cloudflare is used to distribute the resulting collection, with no transfer of source copyright claimed."
+  },
+  "criticism_review_and_fairness": {
+    "purpose": "Positive editorial review and explanation of specific reasoning, values, taste and humor. Each clip has an original contextual note, rather than being presented as an unqualified quotation or a general claim about the speaker.",
+    "character": "Public web distribution is explicitly included in this assessment. Videos are attributed, user-initiated, freely accessible and accompanied by original links. Public availability does not itself supply a license.",
+    "amount": "Only the continuous passage needed for each idea is used. Aggregate amounts across the two source works are recorded above. Several are memorable highlights, so qualitative importance and the potential market for excerpts are considered as well as duration.",
+    "alternatives": "Original timestamp links are retained and allow full viewing. The short accessible video is used so readers can assess the tone and reasoning being discussed. Replacing the speaker with a synthetic performance would be less faithful. Complete recordings and unrelated reactions are unnecessary and excluded.",
+    "nature": "Published conversational and documentary material, with both factual discussion and creative filming. Incidental people, exhibits and original ambient sound remain; no independent rights or releases for those elements are asserted. No music or third party footage has been added. Original explanatory side panels were removed from two excerpts.",
+    "effect": "The bounded excerpts and commentary are reasonably assessed as unlikely to substitute substantially for the long originals. The possibility of competing with an existing excerpt market remains a limitation. New clips, expanded compilation use or monetization require a new assessment."
+  },
+  "us_fair_use_considerations": {
+    "purpose_character": "Noncommercial commentary and an author-directed collection support the purpose. Simple subtitling and reposting would be a weaker basis; the contextual analysis is part of the use being assessed.",
+    "nature": "The recordings are published, but the travel film also contains creative expression. This factor is mixed.",
+    "amount": "Brief, continuous passages are bounded to the point being discussed; both aggregate duration and memorable content matter.",
+    "market": "Links encourage original viewing and the excerpts do not replace the long recordings. Potential markets for short excerpts still weigh in the assessment. No fair-use outcome is guaranteed."
+  },
+  "excerpts": [
+    {
+      "id": "JH001",
+      "source": "https://www.youtube.com/watch?v=vif8NQcjVf0",
+      "in_seconds": 3520.2,
+      "out_seconds": 3570,
+      "seconds": 49.8,
+      "purpose": "Review the change in reasoning from incremental optimization to questioning assumptions; retain the tradeoff caveat."
+    },
+    {
+      "id": "JH004",
+      "source": "https://www.youtube.com/watch?v=FGCP2F_7rQk",
+      "in_seconds": 1861.3,
+      "out_seconds": 1888.7,
+      "seconds": 27.4,
+      "purpose": "Discuss attention to generosity and craft; retain the language that makes the profit estimate an impression."
+    },
+    {
+      "id": "JH005",
+      "source": "https://www.youtube.com/watch?v=FGCP2F_7rQk",
+      "in_seconds": 4307.4,
+      "out_seconds": 4334.1,
+      "seconds": 26.7,
+      "purpose": "Preserve the setup and response in a humorous food exchange; do not turn it into a literal claim about business priorities."
+    },
+    {
+      "id": "JH006",
+      "source": "https://www.youtube.com/watch?v=FGCP2F_7rQk",
+      "in_seconds": 454.4,
+      "out_seconds": 472.4,
+      "seconds": 18,
+      "purpose": "Review the speaker's changing taste and appreciation for imperfection, without inventing which defect he meant."
+    },
+    {
+      "id": "JH007",
+      "source": "https://www.youtube.com/watch?v=FGCP2F_7rQk",
+      "in_seconds": 5087.6,
+      "out_seconds": 5114.6,
+      "seconds": 27,
+      "purpose": "Explain partner selection under uncertainty, retaining the chip-building reasoning before the conclusion."
+    }
+  ],
+  "remaining_limits": [
+    "Copyright exceptions are fact dependent and jurisdiction specific. This assessment is not a global license or a prediction of a court decision.",
+    "Whether the new work has sufficient human authorship and whether there is a substantial adverse market effect remain legal questions, not facts established by adding a caption or an attribution.",
+    "Source copyright, performer interests and other rights remain with their holders. Platform contract questions are separate from statutory exceptions.",
+    "Do not label these assets Creative Commons, public domain, licensed by Lex Fridman, or covered by Latent Light's MIT license.",
+    "Review an objection promptly and suspend the affected asset if its assessed basis no longer holds. Do not expand the use or monetize it under this record."
+  ],
+  "sources": [
+    {
+      "url": "https://laws-lois.justice.gc.ca/eng/acts/C-42/section-29.21.html",
+      "role": "Canadian noncommercial user-generated content conditions and intermediary definition; inspected November 15."
+    },
+    {
+      "url": "https://laws-lois.justice.gc.ca/eng/acts/C-42/section-29.1.html",
+      "role": "Canadian criticism and review attribution requirement; inspected November 15."
+    },
+    {
+      "url": "https://www.ualberta.ca/en/copyright/intro-to-copyright-law/other-exceptions.html",
+      "role": "University explanation of the UGC exception, including online mash-ups and attribution; inspected November 15."
+    },
+    {
+      "url": "https://www.copyright.gov/fair-use/",
+      "role": "Official United States explanation of the four factors and fact-dependent limits; inspected November 15."
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=FGCP2F_7rQk",
+      "role": "Original Taiwan recording, publisher metadata, captions and source audio."
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=vif8NQcjVf0",
+      "role": "Original podcast recording, publisher metadata, captions and source audio."
+    }
+  ],
+  "publication_approval": "The author explicitly approved public upload of these five clips, posters and captions and activation on the live Jensen page after reviewing this assessment and its uncertainty on November 15, 2026."
+}

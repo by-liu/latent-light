@@ -49,23 +49,25 @@ export function clipPreviewFiles(clip, mediaRoot = clipMediaRoot) {
   };
 }
 
-export async function getJensenClips({ preview = false, previewRoot = clipMediaRoot } = {}) {
-  const clips = await readClipCatalog();
+export async function getJensenClips({ preview = false, previewRoot = clipMediaRoot, records } = {}) {
+  const clips = records ? validateClips(structuredClone(records)) : await readClipCatalog();
   const result = [];
   for (const clip of clips) {
     const { previewDirectory, previewVideo, release, ...metadata } = clip;
-    if (release) result.push({ ...metadata, ...release, sourceUrl: clipSourceUrl(clip) });
-    else if (preview) {
+    if (preview) {
       let cues;
       try {
         await Promise.all(Object.values(clipPreviewFiles(clip, previewRoot)).map(file => access(file)));
         cues = JSON.parse(await readFile(path.join(previewRoot, previewDirectory, 'captions.json'), 'utf8'));
       } catch (error) {
-        if (error.code === 'ENOENT') continue;
-        throw error;
+        if (error.code !== 'ENOENT') throw error;
       }
-      result.push({ ...metadata, video: `${clipPreviewPrefix}${clip.id}/video.mp4`, poster: `${clipPreviewPrefix}${clip.id}/poster.webp`, captions: `${clipPreviewPrefix}${clip.id}/captions.vtt`, transcript: cues.map(cue => cue.text.replace(/\s+/g, ' ').trim()), sourceUrl: clipSourceUrl(clip) });
+      if (cues) {
+        result.push({ ...metadata, video: `${clipPreviewPrefix}${clip.id}/video.mp4`, poster: `${clipPreviewPrefix}${clip.id}/poster.webp`, captions: `${clipPreviewPrefix}${clip.id}/captions.vtt`, transcript: cues.map(cue => cue.text.replace(/\s+/g, ' ').trim()), sourceUrl: clipSourceUrl(clip) });
+        continue;
+      }
     }
+    if (release) result.push({ ...metadata, ...release, sourceUrl: clipSourceUrl(clip) });
   }
   return result;
 }
@@ -73,6 +75,6 @@ export async function getJensenClips({ preview = false, previewRoot = clipMediaR
 export function clipsAsMarkdown(clips) {
   if (!clips.length) return '';
   return '\n## Short clips\n\nSmall moments. Lasting ideas. Edited excerpts with English captions.\n\n' + clips.map(clip =>
-    `### ${escapeMarkdown(clip.title)}\n\n- Duration: ${clip.duration}\n- Theme: ${escapeMarkdown(clip.theme)}\n- Video: ${clip.video}\n- Captions: ${clip.captions}\n- Source: [${escapeMarkdown(clip.sourceTitle)}](${clip.sourceUrl}), ${escapeMarkdown(clip.sourcePublisher)}, ${clip.sourceTime}\n${clip.xUrl ? `- X post: ${clip.xUrl}\n` : ''}\n${escapeMarkdown(clip.description)}\n\nTranscript, lightly edited for readability:\n\n${clip.transcript.map(escapeMarkdown).join(' ')}\n`
+    `### ${escapeMarkdown(clip.title)}\n\n- Duration: ${clip.duration}\n- Theme: ${escapeMarkdown(clip.theme)}\n- Video: ${clip.video}\n- Captions: ${clip.captions}\n- Source: [${escapeMarkdown(clip.sourceTitle)}](${clip.sourceUrl}), ${escapeMarkdown(clip.sourcePublisher)}, ${clip.sourceTime}\n${clip.xUrl ? `- X post: ${clip.xUrl}\n` : ''}\n${escapeMarkdown(clip.description)}\n\n${clip.reviewNote ? `Context: ${escapeMarkdown(clip.reviewNote)}\n\n` : ''}Transcript, lightly edited for readability:\n\n${clip.transcript.map(escapeMarkdown).join(' ')}\n`
   ).join('\n') + '\n## Full conversations\n\n';
 }

@@ -98,5 +98,8 @@ The logo, avatar, favicon, and identity artwork in `public/brand/` and
 `public/favicon.ico` are excluded from this MIT grant. No separate reuse license
 is granted for these assets. Their inclusion does not grant trademark rights or
 imply endorsement. Third party code, fonts, icons, and other material retain
-their own licenses. Preserve the notices in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)
+their own licenses. Jensen Huang video excerpts and their source footage remain
+with the original rights holders and are excluded from this MIT grant. The
+collection documents its specific noncommercial reuse assessment; it grants no
+license to redistribute that footage. Preserve the notices in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)
 and `public/licenses/`.

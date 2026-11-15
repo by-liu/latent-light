@@ -382,9 +382,11 @@ clearance record. A release needs a documented reuse basis, reviewed media on
 `media.latentlit.com`, captions and a complete transcript before it appears in
 a production build.
 
-Until release, the developer preview reads only the catalog’s named files from
-ignored `output/jensen-clips/`. Clips with missing local media are skipped so
-a fresh checkout remains usable. The development-only media middleware accepts
+The developer preview prefers the catalog’s named files from ignored
+`output/jensen-clips/`, then falls back to published release URLs. Unreleased
+clips with missing local media are skipped so a fresh checkout remains usable.
+Use anonymous CORS on the native player so external caption tracks can load.
+Keep the original contextual note beside each transcript and in Markdown exports. The development-only media middleware accepts
 loopback hosts, same-origin requests and read-only byte ranges. It must not
 be installed in production or expose arbitrary files. Keep unreleased MP4s,
 posters and captions outside `public/` and Git. Test range handling, publication
