@@ -1,0 +1,38 @@
+{
+  "total": 27,
+  "results": [
+    "FGCP2F_7rQk"
+  ],
+  "image": {
+    "loaded": true
+  },
+  "player": {
+    "src": "https://www.youtube-nocookie.com/embed/FGCP2F_7rQk?autoplay=1&rel=0",
+    "title": "Taiwan with Jensen Huang and Lex Fridman",
+    "source": "https://www.youtube.com/watch?v=FGCP2F_7rQk",
+    "transcriptHidden": true,
+    "dialogs": 0,
+    "width": 811.265625,
+    "frameWidth": 811.265625
+  },
+  "mobileOverflow": false,
+  "export": {
+    "count": 27,
+    "newVideo": true,
+    "date": true,
+    "format": true,
+    "updated": true
+  },
+  "errors": [],
+  "validation": {
+    "deploymentTests": 49,
+    "contentTests": 187,
+    "astroErrors": 0,
+    "astroWarnings": 0,
+    "builtPages": 108,
+    "lintCleanMDX": 107,
+    "existingNotices": "Nimbus/Vite module directives and legacy redirect Pagefind notices retained",
+    "publication": "local only",
+    "playbackScope": "Inline selection, iframe sizing, source link and stop cleanup checked; audiovisual playback not asserted."
+  }
+}
