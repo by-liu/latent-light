@@ -504,6 +504,17 @@ Full validation, desktop/mobile/both themes, keyboard, motion and exports pass.
 Review: `docs/research/people/jensen/review-clean-copy-2026-11-12.json`.
 No publication actions. Existing build notices and unrelated changes preserved.
 
+## November 14: Jensen Taiwan travel film addition
+
+Added user-supplied `FGCP2F_7rQk`, “Jensen Huang visits Taiwan w/ Lex Fridman,”
+from Lex's original channel. Publication/upload date verified as October 13,
+2026, distinct from filming date. Listed second and in the suggestion queue;
+categorized Life & Growth / Travel film, with 27 total recordings. Shared-data
+counts/export adapt automatically. Collection revision date updated November 14;
+other records' source checks remain unchanged. Metadata/research record under
+`docs/research/people/jensen/`. Preserve the same three unrelated progress files.
+This new addition is local; no new commit, push or deployment authorized.
+
 ## Jensen collection release preparation
 
 The author authorized commit and push for the completed Jensen collection and
@@ -512,3 +523,13 @@ production deployment are not authorized by this release step. Final validation
 and browser/export review passed; only existing Nimbus/Vite and legacy redirect
 Pagefind notices remain. Keep the three unrelated research progress JSON edits
 outside the commit.
+
+Taiwan addition checks passed: full validation, desktop/mobile, combined
+Taiwan/Travel film/2026 filters, new thumbnail, inline selection/sizing/stop and
+27-entry Markdown export. Review record:
+`docs/research/people/jensen/review-taiwan-travel-2026-11-14.json`.
+Existing build notices remain; no commit or publication performed.
+
+The author subsequently authorized commit and push for this Taiwan video
+addition. Use the branch/PR workflow and exclude the same three unrelated
+research progress edits. This step does not authorize merge or deployment.

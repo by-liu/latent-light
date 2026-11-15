@@ -1,5 +1,29 @@
 # Jensen Huang video collection — November 12, 2026
 
+## Taiwan travel film addition — November 14, 2026
+
+Added the author's supplied video, normalized to its original watch URL:
+https://www.youtube.com/watch?v=FGCP2F_7rQk . Original title:
+“Jensen Huang visits Taiwan w/ Lex Fridman.” YouTube oEmbed confirms Lex Fridman,
+https://www.youtube.com/@lexfridman . Original watch-page publication and upload
+metadata both give October 13, 2026. Metadata retained in
+`taiwan-travel-metadata-2026-11-14.json`.
+
+Inspected the publisher's own description and chapter list, which identify
+COMPUTEX, Taiwan night markets, childhood memories and informal technical
+conversations. The date in the collection is publication, not a claim about the
+filming date. Categorized as Life & Growth / Travel film rather than Podcast.
+No transcript link or claim of watching the full recording was added. The
+description links to the already-listed Lex #494 podcast; these are distinct
+recordings, not duplicate uploads. Tracking query parameters were discarded.
+
+The new video appears second in the catalog and first in the suggestion queue.
+The shared catalog now has 27 recordings; counts, search and Markdown export
+derive from it. Existing recordings retain their previous verification dates.
+Updated the collection revision date to November 14 without claiming that the
+whole catalog was rechecked. This addition is local; no new commit, push or
+publication authorization was inferred from the request to add the video.
+
 ## Homepage cartoon avatar and dated support statement (latest)
 
 Homepage now links to the collection through a small panel before Explore:
