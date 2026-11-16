@@ -1,0 +1,162 @@
+{
+  "checked": "2026-11-15",
+  "decision": "Publication requested by the author after local review of nine additional excerpts. This new assessment covers the expanded fourteen-clip collection, including aggregate use of the Taiwan film. It is a reasoned noncommercial exception assessment, not rights-holder permission, a license or a legal assurance.",
+  "basis_type": "documented_exception_assessment",
+  "permission_granted": false,
+  "scope": "Latent Light's personal Jensen collection, including its contextual notes, complete accessible captions, source links and short edited excerpts. This decision does not cover advertising, paid distribution, sponsorship, commercial reuse, full recordings or unrelated footage.",
+  "new_work": "The author selected and directed the edits, titles and presentation, reviewed the results and assembled them into a personal tribute and explanatory collection. Original framing and contextual notes discuss the particular ideas and preserve qualifications. Captions and decorative changes alone are not treated as automatically transformative.",
+  "canadian_ugc_assessment": {
+    "individual_and_noncommercial": "The About page and README describe a personal notebook for learning and sharing. The inspected Jensen page has no sales, paywall, paid promotion or advertising placement. The use assessed here is solely noncommercial. Any change to that purpose requires review.",
+    "published_source_and_reasonable_belief": "Both source recordings were publicly published by Lex Fridman's original channel. Original metadata, publisher captions and actual source audio were inspected. No paywall, login, DRM or access control was bypassed. Nothing inspected indicates that these original publisher recordings were infringing copies.",
+    "attribution": "Each excerpt credits Lex Fridman on screen. The page names Jensen Huang and the source publisher, links the original recording at the relevant time, and identifies the clips as edited excerpts. Original footage is not offered under the site's MIT license and no endorsement is implied.",
+    "market_effect_and_substitution": "Thirteen Taiwan excerpts now total 424.65 seconds, about 7.84 percent of the 5418 second film; nine additions account for 325.55 seconds. The longest new excerpt is 66.95 seconds. This materially expands the earlier four-excerpt assessment. The collection selects memorable ideas and stories, especially several passages about partnerships near the end. It can serve some demand for highlights and could compete with an official short-excerpt market; neither length nor links establish fairness. The personal collection remains free, noncommercial, attributed, contextual and bounded. It does not reproduce complete chapters, all highlights or the source film, and each excerpt points to the original at its time. On these inspected facts, a specific exception basis is considered plausible for this release. Audience, financial impact and the potential market are not measured, so absence of substantial adverse effect remains a limitation rather than an established fact. An objection or evidence of adverse effect requires prompt reassessment and suspension of affected assets.",
+    "intermediary": "The author requested website publication through the existing hosting services. Cloudflare is used to distribute the resulting collection, with no transfer of source copyright claimed."
+  },
+  "criticism_review_and_fairness": {
+    "purpose": "Positive editorial review of specific ideas and performances: generosity, balancing fairness over time, cultural context, humility, invention under constraints, persistence, nerves, engineering role models and integrity. Each has original contextual commentary that explains scope or interpretation. The engineer tribute is correctly attributed to Lex rather than Jensen. Captions, decoration and enthusiasm alone are not treated as sufficient review.",
+    "character": "Public web distribution is explicitly included in this assessment. Videos are attributed, user-initiated, freely accessible and accompanied by original links. Public availability does not itself supply a license.",
+    "amount": "Assess the combined 424.65 seconds and qualitative importance of all thirteen Taiwan passages. Nine new continuous selections run from 13.1 to 66.95 seconds. Separate ideas retain their question, qualifications or story resolution. The expanded TSMC sequence contains meaningful highlights; this is a factor against treating the addition as automatically fair.",
+    "alternatives": "Original timestamp links are retained and allow full viewing. The short accessible video is used so readers can assess the tone and reasoning being discussed. Replacing the speaker with a synthetic performance would be less faithful. Complete recordings and unrelated reactions are unnecessary and excluded.",
+    "nature": "Published conversational and documentary material, with both factual discussion and creative filming. Incidental people, exhibits and original ambient sound remain; no independent rights or releases for those elements are asserted. No music or third party footage has been added. Original explanatory side panels were removed from two excerpts.",
+    "effect": "The new volume and concentration of partnership highlights increase excerpt-market uncertainty. The release remains a bounded personal commentary collection without advertising, paywall or sponsorship, with one user-initiated player and prominent original-source links. It is reasonably assessed to leave a plausible exception basis, not proven harmless market impact. Do not infer clearance for a growing archive, a full-story compilation, commercial use or another platform from this record."
+  },
+  "us_fair_use_considerations": {
+    "purpose_character": "Noncommercial commentary and an author-directed collection support the purpose. Simple subtitling and reposting would be a weaker basis; the contextual analysis is part of the use being assessed.",
+    "nature": "The recordings are published, but the travel film also contains creative expression. This factor is mixed.",
+    "amount": "The combined Taiwan selection is 7.84 percent, including memorable moments and adjacent partnership passages. Qualitative importance and the expanded aggregate weigh against relying on duration alone.",
+    "market": "The film remains available at the original source, but this collection can satisfy some demand for its highlights. Potential competition with the existing short-excerpt market and unknown financial effects remain material limitations. No US fair-use outcome is guaranteed."
+  },
+  "excerpts": [
+    {
+      "id": "JH014",
+      "title": "Even Jensen gets nervous.",
+      "source": "https://www.youtube.com/watch?v=FGCP2F_7rQk",
+      "in_seconds": 561.05,
+      "out_seconds": 590.0,
+      "seconds": 28.95,
+      "purpose_and_context": "Lex asks whether Jensen was nervous before the keynote. Jensen describes nerves as a recurring part of public speaking, then explains the last-minute nature of preparing this particular event. His comments about practice describe his process here, not a recommendation to avoid preparation."
+    },
+    {
+      "id": "JH015",
+      "title": "Engineers deserve the spotlight.",
+      "source": "https://www.youtube.com/watch?v=FGCP2F_7rQk",
+      "in_seconds": 808.25,
+      "out_seconds": 830.4,
+      "seconds": 22.15,
+      "purpose_and_context": "After a crowded Computex visit, Lex tells Jensen why seeing an engineer treated like a rock star feels inspiring. Lex speaks most of this excerpt; Jensen agrees at the end. The text must not attribute Lex’s observation to Jensen or claim a measured effect on career choices."
+    },
+    {
+      "id": "JH016",
+      "title": "Trust starts with honest limits.",
+      "source": "https://www.youtube.com/watch?v=FGCP2F_7rQk",
+      "in_seconds": 5020.45,
+      "out_seconds": 5087.4,
+      "seconds": 66.95,
+      "purpose_and_context": "Jensen recalls choosing between TSMC and UMC, says he liked both, and explains what stood out about Morris Chang. The honest-limits title is an editorial interpretation of the refusals, stated values and promise he describes. This passage preserves the comparison and reasoning; it is distinct from the earlier clip about choosing who to work with."
+    },
+    {
+      "id": "JH011",
+      "title": "Never forget your roots.",
+      "source": "https://www.youtube.com/watch?v=FGCP2F_7rQk",
+      "in_seconds": 636.5,
+      "out_seconds": 649.6,
+      "seconds": 13.1,
+      "purpose_and_context": "During a Computex visit, Lex asks about showing love to gamers. Jensen connects the gaming community to NVIDIA’s beginnings, then offers a reminder about staying grounded. This is a personal reflection in the recording, not a complete company history."
+    },
+    {
+      "id": "JH012",
+      "title": "Scarcity can spark invention.",
+      "source": "https://www.youtube.com/watch?v=FGCP2F_7rQk",
+      "in_seconds": 1970.8,
+      "out_seconds": 1995.1,
+      "seconds": 24.3,
+      "purpose_and_context": "Lex has been discussing visits to AI and robotics companies in China. They reflect on the pressure to find efficient architectures when compute is scarce. This is a conversational observation, not a benchmark, a claim about every AI company, or an endorsement of any particular restriction."
+    },
+    {
+      "id": "JH013",
+      "title": "Nobody called back. Then Morris Chang did.",
+      "source": "https://www.youtube.com/watch?v=FGCP2F_7rQk",
+      "in_seconds": 4918.4,
+      "out_seconds": 4970.3,
+      "seconds": 51.9,
+      "purpose_and_context": "Jensen is recalling NVIDIA’s early search for a foundry. After unanswered calls to TSMC’s office, he wrote to Morris Chang, who later called him. The excerpt is his personal recollection, including the noisy office and relief; it does not establish a precise date or claim that one letter alone explains NVIDIA’s later success."
+    },
+    {
+      "id": "JH008",
+      "title": "Goodwill is not a zero-sum game.",
+      "source": "https://www.youtube.com/watch?v=FGCP2F_7rQk",
+      "in_seconds": 2630.0,
+      "out_seconds": 2670.8,
+      "seconds": 40.8,
+      "purpose_and_context": "Asked about the responsibility of fame, Jensen says he likes seeing other people succeed. The exchange expands from colleagues and employees to goodwill as something that can grow for everyone. The employee number is his statement in the recording, not a current headcount."
+    },
+    {
+      "id": "JH009",
+      "title": "Fairness takes time.",
+      "source": "https://www.youtube.com/watch?v=FGCP2F_7rQk",
+      "in_seconds": 5151.6,
+      "out_seconds": 5193.8,
+      "seconds": 42.2,
+      "purpose_and_context": "Jensen has just described a decades-long relationship with TSMC. He argues that trying to specify every future contingency can make a relationship brittle, and describes fairness across repeated interactions. This is his partnership philosophy, not advice to abandon legal protections or accept lasting unfairness."
+    },
+    {
+      "id": "JH010",
+      "title": "Even dinner has an objective function.",
+      "source": "https://www.youtube.com/watch?v=FGCP2F_7rQk",
+      "in_seconds": 3506.4,
+      "out_seconds": 3541.6,
+      "seconds": 35.2,
+      "purpose_and_context": "After being given more food than they can finish, Jensen and Lex discuss how hospitality changes the meaning of an empty plate. Jensen’s cultural generalizations are part of a playful conversation, not universal etiquette rules. Lex supplies the objective-function punchline."
+    }
+  ],
+  "remaining_limits": [
+    "Copyright exceptions are fact dependent and jurisdiction specific. This assessment is not a global license or a prediction of a court decision.",
+    "Whether the new work has sufficient human authorship and whether there is a substantial adverse market effect remain legal questions, not facts established by adding a caption or an attribution.",
+    "Source copyright, performer interests and other rights remain with their holders. Platform contract questions are separate from statutory exceptions.",
+    "Do not label these assets Creative Commons, public domain, licensed by Lex Fridman, or covered by Latent Light's MIT license.",
+    "Review an objection promptly and suspend the affected asset if its assessed basis no longer holds. Do not expand the use or monetize it under this record."
+  ],
+  "sources": [
+    {
+      "url": "https://laws-lois.justice.gc.ca/eng/acts/C-42/section-29.21.html",
+      "role": "Canadian noncommercial user-generated content conditions and intermediary definition; inspected November 15."
+    },
+    {
+      "url": "https://laws-lois.justice.gc.ca/eng/acts/C-42/section-29.1.html",
+      "role": "Canadian criticism and review attribution requirement; inspected November 15."
+    },
+    {
+      "url": "https://www.ualberta.ca/en/copyright/intro-to-copyright-law/other-exceptions.html",
+      "role": "University explanation of the UGC exception, including online mash-ups and attribution; inspected November 15."
+    },
+    {
+      "url": "https://www.copyright.gov/fair-use/",
+      "role": "Official United States explanation of the four factors and fact-dependent limits; inspected November 15."
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=FGCP2F_7rQk",
+      "role": "Original Taiwan recording, publisher metadata, captions and source audio."
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=vif8NQcjVf0",
+      "role": "Original podcast recording, publisher metadata, captions and source audio."
+    }
+  ],
+  "publication_approval": "After the explicit question about publicly uploading all nine new clips, posters and captions under the expanded noncommercial exception assessment and deploying the fourteen-clip collection, the author replied approve on November 15, 2026. Commit, push and production deployment are also authorized. This is publication approval by the author, not rights-holder permission.",
+  "supersedes_scope": "Extends the earlier five-clip review only for the nine excerpts listed here. Existing five release records remain unchanged. Any further expansion needs review.",
+  "aggregate": {
+    "taiwan_clips": 13,
+    "taiwan_seconds": 424.65,
+    "taiwan_source_seconds": 5418,
+    "taiwan_percent": 7.84,
+    "new_clips": 9,
+    "new_seconds": 325.55,
+    "other_source": "The existing 49.8 second podcast excerpt is unchanged."
+  },
+  "local_source_evidence": [
+    "output/jensen-clips/review/batch-two-review.json",
+    "output/jensen-clips/review/batch-three-review.json",
+    "output/jensen-clips/review/batch-four-review.json"
+  ],
+  "distribution_limits": "Publish only the specified final MP4s, posters and VTT tracks with contextual notes and full transcripts. Raw source windows and clean masters stay ignored and private. No X posting, outreach or automatic future publication is authorized by this record. Retain source copyright and MIT exclusion."
+}

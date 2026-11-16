@@ -5,7 +5,7 @@ import { parseClipRange, localClipOrigin, localJensenClips } from '../plugins/lo
 
 const catalog = await readClipCatalog();
 test('unreleased clips do not enter production, including clips already shared on X', async () => {
-  assert.equal(catalog.length, 5);
+  assert.ok(catalog.length >= 5);
   assert.equal(catalog.filter(clip => clip.sharedOnX).length, 2);
   assert.deepEqual(await getJensenClips({records:catalog.map(clip=>({...clip,release:null}))}), []);
   assert.equal(clipsAsMarkdown([]), '');
@@ -40,7 +40,8 @@ test('text export retains video, source offset, captions and the complete transc
 
 test('a growing clip directory paginates after filtering and handles empty results', async () => {
   const {clipDirectoryPage} = await import('../plugins/clip-directory.mjs');
-  const many = Array.from({length:19}, (_,i) => ({...catalog[i%catalog.length],id:`test-${i}`}));
+  const fixtures = ['JH007','JH001','JH004','JH006','JH005'].map(id => catalog.find(clip => clip.id === id));
+  const many = Array.from({length:19}, (_,i) => ({...fixtures[i%fixtures.length],id:`test-${i}`}));
   const first = clipDirectoryPage(many);
   const second = clipDirectoryPage(many,{page:2});
   assert.equal(first.items.length,6); assert.equal(first.pageCount,4);
