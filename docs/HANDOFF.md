@@ -573,3 +573,56 @@ timestamped source link. The single player uses anonymous CORS for hosted
 caption tracks. Local preview prefers existing ignored assets, with published
 URLs as the fallback on a fresh checkout. Source footage is excluded from MIT.
 The same three unrelated research progress files remain outside this update.
+
+## November 15: three additional Taiwan clips in local preview
+
+Added JH008 (goodwill), JH009 (fairness over time) and JH010 (dinner and culture)
+to the Jensen directory after the two clips shared on X. Local preview has eight
+clips across two pages. The new MP4s, posters and caption tracks remain in the
+ignored clipping area, with full transcripts and contextual notes. Their release
+fields are null, so production still contains only the five previously approved
+clips. This task authorizes local inclusion only; no upload, commit or deployment.
+Source and edit review records: `output/jensen-clips/review/batch-two-review.json`.
+Preserve the same three unrelated research progress edits.
+
+## November 15: third local Taiwan batch
+
+Prepared JH011 (staying grounded), JH012 (scarcity and invention) and JH013
+(the early Morris Chang callback). These are continuous excerpts with source
+context, edited captions, clean masters and post drafts in the ignored clipping
+area. The local Jensen page now includes eleven clips; all six new clips across
+the second and third batches remain unreleased. Production retains five clips.
+No upload, commit, push, merge, deployment or X posting performed. Review records:
+`output/jensen-clips/review/batch-three-review.json`. Preserve the three unrelated
+research progress files and prior local changes.
+
+## November 15: fourth local Taiwan batch
+
+Added JH014 (public speaking nerves), JH015 (Lex on engineers inspiring young
+people) and JH016 (Morris Chang’s honest limits and core values). The local
+Jensen directory contains fourteen clips across three pages, with the latest
+three on the first page. All nine additions after the five published clips
+remain unreleased. Source context, local reuse assessments, full transcripts,
+clean masters and caption files are retained in the ignored clipping area.
+Review: `output/jensen-clips/review/batch-four-review.json`. No public upload,
+Git publication, deployment or X posting. Use port 4327 for local viewing;
+the user confirmed that their laptop also uses 4327. Preserve prior local
+changes and the three unrelated research progress files.
+
+## November 15: expanded Jensen clip publication
+
+The author explicitly approved public upload of the nine new clips and their
+poster/caption assets under the expanded assessment, plus commit, push and
+deployment. All 27 new R2 objects passed public hash, MIME, CORS and video
+range verification before their release records were enabled. All fourteen
+clips now qualify for the production build; no local media route or ignored
+file path is emitted. The directory remains one player, six entries per page,
+with three pages for fourteen clips and the two shared X clips first.
+
+Expanded use and its limitations are recorded in
+`docs/research/people/jensen/clips/public-reuse-expanded-2026-11-15.json`;
+object hashes and delivery checks are in the adjacent expanded media release
+record. Original footage remains excluded from MIT. No X posting or recurring
+publication is authorized. All media and clean masters remain outside Git.
+Preserve the same three unrelated research progress edits. This note records
+release preparation; final merge, build and live checks must be confirmed.
