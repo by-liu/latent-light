@@ -1,5 +1,39 @@
 # Jensen Huang video collection — November 12, 2026
 
+## Welcome-back refresh — November 23, 2026
+
+NVIDIA’s [official announcement](https://nvidianews.nvidia.com/news/nvidia-board-reinstates-jensen-huang-as-president-ceo-and-board-director),
+dated November 23, confirms unanimous reinstatement as president and CEO,
+effective immediately. Homepage and Jensen-page messages now welcome his return;
+the personal note preserves the author’s admiration and does not imply that
+investigations have concluded. The announcement is linked beside the dated
+marker and cited in the personal note and Markdown export.
+
+The author authorized commit, push and deployment of the reviewed pages,
+including the previously prepared How I Built This addition described below.
+The collection contains fourteen clips and twenty-eight full recordings.
+Review: `review-welcome-back-2026-11-23.json`.
+
+
+## How I Built This addition — November 15, 2026
+
+Added https://www.youtube.com/watch?v=Y334D183ofE at the author's request.
+Original title: “Jensen Huang: The Man Behind NVIDIA (April 2026).” Original
+YouTube oEmbed publisher: How I Built This, https://www.youtube.com/@HowIBuiltThis .
+Watch-page publication and upload timestamps both give November 12, 2026.
+The publisher explicitly says the conversation with Guy Raz was recorded in
+April 2026. The catalog distinguishes recording month from publication date.
+Evidence: `how-i-built-this-metadata-2026-11-15.json`.
+
+The publisher's description/chapter list supports the short orientation covering
+childhood, building NVIDIA, leadership and entrepreneurship's personal cost.
+No full-viewing claim, quotation or unverified transcript link was added.
+Categorized as Building & Leading / Podcast, listed second and in the suggestions.
+Shared-data counts and Markdown export now contain 28 recordings. Collection
+revision date is November 15; other verification dates remain unchanged.
+The existing fourteen-clip section and its publication records are preserved.
+This addition is local only; commit, push and deployment were not requested.
+
 ## Taiwan travel film addition — November 14, 2026
 
 Added the author's supplied video, normalized to its original watch URL:

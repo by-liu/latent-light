@@ -1,0 +1,68 @@
+{
+  "date": "2026-11-23",
+  "scope": "Homepage welcome badge, Jensen welcome hero and personal note, source citation, opening short clip and the previously prepared How I Built This interview. Author explicitly authorized commit, push and deployment after local review.",
+  "source": {
+    "publisher": "NVIDIA",
+    "title": "NVIDIA Board Reinstates Jensen Huang as President, CEO and Board Director",
+    "date": "2026-11-23",
+    "url": "https://nvidianews.nvidia.com/news/nvidia-board-reinstates-jensen-huang-as-president-ceo-and-board-director",
+    "supported_fact": "Unanimous reinstatement as president and CEO effective November 23, 2026. No claim that an investigation has concluded."
+  },
+  "copy": "Personal admiration and support remain the author’s opinions. Replace hoped-for return with a dated welcome. Preserve the quieter Pink Floyd dedication and existing image credits.",
+  "homepage": {
+    "views": [
+      {
+        "width": 1440,
+        "mode": "light",
+        "noOverflow": true,
+        "separateLinks": true
+      },
+      {
+        "width": 1440,
+        "mode": "dark",
+        "noOverflow": true,
+        "separateLinks": true
+      },
+      {
+        "width": 390,
+        "mode": "light",
+        "noOverflow": true,
+        "separateLinks": true
+      },
+      {
+        "width": 390,
+        "mode": "dark",
+        "noOverflow": true,
+        "separateLinks": true
+      }
+    ],
+    "keyboard": true,
+    "reducedMotion": true,
+    "runtimeErrors": []
+  },
+  "jensen": {
+    "welcomeHero": true,
+    "personalNote": true,
+    "sourceLink": true,
+    "defaultClip": "JH011",
+    "userInitiatedPlayback": true,
+    "clipSwitching": true,
+    "pagination": [
+      6,
+      6,
+      2
+    ],
+    "fullRecordings": 28,
+    "howIBuiltThisPreserved": true,
+    "markdown": true,
+    "mobileNoOverflow": true,
+    "keyboard": true,
+    "reducedMotion": true,
+    "deepLinkWithoutAutoplay": true,
+    "noJavaScriptFallback": true,
+    "runtimeErrors": []
+  },
+  "assets": "No new media uploaded. Existing published clip URLs and portrait credits remain unchanged. Raw media remain ignored.",
+  "preserved": "Three unrelated research progress edits excluded. The prepared How I Built This entry and its provenance are included so production matches the reviewed 28-recording page.",
+  "validation": "Full production-origin validation passed locally. Existing Nimbus/Vite module directive and legacy Pagefind notices remain. Live build and deployment checks follow publication."
+}

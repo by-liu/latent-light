@@ -73,6 +73,7 @@ html[data-mode='dark'] #main-content[data-latent-home]::before {
 
 /* A quiet homepage invitation to the standalone Jensen video collection. */
 .docs-content .home-listening-room {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 1.1rem;
@@ -89,7 +90,7 @@ html[data-mode='dark'] #main-content[data-latent-home]::before {
   border-color: #7e9b69;
   background: color-mix(in srgb, var(--nb-background) 87%, #80a267);
 }
-.docs-content .home-listening-room:focus-visible {
+.docs-content .home-listening-room:has(.home-listening-main:focus-visible) {
   outline: 2px solid var(--nb-foreground);
   outline-offset: 4px;
 }
@@ -130,6 +131,20 @@ html[data-mode='dark'] #main-content[data-latent-home]::before {
   90% { opacity: .55; transform: scale(1); }
 }
 .home-listening-copy { display: grid; gap: .35rem; min-width: 0; }
+.docs-content .home-listening-main {
+  display: grid;
+  gap: .35rem;
+  color: inherit;
+  text-decoration: none;
+}
+.home-listening-main::after { content: ''; position: absolute; inset: 0; }
+.home-listening-news {
+  position: relative;
+  z-index: 1;
+  white-space: nowrap;
+  text-decoration: underline;
+  text-underline-offset: .14em;
+}
 .home-listening-copy strong {
   font: italic 1.45rem/1.3 Georgia, serif;
   letter-spacing: -.025em;
