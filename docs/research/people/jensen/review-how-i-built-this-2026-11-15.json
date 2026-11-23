@@ -1,0 +1,45 @@
+{
+  "total": 28,
+  "shortClips": 14,
+  "results": [
+    "Y334D183ofE"
+  ],
+  "image": {
+    "loaded": true
+  },
+  "player": {
+    "src": "https://www.youtube-nocookie.com/embed/Y334D183ofE?autoplay=1&rel=0",
+    "title": "How I Built This: Jensen Huang with Guy Raz",
+    "source": "https://www.youtube.com/watch?v=Y334D183ofE",
+    "transcriptHidden": true,
+    "dialogs": 0,
+    "width": 811.265625,
+    "frameWidth": 811.265625
+  },
+  "mobileOverflow": false,
+  "export": {
+    "count": 28,
+    "newVideo": true,
+    "date": true,
+    "format": true,
+    "updated": true
+  },
+  "errors": [],
+  "date": "2026-11-15",
+  "scope": "Local addition of Y334D183ofE; no commit, push or deployment.",
+  "validation": {
+    "deploymentTests": 49,
+    "contentTests": 194,
+    "astroErrors": 0,
+    "astroWarnings": 0,
+    "builtPages": 108,
+    "mdxFilesLinted": 107,
+    "result": "passed",
+    "existingNotices": [
+      "Nimbus/Vite module directives",
+      "Legacy Pagefind redirects"
+    ]
+  },
+  "visualReview": "Desktop 1440x1080 and mobile 390x844 reviewed; no horizontal overflow.",
+  "playbackScope": "Verified selection, embed URL and size, source link and stop cleanup. Actual audiovisual playback was not assessed."
+}

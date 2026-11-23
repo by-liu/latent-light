@@ -626,3 +626,41 @@ record. Original footage remains excluded from MIT. No X posting or recurring
 publication is authorized. All media and clean masters remain outside Git.
 Preserve the same three unrelated research progress edits. This note records
 release preparation; final merge, build and live checks must be confirmed.
+
+## November 15: How I Built This interview addition (local)
+
+Added user-supplied `Y334D183ofE`, How I Built This with Guy Raz. Original
+metadata confirms publication November 12, 2026; the publisher dates recording
+to April 2026. Listed second, categorized Building & Leading / Podcast; full
+collection now 28 recordings. The existing fourteen short clips remain intact.
+Metadata and source review retained in the Jensen research directory. Other
+source checks retain their dates. No new commit, push or deployment authorized.
+Preserve the same three unrelated research progress files.
+
+Validation passed: 49 deployment tests, 194 content tests, zero Astro errors
+or warnings, 108 built pages and 107 MDX files linted. Existing Nimbus/Vite
+and legacy Pagefind notices remain. Desktop and mobile review passed; search,
+Podcast/year filters, inline selection, stop cleanup and Markdown export
+confirm the new entry. No runtime errors or mobile overflow. Review record:
+`docs/research/people/jensen/review-how-i-built-this-2026-11-15.json`.
+
+## November 23: welcome-back release
+
+The author approved the local homepage badge and Jensen-page refresh, then
+explicitly requested commit, push and deployment. The release also includes
+the prepared How I Built This addition so production matches the reviewed
+local collection of 28 recordings and 14 short clips. Keep the three unrelated
+research progress files outside the release.
+
+The homepage says “Welcome back, Jensen” with a separately accessible date link
+to NVIDIA’s November 23 announcement. The Jensen page leads with a welcome,
+keeps the Pink Floyd dedication below it, updates the personal note and sources,
+and opens its single player on JH011 without autoplay. Directory order and
+pagination remain unchanged. Deep links can select other clips without autoplay.
+
+Desktop/mobile, both homepage themes, keyboard, reduced motion, no-JavaScript
+fallback, playback switching, directory paging and text exports passed. The
+existing 28-recording entry and 14 published clips are preserved. Public review:
+`docs/research/people/jensen/review-welcome-back-2026-11-23.json`. Full validation
+passed with existing build notices. Check final PR, production build and live
+verification results after publication; this note records release preparation.

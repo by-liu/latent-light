@@ -1,8 +1,8 @@
 ---
 import type { JensenClip } from './jensen-clip-types';
-interface Props { clips: JensenClip[]; }
-const { clips } = Astro.props;
-const first = clips[0];
+interface Props { clips: JensenClip[]; initialClipId?: string; }
+const { clips, initialClipId } = Astro.props;
+const first = clips.find(clip => clip.id === initialClipId) || clips[0];
 const themes = [...new Set(clips.map(clip => clip.theme))];
 ---
 {first && <section id="clips" class="clip-section" aria-labelledby="clips-title" data-jensen-clips>
@@ -27,8 +27,8 @@ const themes = [...new Set(clips.map(clip => clip.theme))];
       </form>
       <p class="clip-results" data-clip-results hidden></p>
       <ol class="clip-list">
-        {clips.map((clip, i) => <li id={`clip-${clip.id}`} class="clip-row" data-clip-row={clip.id}>
-          <a class="clip-choice" href={clip.video} data-clip-select={clip.id} aria-current={i === 0 ? 'true' : undefined} aria-label={`Play ${clip.title}, ${clip.duration}`}>
+        {clips.map(clip => <li id={`clip-${clip.id}`} class="clip-row" data-clip-row={clip.id}>
+          <a class="clip-choice" href={clip.video} data-clip-select={clip.id} aria-current={clip.id === first.id ? 'true' : undefined} aria-label={`Play ${clip.title}, ${clip.duration}`}>
             <div class="clip-thumbnail"><img src={clip.poster} alt="" width="1080" height="1080" loading="lazy"/><span class="clip-card-play" aria-hidden="true">▶</span><span class="clip-duration">{clip.duration}</span></div>
             <div class="clip-row-copy"><span class="clip-row-meta">{clip.theme}{clip.sharedOnX && <span class="clip-badge">Shared on X</span>}</span><h4>{clip.title}</h4><span class="clip-row-description">{clip.description}</span></div>
           </a>
@@ -63,7 +63,7 @@ if (root) {
   const next = root.querySelector<HTMLButtonElement>('[data-clip-next]')!;
   const stop = stage.querySelector<HTMLButtonElement>('[data-clip-stop]')!;
   let currentPage = 1;
-  let currentId = clips[0].id;
+  let currentId = stage.dataset.clipStage || clips[0].id;
   function renderDirectory() {
     const result = clipDirectoryPage(clips, { query: query.value, theme: theme.value, page: currentPage, pageSize: 6 });
     currentPage = result.page;
